@@ -121,6 +121,12 @@ def cmd_run(args: argparse.Namespace) -> int:
     paths.ensure_dirs()
     run_date = date.fromisoformat(args.date) if args.date else date.today()
 
+    # Cheap and deterministic, so just regenerate it: it keeps the map in step
+    # with the config if a race is ever added or a projection parameter changes.
+    from .geo import write_state_paths
+
+    write_state_paths()
+
     races, cfg = load_all()
     roster = Roster.load()
     log.info("loaded %d races for %s %d", len(races.races), races.chamber, races.cycle)
@@ -214,6 +220,14 @@ def cmd_run(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_build_map(args: argparse.Namespace) -> int:
+    from .geo import write_state_paths
+
+    path = write_state_paths()
+    print(f"Projected state paths written to {path}")
+    return 0
+
+
 def cmd_bundle(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -258,6 +272,11 @@ def build_parser() -> argparse.ArgumentParser:
     audit = sub.add_parser("audit-roster", help="find candidate names the roster misses")
     audit.add_argument("--offline", action="store_true")
     audit.set_defaults(func=cmd_audit_roster)
+
+    build_map = sub.add_parser(
+        "build-map", help="project the vendored TopoJSON into SVG paths for the dashboard"
+    )
+    build_map.set_defaults(func=cmd_build_map)
 
     bundle = sub.add_parser(
         "bundle", help="build a single self-contained HTML dashboard file"

@@ -27,7 +27,12 @@ Context for working in this repo. Read `docs/METHODOLOGY.md` before changing any
 5. **The roster fails closed.** An unrecognised candidate name resolves to `other` and the
    poll is skipped. Never guess a party — a wrong assignment corrupts a race's whole
    polling history, while skipping only loses information.
-6. **`site/data/*.json` and `outputs/runs/**` must stay committed.** The daily workflow
+6. **Focus and keydown must be bound per element on the map, never delegated.**
+   Those events do not reliably bubble from an SVG child to an HTML ancestor. A
+   delegated listener on the map container never fires even though
+   `document.activeElement` is correctly the focused `<path>`, which silently
+   removes keyboard access to all 35 races. Pointer events *do* delegate fine.
+7. **`site/data/*.json` and `outputs/runs/**` must stay committed.** The daily workflow
    diffs against the previous archived run to write commentary. Un-commit them and every
    run believes it is the first.
 
@@ -41,6 +46,7 @@ Context for working in this repo. Read `docs/METHODOLOGY.md` before changing any
 | Change the model itself | `src/midterms/model/hierarchical.py` |
 | Change seat/tipping-point logic | `src/midterms/model/simulate.py` |
 | Change the dashboard | `site/` — plain HTML/CSS/JS, no build step |
+| Change the map | `site/js/map.js` (render + interaction), `src/midterms/geo.py` (projection) |
 | Change what the JSON contains | `src/midterms/outputs.py` — **bump `SCHEMA_VERSION` and the matching constant in `site/js/app.js`** |
 
 ## Adding the House or Governors

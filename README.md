@@ -9,8 +9,9 @@ day-over-day commentary.
   election-day error that produces a full chamber seat distribution.
 - **Data:** [VoteHub Polling API](https://votehub.com/polls/api/) — free, no API key,
   **CC BY 4.0**.
-- **Output:** static JSON + a dependency-free dashboard, deployed to GitHub Pages by a
-  daily GitHub Actions cron.
+- **Output:** static JSON + a dependency-free dashboard — including an interactive
+  Albers USA map of all 35 races — deployed to GitHub Pages by a daily GitHub Actions
+  cron.
 
 ---
 
@@ -119,6 +120,7 @@ URL will fail because browsers block `fetch` from the filesystem.
 | `midterms audit-roster` | Report candidate names the roster cannot classify |
 | `midterms backtest --holdout-days 30` | Calibration check against held-out polls |
 | `midterms bundle` | Build a single self-contained `outputs/dashboard.html` |
+| `midterms build-map` | Re-project the vendored state boundaries (`run` does this too) |
 
 `midterms bundle` inlines the CSS, JS and data into one portable HTML file. Useful for
 sending someone a snapshot, or for viewing the dashboard without running a server —
@@ -155,12 +157,15 @@ src/midterms/
     hierarchical.py           the PyMC model
     correlation.py            state-similarity kernel for election-day error
     simulate.py               posterior → seat distribution, tipping points
+  geo.py                      Albers USA projection → SVG paths for the map
   outputs.py                  forecast.json / history.json
   commentary.py               day-over-day diff → changelog
   backtest.py                 calibration against held-out polls
   cli.py                      entry points
 
 site/                         the dashboard (plain HTML/CSS/JS, no build step)
+  js/map.js                   the interactive map
+data/geo/                     vendored state boundaries (us-atlas, ISC)
 outputs/runs/<date>/          slim archived runs — the memory commentary diffs against
 .github/workflows/            daily refresh + CI
 ```
@@ -239,6 +244,32 @@ Recorded openly rather than buried, because they affect how much to trust specif
 
 ---
 
+## The map
+
+An **Albers USA** projection — the familiar composite with Alaska and Hawaii inset —
+computed at build time from vendored TopoJSON and emitted as plain SVG paths. No mapping
+library ships to the browser, which keeps the page a stylesheet and two scripts.
+
+Three deliberate choices:
+
+- **Equal-area projection.** No state's apparent size is inflated relative to another's.
+  That is the least-bad property available when the quantity shown (one Senate seat) has
+  nothing to do with land area.
+- **Only the 35 races are coloured.** The other 15 states are greyed out, so empty land
+  cannot shout a result it does not carry. A map fundamentally cannot show that Wyoming
+  and Rhode Island are worth exactly one seat each — the seat histogram below it is the
+  equal-weight truth, and the page says so.
+- **Five rating steps, not seven.** A seven-step ramp was built and measured first; near
+  the neutral midpoint its adjacent pairs fell to a perceptual separation of 4–10, well
+  under the floor of 15, meaning readers with ordinary colour vision could not tell Lean
+  from Likely. Toss-up additionally carries a diagonal hatch, so the one step sitting
+  between the two hues never depends on colour alone. Exact probabilities are always in
+  the hover detail.
+
+Below 820px the inline state labels would render under 8px, so they drop out; below 640px
+the map becomes a pure overview and the race table takes over as the interface. Rhode
+Island is 3x4 pixels on a phone — no amount of tuning makes that tappable.
+
 ## Data source and licensing
 
 Polling comes from the **VoteHub Polling API** (`https://api.votehub.com`), which
@@ -250,6 +281,10 @@ the dashboard footer and in `data_source` inside every `forecast.json`.
 This choice, the alternatives considered, and what changed after FiveThirtyEight's
 shutdown: [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
 
+State boundaries come from **[us-atlas](https://github.com/topojson/us-atlas)** (ISC),
+derived from U.S. Census Bureau cartographic boundary files (public domain). The TopoJSON
+is vendored under `data/geo/` so the daily run never depends on a CDN.
+
 Raw API snapshots are cached under `data/raw/` and are **not** committed — they are
 re-fetchable, and only derived artefacts belong in the repository.
 
@@ -258,7 +293,7 @@ re-fetchable, and only derived artefacts belong in the repository.
 ## Testing
 
 ```bash
-pytest -q          # 80 tests, ~5 seconds, no sampling required
+pytest -q          # 104 tests, ~5 seconds, no sampling required
 ruff check src tests
 ```
 

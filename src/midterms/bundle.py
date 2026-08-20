@@ -16,7 +16,7 @@ from . import paths
 
 log = logging.getLogger(__name__)
 
-DATA_FILES = ("forecast", "history", "commentary")
+DATA_FILES = ("forecast", "history", "commentary", "us-states")
 
 
 def build(
@@ -30,7 +30,11 @@ def build(
 
     html = (site_dir / "index.html").read_text(encoding="utf-8")
     css = (site_dir / "css" / "style.css").read_text(encoding="utf-8")
-    js = (site_dir / "js" / "app.js").read_text(encoding="utf-8")
+    # Order matters: map.js calls helpers defined in app.js.
+    js = "\n".join(
+        (site_dir / "js" / name).read_text(encoding="utf-8")
+        for name in ("app.js", "map.js")
+    )
 
     data: dict[str, object] = {}
     for name in DATA_FILES:
@@ -56,7 +60,7 @@ def build(
         f"<style>\n{css}\n</style>",
     )
     html = html.replace(
-        '<script src="js/app.js"></script>',
+        '<script src="js/app.js"></script>\n<script src="js/map.js"></script>',
         f"<script>\nwindow.__FORECAST_DATA__ = {payload};\n</script>\n<script>\n{js}\n</script>",
     )
 

@@ -490,9 +490,9 @@ function renderDiagnostics(d) {
 
 let LAST_RENDER = null;
 
-function render(forecast, history, commentary) {
+function render(forecast, history, commentary, geo) {
   // Re-runnable so a viewport change can redraw the charts at the new width.
-  LAST_RENDER = () => render(forecast, history, commentary);
+  LAST_RENDER = () => render(forecast, history, commentary, geo);
   const cf = forecast.chamber_forecast;
 
   $('last-updated').textContent = fmtDate(forecast.run_date);
@@ -524,6 +524,10 @@ function render(forecast, history, commentary) {
   $('gb-margin').textContent = margin(gb.dem_margin_median);
   $('gb-margin').className = `national-value ${marginClass(gb.dem_margin_median)}`;
   $('gb-range').textContent = `90%: ${margin(gb.dem_margin_p05)} to ${margin(gb.dem_margin_p95)}`;
+
+  // The map goes first: it is the thing people look at, and it needs the page
+  // visible so its container has a width to measure.
+  renderMap(forecast, geo);
 
   renderSeatChart(forecast);
   renderHistoryChart(history);
@@ -558,10 +562,11 @@ async function loadJson(path, required) {
 
 async function init() {
   try {
-    const [forecast, history, commentary] = await Promise.all([
+    const [forecast, history, commentary, geo] = await Promise.all([
       loadJson('data/forecast.json', true),
       loadJson('data/history.json', false),
       loadJson('data/commentary.json', false),
+      loadJson('data/us-states.json', false),
     ]);
 
     if (forecast.schema_version !== SCHEMA_VERSION) {
@@ -571,7 +576,7 @@ async function init() {
       );
     }
 
-    render(forecast, history, commentary);
+    render(forecast, history, commentary, geo);
   } catch (err) {
     const banner = $('load-error');
     banner.hidden = false;

@@ -18,6 +18,9 @@ log = logging.getLogger(__name__)
 
 DATA_FILES = ("forecast", "history", "commentary", "us-states")
 
+#: Scripts to inline, in load order. Must match the tags in site/index.html.
+SCRIPTS = ("app.js", "charts.js", "map.js")
+
 
 def build(
     site_dir: Path | None = None,
@@ -30,10 +33,10 @@ def build(
 
     html = (site_dir / "index.html").read_text(encoding="utf-8")
     css = (site_dir / "css" / "style.css").read_text(encoding="utf-8")
-    # Order matters: map.js calls helpers defined in app.js.
+    # Order matters: charts.js and map.js call helpers defined in app.js, and
+    # this must stay in step with the script tags in index.html.
     js = "\n".join(
-        (site_dir / "js" / name).read_text(encoding="utf-8")
-        for name in ("app.js", "map.js")
+        (site_dir / "js" / name).read_text(encoding="utf-8") for name in SCRIPTS
     )
 
     data: dict[str, object] = {}
@@ -55,14 +58,37 @@ def build(
     # HTML tokenizer.
     payload = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")
 
-    html = html.replace(
+    def substitute(source: str, marker: str, replacement: str, what: str) -> str:
+        """Replace `marker`, failing loudly if it is not there.
+
+        str.replace on a missing marker is a no-op and raises nothing, so a
+        renamed tag silently produces a bundle that still points at external
+        files — which then do not exist beside it. That shipped once already.
+        """
+        if marker not in source:
+            raise ValueError(
+                f"bundle: could not find the {what} marker in index.html. "
+                f"Expected to substitute:\n{marker}"
+            )
+        return source.replace(marker, replacement, 1)
+
+    html = substitute(
+        html,
         '<link rel="stylesheet" href="css/style.css">',
         f"<style>\n{css}\n</style>",
+        "stylesheet",
     )
-    html = html.replace(
-        '<script src="js/app.js"></script>\n<script src="js/map.js"></script>',
+    html = substitute(
+        html,
+        "\n".join(f'<script src="js/{name}"></script>' for name in SCRIPTS),
         f"<script>\nwindow.__FORECAST_DATA__ = {payload};\n</script>\n<script>\n{js}\n</script>",
+        "script",
     )
+
+    # Nothing external may survive, or the bundle is not self-contained.
+    for leftover in ('<script src=', '<link rel="stylesheet"'):
+        if leftover in html:
+            raise ValueError(f"bundle is not self-contained: found {leftover!r}")
 
     output.write_text(html, encoding="utf-8")
     size_kb = output.stat().st_size / 1024

@@ -15,6 +15,7 @@ SITE = paths.SITE_DIR
 CSS = (SITE / "css" / "style.css").read_text(encoding="utf-8")
 JS = (SITE / "js" / "app.js").read_text(encoding="utf-8")
 MAP_JS = (SITE / "js" / "map.js").read_text(encoding="utf-8")
+CHARTS_JS = (SITE / "js" / "charts.js").read_text(encoding="utf-8")
 HTML = (SITE / "index.html").read_text(encoding="utf-8")
 
 
@@ -127,3 +128,56 @@ def test_map_furniture_degrades_with_available_width():
     assert "const showInlineLabels = width >= 820" in MAP_JS
     assert "const showChips = width >= 640" in MAP_JS
     assert 'id="map-hint"' in HTML
+
+
+def _js_function_body(source: str, name: str) -> str:
+    """Source of one top-level JS function, up to its closing brace."""
+    start = source.index(f"function {name}")
+    end = source.index(chr(10) + "}" + chr(10), start)
+    return source[start:end]
+
+
+def test_scripts_load_in_dependency_order():
+    """charts.js and map.js both call helpers defined in app.js."""
+    order = [HTML.index(f'src="js/{name}.js"') for name in ("app", "charts", "map")]
+    assert order == sorted(order)
+
+
+def test_history_axis_is_scaled_to_the_data():
+    """Regression: the forecast-over-time chart was pinned to 0-100%.
+
+    Every run has sat inside a ten-point band, so a fixed axis rendered the line
+    as a flat squiggle using a tenth of the panel. It now scales to the data —
+    but must always keep 50% in the domain, since crossing it is the one change
+    that alters the story.
+    """
+    assert "paddedDomain(probs" in CHARTS_JS
+    assert "include: 0.5" in CHARTS_JS
+    # The old fixed-domain scale must be gone.
+    assert "const p = i / 4;" not in CHARTS_JS
+
+
+def test_axis_ticks_land_on_round_numbers():
+    assert "function niceTicks" in CHARTS_JS
+    for chart in ("renderSeatChart", "renderHistoryChart", "renderTrajectory"):
+        body = _js_function_body(CHARTS_JS, chart)
+        assert "niceTicks(" in body, f"{chart} must use niceTicks for its axis"
+
+
+def test_every_chart_has_a_hover_layer():
+    """An SVG chart is interactive by default; each one ships a tooltip."""
+    for chart in ("renderSeatChart", "renderHistoryChart", "renderTrajectory"):
+        body = _js_function_body(CHARTS_JS, chart)
+        assert "chartTip(host)" in body, f"{chart} needs a tooltip"
+        assert "pointermove" in body, f"{chart} needs a hover handler"
+        assert "pointerleave" in body, f"{chart} must clear its hover state"
+
+
+def test_hover_dimming_is_gated_to_hover_devices():
+    """:hover latches after a tap on touch, which would strand the chart dimmed."""
+    assert "@media (hover: hover)" in CSS
+
+
+def test_chart_host_anchors_its_tooltip():
+    """The tooltip is absolutely positioned inside the chart host."""
+    assert re.search(r"\.chart\s*\{[^}]*position:\s*relative", CSS)

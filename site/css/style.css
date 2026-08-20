@@ -452,3 +452,60 @@ table.polls td.num { font-family: var(--mono); text-align: right; font-variant-n
 }
 
 .map-hint { margin-top: 10px; font-size: 12.5px; }
+
+/* ---------- chart interactivity ---------- */
+/* The tooltip is positioned inside the chart host, so the host must anchor it. */
+.chart { position: relative; }
+
+.axis-line { stroke: var(--border); stroke-width: 1; }
+
+.crosshair {
+  stroke: var(--text-faint);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  pointer-events: none;
+}
+.hover-dot {
+  fill: var(--bg-elev);
+  stroke: var(--dem-line);
+  stroke-width: 2.5;
+  pointer-events: none;
+}
+
+.seat-bar { opacity: 0.9; transition: opacity 100ms ease; }
+/* Dim the rest rather than brighten one, so the highlighted bar keeps its true
+   colour and the reader is not asked to judge a shifted hue.
+   Gated on a real hover device: on touch, :hover latches after a tap and would
+   leave the whole chart dimmed with no way to clear it. */
+@media (hover: hover) {
+  .chart:hover .seat-bar { opacity: 0.45; }
+}
+.chart .seat-bar.is-active { opacity: 1; }
+
+.chart-tip {
+  position: absolute;
+  z-index: 20;
+  min-width: 190px;
+  max-width: 270px;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  font-size: 13px;
+}
+.chart-tip .tt-name { font-weight: 650; margin-bottom: 2px; }
+.chart-tip .tt-meta { color: var(--text-faint); font-size: 11.5px; margin-bottom: 8px; }
+.chart-tip .tt-row { display: flex; justify-content: space-between; gap: 14px; margin-bottom: 3px; }
+.chart-tip .tt-row span:first-child { color: var(--text-dim); }
+.chart-tip .tt-row span:last-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 520px) {
+  .chart-tip { min-width: 158px; max-width: 210px; font-size: 12px; padding: 8px 10px; }
+  .chart-tip .tt-row { gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seat-bar { transition: none; }
+}

@@ -164,6 +164,7 @@ src/midterms/
   cli.py                      entry points
 
 site/                         the dashboard (plain HTML/CSS/JS, no build step)
+  js/charts.js                seat / history / trajectory charts + hover layer
   js/map.js                   the interactive map
 data/geo/                     vendored state boundaries (us-atlas, ISC)
 outputs/runs/<date>/          slim archived runs — the memory commentary diffs against
@@ -270,6 +271,22 @@ Below 820px the inline state labels would render under 8px, so they drop out; be
 the map becomes a pure overview and the race table takes over as the interface. Rhode
 Island is 3x4 pixels on a phone — no amount of tuning makes that tappable.
 
+## Charts
+
+Every chart carries a hover layer: a crosshair and tooltip on the time series, a
+per-bar tooltip on the seat histogram. The seat chart reports the cumulative
+probability as well as the exact one, because "what are the odds of *at least* 51
+seats" is the question a reader actually brings to a seat histogram — and it is a
+useful internal check, since it should reconcile with the headline control
+probability.
+
+Axes scale to the data rather than to a fixed range, on round tick values. The
+forecast-over-time chart is why: pinned to 0–100% its line was a flat squiggle
+using a tenth of the panel, because every run so far has sat inside a ten-point
+band. It now scales to the data but always keeps 50% in the domain, since crossing
+that line is the one change that alters the story — so the tighter axis cannot
+flatter the movement.
+
 ## Data source and licensing
 
 Polling comes from the **VoteHub Polling API** (`https://api.votehub.com`), which
@@ -293,7 +310,7 @@ re-fetchable, and only derived artefacts belong in the repository.
 ## Testing
 
 ```bash
-pytest -q          # 104 tests, ~5 seconds, no sampling required
+pytest -q          # 110 tests, ~5 seconds, no sampling required
 ruff check src tests
 ```
 

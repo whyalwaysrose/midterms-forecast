@@ -74,6 +74,16 @@
 
 * { box-sizing: border-box; }
 
+/* The `hidden` attribute must always win.
+ *
+ * A class rule that sets `display` is author-origin and silently beats the
+ * browser's own `[hidden] { display: none }`. That is what happened to the race
+ * drawer: `.drawer { display: flex }` kept a fixed, full-viewport, z-index 50
+ * overlay painted over the whole page even while `hidden` was set, so nothing
+ * underneath could be clicked. Declaring it globally kills the whole bug class
+ * rather than just this one instance. */
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   background: var(--bg);
@@ -181,6 +191,9 @@ section { margin-bottom: 22px; }
 .commentary li { margin-bottom: 7px; }
 .commentary strong { color: var(--text); font-weight: 600; }
 .commentary .poll-line { font-family: var(--mono); font-size: 12.5px; color: var(--text-faint); }
+/* A poll line explains the race bullet above it, so indent it instead of
+   letting it sit as a sibling bullet at the same level. */
+.commentary li.poll-line { list-style: none; margin-left: 0.2em; padding-left: 0.9em; border-left: 2px solid var(--border); }
 .archive { margin-top: 8px; }
 .archive summary { cursor: pointer; color: var(--dem-line); font-size: 13.5px; }
 .archive[open] summary { margin-bottom: 16px; }
@@ -211,6 +224,44 @@ section { margin-bottom: 22px; }
   .race-row .col-spark, .race-row .col-polls { display: none; }
 }
 
+/* Phones.
+ *
+ * At 820px the row still reserves 38 + 80 + 80 px of fixed columns plus gaps and
+ * padding. On a 375px screen that leaves the race-name column about 27px, which
+ * squeezes the name to nothing and pushes the margin column off the right edge.
+ * Reclaim the space: trim the page and card gutters, shrink the fixed columns,
+ * and step the type down one notch. */
+@media (max-width: 520px) {
+  main { padding: 18px 12px 48px; }
+  .card { padding: 16px 14px; }
+  .hero { padding: 20px 14px; }
+
+  .race-row {
+    grid-template-columns: 30px 1fr 58px 58px;
+    gap: 7px; padding: 10px 9px; font-size: 13px;
+  }
+  .race-prob { font-size: 12.5px; }
+  .race-margin { font-size: 12px; }
+  .race-meta { font-size: 10.5px; }
+  .race-head-row { font-size: 10px; letter-spacing: 0.03em; }
+
+  .prob-value { font-size: 38px; }
+  .national-value { font-size: 28px; }
+  h1 { font-size: 21px; }
+
+  .drawer-panel { padding: 20px 14px; }
+  .drawer-stats { gap: 8px; }
+  .dstat { padding: 10px 6px; }
+  .dstat-value { font-size: 17px; }
+  .dstat-label { font-size: 10px; letter-spacing: 0.02em; }
+
+  /* The poll table has five columns and the panel is ~350px wide. Rather than
+     let it scroll and hide the margin — the one number a reader came for —
+     drop sample size and screen, keeping pollster, date and margin. */
+  table.polls th:nth-child(3), table.polls td:nth-child(3),
+  table.polls th:nth-child(4), table.polls td:nth-child(4) { display: none; }
+}
+
 .race-code { font-family: var(--mono); font-weight: 600; color: var(--text-dim); }
 .race-name { font-weight: 500; }
 .race-meta { font-size: 11.5px; color: var(--text-faint); }
@@ -236,10 +287,11 @@ section { margin-bottom: 22px; }
 .dstat-label { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; }
 .note { background: var(--bg-elev-2); border-left: 3px solid var(--accent); padding: 10px 14px; font-size: 13px; color: var(--text-dim); margin-bottom: 14px; border-radius: 0 6px 6px 0; }
 
+.table-scroll { overflow-x: auto; }
 table.polls { width: 100%; border-collapse: collapse; font-size: 13px; }
 table.polls th { text-align: left; color: var(--text-faint); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 8px; border-bottom: 1px solid var(--border); }
 table.polls td { padding: 7px 8px; border-bottom: 1px solid var(--border); }
-table.polls td.num { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+table.polls td.num { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .tag { display: inline-block; font-size: 10px; padding: 1px 5px; border-radius: 3px; margin-left: 5px; vertical-align: middle; }
 .tag.d { background: var(--dem-soft); color: var(--dem-line); }
 .tag.r { background: var(--rep-soft); color: var(--rep-line); }

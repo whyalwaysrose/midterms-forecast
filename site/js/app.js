@@ -54,6 +54,19 @@ function svgEl(tag, attrs = {}) {
   return el;
 }
 
+/** Width to draw a chart at, matched to its container.
+ *
+ * The SVG scales uniformly to fit its host, so a viewBox wider than the
+ * container shrinks the axis text with it — a 10px label in a 560-wide viewBox
+ * rendered into 340px comes out at about 6px and is unreadable on a phone.
+ * Drawing at roughly the container's own width keeps the scale near 1:1.
+ */
+function chartWidth(host, preferred) {
+  const available = host.clientWidth || 0;
+  if (!available) return preferred;
+  return Math.round(Math.max(280, Math.min(preferred, available)));
+}
+
 function makeSvg(width, height) {
   const svg = svgEl('svg', {
     viewBox: `0 0 ${width} ${height}`,
@@ -78,7 +91,7 @@ function renderSeatChart(forecast) {
 
   if (!entries.length) return;
 
-  const W = 560, H = 240, padL = 34, padR = 12, padT = 12, padB = 34;
+  const W = chartWidth(host, 560), H = 240, padL = 34, padR = 12, padT = 12, padB = 34;
   const svg = makeSvg(W, H);
 
   const minSeat = entries[0].seats, maxSeat = entries[entries.length - 1].seats;
@@ -146,7 +159,7 @@ function renderHistoryChart(history) {
   }
   $('history-empty').hidden = true;
 
-  const W = 560, H = 240, padL = 40, padR = 14, padT = 14, padB = 34;
+  const W = chartWidth(host, 560), H = 240, padL = 40, padR = 14, padT = 14, padB = 34;
   const svg = makeSvg(W, H);
 
   const t0 = Date.parse(runs[0].run_date);
@@ -199,7 +212,7 @@ function renderTrajectory(host, trajectory, opts = {}) {
   host.textContent = '';
   if (!trajectory?.length) return;
 
-  const W = opts.width ?? 560, H = opts.height ?? 200;
+  const W = chartWidth(host, opts.width ?? 560), H = opts.height ?? 200;
   const padL = 38, padR = 12, padT = 12, padB = 26;
   const svg = makeSvg(W, H);
 
@@ -434,10 +447,10 @@ function openDrawer(raceId) {
 
   const pollTable = race.polls?.length
     ? `<h3 style="margin-top:22px">Recent polls (${race.poll_count} in window)</h3>
-       <table class="polls">
+       <div class="table-scroll"><table class="polls">
          <thead><tr><th>Pollster</th><th style="text-align:right">Date</th><th style="text-align:right">N</th><th style="text-align:right">Screen</th><th style="text-align:right">Margin</th></tr></thead>
          <tbody>${pollRows}</tbody>
-       </table>`
+       </table></div>`
     : '<p class="subtle" style="margin-top:20px">No qualifying general-election polls in this race.</p>';
 
   $('drawer-body').innerHTML =
@@ -446,10 +459,12 @@ function openDrawer(raceId) {
     '<div id="drawer-chart" class="chart"></div>' +
     pollTable;
 
-  renderTrajectory($('drawer-chart'), race.trajectory, { width: 540, height: 190 });
-
+  // Reveal before drawing: a hidden container reports clientWidth 0, which
+  // would send chartWidth() back to the unscaled fallback.
   $('drawer').hidden = false;
   document.body.style.overflow = 'hidden';
+
+  renderTrajectory($('drawer-chart'), race.trajectory, { width: 540, height: 190 });
 }
 
 function closeDrawer() {
@@ -473,7 +488,11 @@ function renderDiagnostics(d) {
   ).join('');
 }
 
+let LAST_RENDER = null;
+
 function render(forecast, history, commentary) {
+  // Re-runnable so a viewport change can redraw the charts at the new width.
+  LAST_RENDER = () => render(forecast, history, commentary);
   const cf = forecast.chamber_forecast;
 
   $('last-updated').textContent = fmtDate(forecast.run_date);
@@ -496,6 +515,11 @@ function render(forecast, history, commentary) {
 
   $('n-sims').textContent = cf.n_simulations.toLocaleString();
 
+  // Reveal the page before drawing anything. While `main` is hidden every
+  // chart container reports clientWidth 0, so chartWidth() would fall back to
+  // its unscaled default and the axis text would render at roughly half size.
+  $('main').hidden = false;
+
   const gb = forecast.national.generic_ballot;
   $('gb-margin').textContent = margin(gb.dem_margin_median);
   $('gb-margin').className = `national-value ${marginClass(gb.dem_margin_median)}`;
@@ -509,8 +533,6 @@ function render(forecast, history, commentary) {
   ALL_RACES = forecast.races ?? [];
   renderRaces();
   renderDiagnostics(forecast.diagnostics ?? {});
-
-  $('main').hidden = false;
 }
 
 async function loadJson(path, required) {
@@ -573,6 +595,12 @@ document.addEventListener('DOMContentLoaded', () => {
   $('drawer-close').addEventListener('click', closeDrawer);
   $('drawer').addEventListener('click', (e) => { if (e.target.id === 'drawer') closeDrawer(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { if (LAST_RENDER) LAST_RENDER(); }, 150);
+  });
 
   init();
 });

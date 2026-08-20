@@ -221,9 +221,18 @@ class FundamentalsConfig:
 
 
 @dataclass(frozen=True)
+class ApprovalConfig:
+    enabled: bool
+    rw_sd_per_day_prior: float
+    initial_sd: float
+    correlation_prior_sd: float
+
+
+@dataclass(frozen=True)
 class NationalEnvConfig:
     rw_sd_per_day_prior: float
     initial_sd: float
+    approval: ApprovalConfig
 
 
 @dataclass(frozen=True)
@@ -232,11 +241,13 @@ class RaceStateConfig:
     elasticity_sd: float
     elasticity_lower: float
     rw_sd_per_day_prior: float
+    movement_correlation: CorrelationConfig
 
 
 @dataclass(frozen=True)
 class PollsConfig:
     student_t_nu: float
+    match_student_t_variance: bool
     design_effect: float
     excess_sd_prior: float
     house_effect_sd_prior: float
@@ -296,8 +307,10 @@ class ModelConfig:
         return cls(
             national=NationalRefs(**_require(raw, "national", ctx)),
             fundamentals=FundamentalsConfig(**_require(raw, "fundamentals", ctx)),
-            national_environment=NationalEnvConfig(**_require(raw, "national_environment", ctx)),
-            race=RaceStateConfig(**_require(raw, "race", ctx)),
+            national_environment=_national_env_config(
+                _require(raw, "national_environment", ctx)
+            ),
+            race=_race_state_config(_require(raw, "race", ctx)),
             polls=PollsConfig(**_require(raw, "polls", ctx)),
             election_day_error=ElectionDayErrorConfig(
                 national_sd=float(_require(ede, "national_sd", "election_day_error")),
@@ -311,6 +324,22 @@ class ModelConfig:
             grid_days=int(_require(raw, "time", ctx)["grid_days"]),
             raw=raw,
         )
+
+
+def _national_env_config(raw: Mapping[str, Any]) -> NationalEnvConfig:
+    values = dict(raw)
+    approval = values.pop("approval", None)
+    if approval is None:
+        raise ConfigError("national_environment.approval is required")
+    return NationalEnvConfig(approval=ApprovalConfig(**approval), **values)
+
+
+def _race_state_config(raw: Mapping[str, Any]) -> RaceStateConfig:
+    values = dict(raw)
+    correlation = values.pop("movement_correlation", None)
+    if correlation is None:
+        raise ConfigError("race.movement_correlation is required")
+    return RaceStateConfig(movement_correlation=CorrelationConfig(**correlation), **values)
 
 
 def load_all(

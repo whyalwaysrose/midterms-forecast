@@ -15,7 +15,12 @@ from datetime import date, timedelta
 import numpy as np
 
 from ..config import ModelConfig, RaceSet
-from ..data.polls import NATIONAL_RACE_ID, NormalisedPoll, PollTable
+from ..data.polls import (
+    APPROVAL_RACE_ID,
+    NATIONAL_RACE_ID,
+    NormalisedPoll,
+    PollTable,
+)
 from ..fundamentals import Fundamentals, logit
 
 #: Population screens, in a fixed order so indices are stable across runs.
@@ -46,9 +51,15 @@ class ModelData:
     race_poll_race_idx: np.ndarray
     race_poll_time_idx: np.ndarray
     national_poll_time_idx: np.ndarray
+    approval_poll_time_idx: np.ndarray
 
     # -- priors ------------------------------------------------------------
     fundamentals_prior_mean: np.ndarray
+    #: Lower-triangular Cholesky of the race-movement correlation matrix.
+    #: Multiplying i.i.d. innovations by this correlates drift across similar
+    #: races while leaving each race's marginal variance at 1, because the rows
+    #: of a correlation Cholesky have unit norm.
+    movement_chol: np.ndarray
 
     # -- metadata ----------------------------------------------------------
     polls_in_order: tuple[NormalisedPoll, ...]
@@ -72,6 +83,10 @@ class ModelData:
     @property
     def n_national_polls(self) -> int:
         return len(self.national_poll_time_idx)
+
+    @property
+    def n_approval_polls(self) -> int:
+        return len(self.approval_poll_time_idx)
 
     @property
     def nonreference_population_indices(self) -> np.ndarray:
@@ -143,7 +158,16 @@ def build_model_data(
 
     race_polls = sorted(table.race_polls, key=lambda p: (p.race_id, p.field_date))
     national_polls = sorted(table.national, key=lambda p: p.field_date)
-    ordered = tuple(race_polls + national_polls)
+    # The model only creates a latent approval series when the feature is on,
+    # so the design must drop the polls when it is off. One switch, honoured in
+    # both places, or the observation vector and the latent vector disagree.
+    approval_polls = (
+        sorted(table.approval, key=lambda p: p.field_date)
+        if cfg.national_environment.approval.enabled
+        else []
+    )
+    # The model concatenates its latent means in this order, so it must match.
+    ordered = tuple(race_polls + national_polls + approval_polls)
 
     if not ordered:
         raise ValueError("no usable polls: cannot fit the model")
@@ -187,6 +211,9 @@ def build_model_data(
     national_poll_time_idx = np.array(
         [_time_index(p.field_date, grid, cfg.grid_days) for p in national_polls], dtype=int
     )
+    approval_poll_time_idx = np.array(
+        [_time_index(p.field_date, grid, cfg.grid_days) for p in approval_polls], dtype=int
+    )
 
     # Fundamentals are computed over races in config order; assert alignment
     # rather than trusting it, because a silent misalignment would attach every
@@ -195,6 +222,13 @@ def build_model_data(
         raise ValueError("fundamentals race order does not match the race set")
 
     assert all(p.race_id == NATIONAL_RACE_ID for p in national_polls)
+    assert all(p.race_id == APPROVAL_RACE_ID for p in approval_polls)
+
+    from .correlation import cholesky_factor, correlation_matrix
+
+    movement_chol = cholesky_factor(
+        correlation_matrix(fundamentals, cfg.race.movement_correlation)
+    )
 
     return ModelData(
         race_ids=race_ids,
@@ -210,6 +244,8 @@ def build_model_data(
         race_poll_race_idx=race_poll_race_idx,
         race_poll_time_idx=race_poll_time_idx,
         national_poll_time_idx=national_poll_time_idx,
+        approval_poll_time_idx=approval_poll_time_idx,
         fundamentals_prior_mean=fundamentals.prior_mean,
+        movement_chol=movement_chol,
         polls_in_order=ordered,
     )

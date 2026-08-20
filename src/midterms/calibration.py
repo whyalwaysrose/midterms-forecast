@@ -1,0 +1,272 @@
+"""Fit the model's error scales from historical polling.
+
+Before this module existed, the two numbers that set the width of the entire
+seat distribution — ``election_day_error.national_sd`` and ``.state_sd`` — were
+asserted from general knowledge of the literature. They are the most
+consequential numbers the model has: they decide how confident the headline
+control probability is allowed to be, and nothing in the current cycle can
+check them, because the election has not happened.
+
+``data/history/raw_polls.csv.gz`` can check them. It pairs every poll
+FiveThirtyEight ever collected with the actual result of the race, so poll
+error is directly observable across 1998-2022.
+
+THE DECOMPOSITION
+-----------------
+A poll's error decomposes into three levels, and the model needs them
+separately because they behave completely differently in a seat forecast:
+
+    national   a miss shared by every race in a cycle. Perfectly correlated,
+               so it does NOT average out across 35 races — it moves the whole
+               chamber together and is what fattens the tails.
+    state      a miss specific to one race, correlated only with similar
+               states. Partly cancels across the map.
+    poll       noise in an individual poll. Averages away as polls accumulate,
+               and is what the measurement model's sampling variance covers.
+
+Getting the *split* wrong matters as much as getting the total wrong: shifting
+error from the state term to the national term makes the seat distribution
+wider without changing any single race's win probability.
+
+The subtlety is that a race's mean poll error is not its true race-level error:
+it still contains poll noise divided by the number of polls. Races polled once
+therefore look far more erratic than races polled twenty times. This module
+subtracts that leakage explicitly rather than letting it inflate the state
+term, which it otherwise does by around 10%.
+"""
+
+from __future__ import annotations
+
+import logging
+from dataclasses import dataclass
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+from . import paths
+
+log = logging.getLogger(__name__)
+
+HISTORY_PATH = paths.DATA_DIR / "history" / "raw_polls.csv.gz"
+
+ATTRIBUTION = (
+    "Historical poll errors from FiveThirtyEight's pollster-ratings dataset "
+    "(github.com/fivethirtyeight/data), licensed CC BY 4.0."
+)
+
+#: Points of margin per logit unit, near a competitive race. See METHODOLOGY §1.
+POINTS_PER_LOGIT = 50.0
+
+#: A cycle needs this many races before its mean error is a meaningful estimate
+#: of that cycle's national bias. Off-year specials with one or two races
+#: otherwise dominate the cycle-to-cycle spread.
+MIN_RACES_PER_CYCLE = 5
+
+
+@dataclass(frozen=True)
+class ErrorComponents:
+    """Fitted error scales, in points of margin."""
+
+    national_sd: float
+    state_sd: float
+    poll_sd: float
+    design_effect: float
+
+    n_polls: int
+    n_races: int
+    n_cycles: int
+    window: tuple[int, int]
+    min_cycle: int
+
+    @property
+    def total_race_sd(self) -> float:
+        """Combined national + state error on a single race."""
+        return float(np.hypot(self.national_sd, self.state_sd))
+
+    def as_logit(self) -> dict[str, float]:
+        """The same scales in the model's units."""
+        return {
+            "national_sd": round(self.national_sd / POINTS_PER_LOGIT, 4),
+            "state_sd": round(self.state_sd / POINTS_PER_LOGIT, 4),
+        }
+
+    def report(self) -> str:
+        lines = [
+            f"Fitted on {self.n_polls:,} Senate polls / {self.n_races} races / "
+            f"{self.n_cycles} cycles",
+            f"  window: {self.window[0]}-{self.window[1]} days before the election, "
+            f"cycles from {self.min_cycle}",
+            "",
+            "Error components (points of margin):",
+            f"  national (cycle-wide, perfectly correlated) : {self.national_sd:5.2f}",
+            f"  state    (race-specific)                    : {self.state_sd:5.2f}",
+            f"  -> total race-level error                   : {self.total_race_sd:5.2f}",
+            "",
+            f"  poll-level noise (within a race)            : {self.poll_sd:5.2f}",
+            f"  implied design effect vs binomial           : {self.design_effect:5.2f}",
+            "",
+            "In model units (logit):",
+            f"  election_day_error.national_sd: {self.as_logit()['national_sd']}",
+            f"  election_day_error.state_sd:    {self.as_logit()['state_sd']}",
+            f"  polls.design_effect:            {round(self.design_effect, 2)}",
+        ]
+        return "\n".join(lines)
+
+
+def load_history(path: Path | None = None) -> pd.DataFrame:
+    """Historical polls with a known result."""
+    path = path or HISTORY_PATH
+    return pd.read_csv(path)
+
+
+def senate_polls(
+    df: pd.DataFrame,
+    days_window: tuple[int, int] = (45, 120),
+    min_cycle: int = 2010,
+) -> pd.DataFrame:
+    """Senate general-election polls inside a forecast horizon.
+
+    The window matters. Poll error shrinks as an election approaches, so
+    calibrating on polls taken the week before would understate the uncertainty
+    a forecast issued in August has to carry. The default brackets where this
+    model actually runs.
+    """
+    sen = df[df["type_simple"].astype(str).str.contains("Sen", case=False, na=False)].copy()
+    sen["error"] = sen["margin_poll"] - sen["margin_actual"]
+    sen = sen.dropna(subset=["error", "time_to_election", "cycle"])
+    sen = sen[
+        (sen["time_to_election"] >= days_window[0])
+        & (sen["time_to_election"] <= days_window[1])
+        & (sen["cycle"] >= min_cycle)
+    ]
+    race_counts = sen.groupby("cycle")["race_id"].nunique()
+    keep = race_counts[race_counts >= MIN_RACES_PER_CYCLE].index
+    return sen[sen["cycle"].isin(keep)]
+
+
+def _design_effect(sen: pd.DataFrame) -> float:
+    """How much noisier polls are than a simple random sample implies.
+
+    Compares the observed spread of polls within a race against the binomial
+    spread their sample sizes predict. The excess is everything the sampling
+    formula does not know about: weighting, clustering, house effects, and real
+    opinion movement inside the window. Reported as a variance ratio, which is
+    exactly how `polls.design_effect` is used in the measurement model.
+    """
+    usable = sen.dropna(subset=["samplesize"])
+    usable = usable[usable["samplesize"] > 0]
+
+    observed, expected = [], []
+    for _, group in usable.groupby(["cycle", "race_id"]):
+        if len(group) < 3:
+            continue  # a variance from two polls is far too noisy to pool
+        observed.append(float(np.var(group["margin_poll"], ddof=1)))
+        # Binomial variance of a margin at p=0.5: (2 * 100)^2 * 0.25 / n = 10000/n
+        expected.append(float(np.mean(10000.0 / group["samplesize"])))
+
+    if not observed:
+        return float("nan")
+    return float(np.sum(observed) / np.sum(expected))
+
+
+def estimate_error_components(
+    days_window: tuple[int, int] = (45, 120),
+    min_cycle: int = 2010,
+    path: Path | None = None,
+) -> ErrorComponents:
+    """Fit national, state and poll-level error scales."""
+    sen = senate_polls(load_history(path), days_window, min_cycle)
+    if sen.empty:
+        raise ValueError("no historical Senate polls matched the given window")
+
+    grouped = sen.groupby(["cycle", "race_id"])["error"]
+    race = pd.DataFrame(
+        {
+            "mean_error": grouped.mean(),
+            "n_polls": grouped.size(),
+            "within_var": grouped.var(ddof=1),
+        }
+    ).reset_index()
+
+    # Poll-level variance, pooled over races with more than one poll.
+    multi = race[race["n_polls"] > 1].dropna(subset=["within_var"])
+    poll_var = float(
+        np.average(multi["within_var"], weights=multi["n_polls"] - 1)
+    ) if len(multi) else 0.0
+
+    # National: how much whole cycles miss by, relative to each other.
+    cycle_mean = race.groupby("cycle")["mean_error"].mean()
+    national_sd = float(cycle_mean.std(ddof=1))
+
+    # State: spread of race means about their cycle mean, with the poll noise
+    # each race mean still carries (poll_var / n_polls) removed.
+    residual = race["mean_error"] - race["cycle"].map(cycle_mean)
+    weights = race["n_polls"]
+    observed_var = float(np.average(residual**2, weights=weights))
+    leakage = float(np.average(poll_var / race["n_polls"], weights=weights))
+    state_var = max(observed_var - leakage, 0.0)
+
+    components = ErrorComponents(
+        national_sd=national_sd,
+        state_sd=float(np.sqrt(state_var)),
+        poll_sd=float(np.sqrt(poll_var)),
+        design_effect=_design_effect(sen),
+        n_polls=len(sen),
+        n_races=len(race),
+        n_cycles=int(sen["cycle"].nunique()),
+        window=days_window,
+        min_cycle=min_cycle,
+    )
+    log.info(
+        "calibration: national %.2f, state %.2f, poll %.2f pts (design effect %.2f)",
+        components.national_sd, components.state_sd,
+        components.poll_sd, components.design_effect,
+    )
+    return components
+
+
+def compare_to_config(components: ErrorComponents) -> str:
+    """Fitted scales against what config/model.yaml currently assumes."""
+    from .config import ModelConfig
+
+    cfg = ModelConfig.load()
+    current_national = cfg.election_day_error.national_sd * POINTS_PER_LOGIT
+    current_state = cfg.election_day_error.state_sd * POINTS_PER_LOGIT
+    current_total = float(np.hypot(current_national, current_state))
+
+    def delta(fitted: float, current: float) -> str:
+        if current == 0:
+            return "n/a"
+        return f"{fitted / current - 1:+.0%}"
+
+    rows = [
+        ("national_sd", current_national, components.national_sd),
+        ("state_sd", current_state, components.state_sd),
+        ("total race error", current_total, components.total_race_sd),
+        ("design_effect", cfg.polls.design_effect, components.design_effect),
+    ]
+    lines = [f"  {'':18s} {'config':>8s} {'fitted':>8s} {'change':>8s}"]
+    for name, current, fitted in rows:
+        lines.append(f"  {name:18s} {current:8.2f} {fitted:8.2f} {delta(fitted, current):>8s}")
+    return "\n".join(lines)
+
+
+def run_calibration(
+    days_window: tuple[int, int] = (45, 120),
+    min_cycle: int = 2010,
+) -> int:
+    """CLI entry point. Returns a process exit code."""
+    components = estimate_error_components(days_window, min_cycle)
+    print()
+    print("=" * 72)
+    print("  CALIBRATION against historical Senate polling")
+    print("=" * 72)
+    print(components.report())
+    print()
+    print("Against the current configuration:")
+    print(compare_to_config(components))
+    print()
+    print(f"  {ATTRIBUTION}")
+    print("=" * 72)
+    return 0

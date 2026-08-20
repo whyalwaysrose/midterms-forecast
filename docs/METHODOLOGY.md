@@ -197,12 +197,24 @@ in Iowa — and that correlation fattens the tails enormously.
 ```
 θ_final_r = θ_{r,T} + b_national + κ_r
 
-b_national ~ Normal(0, 0.075²)                    ~3.7 pts of margin
-κ          ~ MVN(0, 0.085² · C)                   ~4.2 pts of margin
+b_national ~ Normal(0, 0.060²)                    ~3.0 pts of margin
+κ          ~ MVN(0, 0.114² · C)                   ~5.7 pts of margin
 ```
 
-Total ≈ `√(0.075² + 0.085²) = 0.113` logit ≈ **5.7 points of margin RMSE**, consistent with
-the historical record for Senate polling at this range.
+Total ≈ `√(0.060² + 0.114²) = 0.129` logit ≈ **6.4 points of margin**.
+
+**These are fitted, not asserted.** `midterms calibrate` decomposes the observed error
+of 595 Senate polls (2010–2022, 45–120 days out) into three levels — a cycle-wide
+national miss, a race-specific miss, and poll noise — after removing the poll noise that
+each race's mean error still carries. The earlier values (0.075 / 0.085) came from the
+literature and were wrong in a specific way: they understated total race-level error by
+14% and, more damagingly, mis-split it, overstating the perfectly-correlated national
+component by 20% while understating the race-specific one by 34%.
+
+The split matters as much as the total. National error moves all 35 races together and
+fattens the tails of the seat distribution; state error partly cancels across the map.
+Getting the mix wrong changes the *shape* of the chamber forecast without changing any
+single race's win probability.
 
 The correlation matrix is
 
@@ -320,6 +332,37 @@ against real results.
 
 ---
 
+## 8b. Backtest against real elections
+
+`midterms backtest-history` scores win probabilities against 167 Senate races from
+2010–2022 — the check that `backtest.py` cannot make, because predicting polls is not
+predicting elections.
+
+Fitted scales versus the previously asserted ones, on identical races:
+
+| Coverage of the actual margin | Fitted 3.0/5.7 | Asserted 3.75/4.25 | Target |
+|---|---|---|---|
+| 50% interval | 44.3% | 40.7% | 50% |
+| 80% interval | 70.7% | 65.9% | 80% |
+| 90% interval | 84.4% | 77.8% | 90% |
+
+The fitted scales are better at every level, and reliability sits close to the diagonal:
+races called at 42% won 39% of the time, at 59% won 53%, at 82% won 86%, at 98% won 98%.
+Brier score 0.091, a 34% improvement on always calling the poll leader.
+
+**Two things this backtest does not say.** First, its point estimate is a
+recency-weighted poll average, not the full posterior, so its error is an upper bound on
+the model's. Second — and this is the trap — it wants roughly 1.2× the fitted scales to
+be perfectly calibrated, but that factor must **not** be copied into the config. It is
+absorbing the point estimate's own error, which the real model carries separately in its
+posterior. Measured directly: the model's posterior contributes a median 4.9 points of
+SD per race, which combined with the 6.4-point election-day error gives 8.1 points
+total, against the 7.7 the backtest finds well-calibrated — a ratio of 1.05. Inflating
+the config would double-count.
+
+A fat-tailed (Student-t) election-day error was tested and **rejected**: it made coverage
+worse at every level. The residual gap is width, not shape.
+
 ## 9. Known weaknesses
 
 1. **Correlation covariates are political, not demographic** (§5). Highest-value fix.
@@ -328,10 +371,19 @@ against real results.
 3. **Fourteen races have no qualifying polls.** They rest entirely on fundamentals and the
    national environment; their intervals are wide but their centres are only as good as the
    prior.
-4. **The historical error scales in §5 are asserted from the literature, not fitted.** They
-   should be estimated from a historical Senate polling dataset. That dataset is exactly
-   what FiveThirtyEight's shutdown made hard to obtain.
+4. ~~The historical error scales in §5 are asserted from the literature.~~ **Fixed** —
+   fitted from FiveThirtyEight's archived pollster-ratings dataset (§5, §8b). The
+   fundamentals coefficients in §3 are still asserted and are the next candidate.
 5. **A single elasticity per race** assumes the relationship to the national environment is
    constant over the cycle.
+7. **Presidential approval is ingested but disabled.** The link is implemented and
+   works — the fitted correlation between approval and generic-ballot innovations is
+   −0.54, correctly negative — but A/B testing showed it tightens the national
+   environment by only 6.6% while cutting minimum effective sample size from 455 to 296.
+   Not worth the geometry at present. `scripts/ab_approval.py` reproduces the test.
+8. **Correlated race movement costs sampling efficiency.** Making drift correlated across
+   similar states (§2.2) helps the 14 unpolled races, but it competes with the national
+   environment for the common signal and pushed minimum ESS from 658 to 455. Still well
+   above the 400 floor, but it is the first thing to check if convergence degrades.
 6. **Nebraska's independent** is forced onto the Democratic side for chamber arithmetic
    (§ README known issues). There is no unarguably correct treatment.

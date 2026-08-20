@@ -238,3 +238,62 @@ def test_slim_payload_is_substantially_smaller():
     race["trajectory"] = [{"date": "2026-01-01", "p05": -5, "p50": 0, "p95": 5}] * 69
     full = make_payload("2026-08-20", 0.58, [race])
     assert len(json.dumps(slim_payload(full))) < 0.35 * len(json.dumps(full))
+
+
+# ------------------------------------------------- model-change attribution
+
+
+def test_model_change_is_reported_instead_of_blamed_on_polls():
+    """Regression: a model revision was reported as though polls caused it.
+
+    After recalibration every race moved at once. The differ, which assumes a
+    fixed model, announced a 5.6-point jump "on 1 new poll" and credited 26
+    races to "the national environment" — a claim that was simply false.
+    """
+    race = make_race(prob=0.42, polls=[make_poll("old")])
+    prev = make_payload("2026-08-19", 0.55, [race])
+    prev["model_fingerprint"] = "aaaaaaaaaaaa"
+
+    curr = make_payload("2026-08-20", 0.63, [make_race(prob=0.63, polls=[make_poll("old")])])
+    curr["model_fingerprint"] = "bbbbbbbbbbbb"
+
+    note = C.generate(curr, prev)
+    assert "model changed" in note.headline.lower()
+    text = " ".join(note.body) + " ".join(c.describe() for c in note.race_changes)
+    assert "model revision" in text
+    assert "comes from the national environment" not in text
+
+
+def test_identical_fingerprints_keep_normal_attribution():
+    polls = [make_poll("old")]
+    prev = make_payload("2026-08-19", 0.55, [make_race(prob=0.55, polls=polls)])
+    curr = make_payload("2026-08-20", 0.60, [make_race(prob=0.62, polls=polls)])
+    for payload in (prev, curr):
+        payload["model_fingerprint"] = "same00000000"
+
+    note = C.generate(curr, prev)
+    assert "model changed" not in note.headline.lower()
+    assert "comes from the national environment" in note.race_changes[0].describe()
+
+
+def test_missing_fingerprint_does_not_claim_a_model_change():
+    """Runs archived before fingerprinting existed must not all look changed."""
+    polls = [make_poll("old")]
+    prev = make_payload("2026-08-19", 0.55, [make_race(prob=0.55, polls=polls)])
+    curr = make_payload("2026-08-20", 0.60, [make_race(prob=0.62, polls=polls)])
+    curr["model_fingerprint"] = "bbbbbbbbbbbb"   # previous has none
+    note = C.generate(curr, prev)
+    assert "model changed" not in note.headline.lower()
+
+
+def test_fingerprint_changes_when_the_config_changes(tmp_path, monkeypatch):
+    from midterms import outputs, paths
+
+    before = outputs.model_fingerprint()
+    original = paths.MODEL_CONFIG.read_bytes()
+    try:
+        paths.MODEL_CONFIG.write_bytes(original + b"\n# nudge\n")
+        assert outputs.model_fingerprint() != before
+    finally:
+        paths.MODEL_CONFIG.write_bytes(original)
+    assert outputs.model_fingerprint() == before

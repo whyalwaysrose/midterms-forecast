@@ -59,6 +59,43 @@ national_environment:
   rw_sd_per_day_prior: 0.004
   # Prior on the environment at the start of the window.
   initial_sd: 0.10
+  # Presidential approval as a SECOND indicator of the national environment.
+  #
+  # What this does: approval gets its own latent random walk, and its
+  # innovations are correlated with the generic ballot's by a coefficient the
+  # model estimates. When approval moves, the environment is nudged to move
+  # with it, in proportion to how tightly the two have actually co-moved. Only
+  # movement is shared — approval's *level* is absorbed by its own intercept,
+  # because "net approval of -8" does not translate into a generic-ballot
+  # margin without a historical fit this dataset cannot support (VoteHub's
+  # approval series starts in 2018, which is two midterms).
+  #
+  # What it does NOT do: fix staleness. Approval polls in this feed end
+  # 2026-06-29 and generic-ballot polls 2026-06-30, so both are about seven
+  # weeks behind the state polls. Approval adds information over the window
+  # where it exists; it does not extend the window.
+  approval:
+    # MEASURED AND TURNED OFF. Built, A/B-tested against the same polls, and
+    # left disabled because the numbers did not justify it:
+    #
+    #   national-environment 90% width : 3.95 vs 4.23 pts  (only 6.6% tighter)
+    #   minimum effective sample size  : 296  vs 455       (35% worse)
+    #   P(Democratic control)          : 60.7% vs 62.9%
+    #
+    # An ESS of 296 is below the 400 floor this project treats as the bar for a
+    # trustworthy run and surfaces on the dashboard, so the cost is real while
+    # the gain is marginal. The mechanism is sound — the fitted correlation
+    # between approval and generic-ballot innovations came out at -0.54
+    # [-0.89, -0.04], correctly negative, since eta is the *Democratic* share
+    # and approval is the *president's* — it simply is not worth the geometry.
+    #
+    # Set to true to re-enable; `scripts/ab_approval.py` reproduces the test.
+    enabled: false
+    rw_sd_per_day_prior: 0.004
+    initial_sd: 0.30
+    # Prior scale on atanh(correlation) between the two series' innovations.
+    # 0.6 puts most mass on a positive but far-from-perfect correlation.
+    correlation_prior_sd: 0.6
 
 # --- Latent state: per-race ---------------------------------------------------
 # theta_{r,t} = alpha_r + lambda_r * eta_t + epsilon_{r,t}
@@ -72,16 +109,55 @@ race:
   elasticity_sd: 0.25          # partial pooling around 1
   elasticity_lower: 0.2        # keep sign-identified and away from 0
   rw_sd_per_day_prior: 0.005   # ~0.096 logit (~4.8 pts margin) per year
+  # Movement is CORRELATED across similar races, not independent.
+  #
+  # Treating each race's drift as i.i.d. says that Michigan moving three points
+  # toward Democrats tells you nothing about Wisconsin. That is plainly wrong,
+  # and it is most costly exactly where the model is weakest: the 14 races with
+  # no polling at all, which under independence can only drift on their prior.
+  # Correlating the innovations lets a poll in one state inform its neighbours.
+  #
+  # Same kernel shape as the election-day error, with its own length scale —
+  # week-to-week co-movement is broader than election-day error correlation.
+  #
+  # This does compete with the national environment for the common signal: a
+  # perfectly correlated drift is indistinguishable from a move in eta. It stays
+  # identified because eta has its own likelihood terms (the generic-ballot
+  # polls observe it directly), and because this kernel decays with distance
+  # rather than being all-ones. Convergence is checked on every run.
+  movement_correlation:
+    length_scale: 1.5
+    region_weight: 0.5
+    nugget: 0.05
 
 # --- Measurement model (polls) ------------------------------------------------
 polls:
   # Student-t likelihood so a single wild poll cannot drag the latent state.
-  student_t_nu: 4.0
+  student_t_nu: 5.0
+  # Rescale so the likelihood's STANDARD DEVIATION is the one we asked for.
+  #
+  # A Student-t's SD is its scale x sqrt(nu / (nu - 2)) — 1.41x at nu=4. Feeding
+  # the sampling SD in as the scale therefore inflated every poll's effective
+  # error by 41% on top of the design effect, which is why the model's per-poll
+  # spread came out near 7 points of margin against a measured 4.0, and why the
+  # backtest found 50% intervals containing 70% of held-out polls. Dividing the
+  # scale by that factor keeps the heavy tails (the reason for using t at all)
+  # without the variance inflation that came along with them.
+  match_student_t_variance: true
   # Sampling variance on the logit scale via the delta method:
   #   var = design_effect / (n * p * (1-p))
-  # The design effect inflates for weighting/clustering; 1.5 is a conventional
-  # value for modern weighted online and IVR samples.
-  design_effect: 1.5
+  #
+  # FITTED, not assumed. `midterms calibrate` compares the observed spread of
+  # polls within a race against the binomial spread their sample sizes imply,
+  # over 595 Senate polls from 2010-2022 taken 45-120 days out. The excess is
+  # 1.18x, not the 1.5 previously assumed.
+  #
+  # Mildly conservative on purpose: the measured 1.18 also contains house
+  # effects and real opinion movement inside the window, both of which the model
+  # represents separately, so the true sampling-only design effect is lower
+  # still. Erring high here costs a little sharpness; erring low would make
+  # every individual poll too influential.
+  design_effect: 1.18
   # Extra poll-level noise beyond sampling error ("pollster-induced error"):
   # house effects and mode explain some of it, this absorbs the rest.
   excess_sd_prior: 0.05
@@ -129,8 +205,18 @@ polls:
 # ~ 5.7 points of margin RMSE, matching the historical record for Senate polling
 # at this distance from an election.
 election_day_error:
-  national_sd: 0.075
-  state_sd: 0.085
+  # FITTED from 167 historical Senate races (2010-2022), 45-120 days out, via
+  # `midterms calibrate`. Previously asserted from the literature as 0.075 and
+  # 0.085, which understated total race-level error by 14% and — more
+  # importantly — mis-split it, overstating the perfectly-correlated national
+  # component by 20% while understating the race-specific one by 34%.
+  #
+  # The split matters as much as the total. National error moves all 35 races
+  # together and so fattens the tails of the seat distribution; state error
+  # partly cancels across the map. Getting the mix wrong changes the shape of
+  # the chamber forecast without changing any single race's win probability.
+  national_sd: 0.060    # 3.0 points of margin
+  state_sd: 0.114       # 5.7 points of margin
   # Correlation kernel: corr(r, r') = (1 - nugget) * exp(-d(r,r') / length_scale)
   # with d the Euclidean distance in standardised covariate space
   # (2024 lean, 2020 lean, region indicator).

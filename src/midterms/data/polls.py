@@ -27,6 +27,13 @@ log = logging.getLogger(__name__)
 #: Sentinel race id for national generic-ballot polls.
 NATIONAL_RACE_ID = "__national__"
 
+#: Sentinel for presidential-approval polls, a second national indicator.
+APPROVAL_RACE_ID = "__approval__"
+
+#: Approval polls are collected for several subjects; only the president's
+#: matter for a midterm.
+APPROVAL_SUBJECT = "Donald Trump"
+
 
 @dataclass(frozen=True)
 class NormalisedPoll:
@@ -75,15 +82,23 @@ class PollTable:
         return self.for_race(NATIONAL_RACE_ID)
 
     @property
+    def approval(self) -> list[NormalisedPoll]:
+        return self.for_race(APPROVAL_RACE_ID)
+
+    @property
     def race_polls(self) -> list[NormalisedPoll]:
-        return [p for p in self.polls if p.race_id != NATIONAL_RACE_ID]
+        return [
+            p for p in self.polls
+            if p.race_id not in (NATIONAL_RACE_ID, APPROVAL_RACE_ID)
+        ]
 
     def counts_by_race(self) -> Counter:
         return Counter(p.race_id for p in self.race_polls)
 
     def summary(self) -> str:
         lines = [
-            f"{len(self.race_polls)} race polls, {len(self.national)} generic-ballot polls",
+            f"{len(self.race_polls)} race polls, {len(self.national)} generic-ballot polls, "
+            f"{len(self.approval)} approval polls",
         ]
         if self.rejections:
             lines.append("rejected: " + ", ".join(
@@ -222,6 +237,7 @@ def build_poll_table(
     as_of: date | None = None,
     race_poll_type: str = "us-senator",
     national_poll_type: str = "generic-ballot",
+    approval_poll_type: str | None = "approval",
 ) -> PollTable:
     """Turn raw API records into the model's input table.
 
@@ -270,6 +286,18 @@ def build_poll_table(
             table.rejections["older than max_age_days"] += 1
             continue
         table.polls.append(poll)
+
+    # --- presidential approval -------------------------------------------
+    if approval_poll_type:
+        for record in raw_by_type.get(approval_poll_type, []):
+            if str(record.get("subject", "")) != APPROVAL_SUBJECT:
+                continue
+            poll = _normalise_one(record, APPROVAL_RACE_ID, roster, cfg, table)
+            if poll is None:
+                continue
+            if poll.field_date > as_of or poll.field_date < cutoff:
+                continue
+            table.polls.append(poll)
 
     table.polls.sort(key=lambda p: (p.race_id, p.field_date))
     log.info("poll table: %s", table.summary().replace("\n", "; "))

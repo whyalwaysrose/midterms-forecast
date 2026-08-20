@@ -45,3 +45,8 @@ src = ["src", "tests"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# Analysis scripts silence warnings and configure logging before importing the
+# heavy scientific stack, which necessarily puts imports after statements.
+"scripts/*.py" = ["E402"]

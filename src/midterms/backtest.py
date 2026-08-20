@@ -127,6 +127,10 @@ def _posterior_predictive_for_poll(
 
     sampling_var = _sampling_variance(poll, cfg.polls.design_effect)
     sigma = np.sqrt(sampling_var + sigma_excess**2)
+    # Mirror the likelihood exactly, variance correction included, or the
+    # coverage numbers describe a distribution the model never used.
+    if cfg.polls.match_student_t_variance:
+        sigma = sigma / np.sqrt(cfg.polls.student_t_nu / (cfg.polls.student_t_nu - 2.0))
 
     mu = latent + house + pop_effect + partisan
 
@@ -155,7 +159,7 @@ def calibrate(
 
     snapshot = latest_snapshot()
     if snapshot is None or not offline:
-        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot"])
+        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot", "approval"])
     else:
         raw = load_snapshot(snapshot)
 

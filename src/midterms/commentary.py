@@ -74,6 +74,9 @@ class RaceChange:
     margin_before: float
     margin_after: float
     new_polls: list[dict] = field(default_factory=list)
+    #: Set when the run that produced this change used a different model, so a
+    #: move cannot be attributed to polling.
+    model_changed: bool = False
 
     @property
     def prob_delta(self) -> float:
@@ -104,6 +107,8 @@ class RaceChange:
             f"({_fmt_signed(self.margin_delta)})."
         )
         if not self.new_polls:
+            if self.model_changed:
+                return head + " No new polls in this race; this is the model revision."
             return (
                 head
                 + " No new polls in this race; the move comes from the national"
@@ -225,6 +230,16 @@ def generate(current: dict, previous: dict | None) -> Commentary:
     if previous is None:
         return _first_run_commentary(current)
 
+    # Did the model itself change since the last run? If so, every race can
+    # move at once for reasons that have nothing to do with polling, and
+    # attributing that to "the national environment" — as this differ otherwise
+    # would — is simply false.
+    model_changed = (
+        current.get("model_fingerprint") is not None
+        and previous.get("model_fingerprint") is not None
+        and current["model_fingerprint"] != previous["model_fingerprint"]
+    )
+
     previous_ids = _poll_ids(previous)
     prev_races = {r["id"]: r for r in previous.get("races", [])}
 
@@ -248,6 +263,7 @@ def generate(current: dict, previous: dict | None) -> Commentary:
                 margin_before=before["margin"]["p50"],
                 margin_after=race["margin"]["p50"],
                 new_polls=sorted(new_polls, key=lambda p: p["date"], reverse=True),
+                model_changed=model_changed,
             )
         )
 
@@ -285,6 +301,21 @@ def generate(current: dict, previous: dict | None) -> Commentary:
         )
 
     body: list[str] = []
+
+    if model_changed:
+        headline = (
+            f"**The model changed in this run.** Democratic chances of Senate "
+            f"control are {_fmt_pct(cur_chamber['dem_control_prob'])}, against "
+            f"{_fmt_pct(prev_chamber['dem_control_prob'])} on "
+            f"{previous['run_date']} — but the two runs were produced by "
+            f"different models, so the difference is not a change in the race."
+        )
+        body.append(
+            "Movement below reflects the model revision as well as any new "
+            "polling, and the two cannot be separated from a single comparison. "
+            "Day-over-day attribution resumes with the next run."
+        )
+        body.append("")
 
     cur_gb = current["national"]["generic_ballot"]["dem_margin_median"]
     prev_gb = previous["national"]["generic_ballot"]["dem_margin_median"]

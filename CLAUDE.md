@@ -32,7 +32,23 @@ Context for working in this repo. Read `docs/METHODOLOGY.md` before changing any
    delegated listener on the map container never fires even though
    `document.activeElement` is correctly the focused `<path>`, which silently
    removes keyboard access to all 35 races. Pointer events *do* delegate fine.
-7. **`site/data/*.json` and `outputs/runs/**` must stay committed.** The daily workflow
+7. **The error scales in `election_day_error` are FITTED. Do not hand-edit them.**
+   They come from `midterms calibrate` against vendored historical poll errors, and
+   `tests/test_calibration.py` asserts the config still matches the fit. If you change
+   the window or the era, re-run calibrate and update both together.
+8. **Do not inflate the scales to match `backtest-history`.** That backtest adds error to
+   a point estimate with no uncertainty of its own, so it appears to want ~1.2x wider
+   scales. The real model's posterior already supplies that width (measured ratio 1.05).
+   Copying the factor across double-counts estimation error.
+9. **Design and model must agree about the approval switch.** `build_model_data` drops
+   approval polls when the feature is off and `build_model` skips their latents; if the
+   two disagree the observation and latent vectors differ in length. There is an explicit
+   check that raises a readable error, added after this bit as a raw PyTensor shape error.
+10. **A model change must not be reported as a polling change.** Every run records a
+   `model_fingerprint` (a hash of model.yaml plus the modules that define the arithmetic).
+   When it differs between runs the commentary says so instead of blaming the polls. This
+   was added after a recalibration was announced as a 5.6-point move "on 1 new poll".
+11. **`site/data/*.json` and `outputs/runs/**` must stay committed.** The daily workflow
    diffs against the previous archived run to write commentary. Un-commit them and every
    run believes it is the first.
 
@@ -47,6 +63,9 @@ Context for working in this repo. Read `docs/METHODOLOGY.md` before changing any
 | Change seat/tipping-point logic | `src/midterms/model/simulate.py` |
 | Change the dashboard | `site/` — plain HTML/CSS/JS, no build step |
 | Change the map | `site/js/map.js` (render + interaction), `src/midterms/geo.py` (projection) |
+| Change a chart | `site/js/charts.js` |
+| Re-fit the error scales | `midterms calibrate`, then update `config/model.yaml` |
+| Score against real elections | `midterms backtest-history` |
 | Change what the JSON contains | `src/midterms/outputs.py` — **bump `SCHEMA_VERSION` and the matching constant in `site/js/app.js`** |
 
 ## Adding the House or Governors
@@ -62,6 +81,19 @@ The model is chamber-agnostic; races come from config. What is actually needed:
 4. Poll type `us-representative` (governors: `governor`) in the CLI's fetch list.
 
 `src/midterms/model/` needs no changes for this.
+
+## Measured, then rejected
+
+Keep these decisions unless new evidence overturns them; each cost real time to
+establish and the numbers are in `docs/METHODOLOGY.md`.
+
+- **Student-t election-day error** — tested, made coverage worse at every level. The
+  residual mis-calibration is width, not tail shape.
+- **Presidential approval in the national environment** — implemented and works
+  (correlation -0.54, correctly signed), but buys 6.6% tighter eta for a 35% ESS loss.
+  Disabled by default; `scripts/ab_approval.py` reproduces it.
+- **Seven-step map colour ramp** — adjacent pairs fell below the perceptual separation
+  floor near the neutral midpoint. Five steps is what the colour space supports.
 
 ## Known rough edges
 

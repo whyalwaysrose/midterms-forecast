@@ -121,6 +121,8 @@ URL will fail because browsers block `fetch` from the filesystem.
 | `midterms backtest --holdout-days 30` | Calibration check against held-out polls |
 | `midterms bundle` | Build a single self-contained `outputs/dashboard.html` |
 | `midterms build-map` | Re-project the vendored state boundaries (`run` does this too) |
+| `midterms calibrate` | Fit the error scales from historical polling |
+| `midterms backtest-history` | Score win probabilities against elections that happened |
 
 `midterms bundle` inlines the CSS, JS and data into one portable HTML file. Useful for
 sending someone a snapshot, or for viewing the dashboard without running a server —
@@ -158,6 +160,8 @@ src/midterms/
     correlation.py            state-similarity kernel for election-day error
     simulate.py               posterior → seat distribution, tipping points
   geo.py                      Albers USA projection → SVG paths for the map
+  calibration.py              fit error scales from historical polling
+  backtest_history.py         score against elections that actually happened
   outputs.py                  forecast.json / history.json
   commentary.py               day-over-day diff → changelog
   backtest.py                 calibration against held-out polls
@@ -167,6 +171,7 @@ site/                         the dashboard (plain HTML/CSS/JS, no build step)
   js/charts.js                seat / history / trajectory charts + hover layer
   js/map.js                   the interactive map
 data/geo/                     vendored state boundaries (us-atlas, ISC)
+data/history/                 vendored historical poll errors (538, CC BY 4.0)
 outputs/runs/<date>/          slim archived runs — the memory commentary diffs against
 .github/workflows/            daily refresh + CI
 ```
@@ -245,6 +250,30 @@ Recorded openly rather than buried, because they affect how much to trust specif
 
 ---
 
+## Calibration against history
+
+The two numbers that set how confident the headline is allowed to be —
+`election_day_error.national_sd` and `.state_sd` — used to be asserted from the
+literature. They are now **fitted** from FiveThirtyEight's archived pollster-ratings
+dataset (20,466 polls paired with actual results, CC BY 4.0, vendored under
+`data/history/`).
+
+`midterms calibrate` decomposes historical Senate poll error into three levels that
+behave completely differently in a seat forecast:
+
+| Component | Was assumed | History says |
+|---|---|---|
+| National (cycle-wide, perfectly correlated) | 3.8 pts | **3.0 pts** |
+| State-specific | 4.2 pts | **5.7 pts** |
+| Total race-level | 5.7 pts | **6.4 pts** |
+| Per-poll design effect | 1.50 | **1.18** |
+
+`midterms backtest-history` then scores the result against 167 real races. The fitted
+scales beat the asserted ones at every coverage level (90% interval: 84.4% vs 77.8%), and
+reliability sits close to the diagonal — races called at 42% won 39% of the time, at 82%
+won 86%. See [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) §8b, including why the
+backtest's apparent demand for 1.2× wider scales must **not** be copied into the config.
+
 ## The map
 
 An **Albers USA** projection — the familiar composite with Alaska and Hawaii inset —
@@ -310,7 +339,7 @@ re-fetchable, and only derived artefacts belong in the repository.
 ## Testing
 
 ```bash
-pytest -q          # 110 tests, ~5 seconds, no sampling required
+pytest -q          # 129 tests, ~5 seconds, no sampling required
 ruff check src tests
 ```
 
@@ -333,6 +362,10 @@ wrong on the dashboard.
 - Backtesting against real outcomes is impossible until November 2026. What
   `midterms backtest` provides is a necessary condition (are the predictive intervals the
   right width?), not a sufficient one.
+- **Presidential approval is ingested but off by default.** It works — the fitted
+  correlation with the generic ballot is −0.54, correctly negative — but it tightens the
+  national environment by only 6.6% while cutting minimum effective sample size from 455
+  to 296. Measured, then disabled; `scripts/ab_approval.py` reproduces the test.
 - **Measured calibration (33 held-out polls):** median error 2.27 points of margin, and the
   poll-level intervals are somewhat **too wide** — 50% intervals contained 69.7% of held-out
   polls. Deliberately not retuned: at n=33 the standard error on that figure is ~8.7 points,

@@ -133,31 +133,203 @@
   </section>
 
   <!-- ============ METHOD ============ -->
-  <section class="card">
-    <h2>How this works</h2>
-    <div class="method-grid">
-      <div>
-        <h3>The model</h3>
-        <p>Every race is tracked on the logit of the two-party Democratic share. A single national environment evolves as a Gaussian random walk driven by generic-ballot polls. Each race is that environment scaled by its own elasticity, plus a structural baseline and its own drift:</p>
-        <p class="formula">θ<sub>r,t</sub> = α<sub>r</sub> + λ<sub>r</sub>·η<sub>t</sub> + ε<sub>r,t</sub></p>
-        <p>α comes from a fundamentals prior (presidential lean in 2024 and 2020, plus incumbency), λ is partially pooled across races, and ε is a race-specific random walk.</p>
-      </div>
-      <div>
-        <h3>The polls</h3>
-        <p>Polls observe that latent state through a biased instrument. The model estimates a house effect for each frequent pollster (constrained to sum to zero, or it would not be identified), an adjustment for likely-voter versus registered-voter versus adult samples, and a partisan-sponsor correction. A Student-t likelihood keeps one wild poll from dragging the estimate.</p>
-      </div>
-      <div>
-        <h3>Why the intervals are wide</h3>
-        <p>Polling misses are correlated. If all 35 races erred independently the errors would cancel and the seat forecast would be absurdly confident. So on top of the posterior we add a national error common to every race and a state-level error whose correlation decays with political distance between states. That correlation is what gives the seat distribution its real width.</p>
-      </div>
-      <div>
-        <h3>Honest limits</h3>
-        <p>This model predicts polls well; whether it predicts the <em>election</em> well depends on whether the polls are biased, which no amount of modelling can determine in advance. Races with no polling are carried entirely by fundamentals and should be read as rough. See the methodology document for the full specification and known caveats.</p>
+  <section class="card method">
+    <h2>How this forecast is made</h2>
+    <p class="card-sub">
+      The short version: a Bayesian model estimates where each race stands from the polls,
+      then adds the amount that polls have historically been wrong by. Both halves are
+      described below — including how the second one was measured rather than guessed.
+    </p>
+
+    <div class="method-nav" id="method-nav">
+      <button class="method-tab active" data-panel="m-model">The model</button>
+      <button class="method-tab" data-panel="m-data">The data</button>
+      <button class="method-tab" data-panel="m-uncertainty">Uncertainty</button>
+      <button class="method-tab" data-panel="m-testing">Testing</button>
+      <button class="method-tab" data-panel="m-limits">Limits</button>
+    </div>
+
+    <!-- ---------- the model ---------- -->
+    <div class="method-panel" id="m-model">
+      <div class="method-cols">
+        <div>
+          <h3>One equation</h3>
+          <p>Everything is tracked on the log-odds of the Democratic share of the two-party
+          vote. Each race, on each day, is:</p>
+          <p class="formula">&theta;<sub>r,t</sub> = &alpha;<sub>r</sub> + &lambda;<sub>r</sub>&middot;&eta;<sub>t</sub> + &epsilon;<sub>r,t</sub></p>
+          <dl class="term-list">
+            <dt>&eta;<sub>t</sub></dt>
+            <dd>The <strong>national environment</strong> &mdash; a random walk driven by
+            generic-ballot polls. One number for the whole country on a given day.</dd>
+            <dt>&alpha;<sub>r</sub></dt>
+            <dd>The race&rsquo;s <strong>baseline</strong> if the country were exactly tied,
+            from presidential lean in 2024 and 2020 plus incumbency.</dd>
+            <dt>&lambda;<sub>r</sub></dt>
+            <dd><strong>Elasticity</strong> &mdash; how hard this race swings when the
+            country swings. Estimated per race, pooled toward 1.</dd>
+            <dt>&epsilon;<sub>r,t</sub></dt>
+            <dd>The race&rsquo;s <strong>own drift</strong>: candidate news, spending,
+            scandal.</dd>
+          </dl>
+        </div>
+        <div>
+          <h3>Why it is built this way</h3>
+          <p>Defining the baseline <em>at a tied national environment</em> is what stops the
+          national swing being counted twice &mdash; once inside each race&rsquo;s starting
+          point and again through &eta;.</p>
+          <p>Race drift is <strong>correlated across similar states</strong>. If Michigan
+          moves toward Democrats, Wisconsin probably did too, and treating them as
+          independent throws that away. This matters most for the
+          <span id="m-unpolled">unpolled</span> races, which would otherwise have nothing to
+          follow but the national trend.</p>
+          <p>The model is fitted with <a href="https://www.pymc.io/" rel="noopener">PyMC</a>
+          using Hamiltonian Monte Carlo, so the output is a full probability distribution
+          rather than a single number. The seat forecast comes from simulating all 35 races
+          together <strong id="m-nsims">many</strong> times.</p>
+        </div>
       </div>
     </div>
-    <div class="diagnostics">
-      <h3>Run diagnostics</h3>
-      <div id="diagnostics" class="diag-grid"></div>
+
+    <!-- ---------- the data ---------- -->
+    <div class="method-panel" id="m-data" hidden>
+      <div class="method-cols">
+        <div>
+          <h3>Where the polls come from</h3>
+          <p>Every poll is pulled from the
+          <a href="https://votehub.com/polls/api/" rel="noopener">VoteHub Polling API</a>,
+          which aggregates hundreds of pollsters and publishes under a Creative Commons
+          licence. This run used <strong id="m-racepolls">&mdash;</strong> state polls and
+          <strong id="m-genpolls">&mdash;</strong> generic-ballot polls from
+          <strong id="m-pollsters">&mdash;</strong> pollsters.</p>
+          <p>Polls are dated to the <em>middle of their field period</em> rather than their
+          publication date: a poll tells you about opinion while it was being taken.</p>
+          <h3 class="method-subhead">What gets thrown away</h3>
+          <p>Primary polls, polls older than the window, samples under 100, and any poll that
+          cannot be reduced to a single Democrat-versus-Republican matchup. Candidate names
+          carry no party in the feed, so an explicit roster maps them &mdash; and when a name
+          is unrecognised the poll is <strong>skipped rather than guessed at</strong>. A
+          wrong party assignment would corrupt a race&rsquo;s entire history; a skipped poll
+          only loses information.</p>
+        </div>
+        <div>
+          <h3>How each poll is adjusted</h3>
+          <p>Polls are not neutral instruments, so the model estimates and removes three
+          biases before believing them:</p>
+          <ul class="method-list">
+            <li><strong>House effects.</strong> Each frequent pollster gets its own
+            persistent lean, constrained to average out across all pollsters &mdash;
+            otherwise &ldquo;everyone leans Democratic&rdquo; and &ldquo;the race is more
+            Democratic&rdquo; would be indistinguishable.</li>
+            <li><strong>Voter screen.</strong> Registered-voter and adult samples are
+            corrected relative to likely voters.</li>
+            <li><strong>Partisan sponsorship.</strong> Polls released by campaigns and
+            aligned groups are corrected back toward the centre.</li>
+          </ul>
+          <p>A pollster needs at least three polls before earning its own house effect. Give
+          a one-off pollster a free parameter and it simply absorbs that poll&rsquo;s own
+          noise, which makes every individual poll look more informative than it is.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- uncertainty ---------- -->
+    <div class="method-panel" id="m-uncertainty" hidden>
+      <div class="method-cols">
+        <div>
+          <h3>Polls are wrong together, not separately</h3>
+          <p>This is the part that decides whether the headline number is honest.</p>
+          <p>If all 35 races could err independently, those errors would cancel across the
+          map and the seat forecast would be absurdly confident. They do not. When polls miss
+          in Ohio they tend to miss the same way in Iowa. So on top of the model&rsquo;s
+          estimate, the simulation adds two errors:</p>
+          <ul class="method-list">
+            <li><strong>A national miss</strong> of about
+            <strong id="m-nat">&mdash;</strong> points, applied identically to every race.
+            This is what fattens the tails of the seat distribution.</li>
+            <li><strong>A state-specific miss</strong> of about
+            <strong id="m-state">&mdash;</strong> points, correlated between states that vote
+            alike and only partly cancelling across the map.</li>
+          </ul>
+          <p>Together, roughly <strong id="m-total">&mdash;</strong> points of margin per
+          race &mdash; which is why even a comfortable-looking lead is not a safe seat.</p>
+        </div>
+        <div>
+          <h3>These numbers were measured, not chosen</h3>
+          <p>They come from <strong id="m-calpolls">&mdash;</strong> Senate polls across
+          <strong id="m-calcycles">&mdash;</strong> past election cycles, each paired with
+          the result that actually happened, taken at the same distance from election day as
+          this forecast.</p>
+          <table class="method-table" id="m-caltable"></table>
+          <p class="subtle method-note">Source: <span id="m-calsource">&mdash;</span>.
+          Earlier versions of this model used figures taken from the published literature.
+          They were wrong in both directions at once: overstating how much states miss
+          <em>together</em>, understating how much they miss <em>individually</em>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- testing ---------- -->
+    <div class="method-panel" id="m-testing" hidden>
+      <div class="method-cols">
+        <div>
+          <h3>Does a 70% call win 70% of the time?</h3>
+          <p>A forecast that says 70% and is right 95% of the time is just as broken as one
+          that is right 40% of the time. So the model is scored against
+          <strong id="m-btraces">&mdash;</strong> real Senate races from
+          <strong id="m-btcycles">&mdash;</strong> past cycles, where the answer is known.</p>
+          <table class="method-table" id="m-reliability"></table>
+          <p class="subtle method-note">Left: what the model said. Right: what happened.
+          Closer together is better.</p>
+        </div>
+        <div>
+          <h3>Two different tests</h3>
+          <p><strong>Against past elections.</strong> Brier score
+          <strong id="m-brier">&mdash;</strong> &mdash; an improvement of
+          <strong id="m-skill">&mdash;</strong> on simply calling every race for whoever
+          leads the polls. How often the true result landed inside each interval:</p>
+          <div id="m-coverage" class="coverage-rows"></div>
+          <p><strong>Against polls it has not seen.</strong> The model is also refit on older
+          polls and asked to predict recent ones it was never shown. That catches a different
+          failure: a model that has learned this cycle&rsquo;s noise rather than its signal.</p>
+          <p class="subtle">Neither test can prove the 2026 forecast is right. They establish
+          that this method has been honest about its own uncertainty in the past, which is
+          the most anyone can claim before an election happens.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- limits ---------- -->
+    <div class="method-panel" id="m-limits" hidden>
+      <div class="method-cols">
+        <div>
+          <h3>What this cannot do</h3>
+          <ul class="method-list">
+            <li><strong>It cannot know whether the polls are biased this year.</strong> The
+            error model is calibrated to how wrong polls have been <em>on average</em> across
+            past cycles. A miss larger than anything in that record would not be anticipated
+            here.</li>
+            <li><strong>Races with no polling rest on fundamentals alone.</strong> Their
+            centres come from presidential lean and incumbency, which know nothing about
+            candidate quality, fundraising or scandal. Their intervals are wide for good
+            reason.</li>
+            <li><strong>Nebraska is a special case.</strong> Dan Osborn runs as an
+            independent and has said he would not automatically caucus with either party.
+            Chamber arithmetic forces a side, so he is counted with the Democrats. Read that
+            race, and its contribution to the seat total, with the caveat in mind.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What a probability means</h3>
+          <p>A 30% chance is not a prediction that something will not happen. It is a claim
+          that in roughly three cycles out of ten, it does. The reliability table under
+          <em>Testing</em> is the evidence that these particular probabilities behave that
+          way.</p>
+          <h3 class="method-subhead">Run diagnostics</h3>
+          <p class="subtle">A forecast whose sampler did not converge is not a forecast, so
+          these are published on every run.</p>
+          <div id="diagnostics" class="diag-grid"></div>
+        </div>
+      </div>
     </div>
   </section>
 

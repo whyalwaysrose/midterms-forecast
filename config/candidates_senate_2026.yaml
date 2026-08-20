@@ -28,6 +28,13 @@
 
 # Generic placeholders used by pollsters testing an unnamed nominee.
 generic_labels:
+  # Presidential-approval polls are reduced with exactly the same two-party
+  # machinery as a horse race: Approve takes the "D" slot, Disapprove the "R"
+  # slot, and the result is the approve share of approve+disapprove. The labels
+  # are arbitrary; only the ratio is used, and only its *movement* reaches the
+  # model.
+  Approve: D
+  Disapprove: R
   Dem: D
   Democrat: D
   Democratic: D

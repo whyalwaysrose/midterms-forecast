@@ -44,7 +44,7 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     from .data.votehub import VoteHubClient
 
     client = VoteHubClient()
-    raw = client.fetch_and_snapshot(["us-senator", "generic-ballot"])
+    raw = client.fetch_and_snapshot(["us-senator", "generic-ballot", "approval"])
     for poll_type, records in raw.items():
         log.info("%s: %d polls", poll_type, len(records))
     return 0
@@ -71,7 +71,7 @@ def cmd_audit_roster(args: argparse.Namespace) -> int:
 
     snapshot = latest_snapshot()
     if snapshot is None or not args.offline:
-        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot"])
+        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot", "approval"])
     else:
         raw = load_snapshot(snapshot)
 
@@ -140,7 +140,7 @@ def cmd_run(args: argparse.Namespace) -> int:
         log.info("using cached snapshot %s", snapshot.name)
         raw = load_snapshot(snapshot)
     else:
-        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot"], run_date)
+        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot", "approval"], run_date)
 
     table = build_poll_table(raw, races, cfg, roster, as_of=run_date)
     if table.unknown_candidates:
@@ -220,6 +220,20 @@ def cmd_run(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_backtest_history(args: argparse.Namespace) -> int:
+    from .backtest_history import run_historical_backtest
+
+    return run_historical_backtest()
+
+
+def cmd_calibrate(args: argparse.Namespace) -> int:
+    from .calibration import run_calibration
+
+    return run_calibration(
+        days_window=(args.min_days, args.max_days), min_cycle=args.min_cycle
+    )
+
+
 def cmd_build_map(args: argparse.Namespace) -> int:
     from .geo import write_state_paths
 
@@ -272,6 +286,20 @@ def build_parser() -> argparse.ArgumentParser:
     audit = sub.add_parser("audit-roster", help="find candidate names the roster misses")
     audit.add_argument("--offline", action="store_true")
     audit.set_defaults(func=cmd_audit_roster)
+
+    hist = sub.add_parser(
+        "backtest-history",
+        help="score win probabilities against elections that actually happened",
+    )
+    hist.set_defaults(func=cmd_backtest_history)
+
+    calibrate = sub.add_parser(
+        "calibrate", help="fit error scales from historical polling"
+    )
+    calibrate.add_argument("--min-days", type=int, default=45)
+    calibrate.add_argument("--max-days", type=int, default=120)
+    calibrate.add_argument("--min-cycle", type=int, default=2010)
+    calibrate.set_defaults(func=cmd_calibrate)
 
     build_map = sub.add_parser(
         "build-map", help="project the vendored TopoJSON into SVG paths for the dashboard"

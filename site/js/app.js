@@ -4,7 +4,7 @@
    handful of static files that GitHub Pages can serve with no build step.
    ========================================================================= */
 
-const SCHEMA_VERSION = 2;
+const SCHEMA_VERSION = 4;
 const NS = 'http://www.w3.org/2000/svg';
 
 const $ = (id) => document.getElementById(id);
@@ -291,6 +291,93 @@ function closeDrawer() {
 
 /* ------------------------------------------------------------------- main */
 
+function renderMethodology(forecast) {
+  const m = forecast.methodology ?? {};
+  const summary = forecast.poll_summary ?? {};
+  const cf = forecast.chamber_forecast ?? {};
+  const set = (id, value) => { const el = $(id); if (el) el.textContent = value; };
+
+  const unpolled = (forecast.races ?? []).filter((r) => r.poll_count === 0).length;
+  set('m-unpolled', unpolled ? `${unpolled} races with no polling at all` : 'unpolled');
+  set('m-nsims', (cf.n_simulations ?? 0).toLocaleString());
+  set('m-racepolls', summary.n_race_polls ?? '—');
+  set('m-genpolls', summary.n_national_polls ?? '—');
+  set('m-pollsters', summary.n_pollsters ?? '—');
+
+  // One decimal throughout: JSON drops the trailing zero, so 3.0 arrives as 3
+  // and would read as a suspiciously round number next to 5.7.
+  const pts = (v) => (typeof v === 'number' ? v.toFixed(1) : '—');
+  const ede = m.election_day_error ?? {};
+  set('m-nat', pts(ede.national_pts));
+  set('m-state', pts(ede.state_pts));
+  set('m-total', pts(ede.total_pts));
+
+  // --- calibration ------------------------------------------------------
+  const cal = m.calibration;
+  if (cal) {
+    set('m-calpolls', cal.n_polls.toLocaleString());
+    set('m-calcycles', cal.n_cycles);
+    set('m-calsource', cal.source);
+    const rows = [
+      ['National (shared by every race)', cal.fitted_national_pts, 'pts'],
+      ['State-specific', cal.fitted_state_pts, 'pts'],
+      ['Individual poll noise', cal.fitted_poll_pts, 'pts'],
+      ['Poll design effect', cal.fitted_design_effect, '×'],
+    ];
+    $('m-caltable').innerHTML =
+      '<thead><tr><th>Measured from history</th><th>Value</th></tr></thead><tbody>' +
+      rows.map(([label, value, unit]) =>
+        `<tr><td>${esc(label)}</td><td>${unit === '×' ? `${value.toFixed(2)}×` : `${value.toFixed(1)} pts`}</td></tr>`
+      ).join('') + '</tbody>';
+  }
+
+  // --- backtest ---------------------------------------------------------
+  const bt = m.backtest;
+  if (bt) {
+    set('m-btraces', bt.n_races);
+    set('m-btcycles', bt.n_cycles);
+    set('m-brier', bt.brier);
+    set('m-skill', `${(100 * bt.skill_vs_naive).toFixed(0)}%`);
+
+    $('m-reliability').innerHTML =
+      '<thead><tr><th>Model said</th><th>Races</th><th>Actually won</th></tr></thead><tbody>' +
+      bt.reliability.map((r) =>
+        `<tr><td>${esc(r.bin)}</td><td>${r.n}</td>` +
+        `<td>${pct(r.actual)}</td></tr>`
+      ).join('') + '</tbody>';
+
+    // Coverage: a bar for what happened, a notch for what was promised.
+    $('m-coverage').innerHTML = Object.entries(bt.coverage)
+      .sort((a, b) => +a[0] - +b[0])
+      .map(([level, hit]) => {
+        const target = +level;
+        return `<div class="coverage-row">
+          <span>${pct(target)} interval</span>
+          <span class="coverage-track">
+            <span class="coverage-fill" style="width:${(100 * hit).toFixed(1)}%"></span>
+            <span class="coverage-target" style="left:${(100 * target).toFixed(1)}%"></span>
+          </span>
+          <span class="coverage-value">${pct(hit)}</span>
+        </div>`;
+      }).join('');
+  }
+}
+
+function attachMethodTabs() {
+  const nav = $('method-nav');
+  if (!nav) return;
+  nav.addEventListener('click', (e) => {
+    const tab = e.target.closest('.method-tab');
+    if (!tab) return;
+    for (const button of nav.querySelectorAll('.method-tab')) {
+      const selected = button === tab;
+      button.classList.toggle('active', selected);
+      const panel = $(button.dataset.panel);
+      if (panel) panel.hidden = !selected;
+    }
+  });
+}
+
 function renderDiagnostics(d) {
   const rHatOk = d.max_r_hat <= 1.05;
   const divOk = (d.divergences ?? 0) === 0;
@@ -353,6 +440,7 @@ function render(forecast, history, commentary, geo) {
 
   ALL_RACES = forecast.races ?? [];
   renderRaces();
+  renderMethodology(forecast);
   renderDiagnostics(forecast.diagnostics ?? {});
 }
 
@@ -413,6 +501,8 @@ document.addEventListener('DOMContentLoaded', () => {
       renderRaces();
     });
   });
+
+  attachMethodTabs();
 
   $('drawer-close').addEventListener('click', closeDrawer);
   $('drawer').addEventListener('click', (e) => { if (e.target.id === 'drawer') closeDrawer(); });

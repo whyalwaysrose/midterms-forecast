@@ -17,6 +17,7 @@ rather than silently rendering a stale shape.
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from pathlib import Path
@@ -32,7 +33,36 @@ from .data.votehub import ATTRIBUTION
 from .fundamentals import Fundamentals, logit_to_margin
 from .model.simulate import SimulationResult, national_environment_summary
 
-SCHEMA_VERSION = 2
+log = logging.getLogger(__name__)
+
+SCHEMA_VERSION = 4
+
+
+def model_fingerprint() -> str:
+    """A short hash of everything that decides the numbers.
+
+    Day-over-day commentary compares two runs and attributes what moved to the
+    polls. That is only honest while the model is held fixed. Change a prior,
+    or the simulation, and every race shifts at once — which the differ would
+    otherwise report as though the polls had done it.
+
+    Hashing the config plus the two modules that define the arithmetic means a
+    model change is detected automatically, with nothing to remember to bump.
+    """
+    import hashlib
+
+    digest = hashlib.sha256()
+    for path in (
+        paths.MODEL_CONFIG,
+        paths.REPO_ROOT / "src" / "midterms" / "model" / "hierarchical.py",
+        paths.REPO_ROOT / "src" / "midterms" / "model" / "simulate.py",
+        paths.REPO_ROOT / "src" / "midterms" / "fundamentals.py",
+    ):
+        try:
+            digest.update(path.read_bytes())
+        except OSError:  # pragma: no cover - only if the tree is incomplete
+            digest.update(b"<missing>")
+    return digest.hexdigest()[:12]
 
 #: Quantiles reported for every margin, in a fixed order.
 QUANTILES = (0.05, 0.25, 0.5, 0.75, 0.95)
@@ -178,6 +208,7 @@ class ForecastRun:
 
         return {
             "schema_version": SCHEMA_VERSION,
+            "model_fingerprint": model_fingerprint(),
             "run_date": self.run_date.isoformat(),
             "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
             "cycle": races.cycle,
@@ -216,6 +247,7 @@ class ForecastRun:
                 "n_simulations": int(sim.n_sims),
             },
             "races": race_records,
+            "methodology": _methodology_block(self.cfg),
             "diagnostics": {k: _round(v, 4) for k, v in self.diagnostics.items()},
             "poll_summary": {
                 "n_race_polls": len(self.table.race_polls),
@@ -251,6 +283,85 @@ class ForecastRun:
         }
 
 
+def _methodology_block(cfg: ModelConfig) -> dict:
+    """Calibration and validation figures, computed rather than written down.
+
+    The dashboard explains how the uncertainty was arrived at. Hard-coding those
+    numbers into the page would let them drift silently the moment anyone
+    re-fits the scales — the page would keep describing a model that no longer
+    exists. Recomputing them each run costs a couple of seconds and makes the
+    explanation structurally unable to lie.
+    """
+    from .calibration import POINTS_PER_LOGIT, estimate_error_components
+
+    block: dict[str, Any] = {
+        "election_day_error": {
+            "national_pts": _round(cfg.election_day_error.national_sd * POINTS_PER_LOGIT, 2),
+            "state_pts": _round(cfg.election_day_error.state_sd * POINTS_PER_LOGIT, 2),
+            "total_pts": _round(
+                float(
+                    np.hypot(
+                        cfg.election_day_error.national_sd,
+                        cfg.election_day_error.state_sd,
+                    )
+                )
+                * POINTS_PER_LOGIT,
+                2,
+            ),
+        },
+        "design_effect": _round(cfg.polls.design_effect, 2),
+        "student_t_nu": cfg.polls.student_t_nu,
+    }
+
+    try:
+        fitted = estimate_error_components()
+        block["calibration"] = {
+            "source": "FiveThirtyEight pollster-ratings archive (CC BY 4.0)",
+            "n_polls": fitted.n_polls,
+            "n_races": fitted.n_races,
+            "n_cycles": fitted.n_cycles,
+            "window_days": list(fitted.window),
+            "min_cycle": fitted.min_cycle,
+            "fitted_national_pts": _round(fitted.national_sd, 2),
+            "fitted_state_pts": _round(fitted.state_sd, 2),
+            "fitted_poll_pts": _round(fitted.poll_sd, 2),
+            "fitted_design_effect": _round(fitted.design_effect, 2),
+        }
+    except Exception as exc:  # pragma: no cover - only if history is missing
+        log.warning("calibration figures unavailable for the dashboard: %s", exc)
+
+    try:
+        from .backtest_history import build_race_table, score
+
+        races = build_race_table()
+        result = score(
+            cfg.election_day_error.national_sd * POINTS_PER_LOGIT,
+            cfg.election_day_error.state_sd * POINTS_PER_LOGIT,
+            "current",
+            races,
+        )
+        block["backtest"] = {
+            "n_races": result.n_races,
+            "n_cycles": result.n_cycles,
+            "brier": _round(result.brier, 4),
+            "skill_vs_naive": _round(result.brier_skill_vs_naive, 3),
+            "coverage": {str(k): _round(v, 3) for k, v in result.coverage.items()},
+            "reliability": [
+                {
+                    "bin": row["bin"],
+                    "n": int(row["n"]),
+                    "predicted": _round(row["mean_pred"], 3),
+                    "actual": _round(row["actual"], 3),
+                }
+                for _, row in result.reliability.iterrows()
+            ],
+        }
+    except Exception as exc:  # pragma: no cover
+        log.warning("backtest figures unavailable for the dashboard: %s", exc)
+
+    return block
+
+
 def slim_payload(payload: dict) -> dict:
     """Strip a forecast down to what day-over-day diffing actually needs.
 
@@ -268,6 +379,7 @@ def slim_payload(payload: dict) -> dict:
     """
     return {
         "schema_version": payload["schema_version"],
+        "model_fingerprint": payload.get("model_fingerprint"),
         "run_date": payload["run_date"],
         "generated_at": payload["generated_at"],
         "chamber_forecast": payload["chamber_forecast"],

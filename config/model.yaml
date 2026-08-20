@@ -1,0 +1,174 @@
+# =============================================================================
+# Model hyperparameters and prior scales
+# =============================================================================
+# Everything the model does numerically is specified here. No magic numbers in
+# the Python.
+#
+# UNITS. The model works throughout in the LOGIT of the Democratic share of the
+# two-party vote. Useful conversions near a 50-50 race:
+#     d(logit)/d(share) = 1 / (p(1-p)) = 4      at p = 0.5
+#     1 point of SHARE  ~ 0.04 logit
+#     1 point of MARGIN ~ 0.02 logit            (margin = 2 x share deviation)
+# So a prior SD of 0.10 logit is roughly "5 points of margin".
+# =============================================================================
+
+# --- National reference points ----------------------------------------------
+# Two-party Democratic share of the NATIONAL presidential vote. Used to convert
+# each state's raw presidential share into a partisan *lean* relative to the
+# nation, so that the race baseline is defined under a neutral (50-50) national
+# environment and the national environment enters separately via generic-ballot
+# polls. Without this recentering the fundamentals prior and the national
+# environment term would double-count the national swing.
+national:
+  pres_2024_dem_two_party: 0.4924   # Harris 48.3 / Trump 49.8
+  pres_2020_dem_two_party: 0.5229   # Biden  51.3 / Trump 46.8
+
+# --- Fundamentals prior ------------------------------------------------------
+# Predicts each race's baseline logit share under a NEUTRAL national
+# environment:
+#
+#   f_r = shrink * (w2024 * lean2024_r + w2020 * lean2020_r) + incumbency_r
+#
+# where lean is the state's presidential logit share minus the national one.
+fundamentals:
+  weight_pres_2024: 0.75
+  weight_pres_2020: 0.25
+  # Senate results are slightly less polarised than presidential results;
+  # <1 shrinks safe states back toward the centre.
+  lean_shrinkage: 0.95
+  # Incumbency advantage, in logit units, signed toward the incumbent's party.
+  # ~0.06 logit = ~3 points of margin, consistent with the modern (post-2016)
+  # decline in the personal-incumbency advantage.
+  incumbency_bonus:
+    elected: 0.060
+    appointed: 0.020
+    open: 0.0
+  # How far a race may sit from its fundamentals prediction. Wide on purpose:
+  # ~0.15 logit = ~7.5 points of margin. In well-polled races the polls
+  # dominate this prior; in unpolled races it is what carries the forecast.
+  prior_sd: 0.15
+
+# --- Latent state: national environment --------------------------------------
+# eta_t = national two-party Democratic logit share (generic ballot), modelled
+# as a Gaussian random walk on a daily grid. eta_t = 0 means a tied generic
+# ballot.
+national_environment:
+  # Half-normal prior scale on the per-day innovation SD. 0.004/day accumulates
+  # to 0.004*sqrt(365) ~ 0.076 logit (~3.8 pts of margin) of drift over a year,
+  # which is the right order for generic-ballot movement.
+  rw_sd_per_day_prior: 0.004
+  # Prior on the environment at the start of the window.
+  initial_sd: 0.10
+
+# --- Latent state: per-race ---------------------------------------------------
+# theta_{r,t} = alpha_r + lambda_r * eta_t + epsilon_{r,t}
+#   alpha_r      race baseline under a neutral environment (fundamentals prior)
+#   lambda_r     sensitivity of the race to the national environment
+#                ("elasticity"), partially pooled around 1
+#   epsilon_{r,t} race-specific random walk capturing idiosyncratic movement
+#                (candidate news, ad spending, scandals)
+race:
+  elasticity_mean: 1.0
+  elasticity_sd: 0.25          # partial pooling around 1
+  elasticity_lower: 0.2        # keep sign-identified and away from 0
+  rw_sd_per_day_prior: 0.005   # ~0.096 logit (~4.8 pts margin) per year
+
+# --- Measurement model (polls) ------------------------------------------------
+polls:
+  # Student-t likelihood so a single wild poll cannot drag the latent state.
+  student_t_nu: 4.0
+  # Sampling variance on the logit scale via the delta method:
+  #   var = design_effect / (n * p * (1-p))
+  # The design effect inflates for weighting/clustering; 1.5 is a conventional
+  # value for modern weighted online and IVR samples.
+  design_effect: 1.5
+  # Extra poll-level noise beyond sampling error ("pollster-induced error"):
+  # house effects and mode explain some of it, this absorbs the rest.
+  excess_sd_prior: 0.05
+  # Pollster house effects, hierarchical and SUM-TO-ZERO constrained. Without
+  # the constraint the house effects and the latent state are not jointly
+  # identified (you can add a constant to every house effect and subtract it
+  # from the state).
+  house_effect_sd_prior: 0.06
+  # A pollster needs at least this many polls in the window to earn its own
+  # house effect; the rest share a single pooled effect.
+  #
+  # This matters more than it looks. Most pollsters in the feed appear once or
+  # twice. Give each of them a free parameter and it will absorb that poll's
+  # entire deviation from the latent state, which (a) is not a *house* effect,
+  # it is noise, and (b) drives the estimated excess poll error to zero, which
+  # in turn makes every single poll far too influential. Pooling the long tail
+  # sends their deviation where it belongs: into excess_sd.
+  min_polls_for_house_effect: 3
+  # Population/screen adjustments, relative to likely voters (the reference).
+  # Registered-voter and adult samples historically lean slightly more
+  # Democratic than likely-voter samples.
+  population_effect_sd_prior: 0.03
+  population_reference: lv
+  # Partisan-sponsor adjustment. Applied as rho * s_i where s_i is +1 for a
+  # Democratic-aligned sponsor, -1 for Republican-aligned, 0 for neutral.
+  # rho is constrained positive (partisan polls favour their sponsor) and
+  # shrunk toward zero.
+  partisan_effect_prior: 0.08
+  # Polls older than this are dropped entirely.
+  max_age_days: 400
+  # Minimum sample size to accept a poll.
+  min_sample_size: 100
+  # Sample size used when a poll reports none.
+  default_sample_size: 600
+
+# --- Election-day error -------------------------------------------------------
+# Applied at SIMULATION time, on top of the posterior latent state. This is the
+# part that makes the seat distribution honest: polls are not just noisy, they
+# are *correlated-ly wrong*. Two components:
+#   national  a common miss across every race (e.g. a systematic turnout or
+#             differential-nonresponse error)
+#   state     a correlated-across-similar-states miss, with correlation decaying
+#             in political distance between states
+# Scales are set so total error ~ sqrt(0.075^2 + 0.085^2) = 0.113 logit
+# ~ 5.7 points of margin RMSE, matching the historical record for Senate polling
+# at this distance from an election.
+election_day_error:
+  national_sd: 0.075
+  state_sd: 0.085
+  # Correlation kernel: corr(r, r') = (1 - nugget) * exp(-d(r,r') / length_scale)
+  # with d the Euclidean distance in standardised covariate space
+  # (2024 lean, 2020 lean, region indicator).
+  correlation:
+    length_scale: 1.25
+    region_weight: 0.6      # how much sharing a region pulls states together
+    nugget: 0.02            # keeps the matrix comfortably positive-definite
+  #
+  # NOTE: there is deliberately no separate "drift to election day" term here.
+  # The latent random walks are defined on a grid whose final point IS election
+  # day, so uncertainty about movement between the last poll and the election is
+  # already carried by the fitted walk. Adding a drift term on top would
+  # double-count it and inflate every interval.
+
+# --- Sampler ------------------------------------------------------------------
+sampler:
+  draws: 1000
+  # Generous tuning: the variance-scale parameters (sigma_eps, sigma_eta) sit
+  # near zero, where the posterior geometry is tightest and the step-size
+  # adaptation needs the most warm-up.
+  tune: 1500
+  chains: 4
+  target_accept: 0.95
+  seed: 20261103
+  # "nutpie" (Numba) avoids needing a C++ compiler on Windows and is faster.
+  # "pymc" falls back to the built-in NUTS.
+  backend: nutpie
+
+# --- Simulation ---------------------------------------------------------------
+simulation:
+  # Posterior draws are recycled this many times with fresh election-day error
+  # to build a smooth seat distribution.
+  sims_per_draw: 10
+
+# --- Time grid ----------------------------------------------------------------
+time:
+  # Resolution of the latent random walks, in days. The grid is anchored
+  # backwards from election day so the forecast target is an exact grid point.
+  # Each poll is assigned to its nearest grid point; at 7 days the worst-case
+  # snapping error is 3.5 days, far below the week-to-week noise in the polls.
+  grid_days: 7

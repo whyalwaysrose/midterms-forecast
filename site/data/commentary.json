@@ -1,0 +1,712 @@
+{
+ "schema_version": 2,
+ "entries": [
+  {
+   "run_date": "2026-08-20",
+   "previous_run_date": "2026-08-13",
+   "headline": "Democratic chances of Senate control are up 0.7 pts to 58.0% on 1 new poll. Projected seats 51.0 \u2192 51.1 (+0.0).",
+   "body": [
+    "**Races that moved** (1 of 35):",
+    "",
+    "  - **Michigan** \u2014 Democratic win probability 58.2% \u2192 59.9% (+1.7 pts); projected margin D+1.2 \u2192 D+1.5 (+0.3). Driven by 1 new poll:\n    - Susquehanna Polling & Research (2026-08-14, n=800, RV): D+8.2",
+    ""
+   ],
+   "new_poll_count": 1,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-MI",
+     "name": "Michigan",
+     "prob_before": 0.582,
+     "prob_after": 0.5988,
+     "prob_delta": 0.016800000000000037,
+     "margin_before": 1.23,
+     "margin_after": 1.53,
+     "margin_delta": 0.30000000000000004,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202susb1d73b8b",
+       "pollster": "Susquehanna Polling & Research",
+       "date": "2026-08-14",
+       "start_date": "2026-08-11",
+       "end_date": "2026-08-17",
+       "sample_size": 800,
+       "population": "rv",
+       "dem_pct": 46.0,
+       "rep_pct": 39.0,
+       "margin": 8.2,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://static01.nyt.com/newsgraphics/documenttools/43c767b477fe30ae/4748b92f-full.pdf",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      }
+     ]
+    }
+   ],
+   "markdown": "## 2026-08-20\n\nDemocratic chances of Senate control are up 0.7 pts to 58.0% on 1 new poll. Projected seats 51.0 \u2192 51.1 (+0.0).\n\n**Races that moved** (1 of 35):\n\n  - **Michigan** \u2014 Democratic win probability 58.2% \u2192 59.9% (+1.7 pts); projected margin D+1.2 \u2192 D+1.5 (+0.3). Driven by 1 new poll:\n    - Susquehanna Polling & Research (2026-08-14, n=800, RV): D+8.2\n"
+  },
+  {
+   "run_date": "2026-08-13",
+   "previous_run_date": "2026-08-06",
+   "headline": "Democratic chances of Senate control are up 3.2 pts to 57.3% on 10 new polls. Projected seats 50.8 \u2192 51.0 (+0.3).",
+   "body": [
+    "**National environment.** The generic ballot moved D+6.0 \u2192 D+6.2 (+0.2). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.",
+    "",
+    "**Races that moved** (8 of 35):",
+    "",
+    "  - **Ohio** \u2014 Democratic win probability 50.4% \u2192 60.7% (+10.3 pts); projected margin D+0.1 \u2192 D+1.7 (+1.6). Driven by 2 new polls:\n    - Wedgewood Polls (2026-08-12, n=800, LV): D+4.3\n    - Beacon Research/Shaw & Co. Research (2026-08-08, n=1008, RV): D+8.2",
+    "",
+    "  - **Nebraska** \u2014 Democratic win probability 39.8% \u2192 41.7% (+1.9 pts); projected margin R+2.1 \u2192 R+1.7 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Michigan** \u2014 Democratic win probability 56.5% \u2192 58.2% (+1.7 pts); projected margin D+1.0 \u2192 D+1.2 (+0.2). Driven by 3 new polls:\n    - Beacon Research/Shaw & Co. Research (2026-08-08, n=1006, RV): R+4.1\n    - GBAO Strategies (2026-08-08, n=800, LV, D-aligned sponsor): D+6.4\n    - TIPP Insights (2026-08-08, n=1528, RV, R-aligned sponsor): D+3.4",
+    "",
+    "  - **Alaska** \u2014 Democratic win probability 62.0% \u2192 63.7% (+1.7 pts); projected margin D+1.9 \u2192 D+2.1 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Florida** \u2014 Democratic win probability 17.4% \u2192 18.8% (+1.4 pts); projected margin R+5.8 \u2192 R+5.4 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **North Carolina** \u2014 Democratic win probability 94.1% \u2192 95.0% (+0.9 pts); projected margin D+9.4 \u2192 D+9.9 (+0.5). Driven by 1 new poll:\n    - Harper Polling (2026-08-09, n=600, LV): D+13.8",
+    "",
+    "  - **Kansas** \u2014 Democratic win probability 12.2% \u2192 12.8% (+0.6 pts); projected margin R+8.5 \u2192 R+8.2 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **New Jersey** \u2014 Democratic win probability 95.0% \u2192 95.4% (+0.3 pts); projected margin D+16.2 \u2192 D+16.6 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "**New polling that did not move the needle.** Texas (1), Maine (1), Massachusetts (2). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 10,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-OH",
+     "name": "Ohio",
+     "prob_before": 0.5037,
+     "prob_after": 0.6072,
+     "prob_delta": 0.10349999999999993,
+     "margin_before": 0.06,
+     "margin_after": 1.7,
+     "margin_delta": 1.64,
+     "new_poll_count": 2,
+     "new_polls": [
+      {
+       "id": "us-202wedb13225b0",
+       "pollster": "Wedgewood Polls",
+       "date": "2026-08-12",
+       "start_date": "2026-08-11",
+       "end_date": "2026-08-13",
+       "sample_size": 800,
+       "population": "lv",
+       "dem_pct": 48.0,
+       "rep_pct": 44.0,
+       "margin": 4.3,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://drive.google.com/file/u/1/d/1rP-26-yqNx9jy_gRqoLDmgJgzm5X8a4O/view",
+       "dem_candidate": "Sherrod Brown",
+       "rep_candidate": "Jon Husted"
+      },
+      {
+       "id": "us-202bea58e907c0",
+       "pollster": "Beacon Research/Shaw & Co. Research",
+       "date": "2026-08-08",
+       "start_date": "2026-08-06",
+       "end_date": "2026-08-10",
+       "sample_size": 1008,
+       "population": "rv",
+       "dem_pct": 53.0,
+       "rep_pct": 45.0,
+       "margin": 8.2,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Fox News"
+       ],
+       "url": "https://www.foxnews.com/politics/fox-news-poll-economic-anxiety-candidate-concerns-define-ohio-senate-race",
+       "dem_candidate": "Sherrod Brown",
+       "rep_candidate": "Jon Husted"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-NE",
+     "name": "Nebraska",
+     "prob_before": 0.3981,
+     "prob_after": 0.4167,
+     "prob_delta": 0.018600000000000005,
+     "margin_before": -2.15,
+     "margin_after": -1.74,
+     "margin_delta": 0.4099999999999999,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-MI",
+     "name": "Michigan",
+     "prob_before": 0.5646,
+     "prob_after": 0.582,
+     "prob_delta": 0.01739999999999997,
+     "margin_before": 1.01,
+     "margin_after": 1.23,
+     "margin_delta": 0.21999999999999997,
+     "new_poll_count": 3,
+     "new_polls": [
+      {
+       "id": "us-202bea6ed87549",
+       "pollster": "Beacon Research/Shaw & Co. Research",
+       "date": "2026-08-08",
+       "start_date": "2026-08-06",
+       "end_date": "2026-08-10",
+       "sample_size": 1006,
+       "population": "rv",
+       "dem_pct": 47.0,
+       "rep_pct": 51.0,
+       "margin": -4.1,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Fox News"
+       ],
+       "url": "https://www.foxnews.com/politics/fox-news-poll-senate-battle-looms-michigan",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      },
+      {
+       "id": "us-202gba7596c230",
+       "pollster": "GBAO Strategies",
+       "date": "2026-08-08",
+       "start_date": "2026-08-06",
+       "end_date": "2026-08-10",
+       "sample_size": 800,
+       "population": "lv",
+       "dem_pct": 50.0,
+       "rep_pct": 44.0,
+       "margin": 6.4,
+       "partisan_sign": 1,
+       "sponsors": [
+        "Senate Majority PAC"
+       ],
+       "url": "https://www.politico.com/newsletters/playbook/2026/08/15/what-burritos-tell-us-about-capitalism-01038859",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      },
+      {
+       "id": "us-202tip8915c085",
+       "pollster": "TIPP Insights",
+       "date": "2026-08-08",
+       "start_date": "2026-08-06",
+       "end_date": "2026-08-10",
+       "sample_size": 1528,
+       "population": "rv",
+       "dem_pct": 45.0,
+       "rep_pct": 42.0,
+       "margin": 3.4,
+       "partisan_sign": -1,
+       "sponsors": [
+        "League of American Workers"
+       ],
+       "url": "https://tippinsights.com/league-of-american-workers-survey-michigan-2/",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-AK",
+     "name": "Alaska",
+     "prob_before": 0.6203,
+     "prob_after": 0.6369,
+     "prob_delta": 0.01660000000000006,
+     "margin_before": 1.92,
+     "margin_after": 2.14,
+     "margin_delta": 0.2200000000000002,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-FL",
+     "name": "Florida",
+     "prob_before": 0.1745,
+     "prob_after": 0.1882,
+     "prob_delta": 0.013700000000000018,
+     "margin_before": -5.75,
+     "margin_after": -5.42,
+     "margin_delta": 0.33000000000000007,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-NC",
+     "name": "North Carolina",
+     "prob_before": 0.9409,
+     "prob_after": 0.9495,
+     "prob_delta": 0.008600000000000052,
+     "margin_before": 9.45,
+     "margin_after": 9.92,
+     "margin_delta": 0.47000000000000064,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202har1cef6d8a",
+       "pollster": "Harper Polling",
+       "date": "2026-08-09",
+       "start_date": "2026-08-09",
+       "end_date": "2026-08-10",
+       "sample_size": 600,
+       "population": "lv",
+       "dem_pct": 51.5,
+       "rep_pct": 39.0,
+       "margin": 13.8,
+       "partisan_sign": 0,
+       "sponsors": [
+        "The Carolina Journal"
+       ],
+       "url": "https://www.carolinajournal.com/polls/august-2026-coopers-lead-over-whatley-grows-to-12-5-points/",
+       "dem_candidate": "Roy Cooper",
+       "rep_candidate": "Michael Whatley"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-KS",
+     "name": "Kansas",
+     "prob_before": 0.1223,
+     "prob_after": 0.1283,
+     "prob_delta": 0.0059999999999999915,
+     "margin_before": -8.49,
+     "margin_after": -8.19,
+     "margin_delta": 0.3000000000000007,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-NJ",
+     "name": "New Jersey",
+     "prob_before": 0.9504,
+     "prob_after": 0.9539,
+     "prob_delta": 0.0034999999999999476,
+     "margin_before": 16.23,
+     "margin_after": 16.59,
+     "margin_delta": 0.35999999999999943,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-08-13\n\nDemocratic chances of Senate control are up 3.2 pts to 57.3% on 10 new polls. Projected seats 50.8 \u2192 51.0 (+0.3).\n\n**National environment.** The generic ballot moved D+6.0 \u2192 D+6.2 (+0.2). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.\n\n**Races that moved** (8 of 35):\n\n  - **Ohio** \u2014 Democratic win probability 50.4% \u2192 60.7% (+10.3 pts); projected margin D+0.1 \u2192 D+1.7 (+1.6). Driven by 2 new polls:\n    - Wedgewood Polls (2026-08-12, n=800, LV): D+4.3\n    - Beacon Research/Shaw & Co. Research (2026-08-08, n=1008, RV): D+8.2\n\n  - **Nebraska** \u2014 Democratic win probability 39.8% \u2192 41.7% (+1.9 pts); projected margin R+2.1 \u2192 R+1.7 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Michigan** \u2014 Democratic win probability 56.5% \u2192 58.2% (+1.7 pts); projected margin D+1.0 \u2192 D+1.2 (+0.2). Driven by 3 new polls:\n    - Beacon Research/Shaw & Co. Research (2026-08-08, n=1006, RV): R+4.1\n    - GBAO Strategies (2026-08-08, n=800, LV, D-aligned sponsor): D+6.4\n    - TIPP Insights (2026-08-08, n=1528, RV, R-aligned sponsor): D+3.4\n\n  - **Alaska** \u2014 Democratic win probability 62.0% \u2192 63.7% (+1.7 pts); projected margin D+1.9 \u2192 D+2.1 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Florida** \u2014 Democratic win probability 17.4% \u2192 18.8% (+1.4 pts); projected margin R+5.8 \u2192 R+5.4 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **North Carolina** \u2014 Democratic win probability 94.1% \u2192 95.0% (+0.9 pts); projected margin D+9.4 \u2192 D+9.9 (+0.5). Driven by 1 new poll:\n    - Harper Polling (2026-08-09, n=600, LV): D+13.8\n\n  - **Kansas** \u2014 Democratic win probability 12.2% \u2192 12.8% (+0.6 pts); projected margin R+8.5 \u2192 R+8.2 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **New Jersey** \u2014 Democratic win probability 95.0% \u2192 95.4% (+0.3 pts); projected margin D+16.2 \u2192 D+16.6 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n**New polling that did not move the needle.** Texas (1), Maine (1), Massachusetts (2). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
+   "run_date": "2026-08-06",
+   "previous_run_date": "2026-07-30",
+   "headline": "Democratic chances of Senate control are down 1.2 pts to 54.0% on 4 new polls. Projected seats 50.9 \u2192 50.8 (-0.1).",
+   "body": [
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **Alaska** \u2014 Democratic win probability 64.4% \u2192 62.0% (-2.3 pts); projected margin D+2.3 \u2192 D+1.9 (-0.4). Driven by 1 new poll:\n    - Alaska Survey Research (2026-08-03, n=1371, LV): D+1.6",
+    "",
+    "  - **Iowa** \u2014 Democratic win probability 39.8% \u2192 37.7% (-2.1 pts); projected margin R+1.6 \u2192 R+1.9 (-0.3). Driven by 1 new poll:\n    - Emerson College (2026-08-03, n=712, LV): R+3.2",
+    "",
+    "  - **North Carolina** \u2014 Democratic win probability 94.8% \u2192 94.1% (-0.7 pts); projected margin D+10.0 \u2192 D+9.4 (-0.5). Driven by 1 new poll:\n    - Change Research (2026-08-04, n=915, LV, D-aligned sponsor): D+7.5",
+    "",
+    "**New polling that did not move the needle.** Idaho (1). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 4,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-AK",
+     "name": "Alaska",
+     "prob_before": 0.6437,
+     "prob_after": 0.6203,
+     "prob_delta": -0.023400000000000087,
+     "margin_before": 2.31,
+     "margin_after": 1.92,
+     "margin_delta": -0.3900000000000001,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202alaaa70f06a",
+       "pollster": "Alaska Survey Research",
+       "date": "2026-08-03",
+       "start_date": "2026-08-02",
+       "end_date": "2026-08-05",
+       "sample_size": 1371,
+       "population": "lv",
+       "dem_pct": 50.8,
+       "rep_pct": 49.2,
+       "margin": 1.6,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://x.com/The_Real_ASR/status/2087253230548107640?s=20",
+       "dem_candidate": "Mary Peltola",
+       "rep_candidate": "Dan Sullivan"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-IA",
+     "name": "Iowa",
+     "prob_before": 0.398,
+     "prob_after": 0.3772,
+     "prob_delta": -0.02080000000000004,
+     "margin_before": -1.62,
+     "margin_after": -1.92,
+     "margin_delta": -0.2999999999999998,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202eme4923d9f5",
+       "pollster": "Emerson College",
+       "date": "2026-08-03",
+       "start_date": "2026-08-02",
+       "end_date": "2026-08-04",
+       "sample_size": 712,
+       "population": "lv",
+       "dem_pct": 45.0,
+       "rep_pct": 48.0,
+       "margin": -3.2,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Nexstar Media"
+       ],
+       "url": "https://emersoncollegepolling.com/iowa-2026-poll/",
+       "dem_candidate": "Josh Turek",
+       "rep_candidate": "Ashley Hinson"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-NC",
+     "name": "North Carolina",
+     "prob_before": 0.9477,
+     "prob_after": 0.9409,
+     "prob_delta": -0.006800000000000028,
+     "margin_before": 9.97,
+     "margin_after": 9.45,
+     "margin_delta": -0.5200000000000014,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202chaf0ea6e94",
+       "pollster": "Change Research",
+       "date": "2026-08-04",
+       "start_date": "2026-08-03",
+       "end_date": "2026-08-06",
+       "sample_size": 915,
+       "population": "lv",
+       "dem_pct": 50.0,
+       "rep_pct": 43.0,
+       "margin": 7.5,
+       "partisan_sign": 1,
+       "sponsors": [
+        "Carolina Forward"
+       ],
+       "url": "https://carolinaforward.org/news/the-august-2026-carolina-forward-poll/",
+       "dem_candidate": "Roy Cooper",
+       "rep_candidate": "Michael Whatley"
+      }
+     ]
+    }
+   ],
+   "markdown": "## 2026-08-06\n\nDemocratic chances of Senate control are down 1.2 pts to 54.0% on 4 new polls. Projected seats 50.9 \u2192 50.8 (-0.1).\n\n**Races that moved** (3 of 35):\n\n  - **Alaska** \u2014 Democratic win probability 64.4% \u2192 62.0% (-2.3 pts); projected margin D+2.3 \u2192 D+1.9 (-0.4). Driven by 1 new poll:\n    - Alaska Survey Research (2026-08-03, n=1371, LV): D+1.6\n\n  - **Iowa** \u2014 Democratic win probability 39.8% \u2192 37.7% (-2.1 pts); projected margin R+1.6 \u2192 R+1.9 (-0.3). Driven by 1 new poll:\n    - Emerson College (2026-08-03, n=712, LV): R+3.2\n\n  - **North Carolina** \u2014 Democratic win probability 94.8% \u2192 94.1% (-0.7 pts); projected margin D+10.0 \u2192 D+9.4 (-0.5). Driven by 1 new poll:\n    - Change Research (2026-08-04, n=915, LV, D-aligned sponsor): D+7.5\n\n**New polling that did not move the needle.** Idaho (1). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
+   "run_date": "2026-07-30",
+   "previous_run_date": "2026-07-23",
+   "headline": "Democratic chances of Senate control are down 0.7 pts to 55.3% on 13 new polls. Projected seats 51.0 \u2192 50.9 (-0.1).",
+   "body": [
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **Michigan** \u2014 Democratic win probability 60.3% \u2192 57.2% (-3.2 pts); projected margin D+1.6 \u2192 D+1.1 (-0.4). Driven by 6 new polls:\n    - SoCal Strategies (2026-07-29, n=640, LV, R-aligned sponsor): R+1.2\n    - SoCal Strategies (2026-07-29, n=640, LV, R-aligned sponsor): D+2.3\n    - Mitchell Research & Communications (2026-07-28, n=672, LV): D+0.0\n    - Mitchell Research & Communications (2026-07-28, n=672, LV): R+4.7\n    - EPIC-MRA (2026-07-27, n=600, LV): R+3.4\n    - EPIC-MRA (2026-07-27, n=600, LV): D+2.3",
+    "",
+    "  - **Texas** \u2014 Democratic win probability 57.2% \u2192 58.6% (+1.3 pts); projected margin D+1.1 \u2192 D+1.3 (+0.2). Driven by 4 new polls:\n    - Wedgewood Polls (2026-07-30, n=800, LV): D+2.1\n    - Texas Southern University Barbara Jordan Public Policy Research and Survey Center (2026-07-28, n=1200, LV): D+2.2\n    - ReconMR/Siena University (2026-07-28, n=619, LV): D+4.4\n    - Beacon Research/Shaw & Co. Research (2026-07-25, n=1006, RV): D+3.0",
+    "",
+    "  - **North Carolina** \u2014 Democratic win probability 95.4% \u2192 94.8% (-0.6 pts); projected margin D+10.3 \u2192 D+10.0 (-0.3). Driven by 2 new polls:\n    - Change Research (2026-07-30, n=967, LV): D+9.9\n    - Beacon Research/Shaw & Co. Research (2026-07-25, n=1005, RV): D+9.3",
+    "",
+    "**New polling that did not move the needle.** Maine (1). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 13,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-MI",
+     "name": "Michigan",
+     "prob_before": 0.6033,
+     "prob_after": 0.5717,
+     "prob_delta": -0.03159999999999996,
+     "margin_before": 1.55,
+     "margin_after": 1.11,
+     "margin_delta": -0.43999999999999995,
+     "new_poll_count": 6,
+     "new_polls": [
+      {
+       "id": "us-202soc6e865068",
+       "pollster": "SoCal Strategies",
+       "date": "2026-07-29",
+       "start_date": "2026-07-28",
+       "end_date": "2026-07-30",
+       "sample_size": 640,
+       "population": "lv",
+       "dem_pct": 41.0,
+       "rep_pct": 42.0,
+       "margin": -1.2,
+       "partisan_sign": -1,
+       "sponsors": [
+        "Red Eagle Politics"
+       ],
+       "url": "https://socalstrategies.substack.com/p/abdul-el-sayed-holds-17-point-primary",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      },
+      {
+       "id": "us-202soc0b27fd00",
+       "pollster": "SoCal Strategies",
+       "date": "2026-07-29",
+       "start_date": "2026-07-28",
+       "end_date": "2026-07-30",
+       "sample_size": 640,
+       "population": "lv",
+       "dem_pct": 44.0,
+       "rep_pct": 42.0,
+       "margin": 2.3,
+       "partisan_sign": -1,
+       "sponsors": [
+        "Red Eagle Politics"
+       ],
+       "url": "https://socalstrategies.substack.com/p/abdul-el-sayed-holds-17-point-primary",
+       "dem_candidate": "Haley Stevens",
+       "rep_candidate": "Mike Rogers"
+      },
+      {
+       "id": "us-202mit1e6a5692",
+       "pollster": "Mitchell Research & Communications",
+       "date": "2026-07-28",
+       "start_date": "2026-07-28",
+       "end_date": "2026-07-29",
+       "sample_size": 672,
+       "population": "lv",
+       "dem_pct": 45.0,
+       "rep_pct": 45.0,
+       "margin": 0.0,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://static1.squarespace.com/static/5f14ae6fb2a20e01e9c6d608/t/6a6d26262f442f133d15fa49/1785538087149/MITCHELL+MI+Poll+Nov+Electio+Press+Release+7-31-2026+305PM_A.pdf",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      },
+      {
+       "id": "us-202mit132a3ca8",
+       "pollster": "Mitchell Research & Communications",
+       "date": "2026-07-28",
+       "start_date": "2026-07-28",
+       "end_date": "2026-07-29",
+       "sample_size": 672,
+       "population": "lv",
+       "dem_pct": 41.0,
+       "rep_pct": 45.0,
+       "margin": -4.7,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://static1.squarespace.com/static/5f14ae6fb2a20e01e9c6d608/t/6a6d26262f442f133d15fa49/1785538087149/MITCHELL+MI+Poll+Nov+Electio+Press+Release+7-31-2026+305PM_A.pdf",
+       "dem_candidate": "Haley Stevens",
+       "rep_candidate": "Mike Rogers"
+      },
+      {
+       "id": "us-202epife4108d8",
+       "pollster": "EPIC-MRA",
+       "date": "2026-07-27",
+       "start_date": "2026-07-24",
+       "end_date": "2026-07-31",
+       "sample_size": 600,
+       "population": "lv",
+       "dem_pct": 43.0,
+       "rep_pct": 46.0,
+       "margin": -3.4,
+       "partisan_sign": 0,
+       "sponsors": [
+        "MIRS"
+       ],
+       "url": "",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      },
+      {
+       "id": "us-202epia42401c2",
+       "pollster": "EPIC-MRA",
+       "date": "2026-07-27",
+       "start_date": "2026-07-24",
+       "end_date": "2026-07-31",
+       "sample_size": 600,
+       "population": "lv",
+       "dem_pct": 44.0,
+       "rep_pct": 42.0,
+       "margin": 2.3,
+       "partisan_sign": 0,
+       "sponsors": [
+        "MIRS"
+       ],
+       "url": "",
+       "dem_candidate": "Haley Stevens",
+       "rep_candidate": "Mike Rogers"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-TX",
+     "name": "Texas",
+     "prob_before": 0.5721,
+     "prob_after": 0.5856,
+     "prob_delta": 0.013499999999999956,
+     "margin_before": 1.1,
+     "margin_after": 1.31,
+     "margin_delta": 0.20999999999999996,
+     "new_poll_count": 4,
+     "new_polls": [
+      {
+       "id": "us-202wed4dcf8c6b",
+       "pollster": "Wedgewood Polls",
+       "date": "2026-07-30",
+       "start_date": "2026-07-30",
+       "end_date": "2026-07-31",
+       "sample_size": 800,
+       "population": "lv",
+       "dem_pct": 48.0,
+       "rep_pct": 46.0,
+       "margin": 2.1,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://drive.google.com/file/u/1/d/1t2mC4MFActxiBdx4ef_5crisXjD9xH7a/view",
+       "dem_candidate": "James Talarico",
+       "rep_candidate": "Ken Paxton"
+      },
+      {
+       "id": "us-202texee0a6ae6",
+       "pollster": "Texas Southern University Barbara Jordan Public Policy Research and Survey Center",
+       "date": "2026-07-28",
+       "start_date": "2026-07-27",
+       "end_date": "2026-07-30",
+       "sample_size": 1200,
+       "population": "lv",
+       "dem_pct": 47.0,
+       "rep_pct": 45.0,
+       "margin": 2.2,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://static1.squarespace.com/static/67aa7aa3e284b002cd6a420e/t/6a713767d4ed824b91ea090d/1785804647961/Texas+Statewide+August2026.pdf",
+       "dem_candidate": "James Talarico",
+       "rep_candidate": "Ken Paxton"
+      },
+      {
+       "id": "us-202rec773da2d7",
+       "pollster": "ReconMR/Siena University",
+       "date": "2026-07-28",
+       "start_date": "2026-07-27",
+       "end_date": "2026-07-30",
+       "sample_size": 619,
+       "population": "lv",
+       "dem_pct": 47.0,
+       "rep_pct": 43.0,
+       "margin": 4.4,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Texas A&M University Bush School of Government & Public Service"
+       ],
+       "url": "https://reconmr.com/wp-content/uploads/2026/08/Texas-Pulse-August-Release-August-7-2026-Final.pdf",
+       "dem_candidate": "James Talarico",
+       "rep_candidate": "Ken Paxton"
+      },
+      {
+       "id": "us-202bea54820d8d",
+       "pollster": "Beacon Research/Shaw & Co. Research",
+       "date": "2026-07-25",
+       "start_date": "2026-07-23",
+       "end_date": "2026-07-27",
+       "sample_size": 1006,
+       "population": "rv",
+       "dem_pct": 51.0,
+       "rep_pct": 48.0,
+       "margin": 3.0,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Fox News"
+       ],
+       "url": "https://www.foxnews.com/politics/fox-news-poll-gop-divisions-shape-texas-senate-race",
+       "dem_candidate": "James Talarico",
+       "rep_candidate": "Ken Paxton"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-NC",
+     "name": "North Carolina",
+     "prob_before": 0.9539,
+     "prob_after": 0.9477,
+     "prob_delta": -0.006199999999999983,
+     "margin_before": 10.28,
+     "margin_after": 9.97,
+     "margin_delta": -0.3099999999999987,
+     "new_poll_count": 2,
+     "new_polls": [
+      {
+       "id": "us-202chad53b9fb6",
+       "pollster": "Change Research",
+       "date": "2026-07-30",
+       "start_date": "2026-07-29",
+       "end_date": "2026-08-01",
+       "sample_size": 967,
+       "population": "lv",
+       "dem_pct": 50.0,
+       "rep_pct": 41.0,
+       "margin": 9.9,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Talking About Politics"
+       ],
+       "url": "https://garypearcenc.substack.com/p/cooper-up-by-9-trump-still-slumps",
+       "dem_candidate": "Roy Cooper",
+       "rep_candidate": "Michael Whatley"
+      },
+      {
+       "id": "us-202beacaddacc4",
+       "pollster": "Beacon Research/Shaw & Co. Research",
+       "date": "2026-07-25",
+       "start_date": "2026-07-23",
+       "end_date": "2026-07-27",
+       "sample_size": 1005,
+       "population": "rv",
+       "dem_pct": 53.0,
+       "rep_pct": 44.0,
+       "margin": 9.3,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Fox News"
+       ],
+       "url": "https://www.foxnews.com/politics/fox-news-poll-democratic-enthusiasm-shapes-north-carolina-senate-race",
+       "dem_candidate": "Roy Cooper",
+       "rep_candidate": "Michael Whatley"
+      }
+     ]
+    }
+   ],
+   "markdown": "## 2026-07-30\n\nDemocratic chances of Senate control are down 0.7 pts to 55.3% on 13 new polls. Projected seats 51.0 \u2192 50.9 (-0.1).\n\n**Races that moved** (3 of 35):\n\n  - **Michigan** \u2014 Democratic win probability 60.3% \u2192 57.2% (-3.2 pts); projected margin D+1.6 \u2192 D+1.1 (-0.4). Driven by 6 new polls:\n    - SoCal Strategies (2026-07-29, n=640, LV, R-aligned sponsor): R+1.2\n    - SoCal Strategies (2026-07-29, n=640, LV, R-aligned sponsor): D+2.3\n    - Mitchell Research & Communications (2026-07-28, n=672, LV): D+0.0\n    - Mitchell Research & Communications (2026-07-28, n=672, LV): R+4.7\n    - EPIC-MRA (2026-07-27, n=600, LV): R+3.4\n    - EPIC-MRA (2026-07-27, n=600, LV): D+2.3\n\n  - **Texas** \u2014 Democratic win probability 57.2% \u2192 58.6% (+1.3 pts); projected margin D+1.1 \u2192 D+1.3 (+0.2). Driven by 4 new polls:\n    - Wedgewood Polls (2026-07-30, n=800, LV): D+2.1\n    - Texas Southern University Barbara Jordan Public Policy Research and Survey Center (2026-07-28, n=1200, LV): D+2.2\n    - ReconMR/Siena University (2026-07-28, n=619, LV): D+4.4\n    - Beacon Research/Shaw & Co. Research (2026-07-25, n=1006, RV): D+3.0\n\n  - **North Carolina** \u2014 Democratic win probability 95.4% \u2192 94.8% (-0.6 pts); projected margin D+10.3 \u2192 D+10.0 (-0.3). Driven by 2 new polls:\n    - Change Research (2026-07-30, n=967, LV): D+9.9\n    - Beacon Research/Shaw & Co. Research (2026-07-25, n=1005, RV): D+9.3\n\n**New polling that did not move the needle.** Maine (1). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
+   "run_date": "2026-07-23",
+   "previous_run_date": null,
+   "headline": "First run of the model. Democrats have a 55.9% chance of Senate control, with a projected 51 seats (90% interval 44\u201357).",
+   "body": [
+    "Fitted to 215 state-level polls and 469 generic-ballot polls from 114 pollsters.",
+    "",
+    "The national environment is estimated at D+6.2 on the generic ballot (90% interval D+3.8 to D+8.4).",
+    "",
+    "Closest races:",
+    "  - **Ohio**: 51.9% Democratic, projected D+0.3 (11 polls).",
+    "  - **Texas**: 57.2% Democratic, projected D+1.1 (28 polls).",
+    "  - **Nebraska**: 41.5% Democratic, projected R+1.8 (1 poll).",
+    "  - **Iowa**: 39.8% Democratic, projected R+1.6 (10 polls).",
+    "  - **Michigan**: 60.3% Democratic, projected D+1.6 (35 polls).",
+    "  - **Alaska**: 64.8% Democratic, projected D+2.4 (12 polls).",
+    "",
+    "Day-over-day commentary begins with the next run."
+   ],
+   "new_poll_count": 215,
+   "race_changes": [],
+   "markdown": "## 2026-07-23\n\nFirst run of the model. Democrats have a 55.9% chance of Senate control, with a projected 51 seats (90% interval 44\u201357).\n\nFitted to 215 state-level polls and 469 generic-ballot polls from 114 pollsters.\n\nThe national environment is estimated at D+6.2 on the generic ballot (90% interval D+3.8 to D+8.4).\n\nClosest races:\n  - **Ohio**: 51.9% Democratic, projected D+0.3 (11 polls).\n  - **Texas**: 57.2% Democratic, projected D+1.1 (28 polls).\n  - **Nebraska**: 41.5% Democratic, projected R+1.8 (1 poll).\n  - **Iowa**: 39.8% Democratic, projected R+1.6 (10 polls).\n  - **Michigan**: 60.3% Democratic, projected D+1.6 (35 polls).\n  - **Alaska**: 64.8% Democratic, projected D+2.4 (12 polls).\n\nDay-over-day commentary begins with the next run.\n"
+  }
+ ]
+}

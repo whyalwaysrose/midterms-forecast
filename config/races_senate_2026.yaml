@@ -1,0 +1,414 @@
+# =============================================================================
+# 2026 U.S. Senate — race definitions
+# =============================================================================
+# This file is the single source of truth for WHICH contests exist and what
+# structural (non-poll) information we know about them. The model reads it; no
+# race information is hard-coded in Python.
+#
+# The schema here is deliberately chamber-agnostic. Adding the House or the
+# governorships later means adding config/races_house_2026.yaml with the same
+# keys (`district` replacing `state` as the unit id) — not editing the model.
+#
+# FIELD NOTES
+#   id                        stable unique key, used in all output JSON
+#   unit                      geographic unit (state postal code here)
+#   special                   true for the two 2026 special elections
+#   incumbent_party           party currently holding the seat: D | R
+#   incumbent_status          elected  -> elected incumbent is on the ballot
+#                             appointed-> appointed incumbent is on the ballot
+#                             open     -> no incumbent on the ballot
+#   pres_2024_dem_two_party   Harris / (Harris + Trump), statewide
+#   pres_2020_dem_two_party   Biden  / (Biden  + Trump), statewide
+#   region                    used to build the state-error correlation kernel
+#
+# The two presidential columns are approximate two-party shares (±0.005). They
+# are anchors for the fundamentals prior, which carries a deliberately wide SD,
+# so this precision is sufficient. See docs/DATA_SOURCES.md.
+# =============================================================================
+
+cycle: 2026
+chamber: senate
+election_date: 2026-11-03
+
+# ---------------------------------------------------------------------------
+# Chamber control arithmetic.
+#
+# Current Senate: 53 R, 45 D, 2 I (both caucus with Democrats) = 100.
+# 35 seats are up in 2026: 33 Class 2 regular + FL and OH specials.
+#   Republican-held seats up: 22   ->  53 - 22 = 31 R not up
+#   Democratic-held seats up: 13   ->  47 - 13 = 34 D not up  (incl. the 2 I)
+# Vice President Vance breaks ties, so Republicans hold the chamber at 50-50:
+# Democrats need 51 seats, Republicans need 50.
+#
+# tests/test_config.py asserts this arithmetic closes to 100 and that the
+# per-race `incumbent_party` counts match `seats_up` below.
+# ---------------------------------------------------------------------------
+control:
+  total_seats: 100
+  seats_not_up:
+    D: 34
+    R: 31
+  seats_up:
+    D: 13
+    R: 22
+  dem_seats_for_majority: 51
+  rep_seats_for_majority: 50
+  tiebreaker_party: R
+
+races:
+  # ---- Republican-held seats up -------------------------------------------
+  - id: senate-2026-AL
+    unit: AL
+    name: Alabama
+    special: false
+    incumbent_party: R
+    incumbent_status: open          # Tuberville retired to run for Governor
+    pres_2024_dem_two_party: 0.342
+    pres_2020_dem_two_party: 0.373
+    region: south
+
+  - id: senate-2026-AK
+    unit: AK
+    name: Alaska
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Sullivan
+    pres_2024_dem_two_party: 0.414
+    pres_2020_dem_two_party: 0.442
+    region: west
+
+  - id: senate-2026-AR
+    unit: AR
+    name: Arkansas
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Cotton
+    pres_2024_dem_two_party: 0.342
+    pres_2020_dem_two_party: 0.354
+    region: south
+
+  - id: senate-2026-FL
+    unit: FL
+    name: Florida
+    special: true                   # special for Rubio's seat
+    incumbent_party: R
+    incumbent_status: appointed     # Moody, appointed 2025
+    pres_2024_dem_two_party: 0.434
+    pres_2020_dem_two_party: 0.481
+    region: south
+
+  - id: senate-2026-ID
+    unit: ID
+    name: Idaho
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Risch
+    pres_2024_dem_two_party: 0.309
+    pres_2020_dem_two_party: 0.339
+    region: west
+
+  - id: senate-2026-IA
+    unit: IA
+    name: Iowa
+    special: false
+    incumbent_party: R
+    incumbent_status: open          # Ernst retiring
+    pres_2024_dem_two_party: 0.432
+    pres_2020_dem_two_party: 0.451
+    region: midwest
+
+  - id: senate-2026-KS
+    unit: KS
+    name: Kansas
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Marshall
+    pres_2024_dem_two_party: 0.417
+    pres_2020_dem_two_party: 0.421
+    region: midwest
+
+  - id: senate-2026-KY
+    unit: KY
+    name: Kentucky
+    special: false
+    incumbent_party: R
+    incumbent_status: open          # McConnell retiring
+    pres_2024_dem_two_party: 0.343
+    pres_2020_dem_two_party: 0.372
+    region: south
+
+  - id: senate-2026-LA
+    unit: LA
+    name: Louisiana
+    special: false
+    incumbent_party: R
+    incumbent_status: open          # Cassidy lost renomination
+    pres_2024_dem_two_party: 0.385
+    pres_2020_dem_two_party: 0.402
+    region: south
+
+  - id: senate-2026-ME
+    unit: ME
+    name: Maine
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Collins
+    pres_2024_dem_two_party: 0.535
+    pres_2020_dem_two_party: 0.550
+    region: northeast
+
+  - id: senate-2026-MS
+    unit: MS
+    name: Mississippi
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Hyde-Smith
+    pres_2024_dem_two_party: 0.374
+    pres_2020_dem_two_party: 0.418
+    region: south
+
+  - id: senate-2026-MT
+    unit: MT
+    name: Montana
+    special: false
+    incumbent_party: R
+    incumbent_status: open          # Daines retiring
+    pres_2024_dem_two_party: 0.394
+    pres_2020_dem_two_party: 0.415
+    region: west
+
+  - id: senate-2026-NE
+    unit: NE
+    name: Nebraska
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Ricketts
+    pres_2024_dem_two_party: 0.399
+    pres_2020_dem_two_party: 0.401
+    region: midwest
+
+  - id: senate-2026-NC
+    unit: NC
+    name: North Carolina
+    special: false
+    incumbent_party: R
+    incumbent_status: open          # Tillis retiring
+    pres_2024_dem_two_party: 0.485
+    pres_2020_dem_two_party: 0.492
+    region: south
+
+  - id: senate-2026-OH
+    unit: OH
+    name: Ohio
+    special: true                   # special for Vance's seat
+    incumbent_party: R
+    incumbent_status: appointed     # Husted, appointed 2025
+    pres_2024_dem_two_party: 0.444
+    pres_2020_dem_two_party: 0.454
+    region: midwest
+
+  - id: senate-2026-OK
+    unit: OK
+    name: Oklahoma
+    special: false
+    incumbent_party: R
+    # UNVERIFIED: sources conflict on whether the elected incumbent (Lankford)
+    # is on the 2026 ballot. Treated as open, which is the conservative choice.
+    # Safe-R either way, so chamber-level impact is negligible. See README
+    # "Known data-quality items".
+    incumbent_status: open
+    pres_2024_dem_two_party: 0.326
+    pres_2020_dem_two_party: 0.334
+    region: south
+
+  - id: senate-2026-SC
+    unit: SC
+    name: South Carolina
+    special: false
+    incumbent_party: R
+    # UNVERIFIED: same caveat as Oklahoma (elected incumbent Graham).
+    incumbent_status: open
+    pres_2024_dem_two_party: 0.409
+    pres_2020_dem_two_party: 0.435
+    region: south
+
+  - id: senate-2026-SD
+    unit: SD
+    name: South Dakota
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Rounds
+    pres_2024_dem_two_party: 0.349
+    pres_2020_dem_two_party: 0.361
+    region: midwest
+
+  - id: senate-2026-TN
+    unit: TN
+    name: Tennessee
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Hagerty
+    pres_2024_dem_two_party: 0.353
+    pres_2020_dem_two_party: 0.380
+    region: south
+
+  - id: senate-2026-TX
+    unit: TX
+    name: Texas
+    special: false
+    incumbent_party: R
+    incumbent_status: open          # Cornyn lost renomination
+    pres_2024_dem_two_party: 0.429
+    pres_2020_dem_two_party: 0.469
+    region: south
+
+  - id: senate-2026-WV
+    unit: WV
+    name: West Virginia
+    special: false
+    incumbent_party: R
+    incumbent_status: elected       # Capito
+    pres_2024_dem_two_party: 0.286
+    pres_2020_dem_two_party: 0.301
+    region: south
+
+  - id: senate-2026-WY
+    unit: WY
+    name: Wyoming
+    special: false
+    incumbent_party: R
+    incumbent_status: open          # Lummis retiring
+    pres_2024_dem_two_party: 0.266
+    pres_2020_dem_two_party: 0.271
+    region: west
+
+  # ---- Democratic-held seats up -------------------------------------------
+  - id: senate-2026-CO
+    unit: CO
+    name: Colorado
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Hickenlooper
+    pres_2024_dem_two_party: 0.556
+    pres_2020_dem_two_party: 0.567
+    region: west
+
+  - id: senate-2026-DE
+    unit: DE
+    name: Delaware
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Coons
+    pres_2024_dem_two_party: 0.575
+    pres_2020_dem_two_party: 0.594
+    region: northeast
+
+  - id: senate-2026-GA
+    unit: GA
+    name: Georgia
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Ossoff
+    pres_2024_dem_two_party: 0.489
+    pres_2020_dem_two_party: 0.503
+    region: south
+
+  - id: senate-2026-IL
+    unit: IL
+    name: Illinois
+    special: false
+    incumbent_party: D
+    incumbent_status: open          # Durbin retiring
+    pres_2024_dem_two_party: 0.552
+    pres_2020_dem_two_party: 0.583
+    region: midwest
+
+  - id: senate-2026-MA
+    unit: MA
+    name: Massachusetts
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Markey
+    pres_2024_dem_two_party: 0.624
+    pres_2020_dem_two_party: 0.660
+    region: northeast
+
+  - id: senate-2026-MI
+    unit: MI
+    name: Michigan
+    special: false
+    incumbent_party: D
+    incumbent_status: open          # Peters retiring
+    pres_2024_dem_two_party: 0.493
+    pres_2020_dem_two_party: 0.507
+    region: midwest
+
+  - id: senate-2026-MN
+    unit: MN
+    name: Minnesota
+    special: false
+    incumbent_party: D
+    incumbent_status: open          # Smith retiring
+    pres_2024_dem_two_party: 0.519
+    pres_2020_dem_two_party: 0.529
+    region: midwest
+
+  - id: senate-2026-NH
+    unit: NH
+    name: New Hampshire
+    special: false
+    incumbent_party: D
+    incumbent_status: open          # Shaheen retiring
+    pres_2024_dem_two_party: 0.515
+    pres_2020_dem_two_party: 0.532
+    region: northeast
+
+  - id: senate-2026-NJ
+    unit: NJ
+    name: New Jersey
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Booker
+    pres_2024_dem_two_party: 0.525
+    pres_2020_dem_two_party: 0.579
+    region: northeast
+
+  - id: senate-2026-NM
+    unit: NM
+    name: New Mexico
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Lujan
+    pres_2024_dem_two_party: 0.531
+    pres_2020_dem_two_party: 0.556
+    region: west
+
+  - id: senate-2026-OR
+    unit: OR
+    name: Oregon
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Merkley
+    pres_2024_dem_two_party: 0.567
+    pres_2020_dem_two_party: 0.573
+    region: west
+
+  - id: senate-2026-RI
+    unit: RI
+    name: Rhode Island
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Reed
+    pres_2024_dem_two_party: 0.573
+    pres_2020_dem_two_party: 0.596
+    region: northeast
+
+  - id: senate-2026-VA
+    unit: VA
+    name: Virginia
+    special: false
+    incumbent_party: D
+    incumbent_status: elected       # Warner
+    pres_2024_dem_two_party: 0.528
+    pres_2020_dem_two_party: 0.548
+    region: south

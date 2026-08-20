@@ -1,0 +1,24 @@
+{
+  // Point VS Code at the project venv so imports resolve and the test explorer works.
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": ["tests"],
+  "python.analysis.extraPaths": ["${workspaceFolder}/src"],
+
+  // PyTensor warns loudly about a missing C++ compiler on Windows. Sampling uses
+  // nutpie (Numba), so the C backend is genuinely unused.
+  "terminal.integrated.env.windows": { "PYTENSOR_FLAGS": "cxx=" },
+  "terminal.integrated.env.linux": { "PYTENSOR_FLAGS": "cxx=" },
+  "terminal.integrated.env.osx": { "PYTENSOR_FLAGS": "cxx=" },
+
+  "[python]": {
+    "editor.rulers": [100],
+    "editor.codeActionsOnSave": { "source.organizeImports": "explicit" }
+  },
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.ruff_cache": true
+  }
+}

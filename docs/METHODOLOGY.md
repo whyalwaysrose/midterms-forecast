@@ -1,0 +1,337 @@
+# Methodology
+
+Full specification of the model, why each piece is there, and where it can go wrong.
+
+---
+
+## 1. Scale
+
+Everything is on the **logit of the two-party Democratic share**. Working in logits keeps
+the latent state unbounded (so a random walk cannot wander outside `[0, 1]`) and makes the
+measurement variance approximately additive.
+
+Conversions near a competitive race (`p = 0.5`):
+
+```
+d(logit)/d(share) = 1 / (p(1-p)) = 4
+1 point of SHARE   ≈ 0.04 logit
+1 point of MARGIN  ≈ 0.02 logit        (margin = 2 × deviation from 50% share)
+```
+
+So a prior SD of `0.10` logit is "about 5 points of margin". Every scale in
+`config/model.yaml` is annotated in these terms.
+
+Third-party support is excluded from the denominator: a poll showing 48/32/20 is treated
+as a 60% two-party Democratic share, with the sample size discounted accordingly
+(§4.2).
+
+---
+
+## 2. The latent state
+
+### 2.1 National environment
+
+`η_t` is the national two-party Democratic logit share on the generic congressional
+ballot, modelled as a Gaussian random walk on a 7-day grid:
+
+```
+η_0 ~ Normal(0, 0.10)
+η_t = η_{t-1} + Normal(0, σ_η²)
+σ_η ~ HalfNormal(0.004 per day × √7)
+```
+
+`η = 0` means a tied generic ballot. The per-day scale of `0.004` accumulates to
+`0.004 × √365 ≈ 0.076` logit (~3.8 points of margin) of drift over a year, which is the
+right order for generic-ballot movement across a cycle.
+
+### 2.2 Per race
+
+```
+θ_{r,t} = α_r + λ_r · η_t + ε_{r,t}
+```
+
+**`α_r` — baseline under a tied national environment.** This is the fundamentals prior
+(§3). Defining it *at a tied environment* is what prevents double-counting: the national
+swing enters through `η` and nowhere else.
+
+**`λ_r` — elasticity.** How much of the national swing this race absorbs.
+`TruncatedNormal(mean 1, sd 0.25, lower 0.2)`. Partially pooled around 1, and kept
+strictly positive so the sign of the national environment cannot flip for one race.
+
+**`ε_{r,t}` — race-specific drift.** A random walk pinned to zero at the grid start, so it
+captures *movement* while `α` captures *level*. This is where candidate news, advertising
+and scandal show up.
+
+### 2.3 The time grid
+
+Anchored **backwards from election day**, so the final grid point is exactly
+2026-11-03. Two consequences, both deliberate:
+
+- The forecast target is a real grid point, not an interpolation.
+- The grid does not shift underneath the model as new polls arrive.
+
+Polls snap to the nearest grid point. At 7-day resolution the worst-case snapping error is
+3.5 days, far below the week-to-week noise in the polls themselves.
+
+Because the walks run all the way to election day, **drift between the last poll and the
+election is already accounted for**. There is deliberately no separate "drift to election
+day" term; adding one would double-count and inflate every interval.
+
+---
+
+## 3. Fundamentals prior
+
+For each race, before any polls:
+
+```
+lean_r    = logit(state presidential share) − logit(national presidential share)
+blended   = 0.75 · lean_2024 + 0.25 · lean_2020
+α_prior_r = 0.95 · blended  ±  incumbency_r
+α_r       ~ Normal(α_prior_r, 0.15²)
+```
+
+- **Recentring against the nation** turns a raw presidential result into a partisan
+  *lean*, which is what generalises across cycles.
+- **`0.95` shrinkage** reflects that Senate results track presidential lean closely but not
+  perfectly, and safe states are slightly less lopsided downballot.
+- **Incumbency** is `+0.060` logit (~3 points of margin) for an elected incumbent on the
+  ballot, `+0.020` for an appointed one, `0` for an open seat — signed toward the party
+  holding the seat. The modest size reflects the well-documented post-2016 decline in the
+  personal incumbency advantage.
+- **`prior_sd = 0.15`** (~7.5 points of margin) is wide on purpose. In well-polled races
+  the polls dominate it; in unpolled races it is what carries the forecast.
+
+**What it does not know:** candidate quality, fundraising, scandal, or ballot access.
+Nebraska is the clearest illustration — Dan Osborn polls far better than Nebraska's
+partisan lean, and only the polls can tell the model that.
+
+---
+
+## 4. Measurement model
+
+```
+logit(yᵢ) ~ StudentT(ν=4, μᵢ, σᵢ)
+
+μᵢ = θ_{rᵢ,tᵢ} + house_{pᵢ} + screen_{popᵢ} + ρ · partisanᵢ
+σᵢ = √(vᵢ + σ²_excess)
+```
+
+### 4.1 House effects
+
+`house_p` is estimated per pollster, hierarchically, and **constrained to sum to zero**.
+
+The constraint is not cosmetic. Without it the model is not identified: you could add a
+constant to every house effect and subtract it from the latent state and obtain exactly
+the same likelihood, so the sampler would drift along that ridge indefinitely.
+
+It is written **non-centred** — a unit-scale `ZeroSumNormal` multiplied by a separately
+sampled `σ_house`. Scaling preserves the sum-to-zero property while decoupling the
+geometry. Writing `ZeroSumNormal(sigma=σ_house)` directly produced a funnel: most
+pollsters appear once or twice, their effects are prior-dominated, and the sampler then
+has to squeeze through a narrowing neck as `σ_house` shrinks. In testing this change alone
+moved minimum ESS from ~19 to ~670.
+
+**Pollsters with fewer than 3 polls share a single pooled effect.** Most pollsters in the
+feed appear once. Giving each a free parameter lets it absorb that poll's entire deviation
+from the latent state, which is not a *house* effect — it is noise — and it makes each
+individual poll far too influential. Pooling the long tail (63 of 116 pollsters, at the
+time of writing) sends their deviation where it belongs.
+
+### 4.2 Sampling variance
+
+Delta method on the logit:
+
+```
+Var(logit(p̂)) ≈ 1 / (n_eff · p · (1−p)) × design_effect
+```
+
+with `design_effect = 1.5` for weighting and clustering, and
+
+```
+n_eff = n × (dem_pct + rep_pct) / 100
+```
+
+A poll of 1000 where 15% are undecided or backing a third candidate carries only about 850
+respondents' worth of information about the D-vs-R split.
+
+### 4.3 Screen and sponsor adjustments
+
+- **Screen.** Likely voters are the reference (effect pinned to exactly zero, for
+  identifiability); registered-voter and adult samples get estimated offsets. The model
+  recovers roughly **+1.4 points of margin** for adult samples relative to likely voters,
+  matching the usual finding.
+- **Partisan sponsor.** `ρ · sᵢ` with `sᵢ ∈ {+1, 0, −1}`. `ρ` is constrained positive
+  (partisan polls favour their sponsor) and shrunk toward zero. Estimated at roughly
+  **+0.5 points of margin**.
+
+### 4.4 Why Student-t, and why `σ_excess` ends up near zero
+
+The `ν = 4` likelihood is for robustness: one wild poll should not drag the latent state.
+
+`σ_excess` — extra poll-level error beyond sampling — consistently estimates near zero.
+**This is expected, not a bug.** For a typical n=600 poll:
+
+```
+binomial margin SD              ≈ 4.1 pts
+× √design_effect (1.5)          ≈ 5.0 pts   ← the t-distribution's scale
+× √(ν/(ν−2)) = √2 for ν=4       ≈ 7.1 pts   ← its actual SD
+```
+
+Roughly 7 points of margin error per poll is already at or slightly above the historical
+record for single polls at this distance from an election. There is simply no unexplained
+variance left for `σ_excess` to claim. It is retained as a diagnostic — if a future cycle's
+polls are noisier than the design effect implies, it will grow.
+
+---
+
+## 5. Election-day error
+
+This is applied at **simulation time**, on top of the posterior, and it is the piece that
+makes the chamber forecast honest.
+
+A race-by-race model with independent errors produces a wildly overconfident seat
+distribution: 35 near-independent coin flips concentrate hard around their mean. Real
+polling misses are correlated — when the polls miss in Ohio they tend to miss the same way
+in Iowa — and that correlation fattens the tails enormously.
+
+```
+θ_final_r = θ_{r,T} + b_national + κ_r
+
+b_national ~ Normal(0, 0.075²)                    ~3.7 pts of margin
+κ          ~ MVN(0, 0.085² · C)                   ~4.2 pts of margin
+```
+
+Total ≈ `√(0.075² + 0.085²) = 0.113` logit ≈ **5.7 points of margin RMSE**, consistent with
+the historical record for Senate polling at this range.
+
+The correlation matrix is
+
+```
+C_{ij} = (1 − nugget) · exp(−d_{ij} / ℓ) + nugget · [i = j]
+```
+
+where `d` is Euclidean distance in standardised covariate space — 2024 lean, 2020 lean,
+and a scaled region indicator — with `ℓ = 1.25`. The exponential kernel is positive
+definite for Euclidean distance (it is the Matérn-½ kernel), and the nugget keeps it
+comfortably so, which matters because it gets Cholesky-factored on every run.
+
+**Limitation:** the covariates are political (past presidential results plus region) rather
+than demographic. Education and urbanicity have been the axes along which recent polling
+errors actually correlated. Adding demographic covariates is the single highest-value
+improvement available, and was deferred here rather than fabricated from unverified
+numbers.
+
+---
+
+## 6. From posterior to seats
+
+```
+dem_seats = seats_not_up_D + Σ_r 1[θ_final_r > 0]
+```
+
+With 34 Democratic-caucus seats not up and 31 Republican, Democrats need **51** of 100 for
+control and Republicans need **50**, because the Vice President breaks a 50-50 tie for the
+Republicans. `tests/test_config.py` asserts this arithmetic closes to 100 and matches the
+per-race incumbent parties — a miscounted baseline is the most damaging silent error a seat
+model can have, because it shifts every control probability without changing any
+individual race.
+
+Each posterior draw is recycled `sims_per_draw = 10` times with fresh election-day error,
+giving 40,000 simulations from 4,000 draws.
+
+### Tipping point
+
+In each simulation, order the contested races from most to least Democratic and walk down
+accumulating seats. The race at which the running total reaches the majority threshold
+decided the chamber. Aggregated across simulations this gives a **tipping-point
+probability** per race — usually more informative than any single race's win probability,
+because it answers "which seat would both parties most want?"
+
+---
+
+## 7. Sampling
+
+- **nutpie** (Numba-compiled NUTS). No C++ toolchain required, so Windows and Linux CI run
+  the identical implementation.
+- 1,000 draws × 4 chains, 1,500 tuning steps, `target_accept = 0.95`. The generous tuning
+  is for the variance-scale parameters (`σ_ε`, `σ_η`), which sit near zero where the
+  geometry is tightest.
+- Typical run: **~45 seconds**, `max R̂ ≈ 1.01`, `min ESS ≈ 660`, **zero divergences**.
+
+Diagnostics are written into every `forecast.json` and displayed on the dashboard. A
+forecast whose sampler did not converge is not a forecast, and the CLI emits a loud warning
+when `R̂ > 1.05` or any divergence occurs.
+
+---
+
+## 8. Calibration
+
+Real backtesting is impossible before November 2026. What is possible continuously is
+**out-of-sample poll prediction**:
+
+1. Refit using only polls fielded before `today − holdout_days`.
+2. Form the posterior predictive for each poll fielded after the cutoff, including house
+   effects, screen adjustments, and the measurement noise the model believes in.
+3. Measure interval coverage and PIT uniformity.
+
+If the 80% intervals contain 80% of held-out polls, the uncertainty is about right. The
+PIT values sharpen this: for a well-calibrated model they are uniform on `[0, 1]`, and
+their departure from uniformity says *how* the model is wrong, not merely that it is.
+
+```bash
+midterms backtest --holdout-days 30
+```
+
+### Measured result (2026-08-20, 33 held-out polls)
+
+```
+Mean   |error| vs poll margin:  3.66 pts
+Median |error| vs poll margin:  2.27 pts
+
+50% interval -> 69.7%   UNDERCONFIDENT
+80% interval -> 87.9%   UNDERCONFIDENT
+90% interval -> 97.0%   well calibrated
+95% interval -> 97.0%   well calibrated
+
+PIT KS statistic: 0.120
+```
+
+The intervals are **too wide at the poll level**, not too narrow. A typical held-out
+poll misses by 2–4 points of margin, against a predictive SD of roughly 7 points
+(§4.4). The likely culprits, in order: `design_effect = 1.5` and the heavy `ν = 4`
+tail, which compound to inflate the SD by about 1.7× over binomial.
+
+This has **not** been retuned, deliberately. With n=33 the standard error on the 50%
+coverage figure is about 8.7 points, so the result is suggestive rather than decisive,
+and tightening the likelihood to fit 33 polls would be fitting the diagnostic instead
+of the phenomenon. The correct next step is to accumulate held-out polls across daily
+runs and revisit `design_effect` and `ν` once the sample supports it.
+
+Two things this does *not* imply. First, being underconfident about **polls** is much
+safer than being overconfident. Second, it says little about the chamber forecast: the
+seat distribution's width is dominated by the correlated election-day error of §5,
+which this diagnostic cannot test at all, because it is calibrated to historical
+election outcomes rather than to polls.
+
+This is a **necessary** condition for calibration, not a sufficient one. A model can
+predict polls beautifully and still be wrong about the election if the polls themselves are
+biased. That residual risk is exactly what §5 represents, and it can only be validated
+against real results.
+
+---
+
+## 9. Known weaknesses
+
+1. **Correlation covariates are political, not demographic** (§5). Highest-value fix.
+2. **The fundamentals prior has no candidate-quality term.** No fundraising, no scandal, no
+   prior-office measure.
+3. **Fourteen races have no qualifying polls.** They rest entirely on fundamentals and the
+   national environment; their intervals are wide but their centres are only as good as the
+   prior.
+4. **The historical error scales in §5 are asserted from the literature, not fitted.** They
+   should be estimated from a historical Senate polling dataset. That dataset is exactly
+   what FiveThirtyEight's shutdown made hard to obtain.
+5. **A single elasticity per race** assumes the relationship to the national environment is
+   constant over the cycle.
+6. **Nebraska's independent** is forced onto the Democratic side for chamber arithmetic
+   (§ README known issues). There is no unarguably correct treatment.

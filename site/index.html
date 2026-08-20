@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 Senate Forecast</title>
+<meta name="description" content="A hierarchical Bayesian forecast of the 2026 U.S. Senate elections, updated daily.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗳️</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div>
+      <h1>2026 Senate Forecast</h1>
+      <p class="tagline">A hierarchical Bayesian model, refit daily as new polls arrive.</p>
+    </div>
+    <div class="updated">
+      <span class="updated-label">Last updated</span>
+      <span id="last-updated" class="updated-value">—</span>
+      <span id="days-left" class="days-left"></span>
+    </div>
+  </div>
+</header>
+
+<div id="load-error" class="wrap error-banner" hidden></div>
+
+<main class="wrap" id="main" hidden>
+
+  <!-- ============ HEADLINE ============ -->
+  <section class="hero card">
+    <div class="hero-probs">
+      <div class="prob-block dem">
+        <div class="prob-party">Democrats</div>
+        <div class="prob-value" id="dem-prob">—</div>
+        <div class="prob-caption">chance of control</div>
+      </div>
+      <div class="prob-bar-wrap">
+        <div class="prob-bar">
+          <div class="prob-bar-dem" id="prob-bar-dem"></div>
+          <div class="prob-bar-rep" id="prob-bar-rep"></div>
+        </div>
+        <p class="prob-note" id="seats-note">—</p>
+        <p class="prob-note subtle" id="tiebreak-note"></p>
+      </div>
+      <div class="prob-block rep">
+        <div class="prob-party">Republicans</div>
+        <div class="prob-value" id="rep-prob">—</div>
+        <div class="prob-caption">chance of control</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHARTS ============ -->
+  <section class="grid-2">
+    <div class="card">
+      <h2>Distribution of Senate seats</h2>
+      <p class="card-sub">Democratic-caucus seats across <span id="n-sims">—</span> simulations. The line marks the 51 seats Democrats need for a majority.</p>
+      <div id="seat-chart" class="chart"></div>
+      <div class="legend">
+        <span><i class="swatch dem"></i>Democratic majority</span>
+        <span><i class="swatch rep"></i>Republican majority</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Forecast over time</h2>
+      <p class="card-sub">Democratic probability of Senate control, one point per model run.</p>
+      <div id="history-chart" class="chart"></div>
+      <p class="card-sub subtle" id="history-empty" hidden>The trend line appears once the model has run on more than one day.</p>
+    </div>
+  </section>
+
+  <!-- ============ NATIONAL ============ -->
+  <section class="card">
+    <h2>National environment</h2>
+    <p class="card-sub">The generic congressional ballot, estimated as a latent random walk. Every race is geared to this by its own elasticity, so movement here shifts all 35 contests at once.</p>
+    <div class="national-row">
+      <div class="national-stat">
+        <div class="national-value" id="gb-margin">—</div>
+        <div class="national-label">Generic ballot margin</div>
+        <div class="national-range" id="gb-range">—</div>
+      </div>
+      <div id="national-chart" class="chart flex-1"></div>
+    </div>
+  </section>
+
+  <!-- ============ COMMENTARY ============ -->
+  <section class="card">
+    <h2>What changed</h2>
+    <p class="card-sub">Generated automatically after each run by diffing against the previous forecast.</p>
+    <div id="commentary-latest" class="commentary"></div>
+    <details id="commentary-archive-wrap" class="archive">
+      <summary>Earlier entries</summary>
+      <div id="commentary-archive"></div>
+    </details>
+  </section>
+
+  <!-- ============ RACES ============ -->
+  <section class="card">
+    <div class="races-head">
+      <div>
+        <h2>Race by race</h2>
+        <p class="card-sub">Ordered by competitiveness. Click any race for its polls and trajectory.</p>
+      </div>
+      <div class="filters">
+        <button class="filter active" data-filter="all">All 35</button>
+        <button class="filter" data-filter="competitive">Competitive</button>
+        <button class="filter" data-filter="polled">Has polling</button>
+      </div>
+    </div>
+    <div id="race-list" class="race-list"></div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section class="card">
+    <h2>How this works</h2>
+    <div class="method-grid">
+      <div>
+        <h3>The model</h3>
+        <p>Every race is tracked on the logit of the two-party Democratic share. A single national environment evolves as a Gaussian random walk driven by generic-ballot polls. Each race is that environment scaled by its own elasticity, plus a structural baseline and its own drift:</p>
+        <p class="formula">θ<sub>r,t</sub> = α<sub>r</sub> + λ<sub>r</sub>·η<sub>t</sub> + ε<sub>r,t</sub></p>
+        <p>α comes from a fundamentals prior (presidential lean in 2024 and 2020, plus incumbency), λ is partially pooled across races, and ε is a race-specific random walk.</p>
+      </div>
+      <div>
+        <h3>The polls</h3>
+        <p>Polls observe that latent state through a biased instrument. The model estimates a house effect for each frequent pollster (constrained to sum to zero, or it would not be identified), an adjustment for likely-voter versus registered-voter versus adult samples, and a partisan-sponsor correction. A Student-t likelihood keeps one wild poll from dragging the estimate.</p>
+      </div>
+      <div>
+        <h3>Why the intervals are wide</h3>
+        <p>Polling misses are correlated. If all 35 races erred independently the errors would cancel and the seat forecast would be absurdly confident. So on top of the posterior we add a national error common to every race and a state-level error whose correlation decays with political distance between states. That correlation is what gives the seat distribution its real width.</p>
+      </div>
+      <div>
+        <h3>Honest limits</h3>
+        <p>This model predicts polls well; whether it predicts the <em>election</em> well depends on whether the polls are biased, which no amount of modelling can determine in advance. Races with no polling are carried entirely by fundamentals and should be read as rough. See the methodology document for the full specification and known caveats.</p>
+      </div>
+    </div>
+    <div class="diagnostics">
+      <h3>Run diagnostics</h3>
+      <div id="diagnostics" class="diag-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>
+      Poll data from <a href="https://votehub.com" rel="noopener">VoteHub</a>, licensed
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>.
+      Model and code are open source.
+    </p>
+    <p class="subtle">This is an independent forecast, not a prediction of certainty. Probabilities are probabilities: a 30% chance happens roughly three times in ten.</p>
+  </div>
+</footer>
+
+<!-- Race detail drawer -->
+<div id="drawer" class="drawer" hidden>
+  <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+    <button class="drawer-close" id="drawer-close" aria-label="Close">&times;</button>
+    <h2 id="drawer-title"></h2>
+    <div id="drawer-body"></div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

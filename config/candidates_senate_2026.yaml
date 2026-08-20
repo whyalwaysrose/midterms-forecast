@@ -1,0 +1,162 @@
+# =============================================================================
+# 2026 U.S. Senate — candidate → party roster
+# =============================================================================
+# WHY THIS FILE EXISTS
+# The VoteHub API returns poll answers as bare candidate names with no party
+# attached (`{"choice": "Jon Ossoff", "pct": 47.7}`). To reduce a poll to a
+# two-party Democratic share we must know which name is the Democrat and which
+# is the Republican. There is no way to infer this from the feed, so it is
+# stated explicitly here.
+#
+# FAIL-CLOSED BY DESIGN
+# Ingestion never guesses. A poll is used only if exactly one D-side and one
+# R-side candidate can be identified among its answers. Any unrecognised name
+# is recorded as `other`, is excluded from the two-party denominator, and is
+# reported by the audit command. A race whose polls are all unusable simply
+# falls back to its fundamentals prior — which is correct behaviour, not a bug.
+#
+# MAINTAINING IT
+#   python -m midterms.cli audit-roster
+# lists every candidate name appearing in the current feed that this file does
+# not classify. Run it after a primary; add the new nominees; re-run.
+#
+# Names marked `other` below are minor-party or unidentified candidates. Where
+# a candidate's party could not be confirmed, they are deliberately left in
+# `other` rather than guessed: a wrong party assignment corrupts the two-party
+# share, whereas `other` merely discards information.
+# =============================================================================
+
+# Generic placeholders used by pollsters testing an unnamed nominee.
+generic_labels:
+  Dem: D
+  Democrat: D
+  Democratic: D
+  Rep: R
+  Republican: R
+  GOP: R
+
+# Misspellings observed in the live feed, normalised before lookup.
+aliases:
+  "Dan Sullvian": "Dan Sullivan"
+  "Thom Thillis": "Thom Tillis"
+  "John E. Sununu": "John Sununu"
+  "Ben Ray Lujan": "Ben Ray Luján"
+
+races:
+  senate-2026-AL:
+    D: [Everett Wess]
+    R: [Barry Moore]
+
+  senate-2026-AK:
+    D: [Mary Peltola]
+    R: [Dan Sullivan]
+    other: [Dustin Darden, Gerald Heikes]
+
+  senate-2026-AR:
+    D: [Hallie Shoffner]
+    R: [Tom Cotton]
+
+  senate-2026-FL:
+    D: [Angie Nixon, Alexander Vindman]
+    R: [Ashley Moody]
+
+  senate-2026-GA:
+    D: [Jon Ossoff]
+    R: [Mike Collins, Buddy Carter, Derek Dooley]
+
+  senate-2026-ID:
+    D: [Todd Achilles]
+    R: [Jim Risch]
+    other: [Matt Loesby]          # Libertarian
+
+  senate-2026-IA:
+    D: [Josh Turek, Zach Wahls]
+    R: [Ashley Hinson]
+
+  senate-2026-KS:
+    D: [Adam Hamilton]
+    R: [Roger Marshall]
+
+  senate-2026-ME:
+    D: [Graham Platner, Janet Mills, Troy Jackson]
+    R: [Susan Collins]
+
+  senate-2026-MA:
+    D: [Ed Markey, Seth Moulton]
+    R: [John Deaton]
+
+  senate-2026-MI:
+    D: [Abdul El-Sayed, Haley Stevens, Mallory McMorrow]
+    R: [Mike Rogers]
+
+  senate-2026-MN:
+    D: [Peggy Flanagan, Angie Craig]
+    R: [Michele Tafoya]
+
+  senate-2026-MS:
+    D: [Scott Colom]
+    R: [Cindy Hyde-Smith]
+
+  senate-2026-MT:
+    # Open seat (Daines retiring). Only Alme is confirmed; the remaining names
+    # in the feed are unconfirmed or primary-stage candidates and are left in
+    # `other`, so Montana is currently carried by its fundamentals prior.
+    D: []
+    R: [Kurt Alme]
+    other: [Seth Bodnar, Alani Bankhead, Reilly Neill, Tom Jandron, Kyle Austin]
+
+  senate-2026-NE:
+    # MODELLING CAVEAT. Dan Osborn runs as an INDEPENDENT, not a Democrat, and
+    # has said he would not automatically caucus with either party. For
+    # chamber-control arithmetic we must place him somewhere, so he is counted
+    # on the Democratic side (`independent_counts_as: D`). Read the Nebraska
+    # number, and its contribution to the seat distribution, with that caveat.
+    # This is surfaced in the dashboard and in docs/METHODOLOGY.md.
+    D: []
+    R: [Pete Ricketts]
+    I: [Dan Osborn]
+    independent_counts_as: D
+
+  senate-2026-NH:
+    D: [Chris Pappas]
+    R: [John Sununu, Scott Brown]
+
+  senate-2026-NC:
+    D: [Roy Cooper]
+    R: [Michael Whatley, Lara Trump, Thom Tillis]
+    other: [Shannon Bray, Michael Dublin, Don Brown]
+
+  senate-2026-OH:
+    D: [Sherrod Brown]
+    R: [Jon Husted]
+
+  senate-2026-RI:
+    D: [Jack Reed]
+    R: [Raymond McKay]
+
+  senate-2026-TX:
+    D: [James Talarico]
+    R: [Ken Paxton, John Cornyn]
+    other: [Ted Brown]            # Libertarian
+
+  senate-2026-VA:
+    D: [Mark Warner]
+    R: [Bert Mizusawa]
+    other: [David Williams, Kim Farington, Mark Moran]
+
+  # --- Races with no polling in the feed yet -------------------------------
+  # Listed so the audit command has somewhere to put new names as polls appear.
+  senate-2026-CO: {D: [John Hickenlooper], R: []}
+  senate-2026-DE: {D: [Chris Coons], R: []}
+  senate-2026-IL: {D: [], R: []}
+  senate-2026-KY: {D: [], R: []}
+  senate-2026-LA: {D: [], R: []}
+  senate-2026-NJ: {D: [Cory Booker], R: []}
+  senate-2026-NM: {D: [Ben Ray Luján], R: []}
+  senate-2026-OK: {D: [], R: []}
+  senate-2026-OR: {D: [Jeff Merkley], R: []}
+  senate-2026-SC: {D: [], R: []}
+  senate-2026-SD: {D: [], R: [Mike Rounds]}
+  senate-2026-TN: {D: [], R: [Bill Hagerty]}
+  senate-2026-WV: {D: [], R: [Shelley Moore Capito]}
+  senate-2026-WY: {D: [], R: []}

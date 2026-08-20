@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# PyTensor / Numba compile caches
+.pytensor/
+__pycache__.numba/
+
+# Raw API snapshots are cached locally but not committed (they are re-fetchable
+# and licensed CC BY 4.0 from VoteHub; we commit only derived artefacts).
+data/raw/*.json
+data/raw/*.json.gz
+!data/raw/.gitkeep
+
+# Large posterior traces (regenerable; the derived JSON in site/data is what ships)
+outputs/traces/
+*.nc
+*.netcdf
+
+# Standalone bundle from `midterms bundle` — regenerated from site/ + site/data,
+# so committing it would just duplicate them in every diff.
+outputs/dashboard.html
+
+# NOTE: outputs/runs/** and site/data/*.json ARE committed on purpose. The daily
+# workflow diffs against the previous archived run to write its commentary, and
+# history.json is the trend line. Ignore them and every run thinks it is the first.
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

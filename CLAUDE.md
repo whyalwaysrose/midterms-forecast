@@ -151,6 +151,15 @@ establish and the numbers are in `docs/METHODOLOGY.md`.
 - **Presidential approval in the national environment** — implemented and works
   (correlation -0.54, correctly signed), but buys 6.6% tighter eta for a 35% ESS loss.
   Disabled by default; `scripts/ab_approval.py` reproduces it.
+- **Fundraising as a covariate** — measured against 171 historical Senate races
+  (`scripts/fit_fundraising.py`). Predicting polling error, the money effect is
+  entirely incumbency: t=+3.18 alone, t=+0.27 once incumbency is included, and the
+  fundamentals prior already has incumbency. Robust, because the lookahead below
+  would have helped it. Predicting the result beyond state and incumbency it looks
+  strong (t=+7.72) but FEC `weball` is end-of-cycle money, and a live forecast has
+  filings through June 30 — so that fit partly uses the outcome to predict the
+  outcome. Not rejected, **unmeasured**: doing it properly needs period-level data
+  from the FEC API, which needs a key.
 - **Seven-step map colour ramp** — adjacent pairs fell below the perceptual separation
   floor near the neutral midpoint. Five steps is what the colour space supports.
   `scripts/check_palette.py` re-measures this and runs in the suite.

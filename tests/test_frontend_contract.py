@@ -63,7 +63,7 @@ def test_charts_are_measured_only_while_visible():
     )
 
     drawer_reveal = JS.index("$('drawer').hidden = false")
-    drawer_chart = call_site(r"^\s+renderTrajectory\(\$\('drawer-chart'\)")
+    drawer_chart = call_site(r"^\s+renderCandidateChart\(\$\('drawer-chart'\)")
     assert drawer_reveal < drawer_chart, (
         "the drawer must be revealed before its trajectory chart is drawn"
     )

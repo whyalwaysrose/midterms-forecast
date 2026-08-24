@@ -4,16 +4,34 @@ Automatically generated after each model run. Newest entries first.
 
 ## 2026-08-24
 
-Democratic chances of Senate control are down 0.1 pts to 62.8% on 4 new polls. Projected seats 51.9 → 51.9 (+0.0).
+**The model changed in this run.** Democratic chances of Senate control are 65.4%, against 62.9% on 2026-08-20 — but the two runs were produced by different models, so the difference is not a change in the race.
 
-**Races that moved** (2 of 35):
+Movement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.
 
-  - **Minnesota** — Democratic win probability 83.4% → 82.5% (-0.8 pts); projected margin D+7.0 → D+6.5 (-0.5). Driven by 1 new poll:
-    - SurveyUSA (2026-08-15, n=661, LV): D+5.7
+**Races that moved** (23 of 35):
 
-  - **Kentucky** — Democratic win probability 3.7% → 4.2% (+0.5 pts); projected margin R+18.8 → R+18.4 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **Ohio** — Democratic win probability 65.8% → 70.1% (+4.3 pts); projected margin D+2.9 → D+3.2 (+0.3). No new polls in this race; this is the model revision.
 
-**New polling that did not move the needle.** Michigan (1), Georgia (1), Arkansas (1). New polls close to the existing estimate confirm it rather than change it.
+  - **Florida** — Democratic win probability 22.6% → 18.5% (-4.1 pts); projected margin R+5.4 → R+5.5 (-0.1). No new polls in this race; this is the model revision.
+
+  - **Nebraska** — Democratic win probability 62.9% → 66.4% (+3.5 pts); projected margin D+2.6 → D+3.1 (+0.5). No new polls in this race; this is the model revision.
+
+  - **Georgia** — Democratic win probability 87.4% → 90.6% (+3.2 pts); projected margin D+7.9 → D+8.0 (+0.1). Driven by 1 new poll:
+    - InsiderAdvantage (2026-08-16, n=800, LV): D+8.1
+
+  - **New Hampshire** — Democratic win probability 79.4% → 82.7% (+3.2 pts); projected margin D+5.8 → D+5.9 (+0.1). No new polls in this race; this is the model revision.
+
+  - **Louisiana** — Democratic win probability 16.1% → 19.1% (+3.0 pts); projected margin R+10.7 → R+8.9 (+1.7). No new polls in this race; this is the model revision.
+
+  - **Montana** — Democratic win probability 19.6% → 22.4% (+2.8 pts); projected margin R+9.2 → R+8.0 (+1.2). No new polls in this race; this is the model revision.
+
+  - **North Carolina** — Democratic win probability 92.4% → 95.0% (+2.5 pts); projected margin D+9.9 → D+9.9 (-0.1). No new polls in this race; this is the model revision.
+
+  - **South Carolina** — Democratic win probability 30.3% → 32.5% (+2.3 pts); projected margin R+5.6 → R+4.7 (+0.9). No new polls in this race; this is the model revision.
+
+  - **Texas** — Democratic win probability 59.6% → 61.1% (+1.4 pts); projected margin D+1.6 → D+1.6 (-0.0). No new polls in this race; this is the model revision.
+
+**New polling that did not move the needle.** Arkansas (1). New polls close to the existing estimate confirm it rather than change it.
 
 ---
 

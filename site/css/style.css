@@ -32,6 +32,13 @@
    * ordinary colour vision could not separate Lean from Likely. Five steps is
    * what the colour space actually supports here.
    *
+   * scripts/check_palette.py re-measures all of this against these values and
+   * runs in the test suite, so the finding is checkable rather than a claim in
+   * a comment. Point its ORDER at a seven-step ramp and it fails again.
+   *
+   * Because five buckets have to cover 80-100%, the top one is labelled
+   * "Strong", not "Safe" -- see the RATINGS comment in map.js.
+   *
    * Toss-up additionally carries a diagonal hatch, so it never depends on
    * colour alone -- it is the one category that sits between the two hues and
    * therefore the one most at risk of being misread. */
@@ -607,3 +614,61 @@ table.polls td.num { font-family: var(--mono); text-align: right; font-variant-n
 .primer-item p:last-child { margin-bottom: 0; }
 .primer-item strong { color: var(--text); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .primer-toggle { transition: none; } }
+
+/* ---------- candidate shares chart ---------- */
+.hover-dot.rep { stroke: var(--rep-line); }
+
+/* Individual polls behind the fitted line. They are deliberately faint: the
+   point is to show the line is answerable to data and how much it smooths,
+   not to invite reading any single dot. */
+.poll-dot { pointer-events: all; }
+@media (hover: hover) {
+  .poll-dot:hover { opacity: 0.95 !important; }
+}
+
+/* .tt-row's own `span:first-child { color: text-dim }` outranks a bare
+   .dem-text on specificity, so a candidate name in the left column would come
+   out grey. Name the column explicitly to win it back. */
+.chart-tip .tt-row span.dem-text { color: var(--dem); }
+.chart-tip .tt-row span.rep-text { color: var(--rep); }
+
+.candidate-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 2px 0 8px;
+  font-size: 0.82rem;
+}
+.candidate-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.candidate-legend i {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  flex: none;
+}
+
+/* ---------- who is on the ballot ---------- */
+.matchup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 1.02rem;
+}
+.matchup .vs {
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tt-matchup {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 6px 0 2px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.tt-vs { color: var(--text-faint); font-weight: 400; font-size: 0.78rem; }

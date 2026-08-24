@@ -4,7 +4,7 @@
    handful of static files that GitHub Pages can serve with no build step.
    ========================================================================= */
 
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 const NS = 'http://www.w3.org/2000/svg';
 
 const $ = (id) => document.getElementById(id);
@@ -12,7 +12,24 @@ const $ = (id) => document.getElementById(id);
 /* ---------------------------------------------------------------- format */
 
 const pct = (v) => `${(100 * v).toFixed(0)}%`;
-const pct1 = (v) => `${(100 * v).toFixed(1)}%`;
+/** A probability, to a tenth of a point, never rounded to 0% or 100%.
+ *
+ * The posterior assigns no race a probability of exactly zero or one, so
+ * printing "100.0%" reports a certainty the model does not hold -- it is the
+ * rounding, not the forecast, saying the race cannot be lost. Worse, it is the
+ * safest-looking races where an upset would matter most. ">99.9%" is both
+ * true and visibly a bound rather than a fact.
+ *
+ * The threshold is the display precision itself: anything that would round to
+ * a bare 0.0 or 100.0 is shown as a bound instead. */
+const pct1 = (v) => {
+  const p = 100 * v;
+  if (p >= 99.95) return '>99.9%';
+  // Zero included: these are Monte Carlo estimates, so 0 of 4000 draws means
+  // "below what 4000 draws can resolve", not "impossible".
+  if (p < 0.05) return '<0.1%';
+  return `${p.toFixed(1)}%`;
+};
 
 /** A margin as a party-leading label: 3.2 -> "D+3.2". */
 function margin(v) {
@@ -32,6 +49,19 @@ function fmtDate(iso) {
 function fmtDateShort(iso) {
   const d = new Date(iso + 'T00:00:00Z');
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+}
+
+/** Short date, with the year only when it is needed to disambiguate.
+ *
+ * The trajectory charts run from mid-2025 to election day, so their two axis
+ * endpoints read "Jul 15" and "Nov 3" — which any reader takes for the same
+ * year. Passing the chart's full span lets a date carry its year exactly when
+ * the span crosses one, and stay uncluttered when it does not.
+ */
+function fmtDateAxis(iso, spanIsos) {
+  const year = (v) => v.slice(0, 4);
+  const crossesYear = spanIsos.some((v) => year(v) !== year(spanIsos[0]));
+  return crossesYear ? `${fmtDateShort(iso)} '${iso.slice(2, 4)}` : fmtDateShort(iso);
 }
 
 /** Escape text before it goes anywhere near innerHTML. */
@@ -227,6 +257,18 @@ function openDrawer(raceId) {
 
   const notes = (race.notes ?? []).map((n) => `<div class="note">${esc(n)}</div>`).join('');
 
+  // Who is actually on the ballot. Names come from the most recent poll in the
+  // race, falling back to the nominee roster where nobody has polled it yet, so
+  // an uncontested-in-the-polls race still names its candidates.
+  const names = race.candidates ?? {};
+  const demName = names.dem || 'Democratic candidate';
+  const repName = names.rep || 'Republican candidate';
+  const matchup = `<p class="matchup">
+    <span class="dem-text"><strong>${esc(demName)}</strong> (D)</span>
+    <span class="vs">vs</span>
+    <span class="rep-text"><strong>${esc(repName)}</strong> (R)</span>
+  </p>`;
+
   const stats = `
   <div class="drawer-stats">
     <div class="dstat">
@@ -270,9 +312,19 @@ function openDrawer(raceId) {
        </table></div>`
     : '<p class="subtle" style="margin-top:20px">No qualifying general-election polls in this race.</p>';
 
+  // The candidate chart carries everything the margin chart did -- the margin
+  // and its interval are still in the tooltip -- plus the two shares and the
+  // polls behind them, so showing both would be the same story drawn twice.
+  const legend = `<div class="candidate-legend">
+    <span><i style="background:var(--dem)"></i>${esc(demName)}</span>
+    <span><i style="background:var(--rep)"></i>${esc(repName)}</span>
+    <span class="subtle">Dots are individual polls</span>
+  </div>`;
+
   $('drawer-body').innerHTML =
-    notes + stats +
-    '<h3 style="margin-top:20px">Estimated margin over time</h3>' +
+    notes + matchup + stats +
+    '<h3 style="margin-top:20px">Share of the two-party vote</h3>' +
+    legend +
     '<div id="drawer-chart" class="chart"></div>' +
     pollTable;
 
@@ -281,7 +333,7 @@ function openDrawer(raceId) {
   $('drawer').hidden = false;
   document.body.style.overflow = 'hidden';
 
-  renderTrajectory($('drawer-chart'), race.trajectory, { width: 540, height: 190 });
+  renderCandidateChart($('drawer-chart'), race, { width: 540, height: 210 });
 }
 
 function closeDrawer() {

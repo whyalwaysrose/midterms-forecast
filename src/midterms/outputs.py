@@ -35,7 +35,7 @@ from .model.simulate import SimulationResult, national_environment_summary
 
 log = logging.getLogger(__name__)
 
-SCHEMA_VERSION = 4
+SCHEMA_VERSION = 5
 
 
 def model_fingerprint() -> str:
@@ -114,6 +114,60 @@ def _trajectory(idata, race_index: int | None, grid_dates, thin: int = 1) -> lis
         }
         for i in range(0, len(grid_dates), thin)
     ]
+
+
+def _candidates(table: PollTable, race_id: str, roster: Roster) -> dict[str, str | None]:
+    """Who is actually running, per side.
+
+    Taken from the polls themselves where possible — the most recent name each
+    side has been polled under is the best available evidence of who the
+    nominee is, and it updates itself after a primary without anyone editing a
+    file. Races with no polling fall back to the roster, which is why the
+    roster lists nominees for unpolled races too.
+    """
+    polls = sorted(table.for_race(race_id), key=lambda p: p.field_date, reverse=True)
+
+    def most_recent(attribute: str) -> str | None:
+        for poll in polls:
+            name = getattr(poll, attribute)
+            # Generic placeholders ("Dem", "Rep") name no one.
+            if name and name.lower() not in {"dem", "rep", "democrat", "republican"}:
+                return name
+        return None
+
+    dem = most_recent("dem_candidate")
+    rep = most_recent("rep_candidate")
+
+    if dem is None or rep is None:
+        entry = roster.by_race.get(race_id, {})
+        listed: dict[str, list[str]] = {"D": [], "R": []}
+        for key, side in entry.items():
+            if side in listed:
+                listed[side].append(key)
+        # by_race stores case-folded keys, so recover the display spelling.
+        display = roster.display_names.get(race_id, {})
+
+        def sole(side: str) -> str | None:
+            """The one name on this side, or nothing.
+
+            The roster carries whole primary fields -- ten of the 2026 races
+            have several candidates on a side -- and it is not ordered by who
+            won. With more than one listed there is no evidence here about
+            which is the nominee, so name nobody; the page then says
+            "Democratic candidate", which is true, rather than a real person
+            who is not on the ballot.
+            """
+            if len(listed[side]) != 1:
+                return None
+            key = listed[side][0]
+            return display.get(key, key.title())
+
+        if dem is None:
+            dem = sole("D")
+        if rep is None:
+            rep = sole("R")
+
+    return {"dem": dem, "rep": rep}
 
 
 def _polls_for_display(table: PollTable, race_id: str, limit: int = 25) -> list[dict]:
@@ -196,6 +250,7 @@ class ForecastRun:
                     },
                     "fundamentals_prior_margin": _round(prior_margins[i], 2),
                     "tipping_point_prob": _round(tipping.get(race.id, 0.0)),
+                    "candidates": _candidates(self.table, race.id, self.roster),
                     "poll_count": int(poll_counts.get(race.id, 0)),
                     "latest_poll_date": latest.isoformat() if latest else None,
                     "trajectory": _trajectory(self.idata, i, grid_dates),

@@ -12,12 +12,22 @@
  * actually supports at this surface. The precise probability is always one
  * hover away, so nothing is lost but false precision.
  */
+/* Five buckets, because five is what the colour space supports here -- seven
+ * were measured and rejected (see the palette comment in style.css).
+ *
+ * The top bucket therefore spans 80% to 100%, and it is deliberately NOT
+ * called "Safe". A race the model gives the favourite an 80% chance of winning
+ * is one the underdog takes one time in five, and calling that safe is exactly
+ * the overclaim this project exists to avoid -- 2016 was lost on that word.
+ * "Strong" describes the size of the lead, which is true across the whole
+ * bucket, and makes no promise about the outcome. The probability is always
+ * printed next to the label, so the number, not the word, is the claim. */
 const RATINGS = [
-  { key: 'safe-r', label: 'Safe R',  max: 0.20 },
-  { key: 'lean-r', label: 'Lean R',  max: 0.40 },
-  { key: 'tossup', label: 'Toss-up', max: 0.60 },
-  { key: 'lean-d', label: 'Lean D',  max: 0.80 },
-  { key: 'safe-d', label: 'Safe D',  max: 1.01 },
+  { key: 'safe-r', label: 'Strong R', max: 0.20 },
+  { key: 'lean-r', label: 'Lean R',   max: 0.40 },
+  { key: 'tossup', label: 'Toss-up',  max: 0.60 },
+  { key: 'lean-d', label: 'Lean D',   max: 0.80 },
+  { key: 'safe-d', label: 'Strong D', max: 1.01 },
 ];
 
 function ratingFor(p) {
@@ -199,6 +209,14 @@ function renderMapLegend(forecast) {
   $('map-legend').innerHTML = items.join('');
 }
 
+/** Last word of a name, for tight spaces. Suffixes are not worth handling:
+ * "Jr." only appears attached to a surname we would keep anyway. */
+function surname(name) {
+  if (!name) return '';
+  const parts = String(name).trim().split(/\s+/);
+  return parts[parts.length - 1];
+}
+
 function mapTooltipHtml(race) {
   const rating = ratingFor(race.dem_win_prob);
   const leadsDem = race.dem_win_prob >= 0.5;
@@ -209,9 +227,21 @@ function mapTooltipHtml(race) {
     ? `${race.poll_count} poll${race.poll_count === 1 ? '' : 's'}`
     : 'No polls — carried by fundamentals';
 
+  // Names, where we have them. Kept to surnames in the tooltip -- it is a small
+  // hover panel and the state already says which race this is.
+  const names = race.candidates ?? {};
+  const matchup = (names.dem || names.rep)
+    ? `<div class="tt-matchup">
+         <span class="dem-text">${esc(surname(names.dem) || 'Democrat')}</span>
+         <span class="tt-vs">v</span>
+         <span class="rep-text">${esc(surname(names.rep) || 'Republican')}</span>
+       </div>`
+    : '';
+
   return `
     <div class="tt-name">${esc(race.name)}</div>
     <div class="tt-meta">${esc(meta)}</div>
+    ${matchup}
     <div class="tt-bar"><div style="width:${(100 * race.dem_win_prob).toFixed(1)}%"></div></div>
     <div class="tt-row"><span>${esc(rating.label)}</span>
       <span class="${leadsDem ? 'dem-text' : 'rep-text'}">${leadsDem ? 'D' : 'R'} ${pct1(shown)}</span></div>

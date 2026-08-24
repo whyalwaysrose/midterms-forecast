@@ -278,12 +278,13 @@ function renderHistoryChart(history) {
   marker.style.display = 'none';
   svg.appendChild(marker);
 
-  for (const iso of [runs[0].run_date, runs[runs.length - 1].run_date]) {
+  const runSpan = [runs[0].run_date, runs[runs.length - 1].run_date];
+  for (const iso of runSpan) {
     const t = svgEl('text', {
       x: x(iso), y: H - padB + 17, class: 'axis-label',
-      'text-anchor': iso === runs[0].run_date ? 'start' : 'end',
+      'text-anchor': iso === runSpan[0] ? 'start' : 'end',
     });
-    t.textContent = fmtDateShort(iso);
+    t.textContent = fmtDateAxis(iso, runSpan);
     svg.appendChild(t);
   }
 
@@ -387,12 +388,10 @@ function renderTrajectory(host, trajectory, opts = {}) {
   marker.style.display = 'none';
   svg.appendChild(marker);
 
-  for (const [iso, anchor] of [
-    [trajectory[0].date, 'start'],
-    [trajectory[trajectory.length - 1].date, 'end'],
-  ]) {
+  const endpoints = [trajectory[0].date, trajectory[trajectory.length - 1].date];
+  for (const [iso, anchor] of [[endpoints[0], 'start'], [endpoints[1], 'end']]) {
     const t = svgEl('text', { x: x(iso), y: H - 7, class: 'axis-label', 'text-anchor': anchor });
-    t.textContent = fmtDateShort(iso);
+    t.textContent = fmtDateAxis(iso, endpoints);
     svg.appendChild(t);
   }
 
@@ -435,6 +434,152 @@ function renderTrajectory(host, trajectory, opts = {}) {
     tip.hidden = true;
     crosshair.style.display = 'none';
     marker.style.display = 'none';
+    activeIndex = -1;
+  });
+}
+
+/* ----------------------------------------------- candidate shares over time */
+
+/** Both candidates' share of the two-party vote, with the polls behind it.
+ *
+ * The margin chart says the same thing mathematically, but "Ossoff 53, Collins
+ * 47" is how people actually think about a race, and where the two lines cross
+ * is instantly readable as the tie. Individual polls are drawn as dots so the
+ * reader can see what the line is fitted to — and how much it is smoothing.
+ *
+ * Shares are of the two-party vote, so the pair always sums to 100. Undecideds
+ * and minor candidates are excluded, which is what the model estimates.
+ */
+function renderCandidateChart(host, race, opts = {}) {
+  host.textContent = '';
+  const trajectory = race.trajectory ?? [];
+  if (!trajectory.length) return;
+
+  const W = chartWidth(host, opts.width ?? 560), H = opts.height ?? 210;
+  const padL = 40, padR = 12, padT = 12, padB = 28;
+  const svg = makeSvg(W, H);
+
+  // margin (D minus R, in points) -> Democratic share of the two-party vote
+  const demShare = (m) => 50 + m / 2;
+  const polls = race.polls ?? [];
+
+  const values = trajectory.flatMap((d) => [demShare(d.p05), demShare(d.p95)])
+    .concat(polls.flatMap((p) => [demShare(p.margin), 100 - demShare(p.margin)]))
+    .concat(trajectory.flatMap((d) => [100 - demShare(d.p05), 100 - demShare(d.p95)]));
+  const [lo, hi] = paddedDomain(values, { include: 50, padFraction: 0.08, minPad: 1.5 });
+
+  const t0 = Date.parse(trajectory[0].date);
+  const t1 = Date.parse(trajectory[trajectory.length - 1].date);
+  const span = Math.max(1, t1 - t0);
+  const x = (iso) => padL + ((Date.parse(iso) - t0) / span) * (W - padL - padR);
+  const y = (v) => padT + (1 - (v - lo) / (hi - lo)) * (H - padT - padB);
+
+  for (const tick of niceTicks(lo, hi, 4)) {
+    const gy = y(tick);
+    svg.appendChild(svgEl('line', {
+      x1: padL, x2: W - padR, y1: gy, y2: gy,
+      class: Math.abs(tick - 50) < 1e-9 ? 'threshold-line' : 'grid-line',
+    }));
+    const label = svgEl('text', { x: padL - 7, y: gy + 3, class: 'axis-label', 'text-anchor': 'end' });
+    label.textContent = `${tick.toFixed(0)}%`;
+    svg.appendChild(label);
+  }
+
+  // Uncertainty band on the Democratic line. The Republican band is its mirror,
+  // so drawing both would double the ink for no extra information.
+  const top = trajectory.map((d) => `${x(d.date)},${y(demShare(d.p95))}`);
+  const bottom = trajectory.slice().reverse().map((d) => `${x(d.date)},${y(demShare(d.p05))}`);
+  svg.appendChild(svgEl('polygon', {
+    points: top.concat(bottom).join(' '), fill: 'var(--dem-soft)', stroke: 'none',
+  }));
+
+  for (const [accessor, colour] of [
+    [(d) => demShare(d.p50), 'var(--dem)'],
+    [(d) => 100 - demShare(d.p50), 'var(--rep)'],
+  ]) {
+    svg.appendChild(svgEl('polyline', {
+      points: trajectory.map((d) => `${x(d.date)},${y(accessor(d))}`).join(' '),
+      fill: 'none', stroke: colour, 'stroke-width': 2, 'stroke-linejoin': 'round',
+    }));
+  }
+
+  // The polls themselves, so the line is visibly answerable to something.
+  for (const poll of polls) {
+    if (Date.parse(poll.date) < t0) continue;
+    for (const [value, colour] of [
+      [demShare(poll.margin), 'var(--dem)'],
+      [100 - demShare(poll.margin), 'var(--rep)'],
+    ]) {
+      const dot = svgEl('circle', {
+        cx: x(poll.date), cy: y(value), r: 2.6,
+        fill: colour, opacity: 0.5, class: 'poll-dot',
+      });
+      const title = svgEl('title');
+      title.textContent = `${poll.pollster} (${poll.date}): ${margin(poll.margin)}`;
+      dot.appendChild(title);
+      svg.appendChild(dot);
+    }
+  }
+
+  const crosshair = svgEl('line', { y1: padT, y2: H - padB, class: 'crosshair' });
+  crosshair.style.display = 'none';
+  svg.appendChild(crosshair);
+  const demDot = svgEl('circle', { r: 4.5, class: 'hover-dot' });
+  const repDot = svgEl('circle', { r: 4.5, class: 'hover-dot rep' });
+  demDot.style.display = repDot.style.display = 'none';
+  svg.appendChild(demDot);
+  svg.appendChild(repDot);
+
+  const endpoints = [trajectory[0].date, trajectory[trajectory.length - 1].date];
+  for (const [iso, anchor] of [[endpoints[0], 'start'], [endpoints[1], 'end']]) {
+    const t = svgEl('text', { x: x(iso), y: H - 7, class: 'axis-label', 'text-anchor': anchor });
+    t.textContent = fmtDateAxis(iso, endpoints);
+    svg.appendChild(t);
+  }
+
+  host.appendChild(svg);
+
+  const names = race.candidates ?? {};
+  const demName = names.dem || 'Democrat';
+  const repName = names.rep || 'Republican';
+  const tip = chartTip(host);
+  let activeIndex = -1;
+
+  svg.addEventListener('pointermove', (e) => {
+    const vx = toViewBoxX(svg, e.clientX);
+    let best = 0, bestDistance = Infinity;
+    trajectory.forEach((d, i) => {
+      const distance = Math.abs(x(d.date) - vx);
+      if (distance < bestDistance) { bestDistance = distance; best = i; }
+    });
+    if (activeIndex !== best) {
+      activeIndex = best;
+      const d = trajectory[best];
+      const dem = demShare(d.p50), rep = 100 - dem;
+      tip.innerHTML =
+        `<div class="tt-name">${esc(fmtDate(d.date))}</div>` +
+        `<div class="tt-row"><span class="dem-text">${esc(demName)}</span>` +
+        `<span class="dem-text">${dem.toFixed(1)}%</span></div>` +
+        `<div class="tt-row"><span class="rep-text">${esc(repName)}</span>` +
+        `<span class="rep-text">${rep.toFixed(1)}%</span></div>` +
+        `<div class="tt-row"><span>Margin</span>` +
+        `<span class="${marginClass(d.p50)}">${margin(d.p50)}</span></div>` +
+        `<div class="tt-row"><span>90% interval</span>` +
+        `<span>${margin(d.p05)} to ${margin(d.p95)}</span></div>`;
+      const cx = x(d.date);
+      crosshair.setAttribute('x1', cx);
+      crosshair.setAttribute('x2', cx);
+      demDot.setAttribute('cx', cx); demDot.setAttribute('cy', y(dem));
+      repDot.setAttribute('cx', cx); repDot.setAttribute('cy', y(rep));
+    }
+    crosshair.style.display = demDot.style.display = repDot.style.display = '';
+    tip.hidden = false;
+    placeTip(host, tip, e.clientX, e.clientY);
+  });
+
+  svg.addEventListener('pointerleave', () => {
+    tip.hidden = true;
+    crosshair.style.display = demDot.style.display = repDot.style.display = 'none';
     activeIndex = -1;
   });
 }

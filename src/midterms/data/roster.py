@@ -40,6 +40,9 @@ class Roster:
     generic_labels: Mapping[str, str]
     #: race ids where an independent is counted on a major-party side
     independent_notes: Mapping[str, str] = field(default_factory=dict)
+    #: race id -> {folded key: original spelling}, so the dashboard can show
+    #: "Jon Ossoff" rather than the lookup key "jon ossoff".
+    display_names: Mapping[str, Mapping[str, str]] = field(default_factory=dict)
 
     @staticmethod
     def _norm(name: str) -> str:
@@ -55,6 +58,7 @@ class Roster:
         generic = {cls._norm(k): v for k, v in (raw.get("generic_labels") or {}).items()}
 
         by_race: dict[str, dict[str, str]] = defaultdict(dict)
+        display: dict[str, dict[str, str]] = defaultdict(dict)
         independent_notes: dict[str, str] = {}
 
         for race_id, entry in (raw.get("races") or {}).items():
@@ -64,10 +68,12 @@ class Roster:
             for side_key, side in (("D", SIDE_D), ("R", SIDE_R), ("other", SIDE_OTHER)):
                 for name in entry.get(side_key) or []:
                     by_race[race_id][cls._norm(name)] = side
+                    display[race_id][cls._norm(name)] = name
 
             for name in entry.get("I") or []:
                 if independent_side in (SIDE_D, SIDE_R):
                     by_race[race_id][cls._norm(name)] = independent_side
+                    display[race_id][cls._norm(name)] = name
                     independent_notes[race_id] = (
                         f"{name} is an independent, counted on the "
                         f"{'Democratic' if independent_side == SIDE_D else 'Republican'} "
@@ -81,6 +87,7 @@ class Roster:
             aliases=aliases,
             generic_labels=generic,
             independent_notes=independent_notes,
+            display_names={k: dict(v) for k, v in display.items()},
         )
 
     def resolve(self, race_id: str, choice: str) -> str:

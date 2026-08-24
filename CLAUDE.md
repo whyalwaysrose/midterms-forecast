@@ -111,6 +111,17 @@ results would look exactly as authoritative as the Senate one while being mostly
 prior, and would be most wrong in open seats — the competitive ones. The
 dashboard's credibility rests on its numbers meaning what they appear to mean.
 
+## Uncertainty is split, not stacked
+
+`election_day_error` is fitted at **0-14 days out**, where the polling miss is almost
+entirely systematic. The 45-120 day figure is larger because it also contains the
+opinion change between poll and election — and the model already represents that, by
+random-walking to election day. Using the far figure would count drift twice.
+
+`scripts/measure_drift.py` is what establishes that the walk really does carry it
+(model 2.5 pts against an empirical 3.9 over the same horizon). If either half is
+re-fitted, re-run it: the two numbers are only correct together.
+
 ## Measured, then rejected
 
 Keep these decisions unless new evidence overturns them; each cost real time to
@@ -123,6 +134,14 @@ establish and the numbers are in `docs/METHODOLOGY.md`.
   Disabled by default; `scripts/ab_approval.py` reproduces it.
 - **Seven-step map colour ramp** — adjacent pairs fell below the perceptual separation
   floor near the neutral midpoint. Five steps is what the colour space supports.
+  `scripts/check_palette.py` re-measures this and runs in the suite.
+- **Low `min_ess_bulk` is not a convergence problem here** — it is always `eta_start`,
+  the national environment 16 months before the election, which nothing constrains and
+  the forecast does not depend on. Election-day `theta`, which it does depend on, runs
+  ESS 4400+. Check the parameter before chasing the number.
+- **Naming a candidate from the roster when the primary was contested** — the roster
+  carries whole primary fields for ten 2026 races and is not ordered by winner, so the
+  first entry is a guess. Unpolled races with a contested field are left unnamed.
 
 ## Known rough edges
 

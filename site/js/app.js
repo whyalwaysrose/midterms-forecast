@@ -363,6 +363,40 @@ function renderMethodology(forecast) {
   }
 }
 
+/** Remember whether the reader collapsed the primer.
+ *
+ * It is written for a first-time visitor, and this page is meant to be checked
+ * repeatedly. Someone coming back daily should not have to scroll past the
+ * explanation of what the Senate is every time — but a newcomer should not have
+ * to find it either, so it starts open and stays however they last left it.
+ */
+function attachPrimer() {
+  const primer = $('primer');
+  if (!primer) return;
+  const KEY = 'primer-collapsed';
+
+  let stored = null;
+  try {
+    stored = localStorage.getItem(KEY);
+  } catch { /* private browsing blocks storage; fall through to the default */ }
+
+  if (stored === '1') {
+    primer.open = false;
+  } else if (stored === null && window.innerWidth <= 640) {
+    // No stated preference, and a narrow screen. Open, the primer runs past a
+    // full phone screen and pushes the forecast itself out of reach — so it
+    // starts collapsed here, with the summary line still visible and inviting.
+    // An explicit choice always wins over this default.
+    primer.open = false;
+  }
+
+  primer.addEventListener('toggle', () => {
+    try {
+      localStorage.setItem(KEY, primer.open ? '0' : '1');
+    } catch { /* nothing to do; the preference simply will not persist */ }
+  });
+}
+
 function attachMethodTabs() {
   const nav = $('method-nav');
   if (!nav) return;
@@ -502,6 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  attachPrimer();
   attachMethodTabs();
 
   $('drawer-close').addEventListener('click', closeDrawer);

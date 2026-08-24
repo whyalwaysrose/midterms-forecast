@@ -233,3 +233,54 @@ def test_strip_handles_protocol_relative_and_https_sources():
         stripped = strip_external_scripts(html)
         assert "example.test" not in stripped
         assert stripped.count("keep") == 2
+
+
+# --------------------------------------------------------------------- primer
+
+
+def test_primer_exists_and_starts_open():
+    """A first-time reader should not have to go looking for the explanation."""
+    assert 'id="primer"' in HTML
+    assert re.search(r'<details[^>]*id="primer"[^>]*\bopen\b', HTML)
+
+
+def test_primer_answers_the_questions_a_newcomer_asks():
+    """The four gaps a reader who does not follow US politics actually has.
+
+    Checks the load-bearing facts and section headings rather than exact
+    sentences — prose gets reworded, and a test that breaks on an edit is a
+    test that will be deleted rather than fixed.
+    """
+    primer = HTML[HTML.index('id="primer"'):HTML.index("HEADLINE + MAP")]
+
+    for heading in ("The Senate", "Why most states are grey",
+                    "What winning means", "Why midterms are different"):
+        assert heading in primer, f"primer is missing the section: {heading!r}"
+
+    # The numbers that carry the explanation. These are facts, not phrasing.
+    for number in ("51", "50", "53", "34", "35", "33", "60"):
+        assert number in primer, f"primer should mention {number}"
+
+    for concept in ("filibuster", "Vice President", "midterm", "Florida", "Ohio"):
+        assert concept in primer, f"primer should explain: {concept!r}"
+
+
+def test_primer_collapse_state_is_remembered():
+    """This page is meant to be revisited; the primer is not."""
+    assert "primer-collapsed" in JS
+    assert "attachPrimer()" in JS
+
+
+def test_primer_storage_access_is_guarded():
+    """localStorage throws outright in some private-browsing modes."""
+    body = _js_function_body(JS, "attachPrimer")
+    assert body.count("try {") >= 2, "each localStorage access needs its own guard"
+
+
+def test_primer_starts_collapsed_on_phones():
+    """Open, it runs past a full phone screen and buries the forecast."""
+    body = _js_function_body(JS, "attachPrimer")
+    assert "window.innerWidth <= 640" in body
+    assert "stored === null" in body, (
+        "the width default must not override a preference the reader has stated"
+    )

@@ -108,7 +108,22 @@ race:
   elasticity_mean: 1.0
   elasticity_sd: 0.25          # partial pooling around 1
   elasticity_lower: 0.2        # keep sign-identified and away from 0
-  rw_sd_per_day_prior: 0.005   # ~0.096 logit (~4.8 pts margin) per year
+  # FITTED. `midterms calibrate` separates genuine opinion movement from
+  # systematic polling error by comparing poll accuracy at different horizons:
+  # error against the final result falls from 6.45 points at 45-120 days out to
+  # 5.12 at 0-14 days. What shrinks is drift; what remains is the systematic
+  # miss. That works out at 0.009 logit per day.
+  #
+  # This was 0.005, and the walk it produced drifted only 1.85 points over 70
+  # days against 3.9 historically — far too rigid. The election-day error was
+  # silently covering the difference, which meant the forecast would have been
+  # just as uncertain three days out as three months out.
+  #
+  # Given as the MEDIAN of a lognormal rather than the scale of a half-normal.
+  # A half-normal has its mode at zero and lets a quiet couple of months talk
+  # the model into believing races no longer move, which is exactly what
+  # happened. History says they move; the data can revise that, not ignore it.
+  rw_sd_per_day_prior: 0.009
   # Movement is CORRELATED across similar races, not independent.
   #
   # Treating each race's drift as i.i.d. says that Michigan moving three points
@@ -158,9 +173,22 @@ polls:
   # still. Erring high here costs a little sharpness; erring low would make
   # every individual poll too influential.
   design_effect: 1.18
-  # Extra poll-level noise beyond sampling error ("pollster-induced error"):
-  # house effects and mode explain some of it, this absorbs the rest.
-  excess_sd_prior: 0.05
+  # Poll noise that a bigger sample does not buy away.
+  #
+  # FITTED, and it corrects a real defect. Sampling theory says poll error
+  # shrinks as 1/sqrt(n). Measured on 3,056 historical polls, within-race
+  # scatter scales as n^-0.18, nowhere near n^-0.5: house effects, mode,
+  # likely-voter modelling and question wording contribute error that is the
+  # same size whatever the sample. Roughly 2.2 points of it, near-constant in n.
+  #
+  # Weighting purely by 1/n therefore treated a 2,000-person poll as about 1.6x
+  # more precise than history says it is. This term is what stops that.
+  #
+  # Lognormal median, not a half-normal scale. Under a half-normal the
+  # posterior collapsed to 0.13 points — the house effects and the Student-t
+  # tails could absorb the scatter, so nothing held this term up, and large
+  # polls kept their inflated weight.
+  excess_sd_prior: 0.0435
   # Pollster house effects, hierarchical and SUM-TO-ZERO constrained. Without
   # the constraint the house effects and the latent state are not jointly
   # identified (you can add a constant to every house effect and subtract it
@@ -215,8 +243,20 @@ election_day_error:
   # together and so fattens the tails of the seat distribution; state error
   # partly cancels across the map. Getting the mix wrong changes the shape of
   # the chamber forecast without changing any single race's win probability.
-  national_sd: 0.060    # 3.0 points of margin
-  state_sd: 0.114       # 5.7 points of margin
+  # Fitted at 0-14 days before the election, NOT at the forecast horizon.
+  #
+  # This is the systematic miss the polls were always going to make, with drift
+  # stripped out — drift now lives in the random walk, where it belongs and
+  # where it grows with the time remaining. Fitting these at 45-120 days folded
+  # roughly 3.9 points of drift in here, which made the total about right today
+  # while guaranteeing it stayed just as wide on the eve of the election.
+  #
+  # Note the national component barely moves with horizon (3.27 at 0-14 days,
+  # 2.99 at 45-120) while the state component grows from 3.94 to 5.71. That is
+  # the signature of the split: national error is systematic, state-level error
+  # is mostly races actually moving.
+  national_sd: 0.065    # 3.3 points of margin
+  state_sd: 0.079       # 3.9 points of margin
   # Correlation kernel: corr(r, r') = (1 - nugget) * exp(-d(r,r') / length_scale)
   # with d the Euclidean distance in standardised covariate space
   # (2024 lean, 2020 lean, region indicator).

@@ -22,6 +22,18 @@ def components():
 
 
 @pytest.fixture(scope="module")
+def near_components():
+    """Error close to election day -- almost entirely systematic.
+
+    This is the window the config is fitted to. Further out, the same statistic
+    also contains however much opinion moved between the poll and the result,
+    and the model represents that separately with its random walk. See
+    ``test_config_matches_the_near_election_scales``.
+    """
+    return C.estimate_error_components(days_window=(0, 14))
+
+
+@pytest.fixture(scope="module")
 def race_table():
     return BH.build_race_table()
 
@@ -89,18 +101,34 @@ def test_logit_conversion_round_trips(components):
     assert 0.0 < as_logit["state_sd"] < 0.5
 
 
-def test_config_matches_the_fitted_scales(components):
-    """The committed config must be the fitted one, not a stale hand-set value."""
+def test_config_matches_the_near_election_scales(near_components):
+    """The committed config must be the fitted one, not a stale hand-set value.
+
+    Fitted at 0-14 days, not the default 45-120. The far window's error is the
+    systematic miss *plus* the drift between poll and election; the model walks
+    to election day, so it already carries the drift. Using the far figure here
+    would add drift a second time. ``scripts/measure_drift.py`` is what
+    established that the walk really does cover it.
+    """
     from midterms.config import ModelConfig
 
     cfg = ModelConfig.load()
     for name in ("national_sd", "state_sd"):
         configured = getattr(cfg.election_day_error, name) * C.POINTS_PER_LOGIT
-        fitted = getattr(components, name)
+        fitted = getattr(near_components, name)
         assert configured == pytest.approx(fitted, abs=0.25), (
             f"{name} in config/model.yaml is {configured:.2f} pts but history "
-            f"fits {fitted:.2f}; re-run `midterms calibrate`"
+            f"fits {fitted:.2f}; re-run `midterms calibrate --days-window 0 14`"
         )
+
+
+def test_error_further_out_is_larger_than_near_election(components, near_components):
+    """The split the config depends on: distant polls miss by more than late ones.
+
+    If this ever stopped holding, the drift/systematic decomposition would be
+    incoherent and the near-election scales would be the wrong choice.
+    """
+    assert components.total_race_sd > near_components.total_race_sd
 
 
 # ---------------------------------------------------------------- backtesting

@@ -165,7 +165,14 @@ def build_model(data: ModelData, cfg: ModelConfig) -> pm.Model:
         # Race-specific drift: a random walk pinned to zero at the grid start,
         # so it captures *movement* while alpha captures *level*.
         # ------------------------------------------------------------------
-        sigma_eps = pm.HalfNormal("sigma_eps", sigma=race_step_scale)
+        # Lognormal, not half-normal. A half-normal peaks at zero, so a quiet
+        # stretch of polling talks the model into believing races have stopped
+        # moving — which is what produced a walk drifting 1.85 points over 70
+        # days against 3.9 historically. A lognormal centred on the historical
+        # rate lets the data revise that belief without being able to erase it.
+        sigma_eps = pm.LogNormal(
+            "sigma_eps", mu=np.log(race_step_scale), sigma=0.35
+        )
         eps_innovations = pm.Normal(
             "eps_innovations", 0.0, 1.0, dims=("race", "grid_step")
         )
@@ -229,7 +236,15 @@ def build_model(data: ModelData, cfg: ModelConfig) -> pm.Model:
             "partisan_effect", sigma=cfg.polls.partisan_effect_prior
         )
 
-        sigma_excess = pm.HalfNormal("sigma_excess", sigma=cfg.polls.excess_sd_prior)
+        # Also lognormal, and for the same reason. Under a half-normal this
+        # collapsed to 0.13 points of margin, because the house effects and the
+        # Student-t tails could absorb the scatter between polls. That left the
+        # model weighting purely by 1/n, treating a 2,000-person poll as roughly
+        # 1.6x more precise than history says it is. Measured non-sampling noise
+        # is about 2.2 points and barely varies with sample size.
+        sigma_excess = pm.LogNormal(
+            "sigma_excess", mu=np.log(cfg.polls.excess_sd_prior), sigma=0.30
+        )
 
         # Latent value each poll is measuring. Race polls come first in the
         # observation ordering, then national generic-ballot polls.

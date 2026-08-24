@@ -226,6 +226,146 @@ def estimate_error_components(
     return components
 
 
+@dataclass(frozen=True)
+class DriftRate:
+    """How fast a race's standing moves, per day, in logit units."""
+
+    per_day_logit: float
+    near_window: tuple[int, int]
+    far_window: tuple[int, int]
+    near_sd_pts: float
+    far_sd_pts: float
+    implied_drift_pts: float
+    days_between: float
+
+    def report(self) -> str:
+        return "\n".join([
+            f"  error {self.near_window[0]}-{self.near_window[1]} days out : "
+            f"{self.near_sd_pts:5.2f} pts  (mostly systematic)",
+            f"  error {self.far_window[0]}-{self.far_window[1]} days out: "
+            f"{self.far_sd_pts:5.2f} pts",
+            f"  => drift accumulated over ~{self.days_between:.0f} days: "
+            f"{self.implied_drift_pts:5.2f} pts",
+            f"  => per-day drift SD: {self.per_day_logit:.5f} logit "
+            f"({self.per_day_logit * POINTS_PER_LOGIT:.3f} pts)",
+        ])
+
+
+def estimate_drift_rate(
+    near_window: tuple[int, int] = (0, 14),
+    far_window: tuple[int, int] = (45, 120),
+    min_cycle: int = 2010,
+) -> DriftRate:
+    """Separate genuine opinion movement from systematic polling error.
+
+    Poll error against the eventual result shrinks as an election approaches.
+    The part that shrinks is *drift* — the race actually moving. The part that
+    remains is the systematic miss the polls were always going to make.
+
+    Splitting them matters because the model represents them in different
+    places: drift belongs to the random walk, which grows with the time left,
+    while the systematic component is added at simulation time and does not
+    shrink at all. Folding drift into the second term makes a forecast issued
+    three days out exactly as uncertain as one issued three months out, which
+    is plainly wrong.
+    """
+    near = estimate_error_components(near_window, min_cycle)
+    far = estimate_error_components(far_window, min_cycle)
+
+    drift_pts = float(np.sqrt(max(far.total_race_sd**2 - near.total_race_sd**2, 0.0)))
+    # Midpoint-to-midpoint, which is where each window's error is centred.
+    days = (sum(far_window) / 2.0) - (sum(near_window) / 2.0)
+    per_day = (drift_pts / POINTS_PER_LOGIT) / np.sqrt(max(days, 1.0))
+
+    return DriftRate(
+        per_day_logit=float(per_day),
+        near_window=near_window,
+        far_window=far_window,
+        near_sd_pts=near.total_race_sd,
+        far_sd_pts=far.total_race_sd,
+        implied_drift_pts=drift_pts,
+        days_between=float(days),
+    )
+
+
+@dataclass(frozen=True)
+class ExcessNoise:
+    """Poll-to-poll scatter that sampling error does not explain."""
+
+    excess_sd_logit: float
+    excess_sd_pts: float
+    size_exponent: float
+    n_polls: int
+    n_races: int
+
+    def report(self) -> str:
+        return "\n".join([
+            f"  fitted on {self.n_polls:,} polls across {self.n_races} races",
+            f"  scatter scales with sample size as n^{self.size_exponent:+.3f} "
+            f"(pure sampling theory: -0.500)",
+            f"  => non-sampling noise, near-constant in n: "
+            f"{self.excess_sd_pts:.2f} pts ({self.excess_sd_logit:.4f} logit)",
+        ])
+
+
+def estimate_excess_noise(
+    days_window: tuple[int, int] = (0, 60),
+    min_cycle: int = 2010,
+    min_polls_per_race: int = 5,
+) -> ExcessNoise:
+    """Measure the poll noise that a bigger sample does not buy away.
+
+    Sampling theory says a poll's error shrinks as 1/sqrt(n). Real polls do not
+    behave that way: house effects, mode, likely-voter modelling and question
+    wording contribute error that is the same size whatever the sample. Fitting
+    the exponent on within-race scatter gives roughly -0.18 rather than -0.5.
+
+    The practical consequence is that a model weighting purely by 1/n treats a
+    2,000-person poll as far more informative than it is. This term is what
+    stops that.
+    """
+    sen = senate_polls(load_history(), days_window, min_cycle).copy()
+    sen = sen.dropna(subset=["samplesize"])
+    sen = sen[sen["samplesize"].between(200, 5000)]
+
+    grouped = sen.groupby(["cycle", "race_id"])["margin_poll"]
+    sen["race_mean"] = grouped.transform("mean")
+    sen["race_n"] = grouped.transform("size")
+    sen = sen[sen["race_n"] >= min_polls_per_race]
+    # A poll contributes to its own race mean, which shrinks its deviation.
+    sen["deviation"] = (sen["margin_poll"] - sen["race_mean"]) * np.sqrt(
+        sen["race_n"] / (sen["race_n"] - 1)
+    )
+
+    bins = [(200, 500), (500, 700), (700, 900), (900, 1400), (1400, 5000)]
+    sizes, spreads, weights, excesses = [], [], [], []
+    for low, high in bins:
+        band = sen[sen["samplesize"].between(low, high)]
+        if len(band) < 25:
+            continue
+        observed = float(band["deviation"].std(ddof=1))
+        median_n = float(band["samplesize"].median())
+        # Binomial SD of a margin at p = 0.5 is 2 * 100 * sqrt(0.25 / n).
+        binomial = 200.0 * np.sqrt(0.25 / median_n)
+        sizes.append(median_n)
+        spreads.append(observed)
+        weights.append(np.sqrt(len(band)))
+        excesses.append(np.sqrt(max(observed**2 - binomial**2, 0.0)))
+
+    exponent = float(
+        np.polyfit(np.log(sizes), np.log(spreads), 1, w=weights)[0]
+    ) if len(sizes) >= 2 else float("nan")
+    excess_pts = float(np.median(excesses)) if excesses else 0.0
+
+    return ExcessNoise(
+        excess_sd_logit=excess_pts / POINTS_PER_LOGIT,
+        excess_sd_pts=excess_pts,
+        size_exponent=exponent,
+        n_polls=len(sen),
+        n_races=int(sen.groupby(["cycle", "race_id"]).ngroups),
+    )
+
+
 def compare_to_config(components: ErrorComponents) -> str:
     """Fitted scales against what config/model.yaml currently assumes."""
     from .config import ModelConfig

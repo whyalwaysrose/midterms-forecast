@@ -59,9 +59,17 @@ def model_fingerprint() -> str:
         paths.REPO_ROOT / "src" / "midterms" / "fundamentals.py",
     ):
         try:
-            digest.update(path.read_bytes())
+            content = path.read_bytes()
         except OSError:  # pragma: no cover - only if the tree is incomplete
             digest.update(b"<missing>")
+            continue
+        # Normalise line endings before hashing. Git checks the same files out
+        # with CRLF on Windows and LF on Linux, so the raw bytes differ between
+        # a local run and CI even though the model is byte-identical in the
+        # repository. That produced exactly the false alarm this fingerprint
+        # exists to prevent: the first CI run announced "the model changed in
+        # this run" when nothing had changed but the checkout.
+        digest.update(content.replace(b"\r\n", b"\n"))
     return digest.hexdigest()[:12]
 
 #: Quantiles reported for every margin, in a fixed order.

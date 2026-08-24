@@ -297,3 +297,44 @@ def test_fingerprint_changes_when_the_config_changes(tmp_path, monkeypatch):
     finally:
         paths.MODEL_CONFIG.write_bytes(original)
     assert outputs.model_fingerprint() == before
+
+
+def test_fingerprint_ignores_line_endings(tmp_path, monkeypatch):
+    """Regression: CI announced a model change that never happened.
+
+    Git checks the same files out with CRLF on Windows and LF on Linux, so
+    hashing raw bytes made a local run and a CI run disagree about a model that
+    was byte-identical in the repository. The first real CI run duly reported
+    "the model changed in this run" when nothing had.
+    """
+    from midterms import outputs, paths
+
+    original = paths.MODEL_CONFIG.read_bytes()
+    try:
+        as_lf = original.replace(b"\r\n", b"\n")
+        paths.MODEL_CONFIG.write_bytes(as_lf)
+        lf_fingerprint = outputs.model_fingerprint()
+
+        paths.MODEL_CONFIG.write_bytes(as_lf.replace(b"\n", b"\r\n"))
+        crlf_fingerprint = outputs.model_fingerprint()
+    finally:
+        paths.MODEL_CONFIG.write_bytes(original)
+
+    assert lf_fingerprint == crlf_fingerprint, (
+        "the fingerprint must not depend on how Git checked the file out, or "
+        "every run that crosses platforms reports a phantom model change"
+    )
+
+
+def test_fingerprint_still_reacts_to_real_changes():
+    """The newline fix must not make the fingerprint blind."""
+    from midterms import outputs, paths
+
+    before = outputs.model_fingerprint()
+    original = paths.MODEL_CONFIG.read_bytes()
+    try:
+        paths.MODEL_CONFIG.write_bytes(original + b"\n# a real change\n")
+        assert outputs.model_fingerprint() != before
+    finally:
+        paths.MODEL_CONFIG.write_bytes(original)
+    assert outputs.model_fingerprint() == before

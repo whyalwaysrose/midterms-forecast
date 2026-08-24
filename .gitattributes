@@ -1,0 +1,15 @@
+# Normalise line endings in the repository.
+#
+# Without this, Git checks the same file out as CRLF on Windows and LF on Linux.
+# That is usually harmless, but this project hashes several source files to
+# detect whether the model changed between runs, and the raw bytes differed
+# between a local run and CI even though the repository content was identical.
+# The hash normalises newlines itself, so this is belt-and-braces — but keeping
+# the working tree consistent removes the whole class of surprise.
+* text=auto eol=lf
+
+# Binary and compressed payloads must never be touched.
+*.json.gz binary
+*.csv.gz  binary
+*.png     binary
+*.ico     binary

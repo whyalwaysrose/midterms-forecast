@@ -14,11 +14,12 @@ from __future__ import annotations
 import logging
 from collections import Counter
 from collections.abc import Iterable, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date, timedelta
 from typing import Any
 
 from ..config import ModelConfig, RaceSet
+from .pollsters import unify as unify_pollsters
 from .roster import SIDE_D, SIDE_OTHER, SIDE_R, Roster
 from .votehub import is_primary_subject
 
@@ -298,6 +299,20 @@ def build_poll_table(
             if poll.field_date > as_of or poll.field_date < cutoff:
                 continue
             table.polls.append(poll)
+
+    # One pollster, one identity. Done here rather than per record because
+    # choosing between "GrayHouse" and "Grayhouse" needs to see the whole feed:
+    # the majority spelling wins. Without this the same pollster is two, and its
+    # house effect is estimated twice from half the evidence each time.
+    mapping = unify_pollsters(p.pollster for p in table.polls)
+    renamed = {raw: name for raw, name in mapping.items() if raw != name}
+    if renamed:
+        table.polls[:] = [
+            replace(p, pollster=mapping[p.pollster]) if p.pollster in renamed else p
+            for p in table.polls
+        ]
+        for raw, name in sorted(renamed.items()):
+            log.info("pollster: merged %r into %r", raw, name)
 
     table.polls.sort(key=lambda p: (p.race_id, p.field_date))
     log.info("poll table: %s", table.summary().replace("\n", "; "))

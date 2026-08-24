@@ -4,6 +4,7 @@
     midterms run --offline    same, but reuse the latest raw snapshot
     midterms fetch            fetch and snapshot polls only
     midterms audit-roster     report candidate names the roster cannot classify
+    midterms audit-pollsters  report pollster names that look like duplicates
     midterms backtest         calibration check against held-out polls
 
 ``run`` is what CI invokes daily.
@@ -15,6 +16,7 @@ import argparse
 import logging
 import os
 import sys
+from collections import Counter
 from datetime import date
 
 # PyTensor prints a loud warning when no C++ compiler is present. We sample via
@@ -102,6 +104,51 @@ def cmd_audit_roster(args: argparse.Namespace) -> int:
     print(
         "\nAdd each to config/candidates_senate_2026.yaml under the correct party, "
         "or under `other` for minor-party candidates."
+    )
+    return 1
+
+
+def cmd_audit_pollsters(args: argparse.Namespace) -> int:
+    """Propose pollster names that look like one firm filing two ways.
+
+    Case and punctuation variants merge on their own. Anything beyond that is a
+    judgement -- "Marist University" and "Marist College" are the same institute,
+    but a rule general enough to know that would also merge firms that merely
+    share a word. So this proposes and a person decides, exactly as
+    ``audit-roster`` does for candidates.
+    """
+    from .config import load_all
+    from .data.polls import build_poll_table
+    from .data.pollsters import ALIASES, find_probable_duplicates
+    from .data.roster import Roster
+    from .data.votehub import VoteHubClient, latest_snapshot, load_snapshot
+
+    races, cfg = load_all()
+    snapshot = latest_snapshot()
+    if snapshot is None or not args.offline:
+        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot", "approval"])
+    else:
+        raw = load_snapshot(snapshot)
+
+    table = build_poll_table(raw, races, cfg, Roster.load())
+    counts = Counter(p.pollster for p in table.polls)
+    proposals = find_probable_duplicates(counts)
+
+    print(f"{len(counts)} distinct pollsters after merging; "
+          f"{len(ALIASES)} aliases in force.")
+    if not proposals:
+        print("No further names look like duplicates.")
+        return 0
+
+    print("\nThese look like one pollster filing under several names:\n")
+    for variants in proposals.values():
+        for name in variants:
+            print(f"  {counts.get(name, 0):3d}  {name}")
+        print()
+    print(
+        "If they are the same firm, add an entry to ALIASES in "
+        "src/midterms/data/pollsters.py mapping each variant's normalised form "
+        "to the canonical name. If they are genuinely different, leave them."
     )
     return 1
 
@@ -303,6 +350,12 @@ def build_parser() -> argparse.ArgumentParser:
     audit = sub.add_parser("audit-roster", help="find candidate names the roster misses")
     audit.add_argument("--offline", action="store_true")
     audit.set_defaults(func=cmd_audit_roster)
+
+    audit_pollsters = sub.add_parser(
+        "audit-pollsters", help="find pollster names that look like duplicates"
+    )
+    audit_pollsters.add_argument("--offline", action="store_true")
+    audit_pollsters.set_defaults(func=cmd_audit_pollsters)
 
     hist = sub.add_parser(
         "backtest-history",

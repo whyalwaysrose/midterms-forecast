@@ -82,6 +82,35 @@ The model is chamber-agnostic; races come from config. What is actually needed:
 
 `src/midterms/model/` needs no changes for this.
 
+### The actual blocker is data, not code (investigated 2026-08-24)
+
+The mechanics above are the easy half. The House was scoped and deliberately
+deferred, because 398 of 435 districts would rest entirely on fundamentals and
+there is no cleanly-licensed source for the input they need.
+
+**Poll coverage.** VoteHub carries 77 general-election House polls across 37 of
+435 districts — AK-01 (8), ME-02 (6), AZ-06 (4), then a long tail of one or two.
+So ~91% of the chamber is fundamentals-only, which makes the district baseline
+the whole model rather than a prior the polls quickly overwhelm.
+
+**What is needed.** Presidential two-party lean per district, ideally 2024 and
+2020. Nothing else is missing.
+
+**What exists, and why each was rejected:**
+
+| Source | Has it? | License | Verdict |
+|---|---|---|---|
+| [ElectIndex](https://github.com/ElectIndex/26_us_forecast_data) `historical.csv` | Yes — pres 2016/2020/2024 by district, 486 rows | **none** (`license: null`) | Exactly right, cannot redistribute. **Re-check this first** — a license here turns a multi-hour job into an afternoon. |
+| [tonmcg](https://github.com/tonmcg/US_County_Level_Election_Results_08-24) | County-level presidential | MIT | Usable, but counties split across districts; needs Census crosswalk + population weighting, and error concentrates in the big urban districts that decide the chamber. |
+| Census county↔CD relationship files | Crosswalk | public domain | Pairs with the above. |
+| Wikipedia state presidential pages | By-district tables | CC BY-SA | Accurate (reported, not apportioned) but 50 pages of brittle parsing. |
+| [michaelminn.net](https://michaelminn.net/tutorials/data/) `2024-electoral-districts.csv` | 2024 **House** results by district | unstated | Not presidential. Embeds incumbency and candidate quality, and 38 of 441 districts were uncontested so have no two-party margin at all. Worst option. |
+
+**Why not just ship the weak version.** A House forecast built on prior House
+results would look exactly as authoritative as the Senate one while being mostly
+prior, and would be most wrong in open seats — the competitive ones. The
+dashboard's credibility rests on its numbers meaning what they appear to mean.
+
 ## Measured, then rejected
 
 Keep these decisions unless new evidence overturns them; each cost real time to

@@ -32,7 +32,7 @@ def _ratings() -> list[tuple[str, str, float]]:
         r"key:\s*'([^']+)',\s*label:\s*'([^']+)',\s*max:\s*([\d.]+)", block.group(1)
     )
     assert found, "could not parse RATINGS"
-    return [(k, l, float(m)) for k, l, m in found]
+    return [(key, label, float(cut)) for key, label, cut in found]
 
 
 def test_no_bucket_is_called_safe():
@@ -65,7 +65,7 @@ def test_the_scale_is_symmetric_about_a_coin_flip():
     ratings = _ratings()
     assert len(ratings) % 2 == 1, "an even count has no middle bucket"
     cuts = [m for _, _, m in ratings][:-1]
-    for low, high in zip(cuts, reversed(cuts)):
+    for low, high in zip(cuts, reversed(cuts), strict=True):
         assert low + high == 1.0, f"threshold {low} has no mirror ({high})"
 
 

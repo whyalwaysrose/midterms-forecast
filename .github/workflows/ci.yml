@@ -31,7 +31,9 @@ jobs:
           pip install pytest ruff
 
       - name: Lint
-        run: ruff check src tests
+        # scripts/ is linted too: check_palette.py runs inside the test suite,
+        # so a lint error there is a broken build, not a tidiness question.
+        run: ruff check src tests scripts
 
       - name: Tests
         env:

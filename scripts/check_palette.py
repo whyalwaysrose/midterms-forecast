@@ -101,7 +101,7 @@ def simulate(value: str, kind: str) -> str:
         c = 12.92 * c if c <= 0.0031308 else 1.055 * c ** (1 / 2.4) - 0.055
         return round(255 * c)
 
-    return "#{:02x}{:02x}{:02x}".format(encode(r), encode(g), encode(b))
+    return f"#{encode(r):02x}{encode(g):02x}{encode(b):02x}"
 
 
 def read_theme(css: str, selector: str) -> dict[str, str]:

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import math
 from collections import Counter
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import date, timedelta
 
@@ -44,6 +45,10 @@ class ModelData:
     # -- observations, race polls first then national polls -----------------
     y: np.ndarray                 # logit two-party Dem share
     sampling_var: np.ndarray      # delta-method sampling variance on logit scale
+    #: Per-poll multiplier on the non-sampling noise term, from the pollster's
+    #: track record. Centred so its poll-weighted mean is 1.0, and all-ones when
+    #: the feature is off, so the likelihood needs no branch.
+    quality_multiplier: np.ndarray
     pollster_idx: np.ndarray
     population_idx: np.ndarray
     partisan_sign: np.ndarray
@@ -146,6 +151,26 @@ def _sampling_variance(poll: NormalisedPoll, design_effect: float) -> float:
     return design_effect / (n_eff * p * (1.0 - p))
 
 
+def _quality_multipliers(
+    polls: Sequence[NormalisedPoll], cfg: ModelConfig
+) -> np.ndarray:
+    """Per-poll noise multipliers from the pollster ratings.
+
+    Returns all ones when the feature is off, so the likelihood is written once
+    and the switch costs nothing. Generic-ballot and approval polls are included
+    in the centring: a pollster's track record says the same thing about its
+    national polls as about its state ones.
+    """
+    if not cfg.polls.pollster_ratings.enabled:
+        return np.ones(len(polls), dtype=float)
+
+    from ..data.ratings import PollsterRatings
+
+    names = [p.pollster for p in polls]
+    multipliers = PollsterRatings.load().noise_multipliers(names)
+    return np.array([multipliers[n] for n in names], dtype=float)
+
+
 def build_model_data(
     table: PollTable,
     races: RaceSet,
@@ -192,6 +217,7 @@ def build_model_data(
     sampling_var = np.array(
         [_sampling_variance(p, cfg.polls.design_effect) for p in ordered], dtype=float
     )
+    quality_multiplier = _quality_multipliers(ordered, cfg)
     pollster_idx = np.array(
         [pollster_position[house_key[p.pollster]] for p in ordered], dtype=int
     )
@@ -238,6 +264,7 @@ def build_model_data(
         reference_population_index=reference_index,
         y=y,
         sampling_var=sampling_var,
+        quality_multiplier=quality_multiplier,
         pollster_idx=pollster_idx,
         population_idx=population_idx,
         partisan_sign=partisan_sign,

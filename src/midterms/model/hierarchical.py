@@ -20,7 +20,11 @@ and its own idiosyncratic drift::
 Polls observe that latent state through a biased, noisy instrument::
 
     logit(y_i) ~ StudentT(nu, theta_{r_i,t_i} + h_{p_i} + g_{pop_i} + rho*s_i,
-                          sqrt(v_i + sigma_excess^2))
+                          sqrt(v_i + (q_i * sigma_excess)^2))
+
+where ``q_i`` is the pollster's quality multiplier, centred so its poll-weighted
+mean is one, so it says who is more reliable without changing the overall
+amount of trust the calibration established.
 
 IDENTIFIABILITY
 ---------------
@@ -282,8 +286,14 @@ def build_model(data: ModelData, cfg: ModelConfig) -> pm.Model:
             + partisan_effect * pt.as_tensor_variable(data.partisan_sign)
         )
 
+        # Non-sampling noise, scaled per poll by its pollster's track record.
+        # Only this term is scaled: 538's plus-minus measures error BEYOND what
+        # sample size explains, which is precisely what sigma_excess represents.
+        # Scaling the sampling term too would penalise a bad pollster twice and
+        # break the one part of a poll's error that theory actually pins down.
+        excess = sigma_excess * pt.as_tensor_variable(data.quality_multiplier)
         sigma_obs = pt.sqrt(
-            pt.as_tensor_variable(data.sampling_var) + sigma_excess**2
+            pt.as_tensor_variable(data.sampling_var) + excess**2
         )
 
         # A Student-t's standard deviation is its scale times sqrt(nu/(nu-2)),

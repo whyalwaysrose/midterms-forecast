@@ -204,6 +204,37 @@ polls:
   # in turn makes every single poll far too influential. Pooling the long tail
   # sends their deviation where it belongs: into excess_sd.
   min_polls_for_house_effect: 3
+  # Pollster quality weighting, from FiveThirtyEight's pollster ratings.
+  #
+  # The model learns each pollster's BIAS from the data, as a house effect. It
+  # cannot learn each pollster's PRECISION, because most pollsters have far too
+  # few polls in one cycle to estimate a variance from. Without this, an F-rated
+  # shop and an A+ shop differ only by sample size — which is exactly the
+  # mistake that trusting sample size alone invites.
+  #
+  # The multiplier scales `excess_sd_prior` only, not the sampling term: 538's
+  # plus-minus already measures error BEYOND what sample size explains, which is
+  # the same quantity excess_sd_prior represents.
+  #
+  # Multipliers are centred so their poll-weighted mean is exactly 1.0.
+  # excess_sd_prior was fitted against all historical polls, so it already
+  # describes an average pollster; raw ratings average +0.49 points rather than
+  # zero, and applying them uncentred would inflate every poll's noise and
+  # quietly undo that calibration. Centred, the ratings redistribute trust
+  # without changing its total.
+  #
+  # Unrated pollsters get exactly 1.0. 538 stopped updating in 2025, so the 2026
+  # entrants cannot be rated. Treating them as average is generous — a pollster
+  # with no track record is riskier than one with a good one — but a penalty
+  # would be a number nothing measured. The count is logged each run.
+  pollster_ratings:
+    enabled: true
+    # Drop pollsters 538 refused to accept polls from. The list exists mainly
+    # for suspected data fabrication, and fabricated data cannot be down-weighted
+    # into usefulness — a plausible invented number looks precise, not noisy.
+    # Currently excludes Big Data Poll (generic-ballot and approval only; no
+    # Senate race polls). Set false to keep them, weighted by their rating.
+    exclude_banned: true
   # Population/screen adjustments, relative to likely voters (the reference).
   # Registered-voter and adult samples historically lean slightly more
   # Democratic than likely-voter samples.

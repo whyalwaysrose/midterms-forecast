@@ -245,7 +245,16 @@ class RaceStateConfig:
 
 
 @dataclass(frozen=True)
+class PollsterRatingsConfig:
+    """Whether and how to weight polls by their pollster's track record."""
+
+    enabled: bool
+    exclude_banned: bool
+
+
+@dataclass(frozen=True)
 class PollsConfig:
+    pollster_ratings: PollsterRatingsConfig
     student_t_nu: float
     match_student_t_variance: bool
     design_effect: float
@@ -311,7 +320,7 @@ class ModelConfig:
                 _require(raw, "national_environment", ctx)
             ),
             race=_race_state_config(_require(raw, "race", ctx)),
-            polls=PollsConfig(**_require(raw, "polls", ctx)),
+            polls=_polls_config(_require(raw, "polls", ctx)),
             election_day_error=ElectionDayErrorConfig(
                 national_sd=float(_require(ede, "national_sd", "election_day_error")),
                 state_sd=float(_require(ede, "state_sd", "election_day_error")),
@@ -324,6 +333,17 @@ class ModelConfig:
             grid_days=int(_require(raw, "time", ctx)["grid_days"]),
             raw=raw,
         )
+
+
+def _polls_config(raw: Mapping[str, Any]) -> PollsConfig:
+    """Build PollsConfig, splitting out the nested ratings block."""
+    values = dict(raw)
+    ratings = values.pop("pollster_ratings", None)
+    if ratings is None:
+        raise ConfigError("polls.pollster_ratings is missing from config/model.yaml")
+    return PollsConfig(
+        pollster_ratings=PollsterRatingsConfig(**ratings), **values
+    )
 
 
 def _national_env_config(raw: Mapping[str, Any]) -> NationalEnvConfig:

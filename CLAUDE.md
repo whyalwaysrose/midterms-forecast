@@ -122,6 +122,25 @@ random-walking to election day. Using the far figure would count drift twice.
 (model 2.5 pts against an empirical 3.9 over the same horizon). If either half is
 re-fitted, re-run it: the two numbers are only correct together.
 
+## Pollster quality multipliers are centred, and must stay that way
+
+`polls.pollster_ratings` scales each poll's non-sampling noise by its pollster's
+538 record. The multipliers are divided by their poll-weighted mean, so that mean
+is exactly 1.0.
+
+This is not cosmetic. `excess_sd_prior` was fitted against all historical polls,
+so it already describes an average pollster, while 538's predictive plus-minus
+averages **+0.49 points, not zero**. Applying the ratings raw would inflate every
+poll's noise and undo the calibration that sets the width of the seat
+distribution -- with nothing in the output looking wrong. Measured after the
+change: median per-race 90% interval moved 23.80 -> 23.87 pts, a ratio of 1.0025,
+with individual races moving both ways (0.973-1.033). That is the property to
+re-check if the weighting is ever touched.
+
+Only `sigma_excess` is scaled, never `sampling_var`. The plus-minus measures error
+*beyond* what sample size explains, so scaling the sampling term too would
+penalise a bad pollster twice.
+
 ## Measured, then rejected
 
 Keep these decisions unless new evidence overturns them; each cost real time to

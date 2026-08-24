@@ -314,6 +314,20 @@ def build_poll_table(
         for raw, name in sorted(renamed.items()):
             log.info("pollster: merged %r into %r", raw, name)
 
+    # Pollsters 538 refused to accept polls from, dropped here rather than
+    # down-weighted. The ban list is mostly about suspected fabrication, and a
+    # fabricated number cannot be weighted into usefulness: it looks precise,
+    # not noisy, so a variance adjustment would make the model MORE confident.
+    if cfg.polls.pollster_ratings.exclude_banned:
+        from .ratings import PollsterRatings
+
+        banned = PollsterRatings.load().banned_names({p.pollster for p in table.polls})
+        if banned:
+            dropped = Counter(p.pollster for p in table.polls if p.pollster in banned)
+            table.polls[:] = [p for p in table.polls if p.pollster not in banned]
+            for name, n in dropped.most_common():
+                table.rejections[f"pollster banned by 538: {name}"] += n
+
     table.polls.sort(key=lambda p: (p.race_id, p.field_date))
     log.info("poll table: %s", table.summary().replace("\n", "; "))
     return table

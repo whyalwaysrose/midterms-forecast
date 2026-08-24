@@ -22,8 +22,11 @@ on:
 
 permissions:
   contents: write      # commit regenerated forecast data
+  # Pages permissions are granted per-job on the `deploy` call below, which is
+  # where publishing actually happens; kept here too because a reusable
+  # workflow cannot be granted more than its caller holds.
   pages: write         # deploy the dashboard
-  id-token: write      # required by actions/deploy-pages
+  id-token: write      # required by the Pages deployment
 
 # Never let two runs fight over the same commit or deployment.
 concurrency:
@@ -86,31 +89,17 @@ jobs:
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
-      # Runs after the commit step on purpose: the stamped index.html is for
-      # the deploy artifact only and must not be committed, or the repo would
-      # carry a hash that goes stale the next time a script changes.
-      - name: Pin asset URLs to their contents
-        if: ${{ !inputs.skip_deploy }}
-        run: midterms -v stamp-assets
-
-      - name: Configure Pages
-        if: ${{ !inputs.skip_deploy }}
-        uses: actions/configure-pages@v5
-
-      - name: Upload dashboard artifact
-        if: ${{ !inputs.skip_deploy }}
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
+  # Publishing lives in deploy.yml, shared with CI, so the two paths cannot
+  # drift apart. It checks out the branch head rather than this run's SHA,
+  # which matters here: the commit step above has just added today's data, and
+  # a SHA-pinned checkout would publish the site as it was before that.
   deploy:
     needs: forecast
     if: ${{ !inputs.skip_deploy }}
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ github.ref_name }}

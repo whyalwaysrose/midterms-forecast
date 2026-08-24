@@ -1,0 +1,80 @@
+name: Deploy dashboard
+
+# The one place Pages deployment lives. Called by CI after tests pass, and by
+# the daily forecast after it commits new data.
+#
+# Splitting this out fixes a real gap: deployment used to happen only inside the
+# daily forecast, so a front-end fix pushed to main sat undeployed for up to 24
+# hours while the repository and the live site disagreed. It also stops the two
+# paths drifting apart, which they would if each kept its own copy of the steps.
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: "Branch or SHA to publish. Defaults to the calling ref."
+        type: string
+        required: false
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# GitHub allows one Pages deployment at a time, and the daily forecast can
+# overlap a push. One shared group across every caller means they queue instead
+# of colliding. Never cancel in progress: a half-finished deploy would leave the
+# live site on whichever version happened to win the race.
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Check out the branch head rather than the triggering SHA. The daily
+      # forecast commits regenerated data and then calls this, and a SHA-pinned
+      # checkout would publish the site as it was *before* that commit -- fresh
+      # code against yesterday's numbers.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref_name }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e . --no-deps
+
+      # Content-hashed asset URLs, so a visitor cannot pair a cached script with
+      # fresh data. Runs against the artifact only -- the committed index.html
+      # stays unstamped, or the repo would carry a hash that goes stale.
+      - name: Pin asset URLs to their contents
+        run: midterms -v stamp-assets
+
+      # Publishing a page whose scripts 404 is worse than not publishing. This
+      # is the last point where that is still catchable.
+      - name: Verify the artifact is self-consistent
+        run: python .github/scripts/verify_site.py site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

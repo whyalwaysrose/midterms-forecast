@@ -31,11 +31,28 @@ jobs:
           pip install pytest ruff
 
       - name: Lint
-        # scripts/ is linted too: check_palette.py runs inside the test suite,
-        # so a lint error there is a broken build, not a tidiness question.
-        run: ruff check src tests scripts
+        # scripts/ and .github/scripts/ are linted too: check_palette.py runs
+        # inside the test suite and verify_site.py gates every deployment, so a
+        # lint error in either is a broken build, not a tidiness question.
+        run: ruff check src tests scripts .github
 
       - name: Tests
         env:
           PYTENSOR_FLAGS: "cxx="
         run: pytest -q
+
+  # Publish on every push to main, not only after the daily model run. Before
+  # this, deployment lived solely in daily-forecast.yml, so a front-end fix
+  # merged at noon was not visible to anyone until the next 11:00 UTC cron --
+  # the repository and the live site disagreed for up to a day.
+  #
+  # Gated on `needs: test`, so a push that breaks the suite never reaches the
+  # page. Pull requests do not deploy.
+  deploy:
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml

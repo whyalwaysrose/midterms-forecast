@@ -475,13 +475,26 @@ function renderCandidateChart(host, race, opts = {}) {
   const y = (v) => padT + (1 - (v - lo) / (hi - lo)) * (H - padT - padB);
 
   for (const tick of niceTicks(lo, hi, 4)) {
+    if (Math.abs(tick - 50) < 1e-9) continue;  // 50 is drawn below, always
     const gy = y(tick);
-    svg.appendChild(svgEl('line', {
-      x1: padL, x2: W - padR, y1: gy, y2: gy,
-      class: Math.abs(tick - 50) < 1e-9 ? 'threshold-line' : 'grid-line',
-    }));
+    svg.appendChild(svgEl('line', { x1: padL, x2: W - padR, y1: gy, y2: gy, class: 'grid-line' }));
     const label = svgEl('text', { x: padL - 7, y: gy + 3, class: 'axis-label', 'text-anchor': 'end' });
     label.textContent = `${tick.toFixed(0)}%`;
+    svg.appendChild(label);
+  }
+
+  // The tie line is drawn on its own, never as a tick.
+  //
+  // It used to be whichever tick happened to equal 50, which meant it vanished
+  // whenever the ladder stepped past it: Wyoming and West Virginia span 20-80%,
+  // the step comes out as 20, the ticks are 40 and 60, and the one line that
+  // says who is ahead was missing from the two charts furthest from a tie.
+  // It is a reference value, so it does not get a vote from the tick generator.
+  if (lo < 50 && hi > 50) {
+    const gy = y(50);
+    svg.appendChild(svgEl('line', { x1: padL, x2: W - padR, y1: gy, y2: gy, class: 'threshold-line' }));
+    const label = svgEl('text', { x: padL - 7, y: gy + 3, class: 'axis-label', 'text-anchor': 'end' });
+    label.textContent = '50%';
     svg.appendChild(label);
   }
 

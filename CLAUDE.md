@@ -139,6 +139,9 @@ establish and the numbers are in `docs/METHODOLOGY.md`.
   the national environment 16 months before the election, which nothing constrains and
   the forecast does not depend on. Election-day `theta`, which it does depend on, runs
   ESS 4400+. Check the parameter before chasing the number.
+- **Drawing a reference line as a tick** — the candidate chart's 50% line was whichever
+  tick equalled 50, so it vanished on the 20-80% races where the ladder steps by 20.
+  Reference values are drawn from the domain; ticks are for ticks.
 - **Naming a candidate from the roster when the primary was contested** — the roster
   carries whole primary fields for ten 2026 races and is not ordered by winner, so the
   first entry is a guess. Unpolled races with a contested field are left unnamed.

@@ -181,3 +181,55 @@ def test_hover_dimming_is_gated_to_hover_devices():
 def test_chart_host_anchors_its_tooltip():
     """The tooltip is absolutely positioned inside the chart host."""
     assert re.search(r"\.chart\s*\{[^}]*position:\s*relative", CSS)
+
+
+# ------------------------------------------------------------------ analytics
+
+
+def test_hosted_page_counts_visits():
+    """The tag must actually be on the page GitHub Pages serves."""
+    assert "goatcounter" in HTML
+    assert 'async src="//gc.zgo.at/count.js"' in HTML
+
+
+def test_visit_counting_is_disclosed_in_the_footer():
+    assert "Visits are counted" in HTML
+
+
+def test_bundle_strips_anything_that_phones_home():
+    """A file handed to someone directly must not report back.
+
+    The hosted page counts visits; the standalone bundle is opened from disk or
+    sent to a person, and the artifact viewer's CSP would block the request in
+    any case. Leaving it in would be a console error and a broken promise.
+    """
+    from midterms.bundle import strip_external_scripts
+
+    stripped = strip_external_scripts(HTML)
+    assert "goatcounter" not in stripped
+    assert "gc.zgo.at" not in stripped
+
+
+def test_stripping_leaves_the_page_intact():
+    """It must remove the tracker and nothing else."""
+    from midterms.bundle import strip_external_scripts
+
+    stripped = strip_external_scripts(HTML)
+    # Local scripts survive — they are what gets inlined.
+    for name in ("app.js", "charts.js", "map.js"):
+        assert f'src="js/{name}"' in stripped
+    # So does the stylesheet and every ordinary outbound link.
+    assert "css/style.css" in stripped
+    assert "votehub.com" in stripped
+    assert "creativecommons.org" in stripped
+
+
+def test_strip_handles_protocol_relative_and_https_sources():
+    from midterms.bundle import strip_external_scripts
+
+    for src in ("//example.test/x.js", "https://example.test/x.js",
+                "http://example.test/x.js"):
+        html = f'<p>keep</p><script async src="{src}"></script><p>keep</p>'
+        stripped = strip_external_scripts(html)
+        assert "example.test" not in stripped
+        assert stripped.count("keep") == 2

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from pathlib import Path
 
 from . import paths
@@ -20,6 +21,31 @@ DATA_FILES = ("forecast", "history", "commentary", "us-states")
 
 #: Scripts to inline, in load order. Must match the tags in site/index.html.
 SCRIPTS = ("app.js", "charts.js", "map.js")
+
+#: Any <script> whose src points at another host, or at a protocol-relative
+#: URL. Matched with DOTALL because the tag is wrapped across lines.
+_EXTERNAL_SCRIPT = re.compile(
+    r"<script\b[^>]*\bsrc\s*=\s*[\"']?(?:https?:)?//[^>]*>\s*</script\s*>",
+    re.IGNORECASE | re.DOTALL,
+)
+
+#: The HTML comment that introduces the analytics tag, removed alongside it so
+#: the bundle does not carry an explanation of something it does not do.
+_ANALYTICS_COMMENT = re.compile(
+    r"<!--\s*Visit counting.*?-->\s*", re.IGNORECASE | re.DOTALL
+)
+
+
+def strip_external_scripts(html: str) -> str:
+    """Drop every script loaded from another host.
+
+    Only the hosted page counts visits. The standalone bundle is a file people
+    open from disk or are sent directly, and it must not report anything
+    anywhere — both because that is the honest behaviour for a file handed over,
+    and because the artifact viewer's CSP blocks the request anyway.
+    """
+    html = _ANALYTICS_COMMENT.sub("", html)
+    return _EXTERNAL_SCRIPT.sub("", html)
 
 
 def build(
@@ -84,6 +110,13 @@ def build(
         f"<script>\nwindow.__FORECAST_DATA__ = {payload};\n</script>\n<script>\n{js}\n</script>",
         "script",
     )
+
+    # Remove anything still loading from another host — in practice the
+    # analytics tag. The hosted page counts visits; a file someone was handed,
+    # or opened from disk, must not quietly report that back to anyone. The
+    # artifact's content-security policy would block it regardless, so leaving
+    # it in would only produce a console error and a broken promise.
+    html = strip_external_scripts(html)
 
     # Nothing external may survive, or the bundle is not self-contained.
     for leftover in ('<script src=', '<link rel="stylesheet"'):

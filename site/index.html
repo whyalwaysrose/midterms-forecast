@@ -343,6 +343,7 @@
       Model and code are open source.
     </p>
     <p class="subtle">This is an independent forecast, not a prediction of certainty. Probabilities are probabilities: a 30% chance happens roughly three times in ten.</p>
+    <p class="subtle">Visits are counted in aggregate — country and referrer only, no cookies, nothing identifying you.</p>
   </div>
 </footer>
 
@@ -354,6 +355,13 @@
     <div id="drawer-body"></div>
   </div>
 </div>
+
+<!-- Visit counting, hosted page only.
+     Cookieless and aggregate: totals, countries and referrers, nothing that
+     identifies a person. `midterms bundle` strips this, because a file handed
+     to someone directly must not phone home — see src/midterms/bundle.py. -->
+<script data-goatcounter="https://whyalwaysrose.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 <script src="js/app.js"></script>
 <script src="js/charts.js"></script>

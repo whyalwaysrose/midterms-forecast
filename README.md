@@ -316,6 +316,27 @@ band. It now scales to the data but always keeps 50% in the domain, since crossi
 that line is the one change that alters the story — so the tighter axis cannot
 flatter the movement.
 
+## Visit counting
+
+The hosted page carries a [GoatCounter](https://www.goatcounter.com) tag —
+cookieless, ~3KB, loaded asynchronously. Stats live at
+`https://whyalwaysrose.goatcounter.com`.
+
+It records aggregate visits only: totals over time, country, referrer, browser.
+Nothing that identifies a person, and no cookies, so no consent banner is needed;
+the footer says so plainly anyway.
+
+**The standalone bundle deliberately does not carry it.** `midterms bundle`
+strips any script loading from another host before writing
+`outputs/dashboard.html`. A file someone was handed, or opened from disk, should
+not quietly report that back — and the artifact viewer's CSP would block the
+request regardless, so leaving it in would only produce a console error. Four
+tests in `tests/test_frontend_contract.py` pin both halves: the tag is present on
+the hosted page, and absent from the bundle.
+
+Treat the numbers as a floor. Ad blockers and Safari's tracking protection drop
+some share of requests — true of every analytics tool, paid ones included.
+
 ## Data source and licensing
 
 Polling comes from the **VoteHub Polling API** (`https://api.votehub.com`), which

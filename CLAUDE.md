@@ -151,6 +151,20 @@ establish and the numbers are in `docs/METHODOLOGY.md`.
 - **Presidential approval in the national environment** — implemented and works
   (correlation -0.54, correctly signed), but buys 6.6% tighter eta for a 35% ESS loss.
   Disabled by default; `scripts/ab_approval.py` reproduces it.
+- **Changing the correlation kernel's parameters** — `scripts/fit_correlation.py`
+  measures which states actually missed together, over 13 cycles and 135 pairs. The
+  covariates are **validated**: agreement between the kernel's ranking and the
+  measured one is +0.17, positive at every setting tried. But agreement rises as
+  `region_weight` falls, monotonically, which looks like a finding and is not:
+  bootstrapping over cycles, 0.0 beats 0.6 in 71% of resamples with a 90% interval
+  of -0.030 to +0.063. The committed values stand.
+- **Comparing raw kernel correlations to demeaned measurements** — a trap of the same
+  shape as the backtest appearing to want wider error scales. Removing each cycle's
+  mean error (necessary, or the national miss is double-counted) forces average
+  pairwise correlation to about -1/(n-1) whatever the truth is. Against that, the
+  kernel looks wildly over-correlated (+0.329 vs -0.064) and the fix looks like
+  shrinking it — which would let errors cancel across 35 races and leave the seat
+  distribution far too narrow. Demean both sides; then it reads -0.068 vs -0.064.
 - **Fundraising as a covariate** — measured against 171 historical Senate races
   (`scripts/fit_fundraising.py`). Predicting polling error, the money effect is
   entirely incumbency: t=+3.18 alone, t=+0.27 once incumbency is included, and the

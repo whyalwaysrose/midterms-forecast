@@ -13,11 +13,17 @@ day-over-day commentary.
   Albers USA map of all 35 races — deployed to GitHub Pages by a daily GitHub Actions
   cron.
 
+**Live:** <https://whyalwaysrose.github.io/midterms-forecast/> — refit and redeployed
+daily at 11:00 UTC by GitHub Actions.
+
 ---
 
-## ⚠️ SETUP — things only you can do
+## Setup — already done for this deployment
 
-Everything else runs itself. These five steps are manual and need your GitHub account.
+The repository, Pages and the daily schedule are live. This section is kept as the
+record of what was configured, and as the recipe for standing up a fresh copy.
+
+Everything else runs itself; these steps need a GitHub account.
 
 ### 1. Create the GitHub repository
 
@@ -58,13 +64,15 @@ would think it was the first and no commentary would ever be generated.
 Repo → **Actions** → **Daily forecast** → **Run workflow**.
 
 The first run takes roughly 5–10 minutes (dependency install plus sampling). When it
-finishes, your dashboard is live at:
+finishes, the dashboard is live at:
 
 ```
 https://<your-username>.github.io/midterms-forecast/
 ```
 
-That is the link to share.
+That is the link to share. Confirm the run's **Commit regenerated data** step actually
+committed — if workflow permissions are wrong it succeeds while doing nothing, and the
+failure only shows up as a missing changelog the following day.
 
 ### 5. Nothing to configure for data access
 

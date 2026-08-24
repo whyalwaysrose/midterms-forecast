@@ -5,6 +5,7 @@
     midterms fetch            fetch and snapshot polls only
     midterms audit-roster     report candidate names the roster cannot classify
     midterms audit-pollsters  report pollster names that look like duplicates
+    midterms check-keys       report which optional API keys are configured
     midterms backtest         calibration check against held-out polls
 
 ``run`` is what CI invokes daily.
@@ -151,6 +152,34 @@ def cmd_audit_pollsters(args: argparse.Namespace) -> int:
         "to the canonical name. If they are genuinely different, leave them."
     )
     return 1
+
+
+def cmd_check_keys(args: argparse.Namespace) -> int:
+    """Report which optional API keys are configured and whether they work."""
+    from .keys import status
+
+    results = status(check_network=not args.offline)
+    print("Optional API keys (the forecast runs without both):\n")
+    for entry in results:
+        if not entry.present:
+            mark = "  -  "
+        elif entry.working is None:
+            mark = "  ?  "
+        else:
+            mark = "  OK " if entry.working else " FAIL"
+        print(f"{mark} {entry.name:16s} {entry.detail}")
+
+    missing = [e.name for e in results if not e.present]
+    broken = [e.name for e in results if e.present and e.working is False]
+    if missing:
+        print(
+            "\nTo add a key, put it in .env in the repo root (gitignored):\n"
+            + "\n".join(f"    {name}=your-key-here" for name in missing)
+        )
+    if broken:
+        print("\nA key is set but not working; check for stray whitespace or quotes.")
+        return 1
+    return 0
 
 
 def cmd_run(args: argparse.Namespace) -> int:
@@ -350,6 +379,14 @@ def build_parser() -> argparse.ArgumentParser:
     audit = sub.add_parser("audit-roster", help="find candidate names the roster misses")
     audit.add_argument("--offline", action="store_true")
     audit.set_defaults(func=cmd_audit_roster)
+
+    check_keys = sub.add_parser(
+        "check-keys", help="report which optional API keys are set and working"
+    )
+    check_keys.add_argument(
+        "--offline", action="store_true", help="report presence without calling the APIs"
+    )
+    check_keys.set_defaults(func=cmd_check_keys)
 
     audit_pollsters = sub.add_parser(
         "audit-pollsters", help="find pollster names that look like duplicates"

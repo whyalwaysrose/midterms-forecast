@@ -97,6 +97,59 @@ Add any reported names to `config/candidates_senate_2026.yaml` under the correct
 
 ---
 
+## SETUP — two optional API keys (only you can request these)
+
+**The forecast runs fine without both.** Nothing is broken; these unlock two
+improvements that are currently blocked. Each is free, instant, and needs a
+signup in your name, which is why they are not already done.
+
+### 1. Census API key — demographic covariates
+
+The election-day correlation kernel decides how much state polling errors move
+together, which matters a lot: errors that are independent average out across 35
+races, errors that move together do not. It currently uses political covariates
+(presidential lean, region). `scripts/fit_correlation.py` confirms those really do
+track which states miss together, so this is an improvement rather than a repair —
+education and urbanicity are the covariates the 2016 and 2020 misses were about.
+
+Request at **<https://api.census.gov/data/key_signup.html>** — it asks for an
+organisation name and an email address, and emails the key.
+
+### 2. FEC API key — fundraising without lookahead
+
+Fundraising is measured and currently *not* used, for a specific reason. Against
+171 historical races the effect is entirely incumbency (t=+0.27 once incumbency is
+included), which the fundamentals prior already has. Against the fundamentals
+baseline it looks strong — but the FEC bulk files are end-of-cycle, so that fit
+uses money raised *after* the date a live forecast would have been made. Testing
+it honestly needs cumulative totals as of June 30 of each election year, which
+means per-report data for around 350 committees. The demo key allows **10
+requests an hour**, which is why this needs a real one.
+
+Request at **<https://api.data.gov/signup/>** — the same key works across all
+api.data.gov services, FEC included.
+
+### 3. Give the keys to the project
+
+Put them in a `.env` file in the repo root. It is gitignored, so they stay off
+GitHub:
+
+```
+CENSUS_API_KEY=your-census-key
+FEC_API_KEY=your-fec-key
+```
+
+Then confirm they work — this calls each API once and prints only a redacted
+fragment of the key, so the output is safe to paste anywhere:
+
+```bash
+midterms check-keys
+```
+
+For the GitHub Actions run, add the same two as repository secrets under
+**Settings → Secrets and variables → Actions**. The daily forecast does not need
+them today; nothing will break if they are absent.
+
 ## Quick start (local)
 
 Requires Python 3.11+ (3.12 recommended). Verified on Windows 11 with Python 3.12.10.

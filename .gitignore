@@ -41,3 +41,6 @@ Thumbs.db
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# Local API keys for the optional data sources. Never commit these.
+.env

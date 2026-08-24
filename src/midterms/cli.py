@@ -242,6 +242,23 @@ def cmd_build_map(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_stamp_assets(args: argparse.Namespace) -> int:
+    """Pin script and stylesheet URLs to their contents before deploying."""
+    from pathlib import Path
+
+    from .assets import stamp
+    from .paths import SITE_DIR
+
+    site = Path(args.site) if args.site else SITE_DIR
+    try:
+        applied = stamp(site)
+    except (FileNotFoundError, RuntimeError) as exc:
+        log.error("%s", exc)
+        return 2
+    print(f"Stamped {len(applied)} assets in {site / 'index.html'}")
+    return 0
+
+
 def cmd_bundle(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -311,6 +328,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     bundle.add_argument("-o", "--output", help="output path (default: outputs/dashboard.html)")
     bundle.set_defaults(func=cmd_bundle)
+
+    stamp_assets = sub.add_parser(
+        "stamp-assets",
+        help="add a content hash to the dashboard's script and stylesheet URLs",
+    )
+    stamp_assets.add_argument("--site", help="site directory (default: site/)")
+    stamp_assets.set_defaults(func=cmd_stamp_assets)
 
     backtest = sub.add_parser("backtest", help="calibration check against held-out polls")
     backtest.add_argument("--holdout-days", type=int, default=30)

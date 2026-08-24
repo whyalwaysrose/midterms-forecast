@@ -561,9 +561,14 @@ async function init() {
     ]);
 
     if (forecast.schema_version !== SCHEMA_VERSION) {
+      // Asset URLs carry a content hash, so this should be unreachable. If it
+      // does fire, the overwhelmingly likely cause is a cached copy of this
+      // script rather than a bad deploy -- so the message is addressed to the
+      // reader, who can fix it, not to whoever deployed, who is not here.
       throw new Error(
-        `Data is schema version ${forecast.schema_version} but this page expects ${SCHEMA_VERSION}. ` +
-        `The site and the model are out of step — redeploy.`
+        'This page is out of date — your browser is holding an old copy. ' +
+        'Reload to get the latest forecast. ' +
+        `(page schema ${SCHEMA_VERSION}, data schema ${forecast.schema_version})`
       );
     }
 

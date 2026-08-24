@@ -86,6 +86,13 @@ jobs:
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
+      # Runs after the commit step on purpose: the stamped index.html is for
+      # the deploy artifact only and must not be committed, or the repo would
+      # carry a hash that goes stale the next time a script changes.
+      - name: Pin asset URLs to their contents
+        if: ${{ !inputs.skip_deploy }}
+        run: midterms -v stamp-assets
+
       - name: Configure Pages
         if: ${{ !inputs.skip_deploy }}
         uses: actions/configure-pages@v5

@@ -2,6 +2,61 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-08-25",
+   "previous_run_date": "2026-08-24",
+   "headline": "Democratic chances of Senate control are down 0.8 pts to 65.7% on no new polls. Projected seats 52.3 \u2192 52.2 (-0.1).",
+   "body": [
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **Louisiana** \u2014 Democratic win probability 20.7% \u2192 19.3% (-1.4 pts); projected margin R+8.5 \u2192 R+8.9 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **South Dakota** \u2014 Democratic win probability 3.7% \u2192 3.4% (-0.3 pts); projected margin R+18.9 \u2192 R+19.5 (-0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Oklahoma** \u2014 Democratic win probability 2.2% \u2192 1.9% (-0.2 pts); projected margin R+21.7 \u2192 R+22.1 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-LA",
+     "name": "Louisiana",
+     "prob_before": 0.2067,
+     "prob_after": 0.1931,
+     "prob_delta": -0.013600000000000001,
+     "margin_before": -8.54,
+     "margin_after": -8.86,
+     "margin_delta": -0.3200000000000003,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-SD",
+     "name": "South Dakota",
+     "prob_before": 0.0374,
+     "prob_after": 0.0343,
+     "prob_delta": -0.0031000000000000055,
+     "margin_before": -18.95,
+     "margin_after": -19.54,
+     "margin_delta": -0.5899999999999999,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-OK",
+     "name": "Oklahoma",
+     "prob_before": 0.0218,
+     "prob_after": 0.0194,
+     "prob_delta": -0.0023999999999999994,
+     "margin_before": -21.71,
+     "margin_after": -22.07,
+     "margin_delta": -0.35999999999999943,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-08-25\n\nDemocratic chances of Senate control are down 0.8 pts to 65.7% on no new polls. Projected seats 52.3 \u2192 52.2 (-0.1).\n\n**Races that moved** (3 of 35):\n\n  - **Louisiana** \u2014 Democratic win probability 20.7% \u2192 19.3% (-1.4 pts); projected margin R+8.5 \u2192 R+8.9 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **South Dakota** \u2014 Democratic win probability 3.7% \u2192 3.4% (-0.3 pts); projected margin R+18.9 \u2192 R+19.5 (-0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Oklahoma** \u2014 Democratic win probability 2.2% \u2192 1.9% (-0.2 pts); projected margin R+21.7 \u2192 R+22.1 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-08-24",
    "previous_run_date": "2026-08-20",
    "headline": "**The model changed in this run.** Democratic chances of Senate control are 66.5%, against 62.9% on 2026-08-20 \u2014 but the two runs were produced by different models, so the difference is not a change in the race.",

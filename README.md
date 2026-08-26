@@ -1,17 +1,19 @@
 # 2026 U.S. Midterms — Bayesian Forecast
 
-A hierarchical Bayesian dynamic model of the 2026 U.S. Senate elections, refit daily
-against new polling, publishing to a static dashboard with automatically generated
-day-over-day commentary.
+A hierarchical Bayesian dynamic model of the 2026 U.S. Senate **and House** elections,
+refit daily against new polling, publishing to a static dashboard with automatically
+generated day-over-day commentary.
 
 - **Model:** PyMC. Latent random-walk state per race, a shared national environment,
   pollster house effects, screen and partisan-sponsor adjustments, and a correlated
-  election-day error that produces a full chamber seat distribution.
+  election-day error that produces a full chamber seat distribution. One model, fitted
+  separately to each chamber — nothing under `model/` knows which chamber it is fitting.
 - **Data:** [VoteHub Polling API](https://votehub.com/polls/api/) — free, no API key,
-  **CC BY 4.0**.
-- **Output:** static JSON + a dependency-free dashboard — including an interactive
-  Albers USA map of all 35 races — deployed to GitHub Pages by a daily GitHub Actions
-  cron.
+  **CC BY 4.0**. District presidential lean is derived from **CC0** precinct returns
+  (see [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md)); nothing here is licensed or paid for.
+- **Output:** static JSON + a dependency-free dashboard — an interactive Albers USA map
+  for the 35 Senate races, and an equal-area cartogram for all 435 districts — deployed
+  to GitHub Pages by a daily GitHub Actions cron.
 
 **Live:** <https://whyalwaysrose.github.io/midterms-forecast/> — refit and redeployed
 daily at 11:00 UTC by GitHub Actions.
@@ -175,10 +177,11 @@ URL will fail because browsers block `fetch` from the filesystem.
 | Command | What it does |
 |---|---|
 | `midterms run` | Full pipeline: fetch → fit → simulate → write JSON + commentary |
+| `midterms run --chamber house` | The same, for all 435 districts (~12 min) |
 | `midterms run --offline` | Same, reusing the last raw snapshot (no network) |
 | `midterms run --date 2026-08-01` | Reproduce a run as of a past date (ignores later polls) |
 | `midterms fetch` | Fetch and snapshot polls only |
-| `midterms audit-roster` | Report candidate names the roster cannot classify |
+| `midterms audit-roster [--chamber house]` | Report candidate names the roster cannot classify |
 | `midterms backtest --holdout-days 30` | Calibration check against held-out polls |
 | `midterms bundle` | Build a single self-contained `outputs/dashboard.html` |
 | `midterms build-map` | Re-project the vendored state boundaries (`run` does this too) |
@@ -333,6 +336,27 @@ Recorded openly rather than buried, because they affect how much to trust specif
 - **`sigma_excess` estimates near zero.** This is not a bug. The design effect (1.5) and
   the Student-t(4) likelihood already give each poll roughly 7 points of margin error, so
   there is no unexplained variance left to attribute. See the methodology document.
+
+### House-specific
+
+- **Almost the whole chamber is unpolled.** Around 397 of 435 districts have no
+  qualifying general-election polls, against 14 of 35 in the Senate. Those districts rest
+  on presidential lean plus the national environment, which is what a House forecast is,
+  but it means the generic ballot does far more work here. The cartogram draws unpolled
+  districts at reduced opacity so this is visible rather than only documented.
+- **The error scales are inherited, not fitted for districts.** They come from Senate and
+  presidential polling. District polls are sparser, later, and historically less accurate,
+  so if anything these are optimistic. Read the House intervals with more caution than the
+  Senate's; the backtest does not yet cover them. This is the largest open item.
+- **`incumbent_status` for the House means "the sitting member filed for 2026"**, taken
+  from FEC filings — *not* from the FEC's incumbency flag, which is wrong for the House
+  as badly as it is for the Senate (555 flagged filings for 435 seats). Membership comes
+  from `unitedstates/congress-legislators`, and the resulting 215 D / 220 R matches the
+  actual chamber.
+- **Unclassified House candidate names are usually benign.** Pollsters test candidates
+  months before they file with the FEC, so `audit-roster --chamber house` reports names no
+  public source can yet classify. An unplaceable third name still leaves a D-vs-R matchup;
+  a poll of four Democrats is a primary poll and is correctly rejected outright.
 
 ---
 

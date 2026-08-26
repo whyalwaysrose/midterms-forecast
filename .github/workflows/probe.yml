@@ -1,0 +1,32 @@
+name: Probe (temporary)
+
+# TEMPORARY. Delete once the Polymarket question is settled.
+#
+# Polymarket is DNS-blocked on the development machine -- France's gambling
+# regulator null-routes every polymarket.com domain and serves an anj.fr block
+# page -- so the API cannot be inspected locally at all. This runs the probe on
+# a US-hosted runner, which is the machine that would do the fetching in
+# production anyway, to find out whether the feature is viable before any of it
+# is built.
+#
+# Manual trigger only: nothing here should run on a schedule.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Probe Polymarket
+        run: python scripts/probe_polymarket.py

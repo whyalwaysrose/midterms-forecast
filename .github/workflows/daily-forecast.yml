@@ -7,6 +7,10 @@ name: Daily forecast
 # is what the next run diffs against to write its commentary, and
 # `site/data/history.json` is the trend line. Without persisting them, every run
 # would believe it was the first.
+#
+# Both chambers are refit here, Senate first. The House is the expensive one and
+# is deliberately allowed to fail without taking the Senate down with it -- see
+# the comment on its step.
 
 on:
   schedule:
@@ -36,7 +40,7 @@ concurrency:
 jobs:
   forecast:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 120
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -72,22 +76,49 @@ jobs:
         continue-on-error: true
         run: python -m midterms.cli fetch-markets
 
-      - name: Run the forecast
+      - name: Run the Senate forecast
         env:
           # We sample with nutpie (Numba); the PyTensor C backend is unused.
           PYTENSOR_FLAGS: "cxx="
-        run: python -m midterms.cli run --quiet-sampler
+        run: python -m midterms.cli run --quiet-sampler --chamber senate
+
+      # The House is twelve times the Senate's work -- 435 races against 35, and
+      # about 700 seconds of sampling on a developer machine with many cores
+      # against the sixty the Senate takes. On a four-core runner it will be
+      # slower still, and how much slower is not yet measured.
+      #
+      # So it is allowed to fail. The Senate forecast is already written by the
+      # time this runs and the commit step below stages whatever exists, so a
+      # House run that overruns costs the reader a stale House tab rather than a
+      # missing dashboard. Same reasoning as the market snapshot above.
+      #
+      # If it proves reliably fast, fold this guard away. If it proves reliably
+      # slow, split it into its own scheduled workflow rather than raising the
+      # ceiling again.
+      - name: Run the House forecast
+        continue-on-error: true
+        timeout-minutes: 60
+        env:
+          PYTENSOR_FLAGS: "cxx="
+        run: python -m midterms.cli run --quiet-sampler --chamber house
 
       - name: Commit regenerated data
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add site/data/forecast.json \
-                  site/data/history.json \
-                  site/data/commentary.json \
+          # Every chamber's outputs, plus the cartogram layout, which the House
+          # run regenerates so the squares can never fall out of step with the
+          # districts they stand for. Globbed rather than listed by name so a
+          # House run that did not finish stages nothing, instead of failing the
+          # step on a path that is not there.
+          git add site/data/forecast*.json \
+                  site/data/history*.json \
+                  site/data/commentary*.json \
+                  site/data/us-districts.json \
                   outputs/runs \
                   CHANGELOG.md
+          git add CHANGELOG_house.md || true
           # Forced: data/raw is gitignored for poll snapshots, which are large
           # and regenerable. This one is small and is the only copy readers can
           # be served from, since Polymarket is unreachable from the machine

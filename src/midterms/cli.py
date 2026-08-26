@@ -92,7 +92,9 @@ def cmd_audit_roster(args: argparse.Namespace) -> int:
     names, their polls are skipped, and the race silently reverts to its
     fundamentals prior until the roster is updated.
     """
+    from . import paths
     from .config import load_all
+    from .data.polls import RACE_POLL_TYPE
     from .data.roster import Roster
     from .data.votehub import (
         VoteHubClient,
@@ -101,19 +103,21 @@ def cmd_audit_roster(args: argparse.Namespace) -> int:
         load_snapshot,
     )
 
-    races, _cfg = load_all()
-    roster = Roster.load()
+    chamber = args.chamber
+    poll_type = RACE_POLL_TYPE[chamber]
+    races, _cfg = load_all(chamber=chamber)
+    roster = Roster.load(paths.CONFIG_DIR / ROSTER_FILE[chamber])
 
     snapshot = latest_snapshot()
     if snapshot is None or not args.offline:
-        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot", "approval"])
+        raw = VoteHubClient().fetch_and_snapshot([poll_type, "generic-ballot", "approval"])
     else:
         raw = load_snapshot(snapshot)
 
     subject_to_race = {r.subject_for(races.cycle): r.id for r in races.races}
     unknown: dict[str, set[str]] = {}
 
-    for record in raw.get("us-senator", []):
+    for record in raw.get(poll_type, []):
         subject = str(record.get("subject", ""))
         if is_primary_subject(subject):
             continue
@@ -135,9 +139,17 @@ def cmd_audit_roster(args: argparse.Namespace) -> int:
         for name in sorted(unknown[race_id]):
             print(f"  {race_id}: {name}")
     print(
-        "\nAdd each to config/candidates_senate_2026.yaml under the correct party, "
+        f"\nAdd each to config/{ROSTER_FILE[chamber]} under the correct party, "
         "or under `other` for minor-party candidates."
     )
+    if chamber == "house":
+        print(
+            "\nFor the House, an unclassified name is often benign. Pollsters "
+            "test candidates months before they file with the FEC, and a "
+            "primary field of four Democrats is not a general-election matchup: "
+            "the `no single D-vs-R matchup` guard rejects those on its own, "
+            "which is the correct outcome rather than a gap to be filled."
+        )
     return 1
 
 
@@ -298,8 +310,9 @@ def cmd_run(args: argparse.Namespace) -> int:
     )
     if table.unknown_candidates:
         log.warning(
-            "unclassified candidates in %d races; run `midterms audit-roster`",
-            len(table.unknown_candidates),
+            "unclassified candidates in %d races; run "
+            "`midterms audit-roster --chamber %s`",
+            len(table.unknown_candidates), chamber,
         )
     if not table.race_polls and chamber == "senate":
         log.error("no usable race polls; aborting")
@@ -466,6 +479,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     audit = sub.add_parser("audit-roster", help="find candidate names the roster misses")
     audit.add_argument("--offline", action="store_true")
+    audit.add_argument(
+        "--chamber", choices=("senate", "house"), default="senate",
+        help="which chamber's roster to audit (default: senate)",
+    )
     audit.set_defaults(func=cmd_audit_roster)
 
     fetch_markets = sub.add_parser(

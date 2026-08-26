@@ -201,9 +201,16 @@ def _normalise_one(
             continue
         sides[roster.resolve(race_id, choice)].append((choice, pct))
 
-    unknown = roster.unknown_names(race_id, [str(a.get("choice", "")) for a in answers])
-    if unknown:
-        table.unknown_candidates.setdefault(race_id, set()).update(unknown)
+    # Approval is not a race and "Approve"/"Disapprove" are not candidates, so
+    # reporting them as unclassified names sends whoever reads the audit looking
+    # for two people who do not exist -- and inflates the count of races needing
+    # attention by one, every single run.
+    if race_id != APPROVAL_RACE_ID:
+        unknown = roster.unknown_names(
+            race_id, [str(a.get("choice", "")) for a in answers]
+        )
+        if unknown:
+            table.unknown_candidates.setdefault(race_id, set()).update(unknown)
 
     if len(sides[SIDE_D]) != 1 or len(sides[SIDE_R]) != 1:
         table.rejections["no single D-vs-R matchup"] += 1

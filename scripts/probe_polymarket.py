@@ -21,8 +21,8 @@ Usage (on a runner):
 from __future__ import annotations
 
 import json
-import sys
 import re
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request

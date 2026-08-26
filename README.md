@@ -344,10 +344,18 @@ Recorded openly rather than buried, because they affect how much to trust specif
   on presidential lean plus the national environment, which is what a House forecast is,
   but it means the generic ballot does far more work here. The cartogram draws unpolled
   districts at reduced opacity so this is visible rather than only documented.
-- **The error scales are inherited, not fitted for districts.** They come from Senate and
-  presidential polling. District polls are sparser, later, and historically less accurate,
-  so if anything these are optimistic. Read the House intervals with more caution than the
-  Senate's; the backtest does not yet cover them. This is the largest open item.
+- **The error scales are fitted on House polling** (`midterms calibrate --chamber house`),
+  not borrowed from the Senate. They came out *larger* — national 3.78 vs 3.32 points,
+  race-level 4.61 vs 3.96 — so the House seat interval is wider than the Senate treatment
+  gave it, not narrower. The national component is separately validated against 13 cycles
+  of generic-ballot error: the model carries 3.42 points of national uncertainty against a
+  measured RMSE of 3.46.
+- **The correlation kernel is shared between chambers and is not separately confirmed for
+  districts.** Its region contrast sits inside the 90% bootstrap interval of the measured
+  one for both chambers, so seven cycles cannot tell them apart — it is not demonstrably
+  wrong, but neither is it demonstrably right. This is the largest open item, and it
+  matters more here than in the Senate because 51 House seats sit within five points of
+  the line against the Senate's ten.
 - **`incumbent_status` for the House means "the sitting member filed for 2026"**, taken
   from FEC filings — *not* from the FEC's incumbency flag, which is wrong for the House
   as badly as it is for the Senate (555 flagged filings for 435 seats). Membership comes

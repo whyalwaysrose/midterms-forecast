@@ -298,19 +298,63 @@ in Iowa — and that correlation fattens the tails enormously.
 ```
 θ_final_r = θ_{r,T} + b_national + κ_r
 
-b_national ~ Normal(0, 0.060²)                    ~3.0 pts of margin
-κ          ~ MVN(0, 0.114² · C)                   ~5.7 pts of margin
+               Senate                    House
+b_national ~ Normal(0, 0.065²)   Normal(0, 0.0756²)     3.3 / 3.8 pts of margin
+κ          ~ MVN(0, 0.079² · C)  MVN(0, 0.0922² · C)    4.0 / 4.6 pts of margin
 ```
 
-Total ≈ `√(0.060² + 0.114²) = 0.129` logit ≈ **6.4 points of margin**.
+Total ≈ **5.1 points of margin** for the Senate, **6.0** for the House.
 
-**These are fitted, not asserted.** `midterms calibrate` decomposes the observed error
-of 595 Senate polls (2010–2022, 45–120 days out) into three levels — a cycle-wide
-national miss, a race-specific miss, and poll noise — after removing the poll noise that
-each race's mean error still carries. The earlier values (0.075 / 0.085) came from the
+**These are fitted per chamber, not asserted and not shared.** `midterms calibrate
+[--chamber house]` decomposes observed poll error into three levels — a cycle-wide
+national miss, a race-specific miss, and poll noise — after removing the poll noise each
+race's mean error still carries. The earlier values (0.075 / 0.085) came from the
 literature and were wrong in a specific way: they understated total race-level error by
 14% and, more damagingly, mis-split it, overstating the perfectly-correlated national
 component by 20% while understating the race-specific one by 34%.
+
+**The window is 0–14 days, not the forecast horizon**, and that is deliberate. This term
+is the systematic miss the polls were always going to make, with drift stripped out —
+drift lives in the random walk, where it grows with the time remaining. Fitting at 45–120
+days folds roughly 3.9 points of drift in here, which would make the total about right
+today while guaranteeing it stayed just as wide on the eve of the election.
+
+### 5.1 Why the House gets its own scales
+
+Because they are measurably different, and because using the Senate's was never a choice
+anyone made — it was what happened when a second chamber was added to a model that had
+only ever had one.
+
+| Fitted at 0–14 days, 2010– | Senate | House |
+|---|---|---|
+| national (cycle-wide) | 3.32 | **3.78** |
+| race-specific | 3.96 | **4.61** |
+| poll noise | 3.97 | **5.85** |
+| design effect | 1.18 | **1.04** |
+
+Both election-day scales are **larger** for the House, so calibrating it correctly made
+the seat interval *wider*. That is worth stating because the intuition runs the other
+way: a 100-seat interval looks like something to shrink.
+
+The design effect goes the opposite direction, and the two facts are consistent. House
+polls carry far more raw noise (5.85 against 3.97) but at a median sample of 496 against
+735 — so once sample size is accounted for they are, if anything, marginally *tighter*
+than binomial. The sampling-variance term already knows about sample size; carrying the
+Senate's 1.18 was inflating district poll variance by 13% and discounting the only direct
+evidence 38 districts have. Note the design effect is fitted at **45–120 days**, where the
+model actually weighs polls, while the election-day scales are fitted at 0–14; mixing the
+two bases would make the chambers incomparable.
+
+**Independent validation of the national term.** The House national component can be
+checked against something the Senate's cannot: the actual national House vote. Across 13
+cycles (1998–2022) the generic ballot's error has an RMSE of 3.46 points about zero. The
+model carries 3.42 — 3.25 of election-day error plus 1.06 of latent drift to election day.
+That is the term which dominates the House seat interval, contributing roughly 58 of its
+101 seats at ~5.2 seats per point, and it is right.
+
+**The bias, however, is not modelled.** Those 13 cycle errors average **+2.47 points
+toward Democrats**, positive in 9 of 13. The model's national error is mean-zero, so its
+spread covers this but its centre does not. See known weakness 13.
 
 The split matters as much as the total. National error moves all 35 races together and
 fattens the tails of the seat distribution; state error partly cancels across the map.
@@ -488,21 +532,39 @@ worse at every level. The residual gap is width, not shape.
    above the 400 floor, but it is the first thing to check if convergence degrades.
 6. **Nebraska's independent** is forced onto the Democratic side for chamber arithmetic
    (§ README known issues). There is no unarguably correct treatment.
-9. **The House interval is calibrated only by inheritance** (§3.1). Now measured rather
-   than suspected: the median is right — 241 against 238 by uniform swing — but the 90%
-   interval is 195–296 where the polling uncertainty alone implies 233–245. Essentially
-   all of that width is the §5 election-day error, fitted on state polling and applied to
-   districts unchanged. The correlation kernel was ruled out as the cause (mean pairwise
-   correlation 0.307 for the House against 0.291 for the Senate). This is the largest open
-   item on the House side, and it is a caveat on the interval only, not the centre.
+9. ~~**The House interval is calibrated only by inheritance.**~~ **Fixed, and it went the
+   other way.** The scales are now fitted on House polling (§5.1): national 3.78 against
+   the Senate's 3.32, race-level 4.61 against 3.96. Both larger, so the interval widened.
+   The national component is independently validated against 13 cycles of generic-ballot
+   error — the model carries 3.42 points against a measured RMSE of 3.46. What remains
+   open is the correlation kernel, below.
 10. ~~**Two districts have no measured lean.**~~ **Fixed.** FL-20 and OK-03 held
     uncontested 2024 House races, so their presidential votes had no House row to join to.
     Both are now recovered by subtraction — where a state is missing exactly one district,
     the unplaced presidential votes in it belong to that district. All 435 have a measured
     lean, and the derived chamber (215 D / 220 R) matches reality exactly.
 
-11. **The kernel has no state term.** Districts in one state share a state polling
+11. **The correlation kernel is shared across chambers and confirmed for neither.**
+    Its region contrast (+0.230, demeaned) sits inside the 90% bootstrap interval of the
+    measured one for both chambers — House +0.088 [+0.035, +0.284], Senate +0.167
+    [+0.047, +0.490]. Seven cycles cannot separate them, so it is not demonstrably wrong
+    and not demonstrably right. **This is now the largest open item**, and it matters more
+    for the House because 51 seats sit within five points of the line against ten in the
+    Senate. Note the trap documented in `scripts/fit_correlation.py` and re-encountered
+    here: comparing the raw kernel against demeaned measurements makes it look 5x
+    over-correlated, and shrinking it on that basis would make the interval far too narrow.
+
+12. **The kernel has no state term.** Districts in one state share a state polling
     environment, state media markets and statewide candidates; the kernel knows only
-    region and presidential lean. Adding it is the obvious next refinement, but note it
-    would widen the House interval rather than narrow it — see the discussion in §3.1
-    before assuming it is an improvement.
+    region and presidential lean. Adding it would widen the House interval rather than
+    narrow it, so it is a correction to the model rather than to the width complaint.
+
+13. **The generic ballot has a systematic pro-Democratic bias the model does not
+    correct.** Across 13 cycles it overstated the Democratic national House margin by an
+    average of 2.47 points, positive in 9 of 13. The model treats national error as
+    mean-zero, so its *spread* covers this (3.42 against a measured RMSE of 3.46 about
+    zero) but its *centre* does not. Correcting it would move the House forecast down by
+    roughly 13 seats. Not done here: house effects and the partisan-sponsor adjustment
+    already absorb an unknown share of it, and VoteHub's pollster mix is not the
+    historical one, so the correction is not simply −2.47. It is the most consequential
+    unaddressed item in this document.

@@ -284,3 +284,32 @@ def test_primer_starts_collapsed_on_phones():
     assert "stored === null" in body, (
         "the width default must not override a preference the reader has stated"
     )
+
+
+def test_the_bundler_takes_its_script_list_from_the_page():
+    """A hand-maintained list is an invitation to add a script and forget.
+
+    Adding markets.js left the bundle pointing at a file it had not inlined;
+    only the self-contained assertion at the end caught it, and only because
+    that assertion exists.
+    """
+    from midterms import bundle
+
+    html = (SITE / "index.html").read_text(encoding="utf-8")
+    scripts = bundle.local_scripts(html)
+    assert "app.js" in scripts, scripts
+    assert scripts[0] == "app.js", (
+        "app.js defines helpers the others call, so it must load first"
+    )
+    for name in scripts:
+        assert (SITE / "js" / name).is_file(), f"{name} is referenced but missing"
+
+
+def test_every_script_in_the_folder_is_actually_loaded():
+    """The mirror of the above: a file nobody loads is dead weight."""
+    from midterms import bundle
+
+    html = (SITE / "index.html").read_text(encoding="utf-8")
+    loaded = set(bundle.local_scripts(html))
+    on_disk = {p.name for p in (SITE / "js").glob("*.js")}
+    assert on_disk == loaded, f"not loaded by index.html: {sorted(on_disk - loaded)}"

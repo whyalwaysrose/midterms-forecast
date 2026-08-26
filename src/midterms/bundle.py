@@ -20,7 +20,25 @@ log = logging.getLogger(__name__)
 DATA_FILES = ("forecast", "history", "commentary", "us-states")
 
 #: Scripts to inline, in load order. Must match the tags in site/index.html.
-SCRIPTS = ("app.js", "charts.js", "map.js")
+#:
+#: Read out of the page rather than listed here. A hand-maintained list is a
+#: standing invitation to add a script and forget: adding markets.js left the
+#: bundle pointing at a file it had not inlined, and only the self-contained
+#: assertion at the end caught it. Load order matters -- charts.js and map.js
+#: call helpers defined in app.js -- and taking the order from the page is
+#: exactly the guarantee that they agree.
+_LOCAL_SCRIPT = re.compile(r"""<script\s+src=["']js/([A-Za-z0-9_.-]+\.js)["']""")
+
+
+def local_scripts(html: str) -> tuple[str, ...]:
+    """The page's own scripts, in the order it loads them."""
+    found = tuple(_LOCAL_SCRIPT.findall(html))
+    if not found:
+        raise ValueError(
+            "no local <script src=\"js/...\"> tags found in index.html; the "
+            "markup changed shape and the bundler would silently inline nothing"
+        )
+    return found
 
 #: Any <script> whose src points at another host, or at a protocol-relative
 #: URL. Matched with DOTALL because the tag is wrapped across lines.
@@ -59,10 +77,10 @@ def build(
 
     html = (site_dir / "index.html").read_text(encoding="utf-8")
     css = (site_dir / "css" / "style.css").read_text(encoding="utf-8")
-    # Order matters: charts.js and map.js call helpers defined in app.js, and
-    # this must stay in step with the script tags in index.html.
+    # Order comes from the page itself, so the two cannot disagree.
+    scripts = local_scripts(html)
     js = "\n".join(
-        (site_dir / "js" / name).read_text(encoding="utf-8") for name in SCRIPTS
+        (site_dir / "js" / name).read_text(encoding="utf-8") for name in scripts
     )
 
     data: dict[str, object] = {}
@@ -106,7 +124,7 @@ def build(
     )
     html = substitute(
         html,
-        "\n".join(f'<script src="js/{name}"></script>' for name in SCRIPTS),
+        "\n".join(f'<script src="js/{name}"></script>' for name in scripts),
         f"<script>\nwindow.__FORECAST_DATA__ = {payload};\n</script>\n<script>\n{js}\n</script>",
         "script",
     )

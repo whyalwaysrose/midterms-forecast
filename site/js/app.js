@@ -522,6 +522,7 @@ function render(forecast, history, commentary, geo) {
   renderSeatChart(forecast);
   renderHistoryChart(history);
   renderTrajectory($('national-chart'), forecast.national.trajectory, { width: 520, height: 190 });
+  renderMarkets(forecast);
   renderCommentary(commentary);
 
   ALL_RACES = forecast.races ?? [];

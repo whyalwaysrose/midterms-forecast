@@ -138,6 +138,34 @@
     </div>
   </section>
 
+  <!-- ============ PREDICTION MARKETS ============ -->
+  <section id="markets" class="card" hidden>
+    <div class="markets-head">
+      <div>
+        <h2>What the betting markets say</h2>
+        <p class="card-sub">
+          Traders on <a id="markets-source-link" href="https://polymarket.com"
+          rel="noopener nofollow" target="_blank">Polymarket</a> pricing the same
+          questions. Shown for contrast &mdash; these are
+          <strong>never an input</strong> to the model, because traders read
+          forecasts and using them would be circular.
+          <span id="markets-fetched" class="subtle"></span>
+        </p>
+      </div>
+      <div class="carousel-nav">
+        <button id="markets-prev" class="carousel-btn" type="button"
+                aria-label="Previous market">&#8249;</button>
+        <button id="markets-next" class="carousel-btn" type="button"
+                aria-label="Next market">&#8250;</button>
+      </div>
+    </div>
+
+    <div id="markets-track" class="carousel" tabindex="0"
+         role="region" aria-label="Prediction markets, scrollable"></div>
+    <div id="markets-dots" class="carousel-dots" role="tablist"
+         aria-label="Choose a market"></div>
+  </section>
+
   <!-- ============ CHARTS ============ -->
   <section class="grid-2">
     <div class="card">
@@ -448,5 +476,6 @@
 <script src="js/app.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/map.js"></script>
+<script src="js/markets.js"></script>
 </body>
 </html>

@@ -319,6 +319,14 @@ drift lives in the random walk, where it grows with the time remaining. Fitting 
 days folds roughly 3.9 points of drift in here, which would make the total about right
 today while guaranteeing it stayed just as wide on the eve of the election.
 
+Zero to fourteen days is not zero days, so a sliver of drift does survive into this term
+and is counted twice — the walk runs to election day and already carries those fourteen
+days. At the national scale of `0.004` logit per day that is `0.004·√14 ≈ 0.75` points,
+which would take `national_sd` from 3.78 to 3.71: **2%**. Left alone rather than corrected,
+because the quantity that matters is the total, and the total is checked against outcomes
+below (3.42 modelled against 3.46 measured). Narrowing the window further would trade a
+2% bias for a much noisier estimate.
+
 ### 5.1 Why the House gets its own scales
 
 Because they are measurably different, and because using the Senate's was never a choice

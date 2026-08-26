@@ -1,8 +1,8 @@
 # District-level presidential lean, 2024
 
 `house_district_lean_2024.csv` — the 2024 presidential two-party result in each
-congressional district, which is the baseline a House forecast rests on. 433 of
-435 districts, 13 KB.
+congressional district, which is the baseline a House forecast rests on. All 435
+districts, 13 KB.
 
 - **Built by:** `scripts/build_house_lean.py`
 - **Sources:** MIT Election Data and Science Lab precinct returns, both
@@ -41,21 +41,52 @@ the script reports coverage per state.
 
 ## Known limitations
 
-**FL-20 and OK-03 are missing.** Both had House races with no recorded
-opposition votes, so there is nothing to join their presidential votes to. Both
-are safe seats, but the gap is real and should be filled from the state's own
-lean rather than left as a hole.
+**~~FL-20 and OK-03 are missing.~~ Fixed — recovered by subtraction.** Florida
+and Oklahoma declare an unopposed House candidate elected without putting them
+on the ballot, so those two races have no precinct rows at all and their
+presidential votes had nothing to join to.
 
-**The implied national two-party Democratic share is 49.20%, against an actual
-figure near 48.3%.** The 1% of votes that could not be placed are concentrated
-in precincts whose House race was uncontested, which is more common in safe
-seats. Compute a district's *lean* against the national figure derived from this
-same file rather than an external one, and the bias largely cancels — which is
-what `fundamentals.py` does, subtracting the national logit from each unit's.
+But those same precincts are exactly the ones that fail to join. Where a state
+is missing exactly one district, every unplaced presidential vote in it belongs
+to that district, so the answer is arithmetic rather than inference:
 
-**`house_2024_holder` gives 209 D / 223 R against an actual 215 / 220.** It is
-derived from precinct House votes, so uncontested and partly-reported races skew
-it. Prefer the FEC's incumbency flag: for the House every seat is up every two
-years, so a 2026 filer marked `I` really is the sitting member seeking
-re-election — unlike the Senate, where the same flag marks members who are not
-on the ballot at all.
+| District | Recovered votes | vs state average | Democratic share |
+|---|---|---|---|
+| FL-20 | 297,094 | 0.76x | **70.0%** |
+| OK-03 | 523,352 | 0.82x | **26.1%** |
+
+The earlier suggestion in this file — fill the gap from the state's own lean —
+was **actively harmful** and was followed. Florida's average is 43% Democratic,
+so FL-20, one of the most Democratic districts in the country, was recorded at
+43%; a downstream script then read that number, saw it was below half, and wrote
+the seat down as Republican-held.
+
+The recovery is guarded rather than trusted. Unplaced votes also accumulate from
+ordinary join failures, and attributing those to a real district would corrupt a
+number rather than supply a missing one — so a recovered total must fall between
+0.35x and 2.0x the state's average district before it is accepted, and anything
+rejected is printed rather than silently dropped.
+
+**The implied national two-party Democratic share is 49.16%, against an actual
+figure near 48.3%.** The 1% of votes that still cannot be placed are
+concentrated in precincts whose House race was uncontested, which is more common
+in safe seats. Compute a district's *lean* against the national figure derived
+from this same file rather than an external one, and the bias largely cancels —
+which is what `fundamentals.py` does, subtracting the national logit from each
+unit's.
+
+**`house_2024_holder` gives 209 D / 223 R against an actual 215 / 220, and three
+blanks. Do not use it as the incumbency source.** It is derived from precinct
+House votes, so uncontested and partly-reported races skew it.
+
+**And do not reach for the FEC's incumbency flag instead** — an earlier version
+of this file recommended exactly that, reasoning that because every House seat
+is contested every two years, a 2026 filer marked `I` must be the sitting
+member. That reasoning is wrong. `CAND_ICI = I` means "has held this office at
+some point": there are 555 flagged filings for 435 seats, 108 districts carry
+more than one, and 28 carry incumbents of *both* parties. It gives 199 D / 232 R.
+
+Use `unitedstates/congress-legislators` (CC0), which is what
+`build_house_races.py` now does — `legislators-current` for sitting members and
+`legislators-historical` for the five vacant seats. That gives **215 D / 220 R**,
+the actual chamber.

@@ -42,8 +42,8 @@ control:
     D: 0
     R: 0
   seats_up:
-    D: 214
-    R: 221
+    D: 215
+    R: 220
   dem_seats_for_majority: 218
   rep_seats_for_majority: 218
   tiebreaker_party: none
@@ -1113,14 +1113,11 @@ races:
     unit: FL-20
     name: FL-20
     special: false
-    incumbent_party: R
+    incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.4326
-    pres_2020_dem_two_party: 0.4326
+    pres_2024_dem_two_party: 0.6998
+    pres_2020_dem_two_party: 0.6998
     region: south
-    # NO DISTRICT DATA: uncontested 2024 House race, so its
-    # presidential votes had nothing to join to. Using the
-    # state average as a placeholder.
 
   - id: house-2026-FL-21
     unit: FL-21
@@ -3208,12 +3205,9 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3377
-    pres_2020_dem_two_party: 0.3377
+    pres_2024_dem_two_party: 0.2611
+    pres_2020_dem_two_party: 0.2611
     region: south
-    # NO DISTRICT DATA: uncontested 2024 House race, so its
-    # presidential votes had nothing to join to. Using the
-    # state average as a placeholder.
 
   - id: house-2026-OK-04
     unit: OK-04

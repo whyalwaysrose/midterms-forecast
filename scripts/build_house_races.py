@@ -22,6 +22,12 @@ their state, district and party. Whether that member is running again is a
 separate question, answered by whether they appear among the 2026 FEC filers --
 the filing itself is reliable even though the incumbency flag on it is not.
 
+**Vacant seats need the historical file too.** A vacant seat is absent from
+`legislators-current` entirely, so there is no answer for `incumbent_party`.
+`legislators-historical` records each former member's last district and party,
+which is the actual answer. A district that not even that can answer aborts the
+build -- see the comment on that branch for what happened when it did not.
+
 **2020 has no usable equivalent.** Presidential results for 2020 are under the
 pre-2022 district lines, so they describe different places. Rather than blend
 across a redistricting, the 2020 field repeats the 2024 value, which makes the

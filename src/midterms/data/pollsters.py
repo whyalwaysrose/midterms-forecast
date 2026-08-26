@@ -53,6 +53,12 @@ ALIASES: dict[str, str] = {
     "university of new hampshire survey center": "University of New Hampshire",
     # GBAO Strategies files both with and without the suffix.
     "gbao strategies": "GBAO",
+    # Saint Anselm College runs the Saint Anselm College Survey Center, and
+    # files under both the bare college name and the centre's full one. Surfaced
+    # by the live-feed duplicate test when a fresh fetch first brought in the
+    # short form: four New Hampshire polls that would otherwise have been split
+    # across two house effects, three against one.
+    "saint anselm college survey center": "Saint Anselm",
 }
 
 #: Tokens that distinguish nothing when comparing two names. Used ONLY by the

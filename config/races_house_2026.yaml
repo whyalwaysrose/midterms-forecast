@@ -55,8 +55,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4364
-    pres_2020_dem_two_party: 0.4364
+    pres_2024_dem_two_party: 0.4315
+    pres_2020_dem_two_party: 0.4315
     region: west
 
   - id: house-2026-AL-01
@@ -65,9 +65,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2232
-    pres_2020_dem_two_party: 0.2232
+    pres_2024_dem_two_party: 0.3183
+    pres_2020_dem_two_party: 0.3183
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-AL-02
     unit: AL-02
@@ -75,9 +78,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5391
-    pres_2020_dem_two_party: 0.5391
+    pres_2024_dem_two_party: 0.4277
+    pres_2020_dem_two_party: 0.4277
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-AL-03
     unit: AL-03
@@ -85,9 +91,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2648
-    pres_2020_dem_two_party: 0.2648
+    pres_2024_dem_two_party: 0.2646
+    pres_2020_dem_two_party: 0.2646
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-AL-04
     unit: AL-04
@@ -95,9 +104,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.1660
-    pres_2020_dem_two_party: 0.1660
+    pres_2024_dem_two_party: 0.1654
+    pres_2020_dem_two_party: 0.1654
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-AL-05
     unit: AL-05
@@ -105,9 +117,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3526
-    pres_2020_dem_two_party: 0.3526
+    pres_2024_dem_two_party: 0.3525
+    pres_2020_dem_two_party: 0.3525
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-AL-06
     unit: AL-06
@@ -115,9 +130,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3051
-    pres_2020_dem_two_party: 0.3051
+    pres_2024_dem_two_party: 0.3250
+    pres_2020_dem_two_party: 0.3250
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-AL-07
     unit: AL-07
@@ -125,9 +143,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6171
-    pres_2020_dem_two_party: 0.6171
+    pres_2024_dem_two_party: 0.5897
+    pres_2020_dem_two_party: 0.5897
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-AR-01
     unit: AR-01
@@ -185,8 +206,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4250
-    pres_2020_dem_two_party: 0.4250
+    pres_2024_dem_two_party: 0.4244
+    pres_2020_dem_two_party: 0.4244
     region: west
 
   - id: house-2026-AZ-03
@@ -265,9 +286,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3719
-    pres_2020_dem_two_party: 0.3719
+    pres_2024_dem_two_party: 0.5631
+    pres_2020_dem_two_party: 0.5631
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-02
     unit: CA-02
@@ -275,9 +299,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7340
-    pres_2020_dem_two_party: 0.7340
+    pres_2024_dem_two_party: 0.6272
+    pres_2020_dem_two_party: 0.6272
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-03
     unit: CA-03
@@ -285,9 +312,14 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: open
-    pres_2024_dem_two_party: 0.4806
-    pres_2020_dem_two_party: 0.4806
+    pres_2024_dem_two_party: 0.5526
+    pres_2020_dem_two_party: 0.5526
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
+    # Kevin Kiley is an independent, counted on the R side
+    # for chamber arithmetic. Flagged, as Nebraska's is.
 
   - id: house-2026-CA-04
     unit: CA-04
@@ -295,9 +327,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6614
-    pres_2020_dem_two_party: 0.6614
+    pres_2024_dem_two_party: 0.5747
+    pres_2020_dem_two_party: 0.5747
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-05
     unit: CA-05
@@ -305,9 +340,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4093
-    pres_2020_dem_two_party: 0.4093
+    pres_2024_dem_two_party: 0.3938
+    pres_2020_dem_two_party: 0.3938
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-06
     unit: CA-06
@@ -315,9 +353,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.5718
-    pres_2020_dem_two_party: 0.5718
+    pres_2024_dem_two_party: 0.5434
+    pres_2020_dem_two_party: 0.5434
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-07
     unit: CA-07
@@ -325,9 +366,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6543
-    pres_2020_dem_two_party: 0.6543
+    pres_2024_dem_two_party: 0.5662
+    pres_2020_dem_two_party: 0.5662
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-08
     unit: CA-08
@@ -335,9 +379,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7255
-    pres_2020_dem_two_party: 0.7255
+    pres_2024_dem_two_party: 0.6758
+    pres_2020_dem_two_party: 0.6758
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-09
     unit: CA-09
@@ -345,9 +392,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4910
-    pres_2020_dem_two_party: 0.4910
+    pres_2024_dem_two_party: 0.5590
+    pres_2020_dem_two_party: 0.5590
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-10
     unit: CA-10
@@ -355,9 +405,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6752
-    pres_2020_dem_two_party: 0.6752
+    pres_2024_dem_two_party: 0.6735
+    pres_2020_dem_two_party: 0.6735
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-11
     unit: CA-11
@@ -368,6 +421,9 @@ races:
     pres_2024_dem_two_party: 0.8531
     pres_2020_dem_two_party: 0.8531
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-12
     unit: CA-12
@@ -378,6 +434,9 @@ races:
     pres_2024_dem_two_party: 0.8882
     pres_2020_dem_two_party: 0.8882
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-13
     unit: CA-13
@@ -385,9 +444,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4734
-    pres_2020_dem_two_party: 0.4734
+    pres_2024_dem_two_party: 0.5019
+    pres_2020_dem_two_party: 0.5019
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-14
     unit: CA-14
@@ -395,9 +457,13 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.6844
-    pres_2020_dem_two_party: 0.6844
+    pres_2024_dem_two_party: 0.6810
+    pres_2020_dem_two_party: 0.6810
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
+    # Seat is vacant. Last held by: VACANT (Swalwell).
 
   - id: house-2026-CA-15
     unit: CA-15
@@ -405,9 +471,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7483
-    pres_2020_dem_two_party: 0.7483
+    pres_2024_dem_two_party: 0.7482
+    pres_2020_dem_two_party: 0.7482
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-16
     unit: CA-16
@@ -415,9 +484,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7517
-    pres_2020_dem_two_party: 0.7517
+    pres_2024_dem_two_party: 0.7494
+    pres_2020_dem_two_party: 0.7494
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-17
     unit: CA-17
@@ -425,9 +497,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6983
-    pres_2020_dem_two_party: 0.6983
+    pres_2024_dem_two_party: 0.7037
+    pres_2020_dem_two_party: 0.7037
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-18
     unit: CA-18
@@ -435,9 +510,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6524
-    pres_2020_dem_two_party: 0.6524
+    pres_2024_dem_two_party: 0.6468
+    pres_2020_dem_two_party: 0.6468
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-19
     unit: CA-19
@@ -448,6 +526,9 @@ races:
     pres_2024_dem_two_party: 0.6783
     pres_2020_dem_two_party: 0.6783
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-20
     unit: CA-20
@@ -455,9 +536,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3449
-    pres_2020_dem_two_party: 0.3449
+    pres_2024_dem_two_party: 0.3351
+    pres_2020_dem_two_party: 0.3351
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-21
     unit: CA-21
@@ -465,9 +549,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5197
-    pres_2020_dem_two_party: 0.5197
+    pres_2024_dem_two_party: 0.5307
+    pres_2020_dem_two_party: 0.5307
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-22
     unit: CA-22
@@ -475,9 +562,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4705
-    pres_2020_dem_two_party: 0.4705
+    pres_2024_dem_two_party: 0.4905
+    pres_2020_dem_two_party: 0.4905
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-23
     unit: CA-23
@@ -485,9 +575,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4140
-    pres_2020_dem_two_party: 0.4140
+    pres_2024_dem_two_party: 0.4004
+    pres_2020_dem_two_party: 0.4004
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-24
     unit: CA-24
@@ -495,9 +588,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6295
-    pres_2020_dem_two_party: 0.6295
+    pres_2024_dem_two_party: 0.6287
+    pres_2020_dem_two_party: 0.6287
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-25
     unit: CA-25
@@ -505,9 +601,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5130
-    pres_2020_dem_two_party: 0.5130
+    pres_2024_dem_two_party: 0.5297
+    pres_2020_dem_two_party: 0.5297
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-26
     unit: CA-26
@@ -515,9 +614,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5681
-    pres_2020_dem_two_party: 0.5681
+    pres_2024_dem_two_party: 0.5786
+    pres_2020_dem_two_party: 0.5786
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-27
     unit: CA-27
@@ -525,9 +627,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5203
-    pres_2020_dem_two_party: 0.5203
+    pres_2024_dem_two_party: 0.5502
+    pres_2020_dem_two_party: 0.5502
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-28
     unit: CA-28
@@ -535,9 +640,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6395
-    pres_2020_dem_two_party: 0.6395
+    pres_2024_dem_two_party: 0.6307
+    pres_2020_dem_two_party: 0.6307
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-29
     unit: CA-29
@@ -545,9 +653,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6797
-    pres_2020_dem_two_party: 0.6797
+    pres_2024_dem_two_party: 0.6735
+    pres_2020_dem_two_party: 0.6735
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-30
     unit: CA-30
@@ -555,9 +666,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7126
-    pres_2020_dem_two_party: 0.7126
+    pres_2024_dem_two_party: 0.7072
+    pres_2020_dem_two_party: 0.7072
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-31
     unit: CA-31
@@ -565,9 +679,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5872
-    pres_2020_dem_two_party: 0.5872
+    pres_2024_dem_two_party: 0.5630
+    pres_2020_dem_two_party: 0.5630
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-32
     unit: CA-32
@@ -575,9 +692,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6615
-    pres_2020_dem_two_party: 0.6615
+    pres_2024_dem_two_party: 0.6287
+    pres_2020_dem_two_party: 0.6287
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-33
     unit: CA-33
@@ -585,9 +705,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5452
-    pres_2020_dem_two_party: 0.5452
+    pres_2024_dem_two_party: 0.5504
+    pres_2020_dem_two_party: 0.5504
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-34
     unit: CA-34
@@ -598,6 +721,9 @@ races:
     pres_2024_dem_two_party: 0.7652
     pres_2020_dem_two_party: 0.7652
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-35
     unit: CA-35
@@ -605,9 +731,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5530
-    pres_2020_dem_two_party: 0.5530
+    pres_2024_dem_two_party: 0.5402
+    pres_2020_dem_two_party: 0.5402
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-36
     unit: CA-36
@@ -615,9 +744,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7022
-    pres_2020_dem_two_party: 0.7022
+    pres_2024_dem_two_party: 0.7021
+    pres_2020_dem_two_party: 0.7021
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-37
     unit: CA-37
@@ -628,16 +760,22 @@ races:
     pres_2024_dem_two_party: 0.8115
     pres_2020_dem_two_party: 0.8115
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-38
     unit: CA-38
     name: CA-38
     special: false
     incumbent_party: D
-    incumbent_status: open
-    pres_2024_dem_two_party: 0.5830
-    pres_2020_dem_two_party: 0.5830
+    incumbent_status: elected
+    pres_2024_dem_two_party: 0.5637
+    pres_2020_dem_two_party: 0.5637
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-39
     unit: CA-39
@@ -645,9 +783,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5501
-    pres_2020_dem_two_party: 0.5501
+    pres_2024_dem_two_party: 0.5489
+    pres_2020_dem_two_party: 0.5489
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-40
     unit: CA-40
@@ -655,9 +796,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4881
-    pres_2020_dem_two_party: 0.4881
+    pres_2024_dem_two_party: 0.4370
+    pres_2020_dem_two_party: 0.4370
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-41
     unit: CA-41
@@ -665,9 +809,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: open
-    pres_2024_dem_two_party: 0.4698
-    pres_2020_dem_two_party: 0.4698
+    pres_2024_dem_two_party: 0.5732
+    pres_2020_dem_two_party: 0.5732
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-42
     unit: CA-42
@@ -675,9 +822,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6680
-    pres_2020_dem_two_party: 0.6680
+    pres_2024_dem_two_party: 0.5678
+    pres_2020_dem_two_party: 0.5678
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-43
     unit: CA-43
@@ -685,19 +835,25 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7530
-    pres_2020_dem_two_party: 0.7530
+    pres_2024_dem_two_party: 0.7529
+    pres_2020_dem_two_party: 0.7529
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-44
     unit: CA-44
     name: CA-44
     special: false
     incumbent_party: D
-    incumbent_status: open
-    pres_2024_dem_two_party: 0.6746
-    pres_2020_dem_two_party: 0.6746
+    incumbent_status: elected
+    pres_2024_dem_two_party: 0.6816
+    pres_2020_dem_two_party: 0.6816
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-45
     unit: CA-45
@@ -705,9 +861,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5080
-    pres_2020_dem_two_party: 0.5080
+    pres_2024_dem_two_party: 0.5203
+    pres_2020_dem_two_party: 0.5203
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-46
     unit: CA-46
@@ -715,9 +874,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5915
-    pres_2020_dem_two_party: 0.5915
+    pres_2024_dem_two_party: 0.5834
+    pres_2020_dem_two_party: 0.5834
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-47
     unit: CA-47
@@ -725,9 +887,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5217
-    pres_2020_dem_two_party: 0.5217
+    pres_2024_dem_two_party: 0.5523
+    pres_2020_dem_two_party: 0.5523
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-48
     unit: CA-48
@@ -735,9 +900,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4217
-    pres_2020_dem_two_party: 0.4217
+    pres_2024_dem_two_party: 0.5174
+    pres_2020_dem_two_party: 0.5174
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-49
     unit: CA-49
@@ -745,9 +913,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5400
-    pres_2020_dem_two_party: 0.5400
+    pres_2024_dem_two_party: 0.5624
+    pres_2020_dem_two_party: 0.5624
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-50
     unit: CA-50
@@ -755,9 +926,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6530
-    pres_2020_dem_two_party: 0.6530
+    pres_2024_dem_two_party: 0.5942
+    pres_2020_dem_two_party: 0.5942
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-51
     unit: CA-51
@@ -765,9 +939,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6212
-    pres_2020_dem_two_party: 0.6212
+    pres_2024_dem_two_party: 0.5940
+    pres_2020_dem_two_party: 0.5940
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CA-52
     unit: CA-52
@@ -775,9 +952,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6088
-    pres_2020_dem_two_party: 0.6088
+    pres_2024_dem_two_party: 0.5902
+    pres_2020_dem_two_party: 0.5902
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-CO-01
     unit: CO-01
@@ -928,6 +1108,9 @@ races:
     pres_2024_dem_two_party: 0.3121
     pres_2020_dem_two_party: 0.3121
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-02
     unit: FL-02
@@ -938,6 +1121,9 @@ races:
     pres_2024_dem_two_party: 0.4091
     pres_2020_dem_two_party: 0.4091
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-03
     unit: FL-03
@@ -948,6 +1134,9 @@ races:
     pres_2024_dem_two_party: 0.3934
     pres_2020_dem_two_party: 0.3934
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-04
     unit: FL-04
@@ -958,6 +1147,9 @@ races:
     pres_2024_dem_two_party: 0.4402
     pres_2020_dem_two_party: 0.4402
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-05
     unit: FL-05
@@ -968,6 +1160,9 @@ races:
     pres_2024_dem_two_party: 0.3916
     pres_2020_dem_two_party: 0.3916
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-06
     unit: FL-06
@@ -978,6 +1173,9 @@ races:
     pres_2024_dem_two_party: 0.3485
     pres_2020_dem_two_party: 0.3485
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-07
     unit: FL-07
@@ -988,6 +1186,9 @@ races:
     pres_2024_dem_two_party: 0.4369
     pres_2020_dem_two_party: 0.4369
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-08
     unit: FL-08
@@ -995,9 +1196,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3872
-    pres_2020_dem_two_party: 0.3872
+    pres_2024_dem_two_party: 0.4180
+    pres_2020_dem_two_party: 0.4180
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-09
     unit: FL-09
@@ -1005,9 +1209,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5178
-    pres_2020_dem_two_party: 0.5178
+    pres_2024_dem_two_party: 0.4103
+    pres_2020_dem_two_party: 0.4103
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-10
     unit: FL-10
@@ -1015,9 +1222,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6151
-    pres_2020_dem_two_party: 0.6151
+    pres_2024_dem_two_party: 0.6215
+    pres_2020_dem_two_party: 0.6215
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-11
     unit: FL-11
@@ -1025,9 +1235,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4180
-    pres_2020_dem_two_party: 0.4180
+    pres_2024_dem_two_party: 0.4208
+    pres_2020_dem_two_party: 0.4208
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-12
     unit: FL-12
@@ -1035,9 +1248,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3257
-    pres_2020_dem_two_party: 0.3257
+    pres_2024_dem_two_party: 0.4222
+    pres_2020_dem_two_party: 0.4222
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-13
     unit: FL-13
@@ -1045,9 +1261,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: open
-    pres_2024_dem_two_party: 0.4401
-    pres_2020_dem_two_party: 0.4401
+    pres_2024_dem_two_party: 0.4327
+    pres_2020_dem_two_party: 0.4327
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-14
     unit: FL-14
@@ -1055,9 +1274,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5388
-    pres_2020_dem_two_party: 0.5388
+    pres_2024_dem_two_party: 0.4469
+    pres_2020_dem_two_party: 0.4469
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-15
     unit: FL-15
@@ -1065,9 +1287,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4432
-    pres_2020_dem_two_party: 0.4432
+    pres_2024_dem_two_party: 0.3995
+    pres_2020_dem_two_party: 0.3995
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-16
     unit: FL-16
@@ -1075,9 +1300,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4220
-    pres_2020_dem_two_party: 0.4220
+    pres_2024_dem_two_party: 0.4309
+    pres_2020_dem_two_party: 0.4309
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-17
     unit: FL-17
@@ -1085,9 +1313,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3794
-    pres_2020_dem_two_party: 0.3794
+    pres_2024_dem_two_party: 0.3888
+    pres_2020_dem_two_party: 0.3888
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-18
     unit: FL-18
@@ -1095,9 +1326,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3519
-    pres_2020_dem_two_party: 0.3519
+    pres_2024_dem_two_party: 0.4145
+    pres_2020_dem_two_party: 0.4145
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-19
     unit: FL-19
@@ -1105,9 +1339,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3532
-    pres_2020_dem_two_party: 0.3532
+    pres_2024_dem_two_party: 0.3479
+    pres_2020_dem_two_party: 0.3479
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-20
     unit: FL-20
@@ -1115,9 +1352,13 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.6998
-    pres_2020_dem_two_party: 0.6998
+    pres_2024_dem_two_party: 0.6875
+    pres_2020_dem_two_party: 0.6875
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
+    # Seat is vacant. Last held by: VACANT (Cherfilus-McCormick).
 
   - id: house-2026-FL-21
     unit: FL-21
@@ -1125,9 +1366,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4166
-    pres_2020_dem_two_party: 0.4166
+    pres_2024_dem_two_party: 0.4180
+    pres_2020_dem_two_party: 0.4180
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-22
     unit: FL-22
@@ -1135,9 +1379,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.5281
-    pres_2020_dem_two_party: 0.5281
+    pres_2024_dem_two_party: 0.4481
+    pres_2020_dem_two_party: 0.4481
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-23
     unit: FL-23
@@ -1145,9 +1392,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.5096
-    pres_2020_dem_two_party: 0.5096
+    pres_2024_dem_two_party: 0.5693
+    pres_2020_dem_two_party: 0.5693
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-24
     unit: FL-24
@@ -1155,9 +1405,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6516
-    pres_2020_dem_two_party: 0.6516
+    pres_2024_dem_two_party: 0.6952
+    pres_2020_dem_two_party: 0.6952
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-25
     unit: FL-25
@@ -1165,9 +1418,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.5269
-    pres_2020_dem_two_party: 0.5269
+    pres_2024_dem_two_party: 0.4539
+    pres_2020_dem_two_party: 0.4539
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-26
     unit: FL-26
@@ -1175,9 +1431,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3240
-    pres_2020_dem_two_party: 0.3240
+    pres_2024_dem_two_party: 0.4073
+    pres_2020_dem_two_party: 0.4073
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-27
     unit: FL-27
@@ -1185,9 +1444,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4261
-    pres_2020_dem_two_party: 0.4261
+    pres_2024_dem_two_party: 0.4265
+    pres_2020_dem_two_party: 0.4265
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-FL-28
     unit: FL-28
@@ -1195,9 +1457,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3721
-    pres_2020_dem_two_party: 0.3721
+    pres_2024_dem_two_party: 0.3719
+    pres_2020_dem_two_party: 0.3719
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-GA-01
     unit: GA-01
@@ -1215,8 +1480,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5382
-    pres_2020_dem_two_party: 0.5382
+    pres_2024_dem_two_party: 0.5383
+    pres_2020_dem_two_party: 0.5383
     region: south
 
   - id: house-2026-GA-03
@@ -1328,6 +1593,7 @@ races:
     pres_2024_dem_two_party: 0.7136
     pres_2020_dem_two_party: 0.7136
     region: south
+    # Seat is vacant. Last held by: VACANT (Scott).
 
   - id: house-2026-GA-14
     unit: GA-14
@@ -1425,8 +1691,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6616
-    pres_2020_dem_two_party: 0.6616
+    pres_2024_dem_two_party: 0.6623
+    pres_2020_dem_two_party: 0.6623
     region: midwest
 
   - id: house-2026-IL-02
@@ -1454,9 +1720,9 @@ races:
     name: IL-04
     special: false
     incumbent_party: D
-    incumbent_status: open
-    pres_2024_dem_two_party: 0.6439
-    pres_2020_dem_two_party: 0.6439
+    incumbent_status: elected
+    pres_2024_dem_two_party: 0.6438
+    pres_2020_dem_two_party: 0.6438
     region: midwest
 
   - id: house-2026-IL-05
@@ -1475,8 +1741,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5284
-    pres_2020_dem_two_party: 0.5284
+    pres_2024_dem_two_party: 0.5279
+    pres_2020_dem_two_party: 0.5279
     region: midwest
 
   - id: house-2026-IL-07
@@ -1485,8 +1751,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.8306
-    pres_2020_dem_two_party: 0.8306
+    pres_2024_dem_two_party: 0.8308
+    pres_2020_dem_two_party: 0.8308
     region: midwest
 
   - id: house-2026-IL-08
@@ -1505,8 +1771,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6850
-    pres_2020_dem_two_party: 0.6850
+    pres_2024_dem_two_party: 0.6849
+    pres_2020_dem_two_party: 0.6849
     region: midwest
 
   - id: house-2026-IL-10
@@ -1605,8 +1871,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4037
-    pres_2020_dem_two_party: 0.4037
+    pres_2024_dem_two_party: 0.3654
+    pres_2020_dem_two_party: 0.3654
     region: midwest
 
   - id: house-2026-IN-03
@@ -1625,8 +1891,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3600
-    pres_2020_dem_two_party: 0.3600
+    pres_2024_dem_two_party: 0.3506
+    pres_2020_dem_two_party: 0.3506
     region: midwest
 
   - id: house-2026-IN-05
@@ -1665,8 +1931,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3173
-    pres_2020_dem_two_party: 0.3173
+    pres_2024_dem_two_party: 0.3175
+    pres_2020_dem_two_party: 0.3175
     region: midwest
 
   - id: house-2026-IN-09
@@ -1675,8 +1941,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3089
-    pres_2020_dem_two_party: 0.3089
+    pres_2024_dem_two_party: 0.3481
+    pres_2020_dem_two_party: 0.3481
     region: midwest
 
   - id: house-2026-KS-01
@@ -1785,9 +2051,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3022
-    pres_2020_dem_two_party: 0.3022
+    pres_2024_dem_two_party: 0.3053
+    pres_2020_dem_two_party: 0.3053
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-LA-02
     unit: LA-02
@@ -1795,9 +2064,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6510
-    pres_2020_dem_two_party: 0.6510
+    pres_2024_dem_two_party: 0.7417
+    pres_2020_dem_two_party: 0.7417
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-LA-03
     unit: LA-03
@@ -1805,9 +2077,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2868
-    pres_2020_dem_two_party: 0.2868
+    pres_2024_dem_two_party: 0.3175
+    pres_2020_dem_two_party: 0.3175
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-LA-04
     unit: LA-04
@@ -1815,9 +2090,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2426
-    pres_2020_dem_two_party: 0.2426
+    pres_2024_dem_two_party: 0.3267
+    pres_2020_dem_two_party: 0.3267
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-LA-05
     unit: LA-05
@@ -1825,9 +2103,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3337
-    pres_2020_dem_two_party: 0.3337
+    pres_2024_dem_two_party: 0.3277
+    pres_2020_dem_two_party: 0.3277
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-LA-06
     unit: LA-06
@@ -1835,9 +2116,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5784
-    pres_2020_dem_two_party: 0.5784
+    pres_2024_dem_two_party: 0.3469
+    pres_2020_dem_two_party: 0.3469
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MA-01
     unit: MA-01
@@ -1955,8 +2239,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6224
-    pres_2020_dem_two_party: 0.6224
+    pres_2024_dem_two_party: 0.6225
+    pres_2020_dem_two_party: 0.6225
     region: northeast
 
   - id: house-2026-MD-04
@@ -1975,8 +2259,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6702
-    pres_2020_dem_two_party: 0.6702
+    pres_2024_dem_two_party: 0.6703
+    pres_2020_dem_two_party: 0.6703
     region: northeast
 
   - id: house-2026-MD-06
@@ -1984,7 +2268,7 @@ races:
     name: MD-06
     special: false
     incumbent_party: D
-    incumbent_status: open
+    incumbent_status: elected
     pres_2024_dem_two_party: 0.5296
     pres_2020_dem_two_party: 0.5296
     region: northeast
@@ -2015,8 +2299,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6081
-    pres_2020_dem_two_party: 0.6081
+    pres_2024_dem_two_party: 0.6104
+    pres_2020_dem_two_party: 0.6104
     region: northeast
 
   - id: house-2026-ME-02
@@ -2025,8 +2309,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4532
-    pres_2020_dem_two_party: 0.4532
+    pres_2024_dem_two_party: 0.4538
+    pres_2020_dem_two_party: 0.4538
     region: northeast
 
   - id: house-2026-MI-01
@@ -2104,7 +2388,7 @@ races:
     name: MI-08
     special: false
     incumbent_party: D
-    incumbent_status: elected
+    incumbent_status: open
     pres_2024_dem_two_party: 0.4900
     pres_2020_dem_two_party: 0.4900
     region: midwest
@@ -2245,9 +2529,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7909
-    pres_2020_dem_two_party: 0.7909
+    pres_2024_dem_two_party: 0.7931
+    pres_2020_dem_two_party: 0.7931
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MO-02
     unit: MO-02
@@ -2255,9 +2542,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4617
-    pres_2020_dem_two_party: 0.4617
+    pres_2024_dem_two_party: 0.4422
+    pres_2020_dem_two_party: 0.4422
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MO-03
     unit: MO-03
@@ -2265,9 +2555,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3630
-    pres_2020_dem_two_party: 0.3630
+    pres_2024_dem_two_party: 0.3986
+    pres_2020_dem_two_party: 0.3986
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MO-04
     unit: MO-04
@@ -2275,9 +2568,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2878
-    pres_2020_dem_two_party: 0.2878
+    pres_2024_dem_two_party: 0.3926
+    pres_2020_dem_two_party: 0.3926
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MO-05
     unit: MO-05
@@ -2285,9 +2581,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.6154
-    pres_2020_dem_two_party: 0.6154
+    pres_2024_dem_two_party: 0.4070
+    pres_2020_dem_two_party: 0.4070
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MO-06
     unit: MO-06
@@ -2295,9 +2594,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3037
-    pres_2020_dem_two_party: 0.3037
+    pres_2024_dem_two_party: 0.3650
+    pres_2020_dem_two_party: 0.3650
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MO-07
     unit: MO-07
@@ -2308,6 +2610,9 @@ races:
     pres_2024_dem_two_party: 0.2844
     pres_2020_dem_two_party: 0.2844
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MO-08
     unit: MO-08
@@ -2315,9 +2620,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2260
-    pres_2020_dem_two_party: 0.2260
+    pres_2024_dem_two_party: 0.2279
+    pres_2020_dem_two_party: 0.2279
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-MS-01
     unit: MS-01
@@ -2335,8 +2643,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6030
-    pres_2020_dem_two_party: 0.6030
+    pres_2024_dem_two_party: 0.6029
+    pres_2020_dem_two_party: 0.6029
     region: south
 
   - id: house-2026-MS-03
@@ -2345,8 +2653,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3524
-    pres_2020_dem_two_party: 0.3524
+    pres_2024_dem_two_party: 0.3527
+    pres_2020_dem_two_party: 0.3527
     region: south
 
   - id: house-2026-MS-04
@@ -2375,8 +2683,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3474
-    pres_2020_dem_two_party: 0.3474
+    pres_2024_dem_two_party: 0.3475
+    pres_2020_dem_two_party: 0.3475
     region: west
 
   - id: house-2026-NC-01
@@ -2385,9 +2693,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4844
-    pres_2020_dem_two_party: 0.4844
+    pres_2024_dem_two_party: 0.4418
+    pres_2020_dem_two_party: 0.4418
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-02
     unit: NC-02
@@ -2395,9 +2706,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6629
-    pres_2020_dem_two_party: 0.6629
+    pres_2024_dem_two_party: 0.6722
+    pres_2020_dem_two_party: 0.6722
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-03
     unit: NC-03
@@ -2405,9 +2719,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3895
-    pres_2020_dem_two_party: 0.3895
+    pres_2024_dem_two_party: 0.4312
+    pres_2020_dem_two_party: 0.4312
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-04
     unit: NC-04
@@ -2415,9 +2732,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7284
-    pres_2020_dem_two_party: 0.7284
+    pres_2024_dem_two_party: 0.7303
+    pres_2020_dem_two_party: 0.7303
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-05
     unit: NC-05
@@ -2425,9 +2745,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3976
-    pres_2020_dem_two_party: 0.3976
+    pres_2024_dem_two_party: 0.4102
+    pres_2020_dem_two_party: 0.4102
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-06
     unit: NC-06
@@ -2435,9 +2758,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4005
-    pres_2020_dem_two_party: 0.4005
+    pres_2024_dem_two_party: 0.4131
+    pres_2020_dem_two_party: 0.4131
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-07
     unit: NC-07
@@ -2445,9 +2771,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4302
-    pres_2020_dem_two_party: 0.4302
+    pres_2024_dem_two_party: 0.4303
+    pres_2020_dem_two_party: 0.4303
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-08
     unit: NC-08
@@ -2455,9 +2784,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4065
-    pres_2020_dem_two_party: 0.4065
+    pres_2024_dem_two_party: 0.4021
+    pres_2020_dem_two_party: 0.4021
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-09
     unit: NC-09
@@ -2465,9 +2797,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4428
-    pres_2020_dem_two_party: 0.4428
+    pres_2024_dem_two_party: 0.4199
+    pres_2020_dem_two_party: 0.4199
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-10
     unit: NC-10
@@ -2475,9 +2810,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4097
-    pres_2020_dem_two_party: 0.4097
+    pres_2024_dem_two_party: 0.4105
+    pres_2020_dem_two_party: 0.4105
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-11
     unit: NC-11
@@ -2488,6 +2826,9 @@ races:
     pres_2024_dem_two_party: 0.4519
     pres_2020_dem_two_party: 0.4519
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-12
     unit: NC-12
@@ -2495,9 +2836,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7323
-    pres_2020_dem_two_party: 0.7323
+    pres_2024_dem_two_party: 0.7353
+    pres_2020_dem_two_party: 0.7353
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-13
     unit: NC-13
@@ -2505,9 +2849,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4275
-    pres_2020_dem_two_party: 0.4275
+    pres_2024_dem_two_party: 0.4168
+    pres_2020_dem_two_party: 0.4168
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-NC-14
     unit: NC-14
@@ -2515,9 +2862,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4249
-    pres_2020_dem_two_party: 0.4249
+    pres_2024_dem_two_party: 0.4239
+    pres_2020_dem_two_party: 0.4239
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-ND-01
     unit: ND-01
@@ -2555,8 +2905,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2279
-    pres_2020_dem_two_party: 0.2279
+    pres_2024_dem_two_party: 0.2278
+    pres_2020_dem_two_party: 0.2278
     region: midwest
 
   - id: house-2026-NH-01
@@ -2585,8 +2935,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6373
-    pres_2020_dem_two_party: 0.6373
+    pres_2024_dem_two_party: 0.5951
+    pres_2020_dem_two_party: 0.5951
     region: northeast
 
   - id: house-2026-NJ-02
@@ -2594,9 +2944,9 @@ races:
     name: NJ-02
     special: false
     incumbent_party: R
-    incumbent_status: elected
-    pres_2024_dem_two_party: 0.4349
-    pres_2020_dem_two_party: 0.4349
+    incumbent_status: open
+    pres_2024_dem_two_party: 0.4363
+    pres_2020_dem_two_party: 0.4363
     region: northeast
 
   - id: house-2026-NJ-03
@@ -2605,8 +2955,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5418
-    pres_2020_dem_two_party: 0.5418
+    pres_2024_dem_two_party: 0.5425
+    pres_2020_dem_two_party: 0.5425
     region: northeast
 
   - id: house-2026-NJ-04
@@ -2625,8 +2975,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5281
-    pres_2020_dem_two_party: 0.5281
+    pres_2024_dem_two_party: 0.5077
+    pres_2020_dem_two_party: 0.5077
     region: northeast
 
   - id: house-2026-NJ-06
@@ -2645,8 +2995,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4935
-    pres_2020_dem_two_party: 0.4935
+    pres_2024_dem_two_party: 0.4940
+    pres_2020_dem_two_party: 0.4940
     region: northeast
 
   - id: house-2026-NJ-08
@@ -2655,8 +3005,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6252
-    pres_2020_dem_two_party: 0.6252
+    pres_2024_dem_two_party: 0.6241
+    pres_2020_dem_two_party: 0.6241
     region: northeast
 
   - id: house-2026-NJ-09
@@ -2665,8 +3015,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4784
-    pres_2020_dem_two_party: 0.4784
+    pres_2024_dem_two_party: 0.4941
+    pres_2020_dem_two_party: 0.4941
     region: northeast
 
   - id: house-2026-NJ-10
@@ -2675,8 +3025,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7592
-    pres_2020_dem_two_party: 0.7592
+    pres_2024_dem_two_party: 0.7583
+    pres_2020_dem_two_party: 0.7583
     region: northeast
 
   - id: house-2026-NJ-11
@@ -2685,8 +3035,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5474
-    pres_2020_dem_two_party: 0.5474
+    pres_2024_dem_two_party: 0.5445
+    pres_2020_dem_two_party: 0.5445
     region: northeast
 
   - id: house-2026-NJ-12
@@ -2694,9 +3044,9 @@ races:
     name: NJ-12
     special: false
     incumbent_party: D
-    incumbent_status: open
-    pres_2024_dem_two_party: 0.6152
-    pres_2020_dem_two_party: 0.6152
+    incumbent_status: elected
+    pres_2024_dem_two_party: 0.6227
+    pres_2020_dem_two_party: 0.6227
     region: northeast
 
   - id: house-2026-NM-01
@@ -2715,8 +3065,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4907
-    pres_2020_dem_two_party: 0.4907
+    pres_2024_dem_two_party: 0.4908
+    pres_2020_dem_two_party: 0.4908
     region: west
 
   - id: house-2026-NM-03
@@ -2724,7 +3074,7 @@ races:
     name: NM-03
     special: false
     incumbent_party: D
-    incumbent_status: elected
+    incumbent_status: open
     pres_2024_dem_two_party: 0.5266
     pres_2020_dem_two_party: 0.5266
     region: west
@@ -2765,8 +3115,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5119
-    pres_2020_dem_two_party: 0.5119
+    pres_2024_dem_two_party: 0.5118
+    pres_2020_dem_two_party: 0.5118
     region: west
 
   - id: house-2026-NY-01
@@ -2775,8 +3125,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: open
-    pres_2024_dem_two_party: 0.4653
-    pres_2020_dem_two_party: 0.4653
+    pres_2024_dem_two_party: 0.4490
+    pres_2020_dem_two_party: 0.4490
     region: northeast
 
   - id: house-2026-NY-02
@@ -2785,8 +3135,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4437
-    pres_2020_dem_two_party: 0.4437
+    pres_2024_dem_two_party: 0.4296
+    pres_2020_dem_two_party: 0.4296
     region: northeast
 
   - id: house-2026-NY-03
@@ -2795,8 +3145,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4873
-    pres_2020_dem_two_party: 0.4873
+    pres_2024_dem_two_party: 0.4783
+    pres_2020_dem_two_party: 0.4783
     region: northeast
 
   - id: house-2026-NY-04
@@ -2805,8 +3155,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5158
-    pres_2020_dem_two_party: 0.5158
+    pres_2024_dem_two_party: 0.5065
+    pres_2020_dem_two_party: 0.5065
     region: northeast
 
   - id: house-2026-NY-05
@@ -2815,8 +3165,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7218
-    pres_2020_dem_two_party: 0.7218
+    pres_2024_dem_two_party: 0.7140
+    pres_2020_dem_two_party: 0.7140
     region: northeast
 
   - id: house-2026-NY-06
@@ -2825,8 +3175,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5320
-    pres_2020_dem_two_party: 0.5320
+    pres_2024_dem_two_party: 0.5326
+    pres_2020_dem_two_party: 0.5326
     region: northeast
 
   - id: house-2026-NY-07
@@ -2834,9 +3184,9 @@ races:
     name: NY-07
     special: false
     incumbent_party: D
-    incumbent_status: open
-    pres_2024_dem_two_party: 0.7251
-    pres_2020_dem_two_party: 0.7251
+    incumbent_status: elected
+    pres_2024_dem_two_party: 0.7360
+    pres_2020_dem_two_party: 0.7360
     region: northeast
 
   - id: house-2026-NY-08
@@ -2845,8 +3195,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7231
-    pres_2020_dem_two_party: 0.7231
+    pres_2024_dem_two_party: 0.7235
+    pres_2020_dem_two_party: 0.7235
     region: northeast
 
   - id: house-2026-NY-09
@@ -2855,8 +3205,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7050
-    pres_2020_dem_two_party: 0.7050
+    pres_2024_dem_two_party: 0.7073
+    pres_2020_dem_two_party: 0.7073
     region: northeast
 
   - id: house-2026-NY-10
@@ -2865,8 +3215,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.8030
-    pres_2020_dem_two_party: 0.8030
+    pres_2024_dem_two_party: 0.8095
+    pres_2020_dem_two_party: 0.8095
     region: northeast
 
   - id: house-2026-NY-11
@@ -2875,8 +3225,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3777
-    pres_2020_dem_two_party: 0.3777
+    pres_2024_dem_two_party: 0.3759
+    pres_2020_dem_two_party: 0.3759
     region: northeast
 
   - id: house-2026-NY-12
@@ -2885,8 +3235,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.8259
-    pres_2020_dem_two_party: 0.8259
+    pres_2024_dem_two_party: 0.8245
+    pres_2020_dem_two_party: 0.8245
     region: northeast
 
   - id: house-2026-NY-13
@@ -2895,8 +3245,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.8006
-    pres_2020_dem_two_party: 0.8006
+    pres_2024_dem_two_party: 0.8014
+    pres_2020_dem_two_party: 0.8014
     region: northeast
 
   - id: house-2026-NY-14
@@ -2905,8 +3255,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6583
-    pres_2020_dem_two_party: 0.6583
+    pres_2024_dem_two_party: 0.6618
+    pres_2020_dem_two_party: 0.6618
     region: northeast
 
   - id: house-2026-NY-15
@@ -2915,8 +3265,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7500
-    pres_2020_dem_two_party: 0.7500
+    pres_2024_dem_two_party: 0.7440
+    pres_2020_dem_two_party: 0.7440
     region: northeast
 
   - id: house-2026-NY-16
@@ -2925,8 +3275,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6753
-    pres_2020_dem_two_party: 0.6753
+    pres_2024_dem_two_party: 0.6665
+    pres_2020_dem_two_party: 0.6665
     region: northeast
 
   - id: house-2026-NY-17
@@ -2935,8 +3285,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5140
-    pres_2020_dem_two_party: 0.5140
+    pres_2024_dem_two_party: 0.5028
+    pres_2020_dem_two_party: 0.5028
     region: northeast
 
   - id: house-2026-NY-18
@@ -2945,8 +3295,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5239
-    pres_2020_dem_two_party: 0.5239
+    pres_2024_dem_two_party: 0.5168
+    pres_2020_dem_two_party: 0.5168
     region: northeast
 
   - id: house-2026-NY-19
@@ -2955,8 +3305,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4948
-    pres_2020_dem_two_party: 0.4948
+    pres_2024_dem_two_party: 0.5090
+    pres_2020_dem_two_party: 0.5090
     region: northeast
 
   - id: house-2026-NY-20
@@ -2965,8 +3315,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6008
-    pres_2020_dem_two_party: 0.6008
+    pres_2024_dem_two_party: 0.5716
+    pres_2020_dem_two_party: 0.5716
     region: northeast
 
   - id: house-2026-NY-21
@@ -2975,8 +3325,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4031
-    pres_2020_dem_two_party: 0.4031
+    pres_2024_dem_two_party: 0.3962
+    pres_2020_dem_two_party: 0.3962
     region: northeast
 
   - id: house-2026-NY-22
@@ -2985,8 +3335,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5492
-    pres_2020_dem_two_party: 0.5492
+    pres_2024_dem_two_party: 0.5385
+    pres_2020_dem_two_party: 0.5385
     region: northeast
 
   - id: house-2026-NY-23
@@ -2995,8 +3345,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4081
-    pres_2020_dem_two_party: 0.4081
+    pres_2024_dem_two_party: 0.3941
+    pres_2020_dem_two_party: 0.3941
     region: northeast
 
   - id: house-2026-NY-24
@@ -3005,8 +3355,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4237
-    pres_2020_dem_two_party: 0.4237
+    pres_2024_dem_two_party: 0.3838
+    pres_2020_dem_two_party: 0.3838
     region: northeast
 
   - id: house-2026-NY-25
@@ -3015,8 +3365,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6427
-    pres_2020_dem_two_party: 0.6427
+    pres_2024_dem_two_party: 0.5933
+    pres_2020_dem_two_party: 0.5933
     region: northeast
 
   - id: house-2026-NY-26
@@ -3025,8 +3375,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6143
-    pres_2020_dem_two_party: 0.6143
+    pres_2024_dem_two_party: 0.5978
+    pres_2020_dem_two_party: 0.5978
     region: northeast
 
   - id: house-2026-OH-01
@@ -3035,9 +3385,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5320
-    pres_2020_dem_two_party: 0.5320
+    pres_2024_dem_two_party: 0.4869
+    pres_2020_dem_two_party: 0.4869
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-02
     unit: OH-02
@@ -3045,9 +3398,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2603
-    pres_2020_dem_two_party: 0.2603
+    pres_2024_dem_two_party: 0.2876
+    pres_2020_dem_two_party: 0.2876
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-03
     unit: OH-03
@@ -3058,6 +3414,9 @@ races:
     pres_2024_dem_two_party: 0.7033
     pres_2020_dem_two_party: 0.7033
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-04
     unit: OH-04
@@ -3065,9 +3424,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3146
-    pres_2020_dem_two_party: 0.3146
+    pres_2024_dem_two_party: 0.2849
+    pres_2020_dem_two_party: 0.2849
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-05
     unit: OH-05
@@ -3075,9 +3437,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3523
-    pres_2020_dem_two_party: 0.3523
+    pres_2024_dem_two_party: 0.3801
+    pres_2020_dem_two_party: 0.3801
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-06
     unit: OH-06
@@ -3085,9 +3450,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3303
-    pres_2020_dem_two_party: 0.3303
+    pres_2024_dem_two_party: 0.3255
+    pres_2020_dem_two_party: 0.3255
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-07
     unit: OH-07
@@ -3095,9 +3463,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4463
-    pres_2020_dem_two_party: 0.4463
+    pres_2024_dem_two_party: 0.4442
+    pres_2020_dem_two_party: 0.4442
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-08
     unit: OH-08
@@ -3105,9 +3476,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3805
-    pres_2020_dem_two_party: 0.3805
+    pres_2024_dem_two_party: 0.4211
+    pres_2020_dem_two_party: 0.4211
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-09
     unit: OH-09
@@ -3115,9 +3489,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4661
-    pres_2020_dem_two_party: 0.4661
+    pres_2024_dem_two_party: 0.4466
+    pres_2020_dem_two_party: 0.4466
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-10
     unit: OH-10
@@ -3125,9 +3502,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4710
-    pres_2020_dem_two_party: 0.4710
+    pres_2024_dem_two_party: 0.4607
+    pres_2020_dem_two_party: 0.4607
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-11
     unit: OH-11
@@ -3138,6 +3518,9 @@ races:
     pres_2024_dem_two_party: 0.7773
     pres_2020_dem_two_party: 0.7773
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-12
     unit: OH-12
@@ -3145,9 +3528,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3349
-    pres_2020_dem_two_party: 0.3349
+    pres_2024_dem_two_party: 0.3482
+    pres_2020_dem_two_party: 0.3482
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-13
     unit: OH-13
@@ -3155,9 +3541,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5002
-    pres_2020_dem_two_party: 0.5002
+    pres_2024_dem_two_party: 0.5166
+    pres_2020_dem_two_party: 0.5166
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-14
     unit: OH-14
@@ -3165,9 +3554,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4096
-    pres_2020_dem_two_party: 0.4096
+    pres_2024_dem_two_party: 0.3973
+    pres_2020_dem_two_party: 0.3973
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OH-15
     unit: OH-15
@@ -3175,9 +3567,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4536
-    pres_2020_dem_two_party: 0.4536
+    pres_2024_dem_two_party: 0.4494
+    pres_2020_dem_two_party: 0.4494
     region: midwest
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-OK-01
     unit: OK-01
@@ -3205,8 +3600,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2611
-    pres_2020_dem_two_party: 0.2611
+    pres_2024_dem_two_party: 0.2679
+    pres_2020_dem_two_party: 0.2679
     region: south
 
   - id: house-2026-OK-04
@@ -3225,8 +3620,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4126
-    pres_2020_dem_two_party: 0.4126
+    pres_2024_dem_two_party: 0.4094
+    pres_2020_dem_two_party: 0.4094
     region: south
 
   - id: house-2026-OR-01
@@ -3235,8 +3630,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6226
-    pres_2020_dem_two_party: 0.6226
+    pres_2024_dem_two_party: 0.6956
+    pres_2020_dem_two_party: 0.6956
     region: west
 
   - id: house-2026-OR-02
@@ -3245,8 +3640,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3244
-    pres_2020_dem_two_party: 0.3244
+    pres_2024_dem_two_party: 0.3606
+    pres_2020_dem_two_party: 0.3606
     region: west
 
   - id: house-2026-OR-03
@@ -3255,8 +3650,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4391
-    pres_2020_dem_two_party: 0.4391
+    pres_2024_dem_two_party: 0.7381
+    pres_2020_dem_two_party: 0.7381
     region: west
 
   - id: house-2026-OR-04
@@ -3265,8 +3660,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5597
-    pres_2020_dem_two_party: 0.5597
+    pres_2024_dem_two_party: 0.5622
+    pres_2020_dem_two_party: 0.5622
     region: west
 
   - id: house-2026-OR-05
@@ -3275,8 +3670,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5535
-    pres_2020_dem_two_party: 0.5535
+    pres_2024_dem_two_party: 0.5440
+    pres_2020_dem_two_party: 0.5440
     region: west
 
   - id: house-2026-OR-06
@@ -3295,8 +3690,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5017
-    pres_2020_dem_two_party: 0.5017
+    pres_2024_dem_two_party: 0.5016
+    pres_2020_dem_two_party: 0.5016
     region: northeast
 
   - id: house-2026-PA-02
@@ -3305,8 +3700,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6806
-    pres_2020_dem_two_party: 0.6806
+    pres_2024_dem_two_party: 0.6808
+    pres_2020_dem_two_party: 0.6808
     region: northeast
 
   - id: house-2026-PA-03
@@ -3315,8 +3710,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.8911
-    pres_2020_dem_two_party: 0.8911
+    pres_2024_dem_two_party: 0.8913
+    pres_2020_dem_two_party: 0.8913
     region: northeast
 
   - id: house-2026-PA-04
@@ -3325,8 +3720,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5803
-    pres_2020_dem_two_party: 0.5803
+    pres_2024_dem_two_party: 0.5798
+    pres_2020_dem_two_party: 0.5798
     region: northeast
 
   - id: house-2026-PA-05
@@ -3335,8 +3730,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6448
-    pres_2020_dem_two_party: 0.6448
+    pres_2024_dem_two_party: 0.6447
+    pres_2020_dem_two_party: 0.6447
     region: northeast
 
   - id: house-2026-PA-06
@@ -3345,8 +3740,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5579
-    pres_2020_dem_two_party: 0.5579
+    pres_2024_dem_two_party: 0.5576
+    pres_2020_dem_two_party: 0.5576
     region: northeast
 
   - id: house-2026-PA-07
@@ -3365,8 +3760,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4567
-    pres_2020_dem_two_party: 0.4567
+    pres_2024_dem_two_party: 0.4572
+    pres_2020_dem_two_party: 0.4572
     region: northeast
 
   - id: house-2026-PA-09
@@ -3375,8 +3770,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3087
-    pres_2020_dem_two_party: 0.3087
+    pres_2024_dem_two_party: 0.3086
+    pres_2020_dem_two_party: 0.3086
     region: northeast
 
   - id: house-2026-PA-10
@@ -3385,8 +3780,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4732
-    pres_2020_dem_two_party: 0.4732
+    pres_2024_dem_two_party: 0.4735
+    pres_2020_dem_two_party: 0.4735
     region: northeast
 
   - id: house-2026-PA-11
@@ -3395,8 +3790,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3923
-    pres_2020_dem_two_party: 0.3923
+    pres_2024_dem_two_party: 0.3921
+    pres_2020_dem_two_party: 0.3921
     region: northeast
 
   - id: house-2026-PA-12
@@ -3425,8 +3820,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3321
-    pres_2020_dem_two_party: 0.3321
+    pres_2024_dem_two_party: 0.3320
+    pres_2020_dem_two_party: 0.3320
     region: northeast
 
   - id: house-2026-PA-15
@@ -3435,8 +3830,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3085
-    pres_2020_dem_two_party: 0.3085
+    pres_2024_dem_two_party: 0.3086
+    pres_2020_dem_two_party: 0.3086
     region: northeast
 
   - id: house-2026-PA-16
@@ -3445,8 +3840,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3851
-    pres_2020_dem_two_party: 0.3851
+    pres_2024_dem_two_party: 0.3852
+    pres_2020_dem_two_party: 0.3852
     region: northeast
 
   - id: house-2026-PA-17
@@ -3455,8 +3850,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5276
-    pres_2020_dem_two_party: 0.5276
+    pres_2024_dem_two_party: 0.5278
+    pres_2020_dem_two_party: 0.5278
     region: northeast
 
   - id: house-2026-RI-01
@@ -3465,8 +3860,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6128
-    pres_2020_dem_two_party: 0.6128
+    pres_2024_dem_two_party: 0.6133
+    pres_2020_dem_two_party: 0.6133
     region: northeast
 
   - id: house-2026-RI-02
@@ -3475,8 +3870,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5349
-    pres_2020_dem_two_party: 0.5349
+    pres_2024_dem_two_party: 0.5347
+    pres_2020_dem_two_party: 0.5347
     region: northeast
 
   - id: house-2026-SC-01
@@ -3515,8 +3910,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3801
-    pres_2020_dem_two_party: 0.3801
+    pres_2024_dem_two_party: 0.3802
+    pres_2020_dem_two_party: 0.3802
     region: south
 
   - id: house-2026-SC-05
@@ -3568,6 +3963,9 @@ races:
     pres_2024_dem_two_party: 0.2078
     pres_2020_dem_two_party: 0.2078
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TN-02
     unit: TN-02
@@ -3575,9 +3973,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3283
-    pres_2020_dem_two_party: 0.3283
+    pres_2024_dem_two_party: 0.3284
+    pres_2020_dem_two_party: 0.3284
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TN-03
     unit: TN-03
@@ -3585,9 +3986,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3182
-    pres_2020_dem_two_party: 0.3182
+    pres_2024_dem_two_party: 0.3190
+    pres_2020_dem_two_party: 0.3190
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TN-04
     unit: TN-04
@@ -3595,9 +3999,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2795
-    pres_2020_dem_two_party: 0.2795
+    pres_2024_dem_two_party: 0.3786
+    pres_2020_dem_two_party: 0.3786
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TN-05
     unit: TN-05
@@ -3605,9 +4012,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4103
-    pres_2020_dem_two_party: 0.4103
+    pres_2024_dem_two_party: 0.3830
+    pres_2020_dem_two_party: 0.3830
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TN-06
     unit: TN-06
@@ -3615,19 +4025,25 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3218
-    pres_2020_dem_two_party: 0.3218
+    pres_2024_dem_two_party: 0.3656
+    pres_2020_dem_two_party: 0.3656
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TN-07
     unit: TN-07
     name: TN-07
     special: false
     incumbent_party: R
-    incumbent_status: elected
-    pres_2024_dem_two_party: 0.3877
-    pres_2020_dem_two_party: 0.3877
+    incumbent_status: open
+    pres_2024_dem_two_party: 0.3864
+    pres_2020_dem_two_party: 0.3864
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TN-08
     unit: TN-08
@@ -3635,9 +4051,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2921
-    pres_2020_dem_two_party: 0.2921
+    pres_2024_dem_two_party: 0.3978
+    pres_2020_dem_two_party: 0.3978
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TN-09
     unit: TN-09
@@ -3645,9 +4064,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7212
-    pres_2020_dem_two_party: 0.7212
+    pres_2024_dem_two_party: 0.3929
+    pres_2020_dem_two_party: 0.3929
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-01
     unit: TX-01
@@ -3655,9 +4077,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2418
-    pres_2020_dem_two_party: 0.2418
+    pres_2024_dem_two_party: 0.2505
+    pres_2020_dem_two_party: 0.2505
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-02
     unit: TX-02
@@ -3665,9 +4090,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3797
-    pres_2020_dem_two_party: 0.3797
+    pres_2024_dem_two_party: 0.3843
+    pres_2020_dem_two_party: 0.3843
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-03
     unit: TX-03
@@ -3675,9 +4103,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3973
-    pres_2020_dem_two_party: 0.3973
+    pres_2024_dem_two_party: 0.3801
+    pres_2020_dem_two_party: 0.3801
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-04
     unit: TX-04
@@ -3685,9 +4116,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3346
-    pres_2020_dem_two_party: 0.3346
+    pres_2024_dem_two_party: 0.3742
+    pres_2020_dem_two_party: 0.3742
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-05
     unit: TX-05
@@ -3695,9 +4129,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3631
-    pres_2020_dem_two_party: 0.3631
+    pres_2024_dem_two_party: 0.3908
+    pres_2020_dem_two_party: 0.3908
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-06
     unit: TX-06
@@ -3705,9 +4142,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3558
-    pres_2020_dem_two_party: 0.3558
+    pres_2024_dem_two_party: 0.3836
+    pres_2020_dem_two_party: 0.3836
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-07
     unit: TX-07
@@ -3715,9 +4155,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6070
-    pres_2020_dem_two_party: 0.6070
+    pres_2024_dem_two_party: 0.6205
+    pres_2020_dem_two_party: 0.6205
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-08
     unit: TX-08
@@ -3725,9 +4168,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3285
-    pres_2020_dem_two_party: 0.3285
+    pres_2024_dem_two_party: 0.3600
+    pres_2020_dem_two_party: 0.3600
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-09
     unit: TX-09
@@ -3735,9 +4181,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.7238
-    pres_2020_dem_two_party: 0.7238
+    pres_2024_dem_two_party: 0.4002
+    pres_2020_dem_two_party: 0.4002
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-10
     unit: TX-10
@@ -3745,9 +4194,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3742
-    pres_2020_dem_two_party: 0.3742
+    pres_2024_dem_two_party: 0.3853
+    pres_2020_dem_two_party: 0.3853
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-11
     unit: TX-11
@@ -3755,9 +4207,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2707
-    pres_2020_dem_two_party: 0.2707
+    pres_2024_dem_two_party: 0.3261
+    pres_2020_dem_two_party: 0.3261
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-12
     unit: TX-12
@@ -3765,9 +4220,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3857
-    pres_2020_dem_two_party: 0.3857
+    pres_2024_dem_two_party: 0.3792
+    pres_2020_dem_two_party: 0.3792
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-13
     unit: TX-13
@@ -3775,9 +4233,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2587
-    pres_2020_dem_two_party: 0.2587
+    pres_2024_dem_two_party: 0.2667
+    pres_2020_dem_two_party: 0.2667
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-14
     unit: TX-14
@@ -3785,19 +4246,25 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3280
-    pres_2020_dem_two_party: 0.3280
+    pres_2024_dem_two_party: 0.3771
+    pres_2020_dem_two_party: 0.3771
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-15
     unit: TX-15
     name: TX-15
     special: false
     incumbent_party: R
-    incumbent_status: elected
-    pres_2024_dem_two_party: 0.4100
-    pres_2020_dem_two_party: 0.4100
+    incumbent_status: open
+    pres_2024_dem_two_party: 0.4099
+    pres_2020_dem_two_party: 0.4099
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-16
     unit: TX-16
@@ -3805,9 +4272,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5810
-    pres_2020_dem_two_party: 0.5810
+    pres_2024_dem_two_party: 0.5832
+    pres_2020_dem_two_party: 0.5832
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-17
     unit: TX-17
@@ -3815,9 +4285,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3523
-    pres_2020_dem_two_party: 0.3523
+    pres_2024_dem_two_party: 0.3902
+    pres_2020_dem_two_party: 0.3902
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-18
     unit: TX-18
@@ -3825,9 +4298,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7019
-    pres_2020_dem_two_party: 0.7019
+    pres_2024_dem_two_party: 0.7786
+    pres_2020_dem_two_party: 0.7786
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-19
     unit: TX-19
@@ -3838,6 +4314,9 @@ races:
     pres_2024_dem_two_party: 0.2392
     pres_2020_dem_two_party: 0.2392
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-20
     unit: TX-20
@@ -3845,9 +4324,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6076
-    pres_2020_dem_two_party: 0.6076
+    pres_2024_dem_two_party: 0.6444
+    pres_2020_dem_two_party: 0.6444
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-21
     unit: TX-21
@@ -3855,9 +4337,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3805
-    pres_2020_dem_two_party: 0.3805
+    pres_2024_dem_two_party: 0.3896
+    pres_2020_dem_two_party: 0.3896
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-22
     unit: TX-22
@@ -3865,9 +4350,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4004
-    pres_2020_dem_two_party: 0.4004
+    pres_2024_dem_two_party: 0.3864
+    pres_2020_dem_two_party: 0.3864
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-23
     unit: TX-23
@@ -3875,19 +4363,26 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: open
-    pres_2024_dem_two_party: 0.4216
-    pres_2020_dem_two_party: 0.4216
+    pres_2024_dem_two_party: 0.4251
+    pres_2020_dem_two_party: 0.4251
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
+    # Seat is vacant. Last held by: VACANT (Gonzales).
 
   - id: house-2026-TX-24
     unit: TX-24
     name: TX-24
     special: false
     incumbent_party: R
-    incumbent_status: elected
-    pres_2024_dem_two_party: 0.4211
-    pres_2020_dem_two_party: 0.4211
+    incumbent_status: open
+    pres_2024_dem_two_party: 0.4181
+    pres_2020_dem_two_party: 0.4181
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-25
     unit: TX-25
@@ -3895,9 +4390,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3162
-    pres_2020_dem_two_party: 0.3162
+    pres_2024_dem_two_party: 0.3783
+    pres_2020_dem_two_party: 0.3783
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-26
     unit: TX-26
@@ -3905,9 +4403,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3812
-    pres_2020_dem_two_party: 0.3812
+    pres_2024_dem_two_party: 0.3793
+    pres_2020_dem_two_party: 0.3793
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-27
     unit: TX-27
@@ -3915,9 +4416,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3504
-    pres_2020_dem_two_party: 0.3504
+    pres_2024_dem_two_party: 0.3927
+    pres_2020_dem_two_party: 0.3927
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-28
     unit: TX-28
@@ -3925,9 +4429,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4633
-    pres_2020_dem_two_party: 0.4633
+    pres_2024_dem_two_party: 0.4477
+    pres_2020_dem_two_party: 0.4477
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-29
     unit: TX-29
@@ -3935,9 +4442,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6032
-    pres_2020_dem_two_party: 0.6032
+    pres_2024_dem_two_party: 0.6542
+    pres_2020_dem_two_party: 0.6542
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-30
     unit: TX-30
@@ -3945,9 +4455,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7379
-    pres_2020_dem_two_party: 0.7379
+    pres_2024_dem_two_party: 0.7390
+    pres_2020_dem_two_party: 0.7390
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-31
     unit: TX-31
@@ -3955,9 +4468,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3821
-    pres_2020_dem_two_party: 0.3821
+    pres_2024_dem_two_party: 0.3893
+    pres_2020_dem_two_party: 0.3893
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-32
     unit: TX-32
@@ -3965,9 +4481,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.6217
-    pres_2020_dem_two_party: 0.6217
+    pres_2024_dem_two_party: 0.4094
+    pres_2020_dem_two_party: 0.4094
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-33
     unit: TX-33
@@ -3975,9 +4494,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6728
-    pres_2020_dem_two_party: 0.6728
+    pres_2024_dem_two_party: 0.6667
+    pres_2020_dem_two_party: 0.6667
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-34
     unit: TX-34
@@ -3985,9 +4507,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4777
-    pres_2020_dem_two_party: 0.4777
+    pres_2024_dem_two_party: 0.4489
+    pres_2020_dem_two_party: 0.4489
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-35
     unit: TX-35
@@ -3995,9 +4520,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: open
-    pres_2024_dem_two_party: 0.6707
-    pres_2020_dem_two_party: 0.6707
+    pres_2024_dem_two_party: 0.4472
+    pres_2020_dem_two_party: 0.4472
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-36
     unit: TX-36
@@ -4005,9 +4533,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3141
-    pres_2020_dem_two_party: 0.3141
+    pres_2024_dem_two_party: 0.3734
+    pres_2020_dem_two_party: 0.3734
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-37
     unit: TX-37
@@ -4015,9 +4546,12 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7514
-    pres_2020_dem_two_party: 0.7514
+    pres_2024_dem_two_party: 0.7885
+    pres_2020_dem_two_party: 0.7885
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-TX-38
     unit: TX-38
@@ -4025,9 +4559,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3947
-    pres_2020_dem_two_party: 0.3947
+    pres_2024_dem_two_party: 0.3935
+    pres_2020_dem_two_party: 0.3935
     region: south
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-UT-01
     unit: UT-01
@@ -4035,9 +4572,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: open
-    pres_2024_dem_two_party: 0.3968
-    pres_2020_dem_two_party: 0.3968
+    pres_2024_dem_two_party: 0.6216
+    pres_2020_dem_two_party: 0.6216
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-UT-02
     unit: UT-02
@@ -4045,9 +4585,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: open
-    pres_2024_dem_two_party: 0.3958
-    pres_2020_dem_two_party: 0.3958
+    pres_2024_dem_two_party: 0.3504
+    pres_2020_dem_two_party: 0.3504
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-UT-03
     unit: UT-03
@@ -4055,9 +4598,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: open
-    pres_2024_dem_two_party: 0.4007
-    pres_2020_dem_two_party: 0.4007
+    pres_2024_dem_two_party: 0.2879
+    pres_2020_dem_two_party: 0.2879
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-UT-04
     unit: UT-04
@@ -4065,9 +4611,12 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3627
-    pres_2020_dem_two_party: 0.3627
+    pres_2024_dem_two_party: 0.3328
+    pres_2020_dem_two_party: 0.3328
     region: west
+    # Lines redrawn for 2026. The lean is measured on the NEW
+    # boundaries, so it is not comparable with the same district
+    # number in any earlier cycle.
 
   - id: house-2026-VA-01
     unit: VA-01
@@ -4075,8 +4624,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4751
-    pres_2020_dem_two_party: 0.4751
+    pres_2024_dem_two_party: 0.4750
+    pres_2020_dem_two_party: 0.4750
     region: south
 
   - id: house-2026-VA-02
@@ -4085,8 +4634,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4990
-    pres_2020_dem_two_party: 0.4990
+    pres_2024_dem_two_party: 0.4987
+    pres_2020_dem_two_party: 0.4987
     region: south
 
   - id: house-2026-VA-03
@@ -4095,8 +4644,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6754
-    pres_2020_dem_two_party: 0.6754
+    pres_2024_dem_two_party: 0.6759
+    pres_2020_dem_two_party: 0.6759
     region: south
 
   - id: house-2026-VA-04
@@ -4105,8 +4654,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6654
-    pres_2020_dem_two_party: 0.6654
+    pres_2024_dem_two_party: 0.6659
+    pres_2020_dem_two_party: 0.6659
     region: south
 
   - id: house-2026-VA-05
@@ -4125,8 +4674,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.3793
-    pres_2020_dem_two_party: 0.3793
+    pres_2024_dem_two_party: 0.3792
+    pres_2020_dem_two_party: 0.3792
     region: south
 
   - id: house-2026-VA-07
@@ -4135,8 +4684,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5140
-    pres_2020_dem_two_party: 0.5140
+    pres_2024_dem_two_party: 0.5146
+    pres_2020_dem_two_party: 0.5146
     region: south
 
   - id: house-2026-VA-08
@@ -4145,8 +4694,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7540
-    pres_2020_dem_two_party: 0.7540
+    pres_2024_dem_two_party: 0.7545
+    pres_2020_dem_two_party: 0.7545
     region: south
 
   - id: house-2026-VA-09
@@ -4155,8 +4704,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.2778
-    pres_2020_dem_two_party: 0.2778
+    pres_2024_dem_two_party: 0.2779
+    pres_2020_dem_two_party: 0.2779
     region: south
 
   - id: house-2026-VA-10
@@ -4165,8 +4714,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5436
-    pres_2020_dem_two_party: 0.5436
+    pres_2024_dem_two_party: 0.5429
+    pres_2020_dem_two_party: 0.5429
     region: south
 
   - id: house-2026-VA-11
@@ -4175,8 +4724,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6766
-    pres_2020_dem_two_party: 0.6766
+    pres_2024_dem_two_party: 0.6765
+    pres_2020_dem_two_party: 0.6765
     region: south
 
   - id: house-2026-VT-01
@@ -4195,8 +4744,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6596
-    pres_2020_dem_two_party: 0.6596
+    pres_2024_dem_two_party: 0.6486
+    pres_2020_dem_two_party: 0.6486
     region: west
 
   - id: house-2026-WA-02
@@ -4205,8 +4754,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6224
-    pres_2020_dem_two_party: 0.6224
+    pres_2024_dem_two_party: 0.6222
+    pres_2020_dem_two_party: 0.6222
     region: west
 
   - id: house-2026-WA-03
@@ -4214,9 +4763,9 @@ races:
     name: WA-03
     special: false
     incumbent_party: D
-    incumbent_status: elected
-    pres_2024_dem_two_party: 0.4832
-    pres_2020_dem_two_party: 0.4832
+    incumbent_status: open
+    pres_2024_dem_two_party: 0.4830
+    pres_2020_dem_two_party: 0.4830
     region: west
 
   - id: house-2026-WA-04
@@ -4235,8 +4784,8 @@ races:
     special: false
     incumbent_party: R
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.4448
-    pres_2020_dem_two_party: 0.4448
+    pres_2024_dem_two_party: 0.4445
+    pres_2020_dem_two_party: 0.4445
     region: west
 
   - id: house-2026-WA-06
@@ -4245,8 +4794,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5997
-    pres_2020_dem_two_party: 0.5997
+    pres_2024_dem_two_party: 0.5995
+    pres_2020_dem_two_party: 0.5995
     region: west
 
   - id: house-2026-WA-07
@@ -4255,8 +4804,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7675
-    pres_2020_dem_two_party: 0.7675
+    pres_2024_dem_two_party: 0.8878
+    pres_2020_dem_two_party: 0.8878
     region: west
 
   - id: house-2026-WA-08
@@ -4265,8 +4814,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.6068
-    pres_2020_dem_two_party: 0.6068
+    pres_2024_dem_two_party: 0.5298
+    pres_2020_dem_two_party: 0.5298
     region: west
 
   - id: house-2026-WA-09
@@ -4275,8 +4824,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.7675
-    pres_2020_dem_two_party: 0.7675
+    pres_2024_dem_two_party: 0.7135
+    pres_2020_dem_two_party: 0.7135
     region: west
 
   - id: house-2026-WA-10
@@ -4285,8 +4834,8 @@ races:
     special: false
     incumbent_party: D
     incumbent_status: elected
-    pres_2024_dem_two_party: 0.5931
-    pres_2020_dem_two_party: 0.5931
+    pres_2024_dem_two_party: 0.5930
+    pres_2020_dem_two_party: 0.5930
     region: west
 
   - id: house-2026-WI-01
@@ -4314,7 +4863,7 @@ races:
     name: WI-03
     special: false
     incumbent_party: R
-    incumbent_status: elected
+    incumbent_status: open
     pres_2024_dem_two_party: 0.4624
     pres_2020_dem_two_party: 0.4624
     region: midwest

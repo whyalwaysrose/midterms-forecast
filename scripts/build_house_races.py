@@ -49,7 +49,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-LEAN = REPO / "data" / "history" / "house_district_lean_2024.csv"
+LEAN = REPO / "data" / "history" / "house_district_lean_2026.csv"
 OUT = REPO / "config" / "races_house_2026.yaml"
 
 CAND_ID, CAND_NAME, CAND_ICI, _PTY, PARTY = 0, 1, 2, 3, 4
@@ -77,6 +77,21 @@ REGION = {
 
 #: Seats per state for the 119th Congress, so a missing district is an error
 #: rather than a quietly shorter chamber.
+#: Which side of the chamber arithmetic an independent incumbent is counted on.
+#:
+#: Chamber control is a count, so every seat has to land somewhere, and for an
+#: independent there is no unarguably correct answer -- the same problem Dan
+#: Osborn poses in the Senate. Listing them here forces the choice to be made
+#: once and in the open; a district that reaches this branch without an entry
+#: aborts the build rather than being quietly assigned.
+#:
+#: CA-03: Kevin Kiley was elected as a Republican, and both the lean file and
+#: `congress-legislators` now record him as an independent. He is counted on the
+#: Republican side because that is the party he was elected under and the one
+#: the seat has been held for. It is a choice, not a fact, and the generated
+#: config says so on the district itself.
+INDEPENDENT_COUNTS_AS = {"CA-03": "R"}
+
 SEATS = {
     "AL": 7, "AK": 1, "AZ": 9, "AR": 4, "CA": 52, "CO": 8, "CT": 5, "DE": 1,
     "FL": 28, "GA": 14, "HI": 2, "ID": 2, "IL": 17, "IN": 9, "IA": 4, "KS": 4,
@@ -208,81 +223,91 @@ def main() -> int:
 
     lean = load_lean()
     members = load_sitting_members()
-    past = last_holders()
     filed = filed_surnames(args.fec)
     districts = all_districts()
-    print(f"{len(districts)} districts expected, {len(lean)} with a measured lean, "
-          f"{len(members)} with a sitting member")
-    held = Counter(side for side, _ in members.values())
-    print(f"  current chamber: D {held['D']}, R {held['R']}, "
-          f"vacant/unmatched {len(districts) - len(members)}")
+    redrawn = sum(
+        1 for r in lean.values() if (r.get("redrawn_for_2026") or "") == "yes"
+    )
+    print(f"{len(districts)} districts expected, {len(lean)} with a 2026-line lean "
+          f"({redrawn} of them in states that redrew their map)")
 
-    # A district with no lean of its own falls back to its state's average, so
-    # the chamber is never quietly short. Stated per district in the output.
-    by_state: dict[str, list[float]] = defaultdict(list)
-    for code, row in lean.items():
-        by_state[code.split("-")[0]].append(float(row["pres_2024_dem_two_party"]))
-    state_mean = {s: sum(v) / len(v) for s, v in by_state.items()}
+    # `congress-legislators` is no longer the source of incumbency -- it numbers
+    # members by the district they were ELECTED in, and ten states renumbered.
+    # It is still worth reading as a check on the states that did NOT change,
+    # where the two must agree; a disagreement there means one of them is wrong
+    # about something neither redistricting nor renumbering can explain.
+    mismatch = [
+        code for code, (side, _surname) in members.items()
+        if code in lean
+        and (lean[code].get("redrawn_for_2026") or "") != "yes"
+        and (lean[code].get("incumbent_party") or "") in ("D", "R")
+        and lean[code]["incumbent_party"] != side
+    ]
+    print(f"  cross-check against congress-legislators on unchanged districts: "
+          f"{len(mismatch)} disagreements" + (f" {mismatch}" if mismatch else ""))
 
     entries: list[str] = []
     counts: Counter = Counter()
-    fallbacks: list[str] = []
-    vacant: list[tuple[str, list]] = []
-    unknown: list[str] = []
+    no_lean: list[str] = []
+    independents: list[tuple[str, str, str, str]] = []
+    unknown: list[tuple[str, str, str]] = []
     counts_open = 0
 
     for code in districts:
         state = code.split("-")[0]
         row = lean.get(code)
-        if row:
-            share = float(row["pres_2024_dem_two_party"])
-            holder_2024 = row["house_2024_holder"] or ""
-            note = ""
-        else:
-            share = state_mean.get(state, 0.5)
-            holder_2024 = ""
-            note = "    # NO DISTRICT DATA: uncontested 2024 House race, so its\n" \
-                   "    # presidential votes had nothing to join to. Using the\n" \
-                   "    # state average as a placeholder."
-            fallbacks.append(code)
+        if row is None:
+            no_lean.append(code)
+            continue
 
-        sitting = members.get(code)
-        if sitting:
-            party, surname = sitting
-            # Running again if they are among this district's 2026 filers.
-            status = "elected" if surname in filed.get(code, set()) else "open"
-            counts_open += status == "open"
-        elif holder_2024:
-            # A vacant seat, or one whose member could not be matched. The 2024
-            # result says who held it; the seat is open either way.
-            party, status = holder_2024, "open"
-            counts_open += 1
-        elif past.get(code):
-            # Vacant, and with no 2024 House result either -- so ask who held it
-            # last. This is the branch FL-20 falls into, and the branch an
-            # earlier version got badly wrong.
-            #
-            # That version guessed the party from `share`, which is exactly the
-            # wrong thing to do here: a district reaches this branch only when
-            # its House race was uncontested, which is also why it has no
-            # measured lean -- so `share` is the state average, and the guess is
-            # made from the very placeholder that is missing. Florida's average
-            # is 43% Democratic, which is below half, so the script wrote down
-            # "Republican-held" for one of the most Democratic districts in the
-            # country. Two gaps compounding into a confident false statement.
-            party, status = past[code][-1][1], "open"
-            counts_open += 1
-            vacant.append((code, past[code]))
+        share = float(row["pres_2024_dem_two_party"])
+        holder = (row.get("incumbent") or "").strip()
+        party = (row.get("incumbent_party") or "").strip()
+        redrawn = (row.get("redrawn_for_2026") or "").strip() == "yes"
+        is_vacant = holder.upper().startswith("VACANT")
+        notes: list[str] = []
+
+        if redrawn:
+            notes.append(
+                "    # Lines redrawn for 2026. The lean is measured on the NEW\n"
+                "    # boundaries, so it is not comparable with the same district\n"
+                "    # number in any earlier cycle."
+            )
+
+        # An incumbent who is neither D nor R has to be put on one side of the
+        # chamber arithmetic or the seat cannot be counted, and there is no
+        # unarguably correct answer -- the same problem Nebraska's Senate race
+        # poses. Every such case is listed explicitly above so the choice is
+        # made once, in the open, rather than inferred here.
+        if party not in ("D", "R"):
+            side = INDEPENDENT_COUNTS_AS.get(code)
+            if side is None:
+                unknown.append((code, holder, party))
+                party = "R"  # placeholder; the run aborts before writing
+            else:
+                notes.append(
+                    f"    # {holder} is an independent, counted on the {side} side\n"
+                    f"    # for chamber arithmetic. Flagged, as Nebraska's is."
+                )
+                independents.append((code, holder, party, side))
+                party = side
+
+        if is_vacant:
+            status = "open"
+            notes.append(f"    # Seat is vacant. Last held by: {holder}.")
         else:
-            # No sitting member, no 2024 result, and nobody has ever held it
-            # under this numbering -- a newly created district that has not yet
-            # been filled. Nothing here can answer it, so fail rather than
-            # invent: a wrong incumbent_party is worth about three points of
-            # margin in the prior and is invisible once written down.
-            unknown.append(code)
-            party, status = "R", "open"  # placeholder; the run aborts below
-            counts_open += 1
+            # Running again if this district's 2026 FEC filers include them.
+            # Those filings are already on the new lines -- a candidate files
+            # for the district they intend to contest, not the one they hold --
+            # which is why they can be trusted where the membership file cannot.
+            surname = holder.split()[-1].lower() if holder else ""
+            status = (
+                "elected" if surname and surname in filed.get(code, set()) else "open"
+            )
+
+        counts_open += status == "open"
         counts[party] += 1
+        note = "\n".join(notes)
 
         entries.append(
             f"  - id: house-2026-{code}\n"
@@ -356,10 +381,12 @@ races:
     # the error is a three-point shift in one district's prior that nothing
     # downstream can see.
     if unknown:
-        print(f"\nERROR: no holder can be determined for {unknown}. Nothing in "
-              f"these sources answers it, and guessing from the presidential "
-              f"lean is the mistake this branch exists to prevent. Add them by "
-              f"hand, or find a source, before regenerating.")
+        print(f"\nERROR: {len(unknown)} districts have an incumbent who is "
+              f"neither Democratic nor Republican and no entry in "
+              f"INDEPENDENT_COUNTS_AS: {unknown}. Chamber control is a count, "
+              f"so each of them has to be put on one side; that is a decision "
+              f"to take deliberately at the top of this file, not to infer "
+              f"here from a presidential lean.")
         print("Nothing was written.")
         return 1
 
@@ -367,15 +394,14 @@ races:
     print(f"\nseats by current holder: D {counts['D']}, R {counts['R']}")
     print(f"open seats (member not standing again, or seat vacant): "
           f"{counts_open}")
-    if fallbacks:
-        print(f"districts using a state-average lean: {fallbacks}")
+    if no_lean:
+        print(f"districts with no lean at all: {no_lean}")
 
-    # Printed, not assumed. The historical file has no term-end date, so the
-    # holder is taken as the last row for that district; showing every holder
-    # lets a reviewer see whether the ordering mattered.
-    for code, holders in vacant:
-        names = ", ".join(f"{name} ({side})" for name, side in holders)
-        print(f"vacant seat {code}: taking the last of [{names}]")
+    # Printed, not assumed: which side an independent is counted on is a
+    # decision, and the build log is where a reviewer would look for the ones
+    # that were taken.
+    for code, holder, party, side in independents:
+        print(f"independent {code}: {holder} ({party}) counted on the {side} side")
 
     print(f"wrote {args.out}")
     return 0

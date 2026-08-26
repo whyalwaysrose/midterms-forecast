@@ -132,6 +132,48 @@ fact that the file's implied national Democratic share (49.16%) differs from the
 (48.3%) — so lean must be computed against the file's own national figure, not an
 external one, which is what `fundamentals.py` does.
 
+## The 2026 maps: a source with no licence, used deliberately
+
+Ten states redrew their congressional boundaries mid-decade for 2026 — Texas, California,
+Florida, Ohio, North Carolina, Missouri, Tennessee, Louisiana, Alabama and Utah — covering
+**181 of 435 seats**. That broke the precinct-join method above, and not through any fault
+in it: the join works by matching a precinct's presidential row to that precinct's own
+*2024 US House row*, and no 2024 election was held under the new lines. The technique is
+sound; the data it needs does not exist.
+
+| | |
+|---|---|
+| **Source** | The Downballot (formerly Daily Kos Elections), district presidential results under the 2026 maps |
+| **Licence** | **None stated.** Free to read; no restriction found, which is not the same as permission confirmed. |
+| **Built by** | `scripts/build_house_lean_2026.py` → `data/history/house_district_lean_2026.csv` |
+| **Attribution** | Given in the generated file, in this document, and on the dashboard |
+
+This is the one dependency in the project without a clear licence, and it is here because
+the alternative was a GIS overlay of official state boundary files onto precinct shapes —
+the exact dependency the precinct-join method was built to avoid, and more work than the
+weeks remaining before the election allow. It is recorded as a trade rather than presented
+as equivalent to the CC0 sources.
+
+**It is also more accurate than ours where both exist.** The builder cross-checks the two
+on the 254 districts whose lines did not change, where they must agree. Thirty-five of
+forty states agree to within half a point on average, which validates both. Five do not,
+and in every case the error was in the CC0 join:
+
+| State | Mean gap | Worst |
+|---|---|---|
+| Oregon | 7.00 pts | OR-03 (Portland): we had 43.9% Democratic, actual 73.8% |
+| Washington | 2.63 pts | WA-07 (Seattle): 76.8% against 88.8% |
+| NY, IN, NJ | ~1 pt | |
+
+Oregon and Washington vote entirely by mail and report in aggregated batches rather than
+by polling place, so the precinct join had far less to work with there than its overall
+98.97% placement rate suggested. **That defect was live in a published forecast** and was
+invisible until two independent sources were put side by side — which is why the check
+stays in the script rather than having been done once by hand.
+
+The CC0 file remains in the repository: it is the cross-check that found this, and the
+record of a method that needs no licence at all.
+
 ## Reproducibility
 
 Every fetch writes a gzipped, dated snapshot to `data/raw/votehub-<date>.json.gz` **before

@@ -142,9 +142,59 @@ its two known limitations.
    The dashboard draws unpolled districts at reduced opacity so this is visible rather
    than merely documented.
 
-**It scales.** First 435-race fit: `max_r_hat 1.01`, **zero divergences**, minimum ESS 341
-bulk / 468 tail on 4000 draws, sampled in 701 s against the Senate's ~60 s. The
-parameterisation holds; the cost is time, not geometry.
+**It scales.** Across three 435-race fits: `max_r_hat` 1.01–1.02, **zero divergences**,
+minimum ESS 247–495, sampled in 679–701 s against the Senate's ~60 s. The
+parameterisation holds; the cost is time, not geometry. (One caveat: the lowest tail ESS
+seen, 247, is under the 400 floor quoted in §8 for the Senate. It varies run to run and
+sits well above the point where estimates are unusable, but it is the thing to watch if
+the House model is extended.)
+
+**The central estimate is validated; the interval is not.** These are separate claims and
+only the first is currently supported.
+
+The seat median lands where the district leans say it should. With the model's own
+generic-ballot estimate of D+6.9, a plain uniform swing over the 435 measured leans gives
+**238** Democratic seats. The model gives **241**, and its expected value — the sum of the
+per-district win probabilities — is 242.8. That agreement is the check that mattered: it
+says 435 districts, almost none of them polled, are being carried correctly by their lean
+and the national environment rather than by anything accidental.
+
+The 90% interval is another matter. Uniform swing across the *generic ballot's own* 90%
+range (D+5.2 to D+8.7) spans 233–245 seats — twelve seats. The model reports **195–296**,
+a hundred and one. So essentially none of the width comes from uncertainty about where
+opinion is now; almost all of it comes from the election-day error in §5.
+
+Why that term is so much larger here than in the Senate, decomposed:
+
+| | Senate | House |
+|---|---|---|
+| Races | 35 | 435 |
+| Seats within 5 points | 10 | 51 |
+| Seat-count SD if races were independent | 1.86 | 5.62 |
+| Seat-count SD actually produced | 4.26 | 30.70 |
+| Ratio | 2.29x | **5.46x** |
+| Mean pairwise correlation | 0.291 | 0.307 |
+| Effective independent units | 3.2 | 3.2 |
+
+The correlation kernel is **not** misbehaving at scale — that was the thing to rule out,
+and the mean pairwise correlation and its whole distribution are near-identical across the
+two chambers. What changes is the arithmetic downstream of it. Roughly three independent
+shocks of a few points each, applied to a chamber with 51 seats within five points of the
+line, move far more seats than the same shocks applied to ten.
+
+Whether the *magnitude* is right for districts is untested, and it is the open item in §9.
+Two specific reasons for caution, in opposite directions:
+
+- The kernel has **no state term**. Districts in one state share a state polling
+  environment, state media, and statewide candidates, and the kernel knows only region and
+  presidential lean. Adding it would push correlation, and the interval, *wider*.
+- The 5.71-point idiosyncratic scale was fitted on *state* polling. With ~3.2 effective
+  units it behaves as a near-common shock over roughly 136 districts at a time, which may
+  overstate how much genuinely independent district-level error there is — pushing the
+  interval *narrower*.
+
+Until one of those is measured rather than argued, read the House seat interval as an
+upper bound on precision, not a calibrated one. The dashboard says so on the page.
 
 **There is no tie to break.** 435 is odd, so unlike the Senate one side always clears 218
 and the Vice President never enters into it. `tiebreaker_party: none` in the config records
@@ -432,13 +482,21 @@ worse at every level. The residual gap is width, not shape.
    above the 400 floor, but it is the first thing to check if convergence degrades.
 6. **Nebraska's independent** is forced onto the Democratic side for chamber arithmetic
    (§ README known issues). There is no unarguably correct treatment.
-9. **The House is calibrated only by inheritance** (§3.1). The error scales in §5 were
-   fitted from Senate and presidential polling, and are applied to districts unchanged.
-   District polls are sparser, later, and historically less accurate than state polls, so
-   if anything these scales are optimistic for the House. The §8 backtest does not yet
-   cover it. This is the largest open item on the House side and should be read as a
-   caveat on its intervals, not its central estimates.
-10. **Two districts have no measured lean.** FL-20 and OK-03 held uncontested 2024 House
-    races, so their presidential votes had no House row to join to (§3.1). They currently
-    fall back to their state's average, which is a placeholder and is flagged as one in
-    the generated config.
+9. **The House interval is calibrated only by inheritance** (§3.1). Now measured rather
+   than suspected: the median is right — 241 against 238 by uniform swing — but the 90%
+   interval is 195–296 where the polling uncertainty alone implies 233–245. Essentially
+   all of that width is the §5 election-day error, fitted on state polling and applied to
+   districts unchanged. The correlation kernel was ruled out as the cause (mean pairwise
+   correlation 0.307 for the House against 0.291 for the Senate). This is the largest open
+   item on the House side, and it is a caveat on the interval only, not the centre.
+10. ~~**Two districts have no measured lean.**~~ **Fixed.** FL-20 and OK-03 held
+    uncontested 2024 House races, so their presidential votes had no House row to join to.
+    Both are now recovered by subtraction — where a state is missing exactly one district,
+    the unplaced presidential votes in it belong to that district. All 435 have a measured
+    lean, and the derived chamber (215 D / 220 R) matches reality exactly.
+
+11. **The kernel has no state term.** Districts in one state share a state polling
+    environment, state media markets and statewide candidates; the kernel knows only
+    region and presidential lean. Adding it is the obvious next refinement, but note it
+    would widen the House interval rather than narrow it — see the discussion in §3.1
+    before assuming it is an improvement.

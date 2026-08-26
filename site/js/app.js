@@ -527,6 +527,10 @@ function render(forecast, history, commentary, geo, layout) {
   $('history-sub').textContent = copy.historySub;
   $('majority-seats').textContent = cf.dem_seats_for_majority;
   $('filter-all').textContent = `All ${(forecast.races || []).length}`;
+  // Shown for the House only, and shown rather than buried in the methodology,
+  // because a reader looking at a 100-seat interval is owed the reason it is
+  // that wide before they decide what to make of it.
+  $('seat-caveat').hidden = chamber !== 'house';
   $('senate-map-block').hidden = chamber !== 'senate';
   $('house-map-block').hidden = chamber !== 'house';
 

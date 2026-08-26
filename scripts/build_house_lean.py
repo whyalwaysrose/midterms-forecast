@@ -39,8 +39,12 @@ PRESIDENT_FILE = 13730901  # PRESIDENT_precinct_general.csv, doi:10.7910/DVN/XDJ
 HOUSE_FILE = 13731101      # HOUSE_precinct_general.csv,     doi:10.7910/DVN/USBYR4
 
 #: States with a single at-large district. MEDSL records these as `STATEWIDE`
-#: rather than `001`, and the district code needs to be `AL` to match the way
-#: districts are named everywhere else.
+#: rather than `001`.
+#:
+#: They are numbered `-01`, not `-AL`. "AL" is the usual political shorthand,
+#: but the poll feed calls Alaska's seat `2026 AK-01` and the race config keys
+#: off the same string -- and a second naming convention meant six at-large
+#: states silently fell back to a state average they already were.
 AT_LARGE = {"AK", "DE", "ND", "SD", "VT", "WY"}
 
 csv.field_size_limit(10_000_000)
@@ -104,9 +108,9 @@ def district_code(state: str, district: str) -> str | None:
         # Only a genuine at-large state has one district. Rhode Island files
         # some rows as STATEWIDE despite having two, and mapping those to RI-AL
         # invents a district that does not exist.
-        return f"{state}-AL" if state in AT_LARGE else None
+        return f"{state}-01" if state in AT_LARGE else None
     if state in AT_LARGE:
-        return f"{state}-AL"
+        return f"{state}-01"
     if not district.isdigit():
         return None
     return f"{state}-{int(district):02d}"

@@ -363,7 +363,22 @@ def _race_state_config(raw: Mapping[str, Any]) -> RaceStateConfig:
 
 
 def load_all(
-    races_path: Path | None = None, model_path: Path | None = None
+    races_path: Path | None = None,
+    model_path: Path | None = None,
+    chamber: str = "senate",
 ) -> tuple[RaceSet, ModelConfig]:
-    """Load and cross-validate both configs."""
+    """Load and cross-validate both configs.
+
+    ``chamber`` selects which race file to read. The model itself is
+    chamber-agnostic -- it takes whatever races it is given -- so this is the
+    only place that has to know the House exists.
+    """
+    if races_path is None:
+        try:
+            races_path = paths.RACES_BY_CHAMBER[chamber]
+        except KeyError:
+            raise ConfigError(
+                f"unknown chamber {chamber!r}; expected one of "
+                f"{sorted(paths.RACES_BY_CHAMBER)}"
+            ) from None
     return RaceSet.load(races_path), ModelConfig.load(model_path)

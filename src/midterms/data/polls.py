@@ -43,6 +43,14 @@ APPROVAL_RACE_ID = "__approval__"
 #: matter for a midterm.
 APPROVAL_SUBJECT = "Donald Trump"
 
+#: VoteHub's poll_type for each chamber's own races. The generic ballot and
+#: approval feeds are shared, because the national environment is one thing
+#: whichever chamber is being forecast.
+RACE_POLL_TYPE = {
+    "senate": "us-senator",
+    "house": "us-representative",
+}
+
 
 @dataclass(frozen=True)
 class NormalisedPoll:

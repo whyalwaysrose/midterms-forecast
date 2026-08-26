@@ -13,6 +13,13 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 CONFIG_DIR = REPO_ROOT / "config"
 RACES_SENATE_2026 = CONFIG_DIR / "races_senate_2026.yaml"
+RACES_HOUSE_2026 = CONFIG_DIR / "races_house_2026.yaml"
+
+#: Race config per chamber, so callers name a chamber rather than a path.
+RACES_BY_CHAMBER = {
+    "senate": RACES_SENATE_2026,
+    "house": RACES_HOUSE_2026,
+}
 MODEL_CONFIG = CONFIG_DIR / "model.yaml"
 
 DATA_DIR = REPO_ROOT / "data"

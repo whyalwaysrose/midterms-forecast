@@ -518,29 +518,28 @@ worse at every level. The residual gap is width, not shape.
 
 ## 9. Known weaknesses
 
-0. **THE HOUSE MODEL IS BUILT ON THE WRONG DISTRICT MAP.** Ten states redrew their
-   congressional boundaries mid-decade for 2026 — Texas (+5 R), California (+5 D),
-   Florida (+4 R), Ohio (+2 R), North Carolina, Missouri, Tennessee, Louisiana and
-   Alabama (+1 R each), Utah (+1 D) — covering **181 of 435 seats**. Every district lean
-   in `house_district_lean_2024.csv` is derived from 2024 precinct returns joined through
-   the **2024** House races, so for those states the model is scoring districts that will
-   not be on the ballot.
+0. ~~**The House model is built on the wrong district map.**~~ **Fixed.** Ten states
+   redrew their congressional boundaries mid-decade for 2026 — Texas, California, Florida,
+   Ohio, North Carolina, Missouri, Tennessee, Louisiana, Alabama and Utah, covering **181
+   of 435 seats**. Every lean is now measured on the new lines. Harris-carried districts
+   fall from 203 under the old map to 200 under the new one, and per state the change
+   tracks published estimates (CA +6, FL −4, TX −3, UT +1).
 
-   Published estimates put the net effect of the new maps at roughly **ten Republican
-   seats**, none of which the model can see. Its Democratic seat count should be read as
-   overstated by something of that order, and the affected states as unreliable district
-   by district. This was found by comparing against Decision Desk HQ, whose forecast is
-   fifteen seats less Democratic and which does account for the new maps.
+   The precinct-join method of §3.1 could not produce these, and not through any fault of
+   its own: it joins a precinct's presidential row to that precinct's own *2024 US House
+   row*, and no 2024 election was held under the new boundaries. The numbers come instead
+   from The Downballot, which has **no stated licence** — the one dependency in the
+   project without a clear one, recorded as a deliberate trade in
+   [DATA_SOURCES](DATA_SOURCES.md) rather than presented as equivalent to the CC0 sources.
 
-   **Fixing it needs district-level presidential results under the 2026 lines.** The
-   precinct-join method in §3.1 cannot produce them: it works by joining a precinct's
-   presidential row to its *2024* House row, and no 2024 election was held under the new
-   boundaries. The options are a licensed dataset (The Downballot has published exactly
-   this table, free to read but with no stated licence — the same "found no restriction,
-   not confirmed permitted" position as the market data), or a GIS overlay of official
-   state boundary files onto CC0 precinct shapes, which is the dependency §3.1 was built
-   to avoid. This is a decision about licensing, not a modelling problem.
-
+   The swap also exposed a defect in our own data. Cross-checking the two sources on the
+   254 districts whose lines did not change — where they must agree — found 35 of 40
+   states agreeing to within half a point, and five that did not, every one of them our
+   error. Oregon was 7.00 points off on average and OR-03 (Portland) by **30 points**;
+   Washington 2.63. Both vote entirely by mail and report in aggregated batches rather
+   than by polling place, so the join had far less to work with than its 98.97% placement
+   rate implied. That was live in a published forecast and invisible until two independent
+   sources were compared.
 
 1. **Correlation covariates are political, not demographic** (§5). Highest-value fix.
 2. **The fundamentals prior has no candidate-quality term.** No fundraising, no scandal, no

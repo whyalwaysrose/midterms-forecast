@@ -208,6 +208,92 @@ def build_district_map(house_path: Path) -> tuple[dict, dict]:
     return shares, winners
 
 
+#: Seats per state, so "which district is missing" is answerable.
+SEATS = {
+    "AL": 7, "AK": 1, "AZ": 9, "AR": 4, "CA": 52, "CO": 8, "CT": 5, "DE": 1,
+    "FL": 28, "GA": 14, "HI": 2, "ID": 2, "IL": 17, "IN": 9, "IA": 4, "KS": 4,
+    "KY": 6, "LA": 6, "ME": 2, "MD": 8, "MA": 9, "MI": 13, "MN": 8, "MS": 4,
+    "MO": 8, "MT": 2, "NE": 3, "NV": 4, "NH": 2, "NJ": 12, "NM": 3, "NY": 26,
+    "NC": 14, "ND": 1, "OH": 15, "OK": 5, "OR": 6, "PA": 17, "RI": 2, "SC": 7,
+    "SD": 1, "TN": 9, "TX": 38, "UT": 4, "VT": 1, "VA": 11, "WA": 10, "WV": 2,
+    "WI": 8, "WY": 1,
+}
+
+
+def recover_uncontested(
+    tally: dict[str, dict[str, float]],
+    unplaced: dict[str, dict[str, float]],
+) -> None:
+    """Fill in a district whose House race was uncontested, by subtraction.
+
+    Florida and Oklahoma declare a House candidate elected without putting them
+    on the ballot when nobody files against them. There are then no precinct
+    rows for that race at all, so the precincts of that district have
+    presidential votes and nothing to join them to -- which is why FL-20 and
+    OK-03 came out of the main pass with no lean.
+
+    But those same precincts are precisely the ones that failed to join. If a
+    state is missing exactly one district, every unplaced presidential vote in
+    it belongs to that district, and the answer is arithmetic rather than
+    inference.
+
+    **Guarded, because the arithmetic is only sound when the premise holds.**
+    Unplaced votes also accumulate from ordinary join failures -- a precinct
+    named differently in the two files -- and attributing those to a real
+    district would corrupt a number rather than supply a missing one. So the
+    recovered total must be within a plausible range for a single district
+    before it is accepted, and what is rejected is printed rather than dropped.
+
+    The earlier alternative was a state average, and it was actively harmful:
+    it put FL-20, one of the most Democratic districts in the country, at 43%
+    Democratic -- and then a downstream script read that number, saw it was
+    below half, and recorded the seat as Republican-held.
+    """
+    placed_by_state: dict[str, float] = defaultdict(float)
+    seen: dict[str, set[str]] = defaultdict(set)
+    for code, parties in tally.items():
+        state = code.split("-")[0]
+        seen[state].add(code)
+        placed_by_state[state] += parties["DEMOCRAT"] + parties["REPUBLICAN"]
+
+    for state, expected in sorted(SEATS.items()):
+        missing = sorted(
+            f"{state}-{n:02d}" for n in range(1, expected + 1)
+        )
+        missing = [code for code in missing if code not in seen[state]]
+        if not missing:
+            continue
+
+        spare = unplaced.get(state, {})
+        recovered = spare.get("DEMOCRAT", 0.0) + spare.get("REPUBLICAN", 0.0)
+
+        if len(missing) != 1:
+            print(f"   {state}: {len(missing)} districts missing {missing}; "
+                  f"subtraction cannot say which of them the "
+                  f"{recovered:,.0f} unplaced votes belong to. Left empty.")
+            continue
+
+        code = missing[0]
+        # A district is one seat's worth of people. Against the average of the
+        # districts this state *did* place, a genuine uncontested district
+        # should land in the same ballpark; a pile of unrelated join failures
+        # will not.
+        average = placed_by_state[state] / max(1, len(seen[state]))
+        ratio = recovered / average if average else 0.0
+        if not 0.35 <= ratio <= 2.0:
+            print(f"   {code}: {recovered:,.0f} unplaced votes is {ratio:.2f}x "
+                  f"this state's average district ({average:,.0f}) — outside "
+                  f"the plausible range, so this is join failure rather than "
+                  f"one uncontested district. Left empty.")
+            continue
+
+        tally[code]["DEMOCRAT"] = spare.get("DEMOCRAT", 0.0)
+        tally[code]["REPUBLICAN"] = spare.get("REPUBLICAN", 0.0)
+        share = spare.get("DEMOCRAT", 0.0) / recovered
+        print(f"   {code}: recovered {recovered:,.0f} votes "
+              f"({ratio:.2f}x the state average), {100 * share:.1f}% Democratic")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--work-dir", type=Path, required=True,
@@ -226,6 +312,12 @@ def main() -> int:
     tally: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
     placed = lost = 0
     by_state_lost: dict[str, int] = defaultdict(int)
+    # Unplaced votes kept per state AND party, not just counted. The total tells
+    # you how much was lost; the split is what lets an uncontested district be
+    # reconstructed from it.
+    unplaced_by_state: dict[str, dict[str, float]] = defaultdict(
+        lambda: defaultdict(float)
+    )
 
     for row in rows(president):
         if row.get("office") != "US PRESIDENT":
@@ -239,7 +331,9 @@ def main() -> int:
         precinct_shares = shares.get(precinct_key(row))
         if not precinct_shares:
             lost += votes
-            by_state_lost[row.get("state_po", "??")] += votes
+            state = row.get("state_po", "??")
+            by_state_lost[state] += votes
+            unplaced_by_state[state][party] += votes
             continue
         placed += votes
         for code, share in precinct_shares.items():
@@ -252,6 +346,9 @@ def main() -> int:
     print("\nStates losing the most votes (precincts with no usable House race):")
     for state, missing in sorted(by_state_lost.items(), key=lambda kv: -kv[1])[:8]:
         print(f"   {state}  {missing:>10,}")
+
+    print("\nRecovering districts whose House race was uncontested:")
+    recover_uncontested(tally, unplaced_by_state)
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("w", encoding="utf-8", newline="") as fh:

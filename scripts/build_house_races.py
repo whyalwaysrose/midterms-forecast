@@ -91,6 +91,45 @@ def load_lean() -> dict[str, dict]:
 
 LEGISLATORS = ("https://unitedstates.github.io/congress-legislators/"
                "legislators-current.csv")
+LEGISLATORS_PAST = ("https://unitedstates.github.io/congress-legislators/"
+                    "legislators-historical.csv")
+
+
+def fetch_csv(url: str) -> list[dict]:
+    request = urllib.request.Request(url, headers={"User-Agent": "midterms-forecast"})
+    with urllib.request.urlopen(request, timeout=120) as response:
+        text = response.read().decode("utf-8", "replace")
+    return list(csv.DictReader(text.splitlines()))
+
+
+def last_holders() -> dict[str, list[tuple[str, str]]]:
+    """District -> everyone who has held it, for seats nobody holds now.
+
+    A vacant seat is absent from `legislators-current` entirely, which leaves
+    no answer for `incumbent_party` -- and guessing one from the presidential
+    lean is precisely the mistake documented below. The historical file records
+    each former member's last district and party, which is the actual answer.
+
+    The whole list is returned rather than just the most recent, because the CSV
+    carries no term-end date and its row order, while chronological in practice,
+    is not documented to be. The caller prints the list so the choice is visible
+    in the build log instead of being taken on trust; where every holder of a
+    seat is the same party, the ordering does not matter at all.
+    """
+    past: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    for row in fetch_csv(LEGISLATORS_PAST):
+        if row.get("type") != "rep":
+            continue
+        state = (row.get("state") or "").strip().upper()
+        raw = (row.get("district") or "").strip()
+        if state not in SEATS or not raw.lstrip("-").isdigit():
+            continue
+        party = (row.get("party") or "").strip()
+        side = "D" if party.startswith("Democrat") else "R" if party.startswith("Republic") else None
+        if side:
+            code = f"{state}-{max(1, int(raw)):02d}"
+            past[code].append(((row.get("last_name") or "").strip(), side))
+    return past
 
 
 def load_sitting_members() -> dict[str, tuple[str, str]]:
@@ -163,6 +202,7 @@ def main() -> int:
 
     lean = load_lean()
     members = load_sitting_members()
+    past = last_holders()
     filed = filed_surnames(args.fec)
     districts = all_districts()
     print(f"{len(districts)} districts expected, {len(lean)} with a measured lean, "
@@ -181,6 +221,8 @@ def main() -> int:
     entries: list[str] = []
     counts: Counter = Counter()
     fallbacks: list[str] = []
+    vacant: list[tuple[str, list]] = []
+    unknown: list[str] = []
     counts_open = 0
 
     for code in districts:
@@ -204,10 +246,35 @@ def main() -> int:
             # Running again if they are among this district's 2026 filers.
             status = "elected" if surname in filed.get(code, set()) else "open"
             counts_open += status == "open"
-        else:
+        elif holder_2024:
             # A vacant seat, or one whose member could not be matched. The 2024
             # result says who held it; the seat is open either way.
-            party, status = (holder_2024 or ("D" if share > 0.5 else "R")), "open"
+            party, status = holder_2024, "open"
+            counts_open += 1
+        elif past.get(code):
+            # Vacant, and with no 2024 House result either -- so ask who held it
+            # last. This is the branch FL-20 falls into, and the branch an
+            # earlier version got badly wrong.
+            #
+            # That version guessed the party from `share`, which is exactly the
+            # wrong thing to do here: a district reaches this branch only when
+            # its House race was uncontested, which is also why it has no
+            # measured lean -- so `share` is the state average, and the guess is
+            # made from the very placeholder that is missing. Florida's average
+            # is 43% Democratic, which is below half, so the script wrote down
+            # "Republican-held" for one of the most Democratic districts in the
+            # country. Two gaps compounding into a confident false statement.
+            party, status = past[code][-1][1], "open"
+            counts_open += 1
+            vacant.append((code, past[code]))
+        else:
+            # No sitting member, no 2024 result, and nobody has ever held it
+            # under this numbering -- a newly created district that has not yet
+            # been filled. Nothing here can answer it, so fail rather than
+            # invent: a wrong incumbent_party is worth about three points of
+            # margin in the prior and is invisible once written down.
+            unknown.append(code)
+            party, status = "R", "open"  # placeholder; the run aborts below
             counts_open += 1
         counts[party] += 1
 
@@ -278,12 +345,32 @@ control:
 races:
 """
 
+    # Checked before the file is written, not after. A config carrying a made-up
+    # incumbent party is worse than no config: it runs, it produces numbers, and
+    # the error is a three-point shift in one district's prior that nothing
+    # downstream can see.
+    if unknown:
+        print(f"\nERROR: no holder can be determined for {unknown}. Nothing in "
+              f"these sources answers it, and guessing from the presidential "
+              f"lean is the mistake this branch exists to prevent. Add them by "
+              f"hand, or find a source, before regenerating.")
+        print("Nothing was written.")
+        return 1
+
     args.out.write_text(header + "\n".join(entries), encoding="utf-8", newline="")
     print(f"\nseats by current holder: D {counts['D']}, R {counts['R']}")
     print(f"open seats (member not standing again, or seat vacant): "
           f"{counts_open}")
     if fallbacks:
         print(f"districts using a state-average lean: {fallbacks}")
+
+    # Printed, not assumed. The historical file has no term-end date, so the
+    # holder is taken as the last row for that district; showing every holder
+    # lets a reviewer see whether the ordering mattered.
+    for code, holders in vacant:
+        names = ", ".join(f"{name} ({side})" for name, side in holders)
+        print(f"vacant seat {code}: taking the last of [{names}]")
+
     print(f"wrote {args.out}")
     return 0
 

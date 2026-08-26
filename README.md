@@ -83,19 +83,37 @@ repository secrets to add. If you later swap in a paid data source, add its key 
 **Settings → Secrets and variables → Actions** and read it via `env:` in
 `.github/workflows/daily-forecast.yml`.
 
-### Ongoing maintenance — one recurring task
+### Ongoing maintenance — two recurring tasks
 
-After a primary, new nominees appear in the feed as names the model does not recognise.
-Their polls are **skipped** until you classify them, and the race quietly falls back to
-its fundamentals prior. The daily workflow runs an audit step that surfaces this in the
-log; you can also run it locally:
+Both run in the daily workflow and report into its log without ever failing the run.
+Neither needs attention often, but both are things that degrade the model silently if
+left, which is why they are audited rather than trusted.
+
+**1. New candidate names.** After a primary, new nominees appear in the feed as names the
+model does not recognise. Their polls are **skipped** until you classify them, and the
+race quietly falls back to its fundamentals prior.
 
 ```bash
-midterms audit-roster
+midterms audit-roster --chamber senate
+midterms audit-roster --chamber house
 ```
 
-Add any reported names to `config/candidates_senate_2026.yaml` under the correct party
-(or under `other` for minor-party candidates) and commit.
+Add any reported names to the chamber's roster in `config/` under the correct party (or
+under `other` for minor-party candidates) and commit. For the House an unresolved name is
+often benign — pollsters test candidates months before they file with the FEC, and a
+primary field of four Democrats is correctly rejected as not a general-election matchup.
+
+**2. Pollsters filing under more than one name.** A firm that starts filing as both
+"Saint Anselm" and "Saint Anselm College Survey Center" gets two house effects, each
+estimated from half the data.
+
+```bash
+midterms audit-pollsters
+```
+
+Case and punctuation variants merge automatically; anything beyond that is a judgement, so
+this proposes and you decide. If they are the same firm, add an alias to `ALIASES` in
+`src/midterms/data/pollsters.py`; if genuinely different, leave them.
 
 ---
 

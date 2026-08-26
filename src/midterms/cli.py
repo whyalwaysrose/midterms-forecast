@@ -429,7 +429,7 @@ def cmd_run(args: argparse.Namespace) -> int:
 def cmd_backtest_history(args: argparse.Namespace) -> int:
     from .backtest_history import run_historical_backtest
 
-    return run_historical_backtest()
+    return run_historical_backtest(chamber=args.chamber)
 
 
 def cmd_calibrate(args: argparse.Namespace) -> int:
@@ -542,6 +542,10 @@ def build_parser() -> argparse.ArgumentParser:
     hist = sub.add_parser(
         "backtest-history",
         help="score win probabilities against elections that actually happened",
+    )
+    hist.add_argument(
+        "--chamber", choices=("senate", "house"), default="senate",
+        help="which chamber's history to score against (default: senate)",
     )
     hist.set_defaults(func=cmd_backtest_history)
 

@@ -364,6 +364,22 @@ table.polls td.num { font-family: var(--mono); text-align: right; font-variant-n
 .site-footer p { margin: 0 0 6px; }
 .error-banner { background: var(--rep-soft); border: 1px solid var(--rep); color: var(--text); padding: 16px; border-radius: 8px; margin: 24px auto; font-size: 14px; }
 
+/* A standing caveat on the forecast itself, not a load failure. Warmer than
+   .error-banner because nothing is broken -- the page works and the number is
+   real, it is the input that is known to be stale. It must still be impossible
+   to scroll past, which is why it sits above the map rather than under it. */
+.alert {
+  background: var(--tossup-soft, rgba(180, 140, 40, 0.12));
+  border: 1px solid var(--tossup, #b48c28);
+  color: var(--text);
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin: 0 0 18px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.alert strong { display: block; margin-bottom: 4px; }
+
 /* ---------- map ---------- */
 .map-block { margin-top: 26px; border-top: 1px solid var(--border); padding-top: 20px; }
 .map-title { margin: 0 0 4px; font-size: 17px; letter-spacing: -0.01em; }

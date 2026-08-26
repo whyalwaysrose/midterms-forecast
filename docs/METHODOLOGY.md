@@ -518,6 +518,30 @@ worse at every level. The residual gap is width, not shape.
 
 ## 9. Known weaknesses
 
+0. **THE HOUSE MODEL IS BUILT ON THE WRONG DISTRICT MAP.** Ten states redrew their
+   congressional boundaries mid-decade for 2026 — Texas (+5 R), California (+5 D),
+   Florida (+4 R), Ohio (+2 R), North Carolina, Missouri, Tennessee, Louisiana and
+   Alabama (+1 R each), Utah (+1 D) — covering **181 of 435 seats**. Every district lean
+   in `house_district_lean_2024.csv` is derived from 2024 precinct returns joined through
+   the **2024** House races, so for those states the model is scoring districts that will
+   not be on the ballot.
+
+   Published estimates put the net effect of the new maps at roughly **ten Republican
+   seats**, none of which the model can see. Its Democratic seat count should be read as
+   overstated by something of that order, and the affected states as unreliable district
+   by district. This was found by comparing against Decision Desk HQ, whose forecast is
+   fifteen seats less Democratic and which does account for the new maps.
+
+   **Fixing it needs district-level presidential results under the 2026 lines.** The
+   precinct-join method in §3.1 cannot produce them: it works by joining a precinct's
+   presidential row to its *2024* House row, and no 2024 election was held under the new
+   boundaries. The options are a licensed dataset (The Downballot has published exactly
+   this table, free to read but with no stated licence — the same "found no restriction,
+   not confirmed permitted" position as the market data), or a GIS overlay of official
+   state boundary files onto CC0 precinct shapes, which is the dependency §3.1 was built
+   to avoid. This is a decision about licensing, not a modelling problem.
+
+
 1. **Correlation covariates are political, not demographic** (§5). Highest-value fix.
 2. **The fundamentals prior has no candidate-quality term.** No fundraising, no scandal, no
    prior-office measure.

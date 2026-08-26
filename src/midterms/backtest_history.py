@@ -35,7 +35,7 @@ from dataclasses import dataclass, field
 import numpy as np
 import pandas as pd
 
-from .calibration import POINTS_PER_LOGIT, load_history, senate_polls
+from .calibration import POINTS_PER_LOGIT, load_history, race_polls
 
 log = logging.getLogger(__name__)
 
@@ -103,9 +103,11 @@ def _weighted_poll_average(group: pd.DataFrame) -> float:
     return float(np.average(group["margin_poll"], weights=weight))
 
 
-def build_race_table(days_window=(45, 120), min_cycle=2010) -> pd.DataFrame:
+def build_race_table(
+    days_window=(45, 120), min_cycle=2010, chamber: str = "senate"
+) -> pd.DataFrame:
     """One row per historical race: poll-based estimate and actual result."""
-    sen = senate_polls(load_history(), days_window, min_cycle)
+    sen = race_polls(load_history(), chamber, days_window, min_cycle)
     rows = []
     for (cycle, race_id), group in sen.groupby(["cycle", "race_id"]):
         rows.append(
@@ -217,12 +219,12 @@ def score(
     )
 
 
-def run_historical_backtest() -> int:
-    """CLI entry point: score the fitted scales against the old asserted ones."""
+def run_historical_backtest(chamber: str = "senate") -> int:
+    """CLI entry point: score this chamber's scales against real elections."""
     from .config import ModelConfig
 
-    races = build_race_table()
-    cfg = ModelConfig.load()
+    races = build_race_table(chamber=chamber)
+    cfg = ModelConfig.load(chamber=chamber)
     fitted = (
         cfg.election_day_error.national_sd * POINTS_PER_LOGIT,
         cfg.election_day_error.state_sd * POINTS_PER_LOGIT,
@@ -230,13 +232,28 @@ def run_historical_backtest() -> int:
 
     print()
     print("=" * 78)
-    print("  HISTORICAL BACKTEST — scored against elections that happened")
+    print(f"  HISTORICAL BACKTEST ({chamber.upper()}) — scored against elections "
+          f"that happened")
     print("=" * 78)
 
     configurations = [
-        (fitted[0], fitted[1], "current config (fitted from history)"),
-        (3.75, 4.25, "previous config (asserted from literature)"),
+        (fitted[0], fitted[1], f"{chamber} config (fitted from {chamber} history)"),
     ]
+    if chamber == "house":
+        # What the House would have been scored at before it had its own
+        # scales, so the improvement -- or the absence of one -- is visible
+        # rather than asserted.
+        senate_cfg = ModelConfig.load(chamber="senate").election_day_error
+        configurations.append((
+            senate_cfg.national_sd * POINTS_PER_LOGIT,
+            senate_cfg.state_sd * POINTS_PER_LOGIT,
+            "Senate scales, as the House used to inherit them",
+        ))
+    else:
+        configurations.append(
+            (3.75, 4.25, "previous config (asserted from literature)")
+        )
+
     for national_sd, state_sd, label in configurations:
         result = score(national_sd, state_sd, f"{label}: {national_sd:.2f}/{state_sd:.2f} pts", races)
         print()

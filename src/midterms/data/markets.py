@@ -46,12 +46,24 @@ SOURCE_NAME = "Polymarket"
 SOURCE_URL = "https://polymarket.com"
 
 
-@dataclass(frozen=True)
+@dataclass
 class MarketOutcome:
-    """One outcome of one event, with the market's implied probability."""
+    """One outcome of one event, with the market's implied probability.
+
+    Mutable on purpose: :func:`attach_history` fills the series in place after
+    the outcomes are built, because the history endpoint is keyed on a token id
+    that is only known once the market has been parsed.
+    """
 
     label: str
     probability: float
+    #: CLOB token for the "Yes" side, which is what the price-history endpoint
+    #: is keyed on. Kept so a snapshot can be turned into a time series later;
+    #: not shown to anyone.
+    token_id: str = ""
+    #: Daily implied probability over time, oldest first, as (ISO date, p).
+    #: Empty when history has not been fetched or the endpoint had none.
+    history: list = field(default_factory=list)
 
 
 @dataclass
@@ -129,7 +141,14 @@ def _outcomes(event: dict) -> list[MarketOutcome]:
             except (TypeError, ValueError):
                 continue
             if 0.0 <= probability <= 1.0:
-                found.append(MarketOutcome(label=label, probability=probability))
+                # clobTokenIds is [yes, no] in the same order as outcomes.
+                tokens = _maybe_json(market.get("clobTokenIds"))
+                token = ""
+                if isinstance(tokens, list) and tokens:
+                    token = str(tokens[0])
+                found.append(
+                    MarketOutcome(label=label, probability=probability, token_id=token)
+                )
     found.sort(key=lambda o: -o.probability)
     return found
 
@@ -207,8 +226,82 @@ def load_snapshot(path: Path) -> tuple[dict[str, MarketEvent], str]:
             slug=body["slug"],
             title=body["title"],
             volume=body["volume"],
-            outcomes=[MarketOutcome(**o) for o in body["outcomes"]],
+            outcomes=[
+                MarketOutcome(
+                    label=o["label"],
+                    probability=o["probability"],
+                    token_id=o.get("token_id", ""),
+                    # Tuples survive a JSON round trip as lists; the chart does
+                    # not care, but comparing snapshots would.
+                    history=[tuple(p) for p in o.get("history") or []],
+                )
+                for o in body["outcomes"]
+            ],
         )
         for slug, body in (raw.get("events") or {}).items()
     }
     return events, str(raw.get("fetched_at", ""))
+
+
+# ------------------------------------------------------------ price history
+
+CLOB = "https://clob.polymarket.com"
+
+#: Daily points. The endpoint takes fidelity in minutes; 1440 is one a day,
+#: which is all a chart spanning months can show and keeps the payload small.
+HISTORY_FIDELITY_MINUTES = 1440
+
+
+def fetch_history(token_id: str) -> list[tuple[str, float]]:
+    """Daily implied probability for one outcome, oldest first.
+
+    Returns an empty list rather than raising on any failure. A market with no
+    trading history is normal, not an error, and the dashboard has to render
+    either way.
+    """
+    if not token_id:
+        return []
+    payload = _get(
+        f"{CLOB}/prices-history?market={urllib.parse.quote(token_id)}"
+        f"&interval=max&fidelity={HISTORY_FIDELITY_MINUTES}"
+    )
+    if not isinstance(payload, dict):
+        return []
+
+    points: list[tuple[str, float]] = []
+    for point in payload.get("history") or []:
+        try:
+            when = datetime.fromtimestamp(int(point["t"]), tz=UTC).date()
+            price = float(point["p"])
+        except (KeyError, TypeError, ValueError, OSError, OverflowError):
+            continue
+        if 0.0 <= price <= 1.0:
+            points.append((when.isoformat(), round(price, 4)))
+
+    # One point per day, keeping the last reading of each -- the endpoint can
+    # return several inside a day and a chart only needs the close.
+    by_day: dict[str, float] = {}
+    for when, price in points:
+        by_day[when] = price
+    return sorted(by_day.items())
+
+
+def attach_history(events: dict[str, MarketEvent], limit: int = 6) -> None:
+    """Fill in each outcome's time series, in place.
+
+    ``limit`` caps how many outcomes per event get a history request: a
+    seat-count market has twenty legs, most of them priced near zero and none
+    of them worth a chart, and each one is a separate HTTP call.
+    """
+    for event in events.values():
+        wanted = sorted(event.outcomes, key=lambda o: -o.probability)[:limit]
+        filled = 0
+        for outcome in wanted:
+            series = fetch_history(outcome.token_id)
+            if series:
+                outcome.history[:] = series
+                filled += 1
+        log.info(
+            "markets: %s -> history for %d of %d outcomes",
+            event.slug, filled, len(event.outcomes),
+        )

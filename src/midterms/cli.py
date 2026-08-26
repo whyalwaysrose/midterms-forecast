@@ -222,6 +222,11 @@ def cmd_fetch_markets(args: argparse.Namespace) -> int:
         log.error("no markets fetched; leaving the previous snapshot in place")
         return 1
 
+    # Time series for the outcomes worth charting. Separate from the snapshot
+    # fetch because it is one request per outcome and a failure here should
+    # still leave today's prices usable.
+    markets.attach_history(events)
+
     path = markets.write_snapshot(events)
     for event in events.values():
         print(f"\n{event.title}  (${event.volume:,.0f} traded)")

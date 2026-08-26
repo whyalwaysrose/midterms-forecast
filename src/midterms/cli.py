@@ -162,21 +162,33 @@ def cmd_audit_pollsters(args: argparse.Namespace) -> int:
     share a word. So this proposes and a person decides, exactly as
     ``audit-roster`` does for candidates.
     """
-    from .config import load_all
-    from .data.polls import build_poll_table
-    from .data.pollsters import ALIASES, find_probable_duplicates
-    from .data.roster import Roster
+    from .data.pollsters import ALIASES, find_probable_duplicates, unify
     from .data.votehub import VoteHubClient, latest_snapshot, load_snapshot
 
-    races, cfg = load_all()
+    # Every poll type in the snapshot, not one chamber's. A firm filing under
+    # two names does it wherever it files, and the split costs a house effect in
+    # whichever chamber sees it -- Saint Anselm appeared in `us-senator` and
+    # `us-representative` alike. Reading names straight from the raw records
+    # rather than building a poll table also means this needs no race config or
+    # roster, so it can audit poll types this chamber does not model.
     snapshot = latest_snapshot()
     if snapshot is None or not args.offline:
-        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot", "approval"])
+        raw = VoteHubClient().fetch_and_snapshot(
+            ["us-senator", "us-representative", "generic-ballot", "approval"]
+        )
     else:
         raw = load_snapshot(snapshot)
 
-    table = build_poll_table(raw, races, cfg, Roster.load())
-    counts = Counter(p.pollster for p in table.polls)
+    names = [
+        str(record.get("pollster") or "")
+        for records in raw.values()
+        for record in records
+        if record.get("pollster")
+    ]
+    mapping = unify(names)
+    counts = Counter(mapping.get(n, n) for n in names)
+    print(f"read {len(names):,} polls across {len(raw)} poll types: "
+          f"{', '.join(sorted(raw))}")
     proposals = find_probable_duplicates(counts)
 
     print(f"{len(counts)} distinct pollsters after merging; "

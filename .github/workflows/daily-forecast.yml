@@ -65,7 +65,21 @@ jobs:
         # Non-fatal: a new nominee means some polls are skipped, which we want
         # surfaced in the log, but it must not stop the forecast from running.
         continue-on-error: true
-        run: python -m midterms.cli audit-roster
+        run: |
+          python -m midterms.cli audit-roster --chamber senate
+          python -m midterms.cli audit-roster --chamber house
+
+      # Nothing automated was watching for this. The live-feed duplicate test
+      # skips in CI -- raw snapshots are gitignored, so there is none to read --
+      # and this command was never run by the schedule. A firm that started
+      # filing under a second name would therefore split its house effect in
+      # production with no test failing and nothing in any log.
+      #
+      # Saint Anselm did exactly that and was caught only because a developer
+      # happened to run the tests right after an online fetch.
+      - name: Check for pollsters filing under more than one name
+        continue-on-error: true
+        run: python -m midterms.cli audit-pollsters
 
       # Prediction-market odds, shown next to the forecast and never fed into
       # it. Before the model runs, so the payload can include them; allowed to

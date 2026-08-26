@@ -123,8 +123,53 @@ and that is exactly what the licensing prevents.
 no LICENSE at any usual path) despite being updated the same day. Poll coverage
 moved from 37 to 40 districts of 435 (82 polls). Daily Kos publishes presidential
 results by district but states no license either. Wikipedia has no consolidated
-page — confirmed against the 2024 presidential article — so that route is still
-per-state parsing. Nothing has changed the answer.
+page — confirmed against the 2024 presidential article.
+
+### SOLVED (2026-08-26): MEDSL precinct returns, CC0, no GIS required
+
+The table above is superseded. Asking how other forecasters do it turned up the
+answer: they work from **precinct-level** returns, not district-level summaries.
+MIT Election Data and Science Lab publishes those on Harvard Dataverse under
+**CC0 1.0** — a public-domain dedication, the most permissive license there is.
+
+    U.S. President Precinct-Level Returns 2024   doi:10.7910/DVN/XDJYKC
+    Precinct-Level Returns 2024 by State         doi:10.7910/DVN/NYTPDU
+
+The apparent obstacle is that a presidential row has no district: MEDSL's
+`district` field is the *office's* district, blank for a statewide race. The way
+through is that the same precinct also reports its **US HOUSE** race, and that
+row does carry the district. Join the two on `(county_fips, precinct)` and every
+presidential vote inherits a congressional district — **with no shapefiles, no
+spatial join and no county apportionment at all**, which is what made every
+option in the table above either unlicensed or approximate.
+
+Measured on five states:
+
+| State | CDs | Precincts | Split across CDs | Presidential votes placed |
+|---|---|---|---|---|
+| CO | 8 | 3,199 | 0 | 100% |
+| PA | 17 | 9,187 | 0 | 100% |
+| WI | 8 | 3,601 | 0 | 100% |
+| VA | 11 | 2,669 | 18 | 98.8% |
+| GA | 14 | 2,702 | 40 | 97.7% |
+
+Sanity checks land where they should: CO-08 D-1.9, PA-01 D+0, VA-02 D-0, WI-01
+D-5 are all genuine tossups, and CO-01 D+57.6 / GA-05 D+72 are the safe urban
+seats. Unplaced votes are precincts reporting no House race or straddling two
+districts; they shrink the sample slightly rather than biasing a *ratio*, though
+split precincts do cluster on boundaries.
+
+**Two things still to settle before building on this.**
+
+Only five of fifty states are tested. The remaining forty-five are roughly 2 GB
+of downloads and some will be messier — the failure mode to watch is a state
+whose precinct identifiers differ between the presidential and House files, which
+would silently place nothing rather than erroring.
+
+2020 presidential results are under the **pre-2022 district lines**, so they are
+not comparable to current districts. The Senate fundamentals blend 0.75 x 2024
+with 0.25 x 2020; a House version should probably use 2024 alone and say so,
+rather than blending across a redistricting.
 
 ## Uncertainty is split, not stacked
 

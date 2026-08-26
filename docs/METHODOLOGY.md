@@ -122,10 +122,16 @@ a paid dependency and as a heavy one respectively.
 Instead `scripts/build_house_lean.py` derives the lean from **MEDSL precinct returns
 (CC0)** by joining the presidential and US House rows *within each precinct*, which needs
 no geometry at all: the precinct already knows which district it voted in, because it cast
-a House ballot. Votes in split precincts are allocated proportionally. This places
-**433 of 435 districts and 98.97% of two-party presidential votes**. See
-`data/history/README_house_lean.md` for the five state-specific data quirks it handles and
-its two known limitations.
+a House ballot. Votes in split precincts are allocated proportionally. This places 98.97%
+of two-party presidential votes directly.
+
+The two districts it cannot place that way — FL-20 and OK-03, whose 2024 House races were
+uncontested and so have no precinct rows at all — are recovered by subtraction: where a
+state is missing exactly one district, every unplaced presidential vote in it belongs to
+that district. **All 435 districts have a measured lean**, and the chamber that falls out
+of it (215 D / 220 R) matches reality exactly. See
+`data/history/README_house_lean.md` for the five state-specific data quirks the builder
+handles, the guard on the subtraction, and what is still approximate.
 
 **Two consequences worth stating plainly:**
 

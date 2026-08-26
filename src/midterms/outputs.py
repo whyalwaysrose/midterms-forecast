@@ -332,6 +332,7 @@ class ForecastRun:
                     "p95": int(np.quantile(sim.dem_seats, 0.95)),
                 },
                 "seat_distribution": {str(k): _round(v) for k, v in seat_dist.items()},
+                "total_seats": races.control.total_seats,
                 "seats_not_up": dict(races.control.seats_not_up),
                 "dem_seats_for_majority": races.control.dem_seats_for_majority,
                 "tiebreaker_party": races.control.tiebreaker_party,

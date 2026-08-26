@@ -103,7 +103,7 @@ district. Votes in precincts split across districts are allocated proportionally
 | **Source** | MIT Election Data and Science Lab, 2024 precinct-level returns |
 | **Host** | Harvard Dataverse |
 | **License** | **CC0 1.0** — public domain dedication |
-| **Coverage achieved** | 433 of 435 districts; 98.97% of two-party presidential votes placed |
+| **Coverage achieved** | **All 435 districts.** 98.97% of two-party presidential votes join directly; the two uncontested-race districts are recovered by subtraction |
 | **Built by** | `scripts/build_house_lean.py` → `data/history/house_district_lean_2024.csv` |
 
 Two supporting sources, both also unrestricted:
@@ -120,13 +120,17 @@ trustworthy for the House because every seat is contested every two years. That 
 was wrong. `CAND_ICI = I` means "has held this office at some point", not "holds it now":
 there are **555 flagged filings for 435 seats**, 108 districts carry more than one, and 28
 carry incumbents of *both* parties — Kyrsten Sinema still flagged in AZ-09, Rick Renzi in
-AZ-01 having left in 2009. It produced 199 D / 232 R against an actual 215 / 220. Current
-membership now comes from `congress-legislators`, which gives 214 D / 221 R.
+AZ-01 having left in 2009. It produced 199 D / 232 R against an actual 215 / 220.
+
+Current membership now comes from `congress-legislators` — `legislators-current` for
+sitting members and `legislators-historical` for the five vacant seats, which are absent
+from the current file entirely. That gives **215 D / 220 R**, the actual chamber.
 
 Known limitations are documented in `data/history/README_house_lean.md`, including the
-five state-specific data quirks the builder handles and the fact that the file's implied
-national Democratic share (49.20%) differs from the actual (48.3%) — so lean must be
-computed against the file's own national figure, not an external one.
+five state-specific data quirks the builder handles, the guard on the subtraction, and the
+fact that the file's implied national Democratic share (49.16%) differs from the actual
+(48.3%) — so lean must be computed against the file's own national figure, not an
+external one, which is what `fundamentals.py` does.
 
 ## Reproducibility
 

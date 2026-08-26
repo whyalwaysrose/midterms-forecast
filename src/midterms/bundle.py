@@ -48,7 +48,17 @@ def data_files(app_js: str) -> tuple[str, ...]:
 #: assertion at the end caught it. Load order matters -- charts.js and map.js
 #: call helpers defined in app.js -- and taking the order from the page is
 #: exactly the guarantee that they agree.
-_LOCAL_SCRIPT = re.compile(r"""<script\s+src=["']js/([A-Za-z0-9_.-]+\.js)["']""")
+#: Tolerates a stamped `?v=<hash>` suffix. The committed page is unstamped --
+#: stamping happens on the deploy artifact only -- but running `stamp-assets`
+#: locally and then `bundle` is an easy thing to do, and it should work rather
+#: than fail with a message about markup when the stamp is what is in the way.
+_LOCAL_SCRIPT = re.compile(
+    r"""<script\s+src=["']js/([A-Za-z0-9_.-]+\.js)(?:\?[^"']*)?["']\s*>\s*</script\s*>"""
+)
+
+_STYLESHEET = re.compile(
+    r"""<link\s+rel=["']stylesheet["']\s+href=["']css/style\.css(?:\?[^"']*)?["']\s*/?>"""
+)
 
 
 def local_scripts(html: str) -> tuple[str, ...]:
@@ -60,6 +70,20 @@ def local_scripts(html: str) -> tuple[str, ...]:
             "markup changed shape and the bundler would silently inline nothing"
         )
     return found
+
+
+def local_script_block(html: str) -> str:
+    """The exact run of text holding those tags, for substitution.
+
+    Taken from the page rather than rebuilt from the file names. A rebuilt
+    string has to guess how the tags were written, and gets it wrong the moment
+    they carry a `?v=` stamp -- failing with "could not find the script marker"
+    when the tags are plainly right there.
+    """
+    spans = [m.span() for m in _LOCAL_SCRIPT.finditer(html)]
+    if not spans:
+        raise ValueError("no local script tags to replace")
+    return html[spans[0][0]:spans[-1][1]]
 
 #: Any <script> whose src points at another host, or at a protocol-relative
 #: URL. Matched with DOTALL because the tag is wrapped across lines.
@@ -137,15 +161,20 @@ def build(
             )
         return source.replace(marker, replacement, 1)
 
+    stylesheet = _STYLESHEET.search(html)
+    if stylesheet is None:
+        raise ValueError(
+            "bundle: could not find the stylesheet link in index.html"
+        )
     html = substitute(
         html,
-        '<link rel="stylesheet" href="css/style.css">',
+        stylesheet.group(0),
         f"<style>\n{css}\n</style>",
         "stylesheet",
     )
     html = substitute(
         html,
-        "\n".join(f'<script src="js/{name}"></script>' for name in scripts),
+        local_script_block(html),
         f"<script>\nwindow.__FORECAST_DATA__ = {payload};\n</script>\n<script>\n{js}\n</script>",
         "script",
     )

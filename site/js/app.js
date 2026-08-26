@@ -493,7 +493,7 @@ const CHAMBER = {
     seatChart: 'Distribution of Senate seats',
     historySub: 'Democratic probability of Senate control, one point per model run.',
     /** The Senate's 100 seats split evenly, so the Vice President decides. */
-    tiebreak: (cf) =>
+    tiebreak: (cf, _forecast) =>
       `${cf.seats_not_up.D} Democratic and ${cf.seats_not_up.R} Republican seats are not up. `
       + `Democrats need ${cf.dem_seats_for_majority}; the Vice President breaks a 50-50 tie `
       + `for the ${cf.tiebreaker_party === 'R' ? 'Republicans' : 'Democrats'}.`,
@@ -506,11 +506,18 @@ const CHAMBER = {
      * one side always clears 218 and the Vice President never comes into it.
      * Note this is a fact about a full chamber -- mid-term vacancies do produce
      * even splits, but those are not what an election-night forecast predicts. */
-    tiebreak: (cf) =>
-      `All ${cf.total_seats} seats are up, so Democrats need `
-      + `${cf.dem_seats_for_majority} of them outright. There is no tie to break `
-      + `and no seats held over: ${cf.total_seats} is an odd number, so one side `
-      + `always finishes with a majority.`,
+    tiebreak: (cf, forecast) => {
+      // Falls back to the race count, which for the House is exactly the same
+      // number -- every seat is up, so there is one race per seat. The payload
+      // field is the right source and is present going forward, but a forecast
+      // written before it existed must not put "undefined" in front of a
+      // reader. It did once, which is why this reads the way it does.
+      const total = cf.total_seats ?? (forecast.races || []).length;
+      return `All ${total} seats are up, so Democrats need `
+        + `${cf.dem_seats_for_majority} of them outright. There is no tie to break `
+        + `and no seats held over: ${total} is an odd number, so one side always `
+        + `finishes with a majority.`;
+    },
   },
 };
 
@@ -547,7 +554,7 @@ function render(forecast, history, commentary, geo, layout) {
   $('seats-note').innerHTML =
     `Democrats are projected to hold <strong>${cf.dem_seats.median}</strong> seats ` +
     `(90% interval ${cf.dem_seats.p05}–${cf.dem_seats.p95}).`;
-  $('tiebreak-note').textContent = copy.tiebreak(cf);
+  $('tiebreak-note').textContent = copy.tiebreak(cf, forecast);
 
   $('n-sims').textContent = cf.n_simulations.toLocaleString();
 

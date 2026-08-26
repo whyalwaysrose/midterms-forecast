@@ -378,3 +378,79 @@ def test_every_element_the_scripts_reach_for_exists_in_the_page():
         used = set(re.findall(r"\$\('([\w-]+)'\)", path.read_text(encoding="utf-8")))
         missing = sorted(used - declared - dynamic)
         assert not missing, f"{path.name} reads ids that index.html does not define: {missing}"
+
+
+def test_chamber_copy_only_reads_fields_the_payload_actually_has():
+    """A missing field does not throw in JS -- it prints "undefined".
+
+    This is not hypothetical. The House note read "All undefined seats are up"
+    on the live page, because the copy referenced `chamber_forecast.total_seats`
+    and the payload had no such key. Nothing raised, nothing failed to render,
+    and no test noticed; it took looking at the page.
+
+    So: every `cf.<field>` the chamber copy reads must exist in a real payload,
+    and the one field added since must have a fallback for forecasts written
+    before it existed.
+    """
+    import json
+    import re
+
+    app = (SITE / "js" / "app.js").read_text(encoding="utf-8")
+    block = app[app.index("const CHAMBER = {"):app.index("function render(")]
+    read = set(re.findall(r"\bcf\.(\w+)", block))
+
+    forecast = json.loads(
+        (SITE / "data" / "forecast.json").read_text(encoding="utf-8")
+    )
+    present = set(forecast["chamber_forecast"])
+
+    # `??` marks a field the copy knows may be absent and handles itself.
+    guarded = set(re.findall(r"cf\.(\w+)\s*\?\?", block))
+    missing = sorted(read - present - guarded)
+    assert not missing, (
+        f"chamber copy reads {missing} from chamber_forecast, which this "
+        f"payload does not have — the page would print 'undefined'"
+    )
+
+
+def test_the_house_payload_carries_total_seats_when_it_exists():
+    """The field the fallback exists to cover. Skipped if no House run yet."""
+    import json
+
+    path = SITE / "data" / "forecast_house.json"
+    if not path.is_file():
+        import pytest
+        pytest.skip("no House forecast in this tree")
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    total = payload["chamber_forecast"].get("total_seats")
+    if total is None:
+        # Written before the field was added; the fallback must still be exact.
+        assert len(payload["races"]) == 435
+    else:
+        assert total == len(payload["races"]) == 435
+
+
+def test_bundling_works_on_a_stamped_page_too():
+    """Stamping is a deploy step, but running it locally must not break bundle.
+
+    The committed page is unstamped and stamping happens on the artifact, so
+    this is not a CI path -- it is the easy local sequence `stamp-assets` then
+    `bundle`. It used to fail twice over: the script regex did not match a
+    `?v=` suffix, and the substitution rebuilt the tag strings from file names
+    and so could not find them either. Both failures blamed the markup.
+    """
+    from midterms import bundle
+
+    html = (SITE / "index.html").read_text(encoding="utf-8")
+    stamped = html.replace('href="css/style.css"', 'href="css/style.css?v=abc123"')
+    for name in bundle.local_scripts(html):
+        stamped = stamped.replace(f'src="js/{name}"', f'src="js/{name}?v=deadbeef"')
+
+    assert bundle.local_scripts(stamped) == bundle.local_scripts(html), (
+        "the stamped page yields a different script list"
+    )
+    block = bundle.local_script_block(stamped)
+    assert block.startswith("<script") and block.rstrip().endswith("</script>")
+    assert "?v=deadbeef" in block, "the block must be the real text, not a rebuild"
+    assert bundle._STYLESHEET.search(stamped), "stylesheet link not matched when stamped"

@@ -166,7 +166,9 @@ function renderSeatChart(forecast) {
   const target = Math.max(1, Math.ceil(nBars / 12));
   const step = [1, 2, 5, 10, 20, 25, 50].find((n) => n >= target) ?? 100;
   // Start from a multiple of the step so the labels read 210, 215, 220 rather
-  // than 211, 216, 221 — and so the majority line lands on a labelled tick.
+  // than 211, 216, 221. The majority line is deliberately not forced onto a
+  // tick — 218 is not a multiple of 5 or 10, and bending the whole axis to hit
+  // it would make every other label awkward. It carries its own label instead.
   for (let s = Math.ceil(minSeat / step) * step; s <= maxSeat; s += step) {
     const t = svgEl('text', {
       x: x(s) + barW / 2, y: H - padB + 16, class: 'axis-label', 'text-anchor': 'middle',

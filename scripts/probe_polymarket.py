@@ -5,17 +5,16 @@ connections -- France's gambling regulator null-routes every polymarket.com
 domain to localhost and serves an anj.fr block page -- so a developer machine
 may be unable to see the API at all while the production path is fine. The
 runner is US-hosted and reaches it normally; nothing here circumvents anything,
-it is simply the machine that will do the fetching in production.
+it is simply the machine that would do the fetching in production.
 
-Prints three things:
+The first version passed `search=senate` and got back the highest-volume events
+on the whole site -- the 2028 presidential nomination, the next Prime Minister
+of Ethiopia, whether Jesus Christ returns before 2027. Gamma ignores an
+unrecognised query parameter rather than erroring, so an unfiltered list came
+back looking like a filtered one. This version asks by slug, which is exact, and
+enumerates by tag, which is bounded, instead of trusting a search field.
 
-1. whether the API is reachable, and what the response shape is
-2. which 2026 Senate markets exist, chamber-level and state-level, since that
-   decides whether a per-state view has anything to put in it
-3. whatever the API says about terms, so the licensing question can be settled
-   from the source rather than from a search summary
-
-Usage:
+Usage (on a runner):
     python scripts/probe_polymarket.py
 """
 
@@ -30,120 +29,142 @@ import urllib.request
 GAMMA = "https://gamma-api.polymarket.com"
 TIMEOUT = 25
 
+#: Event slugs known from public reporting. Exact lookups, so no guessing.
+KNOWN_SLUGS = (
+    "which-party-will-win-the-senate-in-2026",
+    "balance-of-power-2026-midterms",
+    "will-democrats-win-all-core-four-senate-races",
+)
 
-def fetch(url: str) -> tuple[int, object]:
-    request = urllib.request.Request(url, headers={"User-Agent": "midterms-forecast/probe"})
+
+def fetch(path: str) -> tuple[int, object]:
+    url = f"{GAMMA}{path}"
+    request = urllib.request.Request(
+        url, headers={"User-Agent": "midterms-forecast/probe"}
+    )
     try:
         with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
             body = response.read().decode("utf-8", "replace")
             try:
                 return response.status, json.loads(body)
             except json.JSONDecodeError:
-                return response.status, body[:500]
+                return response.status, body[:400]
     except urllib.error.HTTPError as exc:
         return exc.code, exc.read().decode("utf-8", "replace")[:300]
     except OSError as exc:
         return 0, f"unreachable: {exc}"
 
 
-def brief(market: dict) -> str:
-    outcomes = market.get("outcomes")
-    prices = market.get("outcomePrices")
-    if isinstance(outcomes, str):
+def maybe_json(value):
+    """Gamma returns some list fields as JSON-encoded strings."""
+    if isinstance(value, str):
         try:
-            outcomes = json.loads(outcomes)
+            return json.loads(value)
         except json.JSONDecodeError:
-            pass
-    if isinstance(prices, str):
-        try:
-            prices = json.loads(prices)
-        except json.JSONDecodeError:
-            pass
+            return value
+    return value
+
+
+def show_market(market: dict, indent: str = "      ") -> None:
+    outcomes = maybe_json(market.get("outcomes"))
+    prices = maybe_json(market.get("outcomePrices"))
     pairs = ""
     if isinstance(outcomes, list) and isinstance(prices, list):
-        pairs = "  ".join(
-            f"{o}={float(p):.3f}" for o, p in zip(outcomes, prices, strict=False)
+        pairs = "   ".join(
+            f"{o} {float(p) * 100:.1f}%"
+            for o, p in zip(outcomes, prices, strict=False)
         )
-    volume = market.get("volumeNum") or market.get("volume") or 0
     try:
-        volume = f"${float(volume):,.0f}"
+        volume = f"${float(market.get('volumeNum') or market.get('volume') or 0):,.0f}"
     except (TypeError, ValueError):
-        volume = str(volume)
-    return f"{market.get('question', '?')[:72]:72s} {pairs}  vol {volume}"
+        volume = "?"
+    print(f"{indent}{str(market.get('question', '?'))[:58]:58s} {pairs:26s} vol {volume}")
 
 
 def main() -> int:
     print("=" * 78)
-    print("  1. Reachability")
+    print("  1. Reachability and response shape")
     print("=" * 78)
-    status, payload = fetch(f"{GAMMA}/markets?limit=1")
+    status, payload = fetch("/markets?limit=1")
     print(f"  GET /markets?limit=1 -> {status}")
     if status != 200:
-        print(f"  {payload}")
-        print("\n  The runner cannot reach Polymarket either. Stop here.")
+        print(f"  {payload}\n  Cannot reach Polymarket from here either. Stop.")
         return 1
-    if isinstance(payload, list) and payload:
-        print(f"  response is a list; first market has {len(payload[0])} fields")
-        print(f"  fields: {', '.join(sorted(payload[0])[:18])}")
 
     print()
     print("=" * 78)
-    print("  2. What 2026 Senate markets exist?")
+    print("  2. Known events, looked up by exact slug")
     print("=" * 78)
-
-    seen: dict[str, dict] = {}
-    for term in ("senate", "senate 2026", "midterms"):
-        status, payload = fetch(
-            f"{GAMMA}/events?closed=false&limit=60&order=volume"
-            f"&ascending=false&search={urllib.parse.quote(term)}"
-        )
-        if status != 200 or not isinstance(payload, list):
-            print(f"  search {term!r} -> {status}")
+    for slug in KNOWN_SLUGS:
+        status, payload = fetch(f"/events?slug={urllib.parse.quote(slug)}")
+        if status != 200 or not isinstance(payload, list) or not payload:
+            print(f"\n  {slug} -> {status} (no event)")
             continue
-        for event in payload:
-            seen[str(event.get("id"))] = event
-
-    print(f"  {len(seen)} distinct open events matched\n")
-    for event in sorted(
-        seen.values(), key=lambda e: -float(e.get("volume") or 0)
-    )[:25]:
-        title = str(event.get("title", "?"))[:70]
-        volume = float(event.get("volume") or 0)
+        event = payload[0]
         markets = event.get("markets") or []
-        print(f"  ${volume:>12,.0f}  {title:70s}  ({len(markets)} markets)")
+        try:
+            volume = f"${float(event.get('volume') or 0):,.0f}"
+        except (TypeError, ValueError):
+            volume = "?"
+        print(f"\n  {event.get('title')}")
+        print(f"    slug {slug}   volume {volume}   {len(markets)} markets")
+        for market in markets[:8]:
+            show_market(market)
 
     print()
     print("=" * 78)
-    print("  3. A chamber-level market in detail")
+    print("  3. Enumerating by tag, to find per-state Senate markets")
     print("=" * 78)
-    for event in seen.values():
-        title = str(event.get("title", "")).lower()
-        if "senate" in title and ("which party" in title or "control" in title):
-            print(f"  {event.get('title')}")
-            print(f"  slug: {event.get('slug')}")
-            for market in (event.get("markets") or [])[:6]:
-                print(f"    {brief(market)}")
-            break
-    else:
-        print("  no obvious chamber-control event in the search results")
+    found: dict[str, dict] = {}
+    for tag in ("elections", "politics", "midterms", "us-politics"):
+        for offset in (0, 100, 200, 300):
+            status, payload = fetch(
+                f"/events?closed=false&limit=100&offset={offset}"
+                f"&tag_slug={tag}&order=volume&ascending=false"
+            )
+            if status != 200 or not isinstance(payload, list) or not payload:
+                break
+            for event in payload:
+                found[str(event.get("id"))] = event
+    print(f"  {len(found)} open events across those tags")
+
+    senate = {
+        i: e for i, e in found.items()
+        if "senate" in str(e.get("title", "")).lower()
+        or "senate" in str(e.get("slug", "")).lower()
+    }
+    print(f"  {len(senate)} mention the Senate\n")
+    for event in sorted(senate.values(), key=lambda e: -float(e.get("volume") or 0)):
+        try:
+            volume = f"${float(event.get('volume') or 0):,.0f}"
+        except (TypeError, ValueError):
+            volume = "?"
+        print(f"  {volume:>14}  {str(event.get('title'))[:62]:62s} {event.get('slug')}")
 
     print()
     print("=" * 78)
-    print("  4. Per-state coverage")
+    print("  4. Per-state coverage of the 2026 map")
     print("=" * 78)
     states = [
         "Georgia", "Michigan", "North Carolina", "New Hampshire", "Maine",
-        "Ohio", "Texas", "Iowa", "Alaska", "Minnesota", "Nevada", "Virginia",
+        "Ohio", "Texas", "Iowa", "Alaska", "Minnesota", "Nebraska", "Virginia",
+        "Kentucky", "Louisiana", "Kansas", "Colorado", "Illinois", "New Mexico",
     ]
+    covered = 0
     for state in states:
         hits = [
-            e for e in seen.values()
+            e for e in senate.values()
             if state.lower() in str(e.get("title", "")).lower()
-            and "senate" in str(e.get("title", "")).lower()
+            or state.lower().replace(" ", "-") in str(e.get("slug", "")).lower()
         ]
-        mark = f"{len(hits)} market(s)" if hits else "-"
-        print(f"    {state:16s} {mark}")
-
+        if hits:
+            covered += 1
+            print(f"    {state:16s} {hits[0].get('slug')}")
+        else:
+            print(f"    {state:16s} -")
+    print(f"\n  {covered} of {len(states)} checked states have a Senate market.")
+    print("  The dashboard has 35 races, so most will have no market at all --")
+    print("  any per-state view has to treat 'no market' as the normal case.")
     return 0
 
 

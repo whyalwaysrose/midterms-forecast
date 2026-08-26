@@ -17,7 +17,28 @@ from . import paths
 
 log = logging.getLogger(__name__)
 
-DATA_FILES = ("forecast", "history", "commentary", "us-states")
+#: Data files the page fetches, read out of app.js rather than listed here.
+#:
+#: Same lesson as the script list below, learned the same way. A hand-maintained
+#: tuple is a standing invitation to add a data file and forget: the House
+#: forecast, its history, its commentary and the cartogram layout are four new
+#: fetches, and a stale list would have produced a bundle that silently loses
+#: the entire House tab -- `loadJson` returns null for a missing embedded key
+#: and `loadHouse` then hides the switcher, so the failure looks exactly like a
+#: deploy that had not run the House yet. No error anywhere.
+DATA_FETCH = re.compile(r"loadJson\(\s*'data/([\w-]+)\.json'")
+
+
+def data_files(app_js: str) -> tuple[str, ...]:
+    """Every `data/<name>.json` app.js fetches, in first-seen order."""
+    seen = dict.fromkeys(DATA_FETCH.findall(app_js))
+    if not seen:
+        raise ValueError(
+            "bundle: found no loadJson('data/....json') calls in app.js. "
+            "If the loader was rewritten, this pattern needs rewriting with it "
+            "-- otherwise the bundle would embed no data at all."
+        )
+    return tuple(seen)
 
 #: Scripts to inline, in load order. Must match the tags in site/index.html.
 #:
@@ -84,7 +105,7 @@ def build(
     )
 
     data: dict[str, object] = {}
-    for name in DATA_FILES:
+    for name in data_files((site_dir / "js" / "app.js").read_text(encoding="utf-8")):
         path = site_dir / "data" / f"{name}.json"
         if path.exists():
             data[name] = json.loads(path.read_text(encoding="utf-8"))

@@ -67,10 +67,28 @@ def main() -> int:
     # Persist before doing anything else with it. A 435-race fit costs a quarter
     # of an hour, and the first version of this script threw away exactly one of
     # those to an argument-order mistake on the line below.
+    #
+    # Then this line threw away the second one. nutpie records its sampler
+    # settings as a nested dict on `sample_stats.attrs`, and netCDF attributes
+    # may only be strings, numbers or arrays -- so to_netcdf raises *after* the
+    # sampling is done and the object is still only in memory. Flattened to a
+    # string rather than dropped, because those settings are the record of how
+    # the fit was configured and are worth keeping in the file.
+    #
+    # Guarded, and the guard is the point: a failure while saving must never be
+    # the reason the thing being saved is lost.
     paths.TRACES_DIR.mkdir(parents=True, exist_ok=True)
     trace_path = paths.TRACES_DIR / "house_probe.nc"
-    idata.to_netcdf(trace_path)
-    print(f"trace -> {trace_path}")
+    try:
+        for group in idata.groups():
+            attrs = getattr(idata, group).attrs
+            for key, value in list(attrs.items()):
+                if not isinstance(value, (str, int, float, list, tuple, bytes)):
+                    attrs[key] = repr(value)
+        idata.to_netcdf(trace_path)
+        print(f"trace -> {trace_path}")
+    except Exception as exc:  # noqa: BLE001 - never lose the fit to the backup
+        print(f"could not save the trace ({exc}); continuing with it in memory")
 
     sim = simulate_chamber(idata, races, cfg, fund)
     print()

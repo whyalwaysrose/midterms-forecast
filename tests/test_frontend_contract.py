@@ -313,3 +313,45 @@ def test_every_script_in_the_folder_is_actually_loaded():
     loaded = set(bundle.local_scripts(html))
     on_disk = {p.name for p in (SITE / "js").glob("*.js")}
     assert on_disk == loaded, f"not loaded by index.html: {sorted(on_disk - loaded)}"
+
+
+def test_the_bundler_takes_its_data_list_from_the_page_too():
+    """Same lesson as the script list, and a worse failure mode.
+
+    A stale data list does not produce a broken bundle -- it produces a bundle
+    that silently loses whatever was added. `loadJson` returns null for a
+    missing embedded key and `loadHouse` then hides the chamber switcher, so a
+    bundle with no House in it looks exactly like a deploy that had not run the
+    House yet. Nothing raises, and nobody finds out.
+    """
+    from midterms import bundle
+
+    app = (SITE / "js" / "app.js").read_text(encoding="utf-8")
+    names = bundle.data_files(app)
+
+    assert names[0] == "forecast", "the required payload should come first"
+    for chamber_file in ("forecast_house", "us-districts"):
+        assert chamber_file in names, (
+            f"app.js fetches {chamber_file}.json but the bundler would not embed it"
+        )
+    assert len(set(names)) == len(names), "a data file is listed twice"
+
+
+def test_every_data_file_the_page_fetches_could_exist():
+    """Each fetched name must be one something in the pipeline actually writes.
+
+    Catches a typo in a fetch path, which otherwise degrades silently: an
+    optional file that never loads is indistinguishable from one that has not
+    been generated yet.
+    """
+    from midterms import bundle, paths
+
+    app = (SITE / "js" / "app.js").read_text(encoding="utf-8")
+    written = {
+        paths.chamber_filename(stem, chamber).removesuffix(".json")
+        for stem in ("forecast", "history", "commentary")
+        for chamber in ("senate", "house")
+    } | {"us-states", "us-districts"}
+
+    unknown = set(bundle.data_files(app)) - written
+    assert not unknown, f"app.js fetches data nothing writes: {sorted(unknown)}"

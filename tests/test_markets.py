@@ -190,9 +190,43 @@ def test_the_committed_snapshot_parses_if_present():
 
 
 def test_the_snapshot_is_json_and_small():
-    """It is committed, so it must not bloat the repository."""
+    """It is committed on every run, so its size compounds.
+
+    Unthinned it was 206 KB -- thirteen months of daily readings for every leg
+    of every market, including a seat-count market with eleven of them. At one
+    a day that is roughly 14 MB by election day, for resolution no chart a few
+    hundred pixels wide can show. This test is what caught that.
+    """
     snapshot = markets.latest_snapshot()
     if snapshot is None:
         pytest.skip("no committed market snapshot")
     json.loads(snapshot.read_text(encoding="utf-8"))
-    assert snapshot.stat().st_size < 100_000
+    size = snapshot.stat().st_size
+    assert size < 80_000, (
+        f"{snapshot.name} is {size / 1024:.0f} KB; history is probably unthinned "
+        "or being kept for outcomes that are never charted"
+    )
+
+
+def test_history_is_kept_only_where_it_is_charted():
+    """The seat-count market is a distribution; eleven lines would be spaghetti."""
+    snapshot = markets.latest_snapshot()
+    if snapshot is None:
+        pytest.skip("no committed market snapshot")
+    events, _ = markets.load_snapshot(snapshot)
+    for slug, event in events.items():
+        has_history = any(o.history for o in event.outcomes)
+        if slug in markets.CHARTED_OVER_TIME:
+            assert has_history, f"{slug} is charted over time but has no series"
+        else:
+            assert not has_history, f"{slug} carries history it will never plot"
+
+
+def test_thinning_keeps_the_endpoints():
+    """The last point is the price the card prints, so it must survive."""
+    series = [(f"2026-01-{i:02d}", i / 400) for i in range(1, 400)]
+    thinned = markets.thin(series)
+    assert len(thinned) <= markets.MAX_HISTORY_POINTS
+    assert thinned[0] == series[0]
+    assert thinned[-1] == series[-1]
+    assert markets.thin(series[:20]) == series[:20], "short series must be untouched"

@@ -286,22 +286,56 @@ def fetch_history(token_id: str) -> list[tuple[str, float]]:
     return sorted(by_day.items())
 
 
-def attach_history(events: dict[str, MarketEvent], limit: int = 6) -> None:
-    """Fill in each outcome's time series, in place.
+#: Events whose card is a time series. The seat-count market is deliberately
+#: absent: it is a distribution over a single election, so eleven lines of
+#: history would be spaghetti where one bar chart is legible.
+CHARTED_OVER_TIME = frozenset({
+    "balance-of-power-2026-midterms",
+    "which-party-will-win-the-senate-in-2026",
+})
 
-    ``limit`` caps how many outcomes per event get a history request: a
-    seat-count market has twenty legs, most of them priced near zero and none
-    of them worth a chart, and each one is a separate HTTP call.
+#: Most points to keep per series. Thirteen months of daily readings is 400
+#: points, and the snapshot is committed on every run -- at 200 KB a day that is
+#: 14 MB by election day, for detail no chart a few hundred pixels wide can
+#: show. 120 keeps roughly three-day resolution over the whole period.
+MAX_HISTORY_POINTS = 120
+
+
+def thin(series: list, limit: int = MAX_HISTORY_POINTS) -> list:
+    """Evenly sample a series down to ``limit`` points, always keeping the last.
+
+    The final point is today's price, which the card prints as a number, so it
+    must survive: dropping it would leave the line ending somewhere other than
+    the figure beside it.
     """
-    for event in events.values():
+    if len(series) <= limit:
+        return list(series)
+    step = (len(series) - 1) / (limit - 1)
+    picked = {round(i * step) for i in range(limit)}
+    picked.add(len(series) - 1)
+    return [series[i] for i in sorted(picked)]
+
+
+def attach_history(events: dict[str, MarketEvent], limit: int = 4) -> None:
+    """Fill in the time series for outcomes that will be charted, in place.
+
+    ``limit`` caps how many outcomes per event get a request. Each one is a
+    separate call, and an outcome priced near zero contributes a flat line along
+    the axis -- ink without information.
+    """
+    for slug, event in events.items():
+        if slug not in CHARTED_OVER_TIME:
+            log.info("markets: %s is charted as a distribution, skipping history", slug)
+            continue
         wanted = sorted(event.outcomes, key=lambda o: -o.probability)[:limit]
-        filled = 0
+        filled = points = 0
         for outcome in wanted:
-            series = fetch_history(outcome.token_id)
+            series = thin(fetch_history(outcome.token_id))
             if series:
                 outcome.history[:] = series
                 filled += 1
+                points += len(series)
         log.info(
-            "markets: %s -> history for %d of %d outcomes",
-            event.slug, filled, len(event.outcomes),
+            "markets: %s -> history for %d of %d outcomes (%d points)",
+            slug, filled, len(event.outcomes), points,
         )

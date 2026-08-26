@@ -388,7 +388,15 @@ def _markets_block() -> dict | None:
                 "title": event.title,
                 "volume": _round(event.volume, 0),
                 "outcomes": [
-                    {"label": o.label, "probability": _round(o.probability, 4)}
+                    {
+                        "label": o.label,
+                        "probability": _round(o.probability, 4),
+                        # Present only for the events charted over time; the
+                        # seat-count market is a distribution, not a series.
+                        "history": [
+                            {"date": when, "p": _round(p, 4)} for when, p in o.history
+                        ],
+                    }
                     for o in event.outcomes
                     if o.probability >= 0.001
                 ],

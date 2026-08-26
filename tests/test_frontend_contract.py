@@ -355,3 +355,26 @@ def test_every_data_file_the_page_fetches_could_exist():
 
     unknown = set(bundle.data_files(app)) - written
     assert not unknown, f"app.js fetches data nothing writes: {sorted(unknown)}"
+
+
+def test_every_element_the_scripts_reach_for_exists_in_the_page():
+    """A typo in a DOM id fails silently, which is the whole problem.
+
+    `$('house-map')` on a missing id returns null, `renderCartogram` returns
+    early, and the House map simply does not appear -- no error in the console,
+    nothing in CI, and a page that looks like it is still loading. The same
+    shape of bug would hide any of the chamber-switching wiring.
+    """
+    import re
+
+    html = (SITE / "index.html").read_text(encoding="utf-8")
+    declared = set(re.findall(r'id="([\w-]+)"', html))
+
+    # Built by openDrawer into innerHTML immediately before it is used, so it
+    # exists when it is read but never appears in the static page.
+    dynamic = {"drawer-chart"}
+
+    for path in sorted((SITE / "js").glob("*.js")):
+        used = set(re.findall(r"\$\('([\w-]+)'\)", path.read_text(encoding="utf-8")))
+        missing = sorted(used - declared - dynamic)
+        assert not missing, f"{path.name} reads ids that index.html does not define: {missing}"

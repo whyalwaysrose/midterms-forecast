@@ -106,10 +106,25 @@ the whole model rather than a prior the polls quickly overwhelm.
 | Wikipedia state presidential pages | By-district tables | CC BY-SA | Accurate (reported, not apportioned) but 50 pages of brittle parsing. |
 | [michaelminn.net](https://michaelminn.net/tutorials/data/) `2024-electoral-districts.csv` | 2024 **House** results by district | unstated | Not presidential. Embeds incumbency and candidate quality, and 38 of 441 districts were uncontested so have no two-party margin at all. Worst option. |
 
-**Why not just ship the weak version.** A House forecast built on prior House
-results would look exactly as authoritative as the Senate one while being mostly
-prior, and would be most wrong in open seats — the competitive ones. The
-dashboard's credibility rests on its numbers meaning what they appear to mean.
+**Why not just ship the weak version.** A House forecast built on prior *House*
+results would be most wrong in open seats — the competitive ones — because those
+results embed the incumbent's personal vote and 38 districts were uncontested.
+
+**Correction to the above (2026-08-26).** The original note also argued that a
+mostly-fundamentals House model would look "as authoritative as the Senate one
+while being mostly prior". That reasoning was too harsh and should not be reused:
+*every* House model is mostly fundamentals, because district polling is always
+sparse — 538 and Silver Bulletin both lean on district partisan lean plus the
+national environment. Sparse polling is the norm for the House, not a defect. The
+blocker is narrower than it was written: the fundamentals have to be *accurate*,
+and that is exactly what the licensing prevents.
+
+**Re-checked 2026-08-26.** ElectIndex still has no license file (`spdx_id: NONE`,
+no LICENSE at any usual path) despite being updated the same day. Poll coverage
+moved from 37 to 40 districts of 435 (82 polls). Daily Kos publishes presidential
+results by district but states no license either. Wikipedia has no consolidated
+page — confirmed against the 2024 presidential article — so that route is still
+per-state parsing. Nothing has changed the answer.
 
 ## Uncertainty is split, not stacked
 

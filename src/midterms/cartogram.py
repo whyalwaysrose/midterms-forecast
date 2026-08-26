@@ -78,7 +78,25 @@ def build(
 
     # Start each state at its true centroid, scaled up so the biggest blocks
     # have room to exist before relaxation begins.
-    scale = 2.4
+    #
+    # This one number trades map size against faithfulness, and it was measured
+    # rather than guessed. A larger scale spreads the blocks out, so relaxation
+    # has less work to do and the geography survives better -- but the whole
+    # picture grows, and since it is rendered to a fixed page width, every
+    # district square gets smaller. Measured across the real 435-seat layout,
+    # with square size quoted at a 900px render:
+    #
+    #     scale   viewBox      overlaps   E-W      N-S     square
+    #     1.2      947x576        0      99.5%    97.0%    12.4px
+    #     1.5     1145x706        0      99.8%    98.5%    10.2px
+    #     1.8     1352x837        0     100.0%    99.5%     8.7px   <-- chosen
+    #     2.4     1765x1098       0     100.0%    99.7%     6.6px
+    #
+    # 1.8 is the last value that keeps ordering above the 99% the tests demand,
+    # and it draws squares a third larger than 2.4 did. Below it the map starts
+    # telling small lies about where states are, which is the one thing this
+    # picture must not do; above it the squares get too small to hover.
+    scale = 1.8
     pos = {
         state: [centroids[state][0] * scale, centroids[state][1] * scale]
         for state in seats

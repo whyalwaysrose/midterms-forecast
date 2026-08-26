@@ -110,6 +110,18 @@ function renderCartogram(forecast, layout) {
     labels.appendChild(label);
   }
 
+  // Below about 4px a square stops being tappable, the same judgement the state
+  // map makes about Rhode Island. The cartogram is still worth showing at that
+  // size -- the balance of colour reads perfectly well as a shape -- but the
+  // page should say it is an overview rather than let a reader poke at it.
+  //
+  // The host is already visible by the time this runs (render() unhides the
+  // block before calling in), so clientWidth is real; the fallback covers only
+  // the case where it is not.
+  const squarePx = (cell / vw) * (host.clientWidth || window.innerWidth);
+  const hint = $('house-map-hint');
+  if (hint) hint.hidden = squarePx >= 4;
+
   host.appendChild(svg);
   attachCartogramInteraction(host);
   renderCartogramLegend(forecast);

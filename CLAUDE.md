@@ -141,6 +141,24 @@ Only `sigma_excess` is scaled, never `sampling_var`. The plus-minus measures err
 *beyond* what sample size explains, so scaling the sampling term too would
 penalise a bad pollster twice.
 
+## One survey is one observation
+
+`src/midterms/data/surveys.py` collapses a pollster's several tested matchups into a
+single reading. Do not remove it, and do not "restore" the dropped polls: they are not
+extra evidence, they are the same sample asked a different question, and most of them
+name candidates who lost their primary.
+
+Which matchup is live is read off recent polling rather than the roster, because
+pollsters stop testing losers within days of a primary while a roster has to be edited
+by hand. `LIVE_SURVEYS = 3` is in surveys, not days: a day-window is arbitrary against
+polling density -- three weeks covers eleven Michigan surveys and two Maine ones.
+
+Measured effect: 252 race polls -> 162, chamber 71.0% -> 68.5%, Michigan 64.1% -> 58.9%.
+The **bias** correction is the point. The precision correction barely shows -- Maine's
+90% interval moved 19.9 -> 20.1 points despite going from 34 usable polls to 3 -- because
+election-day error and the shared national environment dominate a race's final interval.
+Do not expect this to widen anything visibly.
+
 ## Measured, then rejected
 
 Keep these decisions unless new evidence overturns them; each cost real time to

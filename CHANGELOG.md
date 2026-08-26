@@ -4,34 +4,31 @@ Automatically generated after each model run. Newest entries first.
 
 ## 2026-08-26
 
-Democratic chances of Senate control are up 5.4 pts to 71.0% on 5 new polls. Projected seats 52.2 → 52.8 (+0.6).
+Democratic chances of Senate control are up 2.9 pts to 68.5% on no new polls. Projected seats 52.2 → 52.5 (+0.4).
 
-**National environment.** The generic ballot moved D+5.9 → D+6.4 (+0.6). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
+**National environment.** The generic ballot moved D+5.9 → D+6.2 (+0.4). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
 
-**Races that moved** (28 of 35):
+**Races that moved** (21 of 35):
 
-  - **New Hampshire** — Democratic win probability 81.6% → 91.8% (+10.2 pts); projected margin D+5.6 → D+8.5 (+2.9). Driven by 2 new polls:
-    - Saint Anselm College Survey Center (2026-08-17, n=1411, LV): D+7.9
-    - Saint Anselm College Survey Center (2026-08-17, n=1411, LV): D+14.0
+  - **Florida** — Democratic win probability 18.8% → 26.8% (+8.0 pts); projected margin R+5.4 → R+3.8 (+1.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Maine** — Democratic win probability 63.8% → 69.7% (+5.9 pts); projected margin D+2.1 → D+3.1 (+1.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **New Hampshire** — Democratic win probability 81.6% → 88.8% (+7.2 pts); projected margin D+5.6 → D+7.5 (+1.8). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Texas** — Democratic win probability 62.4% → 66.6% (+4.3 pts); projected margin D+1.9 → D+2.6 (+0.7). Driven by 1 new poll:
-    - The Texas Politics Project at the University of Texas at Austin/YouGov (2026-08-09, n=1218, RV): D+3.7
+  - **Minnesota** — Democratic win probability 84.7% → 88.5% (+3.8 pts); projected margin D+6.4 → D+7.8 (+1.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Mississippi** — Democratic win probability 22.0% → 25.6% (+3.6 pts); projected margin R+5.7 → R+5.0 (+0.8). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **Maine** — Democratic win probability 63.8% → 66.6% (+2.8 pts); projected margin D+2.1 → D+2.6 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Iowa** — Democratic win probability 46.3% → 49.6% (+3.4 pts); projected margin R+0.6 → R+0.1 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **Michigan** — Democratic win probability 61.1% → 58.9% (-2.2 pts); projected margin D+1.7 → D+1.4 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Nebraska** — Democratic win probability 66.2% → 69.4% (+3.1 pts); projected margin D+3.0 → D+3.7 (+0.7). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **New Jersey** — Democratic win probability 92.0% → 94.0% (+2.0 pts); projected margin D+14.6 → D+16.1 (+1.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Michigan** — Democratic win probability 61.1% → 64.1% (+3.0 pts); projected margin D+1.7 → D+2.1 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **Ohio** — Democratic win probability 71.3% → 73.2% (+1.9 pts); projected margin D+3.4 → D+3.7 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Kansas** — Democratic win probability 26.6% → 29.3% (+2.8 pts); projected margin R+4.5 → R+3.9 (+0.7). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **Illinois** — Democratic win probability 93.8% → 95.5% (+1.8 pts); projected margin D+16.4 → D+17.4 (+1.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Ohio** — Democratic win probability 71.3% → 73.9% (+2.6 pts); projected margin D+3.4 → D+3.9 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **Alaska** — Democratic win probability 63.4% → 64.9% (+1.5 pts); projected margin D+2.1 → D+2.4 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
-  - **Louisiana** — Democratic win probability 19.3% → 21.7% (+2.4 pts); projected margin R+8.9 → R+8.2 (+0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+  - **Texas** — Democratic win probability 62.4% → 63.8% (+1.4 pts); projected margin D+1.9 → D+2.1 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
 
 ---
 

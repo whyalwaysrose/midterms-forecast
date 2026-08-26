@@ -27,7 +27,7 @@ import numpy as np
 
 from . import paths
 from .config import ModelConfig, RaceSet
-from .data.polls import PollTable
+from .data.polls import PLACEHOLDER_NAMES, PollTable
 from .data.roster import Roster
 from .data.votehub import ATTRIBUTION
 from .fundamentals import Fundamentals, logit_to_margin
@@ -131,7 +131,7 @@ def _candidates(table: PollTable, race_id: str, roster: Roster) -> dict[str, str
         for poll in polls:
             name = getattr(poll, attribute)
             # Generic placeholders ("Dem", "Rep") name no one.
-            if name and name.lower() not in {"dem", "rep", "democrat", "republican"}:
+            if name and name.lower() not in PLACEHOLDER_NAMES:
                 return name
         return None
 

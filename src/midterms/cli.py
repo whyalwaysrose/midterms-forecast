@@ -28,7 +28,30 @@ os.environ.setdefault("PYTENSOR_FLAGS", "cxx=")
 log = logging.getLogger("midterms")
 
 
+def _use_utf8_output() -> None:
+    """Stop a Windows console killing the run at the last step.
+
+    The commentary is generated prose and contains real punctuation -- arrows,
+    en dashes, non-ASCII candidate names like Ben Ray Lujan. A Windows console
+    defaults to cp1252, so printing it raised UnicodeEncodeError *after* the
+    model had sampled and written the forecast, losing the changelog and
+    exiting through a traceback. CI never saw it because the runners are Linux.
+
+    Reconfiguring rather than sanitising the text: the strings are correct, it
+    is only this one console that cannot render them, and replacement affects
+    nothing that is written to a file.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            try:
+                reconfigure(encoding="utf-8", errors="replace")
+            except (ValueError, OSError):
+                pass
+
+
 def _configure_logging(verbose: bool) -> None:
+    _use_utf8_output()
     logging.basicConfig(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(asctime)s %(levelname)-7s %(name)s: %(message)s",

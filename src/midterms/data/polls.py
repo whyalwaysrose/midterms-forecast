@@ -25,6 +25,14 @@ from .votehub import is_primary_subject
 
 log = logging.getLogger(__name__)
 
+#: Names that stand in for "whoever the party nominates" rather than a person.
+#:
+#: Pollsters use these before a primary is settled. They matter in two places:
+#: the dashboard must not print "Dem" as a candidate's name, and the model must
+#: not treat a generic-opponent poll as testing the same matchup as a named one.
+PLACEHOLDER_NAMES = frozenset({"dem", "rep", "democrat", "democratic", "republican", "gop"})
+
+
 #: Sentinel race id for national generic-ballot polls.
 NATIONAL_RACE_ID = "__national__"
 
@@ -327,6 +335,35 @@ def build_poll_table(
             table.polls[:] = [p for p in table.polls if p.pollster not in banned]
             for name, n in dropped.most_common():
                 table.rejections[f"pollster banned by 538: {name}"] += n
+
+    # One survey, one observation. A pollster testing several hypothetical
+    # matchups files several rows; they share one sample, so counting them
+    # separately both overstates precision and credits a party with candidates
+    # who are not on the ballot. Applies to race polls only: a generic-ballot
+    # poll has no matchup to vary.
+    from .surveys import deduplicate
+
+    race_polls = [
+        p for p in table.polls
+        if p.race_id not in (NATIONAL_RACE_ID, APPROVAL_RACE_ID)
+    ]
+    other_polls = [
+        p for p in table.polls
+        if p.race_id in (NATIONAL_RACE_ID, APPROVAL_RACE_ID)
+    ]
+    deduped, survey_counts = deduplicate(race_polls)
+    removed = len(race_polls) - len(deduped)
+    if removed:
+        table.polls[:] = deduped + other_polls
+        table.rejections["repeat readings of a survey already counted"] += removed
+        log.info(
+            "surveys: %d race polls from %d surveys -> %d observations (%s)",
+            len(race_polls), survey_counts["surveys"], len(deduped),
+            ", ".join(
+                f"{reason}={n}" for reason, n in survey_counts.most_common()
+                if reason not in {"surveys", "records removed"}
+            ),
+        )
 
     table.polls.sort(key=lambda p: (p.race_id, p.field_date))
     log.info("poll table: %s", table.summary().replace("\n", "; "))

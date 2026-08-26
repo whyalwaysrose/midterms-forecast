@@ -50,7 +50,14 @@ jobs:
   # page. Pull requests do not deploy.
   deploy:
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # Manual runs publish too. Gating on `push` alone left no way to deploy
+    # when a push trigger is slow to fire -- GitHub queued one for 25 minutes
+    # on 2026-08-26 -- and dispatching CI by hand then ran the tests and
+    # skipped the publish, which is the opposite of what you want in that
+    # moment. Pull requests still never deploy.
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     permissions:
       contents: read
       pages: write

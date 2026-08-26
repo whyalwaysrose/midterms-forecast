@@ -55,8 +55,20 @@ def test_ci_deploys_only_after_the_tests_pass():
 
 def test_ci_does_not_deploy_pull_requests_or_other_branches():
     condition = load("ci.yml")["jobs"]["deploy"]["if"]
-    assert "github.event_name == 'push'" in condition
     assert "refs/heads/main" in condition
+    assert "pull_request" not in condition
+
+
+def test_a_manual_ci_run_can_still_publish():
+    """The escape hatch for a slow push trigger.
+
+    GitHub queued a push-triggered run for 25 minutes on 2026-08-26. Dispatching
+    CI by hand was the obvious response, and with the job gated on `push` alone
+    it ran the tests and skipped the deploy -- the opposite of what was wanted.
+    """
+    condition = load("ci.yml")["jobs"]["deploy"]["if"]
+    assert "workflow_dispatch" in condition
+    assert "push" in condition
 
 
 def test_ci_still_runs_on_pull_requests():

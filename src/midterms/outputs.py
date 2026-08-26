@@ -310,6 +310,7 @@ class ForecastRun:
                 "n_simulations": int(sim.n_sims),
             },
             "races": race_records,
+            "markets": _markets_block(),
             "methodology": _methodology_block(self.cfg),
             "diagnostics": {k: _round(v, 4) for k, v in self.diagnostics.items()},
             "poll_summary": {
@@ -344,6 +345,57 @@ class ForecastRun:
                 for i, race in enumerate(self.races.races)
             },
         }
+
+
+def _markets_block() -> dict | None:
+    """Prediction-market odds for the dashboard, or None if we have none.
+
+    Read from the committed snapshot rather than fetched here, so a market
+    outage, a rate limit or a regulator's DNS block can never delay or fail a
+    forecast. Returns None rather than raising for the same reason: the
+    dashboard treats absent markets as an ordinary state.
+
+    Deliberately one-way. Nothing under ``model/`` reads this, and it must stay
+    that way -- traders read forecasts, so feeding market prices back into the
+    model would be circular and would wreck the calibration the error scales
+    were fitted for.
+    """
+    try:
+        from .data import markets
+
+        snapshot = markets.latest_snapshot()
+        if snapshot is None:
+            return None
+        events, fetched_at = markets.load_snapshot(snapshot)
+    except Exception as exc:  # noqa: BLE001 - never let this break a forecast
+        log.warning("markets unavailable, publishing without them: %s", exc)
+        return None
+
+    if not events:
+        return None
+
+    return {
+        "source": markets.SOURCE_NAME,
+        "source_url": markets.SOURCE_URL,
+        "fetched_at": fetched_at,
+        "note": (
+            "Shown for contrast only. Market prices are never an input to this "
+            "model: traders read forecasts, so using them would be circular."
+        ),
+        "events": [
+            {
+                "slug": event.slug,
+                "title": event.title,
+                "volume": _round(event.volume, 0),
+                "outcomes": [
+                    {"label": o.label, "probability": _round(o.probability, 4)}
+                    for o in event.outcomes
+                    if o.probability >= 0.001
+                ],
+            }
+            for event in events.values()
+        ],
+    }
 
 
 def _methodology_block(cfg: ModelConfig) -> dict:

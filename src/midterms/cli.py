@@ -6,6 +6,7 @@
     midterms audit-roster     report candidate names the roster cannot classify
     midterms audit-pollsters  report pollster names that look like duplicates
     midterms check-keys       report which optional API keys are configured
+    midterms fetch-markets    snapshot prediction-market odds for the dashboard
     midterms backtest         calibration check against held-out polls
 
 ``run`` is what CI invokes daily.
@@ -202,6 +203,32 @@ def cmd_check_keys(args: argparse.Namespace) -> int:
     if broken:
         print("\nA key is set but not working; check for stray whitespace or quotes.")
         return 1
+    return 0
+
+
+def cmd_fetch_markets(args: argparse.Namespace) -> int:
+    """Snapshot the prediction-market odds shown alongside the forecast.
+
+    Separate from `run` on purpose. Polymarket is blocked in some jurisdictions
+    -- France's regulator null-routes every polymarket.com domain -- so this is
+    run where it is reachable and the result committed, and readers get the
+    numbers from our own origin. It also means a market outage can never stop a
+    forecast from publishing.
+    """
+    from .data import markets
+
+    events = markets.fetch()
+    if not events:
+        log.error("no markets fetched; leaving the previous snapshot in place")
+        return 1
+
+    path = markets.write_snapshot(events)
+    for event in events.values():
+        print(f"\n{event.title}  (${event.volume:,.0f} traded)")
+        for outcome in event.outcomes:
+            if outcome.probability >= 0.005:
+                print(f"   {outcome.label[:52]:52s} {outcome.probability * 100:5.1f}%")
+    print(f"\nSnapshot -> {path}")
     return 0
 
 
@@ -402,6 +429,11 @@ def build_parser() -> argparse.ArgumentParser:
     audit = sub.add_parser("audit-roster", help="find candidate names the roster misses")
     audit.add_argument("--offline", action="store_true")
     audit.set_defaults(func=cmd_audit_roster)
+
+    fetch_markets = sub.add_parser(
+        "fetch-markets", help="snapshot prediction-market odds for the dashboard"
+    )
+    fetch_markets.set_defaults(func=cmd_fetch_markets)
 
     check_keys = sub.add_parser(
         "check-keys", help="report which optional API keys are set and working"

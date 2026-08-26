@@ -63,6 +63,15 @@ jobs:
         continue-on-error: true
         run: python -m midterms.cli audit-roster
 
+      # Prediction-market odds, shown next to the forecast and never fed into
+      # it. Before the model runs, so the payload can include them; allowed to
+      # fail, because a market outage must not stop a forecast publishing.
+      # Runs here rather than locally because Polymarket is DNS-blocked in some
+      # jurisdictions, including the one this project is developed in.
+      - name: Snapshot prediction-market odds
+        continue-on-error: true
+        run: python -m midterms.cli fetch-markets
+
       - name: Run the forecast
         env:
           # We sample with nutpie (Numba); the PyTensor C backend is unused.
@@ -79,6 +88,11 @@ jobs:
                   site/data/commentary.json \
                   outputs/runs \
                   CHANGELOG.md
+          # Forced: data/raw is gitignored for poll snapshots, which are large
+          # and regenerable. This one is small and is the only copy readers can
+          # be served from, since Polymarket is unreachable from the machine
+          # this project is developed on.
+          git add -f data/raw/markets-*.json || true
 
           if git diff --staged --quiet; then
             echo "No changes to commit."

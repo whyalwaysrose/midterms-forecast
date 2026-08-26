@@ -64,7 +64,15 @@ def main() -> int:
     print(f"\nsampled in {elapsed:.0f}s")
     print("convergence:", convergence_report(idata))
 
-    sim = simulate_chamber(idata, races, cfg, data)
+    # Persist before doing anything else with it. A 435-race fit costs a quarter
+    # of an hour, and the first version of this script threw away exactly one of
+    # those to an argument-order mistake on the line below.
+    paths.TRACES_DIR.mkdir(parents=True, exist_ok=True)
+    trace_path = paths.TRACES_DIR / "house_probe.nc"
+    idata.to_netcdf(trace_path)
+    print(f"trace -> {trace_path}")
+
+    sim = simulate_chamber(idata, races, cfg, fund)
     print()
     print("=" * 70)
     print(f"  P(Democratic House) {sim.dem_control_prob * 100:5.1f}%")

@@ -480,10 +480,55 @@ function renderDiagnostics(d) {
 
 let LAST_RENDER = null;
 
-function render(forecast, history, commentary, geo) {
+/** Everything that differs between the two chambers, in one place.
+ *
+ * The alternative was `chamber === 'house' ? ... : ...` scattered through
+ * render(), which is how a page ends up saying the Vice President breaks a tie
+ * in the House of Representatives. Collecting the differences here means each
+ * one had to be thought about once, deliberately.
+ */
+const CHAMBER = {
+  senate: {
+    title: '2026 Senate Forecast',
+    seatChart: 'Distribution of Senate seats',
+    historySub: 'Democratic probability of Senate control, one point per model run.',
+    /** The Senate's 100 seats split evenly, so the Vice President decides. */
+    tiebreak: (cf) =>
+      `${cf.seats_not_up.D} Democratic and ${cf.seats_not_up.R} Republican seats are not up. `
+      + `Democrats need ${cf.dem_seats_for_majority}; the Vice President breaks a 50-50 tie `
+      + `for the ${cf.tiebreaker_party === 'R' ? 'Republicans' : 'Democrats'}.`,
+  },
+  house: {
+    title: '2026 House Forecast',
+    seatChart: 'Distribution of House seats',
+    historySub: 'Democratic probability of House control, one point per model run.',
+    /* No tiebreaker sentence here, because the House cannot tie: 435 is odd, so
+     * one side always clears 218 and the Vice President never comes into it.
+     * Note this is a fact about a full chamber -- mid-term vacancies do produce
+     * even splits, but those are not what an election-night forecast predicts. */
+    tiebreak: (cf) =>
+      `All ${cf.total_seats} seats are up, so Democrats need `
+      + `${cf.dem_seats_for_majority} of them outright. There is no tie to break `
+      + `and no seats held over: ${cf.total_seats} is an odd number, so one side `
+      + `always finishes with a majority.`,
+  },
+};
+
+function render(forecast, history, commentary, geo, layout) {
   // Re-runnable so a viewport change can redraw the charts at the new width.
-  LAST_RENDER = () => render(forecast, history, commentary, geo);
+  LAST_RENDER = () => render(forecast, history, commentary, geo, layout);
   const cf = forecast.chamber_forecast;
+  const chamber = forecast.chamber === 'house' ? 'house' : 'senate';
+  const copy = CHAMBER[chamber];
+
+  document.title = copy.title;
+  $('site-title').textContent = copy.title;
+  $('seat-chart-title').textContent = copy.seatChart;
+  $('history-sub').textContent = copy.historySub;
+  $('majority-seats').textContent = cf.dem_seats_for_majority;
+  $('filter-all').textContent = `All ${(forecast.races || []).length}`;
+  $('senate-map-block').hidden = chamber !== 'senate';
+  $('house-map-block').hidden = chamber !== 'house';
 
   $('last-updated').textContent = fmtDate(forecast.run_date);
   $('days-left').textContent = forecast.days_to_election >= 0
@@ -498,10 +543,7 @@ function render(forecast, history, commentary, geo) {
   $('seats-note').innerHTML =
     `Democrats are projected to hold <strong>${cf.dem_seats.median}</strong> seats ` +
     `(90% interval ${cf.dem_seats.p05}–${cf.dem_seats.p95}).`;
-  $('tiebreak-note').textContent =
-    `${cf.seats_not_up.D} Democratic and ${cf.seats_not_up.R} Republican seats are not up. ` +
-    `Democrats need ${cf.dem_seats_for_majority}; the Vice President breaks a 50-50 tie for the ` +
-    `${cf.tiebreaker_party === 'R' ? 'Republicans' : 'Democrats'}.`;
+  $('tiebreak-note').textContent = copy.tiebreak(cf);
 
   $('n-sims').textContent = cf.n_simulations.toLocaleString();
 
@@ -517,7 +559,8 @@ function render(forecast, history, commentary, geo) {
 
   // The map goes first: it is the thing people look at, and it needs the page
   // visible so its container has a width to measure.
-  renderMap(forecast, geo);
+  if (chamber === 'house') renderCartogram(forecast, layout);
+  else renderMap(forecast, geo);
 
   renderSeatChart(forecast);
   renderHistoryChart(history);
@@ -552,6 +595,33 @@ async function loadJson(path, required) {
   }
 }
 
+/** Loaded chamber bundles, keyed by chamber. Populated by init(). */
+const BUNDLES = {};
+let ACTIVE_CHAMBER = 'senate';
+
+function showChamber(chamber) {
+  const bundle = BUNDLES[chamber];
+  if (!bundle) return;
+  ACTIVE_CHAMBER = chamber;
+
+  for (const tab of document.querySelectorAll('.chamber-tab')) {
+    const on = tab.dataset.chamber === chamber;
+    tab.classList.toggle('active', on);
+    tab.setAttribute('aria-selected', String(on));
+  }
+
+  // Close anything open against the chamber we are leaving. A drawer showing a
+  // Senate race while the page underneath has switched to the House is the kind
+  // of stale state that makes a reader distrust everything else on the page.
+  closeDrawer();
+  ACTIVE_FILTER = 'all';
+  for (const btn of document.querySelectorAll('.filter')) {
+    btn.classList.toggle('active', btn.dataset.filter === 'all');
+  }
+
+  render(bundle.forecast, bundle.history, bundle.commentary, bundle.geo, bundle.layout);
+}
+
 async function init() {
   try {
     const [forecast, history, commentary, geo] = await Promise.all([
@@ -573,7 +643,15 @@ async function init() {
       );
     }
 
-    render(forecast, history, commentary, geo);
+    BUNDLES.senate = { forecast, history, commentary, geo, layout: null };
+    showChamber('senate');
+
+    // The House loads after the page is already usable, and never blocks it.
+    // Its payload is four times the size of the Senate's and it may not exist
+    // at all -- the House was added to the pipeline part-way through the cycle,
+    // and a deploy that has only run the Senate should still show the Senate
+    // rather than an error. Failure here costs the reader nothing but a tab.
+    loadHouse();
   } catch (err) {
     const banner = $('load-error');
     banner.hidden = false;
@@ -584,7 +662,26 @@ async function init() {
   }
 }
 
+async function loadHouse() {
+  const [forecast, history, commentary, layout] = await Promise.all([
+    loadJson('data/forecast_house.json', false),
+    loadJson('data/history_house.json', false),
+    loadJson('data/commentary_house.json', false),
+    loadJson('data/us-districts.json', false),
+  ]);
+  // The layout is as required as the forecast: without it there is nothing to
+  // draw the districts on, and half a chamber view is worse than none.
+  if (!forecast || !layout || forecast.schema_version !== SCHEMA_VERSION) return;
+
+  BUNDLES.house = { forecast, history, commentary, geo: null, layout };
+  $('chamber-switch').hidden = false;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  for (const tab of document.querySelectorAll('.chamber-tab')) {
+    tab.addEventListener('click', () => showChamber(tab.dataset.chamber));
+  }
+
   document.querySelectorAll('.filter').forEach((btn) => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter').forEach((b) => b.classList.remove('active'));

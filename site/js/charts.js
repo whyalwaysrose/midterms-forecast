@@ -160,8 +160,14 @@ function renderSeatChart(forecast) {
   thresholdLabel.textContent = `${threshold} = majority`;
   svg.appendChild(thresholdLabel);
 
-  const step = nBars > 16 ? 3 : nBars > 9 ? 2 : 1;
-  for (let s = minSeat; s <= maxSeat; s += step) {
+  // Roughly a dozen labels whatever the span, rounded to a friendly interval.
+  // The Senate's plausible range is a dozen seats wide and the House's can be
+  // sixty, so a fixed step either wastes the axis or turns it into a smear.
+  const target = Math.max(1, Math.ceil(nBars / 12));
+  const step = [1, 2, 5, 10, 20, 25, 50].find((n) => n >= target) ?? 100;
+  // Start from a multiple of the step so the labels read 210, 215, 220 rather
+  // than 211, 216, 221 — and so the majority line lands on a labelled tick.
+  for (let s = Math.ceil(minSeat / step) * step; s <= maxSeat; s += step) {
     const t = svgEl('text', {
       x: x(s) + barW / 2, y: H - padB + 16, class: 'axis-label', 'text-anchor': 'middle',
     });

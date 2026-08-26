@@ -183,19 +183,31 @@ def _poll_ids(payload: dict) -> set[str]:
     return ids
 
 
+def _chamber_name(payload: dict) -> str:
+    """"Senate" or "House", for prose.
+
+    Read from the payload rather than passed in, so the commentary can never
+    describe one chamber's numbers using the other's name -- the wording and the
+    figures come from the same object.
+    """
+    return "House" if payload.get("chamber") == "house" else "Senate"
+
+
 def _first_run_commentary(current: dict) -> Commentary:
     chamber = current["chamber_forecast"]
+    which = _chamber_name(current)
     national = current["national"]["generic_ballot"]
     summary = current["poll_summary"]
 
     headline = (
         f"First run of the model. Democrats have a "
-        f"{_fmt_pct(chamber['dem_control_prob'])} chance of Senate control, with a "
+        f"{_fmt_pct(chamber['dem_control_prob'])} chance of {which} control, with a "
         f"projected {chamber['dem_seats']['median']} seats "
         f"(90% interval {chamber['dem_seats']['p05']}–{chamber['dem_seats']['p95']})."
     )
     body = [
-        f"Fitted to {summary['n_race_polls']} state-level polls and "
+        f"Fitted to {summary['n_race_polls']} "
+        f"{'district' if which == 'House' else 'state'}-level polls and "
         f"{summary['n_national_polls']} generic-ballot polls from "
         f"{summary['n_pollsters']} pollsters.",
         "",
@@ -272,13 +284,14 @@ def generate(current: dict, previous: dict | None) -> Commentary:
 
     cur_chamber = current["chamber_forecast"]
     prev_chamber = previous["chamber_forecast"]
+    which = _chamber_name(current)
     control_delta = cur_chamber["dem_control_prob"] - prev_chamber["dem_control_prob"]
     seats_delta = cur_chamber["dem_seats"]["mean"] - prev_chamber["dem_seats"]["mean"]
 
     if abs(control_delta) < 0.005 and total_new_polls == 0:
         headline = (
             f"No new polling since {previous['run_date']}. Democratic chances of "
-            f"Senate control hold at {_fmt_pct(cur_chamber['dem_control_prob'])}."
+            f"{which} control hold at {_fmt_pct(cur_chamber['dem_control_prob'])}."
         )
     else:
         poll_phrase = (
@@ -295,7 +308,7 @@ def generate(current: dict, previous: dict | None) -> Commentary:
                 f"{_fmt_pct(cur_chamber['dem_control_prob'])}"
             )
         headline = (
-            f"Democratic chances of Senate control {movement} on {poll_phrase}. "
+            f"Democratic chances of {which} control {movement} on {poll_phrase}. "
             f"Projected seats {prev_chamber['dem_seats']['mean']:.1f} → "
             f"{cur_chamber['dem_seats']['mean']:.1f} ({_fmt_signed(seats_delta)})."
         )
@@ -304,7 +317,7 @@ def generate(current: dict, previous: dict | None) -> Commentary:
 
     if model_changed:
         headline = (
-            f"**The model changed in this run.** Democratic chances of Senate "
+            f"**The model changed in this run.** Democratic chances of {which} "
             f"control are {_fmt_pct(cur_chamber['dem_control_prob'])}, against "
             f"{_fmt_pct(prev_chamber['dem_control_prob'])} on "
             f"{previous['run_date']} — but the two runs were produced by "
@@ -360,33 +373,53 @@ def generate(current: dict, previous: dict | None) -> Commentary:
     )
 
 
-def previous_payload(run_date: date, runs_dir: Path | None = None) -> dict | None:
-    """The most recent archived forecast strictly before ``run_date``."""
+def previous_payload(
+    run_date: date, runs_dir: Path | None = None, chamber: str = "senate"
+) -> dict | None:
+    """The most recent archived forecast for this chamber before ``run_date``.
+
+    Per chamber, not per date: a dated run directory can hold a Senate archive
+    and no House one, because the House was added to the pipeline part-way
+    through the cycle. Scanning for the chamber's own file means the first House
+    commentary correctly reports no previous run instead of diffing the House
+    against the Senate.
+    """
     runs_dir = runs_dir or paths.RUNS_DIR
     if not runs_dir.exists():
         return None
 
+    name = paths.chamber_filename("forecast", chamber)
     candidates = sorted(
         p for p in runs_dir.iterdir()
-        if p.is_dir() and (p / "forecast.json").exists() and p.name < run_date.isoformat()
+        if p.is_dir() and (p / name).exists() and p.name < run_date.isoformat()
     )
     if not candidates:
         return None
-    return json.loads((candidates[-1] / "forecast.json").read_text(encoding="utf-8"))
+    return json.loads((candidates[-1] / name).read_text(encoding="utf-8"))
+
+
+#: Changelog per chamber. Two files rather than one interleaved by date,
+#: because the chambers are refit by separate runs and a merged file would read
+#: as a single narrative jumping between them mid-paragraph.
+CHANGELOG_FILE = {
+    "senate": "CHANGELOG.md",
+    "house": "CHANGELOG_house.md",
+}
 
 
 def write_commentary(
     commentary: Commentary,
     site_data_dir: Path | None = None,
     changelog_path: Path | None = None,
+    chamber: str = "senate",
 ) -> tuple[Path, Path]:
-    """Append the entry to ``commentary.json`` and prepend it to ``CHANGELOG.md``."""
+    """Append the entry to the chamber's feed and prepend it to its changelog."""
     site_data_dir = site_data_dir or paths.SITE_DATA_DIR
     site_data_dir.mkdir(parents=True, exist_ok=True)
-    changelog_path = changelog_path or paths.REPO_ROOT / "CHANGELOG.md"
+    changelog_path = changelog_path or paths.REPO_ROOT / CHANGELOG_FILE[chamber]
 
     # --- structured feed for the dashboard --------------------------------
-    feed_path = site_data_dir / "commentary.json"
+    feed_path = site_data_dir / paths.chamber_filename("commentary", chamber)
     entries: list[dict[str, Any]] = []
     if feed_path.exists():
         try:
@@ -407,7 +440,7 @@ def write_commentary(
 
     # --- human-readable changelog, newest first ---------------------------
     header = (
-        "# Forecast changelog\n\n"
+        f"# {chamber.capitalize()} forecast changelog\n\n"
         "Automatically generated after each model run. Newest entries first.\n\n"
     )
     sections = [e["markdown"] for e in entries]

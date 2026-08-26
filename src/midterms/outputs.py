@@ -105,6 +105,14 @@ def _trajectory(idata, race_index: int | None, grid_dates, thin: int = 1) -> lis
     margins = logit_to_margin(draws)
     lo, med, hi = np.quantile(margins, (0.05, 0.5, 0.95), axis=0)
 
+    # Always keep the last grid point, whatever the stride lands on. It is not
+    # just another sample of history: it is the current estimate, the number
+    # every headline on the page is drawn from. Striding 68 points by 3 stops at
+    # index 66, which would quietly end every chart two grid steps before the
+    # present and disagree with the figure printed beside it.
+    last = len(grid_dates) - 1
+    keep = sorted({*range(0, len(grid_dates), thin), last})
+
     return [
         {
             "date": grid_dates[i].isoformat(),
@@ -112,7 +120,7 @@ def _trajectory(idata, race_index: int | None, grid_dates, thin: int = 1) -> lis
             "p50": _round(med[i], 2),
             "p95": _round(hi[i], 2),
         }
-        for i in range(0, len(grid_dates), thin)
+        for i in keep
     ]
 
 
@@ -220,6 +228,26 @@ class ForecastRun:
         poll_counts = self.table.counts_by_race()
         prior_margins = logit_to_margin(self.fundamentals.prior_mean)
 
+        # Per-race trajectories dominate the payload: 35 Senate races come to
+        # about 420 KB, so 435 districts at full resolution would be roughly
+        # five megabytes for a page meant to open quickly on a phone.
+        #
+        # Thinned rather than dropped, and thinned uniformly rather than only
+        # for safe seats. These are smooth latent random walks, so roughly
+        # weekly resolution loses nothing a reader could see in a chart a few
+        # hundred pixels wide -- whereas keeping full detail for the close races
+        # and not the rest would make two districts' charts silently different
+        # objects. The final point is always kept regardless (see _trajectory).
+        #
+        # The Senate is unaffected: 35 races is under the threshold, so its
+        # payload keeps every grid point exactly as before.
+        TRAJECTORY_POINTS = 24
+        race_thin = (
+            max(1, -(-len(grid_dates) // TRAJECTORY_POINTS))
+            if len(races.races) > 100
+            else 1
+        )
+
         race_records = []
         for i, race in enumerate(races.races):
             race_polls = self.table.for_race(race.id)
@@ -253,7 +281,7 @@ class ForecastRun:
                     "candidates": _candidates(self.table, race.id, self.roster),
                     "poll_count": int(poll_counts.get(race.id, 0)),
                     "latest_poll_date": latest.isoformat() if latest else None,
-                    "trajectory": _trajectory(self.idata, i, grid_dates),
+                    "trajectory": _trajectory(self.idata, i, grid_dates, race_thin),
                     "polls": _polls_for_display(self.table, race.id),
                     # Every poll id in the window, not just the displayed ones.
                     # `polls` is capped for display, so diffing on it alone
@@ -524,24 +552,25 @@ def slim_payload(payload: dict) -> dict:
 
 
 def write_forecast(run: ForecastRun, site_data_dir: Path | None = None) -> Path:
-    """Write the full ``forecast.json`` and archive a slim dated copy."""
+    """Write the full forecast payload and archive a slim dated copy."""
     site_data_dir = site_data_dir or paths.SITE_DATA_DIR
     site_data_dir.mkdir(parents=True, exist_ok=True)
 
+    name = paths.chamber_filename("forecast", run.races.chamber)
     payload = run.to_dict()
-    target = site_data_dir / "forecast.json"
+    target = site_data_dir / name
     target.write_text(json.dumps(payload, indent=1), encoding="utf-8")
 
     archive_dir = paths.run_dir(run.run_date.isoformat())
     archive_dir.mkdir(parents=True, exist_ok=True)
-    (archive_dir / "forecast.json").write_text(
+    (archive_dir / name).write_text(
         json.dumps(slim_payload(payload), indent=1), encoding="utf-8"
     )
     return target
 
 
 def append_history(run: ForecastRun, site_data_dir: Path | None = None) -> Path:
-    """Append this run to ``history.json``, replacing any record for the same date.
+    """Append this run to the chamber's history, replacing any same-date record.
 
     Replacing rather than appending on a repeat date keeps the series
     idempotent, so re-running the pipeline twice in one day does not create two
@@ -549,7 +578,7 @@ def append_history(run: ForecastRun, site_data_dir: Path | None = None) -> Path:
     """
     site_data_dir = site_data_dir or paths.SITE_DATA_DIR
     site_data_dir.mkdir(parents=True, exist_ok=True)
-    target = site_data_dir / "history.json"
+    target = site_data_dir / paths.chamber_filename("history", run.races.chamber)
 
     records: list[dict] = []
     if target.exists():
@@ -571,10 +600,12 @@ def append_history(run: ForecastRun, site_data_dir: Path | None = None) -> Path:
     return target
 
 
-def load_history(site_data_dir: Path | None = None) -> list[dict]:
-    """Read the history series, oldest first."""
+def load_history(
+    site_data_dir: Path | None = None, chamber: str = "senate"
+) -> list[dict]:
+    """Read a chamber's history series, oldest first."""
     site_data_dir = site_data_dir or paths.SITE_DATA_DIR
-    target = site_data_dir / "history.json"
+    target = site_data_dir / paths.chamber_filename("history", chamber)
     if not target.exists():
         return []
     try:

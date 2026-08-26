@@ -13,8 +13,17 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <div>
-      <h1>2026 Senate Forecast</h1>
+      <h1 id="site-title">2026 Senate Forecast</h1>
       <p class="tagline">A hierarchical Bayesian model, refit daily as new polls arrive.</p>
+      <!-- Hidden until a House forecast exists in site/data. A switcher with
+           one working option would be furniture pretending to be a control. -->
+      <div id="chamber-switch" class="chamber-switch" role="tablist"
+           aria-label="Choose a chamber" hidden>
+        <button class="chamber-tab active" role="tab" data-chamber="senate"
+                aria-selected="true">Senate</button>
+        <button class="chamber-tab" role="tab" data-chamber="house"
+                aria-selected="false">House</button>
+      </div>
     </div>
     <div class="updated">
       <span class="updated-label">Last updated</span>
@@ -118,7 +127,7 @@
       </div>
     </div>
 
-    <div class="map-block">
+    <div class="map-block" id="senate-map-block">
       <h2 class="map-title">The 35 seats up in 2026</h2>
       <p class="card-sub">
         Shaded by who is favoured. The 15 states with no Senate race this cycle are
@@ -135,6 +144,24 @@
         On a small screen the map is an overview only — state labels would be about
         three pixels tall. Use the race table below for the detail on any contest.
       </p>
+    </div>
+
+    <div class="map-block" id="house-map-block" hidden>
+      <h2 class="map-title">All 435 seats</h2>
+      <p class="card-sub">
+        One square per district, all the same size, grouped by state. Districts hold
+        equal numbers of people but wildly unequal amounts of land, so a normal map
+        would give nearly all its ink to the emptiest seats and shrink the ones that
+        decide the chamber to specks. Paler squares are districts with no polling of
+        their own — most of the House — where the forecast comes from how the district
+        voted for president and where the national mood has moved since.
+        Hover for detail; click for the full record.
+      </p>
+      <div class="map-holder">
+        <div id="house-map" class="us-map"></div>
+        <div id="house-map-tooltip" class="map-tooltip" role="status" aria-live="polite" hidden></div>
+      </div>
+      <div id="house-map-legend" class="map-legend"></div>
     </div>
   </section>
 
@@ -169,8 +196,8 @@
   <!-- ============ CHARTS ============ -->
   <section class="grid-2">
     <div class="card">
-      <h2>Distribution of Senate seats</h2>
-      <p class="card-sub">Democratic-caucus seats across <span id="n-sims">—</span> simulations. The line marks the 51 seats Democrats need for a majority.</p>
+      <h2 id="seat-chart-title">Distribution of Senate seats</h2>
+      <p class="card-sub">Democratic-caucus seats across <span id="n-sims">—</span> simulations. The line marks the <span id="majority-seats">51</span> seats Democrats need for a majority.</p>
       <div id="seat-chart" class="chart"></div>
       <div class="legend">
         <span><i class="swatch dem"></i>Democratic majority</span>
@@ -180,7 +207,7 @@
 
     <div class="card">
       <h2>Forecast over time</h2>
-      <p class="card-sub">Democratic probability of Senate control, one point per model run.</p>
+      <p class="card-sub" id="history-sub">Democratic probability of Senate control, one point per model run.</p>
       <div id="history-chart" class="chart"></div>
       <p class="card-sub subtle" id="history-empty" hidden>The trend line appears once the model has run on more than one day.</p>
     </div>
@@ -189,7 +216,7 @@
   <!-- ============ NATIONAL ============ -->
   <section class="card">
     <h2>National environment</h2>
-    <p class="card-sub">The generic congressional ballot, estimated as a latent random walk. Every race is geared to this by its own elasticity, so movement here shifts all 35 contests at once.</p>
+    <p class="card-sub">The generic congressional ballot, estimated as a latent random walk. Every race is geared to this by its own elasticity, so movement here shifts every contest at once.</p>
     <div class="national-row">
       <div class="national-stat">
         <div class="national-value" id="gb-margin">—</div>
@@ -219,7 +246,7 @@
         <p class="card-sub">Ordered by competitiveness. Click any race for its polls and trajectory.</p>
       </div>
       <div class="filters">
-        <button class="filter active" data-filter="all">All 35</button>
+        <button class="filter active" data-filter="all" id="filter-all">All</button>
         <button class="filter" data-filter="competitive">Competitive</button>
         <button class="filter" data-filter="polled">Has polling</button>
       </div>
@@ -476,6 +503,7 @@
 <script src="js/app.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/map.js"></script>
+<script src="js/districts.js"></script>
 <script src="js/markets.js"></script>
 </body>
 </html>

@@ -28,6 +28,14 @@ os.environ.setdefault("PYTENSOR_FLAGS", "cxx=")
 
 log = logging.getLogger("midterms")
 
+#: Candidate roster per chamber. The Senate's is hand-written and reviewed; the
+#: House's is generated, and covers only the districts that have been polled --
+#: names matter for reading a poll, and an unpolled district has none to read.
+ROSTER_FILE = {
+    "senate": "candidates_senate_2026.yaml",
+    "house": "candidates_house_2026.yaml",
+}
+
 
 def _use_utf8_output() -> None:
     """Stop a Windows console killing the run at the last step.
@@ -244,6 +252,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     from .commentary import previous_payload, write_commentary
     from .config import load_all
     from .data import Roster, build_poll_table
+    from .data.polls import RACE_POLL_TYPE
     from .data.votehub import VoteHubClient, latest_snapshot, load_snapshot
     from .model.design import build_model_data
     from .model.hierarchical import build_model, convergence_report, sample
@@ -251,16 +260,24 @@ def cmd_run(args: argparse.Namespace) -> int:
 
     paths.ensure_dirs()
     run_date = date.fromisoformat(args.date) if args.date else date.today()
+    chamber = args.chamber
 
-    # Cheap and deterministic, so just regenerate it: it keeps the map in step
-    # with the config if a race is ever added or a projection parameter changes.
+    # Cheap and deterministic, so just regenerate them: this keeps both pictures
+    # in step with the config if a race is ever added, a district's lean is
+    # recomputed, or a projection parameter changes.
+    from . import cartogram
     from .geo import write_state_paths
 
     write_state_paths()
 
-    races, cfg = load_all()
-    roster = Roster.load()
+    races, cfg = load_all(chamber=chamber)
+    roster = Roster.load(paths.CONFIG_DIR / ROSTER_FILE[chamber])
     log.info("loaded %d races for %s %d", len(races.races), races.chamber, races.cycle)
+
+    if chamber == "house":
+        cartogram.write(
+            paths.SITE_DATA_DIR / "us-districts.json", races, paths.SITE_DATA_DIR
+        )
 
     # --- data ------------------------------------------------------------
     if args.offline:
@@ -271,17 +288,29 @@ def cmd_run(args: argparse.Namespace) -> int:
         log.info("using cached snapshot %s", snapshot.name)
         raw = load_snapshot(snapshot)
     else:
-        raw = VoteHubClient().fetch_and_snapshot(["us-senator", "generic-ballot", "approval"], run_date)
+        raw = VoteHubClient().fetch_and_snapshot(
+            [RACE_POLL_TYPE[chamber], "generic-ballot", "approval"], run_date
+        )
 
-    table = build_poll_table(raw, races, cfg, roster, as_of=run_date)
+    table = build_poll_table(
+        raw, races, cfg, roster,
+        as_of=run_date, race_poll_type=RACE_POLL_TYPE[chamber],
+    )
     if table.unknown_candidates:
         log.warning(
             "unclassified candidates in %d races; run `midterms audit-roster`",
             len(table.unknown_candidates),
         )
-    if not table.race_polls:
+    if not table.race_polls and chamber == "senate":
         log.error("no usable race polls; aborting")
         return 3
+    if not table.race_polls:
+        # Not fatal for the House. Nine districts in ten are never polled at
+        # all, so a cycle with no district polling anywhere is a thin forecast
+        # rather than a broken one -- the generic ballot and the district leans
+        # still carry it. Aborting would publish nothing when we can publish
+        # something honest and clearly labelled.
+        log.warning("no district polls; the House forecast rests on fundamentals alone")
 
     # --- model -----------------------------------------------------------
     fund = F.compute(races, cfg)
@@ -321,14 +350,14 @@ def cmd_run(args: argparse.Namespace) -> int:
         roster=roster,
     )
 
-    previous = previous_payload(run_date)
+    previous = previous_payload(run_date, chamber=chamber)
     payload = run.to_dict()
 
     forecast_path = outputs.write_forecast(run)
     outputs.append_history(run)
 
     commentary = generate_commentary(payload, previous)
-    write_commentary(commentary)
+    write_commentary(commentary, chamber=chamber)
 
     # --- report ----------------------------------------------------------
     chamber = payload["chamber_forecast"]
@@ -423,6 +452,10 @@ def build_parser() -> argparse.ArgumentParser:
     run = sub.add_parser("run", help="full pipeline: fetch, fit, simulate, write")
     run.add_argument("--offline", action="store_true", help="reuse the latest raw snapshot")
     run.add_argument("--date", help="run as of this date (YYYY-MM-DD); defaults to today")
+    run.add_argument(
+        "--chamber", choices=("senate", "house"), default="senate",
+        help="which chamber to forecast (default: senate)",
+    )
     run.add_argument(
         "--quiet-sampler", action="store_true", help="suppress the sampler progress bar"
     )

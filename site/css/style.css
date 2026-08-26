@@ -405,6 +405,81 @@ table.polls td.num { font-family: var(--mono); text-align: right; font-variant-n
 .map-leader { stroke: var(--text-faint); stroke-width: 0.8; fill: none; opacity: 0.65; }
 .map-chip-box { stroke: var(--map-stroke); stroke-width: 0.9; }
 
+/* ---------------------------------------------------------------------------
+   District cartogram (House)
+   --------------------------------------------------------------------------- */
+
+/* One square per district. The stroke is thinner than the state map's because
+   at 435 tiles a 0.9 stroke is a visible fraction of each square -- the grid
+   would read as a mesh with colour trapped inside it rather than as a field of
+   colour. */
+.district {
+  stroke: var(--map-stroke);
+  stroke-width: 0.5;
+  transition: filter 120ms ease, opacity 120ms ease;
+}
+.district.no-race { fill: var(--no-race); stroke: var(--no-race-stroke); }
+.district.safe-r  { fill: var(--safe-r); }
+.district.lean-r  { fill: var(--lean-r); }
+.district.tossup  { fill: url(#hatch-tossup-house); }
+.district.lean-d  { fill: var(--lean-d); }
+.district.safe-d  { fill: var(--safe-d); }
+
+/* Districts with no polling of their own, which is roughly nine in ten. Their
+   forecast is real but rests on the district's presidential lean and the
+   national swing rather than on anyone having asked voters there, and the eye
+   should be able to see how much of the chamber that covers. Opacity rather
+   than a separate palette, so the rating still reads at a glance and the two
+   pieces of information do not compete for the same channel. */
+.district.unpolled { opacity: 0.55; }
+
+.district.interactive { cursor: pointer; }
+.district.interactive:hover,
+.district.interactive:focus-visible {
+  filter: brightness(1.18); opacity: 1; outline: none;
+}
+.district.is-active { stroke: var(--text); stroke-width: 1.4; paint-order: stroke; }
+
+.district-state-label {
+  fill: var(--text-faint);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.legend-swatch.unpolled-swatch { background: var(--lean-d); opacity: 0.55; }
+.legend-note { color: var(--text-faint); }
+
+/* ---------------------------------------------------------------------------
+   Chamber switcher
+   --------------------------------------------------------------------------- */
+
+.chamber-switch {
+  display: inline-flex;
+  margin-top: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.chamber-tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.chamber-tab + .chamber-tab { border-left: 1px solid var(--border); }
+.chamber-tab:hover { color: var(--text); }
+.chamber-tab.active { background: var(--border); color: var(--text); }
+.chamber-tab:focus-visible { outline: 2px solid var(--text); outline-offset: -2px; }
+
 .map-tooltip {
   position: absolute;
   z-index: 20;

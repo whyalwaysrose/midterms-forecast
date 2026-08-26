@@ -1,0 +1,2617 @@
+{
+ "view_box": "265.9 80.1 1765.4 1097.6",
+ "cell": 13.0,
+ "note": "Every district is one square of equal size. Congressional districts have equal population but wildly unequal area, so a geographic map would give most of its ink to the emptiest seats.",
+ "tiles": [
+  {
+   "district": "AK-01",
+   "state": "AK",
+   "x": 383.26,
+   "y": 1019.98
+  },
+  {
+   "district": "AL-01",
+   "state": "AL",
+   "x": 1487.44,
+   "y": 837.48
+  },
+  {
+   "district": "AL-02",
+   "state": "AL",
+   "x": 1502.04,
+   "y": 837.48
+  },
+  {
+   "district": "AL-03",
+   "state": "AL",
+   "x": 1516.64,
+   "y": 837.48
+  },
+  {
+   "district": "AL-04",
+   "state": "AL",
+   "x": 1531.24,
+   "y": 837.48
+  },
+  {
+   "district": "AL-05",
+   "state": "AL",
+   "x": 1494.74,
+   "y": 852.08
+  },
+  {
+   "district": "AL-06",
+   "state": "AL",
+   "x": 1509.34,
+   "y": 852.08
+  },
+  {
+   "district": "AL-07",
+   "state": "AL",
+   "x": 1523.94,
+   "y": 852.08
+  },
+  {
+   "district": "AR-01",
+   "state": "AR",
+   "x": 1281.38,
+   "y": 756.12
+  },
+  {
+   "district": "AR-02",
+   "state": "AR",
+   "x": 1295.98,
+   "y": 756.12
+  },
+  {
+   "district": "AR-03",
+   "state": "AR",
+   "x": 1310.58,
+   "y": 756.12
+  },
+  {
+   "district": "AR-04",
+   "state": "AR",
+   "x": 1295.98,
+   "y": 770.72
+  },
+  {
+   "district": "AZ-01",
+   "state": "AZ",
+   "x": 571.6,
+   "y": 731.78
+  },
+  {
+   "district": "AZ-02",
+   "state": "AZ",
+   "x": 586.2,
+   "y": 731.78
+  },
+  {
+   "district": "AZ-03",
+   "state": "AZ",
+   "x": 600.8,
+   "y": 731.78
+  },
+  {
+   "district": "AZ-04",
+   "state": "AZ",
+   "x": 615.4,
+   "y": 731.78
+  },
+  {
+   "district": "AZ-05",
+   "state": "AZ",
+   "x": 571.6,
+   "y": 746.38
+  },
+  {
+   "district": "AZ-06",
+   "state": "AZ",
+   "x": 586.2,
+   "y": 746.38
+  },
+  {
+   "district": "AZ-07",
+   "state": "AZ",
+   "x": 600.8,
+   "y": 746.38
+  },
+  {
+   "district": "AZ-08",
+   "state": "AZ",
+   "x": 615.4,
+   "y": 746.38
+  },
+  {
+   "district": "AZ-09",
+   "state": "AZ",
+   "x": 593.5,
+   "y": 760.98
+  },
+  {
+   "district": "CA-01",
+   "state": "CA",
+   "x": 278.92,
+   "y": 523.4
+  },
+  {
+   "district": "CA-02",
+   "state": "CA",
+   "x": 293.52,
+   "y": 523.4
+  },
+  {
+   "district": "CA-03",
+   "state": "CA",
+   "x": 308.12,
+   "y": 523.4
+  },
+  {
+   "district": "CA-04",
+   "state": "CA",
+   "x": 322.72,
+   "y": 523.4
+  },
+  {
+   "district": "CA-05",
+   "state": "CA",
+   "x": 337.32,
+   "y": 523.4
+  },
+  {
+   "district": "CA-06",
+   "state": "CA",
+   "x": 351.92,
+   "y": 523.4
+  },
+  {
+   "district": "CA-07",
+   "state": "CA",
+   "x": 366.52,
+   "y": 523.4
+  },
+  {
+   "district": "CA-08",
+   "state": "CA",
+   "x": 381.12,
+   "y": 523.4
+  },
+  {
+   "district": "CA-09",
+   "state": "CA",
+   "x": 395.72,
+   "y": 523.4
+  },
+  {
+   "district": "CA-10",
+   "state": "CA",
+   "x": 410.32,
+   "y": 523.4
+  },
+  {
+   "district": "CA-11",
+   "state": "CA",
+   "x": 278.92,
+   "y": 538.0
+  },
+  {
+   "district": "CA-12",
+   "state": "CA",
+   "x": 293.52,
+   "y": 538.0
+  },
+  {
+   "district": "CA-13",
+   "state": "CA",
+   "x": 308.12,
+   "y": 538.0
+  },
+  {
+   "district": "CA-14",
+   "state": "CA",
+   "x": 322.72,
+   "y": 538.0
+  },
+  {
+   "district": "CA-15",
+   "state": "CA",
+   "x": 337.32,
+   "y": 538.0
+  },
+  {
+   "district": "CA-16",
+   "state": "CA",
+   "x": 351.92,
+   "y": 538.0
+  },
+  {
+   "district": "CA-17",
+   "state": "CA",
+   "x": 366.52,
+   "y": 538.0
+  },
+  {
+   "district": "CA-18",
+   "state": "CA",
+   "x": 381.12,
+   "y": 538.0
+  },
+  {
+   "district": "CA-19",
+   "state": "CA",
+   "x": 395.72,
+   "y": 538.0
+  },
+  {
+   "district": "CA-20",
+   "state": "CA",
+   "x": 410.32,
+   "y": 538.0
+  },
+  {
+   "district": "CA-21",
+   "state": "CA",
+   "x": 278.92,
+   "y": 552.6
+  },
+  {
+   "district": "CA-22",
+   "state": "CA",
+   "x": 293.52,
+   "y": 552.6
+  },
+  {
+   "district": "CA-23",
+   "state": "CA",
+   "x": 308.12,
+   "y": 552.6
+  },
+  {
+   "district": "CA-24",
+   "state": "CA",
+   "x": 322.72,
+   "y": 552.6
+  },
+  {
+   "district": "CA-25",
+   "state": "CA",
+   "x": 337.32,
+   "y": 552.6
+  },
+  {
+   "district": "CA-26",
+   "state": "CA",
+   "x": 351.92,
+   "y": 552.6
+  },
+  {
+   "district": "CA-27",
+   "state": "CA",
+   "x": 366.52,
+   "y": 552.6
+  },
+  {
+   "district": "CA-28",
+   "state": "CA",
+   "x": 381.12,
+   "y": 552.6
+  },
+  {
+   "district": "CA-29",
+   "state": "CA",
+   "x": 395.72,
+   "y": 552.6
+  },
+  {
+   "district": "CA-30",
+   "state": "CA",
+   "x": 410.32,
+   "y": 552.6
+  },
+  {
+   "district": "CA-31",
+   "state": "CA",
+   "x": 278.92,
+   "y": 567.2
+  },
+  {
+   "district": "CA-32",
+   "state": "CA",
+   "x": 293.52,
+   "y": 567.2
+  },
+  {
+   "district": "CA-33",
+   "state": "CA",
+   "x": 308.12,
+   "y": 567.2
+  },
+  {
+   "district": "CA-34",
+   "state": "CA",
+   "x": 322.72,
+   "y": 567.2
+  },
+  {
+   "district": "CA-35",
+   "state": "CA",
+   "x": 337.32,
+   "y": 567.2
+  },
+  {
+   "district": "CA-36",
+   "state": "CA",
+   "x": 351.92,
+   "y": 567.2
+  },
+  {
+   "district": "CA-37",
+   "state": "CA",
+   "x": 366.52,
+   "y": 567.2
+  },
+  {
+   "district": "CA-38",
+   "state": "CA",
+   "x": 381.12,
+   "y": 567.2
+  },
+  {
+   "district": "CA-39",
+   "state": "CA",
+   "x": 395.72,
+   "y": 567.2
+  },
+  {
+   "district": "CA-40",
+   "state": "CA",
+   "x": 410.32,
+   "y": 567.2
+  },
+  {
+   "district": "CA-41",
+   "state": "CA",
+   "x": 278.92,
+   "y": 581.8
+  },
+  {
+   "district": "CA-42",
+   "state": "CA",
+   "x": 293.52,
+   "y": 581.8
+  },
+  {
+   "district": "CA-43",
+   "state": "CA",
+   "x": 308.12,
+   "y": 581.8
+  },
+  {
+   "district": "CA-44",
+   "state": "CA",
+   "x": 322.72,
+   "y": 581.8
+  },
+  {
+   "district": "CA-45",
+   "state": "CA",
+   "x": 337.32,
+   "y": 581.8
+  },
+  {
+   "district": "CA-46",
+   "state": "CA",
+   "x": 351.92,
+   "y": 581.8
+  },
+  {
+   "district": "CA-47",
+   "state": "CA",
+   "x": 366.52,
+   "y": 581.8
+  },
+  {
+   "district": "CA-48",
+   "state": "CA",
+   "x": 381.12,
+   "y": 581.8
+  },
+  {
+   "district": "CA-49",
+   "state": "CA",
+   "x": 395.72,
+   "y": 581.8
+  },
+  {
+   "district": "CA-50",
+   "state": "CA",
+   "x": 410.32,
+   "y": 581.8
+  },
+  {
+   "district": "CA-51",
+   "state": "CA",
+   "x": 337.32,
+   "y": 596.4
+  },
+  {
+   "district": "CA-52",
+   "state": "CA",
+   "x": 351.92,
+   "y": 596.4
+  },
+  {
+   "district": "CO-01",
+   "state": "CO",
+   "x": 815.44,
+   "y": 556.44
+  },
+  {
+   "district": "CO-02",
+   "state": "CO",
+   "x": 830.04,
+   "y": 556.44
+  },
+  {
+   "district": "CO-03",
+   "state": "CO",
+   "x": 844.64,
+   "y": 556.44
+  },
+  {
+   "district": "CO-04",
+   "state": "CO",
+   "x": 859.24,
+   "y": 556.44
+  },
+  {
+   "district": "CO-05",
+   "state": "CO",
+   "x": 815.44,
+   "y": 571.04
+  },
+  {
+   "district": "CO-06",
+   "state": "CO",
+   "x": 830.04,
+   "y": 571.04
+  },
+  {
+   "district": "CO-07",
+   "state": "CO",
+   "x": 844.64,
+   "y": 571.04
+  },
+  {
+   "district": "CO-08",
+   "state": "CO",
+   "x": 859.24,
+   "y": 571.04
+  },
+  {
+   "district": "CT-01",
+   "state": "CT",
+   "x": 1914.49,
+   "y": 363.25
+  },
+  {
+   "district": "CT-02",
+   "state": "CT",
+   "x": 1929.09,
+   "y": 363.25
+  },
+  {
+   "district": "CT-03",
+   "state": "CT",
+   "x": 1943.69,
+   "y": 363.25
+  },
+  {
+   "district": "CT-04",
+   "state": "CT",
+   "x": 1921.79,
+   "y": 377.85
+  },
+  {
+   "district": "CT-05",
+   "state": "CT",
+   "x": 1936.39,
+   "y": 377.85
+  },
+  {
+   "district": "DE-01",
+   "state": "DE",
+   "x": 1871.56,
+   "y": 504.46
+  },
+  {
+   "district": "FL-01",
+   "state": "FL",
+   "x": 1654.42,
+   "y": 987.28
+  },
+  {
+   "district": "FL-02",
+   "state": "FL",
+   "x": 1669.02,
+   "y": 987.28
+  },
+  {
+   "district": "FL-03",
+   "state": "FL",
+   "x": 1683.62,
+   "y": 987.28
+  },
+  {
+   "district": "FL-04",
+   "state": "FL",
+   "x": 1698.22,
+   "y": 987.28
+  },
+  {
+   "district": "FL-05",
+   "state": "FL",
+   "x": 1712.82,
+   "y": 987.28
+  },
+  {
+   "district": "FL-06",
+   "state": "FL",
+   "x": 1727.42,
+   "y": 987.28
+  },
+  {
+   "district": "FL-07",
+   "state": "FL",
+   "x": 1742.02,
+   "y": 987.28
+  },
+  {
+   "district": "FL-08",
+   "state": "FL",
+   "x": 1654.42,
+   "y": 1001.88
+  },
+  {
+   "district": "FL-09",
+   "state": "FL",
+   "x": 1669.02,
+   "y": 1001.88
+  },
+  {
+   "district": "FL-10",
+   "state": "FL",
+   "x": 1683.62,
+   "y": 1001.88
+  },
+  {
+   "district": "FL-11",
+   "state": "FL",
+   "x": 1698.22,
+   "y": 1001.88
+  },
+  {
+   "district": "FL-12",
+   "state": "FL",
+   "x": 1712.82,
+   "y": 1001.88
+  },
+  {
+   "district": "FL-13",
+   "state": "FL",
+   "x": 1727.42,
+   "y": 1001.88
+  },
+  {
+   "district": "FL-14",
+   "state": "FL",
+   "x": 1742.02,
+   "y": 1001.88
+  },
+  {
+   "district": "FL-15",
+   "state": "FL",
+   "x": 1654.42,
+   "y": 1016.48
+  },
+  {
+   "district": "FL-16",
+   "state": "FL",
+   "x": 1669.02,
+   "y": 1016.48
+  },
+  {
+   "district": "FL-17",
+   "state": "FL",
+   "x": 1683.62,
+   "y": 1016.48
+  },
+  {
+   "district": "FL-18",
+   "state": "FL",
+   "x": 1698.22,
+   "y": 1016.48
+  },
+  {
+   "district": "FL-19",
+   "state": "FL",
+   "x": 1712.82,
+   "y": 1016.48
+  },
+  {
+   "district": "FL-20",
+   "state": "FL",
+   "x": 1727.42,
+   "y": 1016.48
+  },
+  {
+   "district": "FL-21",
+   "state": "FL",
+   "x": 1742.02,
+   "y": 1016.48
+  },
+  {
+   "district": "FL-22",
+   "state": "FL",
+   "x": 1654.42,
+   "y": 1031.08
+  },
+  {
+   "district": "FL-23",
+   "state": "FL",
+   "x": 1669.02,
+   "y": 1031.08
+  },
+  {
+   "district": "FL-24",
+   "state": "FL",
+   "x": 1683.62,
+   "y": 1031.08
+  },
+  {
+   "district": "FL-25",
+   "state": "FL",
+   "x": 1698.22,
+   "y": 1031.08
+  },
+  {
+   "district": "FL-26",
+   "state": "FL",
+   "x": 1712.82,
+   "y": 1031.08
+  },
+  {
+   "district": "FL-27",
+   "state": "FL",
+   "x": 1727.42,
+   "y": 1031.08
+  },
+  {
+   "district": "FL-28",
+   "state": "FL",
+   "x": 1742.02,
+   "y": 1031.08
+  },
+  {
+   "district": "GA-01",
+   "state": "GA",
+   "x": 1607.1,
+   "y": 821.78
+  },
+  {
+   "district": "GA-02",
+   "state": "GA",
+   "x": 1621.7,
+   "y": 821.78
+  },
+  {
+   "district": "GA-03",
+   "state": "GA",
+   "x": 1636.3,
+   "y": 821.78
+  },
+  {
+   "district": "GA-04",
+   "state": "GA",
+   "x": 1650.9,
+   "y": 821.78
+  },
+  {
+   "district": "GA-05",
+   "state": "GA",
+   "x": 1665.5,
+   "y": 821.78
+  },
+  {
+   "district": "GA-06",
+   "state": "GA",
+   "x": 1607.1,
+   "y": 836.38
+  },
+  {
+   "district": "GA-07",
+   "state": "GA",
+   "x": 1621.7,
+   "y": 836.38
+  },
+  {
+   "district": "GA-08",
+   "state": "GA",
+   "x": 1636.3,
+   "y": 836.38
+  },
+  {
+   "district": "GA-09",
+   "state": "GA",
+   "x": 1650.9,
+   "y": 836.38
+  },
+  {
+   "district": "GA-10",
+   "state": "GA",
+   "x": 1665.5,
+   "y": 836.38
+  },
+  {
+   "district": "GA-11",
+   "state": "GA",
+   "x": 1614.4,
+   "y": 850.98
+  },
+  {
+   "district": "GA-12",
+   "state": "GA",
+   "x": 1629.0,
+   "y": 850.98
+  },
+  {
+   "district": "GA-13",
+   "state": "GA",
+   "x": 1643.6,
+   "y": 850.98
+  },
+  {
+   "district": "GA-14",
+   "state": "GA",
+   "x": 1658.2,
+   "y": 850.98
+  },
+  {
+   "district": "HI-01",
+   "state": "HI",
+   "x": 801.24,
+   "y": 1151.74
+  },
+  {
+   "district": "HI-02",
+   "state": "HI",
+   "x": 815.84,
+   "y": 1151.74
+  },
+  {
+   "district": "IA-01",
+   "state": "IA",
+   "x": 1234.34,
+   "y": 432.6
+  },
+  {
+   "district": "IA-02",
+   "state": "IA",
+   "x": 1248.94,
+   "y": 432.6
+  },
+  {
+   "district": "IA-03",
+   "state": "IA",
+   "x": 1263.54,
+   "y": 432.6
+  },
+  {
+   "district": "IA-04",
+   "state": "IA",
+   "x": 1248.94,
+   "y": 447.2
+  },
+  {
+   "district": "ID-01",
+   "state": "ID",
+   "x": 567.72,
+   "y": 280.54
+  },
+  {
+   "district": "ID-02",
+   "state": "ID",
+   "x": 582.32,
+   "y": 280.54
+  },
+  {
+   "district": "IL-01",
+   "state": "IL",
+   "x": 1361.0,
+   "y": 510.02
+  },
+  {
+   "district": "IL-02",
+   "state": "IL",
+   "x": 1375.6,
+   "y": 510.02
+  },
+  {
+   "district": "IL-03",
+   "state": "IL",
+   "x": 1390.2,
+   "y": 510.02
+  },
+  {
+   "district": "IL-04",
+   "state": "IL",
+   "x": 1404.8,
+   "y": 510.02
+  },
+  {
+   "district": "IL-05",
+   "state": "IL",
+   "x": 1419.4,
+   "y": 510.02
+  },
+  {
+   "district": "IL-06",
+   "state": "IL",
+   "x": 1434.0,
+   "y": 510.02
+  },
+  {
+   "district": "IL-07",
+   "state": "IL",
+   "x": 1361.0,
+   "y": 524.62
+  },
+  {
+   "district": "IL-08",
+   "state": "IL",
+   "x": 1375.6,
+   "y": 524.62
+  },
+  {
+   "district": "IL-09",
+   "state": "IL",
+   "x": 1390.2,
+   "y": 524.62
+  },
+  {
+   "district": "IL-10",
+   "state": "IL",
+   "x": 1404.8,
+   "y": 524.62
+  },
+  {
+   "district": "IL-11",
+   "state": "IL",
+   "x": 1419.4,
+   "y": 524.62
+  },
+  {
+   "district": "IL-12",
+   "state": "IL",
+   "x": 1434.0,
+   "y": 524.62
+  },
+  {
+   "district": "IL-13",
+   "state": "IL",
+   "x": 1368.3,
+   "y": 539.22
+  },
+  {
+   "district": "IL-14",
+   "state": "IL",
+   "x": 1382.9,
+   "y": 539.22
+  },
+  {
+   "district": "IL-15",
+   "state": "IL",
+   "x": 1397.5,
+   "y": 539.22
+  },
+  {
+   "district": "IL-16",
+   "state": "IL",
+   "x": 1412.1,
+   "y": 539.22
+  },
+  {
+   "district": "IL-17",
+   "state": "IL",
+   "x": 1426.7,
+   "y": 539.22
+  },
+  {
+   "district": "IN-01",
+   "state": "IN",
+   "x": 1474.96,
+   "y": 508.1
+  },
+  {
+   "district": "IN-02",
+   "state": "IN",
+   "x": 1489.56,
+   "y": 508.1
+  },
+  {
+   "district": "IN-03",
+   "state": "IN",
+   "x": 1504.16,
+   "y": 508.1
+  },
+  {
+   "district": "IN-04",
+   "state": "IN",
+   "x": 1518.76,
+   "y": 508.1
+  },
+  {
+   "district": "IN-05",
+   "state": "IN",
+   "x": 1474.96,
+   "y": 522.7
+  },
+  {
+   "district": "IN-06",
+   "state": "IN",
+   "x": 1489.56,
+   "y": 522.7
+  },
+  {
+   "district": "IN-07",
+   "state": "IN",
+   "x": 1504.16,
+   "y": 522.7
+  },
+  {
+   "district": "IN-08",
+   "state": "IN",
+   "x": 1518.76,
+   "y": 522.7
+  },
+  {
+   "district": "IN-09",
+   "state": "IN",
+   "x": 1496.86,
+   "y": 537.3
+  },
+  {
+   "district": "KS-01",
+   "state": "KS",
+   "x": 1068.98,
+   "y": 594.6
+  },
+  {
+   "district": "KS-02",
+   "state": "KS",
+   "x": 1083.58,
+   "y": 594.6
+  },
+  {
+   "district": "KS-03",
+   "state": "KS",
+   "x": 1098.18,
+   "y": 594.6
+  },
+  {
+   "district": "KS-04",
+   "state": "KS",
+   "x": 1083.58,
+   "y": 609.2
+  },
+  {
+   "district": "KY-01",
+   "state": "KY",
+   "x": 1520.32,
+   "y": 617.88
+  },
+  {
+   "district": "KY-02",
+   "state": "KY",
+   "x": 1534.92,
+   "y": 617.88
+  },
+  {
+   "district": "KY-03",
+   "state": "KY",
+   "x": 1549.52,
+   "y": 617.88
+  },
+  {
+   "district": "KY-04",
+   "state": "KY",
+   "x": 1564.12,
+   "y": 617.88
+  },
+  {
+   "district": "KY-05",
+   "state": "KY",
+   "x": 1534.92,
+   "y": 632.48
+  },
+  {
+   "district": "KY-06",
+   "state": "KY",
+   "x": 1549.52,
+   "y": 632.48
+  },
+  {
+   "district": "LA-01",
+   "state": "LA",
+   "x": 1298.8,
+   "y": 928.44
+  },
+  {
+   "district": "LA-02",
+   "state": "LA",
+   "x": 1313.4,
+   "y": 928.44
+  },
+  {
+   "district": "LA-03",
+   "state": "LA",
+   "x": 1328.0,
+   "y": 928.44
+  },
+  {
+   "district": "LA-04",
+   "state": "LA",
+   "x": 1342.6,
+   "y": 928.44
+  },
+  {
+   "district": "LA-05",
+   "state": "LA",
+   "x": 1313.4,
+   "y": 943.04
+  },
+  {
+   "district": "LA-06",
+   "state": "LA",
+   "x": 1328.0,
+   "y": 943.04
+  },
+  {
+   "district": "MA-01",
+   "state": "MA",
+   "x": 1932.4,
+   "y": 309.17
+  },
+  {
+   "district": "MA-02",
+   "state": "MA",
+   "x": 1947.0,
+   "y": 309.17
+  },
+  {
+   "district": "MA-03",
+   "state": "MA",
+   "x": 1961.6,
+   "y": 309.17
+  },
+  {
+   "district": "MA-04",
+   "state": "MA",
+   "x": 1976.2,
+   "y": 309.17
+  },
+  {
+   "district": "MA-05",
+   "state": "MA",
+   "x": 1932.4,
+   "y": 323.77
+  },
+  {
+   "district": "MA-06",
+   "state": "MA",
+   "x": 1947.0,
+   "y": 323.77
+  },
+  {
+   "district": "MA-07",
+   "state": "MA",
+   "x": 1961.6,
+   "y": 323.77
+  },
+  {
+   "district": "MA-08",
+   "state": "MA",
+   "x": 1976.2,
+   "y": 323.77
+  },
+  {
+   "district": "MA-09",
+   "state": "MA",
+   "x": 1954.3,
+   "y": 338.37
+  },
+  {
+   "district": "MD-01",
+   "state": "MD",
+   "x": 1799.86,
+   "y": 504.12
+  },
+  {
+   "district": "MD-02",
+   "state": "MD",
+   "x": 1814.46,
+   "y": 504.12
+  },
+  {
+   "district": "MD-03",
+   "state": "MD",
+   "x": 1829.06,
+   "y": 504.12
+  },
+  {
+   "district": "MD-04",
+   "state": "MD",
+   "x": 1843.66,
+   "y": 504.12
+  },
+  {
+   "district": "MD-05",
+   "state": "MD",
+   "x": 1799.86,
+   "y": 518.72
+  },
+  {
+   "district": "MD-06",
+   "state": "MD",
+   "x": 1814.46,
+   "y": 518.72
+  },
+  {
+   "district": "MD-07",
+   "state": "MD",
+   "x": 1829.06,
+   "y": 518.72
+  },
+  {
+   "district": "MD-08",
+   "state": "MD",
+   "x": 1843.66,
+   "y": 518.72
+  },
+  {
+   "district": "ME-01",
+   "state": "ME",
+   "x": 1990.68,
+   "y": 175.66
+  },
+  {
+   "district": "ME-02",
+   "state": "ME",
+   "x": 2005.28,
+   "y": 175.66
+  },
+  {
+   "district": "MI-01",
+   "state": "MI",
+   "x": 1504.62,
+   "y": 341.54
+  },
+  {
+   "district": "MI-02",
+   "state": "MI",
+   "x": 1519.22,
+   "y": 341.54
+  },
+  {
+   "district": "MI-03",
+   "state": "MI",
+   "x": 1533.82,
+   "y": 341.54
+  },
+  {
+   "district": "MI-04",
+   "state": "MI",
+   "x": 1548.42,
+   "y": 341.54
+  },
+  {
+   "district": "MI-05",
+   "state": "MI",
+   "x": 1563.02,
+   "y": 341.54
+  },
+  {
+   "district": "MI-06",
+   "state": "MI",
+   "x": 1504.62,
+   "y": 356.14
+  },
+  {
+   "district": "MI-07",
+   "state": "MI",
+   "x": 1519.22,
+   "y": 356.14
+  },
+  {
+   "district": "MI-08",
+   "state": "MI",
+   "x": 1533.82,
+   "y": 356.14
+  },
+  {
+   "district": "MI-09",
+   "state": "MI",
+   "x": 1548.42,
+   "y": 356.14
+  },
+  {
+   "district": "MI-10",
+   "state": "MI",
+   "x": 1563.02,
+   "y": 356.14
+  },
+  {
+   "district": "MI-11",
+   "state": "MI",
+   "x": 1519.22,
+   "y": 370.74
+  },
+  {
+   "district": "MI-12",
+   "state": "MI",
+   "x": 1533.82,
+   "y": 370.74
+  },
+  {
+   "district": "MI-13",
+   "state": "MI",
+   "x": 1548.42,
+   "y": 370.74
+  },
+  {
+   "district": "MN-01",
+   "state": "MN",
+   "x": 1197.04,
+   "y": 244.44
+  },
+  {
+   "district": "MN-02",
+   "state": "MN",
+   "x": 1211.64,
+   "y": 244.44
+  },
+  {
+   "district": "MN-03",
+   "state": "MN",
+   "x": 1226.24,
+   "y": 244.44
+  },
+  {
+   "district": "MN-04",
+   "state": "MN",
+   "x": 1240.84,
+   "y": 244.44
+  },
+  {
+   "district": "MN-05",
+   "state": "MN",
+   "x": 1197.04,
+   "y": 259.04
+  },
+  {
+   "district": "MN-06",
+   "state": "MN",
+   "x": 1211.64,
+   "y": 259.04
+  },
+  {
+   "district": "MN-07",
+   "state": "MN",
+   "x": 1226.24,
+   "y": 259.04
+  },
+  {
+   "district": "MN-08",
+   "state": "MN",
+   "x": 1240.84,
+   "y": 259.04
+  },
+  {
+   "district": "MO-01",
+   "state": "MO",
+   "x": 1267.6,
+   "y": 599.64
+  },
+  {
+   "district": "MO-02",
+   "state": "MO",
+   "x": 1282.2,
+   "y": 599.64
+  },
+  {
+   "district": "MO-03",
+   "state": "MO",
+   "x": 1296.8,
+   "y": 599.64
+  },
+  {
+   "district": "MO-04",
+   "state": "MO",
+   "x": 1311.4,
+   "y": 599.64
+  },
+  {
+   "district": "MO-05",
+   "state": "MO",
+   "x": 1267.6,
+   "y": 614.24
+  },
+  {
+   "district": "MO-06",
+   "state": "MO",
+   "x": 1282.2,
+   "y": 614.24
+  },
+  {
+   "district": "MO-07",
+   "state": "MO",
+   "x": 1296.8,
+   "y": 614.24
+  },
+  {
+   "district": "MO-08",
+   "state": "MO",
+   "x": 1311.4,
+   "y": 614.24
+  },
+  {
+   "district": "MS-01",
+   "state": "MS",
+   "x": 1388.9,
+   "y": 847.8
+  },
+  {
+   "district": "MS-02",
+   "state": "MS",
+   "x": 1403.5,
+   "y": 847.8
+  },
+  {
+   "district": "MS-03",
+   "state": "MS",
+   "x": 1418.1,
+   "y": 847.8
+  },
+  {
+   "district": "MS-04",
+   "state": "MS",
+   "x": 1403.5,
+   "y": 862.4
+  },
+  {
+   "district": "MT-01",
+   "state": "MT",
+   "x": 741.96,
+   "y": 187.9
+  },
+  {
+   "district": "MT-02",
+   "state": "MT",
+   "x": 756.56,
+   "y": 187.9
+  },
+  {
+   "district": "NC-01",
+   "state": "NC",
+   "x": 1735.26,
+   "y": 668.9
+  },
+  {
+   "district": "NC-02",
+   "state": "NC",
+   "x": 1749.86,
+   "y": 668.9
+  },
+  {
+   "district": "NC-03",
+   "state": "NC",
+   "x": 1764.46,
+   "y": 668.9
+  },
+  {
+   "district": "NC-04",
+   "state": "NC",
+   "x": 1779.06,
+   "y": 668.9
+  },
+  {
+   "district": "NC-05",
+   "state": "NC",
+   "x": 1793.66,
+   "y": 668.9
+  },
+  {
+   "district": "NC-06",
+   "state": "NC",
+   "x": 1735.26,
+   "y": 683.5
+  },
+  {
+   "district": "NC-07",
+   "state": "NC",
+   "x": 1749.86,
+   "y": 683.5
+  },
+  {
+   "district": "NC-08",
+   "state": "NC",
+   "x": 1764.46,
+   "y": 683.5
+  },
+  {
+   "district": "NC-09",
+   "state": "NC",
+   "x": 1779.06,
+   "y": 683.5
+  },
+  {
+   "district": "NC-10",
+   "state": "NC",
+   "x": 1793.66,
+   "y": 683.5
+  },
+  {
+   "district": "NC-11",
+   "state": "NC",
+   "x": 1742.56,
+   "y": 698.1
+  },
+  {
+   "district": "NC-12",
+   "state": "NC",
+   "x": 1757.16,
+   "y": 698.1
+  },
+  {
+   "district": "NC-13",
+   "state": "NC",
+   "x": 1771.76,
+   "y": 698.1
+  },
+  {
+   "district": "NC-14",
+   "state": "NC",
+   "x": 1786.36,
+   "y": 698.1
+  },
+  {
+   "district": "ND-01",
+   "state": "ND",
+   "x": 1030.06,
+   "y": 196.78
+  },
+  {
+   "district": "NE-01",
+   "state": "NE",
+   "x": 1025.3,
+   "y": 462.94
+  },
+  {
+   "district": "NE-02",
+   "state": "NE",
+   "x": 1039.9,
+   "y": 462.94
+  },
+  {
+   "district": "NE-03",
+   "state": "NE",
+   "x": 1054.5,
+   "y": 462.94
+  },
+  {
+   "district": "NH-01",
+   "state": "NH",
+   "x": 1938.6,
+   "y": 267.82
+  },
+  {
+   "district": "NH-02",
+   "state": "NH",
+   "x": 1953.2,
+   "y": 267.82
+  },
+  {
+   "district": "NJ-01",
+   "state": "NJ",
+   "x": 1855.26,
+   "y": 431.06
+  },
+  {
+   "district": "NJ-02",
+   "state": "NJ",
+   "x": 1869.86,
+   "y": 431.06
+  },
+  {
+   "district": "NJ-03",
+   "state": "NJ",
+   "x": 1884.46,
+   "y": 431.06
+  },
+  {
+   "district": "NJ-04",
+   "state": "NJ",
+   "x": 1899.06,
+   "y": 431.06
+  },
+  {
+   "district": "NJ-05",
+   "state": "NJ",
+   "x": 1913.66,
+   "y": 431.06
+  },
+  {
+   "district": "NJ-06",
+   "state": "NJ",
+   "x": 1855.26,
+   "y": 445.66
+  },
+  {
+   "district": "NJ-07",
+   "state": "NJ",
+   "x": 1869.86,
+   "y": 445.66
+  },
+  {
+   "district": "NJ-08",
+   "state": "NJ",
+   "x": 1884.46,
+   "y": 445.66
+  },
+  {
+   "district": "NJ-09",
+   "state": "NJ",
+   "x": 1899.06,
+   "y": 445.66
+  },
+  {
+   "district": "NJ-10",
+   "state": "NJ",
+   "x": 1913.66,
+   "y": 445.66
+  },
+  {
+   "district": "NJ-11",
+   "state": "NJ",
+   "x": 1877.16,
+   "y": 460.26
+  },
+  {
+   "district": "NJ-12",
+   "state": "NJ",
+   "x": 1891.76,
+   "y": 460.26
+  },
+  {
+   "district": "NM-01",
+   "state": "NM",
+   "x": 781.46,
+   "y": 767.98
+  },
+  {
+   "district": "NM-02",
+   "state": "NM",
+   "x": 796.06,
+   "y": 767.98
+  },
+  {
+   "district": "NM-03",
+   "state": "NM",
+   "x": 810.66,
+   "y": 767.98
+  },
+  {
+   "district": "NV-01",
+   "state": "NV",
+   "x": 448.58,
+   "y": 481.32
+  },
+  {
+   "district": "NV-02",
+   "state": "NV",
+   "x": 463.18,
+   "y": 481.32
+  },
+  {
+   "district": "NV-03",
+   "state": "NV",
+   "x": 477.78,
+   "y": 481.32
+  },
+  {
+   "district": "NV-04",
+   "state": "NV",
+   "x": 463.18,
+   "y": 495.92
+  },
+  {
+   "district": "NY-01",
+   "state": "NY",
+   "x": 1785.94,
+   "y": 308.32
+  },
+  {
+   "district": "NY-02",
+   "state": "NY",
+   "x": 1800.54,
+   "y": 308.32
+  },
+  {
+   "district": "NY-03",
+   "state": "NY",
+   "x": 1815.14,
+   "y": 308.32
+  },
+  {
+   "district": "NY-04",
+   "state": "NY",
+   "x": 1829.74,
+   "y": 308.32
+  },
+  {
+   "district": "NY-05",
+   "state": "NY",
+   "x": 1844.34,
+   "y": 308.32
+  },
+  {
+   "district": "NY-06",
+   "state": "NY",
+   "x": 1858.94,
+   "y": 308.32
+  },
+  {
+   "district": "NY-07",
+   "state": "NY",
+   "x": 1873.54,
+   "y": 308.32
+  },
+  {
+   "district": "NY-08",
+   "state": "NY",
+   "x": 1785.94,
+   "y": 322.92
+  },
+  {
+   "district": "NY-09",
+   "state": "NY",
+   "x": 1800.54,
+   "y": 322.92
+  },
+  {
+   "district": "NY-10",
+   "state": "NY",
+   "x": 1815.14,
+   "y": 322.92
+  },
+  {
+   "district": "NY-11",
+   "state": "NY",
+   "x": 1829.74,
+   "y": 322.92
+  },
+  {
+   "district": "NY-12",
+   "state": "NY",
+   "x": 1844.34,
+   "y": 322.92
+  },
+  {
+   "district": "NY-13",
+   "state": "NY",
+   "x": 1858.94,
+   "y": 322.92
+  },
+  {
+   "district": "NY-14",
+   "state": "NY",
+   "x": 1873.54,
+   "y": 322.92
+  },
+  {
+   "district": "NY-15",
+   "state": "NY",
+   "x": 1785.94,
+   "y": 337.52
+  },
+  {
+   "district": "NY-16",
+   "state": "NY",
+   "x": 1800.54,
+   "y": 337.52
+  },
+  {
+   "district": "NY-17",
+   "state": "NY",
+   "x": 1815.14,
+   "y": 337.52
+  },
+  {
+   "district": "NY-18",
+   "state": "NY",
+   "x": 1829.74,
+   "y": 337.52
+  },
+  {
+   "district": "NY-19",
+   "state": "NY",
+   "x": 1844.34,
+   "y": 337.52
+  },
+  {
+   "district": "NY-20",
+   "state": "NY",
+   "x": 1858.94,
+   "y": 337.52
+  },
+  {
+   "district": "NY-21",
+   "state": "NY",
+   "x": 1873.54,
+   "y": 337.52
+  },
+  {
+   "district": "NY-22",
+   "state": "NY",
+   "x": 1800.54,
+   "y": 352.12
+  },
+  {
+   "district": "NY-23",
+   "state": "NY",
+   "x": 1815.14,
+   "y": 352.12
+  },
+  {
+   "district": "NY-24",
+   "state": "NY",
+   "x": 1829.74,
+   "y": 352.12
+  },
+  {
+   "district": "NY-25",
+   "state": "NY",
+   "x": 1844.34,
+   "y": 352.12
+  },
+  {
+   "district": "NY-26",
+   "state": "NY",
+   "x": 1858.94,
+   "y": 352.12
+  },
+  {
+   "district": "OH-01",
+   "state": "OH",
+   "x": 1583.1,
+   "y": 476.18
+  },
+  {
+   "district": "OH-02",
+   "state": "OH",
+   "x": 1597.7,
+   "y": 476.18
+  },
+  {
+   "district": "OH-03",
+   "state": "OH",
+   "x": 1612.3,
+   "y": 476.18
+  },
+  {
+   "district": "OH-04",
+   "state": "OH",
+   "x": 1626.9,
+   "y": 476.18
+  },
+  {
+   "district": "OH-05",
+   "state": "OH",
+   "x": 1641.5,
+   "y": 476.18
+  },
+  {
+   "district": "OH-06",
+   "state": "OH",
+   "x": 1583.1,
+   "y": 490.78
+  },
+  {
+   "district": "OH-07",
+   "state": "OH",
+   "x": 1597.7,
+   "y": 490.78
+  },
+  {
+   "district": "OH-08",
+   "state": "OH",
+   "x": 1612.3,
+   "y": 490.78
+  },
+  {
+   "district": "OH-09",
+   "state": "OH",
+   "x": 1626.9,
+   "y": 490.78
+  },
+  {
+   "district": "OH-10",
+   "state": "OH",
+   "x": 1641.5,
+   "y": 490.78
+  },
+  {
+   "district": "OH-11",
+   "state": "OH",
+   "x": 1583.1,
+   "y": 505.38
+  },
+  {
+   "district": "OH-12",
+   "state": "OH",
+   "x": 1597.7,
+   "y": 505.38
+  },
+  {
+   "district": "OH-13",
+   "state": "OH",
+   "x": 1612.3,
+   "y": 505.38
+  },
+  {
+   "district": "OH-14",
+   "state": "OH",
+   "x": 1626.9,
+   "y": 505.38
+  },
+  {
+   "district": "OH-15",
+   "state": "OH",
+   "x": 1641.5,
+   "y": 505.38
+  },
+  {
+   "district": "OK-01",
+   "state": "OK",
+   "x": 1097.78,
+   "y": 726.6
+  },
+  {
+   "district": "OK-02",
+   "state": "OK",
+   "x": 1112.38,
+   "y": 726.6
+  },
+  {
+   "district": "OK-03",
+   "state": "OK",
+   "x": 1126.98,
+   "y": 726.6
+  },
+  {
+   "district": "OK-04",
+   "state": "OK",
+   "x": 1105.08,
+   "y": 741.2
+  },
+  {
+   "district": "OK-05",
+   "state": "OK",
+   "x": 1119.68,
+   "y": 741.2
+  },
+  {
+   "district": "OR-01",
+   "state": "OR",
+   "x": 363.28,
+   "y": 248.52
+  },
+  {
+   "district": "OR-02",
+   "state": "OR",
+   "x": 377.88,
+   "y": 248.52
+  },
+  {
+   "district": "OR-03",
+   "state": "OR",
+   "x": 392.48,
+   "y": 248.52
+  },
+  {
+   "district": "OR-04",
+   "state": "OR",
+   "x": 407.08,
+   "y": 248.52
+  },
+  {
+   "district": "OR-05",
+   "state": "OR",
+   "x": 377.88,
+   "y": 263.12
+  },
+  {
+   "district": "OR-06",
+   "state": "OR",
+   "x": 392.48,
+   "y": 263.12
+  },
+  {
+   "district": "PA-01",
+   "state": "PA",
+   "x": 1737.8,
+   "y": 422.18
+  },
+  {
+   "district": "PA-02",
+   "state": "PA",
+   "x": 1752.4,
+   "y": 422.18
+  },
+  {
+   "district": "PA-03",
+   "state": "PA",
+   "x": 1767.0,
+   "y": 422.18
+  },
+  {
+   "district": "PA-04",
+   "state": "PA",
+   "x": 1781.6,
+   "y": 422.18
+  },
+  {
+   "district": "PA-05",
+   "state": "PA",
+   "x": 1796.2,
+   "y": 422.18
+  },
+  {
+   "district": "PA-06",
+   "state": "PA",
+   "x": 1810.8,
+   "y": 422.18
+  },
+  {
+   "district": "PA-07",
+   "state": "PA",
+   "x": 1737.8,
+   "y": 436.78
+  },
+  {
+   "district": "PA-08",
+   "state": "PA",
+   "x": 1752.4,
+   "y": 436.78
+  },
+  {
+   "district": "PA-09",
+   "state": "PA",
+   "x": 1767.0,
+   "y": 436.78
+  },
+  {
+   "district": "PA-10",
+   "state": "PA",
+   "x": 1781.6,
+   "y": 436.78
+  },
+  {
+   "district": "PA-11",
+   "state": "PA",
+   "x": 1796.2,
+   "y": 436.78
+  },
+  {
+   "district": "PA-12",
+   "state": "PA",
+   "x": 1810.8,
+   "y": 436.78
+  },
+  {
+   "district": "PA-13",
+   "state": "PA",
+   "x": 1745.1,
+   "y": 451.38
+  },
+  {
+   "district": "PA-14",
+   "state": "PA",
+   "x": 1759.7,
+   "y": 451.38
+  },
+  {
+   "district": "PA-15",
+   "state": "PA",
+   "x": 1774.3,
+   "y": 451.38
+  },
+  {
+   "district": "PA-16",
+   "state": "PA",
+   "x": 1788.9,
+   "y": 451.38
+  },
+  {
+   "district": "PA-17",
+   "state": "PA",
+   "x": 1803.5,
+   "y": 451.38
+  },
+  {
+   "district": "RI-01",
+   "state": "RI",
+   "x": 1964.29,
+   "y": 358.97
+  },
+  {
+   "district": "RI-02",
+   "state": "RI",
+   "x": 1978.89,
+   "y": 358.97
+  },
+  {
+   "district": "SC-01",
+   "state": "SC",
+   "x": 1700.08,
+   "y": 758.76
+  },
+  {
+   "district": "SC-02",
+   "state": "SC",
+   "x": 1714.68,
+   "y": 758.76
+  },
+  {
+   "district": "SC-03",
+   "state": "SC",
+   "x": 1729.28,
+   "y": 758.76
+  },
+  {
+   "district": "SC-04",
+   "state": "SC",
+   "x": 1743.88,
+   "y": 758.76
+  },
+  {
+   "district": "SC-05",
+   "state": "SC",
+   "x": 1707.38,
+   "y": 773.36
+  },
+  {
+   "district": "SC-06",
+   "state": "SC",
+   "x": 1721.98,
+   "y": 773.36
+  },
+  {
+   "district": "SC-07",
+   "state": "SC",
+   "x": 1736.58,
+   "y": 773.36
+  },
+  {
+   "district": "SD-01",
+   "state": "SD",
+   "x": 1031.5,
+   "y": 331.42
+  },
+  {
+   "district": "TN-01",
+   "state": "TN",
+   "x": 1491.04,
+   "y": 690.02
+  },
+  {
+   "district": "TN-02",
+   "state": "TN",
+   "x": 1505.64,
+   "y": 690.02
+  },
+  {
+   "district": "TN-03",
+   "state": "TN",
+   "x": 1520.24,
+   "y": 690.02
+  },
+  {
+   "district": "TN-04",
+   "state": "TN",
+   "x": 1534.84,
+   "y": 690.02
+  },
+  {
+   "district": "TN-05",
+   "state": "TN",
+   "x": 1491.04,
+   "y": 704.62
+  },
+  {
+   "district": "TN-06",
+   "state": "TN",
+   "x": 1505.64,
+   "y": 704.62
+  },
+  {
+   "district": "TN-07",
+   "state": "TN",
+   "x": 1520.24,
+   "y": 704.62
+  },
+  {
+   "district": "TN-08",
+   "state": "TN",
+   "x": 1534.84,
+   "y": 704.62
+  },
+  {
+   "district": "TN-09",
+   "state": "TN",
+   "x": 1512.94,
+   "y": 719.22
+  },
+  {
+   "district": "TX-01",
+   "state": "TX",
+   "x": 988.8,
+   "y": 888.78
+  },
+  {
+   "district": "TX-02",
+   "state": "TX",
+   "x": 1003.4,
+   "y": 888.78
+  },
+  {
+   "district": "TX-03",
+   "state": "TX",
+   "x": 1018.0,
+   "y": 888.78
+  },
+  {
+   "district": "TX-04",
+   "state": "TX",
+   "x": 1032.6,
+   "y": 888.78
+  },
+  {
+   "district": "TX-05",
+   "state": "TX",
+   "x": 1047.2,
+   "y": 888.78
+  },
+  {
+   "district": "TX-06",
+   "state": "TX",
+   "x": 1061.8,
+   "y": 888.78
+  },
+  {
+   "district": "TX-07",
+   "state": "TX",
+   "x": 1076.4,
+   "y": 888.78
+  },
+  {
+   "district": "TX-08",
+   "state": "TX",
+   "x": 1091.0,
+   "y": 888.78
+  },
+  {
+   "district": "TX-09",
+   "state": "TX",
+   "x": 988.8,
+   "y": 903.38
+  },
+  {
+   "district": "TX-10",
+   "state": "TX",
+   "x": 1003.4,
+   "y": 903.38
+  },
+  {
+   "district": "TX-11",
+   "state": "TX",
+   "x": 1018.0,
+   "y": 903.38
+  },
+  {
+   "district": "TX-12",
+   "state": "TX",
+   "x": 1032.6,
+   "y": 903.38
+  },
+  {
+   "district": "TX-13",
+   "state": "TX",
+   "x": 1047.2,
+   "y": 903.38
+  },
+  {
+   "district": "TX-14",
+   "state": "TX",
+   "x": 1061.8,
+   "y": 903.38
+  },
+  {
+   "district": "TX-15",
+   "state": "TX",
+   "x": 1076.4,
+   "y": 903.38
+  },
+  {
+   "district": "TX-16",
+   "state": "TX",
+   "x": 1091.0,
+   "y": 903.38
+  },
+  {
+   "district": "TX-17",
+   "state": "TX",
+   "x": 988.8,
+   "y": 917.98
+  },
+  {
+   "district": "TX-18",
+   "state": "TX",
+   "x": 1003.4,
+   "y": 917.98
+  },
+  {
+   "district": "TX-19",
+   "state": "TX",
+   "x": 1018.0,
+   "y": 917.98
+  },
+  {
+   "district": "TX-20",
+   "state": "TX",
+   "x": 1032.6,
+   "y": 917.98
+  },
+  {
+   "district": "TX-21",
+   "state": "TX",
+   "x": 1047.2,
+   "y": 917.98
+  },
+  {
+   "district": "TX-22",
+   "state": "TX",
+   "x": 1061.8,
+   "y": 917.98
+  },
+  {
+   "district": "TX-23",
+   "state": "TX",
+   "x": 1076.4,
+   "y": 917.98
+  },
+  {
+   "district": "TX-24",
+   "state": "TX",
+   "x": 1091.0,
+   "y": 917.98
+  },
+  {
+   "district": "TX-25",
+   "state": "TX",
+   "x": 988.8,
+   "y": 932.58
+  },
+  {
+   "district": "TX-26",
+   "state": "TX",
+   "x": 1003.4,
+   "y": 932.58
+  },
+  {
+   "district": "TX-27",
+   "state": "TX",
+   "x": 1018.0,
+   "y": 932.58
+  },
+  {
+   "district": "TX-28",
+   "state": "TX",
+   "x": 1032.6,
+   "y": 932.58
+  },
+  {
+   "district": "TX-29",
+   "state": "TX",
+   "x": 1047.2,
+   "y": 932.58
+  },
+  {
+   "district": "TX-30",
+   "state": "TX",
+   "x": 1061.8,
+   "y": 932.58
+  },
+  {
+   "district": "TX-31",
+   "state": "TX",
+   "x": 1076.4,
+   "y": 932.58
+  },
+  {
+   "district": "TX-32",
+   "state": "TX",
+   "x": 1091.0,
+   "y": 932.58
+  },
+  {
+   "district": "TX-33",
+   "state": "TX",
+   "x": 1003.4,
+   "y": 947.18
+  },
+  {
+   "district": "TX-34",
+   "state": "TX",
+   "x": 1018.0,
+   "y": 947.18
+  },
+  {
+   "district": "TX-35",
+   "state": "TX",
+   "x": 1032.6,
+   "y": 947.18
+  },
+  {
+   "district": "TX-36",
+   "state": "TX",
+   "x": 1047.2,
+   "y": 947.18
+  },
+  {
+   "district": "TX-37",
+   "state": "TX",
+   "x": 1061.8,
+   "y": 947.18
+  },
+  {
+   "district": "TX-38",
+   "state": "TX",
+   "x": 1076.4,
+   "y": 947.18
+  },
+  {
+   "district": "UT-01",
+   "state": "UT",
+   "x": 615.86,
+   "y": 514.68
+  },
+  {
+   "district": "UT-02",
+   "state": "UT",
+   "x": 630.46,
+   "y": 514.68
+  },
+  {
+   "district": "UT-03",
+   "state": "UT",
+   "x": 645.06,
+   "y": 514.68
+  },
+  {
+   "district": "UT-04",
+   "state": "UT",
+   "x": 630.46,
+   "y": 529.28
+  },
+  {
+   "district": "VA-01",
+   "state": "VA",
+   "x": 1736.22,
+   "y": 578.42
+  },
+  {
+   "district": "VA-02",
+   "state": "VA",
+   "x": 1750.82,
+   "y": 578.42
+  },
+  {
+   "district": "VA-03",
+   "state": "VA",
+   "x": 1765.42,
+   "y": 578.42
+  },
+  {
+   "district": "VA-04",
+   "state": "VA",
+   "x": 1780.02,
+   "y": 578.42
+  },
+  {
+   "district": "VA-05",
+   "state": "VA",
+   "x": 1794.62,
+   "y": 578.42
+  },
+  {
+   "district": "VA-06",
+   "state": "VA",
+   "x": 1736.22,
+   "y": 593.02
+  },
+  {
+   "district": "VA-07",
+   "state": "VA",
+   "x": 1750.82,
+   "y": 593.02
+  },
+  {
+   "district": "VA-08",
+   "state": "VA",
+   "x": 1765.42,
+   "y": 593.02
+  },
+  {
+   "district": "VA-09",
+   "state": "VA",
+   "x": 1780.02,
+   "y": 593.02
+  },
+  {
+   "district": "VA-10",
+   "state": "VA",
+   "x": 1794.62,
+   "y": 593.02
+  },
+  {
+   "district": "VA-11",
+   "state": "VA",
+   "x": 1765.42,
+   "y": 607.62
+  },
+  {
+   "district": "VT-01",
+   "state": "VT",
+   "x": 1907.5,
+   "y": 259.66
+  },
+  {
+   "district": "WA-01",
+   "state": "WA",
+   "x": 406.24,
+   "y": 93.14
+  },
+  {
+   "district": "WA-02",
+   "state": "WA",
+   "x": 420.84,
+   "y": 93.14
+  },
+  {
+   "district": "WA-03",
+   "state": "WA",
+   "x": 435.44,
+   "y": 93.14
+  },
+  {
+   "district": "WA-04",
+   "state": "WA",
+   "x": 450.04,
+   "y": 93.14
+  },
+  {
+   "district": "WA-05",
+   "state": "WA",
+   "x": 406.24,
+   "y": 107.74
+  },
+  {
+   "district": "WA-06",
+   "state": "WA",
+   "x": 420.84,
+   "y": 107.74
+  },
+  {
+   "district": "WA-07",
+   "state": "WA",
+   "x": 435.44,
+   "y": 107.74
+  },
+  {
+   "district": "WA-08",
+   "state": "WA",
+   "x": 450.04,
+   "y": 107.74
+  },
+  {
+   "district": "WA-09",
+   "state": "WA",
+   "x": 420.84,
+   "y": 122.34
+  },
+  {
+   "district": "WA-10",
+   "state": "WA",
+   "x": 435.44,
+   "y": 122.34
+  },
+  {
+   "district": "WI-01",
+   "state": "WI",
+   "x": 1335.28,
+   "y": 313.08
+  },
+  {
+   "district": "WI-02",
+   "state": "WI",
+   "x": 1349.88,
+   "y": 313.08
+  },
+  {
+   "district": "WI-03",
+   "state": "WI",
+   "x": 1364.48,
+   "y": 313.08
+  },
+  {
+   "district": "WI-04",
+   "state": "WI",
+   "x": 1379.08,
+   "y": 313.08
+  },
+  {
+   "district": "WI-05",
+   "state": "WI",
+   "x": 1335.28,
+   "y": 327.68
+  },
+  {
+   "district": "WI-06",
+   "state": "WI",
+   "x": 1349.88,
+   "y": 327.68
+  },
+  {
+   "district": "WI-07",
+   "state": "WI",
+   "x": 1364.48,
+   "y": 327.68
+  },
+  {
+   "district": "WI-08",
+   "state": "WI",
+   "x": 1379.08,
+   "y": 327.68
+  },
+  {
+   "district": "WV-01",
+   "state": "WV",
+   "x": 1689.72,
+   "y": 553.18
+  },
+  {
+   "district": "WV-02",
+   "state": "WV",
+   "x": 1704.32,
+   "y": 553.18
+  },
+  {
+   "district": "WY-01",
+   "state": "WY",
+   "x": 790.54,
+   "y": 376.78
+  }
+ ]
+}

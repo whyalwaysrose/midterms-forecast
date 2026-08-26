@@ -52,3 +52,16 @@ def ensure_dirs() -> None:
 def run_dir(run_date: str) -> Path:
     """Directory holding the archived artefacts for a single dated run."""
     return RUNS_DIR / run_date
+
+
+def chamber_filename(stem: str, chamber: str) -> str:
+    """File name for a chamber's copy of a site data file.
+
+    The Senate keeps the unsuffixed names it has always had -- ``forecast.json``,
+    ``history.json`` -- and other chambers are suffixed. That asymmetry is
+    deliberate: the published site, every archived run going back to the start
+    of the project, and any link anyone has already saved all point at the
+    unsuffixed names. Renaming them to gain symmetry would break all of that to
+    fix nothing.
+    """
+    return f"{stem}.json" if chamber == "senate" else f"{stem}_{chamber}.json"

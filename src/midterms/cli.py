@@ -370,25 +370,32 @@ def cmd_run(args: argparse.Namespace) -> int:
     outputs.append_history(run)
 
     commentary = generate_commentary(payload, previous)
-    write_commentary(commentary, chamber=chamber)
+    _feed_path, changelog_path = write_commentary(commentary, chamber=chamber)
 
     # --- report ----------------------------------------------------------
-    chamber = payload["chamber_forecast"]
+    # Named `summary`, not `chamber`. This line used to rebind `chamber` from
+    # the chamber name to this dict, which nothing caught because the only later
+    # use of the name was a hardcoded path -- itself the bug below.
+    summary = payload["chamber_forecast"]
     print()
     print("=" * 72)
     print(f"  {races.chamber.upper()} {races.cycle} — forecast for {run_date}")
     print("=" * 72)
-    print(f"  P(Democratic control): {chamber['dem_control_prob']:.1%}")
-    print(f"  P(Republican control): {chamber['rep_control_prob']:.1%}")
+    print(f"  P(Democratic control): {summary['dem_control_prob']:.1%}")
+    print(f"  P(Republican control): {summary['rep_control_prob']:.1%}")
     print(
-        f"  Democratic seats: {chamber['dem_seats']['median']} "
-        f"(90% interval {chamber['dem_seats']['p05']}–{chamber['dem_seats']['p95']})"
+        f"  Democratic seats: {summary['dem_seats']['median']} "
+        f"(90% interval {summary['dem_seats']['p05']}–{summary['dem_seats']['p95']})"
     )
     print()
     print("  " + commentary.headline)
     print()
+    # Both paths reported as returned rather than reconstructed. The changelog
+    # line was hardcoded to CHANGELOG.md and so told a House run it had written
+    # the Senate's file. It had not -- the write was correct -- but a run that
+    # misreports where it put something is a run you cannot check.
     print(f"  forecast  -> {forecast_path}")
-    print(f"  changelog -> {paths.REPO_ROOT / 'CHANGELOG.md'}")
+    print(f"  changelog -> {changelog_path}")
     print("=" * 72)
     return 0
 

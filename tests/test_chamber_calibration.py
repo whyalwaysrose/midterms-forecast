@@ -20,7 +20,6 @@ import pytest
 from midterms import calibration as C
 from midterms.config import ModelConfig
 
-
 # --- race-type selection ----------------------------------------------------
 
 

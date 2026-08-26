@@ -38,22 +38,42 @@ log = logging.getLogger(__name__)
 SCHEMA_VERSION = 5
 
 
-def model_fingerprint() -> str:
-    """A short hash of everything that decides the numbers.
+def model_fingerprint(cfg: ModelConfig | None = None) -> str:
+    """A short hash of everything that decides *this chamber's* numbers.
 
     Day-over-day commentary compares two runs and attributes what moved to the
     polls. That is only honest while the model is held fixed. Change a prior,
     or the simulation, and every race shifts at once — which the differ would
     otherwise report as though the polls had done it.
 
-    Hashing the config plus the two modules that define the arithmetic means a
-    model change is detected automatically, with nothing to remember to bump.
+    **Per chamber, and resolved rather than raw.** Passing the loaded config
+    hashes the values that chamber actually ran on, with the ``chambers``
+    override block removed because its effect is already merged in. Hashing the
+    file instead would flag the Senate as "model changed" the moment a
+    House-only scale was edited — the two runs would then suppress attribution
+    for a change that could not have touched them. That is the same false alarm
+    the line-ending normalisation below exists to prevent, arriving by a
+    different route.
+
+    Parsing before hashing also makes the config immune to line endings for
+    free; only the code files still need normalising.
     """
     import hashlib
+    import json
+
+    if cfg is not None:
+        resolved = dict(cfg.raw)
+    else:
+        # No config to hand: read and resolve the base, which is the Senate's.
+        import yaml
+
+        resolved = yaml.safe_load(paths.MODEL_CONFIG.read_text(encoding="utf-8"))
+    resolved.pop("chambers", None)
 
     digest = hashlib.sha256()
+    digest.update(json.dumps(resolved, sort_keys=True, default=str).encode("utf-8"))
+
     for path in (
-        paths.MODEL_CONFIG,
         paths.REPO_ROOT / "src" / "midterms" / "model" / "hierarchical.py",
         paths.REPO_ROOT / "src" / "midterms" / "model" / "simulate.py",
         paths.REPO_ROOT / "src" / "midterms" / "fundamentals.py",
@@ -299,7 +319,7 @@ class ForecastRun:
 
         return {
             "schema_version": SCHEMA_VERSION,
-            "model_fingerprint": model_fingerprint(),
+            "model_fingerprint": model_fingerprint(self.cfg),
             "run_date": self.run_date.isoformat(),
             "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
             "cycle": races.cycle,

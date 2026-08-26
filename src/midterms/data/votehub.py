@@ -150,16 +150,48 @@ class VoteHubClient:
             log.info("  %d polls", len(records))
 
         snapshot_path = raw_dir / f"votehub-{run_date.isoformat()}.json.gz"
+
+        # Merge into any snapshot already written for this date rather than
+        # replacing it. A snapshot is keyed by date alone, but the two chambers
+        # fetch different poll types -- the Senate wants `us-senator`, the House
+        # `us-representative` -- and the daily job runs both. Overwriting meant
+        # the House run erased the Senate's polls for that day.
+        #
+        # The forecasts were unaffected, because each run fetches what it needs
+        # before writing. What it broke was reproducibility, which is the entire
+        # reason these files exist: re-running against an archived snapshot is
+        # supposed to reproduce that day's forecast exactly, and for any day
+        # both chambers ran, only the last one could be reproduced. It also made
+        # `--offline` fail outright for whichever chamber went first.
+        #
+        # Freshly fetched types win; anything not fetched this time is kept.
+        existing: dict[str, Any] = {}
+        if snapshot_path.exists():
+            try:
+                with gzip.open(snapshot_path, "rt", encoding="utf-8") as handle:
+                    existing = json.load(handle).get("poll_types", {})
+            except (OSError, json.JSONDecodeError, KeyError):
+                log.warning("could not read %s to merge into; replacing it",
+                            snapshot_path.name)
+                existing = {}
+
+        merged = {**existing, **fetched}
         payload = {
             "fetched_at": run_date.isoformat(),
             "source": self.base_url,
             "attribution": ATTRIBUTION,
             "license": "CC BY 4.0",
-            "poll_types": {k: v for k, v in fetched.items()},
+            "poll_types": merged,
         }
         with gzip.open(snapshot_path, "wt", encoding="utf-8") as handle:
             json.dump(payload, handle)
-        log.info("wrote raw snapshot %s", snapshot_path)
+        kept = sorted(set(existing) - set(fetched))
+        log.info(
+            "wrote raw snapshot %s (%s%s)",
+            snapshot_path,
+            ", ".join(f"{k}={len(v)}" for k, v in sorted(fetched.items())),
+            f"; kept {', '.join(kept)}" if kept else "",
+        )
 
         return fetched
 

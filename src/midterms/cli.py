@@ -292,6 +292,7 @@ def cmd_run(args: argparse.Namespace) -> int:
         )
 
     # --- data ------------------------------------------------------------
+    poll_type = RACE_POLL_TYPE[chamber]
     if args.offline:
         snapshot = latest_snapshot()
         if snapshot is None:
@@ -299,14 +300,27 @@ def cmd_run(args: argparse.Namespace) -> int:
             return 2
         log.info("using cached snapshot %s", snapshot.name)
         raw = load_snapshot(snapshot)
+        # Say what is actually wrong. Older snapshots pre-date the merge fix in
+        # `fetch_and_snapshot` and may hold only the chamber that wrote them
+        # last, and the symptom without this is "no usable race polls" a hundred
+        # lines later -- which reads as a data problem rather than a missing
+        # poll type.
+        if not raw.get(poll_type):
+            log.error(
+                "%s holds no %s polls (it has: %s). It was written before both "
+                "chambers shared a snapshot, or by a run of the other chamber. "
+                "Re-run without --offline to fetch them.",
+                snapshot.name, poll_type, ", ".join(sorted(raw)) or "nothing",
+            )
+            return 2
     else:
         raw = VoteHubClient().fetch_and_snapshot(
-            [RACE_POLL_TYPE[chamber], "generic-ballot", "approval"], run_date
+            [poll_type, "generic-ballot", "approval"], run_date
         )
 
     table = build_poll_table(
         raw, races, cfg, roster,
-        as_of=run_date, race_poll_type=RACE_POLL_TYPE[chamber],
+        as_of=run_date, race_poll_type=poll_type,
     )
     if table.unknown_candidates:
         log.warning(

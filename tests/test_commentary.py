@@ -286,17 +286,51 @@ def test_missing_fingerprint_does_not_claim_a_model_change():
     assert "model changed" not in note.headline.lower()
 
 
-def test_fingerprint_changes_when_the_config_changes(tmp_path, monkeypatch):
-    from midterms import outputs, paths
+def _nudged_config(tmp_path):
+    """A copy of model.yaml with one number genuinely changed."""
+    import yaml
 
-    before = outputs.model_fingerprint()
-    original = paths.MODEL_CONFIG.read_bytes()
-    try:
-        paths.MODEL_CONFIG.write_bytes(original + b"\n# nudge\n")
-        assert outputs.model_fingerprint() != before
-    finally:
-        paths.MODEL_CONFIG.write_bytes(original)
-    assert outputs.model_fingerprint() == before
+    from midterms import paths
+
+    raw = yaml.safe_load(paths.MODEL_CONFIG.read_text(encoding="utf-8"))
+    raw["election_day_error"]["national_sd"] += 0.001
+    path = tmp_path / "model.yaml"
+    path.write_text(yaml.safe_dump(raw), encoding="utf-8")
+    return path
+
+
+def test_fingerprint_changes_when_the_config_changes(tmp_path):
+    from midterms import outputs
+    from midterms.config import ModelConfig
+
+    before = outputs.model_fingerprint(ModelConfig.load())
+    after = outputs.model_fingerprint(ModelConfig.load(_nudged_config(tmp_path)))
+    assert after != before
+
+
+def test_fingerprint_ignores_comments_and_key_order(tmp_path):
+    """It hashes the parsed config, not the file, and that is the point.
+
+    A fingerprint is meant to say "these numbers came from a different model".
+    A reordered block or an edited comment changes the file and cannot change a
+    single number, so reporting one as a model revision would suppress
+    attribution of real polling movement for no reason — the same false alarm
+    as the line-ending case below, arriving by another route.
+    """
+    import yaml
+
+    from midterms import outputs, paths
+    from midterms.config import ModelConfig
+
+    raw = yaml.safe_load(paths.MODEL_CONFIG.read_text(encoding="utf-8"))
+    shuffled = tmp_path / "model.yaml"
+    shuffled.write_text(
+        "# an entirely new comment\n" + yaml.safe_dump(raw, sort_keys=True),
+        encoding="utf-8",
+    )
+    assert outputs.model_fingerprint(
+        ModelConfig.load(shuffled)
+    ) == outputs.model_fingerprint(ModelConfig.load())
 
 
 def test_fingerprint_ignores_line_endings(tmp_path, monkeypatch):
@@ -326,15 +360,11 @@ def test_fingerprint_ignores_line_endings(tmp_path, monkeypatch):
     )
 
 
-def test_fingerprint_still_reacts_to_real_changes():
-    """The newline fix must not make the fingerprint blind."""
-    from midterms import outputs, paths
+def test_fingerprint_still_reacts_to_real_changes(tmp_path):
+    """Ignoring comments and newlines must not make the fingerprint blind."""
+    from midterms import outputs
+    from midterms.config import ModelConfig
 
-    before = outputs.model_fingerprint()
-    original = paths.MODEL_CONFIG.read_bytes()
-    try:
-        paths.MODEL_CONFIG.write_bytes(original + b"\n# a real change\n")
-        assert outputs.model_fingerprint() != before
-    finally:
-        paths.MODEL_CONFIG.write_bytes(original)
-    assert outputs.model_fingerprint() == before
+    before = outputs.model_fingerprint(ModelConfig.load())
+    assert outputs.model_fingerprint(ModelConfig.load(_nudged_config(tmp_path))) != before
+    assert outputs.model_fingerprint(ModelConfig.load()) == before

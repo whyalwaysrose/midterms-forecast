@@ -159,3 +159,52 @@ def test_house_scales_widen_rather_than_narrow():
     s_total = float(np.hypot(senate.national_sd, senate.state_sd))
     h_total = float(np.hypot(house.national_sd, house.state_sd))
     assert h_total > s_total
+
+
+# --- the fingerprint --------------------------------------------------------
+
+
+def test_a_house_only_config_change_does_not_flag_the_senate():
+    """Otherwise the Senate suppresses attribution for a change it never saw.
+
+    The fingerprint exists so that day-over-day commentary refuses to blame the
+    polls for a model revision. It hashed the whole model.yaml, so adding the
+    House override block would have made the very next Senate run announce "the
+    model changed in this run" and decline to attribute real poll movement --
+    the exact false alarm the fingerprint is there to prevent.
+    """
+    from midterms.outputs import model_fingerprint
+
+    senate = ModelConfig.load(chamber="senate")
+    assert model_fingerprint(senate) == model_fingerprint(), (
+        "the Senate's fingerprint must not depend on another chamber's overrides"
+    )
+
+
+def test_the_two_chambers_have_different_fingerprints():
+    """They ran on different scales, so a run of one is not a run of the other."""
+    from midterms.outputs import model_fingerprint
+
+    assert model_fingerprint(ModelConfig.load(chamber="senate")) != model_fingerprint(
+        ModelConfig.load(chamber="house")
+    )
+
+
+def test_changing_a_house_scale_moves_only_the_house_fingerprint(tmp_path):
+    import yaml
+
+    from midterms import paths
+    from midterms.outputs import model_fingerprint
+
+    raw = yaml.safe_load(paths.MODEL_CONFIG.read_text(encoding="utf-8"))
+    raw["chambers"]["house"]["election_day_error"]["national_sd"] = 0.099
+    edited = tmp_path / "model.yaml"
+    edited.write_text(yaml.safe_dump(raw), encoding="utf-8")
+
+    before_h = model_fingerprint(ModelConfig.load(chamber="house"))
+    before_s = model_fingerprint(ModelConfig.load(chamber="senate"))
+    after_h = model_fingerprint(ModelConfig.load(edited, chamber="house"))
+    after_s = model_fingerprint(ModelConfig.load(edited, chamber="senate"))
+
+    assert after_h != before_h, "the House should notice its own scale changing"
+    assert after_s == before_s, "the Senate should not"

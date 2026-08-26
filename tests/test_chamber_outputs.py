@@ -113,3 +113,64 @@ def test_a_run_writes_only_its_own_chamber(tmp_path, chamber):
         mine = paths.chamber_filename(stem, chamber)
         theirs = paths.chamber_filename(stem, other)
         assert mine != theirs
+
+
+# --- raw snapshots ----------------------------------------------------------
+
+
+def _client(marker: str = "x"):
+    """A VoteHubClient that fetches nothing, for testing snapshot writing."""
+    from midterms.data.votehub import VoteHubClient
+
+    client = VoteHubClient()
+    client.polls = lambda poll_type: [{"id": f"{poll_type}-{marker}"}]
+    return client
+
+
+def test_a_house_run_does_not_erase_the_senates_polls(tmp_path):
+    """A snapshot is keyed by date, but the chambers fetch different types.
+
+    The daily job runs both. Overwriting meant the House run erased
+    `us-senator` from that day's archive -- which left the forecasts correct
+    (each run fetches before writing) while silently breaking the one thing
+    these files exist for: re-running an archived snapshot to reproduce that
+    day's forecast. Only the chamber that ran last could be reproduced.
+    """
+    from datetime import date
+
+    from midterms.data.votehub import load_snapshot
+
+    day = date(2026, 1, 1)
+    _client().fetch_and_snapshot(["us-senator", "generic-ballot"], day, tmp_path)
+    _client().fetch_and_snapshot(["us-representative", "generic-ballot"], day, tmp_path)
+
+    got = load_snapshot(tmp_path / "votehub-2026-01-01.json.gz")
+    assert set(got) == {"us-senator", "us-representative", "generic-ballot"}
+
+
+def test_a_refetched_poll_type_is_replaced_not_appended(tmp_path):
+    """Merging must not accumulate stale copies of the same type."""
+    from datetime import date
+
+    from midterms.data.votehub import load_snapshot
+
+    day = date(2026, 1, 1)
+    _client("old").fetch_and_snapshot(["generic-ballot"], day, tmp_path)
+    _client("new").fetch_and_snapshot(["generic-ballot"], day, tmp_path)
+
+    got = load_snapshot(tmp_path / "votehub-2026-01-01.json.gz")
+    assert got["generic-ballot"] == [{"id": "generic-ballot-new"}]
+
+
+def test_an_unreadable_existing_snapshot_does_not_lose_the_fetch(tmp_path):
+    """Corruption must cost the old data, never the data just fetched."""
+    from datetime import date
+
+    from midterms.data.votehub import load_snapshot
+
+    day = date(2026, 1, 1)
+    path = tmp_path / "votehub-2026-01-01.json.gz"
+    path.write_bytes(b"not gzip at all")
+
+    _client().fetch_and_snapshot(["us-senator"], day, tmp_path)
+    assert load_snapshot(path)["us-senator"] == [{"id": "us-senator-x"}]

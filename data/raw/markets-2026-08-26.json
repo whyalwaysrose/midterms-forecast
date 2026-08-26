@@ -1,0 +1,100 @@
+{
+ "fetched_at": "2026-08-26T12:34:38+00:00",
+ "source": "Polymarket",
+ "source_url": "https://polymarket.com",
+ "events": {
+  "balance-of-power-2026-midterms": {
+   "slug": "balance-of-power-2026-midterms",
+   "title": "Balance of Power: 2026 Midterms",
+   "volume": 10446447.466577997,
+   "outcomes": [
+    {
+     "label": "Democrats Sweep",
+     "probability": 0.485
+    },
+    {
+     "label": "R Senate, D House",
+     "probability": 0.375
+    },
+    {
+     "label": "Republicans Sweep",
+     "probability": 0.115
+    },
+    {
+     "label": "D Senate, R House",
+     "probability": 0.0105
+    },
+    {
+     "label": "Other",
+     "probability": 0.0025
+    }
+   ]
+  },
+  "which-party-will-win-the-senate-in-2026": {
+   "slug": "which-party-will-win-the-senate-in-2026",
+   "title": "Which party will win the Senate in 2026?",
+   "volume": 4023220.8055679994,
+   "outcomes": [
+    {
+     "label": "Democratic Party",
+     "probability": 0.495
+    },
+    {
+     "label": "Republican Party",
+     "probability": 0.495
+    }
+   ]
+  },
+  "republican-senate-seats-after-the-2026-midterm-elections-927": {
+   "slug": "republican-senate-seats-after-the-2026-midterm-elections-927",
+   "title": "Republican Senate seats after the 2026 midterm elections?",
+   "volume": 2865372.072431,
+   "outcomes": [
+    {
+     "label": "\u226447",
+     "probability": 0.265
+    },
+    {
+     "label": "49",
+     "probability": 0.135
+    },
+    {
+     "label": "48",
+     "probability": 0.13
+    },
+    {
+     "label": "50",
+     "probability": 0.12
+    },
+    {
+     "label": "51",
+     "probability": 0.105
+    },
+    {
+     "label": "52",
+     "probability": 0.0845
+    },
+    {
+     "label": "53",
+     "probability": 0.048
+    },
+    {
+     "label": "54",
+     "probability": 0.0405
+    },
+    {
+     "label": "55",
+     "probability": 0.0265
+    },
+    {
+     "label": "56",
+     "probability": 0.013
+    },
+    {
+     "label": "57+",
+     "probability": 0.0085
+    }
+   ]
+  }
+ }
+}

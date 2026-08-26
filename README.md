@@ -185,7 +185,7 @@ URL will fail because browsers block `fetch` from the filesystem.
 | `midterms backtest --holdout-days 30` | Calibration check against held-out polls |
 | `midterms bundle` | Build a single self-contained `outputs/dashboard.html` |
 | `midterms build-map` | Re-project the vendored state boundaries (`run` does this too) |
-| `midterms calibrate` | Fit the error scales from historical polling |
+| `midterms calibrate [--chamber house]` | Fit that chamber's error scales from historical polling |
 | `midterms backtest-history` | Score win probabilities against elections that happened |
 
 `midterms bundle` inlines the CSS, JS and data into one portable HTML file. Useful for
@@ -376,15 +376,28 @@ literature. They are now **fitted** from FiveThirtyEight's archived pollster-rat
 dataset (20,466 polls paired with actual results, CC BY 4.0, vendored under
 `data/history/`).
 
-`midterms calibrate` decomposes historical Senate poll error into three levels that
-behave completely differently in a seat forecast:
+`midterms calibrate [--chamber house]` decomposes historical poll error into three levels
+that behave completely differently in a seat forecast, **per chamber** — the House is
+fitted on House polling rather than inheriting the Senate's:
 
-| Component | Was assumed | History says |
+| Component (0–14 days out) | Senate | House |
 |---|---|---|
-| National (cycle-wide, perfectly correlated) | 3.8 pts | **3.0 pts** |
-| State-specific | 4.2 pts | **5.7 pts** |
-| Total race-level | 5.7 pts | **6.4 pts** |
-| Per-poll design effect | 1.50 | **1.18** |
+| National (cycle-wide, perfectly correlated) | 3.3 pts | **3.8 pts** |
+| Race-specific | 4.0 pts | **4.6 pts** |
+| Total race-level | 5.1 pts | **6.0 pts** |
+| Per-poll design effect (45–120 days) | 1.18 | **1.04** |
+
+Both House election-day scales are larger, so calibrating it properly made the House seat
+interval **wider**, not narrower. The national component is independently checkable there
+in a way it is not for the Senate: against the actual national House vote across 13
+cycles, the generic ballot's error has an RMSE of 3.46 points and the model carries 3.42.
+
+Two windows, deliberately. The election-day scales are fitted at 0–14 days so that drift
+stays in the random walk where it belongs; the design effect at 45–120 days, where the
+model actually weighs polls. `scripts/kernel_sensitivity.py` shows the correlation kernel
+moves the House interval by only ~20 seats across the whole range the data permits, and
+that even a fully independent kernel leaves a 65-seat span — the width is the national
+error, not the kernel.
 
 `midterms backtest-history` then scores the result against 167 real races. The fitted
 scales beat the asserted ones at every coverage level (90% interval: 84.4% vs 77.8%), and

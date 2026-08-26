@@ -62,6 +62,13 @@ strictly positive so the sign of the national environment cannot flip for one ra
 captures *movement* while `α` captures *level*. This is where candidate news, advertising
 and scandal show up.
 
+It is **sum-to-zero across races at every step**. A race's drift is its movement relative
+to the field; the field's own movement is `η`'s job, fitted to hundreds of generic-ballot
+polls. Left unconstrained, `ε` carries a free common component — a second national swing —
+and the two trade off along a ridge the likelihood cannot resolve. The symptom was a House
+forecast that did not move when ten states' new maps shifted its fundamentals by thirteen
+seats, and a Senate fit whose tail ESS was a third lower than it needed to be.
+
 ### 2.3 The time grid
 
 Anchored **backwards from election day**, so the final grid point is exactly
@@ -557,10 +564,21 @@ worse at every level. The residual gap is width, not shape.
    −0.54, correctly negative — but A/B testing showed it tightens the national
    environment by only 6.6% while cutting minimum effective sample size from 455 to 296.
    Not worth the geometry at present. `scripts/ab_approval.py` reproduces the test.
-8. **Correlated race movement costs sampling efficiency.** Making drift correlated across
-   similar states (§2.2) helps the 14 unpolled races, but it competes with the national
-   environment for the common signal and pushed minimum ESS from 658 to 455. Still well
-   above the 400 floor, but it is the first thing to check if convergence degrades.
+8. ~~**Correlated race movement costs sampling efficiency.**~~ **Fixed, and the note was
+   describing the cause without naming it.** "Competes with the national environment for
+   the common signal" was precisely the problem: `eps` was free to move every race the
+   same way at once, and a common component of `eps` *is* a national swing — one the model
+   already has in `eta`. The two traded off along a ridge the likelihood cannot resolve.
+
+   `eps` is now sum-to-zero across races at every step, the same constraint house effects
+   have carried all along and for the same reason (§ identifiability rule 4 in
+   `hierarchical.py`). On the Senate, minimum tail ESS went from 604 to **953** and bulk
+   from 582 to 632, with divergences still zero.
+
+   It was not only a sampling cost. Because the ridge let `eps` absorb level, the House
+   forecast did not move when ten states' new maps shifted its fundamentals thirteen seats
+   — and 38 polled districts running 2.6 points more Democratic than their fundamentals
+   were setting the level for all 397 unpolled ones.
 6. **Nebraska's independent** is forced onto the Democratic side for chamber arithmetic
    (§ README known issues). There is no unarguably correct treatment.
 9. ~~**The House interval is calibrated only by inheritance.**~~ **Fixed, and it went the

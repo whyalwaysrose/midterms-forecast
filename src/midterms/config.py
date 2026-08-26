@@ -293,6 +293,24 @@ class SamplerConfig:
     backend: str
 
 
+def _deep_merge(base: Mapping[str, Any], override: Mapping[str, Any]) -> dict:
+    """Recursively overlay `override` onto `base`, returning a new mapping.
+
+    Leaf-by-leaf so a chamber can change one scale without restating the block
+    it lives in. Restating a whole block would work today and quietly fork the
+    moment the shared part -- the correlation kernel, say -- was edited in one
+    place and not the other.
+    """
+    merged = dict(base)
+    for key, value in override.items():
+        current = merged.get(key)
+        if isinstance(current, Mapping) and isinstance(value, Mapping):
+            merged[key] = _deep_merge(current, value)
+        else:
+            merged[key] = value
+    return merged
+
+
 @dataclass(frozen=True)
 class ModelConfig:
     national: NationalRefs
@@ -307,10 +325,25 @@ class ModelConfig:
     raw: Mapping[str, Any] = field(default_factory=dict, repr=False, compare=False)
 
     @classmethod
-    def load(cls, path: Path | None = None) -> ModelConfig:
+    def load(cls, path: Path | None = None, chamber: str = "senate") -> ModelConfig:
+        """Load the model config, applying any per-chamber overrides.
+
+        The top-level values are the Senate's, fitted from Senate polling. A
+        ``chambers:`` block may override individual leaves for another chamber --
+        the House's polls are measurably noisier and its districts miss by more,
+        and applying Senate numbers to them was an assumption nobody had chosen.
+
+        Overrides are merged leaf by leaf rather than wholesale, so a chamber
+        that differs in one scale does not have to restate the correlation
+        kernel and silently fork it.
+        """
         path = path or paths.MODEL_CONFIG
         raw = yaml.safe_load(path.read_text(encoding="utf-8"))
         ctx = str(path)
+
+        overrides = (raw.get("chambers") or {}).get(chamber)
+        if overrides:
+            raw = _deep_merge(raw, overrides)
 
         ede = _require(raw, "election_day_error", ctx)
         return cls(
@@ -381,4 +414,4 @@ def load_all(
                 f"unknown chamber {chamber!r}; expected one of "
                 f"{sorted(paths.RACES_BY_CHAMBER)}"
             ) from None
-    return RaceSet.load(races_path), ModelConfig.load(model_path)
+    return RaceSet.load(races_path), ModelConfig.load(model_path, chamber=chamber)

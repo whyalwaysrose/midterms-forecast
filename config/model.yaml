@@ -329,3 +329,55 @@ time:
   # Each poll is assigned to its nearest grid point; at 7 days the worst-case
   # snapping error is 3.5 days, far below the week-to-week noise in the polls.
   grid_days: 7
+
+# --- Per-chamber overrides ----------------------------------------------------
+#
+# Everything above is the Senate's, fitted from Senate polling. Applying those
+# numbers to 435 House districts was never a decision anyone took -- it was what
+# happened when the House was added to a model that had only ever had one
+# chamber. These are the same quantities measured on the House's own history.
+#
+# Fitted by `midterms calibrate --chamber house`, on House-G polls 0-14 days out
+# from 2010, exactly as the Senate block above was. Merged leaf by leaf, so the
+# correlation kernel and everything else stay shared.
+#
+# WHAT CHANGED, AND WHICH WAY
+#
+#   national_sd    3.32 -> 3.78 pts   House cycle-wide misses are larger
+#   state_sd       3.96 -> 4.61 pts   districts miss by more than states
+#   design_effect  1.18 -> 1.04       House polls are noisier, but only because
+#                                     they are smaller (median n 496 vs 735)
+#
+# The first two WIDEN the seat interval. That is the honest direction and it is
+# worth saying plainly, because the interval was already the thing that looked
+# too wide: measured against 13 cycles of generic-ballot error, the model's
+# national uncertainty (3.42 points including latent drift) matches the observed
+# RMSE about zero (3.46) almost exactly. The width is real.
+#
+# The design effect goes the other way. It is a ratio of observed spread to what
+# the sample size predicts, so it is already net of sample size: House polls
+# carry 5.85 points of raw noise against the Senate's 3.97, but at a median n of
+# 496 against 735 that is very nearly all the smaller samples, which the
+# sampling-variance term knows about on its own. Carrying the Senate's 1.18 was
+# inflating district poll variance by 13% and discounting the only direct
+# evidence 38 districts have.
+#
+# NOTE THE WINDOW IS DIFFERENT HERE, deliberately, and matches how the Senate's
+# 1.18 was set: the design effect is fitted at 45-120 days, where the model
+# actually runs and where poll-to-poll spread is the thing being described,
+# while the election-day scales are fitted at 0-14 days to keep drift out of
+# them. Fitting the design effect at 0-14 days instead gives 0.95, and mixing
+# the two bases would have made the House and Senate figures incomparable.
+#
+# NOT CHANGED: the correlation kernel. Its region contrast (+0.230 after the
+# same demeaning the measurement needs) sits inside the 90% bootstrap interval
+# for both chambers -- House measured +0.088 [+0.035, +0.284], Senate +0.167
+# [+0.047, +0.490]. Seven cycles cannot separate them, and shrinking it on a
+# point estimate is the exact trap documented in scripts/fit_correlation.py.
+chambers:
+  house:
+    election_day_error:
+      national_sd: 0.0756   # 3.78 points of margin
+      state_sd: 0.0922      # 4.61 points of margin
+    polls:
+      design_effect: 1.04

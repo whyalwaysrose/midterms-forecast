@@ -63,6 +63,41 @@ POINTS_PER_LOGIT = 50.0
 #: otherwise dominate the cycle-to-cycle spread.
 MIN_RACES_PER_CYCLE = 5
 
+#: The dataset's race-type code per chamber. Matched exactly, not by substring.
+#:
+#: `str.contains("Sen")` also matches `Sen-P`, so 12-17 Senate *primary* polls
+#: were being used to calibrate general-election error. The effect was small
+#: (national 3.27 -> 3.32 points at 0-14 days, under 2%) but a primary is a
+#: different contest with different polling and does not belong here.
+#:
+#: Exact matching matters more for the House, where `contains("House")` would
+#: sweep in `House-G-US` -- the *national* House vote, one observation per cycle
+#: rather than one per district. That would put a national aggregate into the
+#: per-race pool and quietly corrupt the split between the two components.
+RACE_TYPE = {"senate": "Sen-G", "house": "House-G"}
+
+#: Which window each error component should be fitted in.
+#:
+#: 0-14 days, not the forecast horizon. See the long note on
+#: `election_day_error` in config/model.yaml: fitting at 45-120 days folds
+#: roughly 3.9 points of drift into the election-day term, which the latent
+#: random walk already carries and which would then stay just as wide on the eve
+#: of the election. This constant exists so the reason is attached to the number.
+ELECTION_DAY_WINDOW = (0, 14)
+
+#: Where the *design effect* is fitted, which is deliberately not the same.
+#:
+#: The design effect describes how much noisier polls are than their sample size
+#: implies, at the horizon where the model actually runs and weighs them. The
+#: election-day scales describe the terminal miss and must exclude drift. Fitting
+#: both in one window gets one of them wrong: the Senate's design effect is 1.18
+#: at the horizon and 1.36 on the eve, the House's 1.04 and 0.95.
+#:
+#: So the design effect is always measured here, whatever window the caller asks
+#: for, and the report says so. Otherwise one `midterms calibrate` run could not
+#: produce all four config numbers on their correct bases.
+HORIZON_WINDOW = (45, 120)
+
 
 @dataclass(frozen=True)
 class ErrorComponents:
@@ -78,6 +113,8 @@ class ErrorComponents:
     n_cycles: int
     window: tuple[int, int]
     min_cycle: int
+    chamber: str = "senate"
+    design_effect_window: tuple[int, int] = HORIZON_WINDOW
 
     @property
     def total_race_sd(self) -> float:
@@ -93,7 +130,8 @@ class ErrorComponents:
 
     def report(self) -> str:
         lines = [
-            f"Fitted on {self.n_polls:,} Senate polls / {self.n_races} races / "
+            f"Fitted on {self.n_polls:,} {self.chamber.capitalize()} polls / "
+            f"{self.n_races} races / "
             f"{self.n_cycles} cycles",
             f"  window: {self.window[0]}-{self.window[1]} days before the election, "
             f"cycles from {self.min_cycle}",
@@ -105,6 +143,9 @@ class ErrorComponents:
             "",
             f"  poll-level noise (within a race)            : {self.poll_sd:5.2f}",
             f"  implied design effect vs binomial           : {self.design_effect:5.2f}",
+            f"     (fitted at {self.design_effect_window[0]}-"
+            f"{self.design_effect_window[1]} days, where the model weighs polls,"
+            f" not at the window above)",
             "",
             "In model units (logit):",
             f"  election_day_error.national_sd: {self.as_logit()['national_sd']}",
@@ -120,29 +161,46 @@ def load_history(path: Path | None = None) -> pd.DataFrame:
     return pd.read_csv(path)
 
 
+def race_polls(
+    df: pd.DataFrame,
+    chamber: str = "senate",
+    days_window: tuple[int, int] = (45, 120),
+    min_cycle: int = 2010,
+) -> pd.DataFrame:
+    """General-election polls for one chamber, inside a window.
+
+    The window matters, and which window is right depends on what is being
+    estimated. Poll error shrinks as an election approaches: fitting the
+    election-day term at 45-120 days folds in drift the random walk already
+    carries, so :data:`ELECTION_DAY_WINDOW` is what the config is fitted on.
+    """
+    try:
+        race_type = RACE_TYPE[chamber]
+    except KeyError:
+        raise ValueError(
+            f"unknown chamber {chamber!r}; expected one of {sorted(RACE_TYPE)}"
+        ) from None
+
+    sub = df[df["type_simple"].astype(str) == race_type].copy()
+    sub["error"] = sub["margin_poll"] - sub["margin_actual"]
+    sub = sub.dropna(subset=["error", "time_to_election", "cycle"])
+    sub = sub[
+        (sub["time_to_election"] >= days_window[0])
+        & (sub["time_to_election"] <= days_window[1])
+        & (sub["cycle"] >= min_cycle)
+    ]
+    race_counts = sub.groupby("cycle")["race_id"].nunique()
+    keep = race_counts[race_counts >= MIN_RACES_PER_CYCLE].index
+    return sub[sub["cycle"].isin(keep)]
+
+
 def senate_polls(
     df: pd.DataFrame,
     days_window: tuple[int, int] = (45, 120),
     min_cycle: int = 2010,
 ) -> pd.DataFrame:
-    """Senate general-election polls inside a forecast horizon.
-
-    The window matters. Poll error shrinks as an election approaches, so
-    calibrating on polls taken the week before would understate the uncertainty
-    a forecast issued in August has to carry. The default brackets where this
-    model actually runs.
-    """
-    sen = df[df["type_simple"].astype(str).str.contains("Sen", case=False, na=False)].copy()
-    sen["error"] = sen["margin_poll"] - sen["margin_actual"]
-    sen = sen.dropna(subset=["error", "time_to_election", "cycle"])
-    sen = sen[
-        (sen["time_to_election"] >= days_window[0])
-        & (sen["time_to_election"] <= days_window[1])
-        & (sen["cycle"] >= min_cycle)
-    ]
-    race_counts = sen.groupby("cycle")["race_id"].nunique()
-    keep = race_counts[race_counts >= MIN_RACES_PER_CYCLE].index
-    return sen[sen["cycle"].isin(keep)]
+    """Senate general-election polls. Kept as the name callers already use."""
+    return race_polls(df, "senate", days_window, min_cycle)
 
 
 def _design_effect(sen: pd.DataFrame) -> float:
@@ -174,11 +232,14 @@ def estimate_error_components(
     days_window: tuple[int, int] = (45, 120),
     min_cycle: int = 2010,
     path: Path | None = None,
+    chamber: str = "senate",
 ) -> ErrorComponents:
-    """Fit national, state and poll-level error scales."""
-    sen = senate_polls(load_history(path), days_window, min_cycle)
+    """Fit national, unit and poll-level error scales for one chamber."""
+    sen = race_polls(load_history(path), chamber, days_window, min_cycle)
     if sen.empty:
-        raise ValueError("no historical Senate polls matched the given window")
+        raise ValueError(
+            f"no historical {chamber} polls matched the given window"
+        )
 
     grouped = sen.groupby(["cycle", "race_id"])["error"]
     race = pd.DataFrame(
@@ -211,12 +272,16 @@ def estimate_error_components(
         national_sd=national_sd,
         state_sd=float(np.sqrt(state_var)),
         poll_sd=float(np.sqrt(poll_var)),
-        design_effect=_design_effect(sen),
+        design_effect=_design_effect(
+            race_polls(load_history(path), chamber, HORIZON_WINDOW, min_cycle)
+        ),
+        design_effect_window=HORIZON_WINDOW,
         n_polls=len(sen),
         n_races=len(race),
         n_cycles=int(sen["cycle"].nunique()),
         window=days_window,
         min_cycle=min_cycle,
+        chamber=chamber,
     )
     log.info(
         "calibration: national %.2f, state %.2f, poll %.2f pts (design effect %.2f)",
@@ -366,11 +431,11 @@ def estimate_excess_noise(
     )
 
 
-def compare_to_config(components: ErrorComponents) -> str:
-    """Fitted scales against what config/model.yaml currently assumes."""
+def compare_to_config(components: ErrorComponents, chamber: str = "senate") -> str:
+    """Fitted scales against what config/model.yaml assumes for this chamber."""
     from .config import ModelConfig
 
-    cfg = ModelConfig.load()
+    cfg = ModelConfig.load(chamber=chamber)
     current_national = cfg.election_day_error.national_sd * POINTS_PER_LOGIT
     current_state = cfg.election_day_error.state_sd * POINTS_PER_LOGIT
     current_total = float(np.hypot(current_national, current_state))
@@ -395,17 +460,20 @@ def compare_to_config(components: ErrorComponents) -> str:
 def run_calibration(
     days_window: tuple[int, int] = (45, 120),
     min_cycle: int = 2010,
+    chamber: str = "senate",
 ) -> int:
     """CLI entry point. Returns a process exit code."""
-    components = estimate_error_components(days_window, min_cycle)
+    components = estimate_error_components(
+        days_window, min_cycle, chamber=chamber
+    )
     print()
     print("=" * 72)
-    print("  CALIBRATION against historical Senate polling")
+    print(f"  CALIBRATION against historical {chamber.capitalize()} polling")
     print("=" * 72)
     print(components.report())
     print()
     print("Against the current configuration:")
-    print(compare_to_config(components))
+    print(compare_to_config(components, chamber))
     print()
     print(f"  {ATTRIBUTION}")
     print("=" * 72)

@@ -403,7 +403,9 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     from .calibration import run_calibration
 
     return run_calibration(
-        days_window=(args.min_days, args.max_days), min_cycle=args.min_cycle
+        days_window=(args.min_days, args.max_days),
+        min_cycle=args.min_cycle,
+        chamber=args.chamber,
     )
 
 
@@ -516,6 +518,10 @@ def build_parser() -> argparse.ArgumentParser:
     calibrate.add_argument("--min-days", type=int, default=45)
     calibrate.add_argument("--max-days", type=int, default=120)
     calibrate.add_argument("--min-cycle", type=int, default=2010)
+    calibrate.add_argument(
+        "--chamber", choices=("senate", "house"), default="senate",
+        help="which chamber's historical polling to fit (default: senate)",
+    )
     calibrate.set_defaults(func=cmd_calibrate)
 
     build_map = sub.add_parser(

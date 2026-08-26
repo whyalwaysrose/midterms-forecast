@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import json
 import sys
+import re
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -163,8 +164,49 @@ def main() -> int:
         else:
             print(f"    {state:16s} -")
     print(f"\n  {covered} of {len(states)} checked states have a Senate market.")
-    print("  The dashboard has 35 races, so most will have no market at all --")
-    print("  any per-state view has to treat 'no market' as the normal case.")
+    # Emit the prices as JSON so they can be diffed against the model offline.
+    # The model says 71% for Democratic control; the market says 49.5%. A gap
+    # that size is either a real disagreement worth understanding or a defect,
+    # and the way to tell is whether it is spread across every race or
+    # concentrated in a few.
+    print()
+    print("=" * 78)
+    print("  5. Machine-readable dump (Democratic win probability per race)")
+    print("=" * 78)
+
+    dump: dict[str, object] = {}
+    for event in senate.values():
+        slug = str(event.get("slug", ""))
+        match = re.fullmatch(r"([a-z-]+)-senate-election-winner", slug)
+        if not match:
+            continue
+        state = match.group(1).replace("-", " ").title()
+        best = None
+        for market in event.get("markets") or []:
+            label = str(market.get("groupItemTitle") or market.get("question") or "")
+            outcomes = maybe_json(market.get("outcomes"))
+            prices = maybe_json(market.get("outcomePrices"))
+            if not (isinstance(outcomes, list) and isinstance(prices, list)):
+                continue
+            try:
+                volume = float(market.get("volumeNum") or market.get("volume") or 0)
+            except (TypeError, ValueError):
+                volume = 0.0
+            for outcome, price in zip(outcomes, prices, strict=False):
+                name = str(outcome).strip().lower()
+                is_dem = name.startswith("democrat") or (
+                    name == "yes" and "democrat" in label.lower()
+                )
+                if is_dem and (best is None or volume > best[1]):
+                    best = (float(price), volume, label)
+        if best:
+            dump[state] = {
+                "dem": round(best[0], 4),
+                "volume": round(best[1]),
+                "market": best[2][:48],
+            }
+
+    print(json.dumps(dump, indent=1, sort_keys=True))
     return 0
 
 

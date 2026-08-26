@@ -39,6 +39,12 @@ Three choices keep this from being a badly-posed problem:
 3. The fundamentals prior recenters each state against the nation, so the
    national swing is represented once — by ``eta`` — and not also inside
    ``alpha``.
+4. Race drift ``eps`` is **sum-to-zero across races** at every step, for the
+   same reason. A race's drift is movement relative to the field; the field's
+   own movement is ``eta``. Left free, ``eps`` carries a common component that
+   is a second national swing, and the two trade off along a ridge — which is
+   what the known-weakness note about correlated movement costing sampling
+   efficiency was describing.
 
 Every random walk is written **non-centred** (a cumulative sum of standard
 normals scaled by a separately-sampled SD). Centred random walks produce the
@@ -177,9 +183,26 @@ def build_model(data: ModelData, cfg: ModelConfig) -> pm.Model:
         sigma_eps = pm.LogNormal(
             "sigma_eps", mu=np.log(race_step_scale), sigma=0.35
         )
-        eps_innovations = pm.Normal(
-            "eps_innovations", 0.0, 1.0, dims=("race", "grid_step")
-        )
+        # Sum-to-zero across races, for the same reason house effects are
+        # sum-to-zero across pollsters: see IDENTIFIABILITY above. A race's
+        # drift is its movement *relative to the field*, and the field's own
+        # movement is eta's job. Without the constraint eps carries a free
+        # common component -- a second national swing competing with the first.
+        #
+        # That is not hypothetical. Ten states redrew their maps for 2026,
+        # moving the House fundamentals thirteen seats toward the Republicans,
+        # and the forecast did not move: eps absorbed the change and held the
+        # answer still. Underneath it, 38 polled districts running 2.6 points
+        # more Democratic than their fundamentals were propagating that lean to
+        # all 397 unpolled ones. Pollsters choose which districts to poll, so
+        # that is a selected sample being asked to set a national level the
+        # generic ballot already sets from 448 polls.
+        #
+        # Declared (grid_step, race) and transposed because ZeroSumNormal
+        # constrains its *last* axis, and the constraint belongs on races.
+        eps_innovations = pm.ZeroSumNormal(
+            "eps_innovations", sigma=1.0, dims=("grid_step", "race")
+        ).T
         # Correlate drift across politically similar races. L is the Cholesky of
         # a correlation matrix, so each race's marginal innovation variance is
         # still 1 (its rows have unit norm) — this changes how races move
@@ -187,9 +210,18 @@ def build_model(data: ModelData, cfg: ModelConfig) -> pm.Model:
         #
         # The payoff is concentrated in the races with no polling: under
         # independence they could only follow the national environment, whereas
-        # now a poll in a similar state carries information to them.
+        # now a poll in a similar state carries information to them. That payoff
+        # survives the constraint: races still move together, they just cannot
+        # all move the same way at once.
         correlated_innovations = pt.dot(
             pt.as_tensor_variable(data.movement_chol), eps_innovations
+        )
+        # L mixes races, so it does not preserve the constraint the parameter
+        # was given -- recentre to restore it. The parameter stays constrained
+        # so this adds no flat direction for the sampler to wander along; it is
+        # a projection of an already-projected variable.
+        correlated_innovations = correlated_innovations - correlated_innovations.mean(
+            axis=0, keepdims=True
         )
         eps = pt.concatenate(
             [

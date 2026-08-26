@@ -2,6 +2,38 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-08-27
+
+**The model changed in this run.** Democratic chances of Senate control are 65.4%, against 69.7% on 2026-08-26 — but the two runs were produced by different models, so the difference is not a change in the race.
+
+Movement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.
+
+**National environment.** The generic ballot moved D+6.7 → D+6.9 (+0.3). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
+
+**Races that moved** (22 of 35):
+
+  - **South Carolina** — Democratic win probability 33.3% → 24.6% (-8.8 pts); projected margin R+4.5 → R+7.1 (-2.6). No new polls in this race; this is the model revision.
+
+  - **Louisiana** — Democratic win probability 20.3% → 11.9% (-8.3 pts); projected margin R+8.9 → R+12.2 (-3.4). No new polls in this race; this is the model revision.
+
+  - **Montana** — Democratic win probability 23.9% → 16.8% (-7.1 pts); projected margin R+7.3 → R+10.1 (-2.7). No new polls in this race; this is the model revision.
+
+  - **Mississippi** — Democratic win probability 25.3% → 18.3% (-7.0 pts); projected margin R+5.0 → R+6.8 (-1.8). No new polls in this race; this is the model revision.
+
+  - **New Mexico** — Democratic win probability 95.2% → 89.1% (-6.1 pts); projected margin D+17.2 → D+13.2 (-4.0). No new polls in this race; this is the model revision.
+
+  - **New Jersey** — Democratic win probability 94.5% → 89.0% (-5.5 pts); projected margin D+16.6 → D+13.3 (-3.3). No new polls in this race; this is the model revision.
+
+  - **Kansas** — Democratic win probability 26.4% → 21.0% (-5.4 pts); projected margin R+4.7 → R+5.9 (-1.2). No new polls in this race; this is the model revision.
+
+  - **Illinois** — Democratic win probability 94.9% → 89.7% (-5.2 pts); projected margin D+17.5 → D+13.5 (-4.0). No new polls in this race; this is the model revision.
+
+  - **Colorado** — Democratic win probability 97.4% → 93.0% (-4.4 pts); projected margin D+20.6 → D+16.1 (-4.5). No new polls in this race; this is the model revision.
+
+  - **Kentucky** — Democratic win probability 6.0% → 1.9% (-4.1 pts); projected margin R+16.4 → R+21.0 (-4.6). No new polls in this race; this is the model revision.
+
+---
+
 ## 2026-08-26
 
 **The model changed in this run.** Democratic chances of Senate control are 69.7%, against 65.7% on 2026-08-25 — but the two runs were produced by different models, so the difference is not a change in the race.

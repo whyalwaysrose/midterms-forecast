@@ -1,18 +1,22 @@
-"""What does Polymarket actually offer for the 2026 Senate, and can we reach it?
+"""Can we display Polymarket's implied probabilities, and what are they?
 
-Run this on a GitHub runner, not locally. Polymarket is DNS-blocked on some
-connections -- France's gambling regulator null-routes every polymarket.com
-domain to localhost and serves an anj.fr block page -- so a developer machine
-may be unable to see the API at all while the production path is fine. The
-runner is US-hosted and reaches it normally; nothing here circumvents anything,
-it is simply the machine that would do the fetching in production.
+Run this on a GitHub runner. Polymarket is DNS-blocked on some connections --
+France's gambling regulator null-routes every polymarket.com domain and serves
+an anj.fr block page -- so a developer machine may be unable to see the API or
+the terms at all while the production path is fine. The runner is US-hosted and
+reaches both normally.
 
-The first version passed `search=senate` and got back the highest-volume events
-on the whole site -- the 2028 presidential nomination, the next Prime Minister
-of Ethiopia, whether Jesus Christ returns before 2027. Gamma ignores an
-unrecognised query parameter rather than erroring, so an unfiltered list came
-back looking like a filtered one. This version asks by slug, which is exact, and
-enumerates by tag, which is bounded, instead of trusting a search field.
+Two jobs:
+
+1. **Settle the licensing question**, which gates everything else. This project
+   rejected the NYT and Silver Bulletin as sources purely on licensing, so the
+   same standard applies here, and the terms cannot be read from the dev
+   machine. Fetches the actual documents rather than trusting a search summary.
+
+2. **Dump the chamber-level markets** we would display: Senate control, the
+   Balance of Power sweep combinations, and the Republican-seat-count
+   distribution. Not per-state, and not prices -- what a reader would see is an
+   implied probability, which is what a prediction-market price already is.
 
 Usage (on a runner):
     python scripts/probe_polymarket.py
@@ -30,34 +34,47 @@ import urllib.request
 GAMMA = "https://gamma-api.polymarket.com"
 TIMEOUT = 25
 
-#: Event slugs known from public reporting. Exact lookups, so no guessing.
-KNOWN_SLUGS = (
+#: The chamber-level events worth showing. Per-state markets exist but are not
+#: what this is for.
+EVENT_SLUGS = (
     "which-party-will-win-the-senate-in-2026",
     "balance-of-power-2026-midterms",
     "will-democrats-win-all-core-four-senate-races",
+    "republican-senate-seats-after-the-2026-midterm-elections-927",
+)
+
+#: Documents that might carry data-reuse terms.
+TERMS_URLS = (
+    "https://polymarket.com/tos",
+    "https://polymarket.com/terms-of-service",
+    "https://docs.polymarket.com/",
+    "https://docs.polymarket.com/developers/gamma-markets-api/overview",
+)
+
+#: Phrases worth surfacing verbatim from whatever the terms say.
+TERMS_PATTERNS = (
+    r"[^.]*redistribut[^.]*\.",
+    r"[^.]*scrap[^.]*\.",
+    r"[^.]*\bAPI\b[^.]*\.",
+    r"[^.]*commercial[^.]*\.",
+    r"[^.]*attribut[^.]*\.",
 )
 
 
-def fetch(path: str) -> tuple[int, object]:
-    url = f"{GAMMA}{path}"
+def get(url: str) -> tuple[int, str]:
     request = urllib.request.Request(
-        url, headers={"User-Agent": "midterms-forecast/probe"}
+        url, headers={"User-Agent": "Mozilla/5.0 (compatible; midterms-forecast)"}
     )
     try:
         with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
-            body = response.read().decode("utf-8", "replace")
-            try:
-                return response.status, json.loads(body)
-            except json.JSONDecodeError:
-                return response.status, body[:400]
+            return response.status, response.read().decode("utf-8", "replace")
     except urllib.error.HTTPError as exc:
-        return exc.code, exc.read().decode("utf-8", "replace")[:300]
+        return exc.code, exc.read().decode("utf-8", "replace")[:200]
     except OSError as exc:
         return 0, f"unreachable: {exc}"
 
 
 def maybe_json(value):
-    """Gamma returns some list fields as JSON-encoded strings."""
     if isinstance(value, str):
         try:
             return json.loads(value)
@@ -66,147 +83,98 @@ def maybe_json(value):
     return value
 
 
-def show_market(market: dict, indent: str = "      ") -> None:
-    outcomes = maybe_json(market.get("outcomes"))
-    prices = maybe_json(market.get("outcomePrices"))
-    pairs = ""
-    if isinstance(outcomes, list) and isinstance(prices, list):
-        pairs = "   ".join(
-            f"{o} {float(p) * 100:.1f}%"
-            for o, p in zip(outcomes, prices, strict=False)
-        )
-    try:
-        volume = f"${float(market.get('volumeNum') or market.get('volume') or 0):,.0f}"
-    except (TypeError, ValueError):
-        volume = "?"
-    print(f"{indent}{str(market.get('question', '?'))[:58]:58s} {pairs:26s} vol {volume}")
+def strip_html(html: str) -> str:
+    text = re.sub(r"(?is)<(script|style|svg)\b.*?</\1>", " ", html)
+    text = re.sub(r"(?s)<[^>]+>", " ", text)
+    text = text.replace("&nbsp;", " ").replace("&amp;", "&").replace("&#x27;", "'")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def terms() -> None:
+    print("=" * 78)
+    print("  1. What do the terms say about reusing the data?")
+    print("=" * 78)
+    for url in TERMS_URLS:
+        status, body = get(url)
+        text = strip_html(body) if status == 200 else body
+        print(f"\n  [{status}] {url}  ({len(text)} chars of text)")
+        if status != 200 or len(text) < 200:
+            continue
+        seen: set[str] = set()
+        for pattern in TERMS_PATTERNS:
+            for match in re.findall(pattern, text, re.IGNORECASE):
+                sentence = match.strip()
+                if 40 < len(sentence) < 400 and sentence not in seen:
+                    seen.add(sentence)
+                    print(f"      - {sentence}")
+        if not seen:
+            print("      (nothing mentioning reuse, redistribution or the API)")
+
+
+def markets() -> None:
+    print()
+    print("=" * 78)
+    print("  2. Chamber-level implied probabilities")
+    print("=" * 78)
+    dump: dict[str, dict] = {}
+    for slug in EVENT_SLUGS:
+        status, body = get(f"{GAMMA}/events?slug={urllib.parse.quote(slug)}")
+        if status != 200:
+            print(f"\n  {slug} -> {status}")
+            continue
+        try:
+            payload = json.loads(body)
+        except json.JSONDecodeError:
+            print(f"\n  {slug} -> not JSON")
+            continue
+        if not payload:
+            print(f"\n  {slug} -> no event")
+            continue
+
+        event = payload[0]
+        try:
+            volume = float(event.get("volume") or 0)
+        except (TypeError, ValueError):
+            volume = 0.0
+        print(f"\n  {event.get('title')}   (volume ${volume:,.0f})")
+
+        outcomes: dict[str, float] = {}
+        for market in event.get("markets") or []:
+            label = str(market.get("groupItemTitle") or market.get("question") or "?")
+            names = maybe_json(market.get("outcomes"))
+            prices = maybe_json(market.get("outcomePrices"))
+            if not (isinstance(names, list) and isinstance(prices, list)):
+                continue
+            for name, price in zip(names, prices, strict=False):
+                if str(name).strip().lower() == "yes":
+                    try:
+                        outcomes[label] = float(price)
+                    except (TypeError, ValueError):
+                        pass
+        for label, probability in sorted(outcomes.items(), key=lambda kv: -kv[1]):
+            if probability > 0.0005:
+                print(f"      {label[:58]:58s} {probability * 100:5.1f}%")
+        dump[slug] = {
+            "title": event.get("title"),
+            "volume": round(volume),
+            "outcomes": {k: round(v, 4) for k, v in outcomes.items()},
+        }
+
+    print()
+    print("=" * 78)
+    print("  3. Machine-readable")
+    print("=" * 78)
+    print(json.dumps(dump, indent=1, sort_keys=True))
 
 
 def main() -> int:
-    print("=" * 78)
-    print("  1. Reachability and response shape")
-    print("=" * 78)
-    status, payload = fetch("/markets?limit=1")
-    print(f"  GET /markets?limit=1 -> {status}")
+    status, _ = get(f"{GAMMA}/markets?limit=1")
+    print(f"reachability: GET /markets -> {status}\n")
     if status != 200:
-        print(f"  {payload}\n  Cannot reach Polymarket from here either. Stop.")
+        print("Cannot reach Polymarket from here. Stop.")
         return 1
-
-    print()
-    print("=" * 78)
-    print("  2. Known events, looked up by exact slug")
-    print("=" * 78)
-    for slug in KNOWN_SLUGS:
-        status, payload = fetch(f"/events?slug={urllib.parse.quote(slug)}")
-        if status != 200 or not isinstance(payload, list) or not payload:
-            print(f"\n  {slug} -> {status} (no event)")
-            continue
-        event = payload[0]
-        markets = event.get("markets") or []
-        try:
-            volume = f"${float(event.get('volume') or 0):,.0f}"
-        except (TypeError, ValueError):
-            volume = "?"
-        print(f"\n  {event.get('title')}")
-        print(f"    slug {slug}   volume {volume}   {len(markets)} markets")
-        for market in markets[:8]:
-            show_market(market)
-
-    print()
-    print("=" * 78)
-    print("  3. Enumerating by tag, to find per-state Senate markets")
-    print("=" * 78)
-    found: dict[str, dict] = {}
-    for tag in ("elections", "politics", "midterms", "us-politics"):
-        for offset in (0, 100, 200, 300):
-            status, payload = fetch(
-                f"/events?closed=false&limit=100&offset={offset}"
-                f"&tag_slug={tag}&order=volume&ascending=false"
-            )
-            if status != 200 or not isinstance(payload, list) or not payload:
-                break
-            for event in payload:
-                found[str(event.get("id"))] = event
-    print(f"  {len(found)} open events across those tags")
-
-    senate = {
-        i: e for i, e in found.items()
-        if "senate" in str(e.get("title", "")).lower()
-        or "senate" in str(e.get("slug", "")).lower()
-    }
-    print(f"  {len(senate)} mention the Senate\n")
-    for event in sorted(senate.values(), key=lambda e: -float(e.get("volume") or 0)):
-        try:
-            volume = f"${float(event.get('volume') or 0):,.0f}"
-        except (TypeError, ValueError):
-            volume = "?"
-        print(f"  {volume:>14}  {str(event.get('title'))[:62]:62s} {event.get('slug')}")
-
-    print()
-    print("=" * 78)
-    print("  4. Per-state coverage of the 2026 map")
-    print("=" * 78)
-    states = [
-        "Georgia", "Michigan", "North Carolina", "New Hampshire", "Maine",
-        "Ohio", "Texas", "Iowa", "Alaska", "Minnesota", "Nebraska", "Virginia",
-        "Kentucky", "Louisiana", "Kansas", "Colorado", "Illinois", "New Mexico",
-    ]
-    covered = 0
-    for state in states:
-        hits = [
-            e for e in senate.values()
-            if state.lower() in str(e.get("title", "")).lower()
-            or state.lower().replace(" ", "-") in str(e.get("slug", "")).lower()
-        ]
-        if hits:
-            covered += 1
-            print(f"    {state:16s} {hits[0].get('slug')}")
-        else:
-            print(f"    {state:16s} -")
-    print(f"\n  {covered} of {len(states)} checked states have a Senate market.")
-    # Emit the prices as JSON so they can be diffed against the model offline.
-    # The model says 71% for Democratic control; the market says 49.5%. A gap
-    # that size is either a real disagreement worth understanding or a defect,
-    # and the way to tell is whether it is spread across every race or
-    # concentrated in a few.
-    print()
-    print("=" * 78)
-    print("  5. Machine-readable dump (Democratic win probability per race)")
-    print("=" * 78)
-
-    dump: dict[str, object] = {}
-    for event in senate.values():
-        slug = str(event.get("slug", ""))
-        match = re.fullmatch(r"([a-z-]+)-senate-election-winner", slug)
-        if not match:
-            continue
-        state = match.group(1).replace("-", " ").title()
-        best = None
-        for market in event.get("markets") or []:
-            label = str(market.get("groupItemTitle") or market.get("question") or "")
-            outcomes = maybe_json(market.get("outcomes"))
-            prices = maybe_json(market.get("outcomePrices"))
-            if not (isinstance(outcomes, list) and isinstance(prices, list)):
-                continue
-            try:
-                volume = float(market.get("volumeNum") or market.get("volume") or 0)
-            except (TypeError, ValueError):
-                volume = 0.0
-            for outcome, price in zip(outcomes, prices, strict=False):
-                name = str(outcome).strip().lower()
-                is_dem = name.startswith("democrat") or (
-                    name == "yes" and "democrat" in label.lower()
-                )
-                if is_dem and (best is None or volume > best[1]):
-                    best = (float(price), volume, label)
-        if best:
-            dump[state] = {
-                "dem": round(best[0], 4),
-                "volume": round(best[1]),
-                "market": best[2][:48],
-            }
-
-    print(json.dumps(dump, indent=1, sort_keys=True))
+    terms()
+    markets()
     return 0
 
 

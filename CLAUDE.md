@@ -159,6 +159,23 @@ The **bias** correction is the point. The precision correction barely shows -- M
 election-day error and the shared national environment dominate a race's final interval.
 Do not expect this to widen anything visibly.
 
+## Base rates must be conditioned on the national environment
+
+The single most misleading number you can reach for in this project. Democrats win
+about 17.6% of Senate races in states leaning R+15 to R+25 -- averaged over every
+cycle. That average hides almost everything:
+
+    lean band          weak/neutral year      strong D year (D+6 or better)
+    R+25 or worse           0.0% (n=24)              14.3% (n=14)
+    R+15 to R+25            5.6% (n=18)              31.2% (n=16)
+    R+8 to R+15             7.7% (n=13)              58.3% (n=12)
+
+2026 is running at D+6.7, so the right column is the comparison. South Carolina at
+33.9% against 31.2% is nearly exact; Montana, Louisiana and Kentucky all sit *below*
+their band's strong-year rate. The model reads the environment; a base rate that
+averages over environments does not, and "correcting" toward it would have made a
+correctly calibrated model wrong. `scripts/fit_fundamentals.py` prints both columns.
+
 ## Measured, then rejected
 
 Keep these decisions unless new evidence overturns them; each cost real time to
@@ -183,6 +200,14 @@ establish and the numbers are in `docs/METHODOLOGY.md`.
   kernel looks wildly over-correlated (+0.329 vs -0.064) and the fix looks like
   shrinking it — which would let errors cancel across 35 races and leave the seat
   distribution far too narrow. Demean both sides; then it reads -0.068 vs -0.064.
+- **Widening the fundamentals prior for lopsided states** — the suspicion was that
+  25% for an unpolled Montana and 34% for South Carolina were too generous, and it
+  was wrong. Conditioned on the national environment the model matches history and
+  is if anything conservative. See the section above; `scripts/fit_fundamentals.py`.
+- **Deriving Senate incumbency from FEC `weball`** — the file marks a sitting senator
+  as an incumbent filer in cycles when they are not on the ballot, so the variable is
+  really "which party holds a seat in this state" and yields 2 open seats out of 253.
+  Any incumbency term needs a seat-level source.
 - **Fundraising as a covariate** — measured against 171 historical Senate races
   (`scripts/fit_fundraising.py`). Predicting polling error, the money effect is
   entirely incumbency: t=+3.18 alone, t=+0.27 once incumbency is included, and the

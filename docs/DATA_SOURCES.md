@@ -80,6 +80,54 @@ Real data-quality issues the roster absorbs, all observed in the live feed:
 - Independents. Dan Osborn in Nebraska needs an explicit `independent_counts_as` decision;
   see the README's known-issues section.
 
+## The House needed a second source, and it had to be free
+
+District presidential lean is the input every serious House model needs, and it is the
+one thing VoteHub does not carry. A congressional district is not an administrative unit
+anyone reports election results for, so the number has to be constructed.
+
+**The two usual routes were both rejected.** Commercial datasets (Daily Kos Elections,
+and similar) publish exactly this table but are licensed, which breaks the project's rule
+that everything is free and redistributable. A GIS overlay of precinct shapefiles onto
+district boundaries is the standard open method, but it means shipping geometry
+dependencies and a large boundary dataset for one number per district.
+
+**What was used instead:** the MIT Election Data and Science Lab's 2024 precinct returns,
+released **CC0** (public domain, no attribution required, though it is given below
+anyway). The join needs no geometry at all: within a single precinct, the presidential
+rows and the US House rows describe the same voters, and the House row already names the
+district. Votes in precincts split across districts are allocated proportionally.
+
+| | |
+|---|---|
+| **Source** | MIT Election Data and Science Lab, 2024 precinct-level returns |
+| **Host** | Harvard Dataverse |
+| **License** | **CC0 1.0** — public domain dedication |
+| **Coverage achieved** | 433 of 435 districts; 98.97% of two-party presidential votes placed |
+| **Built by** | `scripts/build_house_lean.py` → `data/history/house_district_lean_2024.csv` |
+
+Two supporting sources, both also unrestricted:
+
+| Source | Used for | License |
+|---|---|---|
+| [`unitedstates/congress-legislators`](https://github.com/unitedstates/congress-legislators) | Who currently holds each seat | **CC0** |
+| FEC bulk candidate file (`weball26.zip`) | Whether that member is running again | US Government work, public domain |
+
+**A correction worth recording, because it was asserted the wrong way round first.** An
+earlier version of `build_house_races.py` used the FEC's own incumbency flag (`CAND_ICI`)
+and its header explicitly argued that the flag, though unreliable for the Senate, was
+trustworthy for the House because every seat is contested every two years. That reasoning
+was wrong. `CAND_ICI = I` means "has held this office at some point", not "holds it now":
+there are **555 flagged filings for 435 seats**, 108 districts carry more than one, and 28
+carry incumbents of *both* parties — Kyrsten Sinema still flagged in AZ-09, Rick Renzi in
+AZ-01 having left in 2009. It produced 199 D / 232 R against an actual 215 / 220. Current
+membership now comes from `congress-legislators`, which gives 214 D / 221 R.
+
+Known limitations are documented in `data/history/README_house_lean.md`, including the
+five state-specific data quirks the builder handles and the fact that the file's implied
+national Democratic share (49.20%) differs from the actual (48.3%) — so lean must be
+computed against the file's own national figure, not an external one.
+
 ## Reproducibility
 
 Every fetch writes a gzipped, dated snapshot to `data/raw/votehub-<date>.json.gz` **before

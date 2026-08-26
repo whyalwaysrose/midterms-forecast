@@ -206,6 +206,8 @@ faster than the C backend anyway. The CLI silences the warning by setting
 config/
   races_senate_2026.yaml      all 35 contests + chamber-control arithmetic
   candidates_senate_2026.yaml candidate → party roster (see below)
+  races_house_2026.yaml       all 435 districts — GENERATED, do not hand-edit
+  candidates_house_2026.yaml  roster for the polled districts — GENERATED
   model.yaml                  every prior scale and hyperparameter
 
 src/midterms/
@@ -221,28 +223,51 @@ src/midterms/
     correlation.py            state-similarity kernel for election-day error
     simulate.py               posterior → seat distribution, tipping points
   geo.py                      Albers USA projection → SVG paths for the map
+  cartogram.py                435 equal squares, relaxed apart from centroids
   calibration.py              fit error scales from historical polling
   backtest_history.py         score against elections that actually happened
-  outputs.py                  forecast.json / history.json
+  outputs.py                  forecast.json / history.json, per chamber
   commentary.py               day-over-day diff → changelog
   backtest.py                 calibration against held-out polls
   cli.py                      entry points
 
 site/                         the dashboard (plain HTML/CSS/JS, no build step)
   js/charts.js                seat / history / trajectory charts + hover layer
-  js/map.js                   the interactive map
+  js/map.js                   the interactive state map (Senate)
+  js/districts.js             the district cartogram (House)
 data/geo/                     vendored state boundaries (us-atlas, ISC)
 data/history/                 vendored historical poll errors (538, CC BY 4.0)
 outputs/runs/<date>/          slim archived runs — the memory commentary diffs against
 .github/workflows/            daily refresh + CI
 ```
 
-**Nothing above `model/` knows the chamber is the Senate.** Races come from config, and
-the model is written over a generic `race × time` grid. Adding the House means adding
-`config/races_house_2026.yaml` with the same schema plus its own control arithmetic — not
-rewriting the model. The two things that would need extending are the VoteHub subject
-mapping (House subjects are `"2026 AZ-06"` rather than `"2026 Arizona"`) and district-level
-fundamentals in place of statewide presidential results.
+**Nothing above `model/` knows which chamber it is fitting.** Races come from config and
+the model is written over a generic `race × time` grid, so the House was added by
+supplying `config/races_house_2026.yaml` in the same schema with its own control
+arithmetic — not by rewriting the model. That claim has now been tested rather than
+merely asserted: the 435-race fit converges cleanly (§3.1 of the methodology).
+
+Both chambers are refit by the same daily job and share one page, switched by a tab.
+Run either directly:
+
+```bash
+midterms run --chamber senate    # ~60s
+midterms run --chamber house     # ~700s
+```
+
+The Senate keeps the unsuffixed output filenames (`forecast.json`, `history.json`) it has
+always had; the House is suffixed (`forecast_house.json`). The asymmetry is deliberate —
+the published site, every archived run, and any saved link already point at the
+unsuffixed names.
+
+The **scripts that generate the House configs** are run by hand, not daily, because their
+inputs change once a cycle rather than once a day:
+
+```
+scripts/build_house_lean.py     precinct returns → district presidential lean
+scripts/build_house_races.py    lean + current membership → the 435-race config
+scripts/build_house_roster.py   FEC filings → candidate roster for polled districts
+```
 
 ---
 
@@ -360,6 +385,40 @@ Three deliberate choices:
 Below 820px the inline state labels would render under 8px, so they drop out; below 640px
 the map becomes a pure overview and the race table takes over as the interface. Rhode
 Island is 3x4 pixels on a phone — no amount of tuning makes that tappable.
+
+### The House cartogram
+
+The same projection **cannot** be used for the House, and the reason is worth stating
+plainly. Congressional districts are drawn to hold equal numbers of people, so they
+differ in area by three orders of magnitude — Wyoming's single at-large seat covers more
+ground than the twenty that cover New York City. Shading real district shapes would hand
+almost all of the ink to the emptiest seats and shrink the ones that decide the chamber
+to specks. The map would be beautiful and would systematically mislead.
+
+So the House gets a **cartogram**: 435 squares of identical size, grouped by state, with
+the states placed roughly where they belong. Every seat counts once, and the picture and
+the arithmetic agree.
+
+The layout is **derived, not hand-drawn**. Published tile-grid layouts are hand-tuned and
+carry their own licensing questions; this one is computed by `src/midterms/cartogram.py`
+from the state centroids already in `site/data/us-states.json` — the same Census
+boundaries the Senate map is built from. Each state's block starts at its true centroid
+and blocks are then pushed apart until none overlap. It needs no new data and cannot fall
+out of step with the map beside it.
+
+Two properties are enforced by tests, because neither failure raises an exception:
+
+- **No district is missing a square.** A district with no tile vanishes from the picture
+  while still counting toward 218 — the one thing this drawing could hide from a reader.
+- **The layout still looks like America.** Relaxation is iterative, and a version that
+  stopped converging would still produce 435 non-overlapping squares. The measured
+  ordering is 1225/1225 state pairs correct east–west and 1221/1225 north–south; the test
+  fails below 99%.
+
+Districts with **no polling of their own** — roughly nine in ten — are drawn at reduced
+opacity. Their forecast is as real as any other, but it rests on the district's
+presidential lean and the national swing rather than on anyone having asked voters there,
+and a reader should be able to see at a glance how much of the chamber that covers.
 
 ## Charts
 

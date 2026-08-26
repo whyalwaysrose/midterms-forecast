@@ -105,6 +105,51 @@ blended   = 0.75 · lean_2024 + 0.25 · lean_2020
 Nebraska is the clearest illustration — Dan Osborn polls far better than Nebraska's
 partisan lean, and only the polls can tell the model that.
 
+### 3.1 The House: the same model, twelve times the races
+
+Nothing under `model/` is Senate-specific. It takes whatever races the config gives it, so
+the House is the same hierarchical model fitted to 435 units instead of 35, with the same
+generic-ballot latent state, the same house effects, and the same election-day error
+structure. What differs is the **evidence available per race** and what that implies.
+
+**The data problem, and how it was solved.** A Senate race is a state, and state
+presidential results are published. A congressional district is not an administrative unit
+anyone reports results for, and district-level presidential results are the input every
+serious House model needs. The usual solutions are to license a commercial dataset or to
+run a GIS overlay of precinct shapefiles onto district boundaries — both were rejected as
+a paid dependency and as a heavy one respectively.
+
+Instead `scripts/build_house_lean.py` derives the lean from **MEDSL precinct returns
+(CC0)** by joining the presidential and US House rows *within each precinct*, which needs
+no geometry at all: the precinct already knows which district it voted in, because it cast
+a House ballot. Votes in split precincts are allocated proportionally. This places
+**433 of 435 districts and 98.97% of two-party presidential votes**. See
+`data/history/README_house_lean.md` for the five state-specific data quirks it handles and
+its two known limitations.
+
+**Two consequences worth stating plainly:**
+
+1. **`pres_2020` is not available under current lines.** 2020 results describe the
+   pre-2022 districts, which are different places. Rather than blend across a
+   redistricting, the 2020 field repeats the 2024 value, making the blend above a no-op
+   for the House whatever weights it is given. This is stated in the generated config
+   rather than left to be discovered.
+
+2. **About nine districts in ten have no polls at all.** Where the Senate has 14 unpolled
+   races out of 35, the House has roughly 397 out of 435. The chamber number is therefore
+   overwhelmingly the seat-by-seat lean plus the national environment — which is what a
+   House forecast *is*, and is why the generic ballot carries so much more weight here.
+   The dashboard draws unpolled districts at reduced opacity so this is visible rather
+   than merely documented.
+
+**It scales.** First 435-race fit: `max_r_hat 1.01`, **zero divergences**, minimum ESS 341
+bulk / 468 tail on 4000 draws, sampled in 701 s against the Senate's ~60 s. The
+parameterisation holds; the cost is time, not geometry.
+
+**There is no tie to break.** 435 is odd, so unlike the Senate one side always clears 218
+and the Vice President never enters into it. `tiebreaker_party: none` in the config records
+that rather than inventing one.
+
 ---
 
 ## 4. Measurement model
@@ -387,3 +432,13 @@ worse at every level. The residual gap is width, not shape.
    above the 400 floor, but it is the first thing to check if convergence degrades.
 6. **Nebraska's independent** is forced onto the Democratic side for chamber arithmetic
    (§ README known issues). There is no unarguably correct treatment.
+9. **The House is calibrated only by inheritance** (§3.1). The error scales in §5 were
+   fitted from Senate and presidential polling, and are applied to districts unchanged.
+   District polls are sparser, later, and historically less accurate than state polls, so
+   if anything these scales are optimistic for the House. The §8 backtest does not yet
+   cover it. This is the largest open item on the House side and should be read as a
+   caveat on its intervals, not its central estimates.
+10. **Two districts have no measured lean.** FL-20 and OK-03 held uncontested 2024 House
+    races, so their presidential votes had no House row to join to (§3.1). They currently
+    fall back to their state's average, which is a placeholder and is flagged as one in
+    the generated config.

@@ -2,7 +2,7 @@
  "schema_version": 5,
  "model_fingerprint": "41ee93ddde5d",
  "run_date": "2026-08-27",
- "generated_at": "2026-08-26T23:09:54+00:00",
+ "generated_at": "2026-08-27T10:00:08+00:00",
  "cycle": 2026,
  "chamber": "house",
  "election_date": "2026-11-03",
@@ -81408,65 +81408,67 @@
   "student_t_nu": 5.0,
   "calibration": {
    "source": "FiveThirtyEight pollster-ratings archive (CC BY 4.0)",
-   "n_polls": 583,
-   "n_races": 162,
+   "chamber": "house",
+   "n_polls": 467,
+   "n_races": 339,
    "n_cycles": 7,
    "window_days": [
-    45,
-    120
+    0,
+    14
    ],
    "min_cycle": 2010,
-   "fitted_national_pts": 3.11,
-   "fitted_state_pts": 5.63,
-   "fitted_poll_pts": 3.96,
-   "fitted_design_effect": 1.18
+   "fitted_national_pts": 3.78,
+   "fitted_state_pts": 4.61,
+   "fitted_poll_pts": 5.85,
+   "fitted_design_effect": 1.04
   },
   "backtest": {
-   "n_races": 162,
+   "chamber": "house",
+   "n_races": 279,
    "n_cycles": 7,
-   "brier": 0.0866,
-   "skill_vs_naive": 0.335,
+   "brier": 0.1729,
+   "skill_vs_naive": 0.221,
    "coverage": {
-    "0.5": 0.414,
-    "0.8": 0.691,
-    "0.9": 0.796
+    "0.5": 0.323,
+    "0.8": 0.624,
+    "0.9": 0.703
    },
    "reliability": [
     {
      "bin": "0%-10%",
-     "n": 35,
-     "predicted": 0.012,
-     "actual": 0.0
+     "n": 71,
+     "predicted": 0.023,
+     "actual": 0.099
     },
     {
      "bin": "10%-30%",
-     "n": 12,
-     "predicted": 0.188,
-     "actual": 0.167
+     "n": 29,
+     "predicted": 0.181,
+     "actual": 0.276
     },
     {
      "bin": "30%-50%",
-     "n": 25,
-     "predicted": 0.411,
-     "actual": 0.36
+     "n": 46,
+     "predicted": 0.398,
+     "actual": 0.326
     },
     {
      "bin": "50%-70%",
-     "n": 16,
-     "predicted": 0.593,
-     "actual": 0.562
+     "n": 41,
+     "predicted": 0.608,
+     "actual": 0.439
     },
     {
      "bin": "70%-90%",
-     "n": 19,
-     "predicted": 0.826,
-     "actual": 0.842
+     "n": 22,
+     "predicted": 0.805,
+     "actual": 0.636
     },
     {
      "bin": "90%-100%",
-     "n": 55,
-     "predicted": 0.983,
-     "actual": 0.982
+     "n": 70,
+     "predicted": 0.973,
+     "actual": 0.886
     }
    ]
   }

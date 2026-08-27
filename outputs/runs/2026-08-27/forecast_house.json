@@ -2,7 +2,7 @@
  "schema_version": 5,
  "model_fingerprint": "41ee93ddde5d",
  "run_date": "2026-08-27",
- "generated_at": "2026-08-26T23:09:54+00:00",
+ "generated_at": "2026-08-27T10:00:08+00:00",
  "chamber_forecast": {
   "dem_control_prob": 0.7378,
   "rep_control_prob": 0.2622,

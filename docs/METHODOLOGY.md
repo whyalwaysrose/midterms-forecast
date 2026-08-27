@@ -608,12 +608,30 @@ worse at every level. The residual gap is width, not shape.
     region and presidential lean. Adding it would widen the House interval rather than
     narrow it, so it is a correction to the model rather than to the width complaint.
 
-13. **The generic ballot has a systematic pro-Democratic bias the model does not
-    correct.** Across 13 cycles it overstated the Democratic national House margin by an
-    average of 2.47 points, positive in 9 of 13. The model treats national error as
-    mean-zero, so its *spread* covers this (3.42 against a measured RMSE of 3.46 about
-    zero) but its *centre* does not. Correcting it would move the House forecast down by
-    roughly 13 seats. Not done here: house effects and the partisan-sponsor adjustment
-    already absorb an unknown share of it, and VoteHub's pollster mix is not the
-    historical one, so the correction is not simply −2.47. It is the most consequential
-    unaddressed item in this document.
+13. ~~**The generic ballot has a systematic pro-Democratic bias the model does not
+    correct.**~~ **Fixed for the House**, and two measurements shaped how.
+
+    First, it is the *instrument*, not the pollsters. At 0–14 days across 2010–2022 the
+    generic ballot ran **+1.65** points more Democratic than the actual national House
+    vote (se 0.94), while House districts came in at +0.30, Senate races +0.29 and
+    governors +0.52 — every race-level figure inside its own standard error. "Which party
+    would you vote for in Congress?" is not the votes that get cast, with hundreds of seats
+    uncontested and turnout uneven between safe and marginal districts.
+
+    Second, the bias has a regime change: +4.36 before 2008 against +1.29 after
+    (Welch t = 3.14, p = 0.011). The all-cycles +2.47 quoted in the previous version of
+    this entry would have imported a regime that ended two decades ago.
+
+    Applied inside `θ` as `α + λ(η − b) + ε`, **not** at election-day simulation. A race
+    with polls is pulled back to what its own unbiased polls say; the 397 House districts
+    without any take the correction in full. `η` itself is untouched, so the reported
+    generic-ballot trajectory still shows what the polls say. **The Senate is zero** — the
+    figure was measured against the national House vote, and there is no national Senate
+    vote to have measured it against.
+
+    The estimate is thin (t = 1.76) and is treated as such: its standard error is folded
+    into the election-day error in quadrature, widening the interval rather than presenting
+    seven cycles as a constant. The earlier note that house effects "already absorb an
+    unknown share" was wrong — they are sum-to-zero across pollsters, so they capture
+    relative lean and cannot absorb a common one. Reproduce with
+    `midterms calibrate --chamber house`.

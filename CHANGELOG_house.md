@@ -4,33 +4,33 @@ Automatically generated after each model run. Newest entries first.
 
 ## 2026-08-27
 
-**The model changed in this run.** Democratic chances of House control are 73.8%, against 76.4% on 2026-08-26 — but the two runs were produced by different models, so the difference is not a change in the race.
+**The model changed in this run.** Democratic chances of House control are 69.8%, against 76.4% on 2026-08-26 — but the two runs were produced by different models, so the difference is not a change in the race.
 
 Movement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.
 
-**National environment.** The generic ballot moved D+7.0 → D+7.1 (+0.2). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
+**National environment.** The generic ballot moved D+7.0 → D+7.2 (+0.2). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
 
-**Races that moved** (244 of 435):
+**Races that moved** (259 of 435):
 
-  - **LA-06** — Democratic win probability 97.7% → 6.8% (-90.9 pts); projected margin D+22.9 → R+16.8 (-39.8). No new polls in this race; this is the model revision.
+  - **LA-06** — Democratic win probability 97.7% → 5.5% (-92.2 pts); projected margin D+22.9 → R+18.4 (-41.4). No new polls in this race; this is the model revision.
 
-  - **CA-01** — Democratic win probability 5.7% → 88.5% (+82.9 pts); projected margin R+18.0 → D+13.5 (+31.5). No new polls in this race; this is the model revision.
+  - **UT-01** — Democratic win probability 16.8% → 98.3% (+81.5 pts); projected margin R+10.9 → D+24.4 (+35.3). No new polls in this race; this is the model revision.
 
-  - **UT-01** — Democratic win probability 16.8% → 99.1% (+82.3 pts); projected margin R+10.9 → D+26.8 (+37.7). No new polls in this race; this is the model revision.
+  - **CA-01** — Democratic win probability 5.7% → 84.5% (+78.8 pts); projected margin R+18.0 → D+11.7 (+29.7). No new polls in this race; this is the model revision.
 
-  - **MO-05** — Democratic win probability 99.0% → 23.7% (-75.3 pts); projected margin D+27.6 → R+7.8 (-35.4). No new polls in this race; this is the model revision.
+  - **TX-09** — Democratic win probability 100.0% → 23.5% (-76.5 pts); projected margin D+48.0 → R+7.8 (-55.8). No new polls in this race; this is the model revision.
 
-  - **TX-09** — Democratic win probability 100.0% → 25.8% (-74.2 pts); projected margin D+48.0 → R+7.1 (-55.1). No new polls in this race; this is the model revision.
+  - **MO-05** — Democratic win probability 99.0% → 22.7% (-76.3 pts); projected margin D+27.6 → R+8.4 (-36.0). No new polls in this race; this is the model revision.
 
-  - **TN-09** — Democratic win probability 100.0% → 29.5% (-70.5 pts); projected margin D+49.7 → R+5.9 (-55.6). No new polls in this race; this is the model revision.
+  - **TN-09** — Democratic win probability 100.0% → 27.8% (-72.2 pts); projected margin D+49.7 → R+6.6 (-56.2). No new polls in this race; this is the model revision.
 
-  - **TX-32** — Democratic win probability 99.4% → 32.5% (-66.9 pts); projected margin D+28.4 → R+4.9 (-33.3). No new polls in this race; this is the model revision.
+  - **TX-32** — Democratic win probability 99.4% → 30.8% (-68.6 pts); projected margin D+28.4 → R+5.4 (-33.8). No new polls in this race; this is the model revision.
 
-  - **OR-03** — Democratic win probability 42.6% → 100.0% (+57.4 pts); projected margin R+2.1 → D+50.8 (+52.9). No new polls in this race; this is the model revision.
+  - **OR-03** — Democratic win probability 42.6% → 100.0% (+57.4 pts); projected margin R+2.1 → D+48.7 (+50.8). No new polls in this race; this is the model revision.
 
-  - **CA-48** — Democratic win probability 16.9% → 71.6% (+54.7 pts); projected margin R+10.7 → D+6.2 (+16.9). No new polls in this race; this is the model revision.
+  - **CA-48** — Democratic win probability 16.9% → 66.7% (+49.8 pts); projected margin R+10.7 → D+4.9 (+15.6). No new polls in this race; this is the model revision.
 
-  - **TX-35** — Democratic win probability 99.9% → 51.9% (-48.0 pts); projected margin D+38.0 → D+0.5 (-37.4). No new polls in this race; this is the model revision.
+  - **TX-35** — Democratic win probability 99.9% → 51.7% (-48.2 pts); projected margin D+38.0 → D+0.4 (-37.5). No new polls in this race; this is the model revision.
 
 ---
 

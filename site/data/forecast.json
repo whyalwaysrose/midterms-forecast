@@ -2,7 +2,7 @@
  "schema_version": 5,
  "model_fingerprint": "44ace2eb9141",
  "run_date": "2026-08-27",
- "generated_at": "2026-08-26T22:50:08+00:00",
+ "generated_at": "2026-08-27T09:37:47+00:00",
  "cycle": 2026,
  "chamber": "senate",
  "election_date": "2026-11-03",
@@ -21983,20 +21983,22 @@
   "student_t_nu": 5.0,
   "calibration": {
    "source": "FiveThirtyEight pollster-ratings archive (CC BY 4.0)",
-   "n_polls": 583,
-   "n_races": 162,
+   "chamber": "senate",
+   "n_polls": 1172,
+   "n_races": 200,
    "n_cycles": 7,
    "window_days": [
-    45,
-    120
+    0,
+    14
    ],
    "min_cycle": 2010,
-   "fitted_national_pts": 3.11,
-   "fitted_state_pts": 5.63,
-   "fitted_poll_pts": 3.96,
+   "fitted_national_pts": 3.32,
+   "fitted_state_pts": 3.96,
+   "fitted_poll_pts": 3.97,
    "fitted_design_effect": 1.18
   },
   "backtest": {
+   "chamber": "senate",
    "n_races": 162,
    "n_cycles": 7,
    "brier": 0.0861,

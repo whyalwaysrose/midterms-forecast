@@ -454,7 +454,7 @@ Island is 3x4 pixels on a phone — no amount of tuning makes that tappable.
 The same projection **cannot** be used for the House, and the reason is worth stating
 plainly. Congressional districts are drawn to hold equal numbers of people, so they
 differ in area by three orders of magnitude — Wyoming's single at-large seat covers more
-ground than the twenty that cover New York City. Shading real district shapes would hand
+ground than the dozen or so that cover New York City. Shading real district shapes would hand
 almost all of the ink to the emptiest seats and shrink the ones that decide the chamber
 to specks. The map would be beautiful and would systematically mislead.
 

@@ -2,7 +2,7 @@
 
 A choropleth cannot show the House. Congressional districts have equal
 population by construction, so they differ in area by three orders of magnitude
--- Wyoming's single seat is larger than the twenty that cover New York City.
+-- Wyoming's single seat is larger than the dozen or so that cover New York City.
 Shading real district shapes would give almost all the ink to the emptiest
 places and hide the seats that decide the chamber.
 

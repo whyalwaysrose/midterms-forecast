@@ -349,9 +349,37 @@ function renderMethodology(forecast) {
   const cf = forecast.chamber_forecast ?? {};
   const set = (id, value) => { const el = $(id); if (el) el.textContent = value; };
 
-  const unpolled = (forecast.races ?? []).filter((r) => r.poll_count === 0).length;
+  const races = forecast.races ?? [];
+  const chamber = forecast.chamber === 'house' ? 'house' : 'senate';
+  const isHouse = chamber === 'house';
+
+  const unpolled = races.filter((r) => r.poll_count === 0).length;
   set('m-unpolled', unpolled ? `${unpolled} races with no polling at all` : 'unpolled');
   set('m-nsims', (cf.n_simulations ?? 0).toLocaleString());
+  set('m-nraces', races.length.toLocaleString());
+  set('mh-unpolled', unpolled.toLocaleString());
+
+  // The House panel is only shown when the House is being read: a Senate reader
+  // does not need a tab explaining a chamber they are not looking at, and the
+  // figures inside it would be the wrong ones anyway.
+  const houseTab = $('method-tab-house');
+  if (houseTab) {
+    houseTab.hidden = !isHouse;
+    // Leaving a hidden tab selected would blank the whole section.
+    if (!isHouse && houseTab.classList.contains('active')) {
+      houseTab.classList.remove('active');
+      const first = document.querySelector('.method-tab');
+      if (first) first.classList.add('active');
+      for (const panel of document.querySelectorAll('.method-panel')) {
+        panel.hidden = panel.id !== first?.dataset.panel;
+      }
+    }
+  }
+
+  // A chamber of districts should not be described in the language of states.
+  set('m-unit-plural', isHouse ? 'districts' : 'states');
+  set('m-calchamber', isHouse ? 'House' : 'Senate');
+  set('m-btchamber', isHouse ? 'House' : 'Senate');
   set('m-racepolls', summary.n_race_polls ?? '—');
   set('m-genpolls', summary.n_national_polls ?? '—');
   set('m-pollsters', summary.n_pollsters ?? '—');

@@ -289,6 +289,7 @@
 
     <div class="method-nav" id="method-nav">
       <button class="method-tab active" data-panel="m-model">The model</button>
+      <button class="method-tab" data-panel="m-house" id="method-tab-house" hidden>The House</button>
       <button class="method-tab" data-panel="m-data">The data</button>
       <button class="method-tab" data-panel="m-uncertainty">Uncertainty</button>
       <button class="method-tab" data-panel="m-testing">Testing</button>
@@ -323,15 +324,74 @@
           <p>Defining the baseline <em>at a tied national environment</em> is what stops the
           national swing being counted twice &mdash; once inside each race&rsquo;s starting
           point and again through &eta;.</p>
-          <p>Race drift is <strong>correlated across similar states</strong>. If Michigan
+          <p>Race drift is <strong>correlated across similar races</strong>. If Michigan
           moves toward Democrats, Wisconsin probably did too, and treating them as
           independent throws that away. This matters most for the
           <span id="m-unpolled">unpolled</span> races, which would otherwise have nothing to
           follow but the national trend.</p>
+          <p>That drift is also constrained to <strong>average out across races</strong>.
+          A race&rsquo;s drift is meant to be its movement <em>relative to the field</em>;
+          the field&rsquo;s own movement is what &eta; measures, from hundreds of national
+          polls. Without the constraint the two describe the same thing and the model cannot
+          tell them apart &mdash; and in practice the drift term wins, because it has one
+          parameter per race to do it with. The symptom was a House forecast that did not
+          budge when ten states&rsquo; new district maps moved its starting point by thirteen
+          seats.</p>
           <p>The model is fitted with <a href="https://www.pymc.io/" rel="noopener">PyMC</a>
           using Hamiltonian Monte Carlo, so the output is a full probability distribution
-          rather than a single number. The seat forecast comes from simulating all 35 races
-          together <strong id="m-nsims">many</strong> times.</p>
+          rather than a single number. The seat forecast comes from simulating all
+          <strong id="m-nraces">&mdash;</strong> races together
+          <strong id="m-nsims">many</strong> times.
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- the house ---------- -->
+    <div class="method-panel" id="m-house" hidden>
+      <div class="method-cols">
+        <div>
+          <h3>Why the House is a different problem</h3>
+          <p>The Senate has 35 contests, most of them polled repeatedly. The House has 435,
+          and <strong id="mh-unpolled">&mdash;</strong> of them have never been polled at
+          all &mdash; not once, by anyone. Nobody commissions a poll of a district that is
+          not close.</p>
+          <p>So for nine seats in ten there is no polling to average. What the model has
+          instead is <strong>how the district voted for president in 2024</strong>, and how
+          far the national mood has moved since. That is not a weakness of this model in
+          particular; it is what a House forecast <em>is</em>. The map above draws unpolled
+          districts paler so you can see how much of the chamber that covers.</p>
+
+          <h3 class="method-subhead">Getting the districts themselves right</h3>
+          <p>Presidential results are published by state, not by congressional district, so
+          the district numbers have to be constructed. Ten states also redrew their
+          boundaries part-way through the decade &mdash; Texas, California, Florida, Ohio,
+          North Carolina, Missouri, Tennessee, Louisiana, Alabama and Utah, covering
+          <strong>181 of the 435 seats</strong>.</p>
+          <p>That matters more than it sounds. A forecast built on the old boundaries is not
+          slightly out of date; for those states it is scoring districts that will not appear
+          on anyone&rsquo;s ballot. Under the previous map Harris carried 203 districts;
+          under the one being voted on, 200. Every number here uses the new lines, which
+          also means a district number is not the same place it was in an earlier cycle.</p>
+        </div>
+        <div>
+          <h3>Why a grid of squares instead of a map</h3>
+          <p>Congressional districts are drawn to hold roughly equal numbers of
+          <em>people</em>, which leaves them wildly unequal in <em>area</em>. Wyoming&rsquo;s
+          single seat covers more ground than the twenty that cover New York City.</p>
+          <p>Shade a real map of those shapes and almost all of the colour goes to the
+          emptiest places, while the seats that actually decide control shrink to specks.
+          So every district here is one square of the same size. It is the only arrangement
+          in which the picture and the arithmetic agree &mdash; each seat counts once,
+          and looks like it counts once.</p>
+          <p class="subtle">The layout is computed from the same state outlines the Senate
+          map uses, so the two pictures cannot drift apart. States sit roughly where they
+          belong; within a state, square order is not geography.</p>
+
+          <h3 class="method-subhead">The House is measured on its own history</h3>
+          <p>House polls are not Senate polls. District surveys are smaller &mdash; a median
+          of about 500 people against 735 &mdash; and they miss by more. Every error scale on
+          this page is fitted from House races specifically, not borrowed from the Senate.
+          Doing that honestly made the interval <em>wider</em>, not narrower.</p>
         </div>
       </div>
     </div>
@@ -399,7 +459,7 @@
         <div>
           <h3>Polls are wrong together, not separately</h3>
           <p>This is the part that decides whether the headline number is honest.</p>
-          <p>If all 35 races could err independently, those errors would cancel across the
+          <p>If every race could err independently, those errors would cancel across the
           map and the seat forecast would be absurdly confident. They do not. When polls miss
           in Ohio they tend to miss the same way in Iowa. So on top of the model&rsquo;s
           estimate, the simulation adds two errors:</p>
@@ -407,19 +467,22 @@
             <li><strong>A national miss</strong> of about
             <strong id="m-nat">&mdash;</strong> points, applied identically to every race.
             This is what fattens the tails of the seat distribution.</li>
-            <li><strong>A state-specific miss</strong> of about
-            <strong id="m-state">&mdash;</strong> points, correlated between states that vote
-            alike and only partly cancelling across the map.</li>
+            <li><strong>A race-specific miss</strong> of about
+            <strong id="m-state">&mdash;</strong> points, correlated between
+            <span id="m-unit-plural">states</span> that vote alike and only partly cancelling
+            across the map.</li>
           </ul>
           <p>Together, roughly <strong id="m-total">&mdash;</strong> points of margin per
           race &mdash; which is why even a comfortable-looking lead is not a safe seat.</p>
         </div>
         <div>
           <h3>These numbers were measured, not chosen</h3>
-          <p>They come from <strong id="m-calpolls">&mdash;</strong> Senate polls across
+          <p>They come from <strong id="m-calpolls">&mdash;</strong>
+          <span id="m-calchamber">Senate</span> polls across
           <strong id="m-calcycles">&mdash;</strong> past election cycles, each paired with
-          the result that actually happened, taken at the same distance from election day as
-          this forecast.</p>
+          the result that actually happened. Each chamber is measured against its own
+          history: House districts miss by more than states do, and are polled with smaller
+          samples, so borrowing the Senate&rsquo;s figures would understate them.</p>
           <table class="method-table" id="m-caltable"></table>
           <p class="subtle method-note">Source: <span id="m-calsource">&mdash;</span>.
           Earlier versions of this model used figures taken from the published literature.
@@ -436,7 +499,8 @@
           <h3>Does a 70% call win 70% of the time?</h3>
           <p>A forecast that says 70% and is right 95% of the time is just as broken as one
           that is right 40% of the time. So the model is scored against
-          <strong id="m-btraces">&mdash;</strong> real Senate races from
+          <strong id="m-btraces">&mdash;</strong> real
+          <span id="m-btchamber">Senate</span> races from
           <strong id="m-btcycles">&mdash;</strong> past cycles, where the answer is known.</p>
           <table class="method-table" id="m-reliability"></table>
           <p class="subtle method-note">Left: what the model said. Right: what happened.
@@ -476,7 +540,21 @@
             <li><strong>Nebraska is a special case.</strong> Dan Osborn runs as an
             independent and has said he would not automatically caucus with either party.
             Chamber arithmetic forces a side, so he is counted with the Democrats. Read that
-            race, and its contribution to the seat total, with the caveat in mind.</li>
+            race, and its contribution to the seat total, with the caveat in mind.
+            California&rsquo;s 3rd district poses the same problem in the House.</li>
+            <li><strong>Who gets polled is not random.</strong> Pollsters survey close races,
+            and campaigns release polls they like. In the House that bites hardest: the
+            handful of districts with any polling at all currently run about two and a half
+            points more Democratic than their own history suggests, and the model carries
+            some of that across to similar districts. If those polls are a fair sample of
+            what is happening, that is information. If they are a selected one, it is
+            optimism.</li>
+            <li><strong>The generic ballot has leaned one way before.</strong> Across
+            thirteen past cycles it overstated the Democratic share of the national House
+            vote by about two and a half points on average. The model&rsquo;s uncertainty is
+            wide enough to cover a miss that size, but it does not <em>assume</em> one:
+            the forecast is centred where the polls are, not where history says polls tend
+            to land.</li>
           </ul>
         </div>
         <div>

@@ -360,7 +360,7 @@ class ForecastRun:
             },
             "races": race_records,
             "markets": _markets_block(),
-            "methodology": _methodology_block(self.cfg),
+            "methodology": _methodology_block(self.cfg, races.chamber),
             "diagnostics": {k: _round(v, 4) for k, v in self.diagnostics.items()},
             "poll_summary": {
                 "n_race_polls": len(self.table.race_polls),
@@ -455,7 +455,7 @@ def _markets_block() -> dict | None:
     }
 
 
-def _methodology_block(cfg: ModelConfig) -> dict:
+def _methodology_block(cfg: ModelConfig, chamber: str = "senate") -> dict:
     """Calibration and validation figures, computed rather than written down.
 
     The dashboard explains how the uncertainty was arrived at. Hard-coding those
@@ -464,7 +464,11 @@ def _methodology_block(cfg: ModelConfig) -> dict:
     exists. Recomputing them each run costs a couple of seconds and makes the
     explanation structurally unable to lie.
     """
-    from .calibration import POINTS_PER_LOGIT, estimate_error_components
+    from .calibration import (
+        ELECTION_DAY_WINDOW,
+        POINTS_PER_LOGIT,
+        estimate_error_components,
+    )
 
     block: dict[str, Any] = {
         "election_day_error": {
@@ -486,9 +490,15 @@ def _methodology_block(cfg: ModelConfig) -> dict:
     }
 
     try:
-        fitted = estimate_error_components()
+        # This chamber's own history, in the window the config was fitted in.
+        # Defaulting to either would put Senate figures on the House page as its
+        # evidence, or show a 45-120 day fit beside numbers taken at 0-14.
+        fitted = estimate_error_components(
+            ELECTION_DAY_WINDOW, chamber=chamber
+        )
         block["calibration"] = {
             "source": "FiveThirtyEight pollster-ratings archive (CC BY 4.0)",
+            "chamber": chamber,
             "n_polls": fitted.n_polls,
             "n_races": fitted.n_races,
             "n_cycles": fitted.n_cycles,
@@ -505,7 +515,7 @@ def _methodology_block(cfg: ModelConfig) -> dict:
     try:
         from .backtest_history import build_race_table, score
 
-        races = build_race_table()
+        races = build_race_table(chamber=chamber)
         result = score(
             cfg.election_day_error.national_sd * POINTS_PER_LOGIT,
             cfg.election_day_error.state_sd * POINTS_PER_LOGIT,
@@ -513,6 +523,7 @@ def _methodology_block(cfg: ModelConfig) -> dict:
             races,
         )
         block["backtest"] = {
+            "chamber": chamber,
             "n_races": result.n_races,
             "n_cycles": result.n_cycles,
             "brier": _round(result.brier, 4),

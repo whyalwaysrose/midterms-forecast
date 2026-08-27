@@ -233,6 +233,16 @@ class NationalEnvConfig:
     rw_sd_per_day_prior: float
     initial_sd: float
     approval: ApprovalConfig
+    #: How far the generic ballot sits from the actual national vote, in logit.
+    #:
+    #: Zero for the Senate, deliberately: the gap was measured against the
+    #: national *House* vote, and extending it to a chamber where it was never
+    #: measured would be asserting rather than calibrating.
+    generic_ballot_bias: float = 0.0
+    #: Standard error of that estimate, folded into the election-day error so
+    #: the correction carries its own uncertainty rather than pretending to be
+    #: exact.
+    generic_ballot_bias_se: float = 0.0
 
 
 @dataclass(frozen=True)

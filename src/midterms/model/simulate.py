@@ -105,7 +105,16 @@ def simulate_chamber(
     chol = cholesky_factor(corr)
 
     # A single national miss applied to every race alike...
-    national_error = rng.normal(0.0, ede.national_sd, size=(n_sims, 1))
+    #
+    # Widened by the standard error of the generic-ballot correction the model
+    # applied inside `theta`. That correction is an estimate from seven cycles,
+    # not a constant: subtracting it and then reporting the interval as though
+    # it were exact would claim precision the seven cycles do not support. Added
+    # in quadrature because the two are independent -- how far the generic
+    # ballot sits from the national vote, and how far the polls miss on the day.
+    bias_se = getattr(cfg.national_environment, "generic_ballot_bias_se", 0.0)
+    national_sd = float(np.hypot(ede.national_sd, bias_se))
+    national_error = rng.normal(0.0, national_sd, size=(n_sims, 1))
     # ...plus a state-level miss correlated across politically similar states.
     z = rng.standard_normal(size=(n_sims, n_races))
     state_error = ede.state_sd * (z @ chol.T)

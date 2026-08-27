@@ -292,6 +292,92 @@ def estimate_error_components(
 
 
 @dataclass(frozen=True)
+class GenericBallotBias:
+    """How far the generic ballot sits from the actual national House vote."""
+
+    mean_pts: float
+    se_pts: float
+    sd_pts: float
+    n_cycles: int
+    min_cycle: int
+    per_cycle: dict[int, float]
+
+    @property
+    def as_logit(self) -> float:
+        return self.mean_pts / POINTS_PER_LOGIT
+
+    @property
+    def se_logit(self) -> float:
+        return self.se_pts / POINTS_PER_LOGIT
+
+
+def estimate_generic_ballot_bias(
+    min_cycle: int = 2010,
+    window: tuple[int, int] = ELECTION_DAY_WINDOW,
+    path: Path | None = None,
+) -> GenericBallotBias:
+    """The generic ballot's systematic gap from the national House vote.
+
+    This is **not** a polling bias. Measured across the same cycles, race-level
+    polls are unbiased -- House districts +0.30 points, Senate races +0.29,
+    governors +0.52, all inside their own standard errors. Only the generic
+    ballot is off, and it is off consistently.
+
+    That points at the instrument rather than the pollsters. "Which party would
+    you vote for in Congress?" is not the same question as the votes actually
+    cast: hundreds of seats are uncontested or effectively so, turnout differs
+    between safe and marginal districts, and the national popular vote is a
+    turnout-weighted sum that no respondent is answering about.
+
+    It matters here because the model uses the generic ballot as the national
+    level for every race -- and for the 397 House districts with no polling of
+    their own, that level is nearly the whole forecast.
+
+    **The window matters more than usual.** The bias has a regime change:
+
+        1998-2006   +3.8 +3.2 +4.8 +4.5 +5.5          mean +4.36
+        2008-2022   -1.2 -0.1 -1.1 +3.7 +3.6 -1.3
+                    +4.7 +2.0                          mean +1.29
+
+    Welch's t on that decline is 3.14, p = 0.011. Fitting all thirteen cycles
+    gives +2.47 and would import a regime that ended two decades ago, so the
+    default is 2010 onward -- the same cutoff every other calibration in this
+    module uses, chosen for the same reason.
+
+    The honest reading of the modern estimate is that it is real but thin:
+    +1.65 points with a standard error of 0.94, which does not clear a
+    conventional significance bar. That is an argument for carrying its
+    uncertainty, not for setting it to zero -- zero is also an estimate, and one
+    the data likes less.
+    """
+    df = load_history(path)
+    national = df[df["type_simple"].astype(str) == "House-G-US"].copy()
+    national["error"] = national["margin_poll"] - national["margin_actual"]
+    national = national.dropna(subset=["error", "time_to_election", "cycle"])
+    national = national[
+        (national["time_to_election"] >= window[0])
+        & (national["time_to_election"] <= window[1])
+        & (national["cycle"] >= min_cycle)
+    ]
+    if national.empty:
+        raise ValueError("no generic-ballot polls matched the given window")
+
+    # One number per cycle first. A cycle with forty polls should not outweigh
+    # one with six: the quantity is how far a whole cycle missed, and there are
+    # only as many observations of that as there are cycles.
+    per_cycle = national.groupby("cycle")["error"].mean()
+    sd = float(per_cycle.std(ddof=1))
+    return GenericBallotBias(
+        mean_pts=float(per_cycle.mean()),
+        se_pts=float(sd / np.sqrt(len(per_cycle))),
+        sd_pts=sd,
+        n_cycles=int(len(per_cycle)),
+        min_cycle=min_cycle,
+        per_cycle={int(c): float(v) for c, v in per_cycle.items()},
+    )
+
+
+@dataclass(frozen=True)
 class DriftRate:
     """How fast a race's standing moves, per day, in logit units."""
 
@@ -474,6 +560,29 @@ def run_calibration(
     print()
     print("Against the current configuration:")
     print(compare_to_config(components, chamber))
+
+    # Only meaningful for the House: it is measured against the national House
+    # vote, and there is no equivalent quantity for a Senate map that changes
+    # every cycle.
+    if chamber == "house":
+        try:
+            bias = estimate_generic_ballot_bias(min_cycle=min_cycle)
+        except Exception as exc:  # pragma: no cover - only if history is missing
+            log.warning("generic-ballot bias unavailable: %s", exc)
+        else:
+            print()
+            print("Generic ballot against the actual national House vote:")
+            print(f"  mean gap over {bias.n_cycles} cycles from {bias.min_cycle}"
+                  f"       : {bias.mean_pts:+5.2f} pts (se {bias.se_pts:.2f})")
+            print(f"  in model units (national_environment.generic_ballot_bias) "
+                  f": {bias.as_logit:.4f}")
+            print(f"  its standard error   (…_bias_se)                        "
+                  f": {bias.se_logit:.4f}")
+            print("  per cycle: " + ", ".join(
+                f"{c} {v:+.1f}" for c, v in sorted(bias.per_cycle.items())
+            ))
+            print("  Positive means the generic ballot overstated Democrats.")
+            print("  Race-level polls show no such bias; this is the instrument.")
     print()
     print(f"  {ATTRIBUTION}")
     print("=" * 72)

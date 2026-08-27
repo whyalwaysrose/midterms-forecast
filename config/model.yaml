@@ -381,3 +381,33 @@ chambers:
       state_sd: 0.0922      # 4.61 points of margin
     polls:
       design_effect: 1.04
+    national_environment:
+      # The generic ballot is not the national House vote, and the gap is
+      # measurable. Fitted by `midterms calibrate --chamber house`, which reports
+      # it, on House-G-US polls 0-14 days out from 2010: the generic ballot ran
+      # +1.65 points more Democratic than the vote actually cast, se 0.94.
+      #
+      # THIS IS THE INSTRUMENT, NOT THE POLLSTERS. Across the same cycles,
+      # race-level polls show no such bias -- House districts +0.30, Senate
+      # +0.29, governors +0.52, every one inside its own standard error. Only
+      # the generic ballot is off. "Which party would you vote for in Congress"
+      # is not the votes that get cast: hundreds of seats are uncontested or
+      # nearly so, and turnout differs between safe and marginal districts.
+      #
+      # WHY 2010 AND NOT ALL THIRTEEN CYCLES. The bias has a regime change:
+      #
+      #     1998-2006   +3.8 +3.2 +4.8 +4.5 +5.5           mean +4.36
+      #     2008-2022   -1.2 -0.1 -1.1 +3.7 +3.6 -1.3
+      #                 +4.7 +2.0                          mean +1.29
+      #
+      # Welch's t on that decline is 3.14, p = 0.011. Fitting all thirteen gives
+      # +2.47 and would import a regime that ended two decades ago. 2010 is the
+      # cutoff every other calibration in this file uses.
+      #
+      # IT IS THIN EVIDENCE AND IS TREATED AS SUCH. +1.65 with se 0.94 does not
+      # clear a conventional significance bar. That argues for carrying the
+      # uncertainty -- which `generic_ballot_bias_se` does, widening the
+      # election-day error -- not for setting it to zero. Zero is also an
+      # estimate, and one the data likes less. Set both to 0.0 to disable.
+      generic_ballot_bias: 0.0330      # +1.65 points of margin
+      generic_ballot_bias_se: 0.0188   #  0.94 points

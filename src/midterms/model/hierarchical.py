@@ -231,9 +231,32 @@ def build_model(data: ModelData, cfg: ModelConfig) -> pm.Model:
             axis=1,
         )
 
+        # The generic ballot is not the national vote, and the gap is measured.
+        #
+        # `eta` is fitted to generic-ballot polls, so it is an unbiased estimate
+        # of *the generic ballot*. It is then used as the national level for
+        # every race, which is a different quantity: across 2010-2022 the generic
+        # ballot ran 1.65 points more Democratic than the actual national House
+        # vote. Race-level polls show no such bias (House districts +0.30, Senate
+        # +0.29), so this is the instrument, not the pollsters -- "which party
+        # would you vote for in Congress" is not the votes that get cast, with
+        # hundreds of seats uncontested and turnout uneven between them.
+        #
+        # Subtracted here rather than at election-day simulation, because the two
+        # are not the same correction. An election-day shift would move every
+        # race alike, including the ones anchored by their own unbiased polls.
+        # Applied inside theta, a race with polls is pulled back where its polls
+        # say it is, and a race without them -- 397 of 435 in the House -- takes
+        # the correction in full. That is exactly the right split.
+        #
+        # `eta` itself is left alone, so the generic-ballot trajectory the
+        # dashboard shows still reports what the polls actually say.
+        bias = cfg.national_environment.generic_ballot_bias
+        national_level = eta - bias if bias else eta
+
         theta = pm.Deterministic(
             "theta",
-            alpha[:, None] + elasticity[:, None] * eta[None, :] + eps,
+            alpha[:, None] + elasticity[:, None] * national_level[None, :] + eps,
             dims=("race", "grid"),
         )
 

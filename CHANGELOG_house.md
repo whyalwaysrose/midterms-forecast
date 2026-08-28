@@ -2,6 +2,14 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-08-28
+
+No new polling since 2026-08-27. Democratic chances of House control hold at 68.9%.
+
+No individual race moved enough to be worth reporting.
+
+---
+
 ## 2026-08-27
 
 **The model changed in this run.** Democratic chances of House control are 68.9%, against 76.4% on 2026-08-26 — but the two runs were produced by different models, so the difference is not a change in the race.

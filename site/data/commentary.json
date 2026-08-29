@@ -2,6 +2,123 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-08-29",
+   "previous_run_date": "2026-08-28",
+   "headline": "Democratic chances of Senate control are down 1.2 pts to 60.3% on 1 new poll. Projected seats 51.4 \u2192 51.2 (-0.2).",
+   "body": [
+    "**Races that moved** (6 of 35):",
+    "",
+    "  - **Mississippi** \u2014 Democratic win probability 20.6% \u2192 12.0% (-8.6 pts); projected margin R+6.2 \u2192 R+7.4 (-1.2). Driven by 1 new poll:\n    - Data for Progress (2026-08-10, n=1018, LV, D-aligned sponsor): R+6.8",
+    "",
+    "  - **Montana** \u2014 Democratic win probability 16.8% \u2192 15.6% (-1.2 pts); projected margin R+10.2 \u2192 R+10.1 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Illinois** \u2014 Democratic win probability 90.7% \u2192 89.5% (-1.2 pts); projected margin D+13.8 \u2192 D+13.9 (+0.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Alaska** \u2014 Democratic win probability 65.5% \u2192 64.4% (-1.1 pts); projected margin D+2.5 \u2192 D+2.3 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **South Carolina** \u2014 Democratic win probability 24.8% \u2192 24.3% (-0.4 pts); projected margin R+6.9 \u2192 R+7.3 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Louisiana** \u2014 Democratic win probability 10.7% \u2192 10.4% (-0.3 pts); projected margin R+12.4 \u2192 R+12.8 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 1,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-MS",
+     "name": "Mississippi",
+     "prob_before": 0.2057,
+     "prob_after": 0.1198,
+     "prob_delta": -0.08589999999999999,
+     "margin_before": -6.21,
+     "margin_after": -7.42,
+     "margin_delta": -1.21,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202dat084dfba9",
+       "pollster": "Data for Progress",
+       "date": "2026-08-10",
+       "start_date": "2026-08-05",
+       "end_date": "2026-08-15",
+       "sample_size": 1018,
+       "population": "lv",
+       "dem_pct": 41.0,
+       "rep_pct": 47.0,
+       "margin": -6.8,
+       "partisan_sign": 1,
+       "sponsors": [
+        "Way to Lead PAC"
+       ],
+       "url": "https://chartingthewayforward.substack.com/p/research-release-fresh-polling-from",
+       "dem_candidate": "Scott Colom",
+       "rep_candidate": "Cindy Hyde-Smith"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-MT",
+     "name": "Montana",
+     "prob_before": 0.1681,
+     "prob_after": 0.1559,
+     "prob_delta": -0.012199999999999989,
+     "margin_before": -10.18,
+     "margin_after": -10.07,
+     "margin_delta": 0.10999999999999943,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-IL",
+     "name": "Illinois",
+     "prob_before": 0.9069,
+     "prob_after": 0.8954,
+     "prob_delta": -0.011500000000000066,
+     "margin_before": 13.83,
+     "margin_after": 13.87,
+     "margin_delta": 0.03999999999999915,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-AK",
+     "name": "Alaska",
+     "prob_before": 0.6548,
+     "prob_after": 0.6436,
+     "prob_delta": -0.011200000000000099,
+     "margin_before": 2.45,
+     "margin_after": 2.28,
+     "margin_delta": -0.17000000000000037,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-SC",
+     "name": "South Carolina",
+     "prob_before": 0.2478,
+     "prob_after": 0.2435,
+     "prob_delta": -0.004299999999999998,
+     "margin_before": -6.93,
+     "margin_after": -7.33,
+     "margin_delta": -0.40000000000000036,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-LA",
+     "name": "Louisiana",
+     "prob_before": 0.1073,
+     "prob_after": 0.1042,
+     "prob_delta": -0.0031000000000000055,
+     "margin_before": -12.44,
+     "margin_after": -12.77,
+     "margin_delta": -0.33000000000000007,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-08-29\n\nDemocratic chances of Senate control are down 1.2 pts to 60.3% on 1 new poll. Projected seats 51.4 \u2192 51.2 (-0.2).\n\n**Races that moved** (6 of 35):\n\n  - **Mississippi** \u2014 Democratic win probability 20.6% \u2192 12.0% (-8.6 pts); projected margin R+6.2 \u2192 R+7.4 (-1.2). Driven by 1 new poll:\n    - Data for Progress (2026-08-10, n=1018, LV, D-aligned sponsor): R+6.8\n\n  - **Montana** \u2014 Democratic win probability 16.8% \u2192 15.6% (-1.2 pts); projected margin R+10.2 \u2192 R+10.1 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Illinois** \u2014 Democratic win probability 90.7% \u2192 89.5% (-1.2 pts); projected margin D+13.8 \u2192 D+13.9 (+0.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Alaska** \u2014 Democratic win probability 65.5% \u2192 64.4% (-1.1 pts); projected margin D+2.5 \u2192 D+2.3 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **South Carolina** \u2014 Democratic win probability 24.8% \u2192 24.3% (-0.4 pts); projected margin R+6.9 \u2192 R+7.3 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Louisiana** \u2014 Democratic win probability 10.7% \u2192 10.4% (-0.3 pts); projected margin R+12.4 \u2192 R+12.8 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-08-28",
    "previous_run_date": "2026-08-27",
    "headline": "Democratic chances of Senate control are down 4.3 pts to 61.5% on no new polls. Projected seats 51.9 \u2192 51.4 (-0.5).",

@@ -2,6 +2,27 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-08-29
+
+Democratic chances of Senate control are down 1.2 pts to 60.3% on 1 new poll. Projected seats 51.4 → 51.2 (-0.2).
+
+**Races that moved** (6 of 35):
+
+  - **Mississippi** — Democratic win probability 20.6% → 12.0% (-8.6 pts); projected margin R+6.2 → R+7.4 (-1.2). Driven by 1 new poll:
+    - Data for Progress (2026-08-10, n=1018, LV, D-aligned sponsor): R+6.8
+
+  - **Montana** — Democratic win probability 16.8% → 15.6% (-1.2 pts); projected margin R+10.2 → R+10.1 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Illinois** — Democratic win probability 90.7% → 89.5% (-1.2 pts); projected margin D+13.8 → D+13.9 (+0.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Alaska** — Democratic win probability 65.5% → 64.4% (-1.1 pts); projected margin D+2.5 → D+2.3 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **South Carolina** — Democratic win probability 24.8% → 24.3% (-0.4 pts); projected margin R+6.9 → R+7.3 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Louisiana** — Democratic win probability 10.7% → 10.4% (-0.3 pts); projected margin R+12.4 → R+12.8 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-08-28
 
 Democratic chances of Senate control are down 4.3 pts to 61.5% on no new polls. Projected seats 51.9 → 51.4 (-0.5).

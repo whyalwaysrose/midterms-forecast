@@ -1,0 +1,775 @@
+{
+ "schema_version": 5,
+ "model_fingerprint": "406ef9220080",
+ "run_date": "2026-08-30",
+ "generated_at": "2026-08-30T15:12:07+00:00",
+ "chamber_forecast": {
+  "dem_control_prob": 0.6138,
+  "rep_control_prob": 0.3862,
+  "exact_tie_prob": 0.0875,
+  "dem_seats": {
+   "mean": 51.34,
+   "median": 52,
+   "p05": 45,
+   "p25": 49,
+   "p75": 54,
+   "p95": 57
+  },
+  "seat_distribution": {
+   "37": 0.0001,
+   "38": 0.0003,
+   "39": 0.001,
+   "40": 0.0022,
+   "41": 0.0037,
+   "42": 0.0075,
+   "43": 0.0129,
+   "44": 0.0198,
+   "45": 0.0276,
+   "46": 0.0353,
+   "47": 0.051,
+   "48": 0.0613,
+   "49": 0.0761,
+   "50": 0.0875,
+   "51": 0.0988,
+   "52": 0.1031,
+   "53": 0.1052,
+   "54": 0.0997,
+   "55": 0.0797,
+   "56": 0.057,
+   "57": 0.036,
+   "58": 0.0193,
+   "59": 0.0095,
+   "60": 0.0041,
+   "61": 0.001,
+   "62": 0.0002,
+   "63": 0.0001,
+   "64": 0.0001,
+   "66": 0.0
+  },
+  "total_seats": 100,
+  "seats_not_up": {
+   "D": 34,
+   "R": 31
+  },
+  "dem_seats_for_majority": 51,
+  "tiebreaker_party": "R",
+  "n_simulations": 40000
+ },
+ "national": {
+  "generic_ballot": {
+   "dem_margin_median": 6.8,
+   "dem_margin_p05": 5.22,
+   "dem_margin_p95": 8.48,
+   "dem_two_party_share_median": 0.53
+  }
+ },
+ "poll_summary": {
+  "n_race_polls": 171,
+  "n_national_polls": 446,
+  "n_pollsters": 126,
+  "rejections": {
+   "primary subject": 60,
+   "older than max_age_days": 99,
+   "no single D-vs-R matchup": 28,
+   "pollster banned by 538: Big Data Poll": 28,
+   "repeat readings of a survey already counted": 88
+  },
+  "unknown_candidates": {
+   "senate-2026-RI": [
+    "Michael Bahry"
+   ],
+   "senate-2026-MA": [
+    "Joe Tache"
+   ]
+  }
+ },
+ "diagnostics": {
+  "max_r_hat": 1.01,
+  "min_ess_bulk": 535.0,
+  "min_ess_tail": 810.0,
+  "divergences": 0,
+  "n_draws": 4000
+ },
+ "races": [
+  {
+   "id": "senate-2026-IA",
+   "name": "Iowa",
+   "dem_win_prob": 0.4478,
+   "margin": {
+    "p05": -10.43,
+    "p25": -4.7,
+    "p50": -0.76,
+    "p75": 3.19,
+    "p95": 8.9
+   },
+   "poll_count": 9,
+   "all_poll_ids": [
+    "us-202cha781abe34",
+    "us-202gbab93d5de3",
+    "us-202echf4929c57",
+    "us-202pub957d3bcc",
+    "us-202cyg40c776c5",
+    "us-202the52e3337f",
+    "us-202bea93a2c09c",
+    "us-202eme4923d9f5",
+    "us-202sufc2449e1f"
+   ]
+  },
+  {
+   "id": "senate-2026-MI",
+   "name": "Michigan",
+   "dem_win_prob": 0.635,
+   "margin": {
+    "p05": -7.36,
+    "p25": -1.9,
+    "p50": 1.98,
+    "p75": 5.85,
+    "p95": 11.4
+   },
+   "poll_count": 21,
+   "all_poll_ids": [
+    "us-202ros410812c7",
+    "us-202mit590c99af",
+    "us-202glef7ac134b",
+    "us-202eme5bdd236b",
+    "us-202gle0133b0b3",
+    "us-202mit9a5c32a0",
+    "us-202tip59dfdfa0",
+    "us-202tip6d4d41d9",
+    "us-202tul3efe64f6",
+    "us-202zen354a92cf",
+    "us-202qua3b4e634a",
+    "us-202gle7fc79cd5",
+    "us-202epife4108d8",
+    "us-202mit1e6a5692",
+    "us-202soc6e865068",
+    "us-202bea6ed87549",
+    "us-202gba7596c230",
+    "us-202tip8915c085",
+    "us-202fab12ee3caf",
+    "us-202susb1d73b8b",
+    "us-202epi5f481027"
+   ]
+  },
+  {
+   "id": "senate-2026-AK",
+   "name": "Alaska",
+   "dem_win_prob": 0.6431,
+   "margin": {
+    "p05": -7.9,
+    "p25": -1.92,
+    "p50": 2.28,
+    "p75": 6.4,
+    "p95": 12.37
+   },
+   "poll_count": 11,
+   "all_poll_ids": [
+    "us-202alaaac6776a",
+    "us-202datff65423b",
+    "us-202ala3b65f6ef",
+    "us-202pub023ecafb",
+    "us-202ala6fd3746f",
+    "us-202alabcabdd28",
+    "us-202alabbd6655e",
+    "us-202alab987738a",
+    "us-202ala3352af00",
+    "us-202the011805d2",
+    "us-202alaaa70f06a"
+   ]
+  },
+  {
+   "id": "senate-2026-ME",
+   "name": "Maine",
+   "dem_win_prob": 0.6669,
+   "margin": {
+    "p05": -7.28,
+    "p25": -1.47,
+    "p50": 2.58,
+    "p75": 6.64,
+    "p95": 12.37
+   },
+   "poll_count": 3,
+   "all_poll_ids": [
+    "us-202unia65b1e02",
+    "us-202harfe4afc0e",
+    "us-202bea347c91b0"
+   ]
+  },
+  {
+   "id": "senate-2026-FL",
+   "name": "Florida",
+   "dem_win_prob": 0.3091,
+   "margin": {
+    "p05": -12.69,
+    "p25": -6.91,
+    "p50": -2.95,
+    "p75": 1.04,
+    "p95": 6.81
+   },
+   "poll_count": 13,
+   "all_poll_ids": [
+    "us-202uni187076c4",
+    "us-202uni979cabda",
+    "us-202eme1adbecdc",
+    "us-202mdw67caa80b",
+    "us-202ste008437cf",
+    "us-202ech2b342f18",
+    "us-202checa283b6c",
+    "us-202chae3c0b874",
+    "us-202cha0c7666ff",
+    "us-202mclfb3c3e69",
+    "us-202cha4c08cfde",
+    "us-202cha6cfd344c",
+    "us-202uni1ae0881e"
+   ]
+  },
+  {
+   "id": "senate-2026-TX",
+   "name": "Texas",
+   "dem_win_prob": 0.6998,
+   "margin": {
+    "p05": -6.44,
+    "p25": -0.88,
+    "p50": 3.0,
+    "p75": 6.79,
+    "p95": 12.33
+   },
+   "poll_count": 27,
+   "all_poll_ids": [
+    "us-202unie89cc6b4",
+    "us-202uni8225dcc0",
+    "us-202rag0c28bfd3",
+    "us-202emeef7cbc1d",
+    "us-202uni0dc518c7",
+    "us-202pub7e233927",
+    "us-202imp50137db2",
+    "us-202you9dee520f",
+    "us-202texe500a6d5",
+    "us-202texc28cf835",
+    "us-202pub121c904c",
+    "us-202sli9f75fb57",
+    "us-202rec22b1c62b",
+    "us-202qua6b878295",
+    "us-202texc8fd4814",
+    "us-202socb918e088",
+    "us-202thee89c7bce",
+    "us-202a2 1a5590cb",
+    "us-202sli6204659f",
+    "us-202you3c4a4a9f",
+    "us-202bea54820d8d",
+    "us-202texee0a6ae6",
+    "us-202rec773da2d7",
+    "us-202wed4dcf8c6b",
+    "us-202eme5bcac049",
+    "us-202the54ba4671",
+    "us-202sli394bd9a0"
+   ]
+  },
+  {
+   "id": "senate-2026-OH",
+   "name": "Ohio",
+   "dem_win_prob": 0.746,
+   "margin": {
+    "p05": -5.73,
+    "p25": -0.07,
+    "p50": 3.88,
+    "p75": 7.87,
+    "p95": 13.42
+   },
+   "poll_count": 13,
+   "all_poll_ids": [
+    "us-202eme8f806411",
+    "us-202bow288ac89a",
+    "us-202emeea9b3350",
+    "us-202emc72b76be3",
+    "us-202onm04028dcb",
+    "us-202quad6aba264",
+    "us-202echefadd030",
+    "us-202bow8a765810",
+    "us-202bea6ef5bd7d",
+    "us-202fabc4750dc3",
+    "us-202the85ab5fb4",
+    "us-202bea58e907c0",
+    "us-202wedb13225b0"
+   ]
+  },
+  {
+   "id": "senate-2026-SC",
+   "name": "South Carolina",
+   "dem_win_prob": 0.2451,
+   "margin": {
+    "p05": -23.67,
+    "p25": -13.98,
+    "p50": -7.1,
+    "p75": -0.16,
+    "p95": 9.9
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-KS",
+   "name": "Kansas",
+   "dem_win_prob": 0.2029,
+   "margin": {
+    "p05": -17.7,
+    "p25": -10.63,
+    "p50": -5.84,
+    "p75": -1.06,
+    "p95": 5.94
+   },
+   "poll_count": 1,
+   "all_poll_ids": [
+    "us-202tav22537272"
+   ]
+  },
+  {
+   "id": "senate-2026-MT",
+   "name": "Montana",
+   "dem_win_prob": 0.1681,
+   "margin": {
+    "p05": -26.3,
+    "p25": -17.05,
+    "p50": -10.01,
+    "p75": -2.99,
+    "p95": 7.21
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-NH",
+   "name": "New Hampshire",
+   "dem_win_prob": 0.8706,
+   "margin": {
+    "p05": -3.09,
+    "p25": 2.78,
+    "p50": 6.82,
+    "p75": 10.89,
+    "p95": 16.55
+   },
+   "poll_count": 15,
+   "all_poll_ids": [
+    "us-202189327ac2c7",
+    "us-202co/465a61ff",
+    "us-202uni0401d0f4",
+    "us-202co/0b672f7f",
+    "us-202saia99778cd",
+    "us-202prad23da08c",
+    "us-202uni1250e038",
+    "us-202yese8051e85",
+    "us-202saica770502",
+    "us-202eme9a6a68f5",
+    "us-202uni64743a1f",
+    "us-202unib186ef52",
+    "us-202sai3a119d63",
+    "us-202sai47715591",
+    "us-202unie006e257"
+   ]
+  },
+  {
+   "id": "senate-2026-MS",
+   "name": "Mississippi",
+   "dem_win_prob": 0.1199,
+   "margin": {
+    "p05": -17.83,
+    "p25": -11.68,
+    "p50": -7.48,
+    "p75": -3.21,
+    "p95": 2.95
+   },
+   "poll_count": 2,
+   "all_poll_ids": [
+    "us-202imp28c38a71",
+    "us-202dat084dfba9"
+   ]
+  },
+  {
+   "id": "senate-2026-MN",
+   "name": "Minnesota",
+   "dem_win_prob": 0.8812,
+   "margin": {
+    "p05": -2.92,
+    "p25": 3.19,
+    "p50": 7.43,
+    "p75": 11.62,
+    "p95": 17.58
+   },
+   "poll_count": 2,
+   "all_poll_ids": [
+    "us-202emec7074b5d",
+    "us-202sur47670306"
+   ]
+  },
+  {
+   "id": "senate-2026-LA",
+   "name": "Louisiana",
+   "dem_win_prob": 0.1075,
+   "margin": {
+    "p05": -29.18,
+    "p25": -19.57,
+    "p50": -12.9,
+    "p75": -5.94,
+    "p95": 4.15
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-NJ",
+   "name": "New Jersey",
+   "dem_win_prob": 0.8945,
+   "margin": {
+    "p05": -4.16,
+    "p25": 6.13,
+    "p50": 13.11,
+    "p75": 19.95,
+    "p95": 29.12
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-NM",
+   "name": "New Mexico",
+   "dem_win_prob": 0.9041,
+   "margin": {
+    "p05": -3.79,
+    "p25": 6.65,
+    "p50": 13.49,
+    "p75": 20.2,
+    "p95": 29.57
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-IL",
+   "name": "Illinois",
+   "dem_win_prob": 0.9045,
+   "margin": {
+    "p05": -3.53,
+    "p25": 6.7,
+    "p50": 13.73,
+    "p75": 20.59,
+    "p95": 29.95
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-NE",
+   "name": "Nebraska",
+   "dem_win_prob": 0.0945,
+   "margin": {
+    "p05": -29.89,
+    "p25": -20.48,
+    "p50": -13.63,
+    "p75": -6.54,
+    "p95": 3.47
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-GA",
+   "name": "Georgia",
+   "dem_win_prob": 0.912,
+   "margin": {
+    "p05": -1.77,
+    "p25": 4.04,
+    "p50": 7.93,
+    "p75": 11.85,
+    "p95": 17.49
+   },
+   "poll_count": 8,
+   "all_poll_ids": [
+    "us-202tip0382be0d",
+    "us-202qua80fe18a7",
+    "us-202eme1bcacacc",
+    "us-202ech1a9afcfb",
+    "us-202bea8e2b79ff",
+    "us-202wic6dd1649c",
+    "us-202fab389395b2",
+    "us-202ins63791cfb"
+   ]
+  },
+  {
+   "id": "senate-2026-CO",
+   "name": "Colorado",
+   "dem_win_prob": 0.9418,
+   "margin": {
+    "p05": -0.73,
+    "p25": 9.47,
+    "p50": 16.4,
+    "p75": 23.16,
+    "p95": 32.5
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-NC",
+   "name": "North Carolina",
+   "dem_win_prob": 0.952,
+   "margin": {
+    "p05": 0.11,
+    "p25": 5.81,
+    "p50": 9.64,
+    "p75": 13.57,
+    "p95": 19.0
+   },
+   "poll_count": 29,
+   "all_poll_ids": [
+    "us-202vicec5afb5c",
+    "us-202eme013c2ece",
+    "us-202harc083001c",
+    "us-202chab6c27b91",
+    "us-202har2b123ce0",
+    "us-202har1bdb30c5",
+    "us-202cha2976f667",
+    "us-202tipab84b110",
+    "us-202cha2111afda",
+    "us-202nex3971aa3a",
+    "us-202pub85665d25",
+    "us-202you2133db87",
+    "us-202harca09238f",
+    "us-202higf04011a1",
+    "us-202hig7de64e7d",
+    "us-202opi5a64ca39",
+    "us-202chab31a8a6e",
+    "us-202harb00382e0",
+    "us-202youca5f07f2",
+    "us-202thef5594fea",
+    "us-202pub96a42a3f",
+    "us-202elodaa5cffa",
+    "us-202elo069243f3",
+    "us-202beacaddacc4",
+    "us-202chad53b9fb6",
+    "us-202chaf0ea6e94",
+    "us-202hig0453aa0e",
+    "us-202hig8ec8c4e5",
+    "us-202har1cef6d8a"
+   ]
+  },
+  {
+   "id": "senate-2026-OR",
+   "name": "Oregon",
+   "dem_win_prob": 0.9533,
+   "margin": {
+    "p05": 0.39,
+    "p25": 10.86,
+    "p50": 17.87,
+    "p75": 24.68,
+    "p95": 34.15
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-DE",
+   "name": "Delaware",
+   "dem_win_prob": 0.9676,
+   "margin": {
+    "p05": 2.14,
+    "p25": 12.46,
+    "p50": 19.52,
+    "p75": 26.54,
+    "p95": 35.84
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-KY",
+   "name": "Kentucky",
+   "dem_win_prob": 0.0215,
+   "margin": {
+    "p05": -36.51,
+    "p25": -27.37,
+    "p50": -20.82,
+    "p75": -14.11,
+    "p95": -3.98
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-ID",
+   "name": "Idaho",
+   "dem_win_prob": 0.0191,
+   "margin": {
+    "p05": -30.53,
+    "p25": -21.79,
+    "p50": -16.18,
+    "p75": -10.76,
+    "p95": -3.28
+   },
+   "poll_count": 1,
+   "all_poll_ids": [
+    "us-202the39a65ca5"
+   ]
+  },
+  {
+   "id": "senate-2026-TN",
+   "name": "Tennessee",
+   "dem_win_prob": 0.0152,
+   "margin": {
+    "p05": -37.12,
+    "p25": -28.57,
+    "p50": -22.06,
+    "p75": -15.35,
+    "p95": -5.45
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-SD",
+   "name": "South Dakota",
+   "dem_win_prob": 0.0102,
+   "margin": {
+    "p05": -39.06,
+    "p25": -30.18,
+    "p50": -23.58,
+    "p75": -16.9,
+    "p95": -6.96
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-OK",
+   "name": "Oklahoma",
+   "dem_win_prob": 0.0063,
+   "margin": {
+    "p05": -40.89,
+    "p25": -32.18,
+    "p50": -25.73,
+    "p75": -19.01,
+    "p95": -9.04
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-VA",
+   "name": "Virginia",
+   "dem_win_prob": 0.9952,
+   "margin": {
+    "p05": 6.06,
+    "p25": 12.4,
+    "p50": 16.73,
+    "p75": 21.05,
+    "p95": 26.98
+   },
+   "poll_count": 2,
+   "all_poll_ids": [
+    "us-202the5a104154",
+    "us-202the592aeef5"
+   ]
+  },
+  {
+   "id": "senate-2026-AL",
+   "name": "Alabama",
+   "dem_win_prob": 0.0045,
+   "margin": {
+    "p05": -29.8,
+    "p25": -23.28,
+    "p50": -18.65,
+    "p75": -13.98,
+    "p95": -7.21
+   },
+   "poll_count": 1,
+   "all_poll_ids": [
+    "us-202yes4308b337"
+   ]
+  },
+  {
+   "id": "senate-2026-AR",
+   "name": "Arkansas",
+   "dem_win_prob": 0.0006,
+   "margin": {
+    "p05": -30.31,
+    "p25": -24.55,
+    "p50": -20.48,
+    "p75": -16.36,
+    "p95": -10.24
+   },
+   "poll_count": 2,
+   "all_poll_ids": [
+    "us-202grae15a8aed",
+    "us-202j.le2159a92"
+   ]
+  },
+  {
+   "id": "senate-2026-RI",
+   "name": "Rhode Island",
+   "dem_win_prob": 0.9995,
+   "margin": {
+    "p05": 11.56,
+    "p25": 17.74,
+    "p50": 21.97,
+    "p75": 26.14,
+    "p95": 31.95
+   },
+   "poll_count": 2,
+   "all_poll_ids": [
+    "us-202uni56d3ce46",
+    "us-202uni2c6a92aa"
+   ]
+  },
+  {
+   "id": "senate-2026-WV",
+   "name": "West Virginia",
+   "dem_win_prob": 0.0002,
+   "margin": {
+    "p05": -50.96,
+    "p25": -42.95,
+    "p50": -36.78,
+    "p75": -30.22,
+    "p95": -20.25
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-WY",
+   "name": "Wyoming",
+   "dem_win_prob": 0.0001,
+   "margin": {
+    "p05": -53.31,
+    "p25": -45.04,
+    "p50": -38.95,
+    "p75": -32.38,
+    "p95": -22.09
+   },
+   "poll_count": 0,
+   "all_poll_ids": []
+  },
+  {
+   "id": "senate-2026-MA",
+   "name": "Massachusetts",
+   "dem_win_prob": 1.0,
+   "margin": {
+    "p05": 17.69,
+    "p25": 23.8,
+    "p50": 27.91,
+    "p75": 31.86,
+    "p95": 37.29
+   },
+   "poll_count": 9,
+   "all_poll_ids": [
+    "us-202suf91850a3d",
+    "us-202uni06038789",
+    "us-202unif8cfec03",
+    "us-202unid95802f4",
+    "us-202unide9784b7",
+    "us-202suf43021e00",
+    "us-202uni7ffc2e9d",
+    "us-202uni86a7074d",
+    "us-202unic67dc15d"
+   ]
+  }
+ ]
+}

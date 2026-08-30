@@ -2,6 +2,21 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-08-30
+
+Democratic chances of Senate control are up 1.1 pts to 61.4% on 1 new poll. Projected seats 51.2 → 51.3 (+0.1).
+
+**Races that moved** (3 of 35):
+
+  - **Michigan** — Democratic win probability 60.1% → 63.5% (+3.4 pts); projected margin D+1.5 → D+2.0 (+0.5). Driven by 1 new poll:
+    - EPIC-MRA (2026-08-25, n=600, LV): D+4.4
+
+  - **Montana** — Democratic win probability 15.6% → 16.8% (+1.2 pts); projected margin R+10.1 → R+10.0 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Kansas** — Democratic win probability 19.2% → 20.3% (+1.0 pts); projected margin R+6.0 → R+5.8 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-08-29
 
 Democratic chances of Senate control are down 1.2 pts to 60.3% on 1 new poll. Projected seats 51.4 → 51.2 (-0.2).

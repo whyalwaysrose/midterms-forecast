@@ -2,6 +2,79 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-08-30",
+   "previous_run_date": "2026-08-29",
+   "headline": "Democratic chances of Senate control are up 1.1 pts to 61.4% on 1 new poll. Projected seats 51.2 \u2192 51.3 (+0.1).",
+   "body": [
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **Michigan** \u2014 Democratic win probability 60.1% \u2192 63.5% (+3.4 pts); projected margin D+1.5 \u2192 D+2.0 (+0.5). Driven by 1 new poll:\n    - EPIC-MRA (2026-08-25, n=600, LV): D+4.4",
+    "",
+    "  - **Montana** \u2014 Democratic win probability 15.6% \u2192 16.8% (+1.2 pts); projected margin R+10.1 \u2192 R+10.0 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Kansas** \u2014 Democratic win probability 19.2% \u2192 20.3% (+1.0 pts); projected margin R+6.0 \u2192 R+5.8 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 1,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-MI",
+     "name": "Michigan",
+     "prob_before": 0.6014,
+     "prob_after": 0.635,
+     "prob_delta": 0.03359999999999996,
+     "margin_before": 1.5,
+     "margin_after": 1.98,
+     "margin_delta": 0.48,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202epi5f481027",
+       "pollster": "EPIC-MRA",
+       "date": "2026-08-25",
+       "start_date": "2026-08-22",
+       "end_date": "2026-08-28",
+       "sample_size": 600,
+       "population": "lv",
+       "dem_pct": 47.0,
+       "rep_pct": 43.0,
+       "margin": 4.4,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://drive.google.com/file/d/1flmzB5xpdJ6Noa-3hAbms0vBml6KwAxy/view?usp=sharing",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-MT",
+     "name": "Montana",
+     "prob_before": 0.1559,
+     "prob_after": 0.1681,
+     "prob_delta": 0.012199999999999989,
+     "margin_before": -10.07,
+     "margin_after": -10.01,
+     "margin_delta": 0.0600000000000005,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-KS",
+     "name": "Kansas",
+     "prob_before": 0.1925,
+     "prob_after": 0.2029,
+     "prob_delta": 0.010399999999999993,
+     "margin_before": -6.03,
+     "margin_after": -5.84,
+     "margin_delta": 0.1900000000000004,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-08-30\n\nDemocratic chances of Senate control are up 1.1 pts to 61.4% on 1 new poll. Projected seats 51.2 \u2192 51.3 (+0.1).\n\n**Races that moved** (3 of 35):\n\n  - **Michigan** \u2014 Democratic win probability 60.1% \u2192 63.5% (+3.4 pts); projected margin D+1.5 \u2192 D+2.0 (+0.5). Driven by 1 new poll:\n    - EPIC-MRA (2026-08-25, n=600, LV): D+4.4\n\n  - **Montana** \u2014 Democratic win probability 15.6% \u2192 16.8% (+1.2 pts); projected margin R+10.1 \u2192 R+10.0 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Kansas** \u2014 Democratic win probability 19.2% \u2192 20.3% (+1.0 pts); projected margin R+6.0 \u2192 R+5.8 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-08-29",
    "previous_run_date": "2026-08-28",
    "headline": "Democratic chances of Senate control are down 1.2 pts to 60.3% on 1 new poll. Projected seats 51.4 \u2192 51.2 (-0.2).",

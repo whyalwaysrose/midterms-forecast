@@ -2,6 +2,33 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-08-31",
+   "previous_run_date": "2026-08-30",
+   "headline": "No new polling since 2026-08-30. Democratic chances of Senate control hold at 61.1%.",
+   "body": [
+    "**Races that moved** (1 of 35):",
+    "",
+    "  - **South Carolina** \u2014 Democratic win probability 24.5% \u2192 23.5% (-1.0 pts); projected margin R+7.1 \u2192 R+7.3 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-SC",
+     "name": "South Carolina",
+     "prob_before": 0.2451,
+     "prob_after": 0.2347,
+     "prob_delta": -0.01040000000000002,
+     "margin_before": -7.1,
+     "margin_after": -7.28,
+     "margin_delta": -0.1800000000000006,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-08-31\n\nNo new polling since 2026-08-30. Democratic chances of Senate control hold at 61.1%.\n\n**Races that moved** (1 of 35):\n\n  - **South Carolina** \u2014 Democratic win probability 24.5% \u2192 23.5% (-1.0 pts); projected margin R+7.1 \u2192 R+7.3 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-08-30",
    "previous_run_date": "2026-08-29",
    "headline": "Democratic chances of Senate control are up 1.1 pts to 61.4% on 1 new poll. Projected seats 51.2 \u2192 51.3 (+0.1).",

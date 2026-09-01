@@ -2,6 +2,16 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-01
+
+No new polling since 2026-08-31. Democratic chances of Senate control hold at 61.2%.
+
+**Races that moved** (1 of 35):
+
+  - **New Mexico** — Democratic win probability 90.0% → 88.9% (-1.1 pts); projected margin D+13.3 → D+13.4 (+0.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-08-31
 
 No new polling since 2026-08-30. Democratic chances of Senate control hold at 61.1%.

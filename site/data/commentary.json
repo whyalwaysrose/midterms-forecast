@@ -2,6 +2,33 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-01",
+   "previous_run_date": "2026-08-31",
+   "headline": "No new polling since 2026-08-31. Democratic chances of Senate control hold at 61.2%.",
+   "body": [
+    "**Races that moved** (1 of 35):",
+    "",
+    "  - **New Mexico** \u2014 Democratic win probability 90.0% \u2192 88.9% (-1.1 pts); projected margin D+13.3 \u2192 D+13.4 (+0.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-NM",
+     "name": "New Mexico",
+     "prob_before": 0.8997,
+     "prob_after": 0.8892,
+     "prob_delta": -0.010500000000000065,
+     "margin_before": 13.32,
+     "margin_after": 13.36,
+     "margin_delta": 0.03999999999999915,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-09-01\n\nNo new polling since 2026-08-31. Democratic chances of Senate control hold at 61.2%.\n\n**Races that moved** (1 of 35):\n\n  - **New Mexico** \u2014 Democratic win probability 90.0% \u2192 88.9% (-1.1 pts); projected margin D+13.3 \u2192 D+13.4 (+0.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-08-31",
    "previous_run_date": "2026-08-30",
    "headline": "No new polling since 2026-08-30. Democratic chances of Senate control hold at 61.1%.",

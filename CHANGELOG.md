@@ -2,6 +2,22 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-02
+
+Democratic chances of Senate control are up 1.3 pts to 62.5% on 2 new polls. Projected seats 51.3 → 51.4 (+0.1).
+
+**Races that moved** (3 of 35):
+
+  - **Michigan** — Democratic win probability 63.8% → 69.7% (+5.8 pts); projected margin D+2.1 → D+2.9 (+0.9). Driven by 2 new polls:
+    - Michigan State University Institute for Public Policy and Social Research/YouGov (2026-08-15, n=779, LV): D+5.3
+    - Michigan State University Institute for Public Policy and Social Research/YouGov (2026-08-15, n=913, RV): D+4.3
+
+  - **New Mexico** — Democratic win probability 88.9% → 90.3% (+1.4 pts); projected margin D+13.4 → D+13.6 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Illinois** — Democratic win probability 90.1% → 91.3% (+1.2 pts); projected margin D+13.9 → D+14.1 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-09-01
 
 No new polling since 2026-08-31. Democratic chances of Senate control hold at 61.2%.

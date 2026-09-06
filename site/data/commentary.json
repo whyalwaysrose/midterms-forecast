@@ -2,6 +2,18 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-06",
+   "previous_run_date": "2026-09-05",
+   "headline": "No new polling since 2026-09-05. Democratic chances of Senate control hold at 59.1%.",
+   "body": [
+    "No individual race moved enough to be worth reporting.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [],
+   "markdown": "## 2026-09-06\n\nNo new polling since 2026-09-05. Democratic chances of Senate control hold at 59.1%.\n\nNo individual race moved enough to be worth reporting.\n"
+  },
+  {
    "run_date": "2026-09-05",
    "previous_run_date": "2026-09-04",
    "headline": "No new polling since 2026-09-04. Democratic chances of Senate control hold at 59.1%.",

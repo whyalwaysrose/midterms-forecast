@@ -128,7 +128,8 @@
     </div>
 
     <div class="map-block" id="senate-map-block">
-      <h2 class="map-title">The 35 seats up in 2026</h2>
+      <p class="chart-kicker">The 35 seats up in 2026</p>
+      <h2 class="map-title" id="senate-map-title">&mdash;</h2>
       <p class="card-sub">
         Shaded by who is favoured. The 15 states with no Senate race this cycle are
         greyed out — a map cannot show that Wyoming and Rhode Island are worth exactly
@@ -158,7 +159,8 @@
         <a href="https://www.the-downballot.com/p/the-downballot-releases-presidential"
            rel="noopener nofollow" target="_blank">The Downballot</a>.
       </p>
-      <h2 class="map-title">All 435 seats</h2>
+      <p class="chart-kicker">All 435 seats</p>
+      <h2 class="map-title" id="house-map-title">&mdash;</h2>
       <p class="card-sub">
         One square per district, all the same size, grouped by state. Districts hold
         equal numbers of people but wildly unequal amounts of land, so a normal map
@@ -211,7 +213,8 @@
   <!-- ============ CHARTS ============ -->
   <section class="grid-2">
     <div class="card">
-      <h2 id="seat-chart-title">Distribution of Senate seats</h2>
+      <p class="chart-kicker" id="seat-chart-kicker">Distribution of Senate seats</p>
+      <h2 id="seat-chart-title">&mdash;</h2>
       <p class="card-sub">Democratic-caucus seats across <span id="n-sims">—</span> simulations. The line marks the <span id="majority-seats">51</span> seats Democrats need for a majority.</p>
       <div id="seat-chart" class="chart"></div>
       <p id="seat-caveat" class="card-sub subtle" hidden>
@@ -230,7 +233,8 @@
     </div>
 
     <div class="card">
-      <h2>Forecast over time</h2>
+      <p class="chart-kicker">Forecast over time</p>
+      <h2 id="history-title">&mdash;</h2>
       <p class="card-sub" id="history-sub">Democratic probability of Senate control, one point per model run.</p>
       <div id="history-chart" class="chart"></div>
       <p class="card-sub subtle" id="history-empty" hidden>The trend line appears once the model has run on more than one day.</p>
@@ -239,7 +243,8 @@
 
   <!-- ============ NATIONAL ============ -->
   <section class="card">
-    <h2>National environment</h2>
+    <p class="chart-kicker">National environment</p>
+    <h2 id="national-title">&mdash;</h2>
     <p class="card-sub">The generic congressional ballot, estimated as a latent random walk. Every race is geared to this by its own elasticity, so movement here shifts every contest at once.</p>
     <div class="national-row">
       <div class="national-stat">
@@ -258,7 +263,7 @@
     <div id="commentary-latest" class="commentary"></div>
     <details id="commentary-archive-wrap" class="archive">
       <summary>Earlier entries</summary>
-      <div id="commentary-archive"></div>
+      <div id="commentary-archive" class="commentary"></div>
     </details>
   </section>
 

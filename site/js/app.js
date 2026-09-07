@@ -506,6 +506,112 @@ function renderDiagnostics(d) {
   ).join('');
 }
 
+/* ---------------------------------------------------------------------------
+   Chart headlines
+   ---------------------------------------------------------------------------
+
+   Each chart's heading states what that chart shows, written from the same
+   payload the chart is drawn from. The chart's name lives in the kicker above
+   it, so nothing is lost for a reader scanning for a particular panel.
+
+   Two rules these all follow, and both are easy to get wrong:
+
+   * Say something the chart alone says. The hero already reports the chance of
+     control; repeating it over the seat histogram would waste the most valuable
+     line on the panel. So the histogram's headline is about the shape of the
+     distribution, which is the thing only it can tell you.
+
+   * Never round a close call into a claim. A tied generic ballot must not be
+     headed "Democrats lead", and a probability that has moved half a point
+     since July must not be headed "chances have risen".
+   --------------------------------------------------------------------------- */
+
+/** The single most likely seat total, and how often it comes up.
+ *
+ * The mode rather than the median, because the median is already in the note
+ * under the hero and because the mode is what the tallest bar in this chart
+ * literally is -- a reader can point at the sentence and then at the bar.
+ */
+/** Spell small numbers, in headlines only.
+ *
+ * "1 seat clear of a majority" reads like a database row; "one seat clear"
+ * reads like a sentence. House style everywhere else on this page is numerals,
+ * because everywhere else is a table, an axis or a statistic -- this applies to
+ * the headline stack alone, where the line is prose.
+ */
+const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+const spell = (n) => (n < WORDS.length ? WORDS[n] : String(n));
+
+function seatChartHeadline(cf) {
+  const dist = cf.seat_distribution || {};
+  const bins = Object.entries(dist).map(([seats, prob]) => [Number(seats), prob]);
+  if (!bins.length) return 'Simulated seat totals';
+
+  const [mode] = bins.reduce((best, b) => (b[1] > best[1] ? b : best));
+  const majority = cf.dem_seats_for_majority;
+  const gap = mode - majority;
+  const seats = (n) => `${spell(n)} ${n === 1 ? 'seat' : 'seats'}`;
+
+  let against;
+  if (gap === 0) against = 'exactly the majority they need';
+  else if (gap > 0) against = `${seats(gap)} clear of a majority`;
+  else against = `${seats(-gap)} short of a majority`;
+
+  return `${mode} seats is the most common single outcome — ${against}`;
+}
+
+/** Which way the forecast has moved, over the window the chart actually draws.
+ *
+ * "Little changed" is a real answer and the most common one: on most days this
+ * forecast does not move, and a headline that manufactures a direction from
+ * three tenths of a point would be lying about the model's stability. The
+ * threshold is 1 point, below which the daily noise in a re-fit is larger than
+ * the signal.
+ */
+function historyHeadline(runs, chamberLabel) {
+  if (!runs || runs.length < 2) return `Democratic chances of ${chamberLabel} control`;
+
+  const first = runs[0];
+  const last = runs[runs.length - 1];
+  const delta = 100 * (last.dem_control_prob - first.dem_control_prob);
+  const since = fmtDateShort(first.run_date);
+
+  if (Math.abs(delta) < 1) {
+    return `Democratic chances have held steady since ${since}`;
+  }
+  const dir = delta > 0 ? 'risen' : 'fallen';
+  const pts = Math.round(Math.abs(delta));
+  const unit = pts === 1 ? 'point' : 'points';
+  return `Democratic chances have ${dir} ${spell(pts)} ${unit} since ${since}`;
+}
+
+/** Where the generic ballot sits, with the interval doing the hedging.
+ *
+ * The 90% interval decides the verb, not the point estimate: a lead whose
+ * interval spans zero is not a lead, however the median came out.
+ */
+function nationalHeadline(gb) {
+  const mid = gb.dem_margin_median;
+  const straddlesZero = gb.dem_margin_p05 <= 0 && gb.dem_margin_p95 >= 0;
+
+  if (straddlesZero) {
+    return 'The generic ballot is too close to call either way';
+  }
+  const party = mid > 0 ? 'Democrats' : 'Republicans';
+  const pts = Math.abs(mid).toFixed(1);
+  return `${party} lead the generic ballot by ${pts} points`;
+}
+
+/** How many of the seats on the map each side is favoured to take.
+ *
+ * Counted at the 50% line, which is what the map's shading encodes, so the
+ * sentence and the picture cannot disagree.
+ */
+function mapHeadline(races, totalLabel) {
+  const dem = races.filter((r) => r.dem_win_prob > 0.5).length;
+  return `Democrats are favoured in ${dem} of ${totalLabel}`;
+}
+
 let LAST_RENDER = null;
 
 /** Everything that differs between the two chambers, in one place.
@@ -519,6 +625,7 @@ const CHAMBER = {
   senate: {
     title: '2026 Senate Forecast',
     seatChart: 'Distribution of Senate seats',
+    seatsLabel: 'the 35 seats up',
     historySub: 'Democratic probability of Senate control, one point per model run.',
     /** The Senate's 100 seats split evenly, so the Vice President decides. */
     tiebreak: (cf, _forecast) =>
@@ -529,6 +636,7 @@ const CHAMBER = {
   house: {
     title: '2026 House Forecast',
     seatChart: 'Distribution of House seats',
+    seatsLabel: 'the 435 districts',
     historySub: 'Democratic probability of House control, one point per model run.',
     /* No tiebreaker sentence here, because the House cannot tie: 435 is odd, so
      * one side always clears 218 and the Vice President never comes into it.
@@ -558,8 +666,11 @@ function render(forecast, history, commentary, geo, layout) {
 
   document.title = copy.title;
   $('site-title').textContent = copy.title;
-  $('seat-chart-title').textContent = copy.seatChart;
+  $('seat-chart-kicker').textContent = copy.seatChart;
+  $('seat-chart-title').textContent = seatChartHeadline(cf);
   $('history-sub').textContent = copy.historySub;
+  const runs = (history?.runs ?? []).filter((r) => typeof r.dem_control_prob === 'number');
+  $('history-title').textContent = historyHeadline(runs, chamber === 'house' ? 'House' : 'Senate');
   $('majority-seats').textContent = cf.dem_seats_for_majority;
   $('filter-all').textContent = `All ${(forecast.races || []).length}`;
   // Shown for the House only, and shown rather than buried in the methodology,
@@ -595,11 +706,18 @@ function render(forecast, history, commentary, geo, layout) {
   $('gb-margin').textContent = margin(gb.dem_margin_median);
   $('gb-margin').className = `national-value ${marginClass(gb.dem_margin_median)}`;
   $('gb-range').textContent = `90%: ${margin(gb.dem_margin_p05)} to ${margin(gb.dem_margin_p95)}`;
+  $('national-title').textContent = nationalHeadline(gb);
 
   // The map goes first: it is the thing people look at, and it needs the page
   // visible so its container has a width to measure.
-  if (chamber === 'house') renderCartogram(forecast, layout);
-  else renderMap(forecast, geo);
+  const mapHeading = mapHeadline(forecast.races ?? [], copy.seatsLabel);
+  if (chamber === 'house') {
+    $('house-map-title').textContent = mapHeading;
+    renderCartogram(forecast, layout);
+  } else {
+    $('senate-map-title').textContent = mapHeading;
+    renderMap(forecast, geo);
+  }
 
   renderSeatChart(forecast);
   renderHistoryChart(history);

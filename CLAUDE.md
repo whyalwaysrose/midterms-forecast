@@ -291,6 +291,32 @@ establish and the numbers are in `docs/METHODOLOGY.md`.
   carries whole primary fields for ten 2026 races and is not ordered by winner, so the
   first entry is a guess. Unpolled races with a contested field are left unnamed.
 
+## The front end has a scale — stay on it
+
+`site/css/style.css` used to carry 31 distinct font sizes and 25 spacing values, all
+ad-hoc. It now has a twelve-step type scale (`--fs-*`), a 4px spacing scale (`--s-*`),
+three elevation tokens (`--shadow-*`) and a prose measure (`--measure`).
+
+- **Never write a bare `font-size: 13px`.** Use a `var(--fs-*)` step, or a `clamp()`
+  between two of them for something that should scale with the viewport.
+  `scripts/check_typography.py` fails the build otherwise, and it runs in the suite.
+- **Component geometry is deliberately off the scale** where a comment explains the
+  pixel budget: the race-row grid columns at 375px, the market card's 300px flex
+  basis, the cartogram stroke widths. Those numbers were measured against a real
+  constraint. Rounding them to the nearest scale step quietly undoes the measurement.
+- **Running text is capped at `--measure`; charts, maps and tables are not.** The
+  distinction is whether something is read line after line or scanned.
+- **Colour tokens must clear 4.5:1 in both themes.** `--accent` was declared once and
+  never redefined for light mode, where it sat at 1.74:1 while carrying the majority
+  line on the seat histogram — invisible, with nothing logged. The checker now walks
+  every text token against every surface in both themes, and asserts the two light
+  blocks (media query and `[data-theme="light"]`) have not drifted apart.
+- **Chart headings are written from the forecast**, not typed into the HTML. The
+  chart's name is the kicker above; the heading says what the chart shows. Two rules:
+  say something only that chart can say (the hero already reports the chance of
+  control), and never round a close call into a claim — a generic ballot whose
+  interval spans zero is not a lead.
+
 ## Known rough edges
 
 Listed in the README under "Known data-quality items" and `docs/METHODOLOGY.md` §9. The

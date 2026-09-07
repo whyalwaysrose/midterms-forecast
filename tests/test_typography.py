@@ -50,9 +50,12 @@ def test_running_text_is_capped_and_data_is_not():
     for prose in (".card-sub", ".commentary p", ".method-panel p", ".primer-item p"):
         assert prose in selectors, f"{prose} is running text and should be capped"
 
+    # The negative lookahead matters: `.chart` is a prefix of `.chart-note`,
+    # which is a caption and *should* be capped. Without it this asserts the
+    # opposite of what it means on any selector that shares a prefix.
     for data in (".race-list", ".chart", "table.polls", ".us-map"):
         assert not re.search(
-            rf"{re.escape(data)}[^{{]*\{{[^}}]*max-width:\s*var\(--measure\)", CSS
+            rf"{re.escape(data)}(?![\w-])[^{{]*\{{[^}}]*max-width:\s*var\(--measure\)", CSS
         ), f"{data} is scanned, not read -- it should keep the full width"
 
 

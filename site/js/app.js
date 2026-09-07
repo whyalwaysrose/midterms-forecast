@@ -315,16 +315,15 @@ function openDrawer(raceId) {
   // The candidate chart carries everything the margin chart did -- the margin
   // and its interval are still in the tooltip -- plus the two shares and the
   // polls behind them, so showing both would be the same story drawn twice.
-  const legend = `<div class="candidate-legend">
-    <span><i style="background:var(--dem)"></i>${esc(demName)}</span>
-    <span><i style="background:var(--rep)"></i>${esc(repName)}</span>
-    <span class="subtle">Dots are individual polls</span>
-  </div>`;
+  // Each line is labelled with its own candidate's surname at the point it
+  // ends, so the swatches are gone. The note about the dots is not a legend
+  // entry -- nothing on the chart says what they are -- so it stays.
+  const chartNote = '<p class="chart-note">Dots are individual polls.</p>';
 
   $('drawer-body').innerHTML =
     notes + matchup + stats +
     '<h3 style="margin-top:20px">Share of the two-party vote</h3>' +
-    legend +
+    chartNote +
     '<div id="drawer-chart" class="chart"></div>' +
     pollTable;
 

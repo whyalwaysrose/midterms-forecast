@@ -311,6 +311,14 @@ three elevation tokens (`--shadow-*`) and a prose measure (`--measure`).
   line on the seat histogram — invisible, with nothing logged. The checker now walks
   every text token against every surface in both themes, and asserts the two light
   blocks (media query and `[data-theme="light"]`) have not drifted apart.
+- **Series are labelled on the chart, not in a legend.** The candidate lines carry
+  their surnames at the point each line ends; the seat histogram names the two
+  majorities in its top corners. `separateLabels()` keeps a tied race from stacking
+  two names on one pixel, and anything drawn over the data (`.series-label`,
+  `.threshold-text`) carries a halo, because a direct label lands wherever its
+  series happens to end. Two keys deliberately survive and are not legends to
+  remove: the map ramp, which is a categorical scale carrying seat counts, and the
+  markets key, which is a table of market-vs-model numbers.
 - **Chart headings are written from the forecast**, not typed into the HTML. The
   chart's name is the kicker above; the heading says what the chart shows. Two rules:
   say something only that chart can say (the hero already reports the chance of

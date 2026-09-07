@@ -385,14 +385,36 @@ section { margin-bottom: var(--s-9); }
 .flex-1 { flex: 1; min-width: 0; }
 
 .axis-label { fill: var(--text-faint); font-size: var(--fs-3xs); font-family: var(--mono); }
+/* A series's name, drawn at the end of its line.
+ *
+ * Sans rather than the mono the axis labels use: this is a name, not a number,
+ * and it should not read as part of the data. The halo is what makes direct
+ * labelling safe -- a label sits wherever its series happens to end, which may
+ * be over a gridline, the uncertainty band, or the other line. */
+.series-label {
+  font-size: var(--fs-2xs);
+  font-weight: 650;
+  font-family: var(--sans);
+  paint-order: stroke;
+  stroke: var(--bg-elev);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
 .grid-line { stroke: var(--border); stroke-width: 1; }
 .threshold-line { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 3; }
-.threshold-text { fill: var(--accent); font-size: var(--fs-3xs); font-family: var(--mono); }
+/* Haloed for the same reason .series-label is: a reference label sits wherever
+   its reference value falls, which on a seat histogram is directly over the
+   tallest bars in the distribution. */
+.threshold-text {
+  fill: var(--accent);
+  font-size: var(--fs-3xs);
+  font-family: var(--mono);
+  paint-order: stroke;
+  stroke: var(--bg-elev);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
 
-.legend { display: flex; gap: 18px; margin-top: 12px; font-size: var(--fs-xs); color: var(--text-dim); }
-.swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
-.swatch.dem { background: var(--dem); }
-.swatch.rep { background: var(--rep); }
 
 /* ---------- national ---------- */
 .national-row { display: flex; gap: 28px; align-items: center; }
@@ -898,19 +920,13 @@ table.polls td.num { font-family: var(--mono); text-align: right; font-variant-n
 .chart-tip .tt-row span.dem-text { color: var(--dem); }
 .chart-tip .tt-row span.rep-text { color: var(--rep); }
 
-.candidate-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 18px;
-  margin: 2px 0 8px;
+/* Says what the dots are, which nothing on the chart itself can. The two
+   series are named on their own lines, so this is a caption, not a legend. */
+.chart-note {
+  margin: 2px 0 var(--s-4);
   font-size: var(--fs-sm);
-}
-.candidate-legend span { display: inline-flex; align-items: center; gap: 6px; }
-.candidate-legend i {
-  width: 14px;
-  height: 3px;
-  border-radius: 2px;
-  flex: none;
+  color: var(--text-faint);
+  max-width: var(--measure);
 }
 
 /* ---------- who is on the ballot ---------- */

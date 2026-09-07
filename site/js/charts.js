@@ -61,6 +61,64 @@ function paddedDomain(values, { include = null, padFraction = 0.25, minPad = 0, 
 }
 
 /** The floating tooltip for a chart, created once per host. */
+/** A series's own name, drawn at the end of its line.
+ *
+ * A legend asks the reader to hold "blue = Peltola" in their head, look at the
+ * chart, and map it back. Putting the name on the line removes the lookup
+ * entirely -- the eye lands on the line and the name is already there. It is
+ * the single cheapest improvement available to a two-series chart, and the
+ * reason newsroom style guides reach for it before anything else.
+ *
+ * Surnames only. "Shelley Moore Capito" at the end of a 210px-tall chart is a
+ * paragraph; "Capito" is a label. Taking the last whitespace-separated token
+ * handles the compound and hyphenated names in this field correctly --
+ * Hyde-Smith, El-Sayed, Moore Capito all come out right.
+ */
+function surname(fullName) {
+  const parts = String(fullName || '').trim().split(/\s+/);
+  return parts[parts.length - 1] || '';
+}
+
+/** Room to reserve on the right for the longest label.
+ *
+ * Estimated rather than measured: getComputedTextLength needs the element in
+ * the document, and these charts are built detached and appended once. 6.2px a
+ * character at 11px sans is close enough, and the cap keeps a long name from
+ * eating a narrow chart in the drawer on a phone.
+ */
+function labelGutter(labels, cap = 78) {
+  const widest = Math.max(0, ...labels.map((t) => t.length));
+  return Math.min(cap, Math.ceil(widest * 6.2) + 10);
+}
+
+/** Keep two labels from sitting on top of each other.
+ *
+ * The two candidate lines are exact mirrors about 50%, so they converge as the
+ * race tightens and in a true toss-up they land on the same pixel. Push them
+ * symmetrically apart around their midpoint, then clamp both into the plot.
+ */
+function separateLabels(a, b, minGap, top, bottom) {
+  let [hi, lo] = a <= b ? [a, b] : [b, a];
+
+  if (lo - hi < minGap) {
+    const mid = (hi + lo) / 2;
+    hi = mid - minGap / 2;
+    lo = mid + minGap / 2;
+  }
+
+  // Move the pair as a block rather than clamping each end independently.
+  // Clamping separately undoes the separation that was the whole point: two
+  // labels pushed past the same edge come back stacked on the same pixel,
+  // which is worse than where they started. Shifting keeps the gap.
+  if (hi < top) { lo += top - hi; hi = top; }
+  if (lo > bottom) { hi -= lo - bottom; lo = bottom; }
+  // Only reachable if the plot is shorter than the gap, where there is no
+  // arrangement that works and the caller has a bigger problem than labels.
+  hi = Math.max(top, hi);
+
+  return a <= b ? [hi, lo] : [lo, hi];
+}
+
 function chartTip(host) {
   let tip = host.querySelector('.chart-tip');
   if (!tip) {
@@ -156,9 +214,36 @@ function renderSeatChart(forecast) {
 
   const tx = x(threshold);
   svg.appendChild(svgEl('line', { x1: tx, x2: tx, y1: padT - 4, y2: H - padB, class: 'threshold-line' }));
-  const thresholdLabel = svgEl('text', { x: tx + 5, y: padT + 6, class: 'threshold-text' });
+  // Dropped a line so the two side labels can own the top of the plot. The
+  // threshold label can sit anywhere along its line; they cannot.
+  const thresholdLabel = svgEl('text', { x: tx + 5, y: padT + 22, class: 'threshold-text' });
   thresholdLabel.textContent = `${threshold} = majority`;
   svg.appendChild(thresholdLabel);
+
+  // --- direct labels -------------------------------------------------------
+  //
+  // Which colour means which majority, said in the top corners of the plot
+  // rather than in a swatch legend underneath. The corners are reliably empty:
+  // a seat distribution peaks in the middle and its tails are what reach the
+  // edges, so there is nothing up there to collide with.
+  //
+  // Only the sides that actually have bars get a label. A forecast lopsided
+  // enough to put every simulation on one side of the line should not print a
+  // key to a colour it never draws.
+  const shortLabels = W < 430;
+  for (const [present, text, lx, anchorTo, colour] of [
+    [bars.some((d) => d.seats < threshold),
+     shortLabels ? 'Rep. majority' : 'Republican majority', padL + 2, 'start', 'var(--rep)'],
+    [bars.some((d) => d.seats >= threshold),
+     shortLabels ? 'Dem. majority' : 'Democratic majority', W - padR - 2, 'end', 'var(--dem)'],
+  ]) {
+    if (!present) continue;
+    const label = svgEl('text', {
+      x: lx, y: padT + 9, class: 'series-label', fill: colour, 'text-anchor': anchorTo,
+    });
+    label.textContent = text;
+    svg.appendChild(label);
+  }
 
   // Roughly a dozen labels whatever the span, rounded to a friendly interval.
   // The Senate's plausible range is a dozen seats wide and the House's can be
@@ -464,7 +549,16 @@ function renderCandidateChart(host, race, opts = {}) {
   if (!trajectory.length) return;
 
   const W = chartWidth(host, opts.width ?? 560), H = opts.height ?? 210;
-  const padL = 40, padR = 12, padT = 12, padB = 28;
+
+  // The lines carry their own names now, so the right margin has to hold them.
+  const names = race.candidates ?? {};
+  const demName = names.dem || 'Democrat';
+  const repName = names.rep || 'Republican';
+  const demLabel = surname(demName) || 'Dem';
+  const repLabel = surname(repName) || 'Rep';
+
+  const padL = 40, padT = 12, padB = 28;
+  const padR = 8 + labelGutter([demLabel, repLabel]);
   const svg = makeSvg(W, H);
 
   // margin (D minus R, in points) -> Democratic share of the two-party vote
@@ -542,6 +636,25 @@ function renderCandidateChart(host, race, opts = {}) {
     }
   }
 
+  // --- direct labels -------------------------------------------------------
+  // Each line ends in its own candidate's name, in its own colour, which is
+  // what the swatch legend above the chart used to say indirectly.
+  const last = trajectory[trajectory.length - 1];
+  const [demY, repY] = separateLabels(
+    y(demShare(last.p50)), y(100 - demShare(last.p50)), 13, padT + 8, H - padB - 2,
+  );
+
+  for (const [text, ly, colour] of [
+    [demLabel, demY, 'var(--dem)'],
+    [repLabel, repY, 'var(--rep)'],
+  ]) {
+    const label = svgEl('text', {
+      x: W - padR + 6, y: ly + 3.5, class: 'series-label', fill: colour,
+    });
+    label.textContent = text;
+    svg.appendChild(label);
+  }
+
   const crosshair = svgEl('line', { y1: padT, y2: H - padB, class: 'crosshair' });
   crosshair.style.display = 'none';
   svg.appendChild(crosshair);
@@ -560,9 +673,6 @@ function renderCandidateChart(host, race, opts = {}) {
 
   host.appendChild(svg);
 
-  const names = race.candidates ?? {};
-  const demName = names.dem || 'Democrat';
-  const repName = names.rep || 'Republican';
   const tip = chartTip(host);
   let activeIndex = -1;
 

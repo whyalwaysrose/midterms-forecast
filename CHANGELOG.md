@@ -2,6 +2,14 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-09
+
+No new polling since 2026-09-08. Democratic chances of Senate control hold at 59.7%.
+
+No individual race moved enough to be worth reporting.
+
+---
+
 ## 2026-09-08
 
 No new polling since 2026-09-07. Democratic chances of Senate control hold at 59.2%.

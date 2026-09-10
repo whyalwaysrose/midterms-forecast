@@ -2,6 +2,28 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-10
+
+Democratic chances of Senate control are up 1.3 pts to 60.9% on no new polls. Projected seats 51.2 → 51.3 (+0.1).
+
+**National environment.** The generic ballot moved D+6.8 → D+7.0 (+0.2). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
+
+**Races that moved** (6 of 35):
+
+  - **South Carolina** — Democratic win probability 21.9% → 23.3% (+1.5 pts); projected margin R+8.0 → R+7.5 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Kansas** — Democratic win probability 17.2% → 18.5% (+1.3 pts); projected margin R+6.6 → R+6.3 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Alaska** — Democratic win probability 56.7% → 58.0% (+1.3 pts); projected margin D+1.0 → D+1.2 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Iowa** — Democratic win probability 37.7% → 38.8% (+1.1 pts); projected margin R+1.8 → R+1.7 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Maine** — Democratic win probability 67.5% → 68.5% (+1.0 pts); projected margin D+2.7 → D+2.9 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Nebraska** — Democratic win probability 8.9% → 9.2% (+0.3 pts); projected margin R+14.0 → R+13.7 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-09-09
 
 No new polling since 2026-09-08. Democratic chances of Senate control hold at 59.7%.

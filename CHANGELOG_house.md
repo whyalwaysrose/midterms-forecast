@@ -2,6 +2,14 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-11
+
+No new polling since 2026-09-10. Democratic chances of House control hold at 71.8%.
+
+No individual race moved enough to be worth reporting.
+
+---
+
 ## 2026-09-10
 
 Democratic chances of House control are up 1.3 pts to 71.8% on no new polls. Projected seats 236.1 → 237.3 (+1.2).

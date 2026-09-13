@@ -2,6 +2,35 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-13
+
+Democratic chances of House control are up 0.3 pts to 71.4% on 1 new poll. Projected seats 236.7 → 237.2 (+0.4).
+
+**Races that moved** (53 of 435):
+
+  - **VA-01** — Democratic win probability 58.1% → 69.7% (+11.7 pts); projected margin D+1.8 → D+4.3 (+2.5). Driven by 1 new poll:
+    - Ragnar Research Partners (2026-03-11, n=400, LV, R-aligned sponsor): D+2.3
+
+  - **OH-08** — Democratic win probability 22.4% → 25.0% (+2.5 pts); projected margin R+8.3 → R+7.7 (+0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **FL-15** — Democratic win probability 16.9% → 18.5% (+1.6 pts); projected margin R+10.3 → R+10.0 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **OH-15** — Democratic win probability 26.8% → 28.4% (+1.6 pts); projected margin R+4.8 → R+4.5 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **NC-11** — Democratic win probability 43.5% → 45.0% (+1.6 pts); projected margin R+1.8 → R+1.3 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **FL-25** — Democratic win probability 55.5% → 57.1% (+1.6 pts); projected margin D+1.5 → D+1.9 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **OH-09** — Democratic win probability 61.3% → 62.8% (+1.5 pts); projected margin D+3.1 → D+3.5 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **TX-34** — Democratic win probability 64.2% → 65.6% (+1.5 pts); projected margin D+2.8 → D+3.1 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **CA-40** — Democratic win probability 16.1% → 17.6% (+1.4 pts); projected margin R+10.5 → R+10.4 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **CA-31** — Democratic win probability 94.0% → 92.6% (-1.4 pts); projected margin D+17.5 → D+17.3 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-09-12
 
 Democratic chances of House control are down 0.8 pts to 71.0% on no new polls. Projected seats 237.3 → 236.7 (-0.6).

@@ -2,6 +2,47 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-14",
+   "previous_run_date": "2026-09-13",
+   "headline": "No new polling since 2026-09-13. Democratic chances of Senate control hold at 67.6%.",
+   "body": [
+    "**Races that moved** (2 of 35):",
+    "",
+    "  - **Louisiana** \u2014 Democratic win probability 11.3% \u2192 12.6% (+1.2 pts); projected margin R+12.5 \u2192 R+12.2 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Idaho** \u2014 Democratic win probability 2.1% \u2192 2.2% (+0.1 pts); projected margin R+15.7 \u2192 R+16.1 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-LA",
+     "name": "Louisiana",
+     "prob_before": 0.1135,
+     "prob_after": 0.1258,
+     "prob_delta": 0.012299999999999991,
+     "margin_before": -12.49,
+     "margin_after": -12.22,
+     "margin_delta": 0.2699999999999996,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-ID",
+     "name": "Idaho",
+     "prob_before": 0.0209,
+     "prob_after": 0.0218,
+     "prob_delta": 0.0009000000000000015,
+     "margin_before": -15.67,
+     "margin_after": -16.07,
+     "margin_delta": -0.40000000000000036,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-09-14\n\nNo new polling since 2026-09-13. Democratic chances of Senate control hold at 67.6%.\n\n**Races that moved** (2 of 35):\n\n  - **Louisiana** \u2014 Democratic win probability 11.3% \u2192 12.6% (+1.2 pts); projected margin R+12.5 \u2192 R+12.2 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Idaho** \u2014 Democratic win probability 2.1% \u2192 2.2% (+0.1 pts); projected margin R+15.7 \u2192 R+16.1 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-09-13",
    "previous_run_date": "2026-09-12",
    "headline": "No new polling since 2026-09-12. Democratic chances of Senate control hold at 67.6%.",

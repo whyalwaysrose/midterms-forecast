@@ -603,6 +603,43 @@ worse at every level. The residual gap is width, not shape.
     here: comparing the raw kernel against demeaned measurements makes it look 5x
     over-correlated, and shrinking it on that basis would make the interval far too narrow.
 
+11b. **The width is the correlated error, and it survives an outside challenge.**
+    Other forecasters put the House far higher: 50+1 at 97%, Polymarket at 86%, against
+    this model's 71.9% — on an *identical* median of 236 seats. So the whole
+    disagreement is width, which `scripts/implied_national_error.py` decomposes.
+
+    The obvious hypothesis — that the national error is too big — is wrong, and the
+    measurement kills it cleanly: **with the national term removed entirely the model
+    still only reaches 82.3%.** It is worth about 32 of the 100-seat span and nine
+    points of probability. Nor is the per-race posterior the culprit: at a median 8.93
+    points on the 397 unpolled districts it is enormous per race, yet worth only about
+    five seats of span, because independent error averages out over 435 seats and
+    correlated error does not.
+
+    What sets the width is the two correlated terms together. Scaling both:
+
+    | scale | national | state | P(D House) | 90% interval | span |
+    |---|---|---|---|---|---|
+    | 0.28 | 1.09 | 1.29 | 97% | — | — |
+    | 0.55 | 2.15 | 2.55 | 86% | — | — |
+    | 1.00 | 3.90 | 4.61 | **73.2%** | 189–289 | 100 |
+    | 1.36 | 5.29 | 6.26 | 68% | — | — |
+
+    To agree with 50+1 this model would have to cut its correlated error to **28% of
+    committed** — a national term of 1.09 points against the **3.46 points RMSE
+    measured across thirteen cycles** of generic-ballot miss (§5.1). That is a claim
+    that midterm national polling is about three times more reliable than its own
+    record. DDHQ's 68% implies the opposite: 1.36×, *more* correlated error than we
+    carry.
+
+    So the interval is not an artefact to be tuned away. It is what the measured
+    national error does to a chamber with 51 seats within five points of the line, and
+    the forecasters who disagree are the ones without a published measurement behind
+    their width. Two limits: an implied scale is what *this* machinery would need to
+    agree, not a claim about how another model is built; and the re-simulation draws
+    the posterior independently across races, which is why it reproduces the headline
+    to 1.3 points rather than exactly.
+
 12. **The kernel has no state term.** Districts in one state share a state polling
     environment, state media markets and statewide candidates; the kernel knows only
     region and presidential lean. Adding it would widen the House interval rather than

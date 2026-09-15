@@ -351,6 +351,23 @@ counterpart to `compare_to_markets.py`. Diagnostic only; a test asserts nothing 
   inside tolerance at 56% and 2.0 points off at 67.6%. Never quote a number derived from
   that re-simulation without `reproduces_headline()` passing.
 
+## The House interval is wide on purpose, and it has been challenged from outside
+
+Other forecasters put the House at 86–97% against this model's 71.9%, on the *same*
+median of 236 seats. `scripts/implied_national_error.py` decomposes the gap.
+
+- **Do not "fix" the width by shrinking the national error.** Removing it entirely still
+  only reaches 82.3%. It is worth ~32 of the 100-seat span.
+- **The per-race posterior is not the culprit either** — a median 8.93 points on the 397
+  unpolled districts, worth about five seats of span, because independent error averages
+  out across 435 seats and correlated error does not. This is the single most
+  counter-intuitive fact about the chamber arithmetic.
+- **Agreeing with 50+1 would take a 0.28× scale on both correlated terms** — a national
+  error of 1.09 points against 3.46 measured over thirteen cycles. DDHQ's 68% implies
+  1.36×, i.e. more than we carry. We are the ones with a measurement behind the number.
+- Anything derived from that re-simulation needs its headline check: the posterior is
+  drawn independently across races, so it reproduces the published number to ~1.3 points.
+
 ## Known rough edges
 
 Listed in the README under "Known data-quality items" and `docs/METHODOLOGY.md` §9. The

@@ -35,8 +35,9 @@ between bid and ask on each leg.
 
 The Nebraska sensitivity is computed by re-simulating from the *published*
 per-race margins with the config's own error scales, rather than by refitting.
-That reproduces the published headline to within 0.1 points, which is the check
-that it is measuring the model and not an approximation of it.
+See ``scripts/_sensitivity.py``: the re-simulation has to put back the posterior
+spread that the published margins' median leaves out, and it checks itself
+against the payload's own headline rather than assuming it worked.
 
 Usage:
     python scripts/compare_to_markets.py
@@ -48,15 +49,14 @@ import json
 import sys
 from pathlib import Path
 
-import numpy as np
-
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
-from midterms import fundamentals as F  # noqa: E402
 from midterms import paths  # noqa: E402
-from midterms.config import load_all  # noqa: E402
-from midterms.model.correlation import cholesky_factor, correlation_matrix  # noqa: E402
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from _sensitivity import senate_both_ways  # noqa: E402
 
 BALANCE_SLUG = "balance-of-power-2026-midterms"
 
@@ -90,42 +90,6 @@ def market_probabilities(payload: dict) -> tuple[dict[str, float], float] | None
             float(event.get("volume") or 0.0),
         )
     return None
-
-
-def senate_without_osborn() -> tuple[float, float]:
-    """P(D Senate) counting Nebraska's independent, and not counting him.
-
-    Re-simulated from the published margins rather than refitted: the election-
-    day error is applied at simulation time, so everything needed is in the
-    payload plus the config. The first number is checked against the published
-    headline by the caller.
-    """
-    races, cfg = load_all(chamber="senate")
-    fundamentals = F.compute(races, cfg)
-    chol = cholesky_factor(
-        correlation_matrix(fundamentals, cfg.election_day_error.correlation)
-    )
-
-    payload = json.loads(
-        (paths.SITE_DATA_DIR / "forecast.json").read_text(encoding="utf-8")
-    )
-    by_id = {r["id"]: r for r in payload["races"]}
-    base = np.array([by_id[r.id]["margin"]["p50"] for r in races.races]) / 50.0
-
-    ede = cfg.election_day_error
-    rng = np.random.default_rng(9)
-    national = rng.normal(0.0, ede.national_sd, (DRAWS, 1))
-    z = rng.standard_normal((DRAWS, len(base)))
-    wins = (base + national + ede.state_sd * (z @ chol.T)) > 0
-
-    control = payload["chamber_forecast"]
-    held = control["seats_not_up"]["D"]
-    need = control["dem_seats_for_majority"]
-
-    keep = [i for i, r in enumerate(races.races) if r.unit != "NE"]
-    with_osborn = float(((held + wins.sum(axis=1)) >= need).mean())
-    without = float(((held + wins[:, keep].sum(axis=1)) >= need).mean())
-    return with_osborn, without
 
 
 def main() -> int:
@@ -172,7 +136,7 @@ def main() -> int:
               f"{100 * market[chamber]:7.1f}% {100 * gap:+7.1f}")
 
     # --- how much of the Senate gap is a difference of definition? ---------
-    with_osborn, without = senate_without_osborn()
+    with_osborn, without = senate_both_ways(senate)
     published = senate["chamber_forecast"]["dem_control_prob"]
     drift = abs(with_osborn - published)
 

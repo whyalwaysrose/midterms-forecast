@@ -174,6 +174,38 @@ stays in the script rather than having been done once by hand.
 The CC0 file remains in the repository: it is the cross-check that found this, and the
 record of a method that needs no licence at all.
 
+## Other people's forecasts: hand-entered, because there is nothing to fetch
+
+| | |
+|---|---|
+| **Source** | Published 2026 forecasts from other modellers |
+| **Licence** | Not applicable — no data is redistributed. Individual figures are quoted with attribution and a link, the way a citation works. |
+| **Held in** | `data/rivals/forecasts.csv` |
+| **Read by** | `scripts/compare_to_forecasters.py`. Nothing under `model/` may import it, and a test asserts that. |
+
+This is the only source in the project that is not automated, and the reason is that
+there is nothing to automate against. Checked on 2026-09-15:
+
+| Forecaster | Machine-readable? | Access |
+|---|---|---|
+| Silver Bulletin | No | Senate probability in the free preview; House and seats behind the paywall |
+| The Economist | No | Interactive paywalled; the free article is from April, before the new maps |
+| 270toWin | No | Returns **403** to an automated fetch |
+| Race to the WH | No | Publishes no probability in the page source |
+| 50+1 | No | Toplines free, full tables paid |
+
+So there is no daily scrape to write — and for the paywalled ones there should not be.
+Each row instead carries the date the forecaster published the number, the URL it came
+from, and the date it was copied down. **A number nobody can point at does not go in**,
+which the tests enforce.
+
+The cost is staleness: the registry is only as current as the last time someone updated
+it. That is handled by comparing like with like rather than by pretending otherwise —
+each rival snapshot is scored against *this model's own archived run from that date*,
+and the comparison is refused outright when no run falls within the tolerance. Two of
+the four rows currently decline to compare for exactly that reason, one of them because
+its figure predates the mid-decade redistricting that moved 181 seats.
+
 ## Reproducibility
 
 Every fetch writes a gzipped, dated snapshot to `data/raw/votehub-<date>.json.gz` **before

@@ -325,6 +325,27 @@ three elevation tokens (`--shadow-*`) and a prose measure (`--measure`).
   control), and never round a close call into a claim — a generic ballot whose
   interval spans zero is not a lead.
 
+## Contrasting against other forecasters
+
+`scripts/compare_to_forecasters.py` against `data/rivals/forecasts.csv`, the model-vs-model
+counterpart to `compare_to_markets.py`. Diagnostic only; a test asserts nothing under
+`model/` can reach it.
+
+- **Hand-entered on purpose.** No serious 2026 model has a machine-readable feed, and most
+  are paywalled (see DATA_SOURCES). Every row needs a source URL and a publication date.
+- **Rival snapshots are compared against our archived run from the same date**, never
+  against today's. `outputs/runs/<date>/` is what makes that possible. The script refuses
+  when nothing falls within the tolerance rather than aligning to a near run — otherwise a
+  April figure gets compared across a redistricting that moved 181 seats.
+- **The Nebraska decomposition re-simulates, and checks itself.** `scripts/_sensitivity.py`
+  holds the one implementation, shared with `compare_to_markets.py`. It must put back the
+  posterior spread the published margins' median leaves out: those margins already contain
+  the election-day error, so `median + election-day error` has the election-day variance
+  alone and is too narrow by ~4.5 points of SD per race. Too narrow pushes a probability
+  away from 50%, so the error is invisible at a coin flip and grows from there — it was
+  inside tolerance at 56% and 2.0 points off at 67.6%. Never quote a number derived from
+  that re-simulation without `reproduces_headline()` passing.
+
 ## Known rough edges
 
 Listed in the README under "Known data-quality items" and `docs/METHODOLOGY.md` §9. The

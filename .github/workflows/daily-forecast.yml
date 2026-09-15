@@ -116,6 +116,23 @@ jobs:
           PYTENSOR_FLAGS: "cxx="
         run: python -m midterms.cli run --quiet-sampler --chamber house
 
+      # The one measurement that matters, and the only one that cannot be
+      # repeated. It reads the chamber totals off Wikipedia's 2026 articles and
+      # prints nothing but "no result yet" until November -- which is the point:
+      # nobody has to remember to run it on the night, and by the time it
+      # matters it will have been exercised every day for weeks.
+      #
+      # continue-on-error because a wiki being slow must never cost a forecast.
+      - name: Score against the result, if there is one yet
+        continue-on-error: true
+        timeout-minutes: 5
+        run: |
+          mkdir -p outputs/score
+          for chamber in senate house; do
+            python -m midterms.cli score --chamber "$chamber" \
+              | tee "outputs/score/$chamber.txt"
+          done
+
       - name: Commit regenerated data
         run: |
           git config user.name  "github-actions[bot]"
@@ -132,6 +149,9 @@ jobs:
                   site/data/us-districts.json \
                   outputs/runs \
                   CHANGELOG.md
+          # Empty until election night, then the scorecard -- committed so the
+          # result lands in a diff rather than only in a CI log nobody reads.
+          git add outputs/score || true
           git add CHANGELOG_house.md || true
           # Forced: data/raw is gitignored for poll snapshots, which are large
           # and regenerable. This one is small and is the only copy readers can

@@ -523,6 +523,50 @@ the config would double-count.
 A fat-tailed (Student-t) election-day error was tested and **rejected**: it made coverage
 worse at every level. The residual gap is width, not shape.
 
+## 8c. Scoring the 2026 result — pre-registered 2026-09-15
+
+`midterms score --chamber {senate,house}`, implemented in `src/midterms/score.py`.
+
+**Fixed before the result, deliberately.** A metric chosen after seeing the outcome is
+not a measurement. What will be computed is settled here, seven weeks out, while nobody
+knows the answer:
+
+| Level | Metric |
+|---|---|
+| Per race | Brier, log score, reliability curve, coverage of the 50% and 90% margin intervals, mean absolute margin error and its sign |
+| Baselines | Always 50%, and always the fundamentals favourite. A Brier score alone is unreadable |
+| Per chamber | Probability given to the winning side, whether the seat total fell in the 90% interval, and **where in the predicted distribution it fell** |
+| Against rivals | The same Brier on the same outcome for every forecaster in `data/rivals/forecasts.csv`, on their last published number |
+
+**What one election can and cannot settle**, also fixed in advance. Chamber-level: almost
+nothing. Two outcomes, one draw. If Democrats take the House then 50+1's 97% beats this
+model's 71.9%, and that is close to meaningless — a confident forecast wins whenever it
+is right, which is what confident means. Race-level is different: 435 districts and 35
+Senate races are enough for a reliability curve to say something real, and interval
+coverage is a direct test of the width §9.11b puts in question.
+
+So: **the per-race calibration is evidence, the chamber result is an anecdote.** That
+ordering is recorded now so that invoking it in November cannot look like special
+pleading.
+
+The seat percentile is the most informative thing a single election yields. One result
+cannot show an interval was too wide; a result at the 3rd percentile is still a fact
+about the shape of the forecast.
+
+**The result arrives on its own.** `src/midterms/data/results.py` reads the chamber
+totals from the infobox of Wikipedia's 2026 election articles — the one part of those
+pages with a stable schema, and already present with empty seat fields. Every parse is
+validated against the chamber size, which is what separates "no result yet" from a
+confidently wrong one: a mis-parse almost never sums to exactly 435. Verified against
+2018 and 2022 for both chambers. Independents are reported separately and never folded
+into a party, because the forecast counts the Democratic *caucus* and on the night
+nobody yet knows who caucuses with whom.
+
+The daily workflow runs it from now on. Until November it prints "no result yet", which
+means that by the time it matters it will have been exercised every day for weeks rather
+than debugged on the night.
+
+
 ## 9. Known weaknesses
 
 0. ~~**The House model is built on the wrong district map.**~~ **Fixed.** Ten states

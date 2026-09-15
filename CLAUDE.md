@@ -368,6 +368,23 @@ median of 236 seats. `scripts/implied_national_error.py` decomposes the gap.
 - Anything derived from that re-simulation needs its headline check: the posterior is
   drawn independently across races, so it reproduces the published number to ~1.3 points.
 
+## Scoring the result is pre-registered — do not change the metric after November
+
+`midterms score`, in `src/midterms/score.py`, committed 2026-09-15. METHODOLOGY 8c fixes
+what gets computed and, just as importantly, **how much weight each level carries**: the
+per-race calibration is evidence, the chamber outcome is an anecdote. Changing either
+after the result is visible turns a measurement into a press release.
+
+- **Results arrive on their own** from Wikipedia's 2026 infoboxes (`data/results.py`),
+  validated against chamber size. A parse that does not sum to 435 or 100 is refused, not
+  used — the difference between "no result yet" and a confidently wrong one.
+- **Independents are never folded into a party.** The forecast counts the Democratic
+  caucus; Wikipedia counts parties; on the night nobody knows who caucuses with whom.
+- **`--dry-run SEED`** scores one election drawn from the forecast's own distribution. It
+  exercises the pipeline and shows what November will print. It cannot validate the
+  model — scoring a forecast against its own draws is calibrated by construction.
+- The daily workflow runs it and prints "no result yet" until November, on purpose.
+
 ## Known rough edges
 
 Listed in the README under "Known data-quality items" and `docs/METHODOLOGY.md` §9. The

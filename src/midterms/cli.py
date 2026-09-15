@@ -483,6 +483,12 @@ def cmd_bundle(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_score(args: argparse.Namespace) -> int:
+    from .score import run_score
+
+    return run_score(chamber=args.chamber, dry_run=args.dry_run)
+
+
 def cmd_backtest(args: argparse.Namespace) -> int:
     from .backtest import run_backtest
 
@@ -582,6 +588,17 @@ def build_parser() -> argparse.ArgumentParser:
     backtest = sub.add_parser("backtest", help="calibration check against held-out polls")
     backtest.add_argument("--holdout-days", type=int, default=30)
     backtest.set_defaults(func=cmd_backtest)
+
+    score = sub.add_parser(
+        "score", help="score the published forecast against the actual result"
+    )
+    score.add_argument("--chamber", choices=["senate", "house"], default="senate")
+    score.add_argument(
+        "--dry-run", type=int, metavar="SEED", default=None,
+        help="score against one election drawn from the forecast's own "
+             "distribution, to exercise the pipeline before there is a result",
+    )
+    score.set_defaults(func=cmd_score)
 
     return parser
 

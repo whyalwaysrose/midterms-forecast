@@ -829,6 +829,26 @@ table.polls td.num { font-family: var(--mono); text-align: right; font-variant-n
 .method-list li { margin-bottom: 8px; }
 .method-list strong, .method-panel p strong { color: var(--text); font-weight: 600; }
 
+/* The equation, folded away.
+ *
+ * The model panel used to open with it, which meant the first thing a reader
+ * met was four Greek letters. The prose above now says the same thing, and this
+ * is here for the reader who wants the formal version -- closed by default, so
+ * it is an offer rather than a toll gate. */
+.method-details {
+  margin-top: var(--s-6);
+  border-top: 1px solid var(--border);
+  padding-top: var(--s-5);
+}
+.method-details summary {
+  cursor: pointer;
+  color: var(--dem-line);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+.method-details[open] summary { margin-bottom: var(--s-5); }
+.method-details p { color: var(--text-dim); font-size: var(--fs-sm); margin: 0 0 var(--s-5); max-width: var(--measure); }
+
 /* Term definitions for the model equation. */
 .term-list { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; }
 .term-list dt {

@@ -301,48 +301,92 @@
     <div class="method-panel" id="m-model">
       <div class="method-cols">
         <div>
-          <h3>One equation</h3>
-          <p>Everything is tracked on the log-odds of the Democratic share of the two-party
-          vote. Each race, on each day, is:</p>
-          <p class="formula">&theta;<sub>r,t</sub> = &alpha;<sub>r</sub> + &lambda;<sub>r</sub>&middot;&eta;<sub>t</sub> + &epsilon;<sub>r,t</sub></p>
-          <dl class="term-list">
-            <dt>&eta;<sub>t</sub></dt>
-            <dd>The <strong>national environment</strong> &mdash; a random walk driven by
-            generic-ballot polls. One number for the whole country on a given day.</dd>
-            <dt>&alpha;<sub>r</sub></dt>
-            <dd>The race&rsquo;s <strong>baseline</strong> if the country were exactly tied,
-            from presidential lean in 2024 and 2020 plus incumbency.</dd>
-            <dt>&lambda;<sub>r</sub></dt>
-            <dd><strong>Elasticity</strong> &mdash; how hard this race swings when the
-            country swings. Estimated per race, pooled toward 1.</dd>
-            <dt>&epsilon;<sub>r,t</sub></dt>
-            <dd>The race&rsquo;s <strong>own drift</strong>: candidate news, spending,
-            scandal.</dd>
-          </dl>
+          <h3>Three things, added together</h3>
+          <p>For every race, on every day, the model estimates one thing: the share of the
+          vote each side would get if the election were held that day. It builds that
+          estimate out of three ingredients.</p>
+
+          <ol class="method-list">
+            <li><strong>Where the race starts.</strong> Before a single poll is read, how
+            does this place vote? That comes from the 2024 and 2020 presidential results
+            there, plus whether an incumbent is on the ballot. Think of it as the answer
+            you would give if the national mood were exactly tied.</li>
+
+            <li><strong>Which way the country has moved since.</strong> Hundreds of national
+            polls ask which party people would back for Congress. Those give a single number
+            for the national mood, and the model tracks it drifting day by day rather than
+            treating today&rsquo;s polls as the last word.</li>
+
+            <li><strong>What is happening in this race in particular.</strong> A strong
+            candidate, a scandal, a spending blitz &mdash; movement that is about this
+            contest rather than the whole country.</li>
+          </ol>
+
+          <p>Add the three together and you have the estimate for that race on that day.
+          One more adjustment: races differ in how hard they swing when the country swings.
+          A district packed with voters who have already picked a side barely moves; a
+          competitive suburb moves a lot. The model works out that sensitivity for each
+          race rather than assuming everywhere responds alike.</p>
+
+          <h3 class="method-subhead">What comes out is a range, not a number</h3>
+          <p>The model never settles on one answer per race. It keeps thousands of versions
+          of the whole map &mdash; every one internally consistent, some good for Democrats,
+          some good for Republicans &mdash; and counts how often each side ends up with a
+          majority across all of them. That count is the percentage at the top of this page.</p>
+          <p>This is why a race can be described as a 70% favourite and still lose without
+          the forecast having been wrong. Thirty out of a hundred is not nothing.</p>
         </div>
         <div>
           <h3>Why it is built this way</h3>
-          <p>Defining the baseline <em>at a tied national environment</em> is what stops the
-          national swing being counted twice &mdash; once inside each race&rsquo;s starting
-          point and again through &eta;.</p>
-          <p>Race drift is <strong>correlated across similar races</strong>. If Michigan
-          moves toward Democrats, Wisconsin probably did too, and treating them as
-          independent throws that away. This matters most for the
-          <span id="m-unpolled">unpolled</span> races, which would otherwise have nothing to
-          follow but the national trend.</p>
-          <p>That drift is also constrained to <strong>average out across races</strong>.
-          A race&rsquo;s drift is meant to be its movement <em>relative to the field</em>;
-          the field&rsquo;s own movement is what &eta; measures, from hundreds of national
-          polls. Without the constraint the two describe the same thing and the model cannot
-          tell them apart &mdash; and in practice the drift term wins, because it has one
-          parameter per race to do it with. The symptom was a House forecast that did not
-          budge when ten states&rsquo; new district maps moved its starting point by thirteen
-          seats.</p>
-          <p>The model is fitted with <a href="https://www.pymc.io/" rel="noopener">PyMC</a>
-          using Hamiltonian Monte Carlo, so the output is a full probability distribution
-          rather than a single number. The seat forecast comes from simulating all
+          <p><strong>The starting point assumes a tied country.</strong> That sounds like a
+          technicality and is the opposite. If a race&rsquo;s starting point already had a
+          good Democratic year baked into it, and the national mood were then added on top,
+          the same swing would be counted twice and every forecast would be too extreme.</p>
+
+          <p><strong>Races move in groups.</strong> If Michigan drifts toward Democrats,
+          Wisconsin probably did too. Treating them as unrelated throws that information
+          away, and it matters most in the
+          <span id="m-unpolled">unpolled races</span> &mdash; the ones with nothing of
+          their own to go on.</p>
+
+          <p><strong>But those group movements have to average out.</strong> The third
+          ingredient is supposed to capture how a race moves <em>compared with everywhere
+          else</em>. The country&rsquo;s own movement is already the second ingredient,
+          measured from hundreds of national polls. If the third one is left free to drift
+          the whole map at once, the two are describing the same thing, and the model cannot
+          tell which is which &mdash; in practice the per-race term wins, because it has one
+          knob per race to do it with.</p>
+          <p>That is not hypothetical. It showed up as a House forecast that did not budge
+          when ten states&rsquo; new district maps moved its starting point by thirteen
+          seats. The per-race term had quietly absorbed the change.</p>
+
+          <p>The model is fitted with <a href="https://www.pymc.io/" rel="noopener">PyMC</a>,
+          which explores the range of settings consistent with the polls rather than hunting
+          for a single best fit. The seat forecast comes from running all
           <strong id="m-nraces">&mdash;</strong> races together
-          <strong id="m-nsims">many</strong> times.
+          <strong id="m-nsims">many</strong> times.</p>
+
+          <details class="method-details">
+            <summary>The same thing, as an equation</summary>
+            <p>Everything is tracked on the log-odds of the Democratic share of the
+            two-party vote. Each race <em>r</em>, on each day <em>t</em>, is:</p>
+            <p class="formula">&theta;<sub>r,t</sub> = &alpha;<sub>r</sub> + &lambda;<sub>r</sub>&middot;&eta;<sub>t</sub> + &epsilon;<sub>r,t</sub></p>
+            <dl class="term-list">
+              <dt>&alpha;<sub>r</sub></dt>
+              <dd>Where the race starts &mdash; its <strong>baseline</strong> at a tied
+              national environment, from presidential lean in 2024 and 2020 plus
+              incumbency.</dd>
+              <dt>&eta;<sub>t</sub></dt>
+              <dd>The <strong>national environment</strong>, a random walk driven by
+              generic-ballot polls. One number for the whole country on a given day.</dd>
+              <dt>&lambda;<sub>r</sub></dt>
+              <dd><strong>Elasticity</strong> &mdash; how hard this race swings when the
+              country swings. Estimated per race, pooled toward 1.</dd>
+              <dt>&epsilon;<sub>r,t</sub></dt>
+              <dd>The race&rsquo;s <strong>own drift</strong>, constrained to sum to zero
+              across races at every step.</dd>
+            </dl>
+          </details>
         </div>
       </div>
     </div>

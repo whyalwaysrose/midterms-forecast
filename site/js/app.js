@@ -353,7 +353,9 @@ function renderMethodology(forecast) {
   const isHouse = chamber === 'house';
 
   const unpolled = races.filter((r) => r.poll_count === 0).length;
-  set('m-unpolled', unpolled ? `${unpolled} races with no polling at all` : 'unpolled');
+  // The span carries the whole noun phrase, so the fallback has to as well --
+  // the markup around it supplies no noun of its own.
+  set('m-unpolled', unpolled ? `${unpolled} races with no polling at all` : 'unpolled races');
   set('m-nsims', (cf.n_simulations ?? 0).toLocaleString());
   set('m-nraces', races.length.toLocaleString());
   set('mh-unpolled', unpolled.toLocaleString());

@@ -483,6 +483,12 @@ def cmd_bundle(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_calibrate_forward(args: argparse.Namespace) -> int:
+    from .forward import run_forward
+
+    return run_forward(chamber=args.chamber)
+
+
 def cmd_score(args: argparse.Namespace) -> int:
     from .score import run_score
 
@@ -599,6 +605,13 @@ def build_parser() -> argparse.ArgumentParser:
              "distribution, to exercise the pipeline before there is a result",
     )
     score.set_defaults(func=cmd_score)
+
+    forward = sub.add_parser(
+        "calibrate-forward",
+        help="score today's new polls against the last run that had not seen them",
+    )
+    forward.add_argument("--chamber", choices=["senate", "house"], default="senate")
+    forward.set_defaults(func=cmd_calibrate_forward)
 
     return parser
 

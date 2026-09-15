@@ -385,6 +385,27 @@ after the result is visible turns a measurement into a press release.
   model — scoring a forecast against its own draws is calibrated by construction.
 - The daily workflow runs it and prints "no result yet" until November, on purpose.
 
+## Calibration accumulates by itself now — do not score a poll the model has seen
+
+`midterms calibrate-forward` (`src/midterms/forward.py`) scores each day's new polls
+against the last archived run that had not seen them. METHODOLOGY 8a.
+
+- **The out-of-sample filter is the whole claim.** A poll is scored only if its id is
+  absent from the archived run's `all_poll_ids` (races) or `predictive.national_poll_ids`
+  (generic ballot). Drop that check and the numbers describe the model's fit, not its
+  predictive accuracy, and will look flatteringly good.
+- **Rebuild the predictive from the archived run, never from the live config.**
+  `design_effect` and `student_t_nu` have both moved this cycle; the archived values
+  travel with the run for that reason.
+- **The spread is not the latent trajectory alone.** House effect, population effect,
+  sampling noise and excess noise all sit between the latent state and a published
+  number. Omitting them makes a well-calibrated model look overconfident and invites
+  exactly the wrong correction to `design_effect`.
+- **Rows are not independent** — one pollster, one race, consecutive days. Report the
+  count beside any coverage figure and treat it as a trend, not a p-value.
+- The archive carries only `LATENT_TAIL` trajectory points (see `slim_payload`); the full
+  payload is 380 KB and archiving it daily would add tens of megabytes a cycle.
+
 ## Known rough edges
 
 Listed in the README under "Known data-quality items" and `docs/METHODOLOGY.md` §9. The

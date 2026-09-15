@@ -78,6 +78,10 @@ def build_model(data: ModelData, cfg: ModelConfig) -> pm.Model:
         "grid": [d.isoformat() for d in data.grid_dates],
         "grid_step": list(range(data.n_steps)),
         "pollster": list(data.pollster_names),
+        # Named so the trace says which population each effect belongs to.
+        # Forward calibration reads these back out of an archived run, and a
+        # bare population_effect_dim_0 would make it guess the order.
+        "population": list(data.populations),
         "population_nonref": [
             data.populations[i] for i in data.nonreference_population_indices
         ],
@@ -287,7 +291,7 @@ def build_model(data: ModelData, cfg: ModelConfig) -> pm.Model:
         population_effect = pt.set_subtensor(
             pt.zeros(len(data.populations))[nonref], population_effect_nonref
         )
-        pm.Deterministic("population_effect", population_effect)
+        pm.Deterministic("population_effect", population_effect, dims="population")
 
         # Partisan sponsors favour their own side, so the coefficient is
         # constrained positive and multiplied by a signed indicator.

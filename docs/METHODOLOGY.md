@@ -479,6 +479,41 @@ and tightening the likelihood to fit 33 polls would be fitting the diagnostic in
 of the phenomenon. The correct next step is to accumulate held-out polls across daily
 runs and revisit `design_effect` and `ν` once the sample supports it.
 
+### 8a. That accumulation now happens on its own
+
+The sentence above sat unactioned for four weeks, because the procedure it describes
+costs a second full sample and so was run once by hand and never again. There is a free
+version, and it is now wired into the daily job:
+
+> Every day brings polls that **yesterday's fit had never seen**, and yesterday's
+> forecast is archived. Scoring today's new polls against yesterday's posterior is
+> genuinely out of sample, costs no sampling at all, and grows by a few polls a day
+> without anyone remembering to do anything.
+
+`midterms calibrate-forward --chamber {senate,house}`, in `src/midterms/forward.py`.
+
+The archived run carries a `predictive` block — house effects, population effects, the
+partisan-sponsor lean, excess noise, and the likelihood's own `design_effect` and `ν` —
+plus a short tail of the latent trajectory. That is what makes the archive
+self-sufficient: the predictive is rebuilt from the run being scored, not from today's
+config, because **both `design_effect` and `ν` have been retuned during this cycle** and
+reading the live values would grade an old forecast against a likelihood it never had.
+
+    centre = latent + house + population + partisan × sign
+    spread² = latent² + house² + population² + sampling(n, design effect) + excess²
+
+then Student-t with that run's own ν, variance correction included.
+
+Two honest limits, both reported alongside every figure. The rows are **not
+independent**: a pollster publishing ten polls in a week contributes ten rows sharing a
+house effect, and consecutive days in one race share most of a latent state, so the
+effective sample is smaller than the row count. And this tests prediction of *polls*,
+never of the result — polls can be collectively biased in a way it cannot see, which is
+exactly what §5 exists to carry.
+
+Accumulating from 2026-09-16. Runs before this date carry no `predictive` block, and the
+scorer refuses them rather than reconstructing one from current settings.
+
 Two things this does *not* imply. First, being underconfident about **polls** is much
 safer than being overconfident. Second, it says little about the chamber forecast: the
 seat distribution's width is dominated by the correlated election-day error of §5,

@@ -359,6 +359,7 @@ class ForecastRun:
                 "n_simulations": int(sim.n_sims),
             },
             "races": race_records,
+            "predictive": self._predictive_block(),
             "markets": _markets_block(),
             "methodology": _methodology_block(self.cfg, races.chamber),
             "diagnostics": {k: _round(v, 4) for k, v in self.diagnostics.items()},
@@ -371,6 +372,88 @@ class ForecastRun:
                     k: sorted(v) for k, v in self.table.unknown_candidates.items()
                 },
             },
+        }
+
+    def _predictive_block(self) -> dict:
+        """Everything a *later* run needs to score polls this one never saw.
+
+        The standing calibration question (METHODOLOGY 8) is whether the model
+        predicts polls it has not been shown. Answering it by refitting on a
+        holdout window costs a second full sample, which is why it was run once
+        by hand in August on 33 polls and then never again.
+
+        There is a free version. Every day brings polls that yesterday's fit had
+        never seen, and yesterday's forecast is archived. Scoring today's new
+        polls against yesterday's posterior is genuinely out of sample, costs no
+        sampling at all, and accumulates on its own.
+
+        What that needs is the posterior of everything standing between the
+        latent state and an observed poll -- house effect, population effect,
+        partisan lean, excess noise -- because a predictive built from the
+        latent trajectory alone would be too narrow and would make the model
+        look overconfident when it is not. The trace itself is far too large to
+        keep (and is gitignored), so this publishes the summaries instead: a few
+        kilobytes that make the archived payload self-sufficient.
+
+        Additive, so the schema version does not move. The front end reads none
+        of this, and an older cached app.js is unaffected by its presence.
+
+        Returns None rather than raising. This is a diagnostic; a forecast that
+        failed to publish because a calibration extra could not be assembled
+        would be a bad trade, and the absence is visible in the next run's
+        forward score rather than silent.
+        """
+        try:
+            return self._build_predictive_block()
+        except Exception:                                    # noqa: BLE001
+            log.exception("could not assemble the predictive block; omitting it")
+            return None
+
+    def _build_predictive_block(self) -> dict:
+        posterior = self.idata.posterior
+
+        def summarise(values) -> dict:
+            flat = np.asarray(values).ravel()
+            return {"mean": _round(float(flat.mean()), 5),
+                    "sd": _round(float(flat.std(ddof=1)), 5)}
+
+        # Read from the trace's own coordinates rather than from the design
+        # object, so this cannot drift out of step with what was actually
+        # sampled, and so nothing new has to be threaded into ForecastRun.
+        pollsters = [str(v) for v in posterior.coords["pollster"].values]
+        house = posterior["house_effect"].to_numpy().reshape(-1, len(pollsters))
+        populations = [str(v) for v in posterior.coords["population"].values]
+        population = posterior["population_effect"].to_numpy().reshape(
+            -1, len(populations)
+        )
+
+        return {
+            "house_effect": {
+                name: summarise(house[:, i]) for i, name in enumerate(pollsters)
+            },
+            "population_effect": {
+                name: summarise(population[:, i])
+                for i, name in enumerate(populations)
+            },
+            "partisan_effect": summarise(posterior["partisan_effect"].to_numpy()),
+            "sigma_excess": summarise(posterior["sigma_excess"].to_numpy()),
+            # The reference population is the one pinned at zero by construction,
+            # which is how it identifies itself without being told.
+            "reference_population": next(
+                (name for i, name in enumerate(populations)
+                 if abs(float(population[:, i].mean())) < 1e-9
+                 and float(population[:, i].std()) < 1e-9),
+                populations[0],
+            ),
+            # The likelihood's own settings, so a later run scores against the
+            # distribution this model actually used rather than whatever the
+            # config happens to say by then.
+            "design_effect": self.cfg.polls.design_effect,
+            "student_t_nu": self.cfg.polls.student_t_nu,
+            "match_student_t_variance": self.cfg.polls.match_student_t_variance,
+            # Race polls are identified per race by `all_poll_ids`; the generic
+            # ballot has no race to hang them off, so they are listed here.
+            "national_poll_ids": sorted(p.id for p in self.table.national),
         }
 
     def history_record(self) -> dict:
@@ -545,6 +628,12 @@ def _methodology_block(cfg: ModelConfig, chamber: str = "senate") -> dict:
     return block
 
 
+#: Trajectory points kept in the archive, counted back from the run date. See
+#: slim_payload: enough for forward calibration to place a poll fielded in the
+#: surrounding weeks, without archiving fifteen months of history every day.
+LATENT_TAIL = 8
+
+
 def slim_payload(payload: dict) -> dict:
     """Strip a forecast down to what day-over-day diffing actually needs.
 
@@ -559,6 +648,14 @@ def slim_payload(payload: dict) -> dict:
 
     Details of any genuinely new poll come from the *current* payload, not the
     archived one, so IDs alone are sufficient here.
+
+    Forward calibration (``forward.py``) needs a little more: it scores the
+    polls a *later* day brings against this run's posterior, which means the
+    archive has to carry the predictive summaries and enough of the latent
+    trajectory to cover a poll fielded shortly before or after the run. The tail
+    is short on purpose -- at roughly weekly spacing, eight points reach back two
+    months, which comfortably covers a poll published late, and keeps the archive
+    at tens of kilobytes rather than the full payload's 380.
     """
     return {
         "schema_version": payload["schema_version"],
@@ -566,7 +663,11 @@ def slim_payload(payload: dict) -> dict:
         "run_date": payload["run_date"],
         "generated_at": payload["generated_at"],
         "chamber_forecast": payload["chamber_forecast"],
-        "national": {"generic_ballot": payload["national"]["generic_ballot"]},
+        "national": {
+            "generic_ballot": payload["national"]["generic_ballot"],
+            "latent": payload["national"].get("trajectory", [])[-LATENT_TAIL:],
+        },
+        "predictive": payload.get("predictive"),
         "poll_summary": payload["poll_summary"],
         "diagnostics": payload["diagnostics"],
         "races": [
@@ -577,6 +678,7 @@ def slim_payload(payload: dict) -> dict:
                 "margin": race["margin"],
                 "poll_count": race["poll_count"],
                 "all_poll_ids": race.get("all_poll_ids", []),
+                "latent": race.get("trajectory", [])[-LATENT_TAIL:],
             }
             for race in payload.get("races", [])
         ],

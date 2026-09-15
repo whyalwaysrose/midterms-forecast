@@ -116,6 +116,24 @@ jobs:
           PYTENSOR_FLAGS: "cxx="
         run: python -m midterms.cli run --quiet-sampler --chamber house
 
+      # The standing calibration question, answered a few polls at a time.
+      #
+      # Runs after the forecasts because it needs the poll snapshot they fetch.
+      # That ordering is safe, and the reason is worth stating: it scores
+      # against the most recent archived run from *strictly before today*, so
+      # today's own run -- fitted on exactly these polls -- is excluded by date
+      # and cannot be mistaken for an out-of-sample predictor.
+      #
+      # continue-on-error because this is a diagnostic; losing a day of
+      # calibration rows must never cost a forecast.
+      - name: Score yesterday's forecast against today's new polls
+        continue-on-error: true
+        timeout-minutes: 10
+        run: |
+          for chamber in senate house; do
+            python -m midterms.cli calibrate-forward --chamber "$chamber" || true
+          done
+
       # The one measurement that matters, and the only one that cannot be
       # repeated. It reads the chamber totals off Wikipedia's 2026 articles and
       # prints nothing but "no result yet" until November -- which is the point:
@@ -149,6 +167,8 @@ jobs:
                   site/data/us-districts.json \
                   outputs/runs \
                   CHANGELOG.md
+          # The forward-calibration rows, which only grow.
+          git add data/calibration || true
           # Empty until election night, then the scorecard -- committed so the
           # result lands in a diff rather than only in a CI log nobody reads.
           git add outputs/score || true

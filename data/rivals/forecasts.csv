@@ -3,3 +3,6 @@ as_of,forecaster,chamber,dem_control_prob,dem_seats_median,dem_seats_p05,dem_sea
 2026-08-03,50+1,house,0.85,230,211,253,n/a,free,https://blog.fiftyplusone.news/p/election-forecast-democrats-strongly-favored-house-tilt-senate,2026-09-15,
 2026-08-03,50+1,senate,0.55,51,47,55,unknown,free,https://blog.fiftyplusone.news/p/election-forecast-democrats-strongly-favored-house-tilt-senate,2026-09-15,
 2026-09-14,Silver Bulletin,senate,0.586,,,,unknown,paywalled-preview,https://www.natesilver.net/p/nate-silver-2026-midterm-election-polls-model,2026-09-15,"Free preview carries the Senate probability only; House and seat projections are behind the paywall. FLIPR1, 40,000 simulations."
+2026-09-15,50+1,house,0.97,236,,,n/a,free,https://fiftyplusone.news/forecast/house,2026-09-15,"'97 out of 100'; median outcome D+37, 236 seats. Page states 'LAST UPDATED: SEP 15 AT 4:09PM'."
+2026-09-15,50+1,senate,0.64,51,,,unknown,free,https://fiftyplusone.news/forecast/senate,2026-09-15,"'64 out of 100'; median outcome D+2, 51 seats. Page states 'LAST UPDATED: SEP 15 AT 4:09PM'."
+2026-09-15,DDHQ,house,0.68,,,,n/a,free,https://votes.decisiondeskhq.com/forecast/2026/house,2026-09-15,"Page states 'Last updated Sep 15, 3:47 PM'. Senate topline is behind an account wall and is not recorded."

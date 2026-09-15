@@ -183,21 +183,31 @@ record of a method that needs no licence at all.
 | **Held in** | `data/rivals/forecasts.csv` |
 | **Read by** | `scripts/compare_to_forecasters.py`. Nothing under `model/` may import it, and a test asserts that. |
 
-This is the only source in the project that is not automated, and the reason is that
-there is nothing to automate against. Checked on 2026-09-15:
+This is the only source in the project that is not automated, and the reason is not that
+the numbers are hidden. Most are freely readable on a public page. The reason is that
+none of them is *published as data*, and the two that sell data sell it on terms this
+project cannot meet. Checked 2026-09-15:
 
-| Forecaster | Machine-readable? | Access |
+| Forecaster | Toplines | Notes |
 |---|---|---|
-| Silver Bulletin | No | Senate probability in the free preview; House and seats behind the paywall |
-| The Economist | No | Interactive paywalled; the free article is from April, before the new maps |
-| 270toWin | No | Returns **403** to an automated fetch |
-| Race to the WH | No | Publishes no probability in the page source |
-| 50+1 | No | Toplines free, full tables paid |
+| 50+1 | **Free**, both chambers, updated daily | Data API is $100–150/month and forbids commercial re-use |
+| DDHQ | **Free** for the House | Senate topline sits behind an account wall |
+| Silver Bulletin | Senate only, in the free preview | House and seat projections are paid |
+| The Economist | Paywalled interactive | The free article is from April, before the new maps |
+| 270toWin | Free, and aggregates seven forecasters | Ratings, not chamber probabilities |
+| Race to the WH | Values render from an embed that did not load | No usable figure obtained |
 
-So there is no daily scrape to write — and for the paywalled ones there should not be.
-Each row instead carries the date the forecaster published the number, the URL it came
-from, and the date it was copied down. **A number nobody can point at does not go in**,
-which the tests enforce.
+**A note on fetching.** The first pass concluded 270toWin "returns 403" and Race to the
+WH "publishes no probability". Both were artefacts of the tool, not the sites: 270toWin
+serves 403 to a plain HTTP client but renders normally in a browser, and most of these
+pages compute their numbers client-side, so the server HTML genuinely contains no
+percentage. Anything concluded about a site from a raw fetch alone should be re-checked
+in a browser before it goes in a document.
+
+So the numbers here were read off rendered pages by hand. Scraping them daily was
+considered and rejected: 50+1 sells this data as a product, and lifting it from the
+rendering of a page instead would be taking the thing they charge for. The registry is
+small, the numbers move slowly, and updating it is a two-minute job.
 
 The cost is staleness: the registry is only as current as the last time someone updated
 it. That is handled by comparing like with like rather than by pretending otherwise —

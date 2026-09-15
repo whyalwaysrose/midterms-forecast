@@ -331,8 +331,13 @@ three elevation tokens (`--shadow-*`) and a prose measure (`--measure`).
 counterpart to `compare_to_markets.py`. Diagnostic only; a test asserts nothing under
 `model/` can reach it.
 
-- **Hand-entered on purpose.** No serious 2026 model has a machine-readable feed, and most
-  are paywalled (see DATA_SOURCES). Every row needs a source URL and a publication date.
+- **Hand-entered on purpose.** Most toplines are freely readable, but none is published
+  *as data*, and the two that sell data forbid the use (see DATA_SOURCES). Every row needs
+  a source URL and a publication date.
+- **Read these pages in a browser, not with a raw fetch.** Most compute their numbers
+  client-side, so the server HTML has no percentage in it, and at least one site serves 403
+  to a plain HTTP client while rendering normally. A first pass here wrote off two sources
+  on evidence that turned out to be about the tool rather than the site.
 - **Rival snapshots are compared against our archived run from the same date**, never
   against today's. `outputs/runs/<date>/` is what makes that possible. The script refuses
   when nothing falls within the tolerance rather than aligning to a near run — otherwise a

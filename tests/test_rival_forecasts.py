@@ -74,17 +74,25 @@ def test_probabilities_and_chambers_are_well_formed():
 
 
 def test_seat_bounds_bracket_the_median_where_given():
-    """An interval that does not contain its own median was mistyped."""
+    """An interval that does not contain its own median was mistyped.
+
+    A median without bounds is normal and allowed -- several forecasters publish
+    a headline seat number and keep the interval behind a subscription. What is
+    not allowed is a half-entered interval, which would silently compare against
+    a bound nobody wrote down.
+    """
     for row in rows():
-        if not row["dem_seats_median"]:
-            continue
         who = f"{row['forecaster']}/{row['chamber']}@{row['as_of']}"
         lo, mid, hi = (
-            int(row["dem_seats_p05"]),
-            int(row["dem_seats_median"]),
-            int(row["dem_seats_p95"]),
+            row["dem_seats_p05"], row["dem_seats_median"], row["dem_seats_p95"]
         )
-        assert lo <= mid <= hi, f"{who} has a median outside its own interval"
+        assert bool(lo) == bool(hi), f"{who} has one seat bound but not the other"
+        if not (lo and hi):
+            continue
+        assert mid, f"{who} has an interval but no median"
+        assert int(lo) <= int(mid) <= int(hi), (
+            f"{who} has a median outside its own interval"
+        )
 
 
 # --- the diagnostic stays a diagnostic --------------------------------------

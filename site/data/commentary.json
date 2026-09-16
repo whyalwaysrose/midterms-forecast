@@ -2,6 +2,63 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-16",
+   "previous_run_date": "2026-09-15",
+   "headline": "**The model changed in this run.** Democratic chances of Senate control are 67.5%, against 67.3% on 2026-09-15 \u2014 but the two runs were produced by different models, so the difference is not a change in the race.",
+   "body": [
+    "Movement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.",
+    "",
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **Montana** \u2014 Democratic win probability 14.8% \u2192 13.6% (-1.2 pts); projected margin R+10.9 \u2192 R+11.2 (-0.2). No new polls in this race; this is the model revision.",
+    "",
+    "  - **Oregon** \u2014 Democratic win probability 96.5% \u2192 95.8% (-0.7 pts); projected margin D+18.9 \u2192 D+18.6 (-0.4). No new polls in this race; this is the model revision.",
+    "",
+    "  - **Delaware** \u2014 Democratic win probability 97.6% \u2192 97.7% (+0.1 pts); projected margin D+20.5 \u2192 D+20.8 (+0.3). No new polls in this race; this is the model revision.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-MT",
+     "name": "Montana",
+     "prob_before": 0.1479,
+     "prob_after": 0.136,
+     "prob_delta": -0.011899999999999994,
+     "margin_before": -10.94,
+     "margin_after": -11.15,
+     "margin_delta": -0.21000000000000085,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-OR",
+     "name": "Oregon",
+     "prob_before": 0.9645,
+     "prob_after": 0.958,
+     "prob_delta": -0.006500000000000061,
+     "margin_before": 18.92,
+     "margin_after": 18.55,
+     "margin_delta": -0.370000000000001,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-DE",
+     "name": "Delaware",
+     "prob_before": 0.9756,
+     "prob_after": 0.9768,
+     "prob_delta": 0.0011999999999999789,
+     "margin_before": 20.51,
+     "margin_after": 20.83,
+     "margin_delta": 0.31999999999999673,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-09-16\n\n**The model changed in this run.** Democratic chances of Senate control are 67.5%, against 67.3% on 2026-09-15 \u2014 but the two runs were produced by different models, so the difference is not a change in the race.\n\nMovement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.\n\n**Races that moved** (3 of 35):\n\n  - **Montana** \u2014 Democratic win probability 14.8% \u2192 13.6% (-1.2 pts); projected margin R+10.9 \u2192 R+11.2 (-0.2). No new polls in this race; this is the model revision.\n\n  - **Oregon** \u2014 Democratic win probability 96.5% \u2192 95.8% (-0.7 pts); projected margin D+18.9 \u2192 D+18.6 (-0.4). No new polls in this race; this is the model revision.\n\n  - **Delaware** \u2014 Democratic win probability 97.6% \u2192 97.7% (+0.1 pts); projected margin D+20.5 \u2192 D+20.8 (+0.3). No new polls in this race; this is the model revision.\n"
+  },
+  {
    "run_date": "2026-09-15",
    "previous_run_date": "2026-09-14",
    "headline": "No new polling since 2026-09-14. Democratic chances of Senate control hold at 67.3%.",

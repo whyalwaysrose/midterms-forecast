@@ -2,6 +2,22 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-16
+
+**The model changed in this run.** Democratic chances of Senate control are 67.5%, against 67.3% on 2026-09-15 — but the two runs were produced by different models, so the difference is not a change in the race.
+
+Movement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.
+
+**Races that moved** (3 of 35):
+
+  - **Montana** — Democratic win probability 14.8% → 13.6% (-1.2 pts); projected margin R+10.9 → R+11.2 (-0.2). No new polls in this race; this is the model revision.
+
+  - **Oregon** — Democratic win probability 96.5% → 95.8% (-0.7 pts); projected margin D+18.9 → D+18.6 (-0.4). No new polls in this race; this is the model revision.
+
+  - **Delaware** — Democratic win probability 97.6% → 97.7% (+0.1 pts); projected margin D+20.5 → D+20.8 (+0.3). No new polls in this race; this is the model revision.
+
+---
+
 ## 2026-09-15
 
 No new polling since 2026-09-14. Democratic chances of Senate control hold at 67.3%.

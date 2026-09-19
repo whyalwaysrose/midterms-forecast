@@ -2,6 +2,18 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-19",
+   "previous_run_date": "2026-09-18",
+   "headline": "No new polling since 2026-09-18. Democratic chances of House control hold at 72.8%.",
+   "body": [
+    "No individual race moved enough to be worth reporting.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [],
+   "markdown": "## 2026-09-19\n\nNo new polling since 2026-09-18. Democratic chances of House control hold at 72.8%.\n\nNo individual race moved enough to be worth reporting.\n"
+  },
+  {
    "run_date": "2026-09-18",
    "previous_run_date": "2026-09-17",
    "headline": "No new polling since 2026-09-17. Democratic chances of House control hold at 72.8%.",

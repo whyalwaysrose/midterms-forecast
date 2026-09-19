@@ -2,6 +2,45 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-19
+
+Democratic chances of Senate control are up 2.5 pts to 68.4% on 11 new polls. Projected seats 51.7 → 52.0 (+0.3).
+
+**National environment.** The generic ballot moved D+7.1 → D+7.4 (+0.2). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
+
+**Races that moved** (16 of 35):
+
+  - **Kansas** — Democratic win probability 23.8% → 46.2% (+22.4 pts); projected margin R+4.9 → R+0.6 (+4.3). Driven by 1 new poll:
+    - Emerson College (2026-09-15, n=750, LV): D+2.3
+
+  - **Florida** — Democratic win probability 31.3% → 19.4% (-11.9 pts); projected margin R+2.7 → R+5.0 (-2.3). Driven by 4 new polls:
+    - St. Pete Polls (2026-09-16, n=913, LV): R+0.4
+    - University of North Florida (2026-07-12, n=848, LV): R+8.7
+    - Stetson University (2026-04-03, n=848, LV): R+14.6
+    - Emerson College (2026-03-30, n=1125, LV): R+13.3
+
+  - **Alaska** — Democratic win probability 68.7% → 63.6% (-5.0 pts); projected margin D+2.9 → D+2.0 (-0.9). Driven by 1 new poll:
+    - co/efficient (2026-09-15, n=799, LV): R+3.2
+
+  - **New Hampshire** — Democratic win probability 88.2% → 92.5% (+4.4 pts); projected margin D+7.1 → D+8.3 (+1.3). Driven by 1 new poll:
+    - InsiderAdvantage (2026-09-16, n=1200, LV): D+9.1
+
+  - **Texas** — Democratic win probability 72.7% → 77.0% (+4.2 pts); projected margin D+3.4 → D+4.1 (+0.7). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Nebraska** — Democratic win probability 10.3% → 13.4% (+3.1 pts); projected margin R+12.9 → R+11.6 (+1.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Iowa** — Democratic win probability 54.3% → 56.5% (+2.2 pts); projected margin D+0.6 → D+0.9 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Maine** — Democratic win probability 68.6% → 69.9% (+1.3 pts); projected margin D+2.8 → D+3.0 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Georgia** — Democratic win probability 91.3% → 92.7% (+1.3 pts); projected margin D+7.9 → D+8.5 (+0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Illinois** — Democratic win probability 91.2% → 90.0% (-1.2 pts); projected margin D+14.1 → D+13.8 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+**New polling that did not move the needle.** Michigan (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-09-18
 
 Democratic chances of Senate control are up 1.1 pts to 65.9% on 1 new poll. Projected seats 51.6 → 51.7 (+0.1).

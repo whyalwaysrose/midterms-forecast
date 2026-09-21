@@ -453,7 +453,7 @@ class ForecastRun:
             "match_student_t_variance": self.cfg.polls.match_student_t_variance,
             # Race polls are identified per race by `all_poll_ids`; the generic
             # ballot has no race to hang them off, so they are listed here.
-            "national_poll_ids": sorted(p.id for p in self.table.national),
+            "national_poll_ids": sorted(p.poll_id for p in self.table.national),
         }
 
     def history_record(self) -> dict:

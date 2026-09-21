@@ -57,13 +57,35 @@ class _Idata:
         self.posterior = posterior
 
 
-class _Poll:
-    def __init__(self, poll_id):
-        self.id = poll_id
+def _real_poll(poll_id: str):
+    """A genuine NormalisedPoll, not a stand-in.
+
+    This used to be a hand-written fake with `self.id = poll_id`. The block read
+    `p.id`, the fake supplied `.id`, and the test passed -- while the real class
+    has `poll_id` and no `id` at all. So every production run from 2026-09-16
+    raised AttributeError inside the block, the wrapper swallowed it as designed,
+    and five days of forward-calibration evidence went uncollected with every
+    workflow reporting success.
+
+    A fake that agrees with the code under test proves nothing about the code
+    under test. Building the real dataclass means the shape can only come from
+    one place.
+    """
+    from datetime import date
+
+    from midterms.data.polls import NormalisedPoll
+
+    return NormalisedPoll(
+        poll_id=poll_id, race_id="__national__", pollster="Test",
+        field_date=date(2026, 9, 15), start_date=date(2026, 9, 13),
+        end_date=date(2026, 9, 15), sample_size=1000, population="lv",
+        dem_pct=48.0, rep_pct=46.0, two_party_dem=48.0 / 94.0, other_pct=6.0,
+        partisan_sign=0, sponsors=(), url="", dem_candidate="", rep_candidate="",
+    )
 
 
 class _Table:
-    national = (_Poll("nat-2"), _Poll("nat-1"))
+    national = (_real_poll("nat-2"), _real_poll("nat-1"))
 
 
 def make_run(posterior=None, cfg=None):

@@ -244,3 +244,56 @@ def test_scoring_is_reproducible():
     first = forward.score_against(payload(), [Poll("p")])[0]
     second = forward.score_against(payload(), [Poll("p")])[0]
     assert first.pit == pytest.approx(second.pit)
+
+
+# --- a failure here must be loud --------------------------------------------
+
+
+def test_a_block_that_failed_to_assemble_is_reported_as_an_error(capsys):
+    """The five-day silence, pinned so it cannot recur quietly.
+
+    A run with a latent tail but no predictive block is not a legacy archive --
+    the two arrived together -- so it means the block was built and thrown away
+    by its own safety wrapper. From 2026-09-16 that happened every day while
+    every workflow reported success. It has to surface as a GitHub error
+    annotation, which shows in the run summary, rather than a log line.
+    """
+    broken = payload()
+    del broken["predictive"]                     # latent tail still present
+    assert forward.score_against(broken, [Poll("new")]) == []
+    assert "::error" in capsys.readouterr().out
+
+
+def test_a_genuinely_old_archive_is_refused_without_an_error(capsys):
+    """An archive from before the block existed is history, not a fault.
+
+    Raising an error on it would train whoever reads the log to ignore the
+    annotation, which is the one outcome worse than not having it.
+    """
+    old = payload()
+    del old["predictive"]
+    for race in old["races"]:
+        del race["latent"]
+    old["national"] = {}
+    assert forward.score_against(old, [Poll("new")]) == []
+    assert "::error" not in capsys.readouterr().out
+
+
+def test_the_fake_poll_has_only_attributes_the_real_one_has():
+    """Guards this file's own test double against the mistake that cost a week.
+
+    The predictive-block test once used a fake poll with `.id` where the real
+    class has `.poll_id`. The code read `.id`, the fake supplied it, the test
+    passed, and production raised on every run. A fake is only evidence if it
+    cannot say something the real object would not.
+    """
+    from dataclasses import fields
+
+    from midterms.data.polls import NormalisedPoll
+
+    real = {f.name for f in fields(NormalisedPoll)}
+    fake = set(vars(Poll("x")))
+    assert fake <= real, (
+        f"the fake poll carries {sorted(fake - real)}, which NormalisedPoll does "
+        "not -- code reading those would pass here and fail in production"
+    )

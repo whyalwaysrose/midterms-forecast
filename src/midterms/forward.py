@@ -177,8 +177,30 @@ def score_against(payload: dict, polls) -> list[ScoredPoll]:
     """Score polls the archived run had never seen."""
     predictive = payload.get("predictive")
     if not predictive:
-        log.warning("archived run %s has no predictive block; cannot score it",
-                    payload.get("run_date"))
+        # Two very different situations share this branch, and only one of them
+        # is fine. An archive from before the block existed has no latent tail
+        # either -- that is history, and refusing it is correct. An archive that
+        # HAS the latent tail but no block is a bug: the two were introduced in
+        # the same change, so one without the other means the block failed to
+        # assemble and was swallowed by its own safety wrapper.
+        #
+        # That is not hypothetical. From 2026-09-16 every run did exactly this,
+        # the wrapper caught it as designed, every workflow reported success, and
+        # five days of calibration evidence went uncollected before anyone
+        # looked. So the second case now raises a GitHub error annotation: it
+        # still cannot stop a forecast, but it can no longer be quiet.
+        has_tail = any(r.get("latent") for r in payload.get("races", []))
+        if has_tail:
+            message = (
+                f"archived run {payload.get('run_date')} has a latent tail but no "
+                "predictive block -- the block failed to assemble in that run. "
+                "Check its log for 'could not assemble the predictive block'."
+            )
+            log.error(message)
+            print(f"::error title=Forward calibration broken::{message}")
+        else:
+            log.warning("archived run %s predates the predictive block; "
+                        "cannot score it", payload.get("run_date"))
         return []
 
     # The archived payload carries a short `latent` tail; the live one carries

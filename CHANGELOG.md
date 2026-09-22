@@ -2,6 +2,32 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-22
+
+Democratic chances of Senate control are up 0.4 pts to 68.9% on 4 new polls. Projected seats 52.0 → 52.0 (+0.0).
+
+**Races that moved** (7 of 35):
+
+  - **Iowa** — Democratic win probability 56.5% → 60.7% (+4.1 pts); projected margin D+0.9 → D+1.5 (+0.6). Driven by 1 new poll:
+    - Marist College (2026-09-18, n=1050, RV): D+8.7
+
+  - **Florida** — Democratic win probability 19.4% → 16.4% (-3.0 pts); projected margin R+5.0 → R+5.6 (-0.6). Driven by 1 new poll:
+    - InsiderAdvantage (2026-09-20, n=600, LV): R+8.2
+
+  - **Michigan** — Democratic win probability 71.2% → 73.0% (+1.7 pts); projected margin D+3.1 → D+3.4 (+0.3). Driven by 1 new poll:
+    - Suffolk University (2026-09-18, n=500, LV): D+8.0
+
+  - **Texas** — Democratic win probability 77.0% → 75.7% (-1.3 pts); projected margin D+4.1 → D+3.8 (-0.2). Driven by 1 new poll:
+    - Texas Southern University Barbara Jordan Public Policy Research and Survey Center (2026-09-17, n=1800, LV): D+1.1
+
+  - **Ohio** — Democratic win probability 82.9% → 84.0% (+1.1 pts); projected margin D+5.3 → D+5.6 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Louisiana** — Democratic win probability 12.2% → 11.2% (-1.1 pts); projected margin R+12.2 → R+12.3 (-0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Colorado** — Democratic win probability 94.7% → 93.6% (-1.0 pts); projected margin D+16.7 → D+16.7 (-0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-09-21
 
 No new polling since 2026-09-20. Democratic chances of Senate control hold at 68.5%.

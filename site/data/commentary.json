@@ -2,6 +2,189 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-22",
+   "previous_run_date": "2026-09-21",
+   "headline": "Democratic chances of Senate control are up 0.4 pts to 68.9% on 4 new polls. Projected seats 52.0 \u2192 52.0 (+0.0).",
+   "body": [
+    "**Races that moved** (7 of 35):",
+    "",
+    "  - **Iowa** \u2014 Democratic win probability 56.5% \u2192 60.7% (+4.1 pts); projected margin D+0.9 \u2192 D+1.5 (+0.6). Driven by 1 new poll:\n    - Marist College (2026-09-18, n=1050, RV): D+8.7",
+    "",
+    "  - **Florida** \u2014 Democratic win probability 19.4% \u2192 16.4% (-3.0 pts); projected margin R+5.0 \u2192 R+5.6 (-0.6). Driven by 1 new poll:\n    - InsiderAdvantage (2026-09-20, n=600, LV): R+8.2",
+    "",
+    "  - **Michigan** \u2014 Democratic win probability 71.2% \u2192 73.0% (+1.7 pts); projected margin D+3.1 \u2192 D+3.4 (+0.3). Driven by 1 new poll:\n    - Suffolk University (2026-09-18, n=500, LV): D+8.0",
+    "",
+    "  - **Texas** \u2014 Democratic win probability 77.0% \u2192 75.7% (-1.3 pts); projected margin D+4.1 \u2192 D+3.8 (-0.2). Driven by 1 new poll:\n    - Texas Southern University Barbara Jordan Public Policy Research and Survey Center (2026-09-17, n=1800, LV): D+1.1",
+    "",
+    "  - **Ohio** \u2014 Democratic win probability 82.9% \u2192 84.0% (+1.1 pts); projected margin D+5.3 \u2192 D+5.6 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Louisiana** \u2014 Democratic win probability 12.2% \u2192 11.2% (-1.1 pts); projected margin R+12.2 \u2192 R+12.3 (-0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Colorado** \u2014 Democratic win probability 94.7% \u2192 93.6% (-1.0 pts); projected margin D+16.7 \u2192 D+16.7 (-0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 4,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-IA",
+     "name": "Iowa",
+     "prob_before": 0.5655,
+     "prob_after": 0.6067,
+     "prob_delta": 0.041200000000000014,
+     "margin_before": 0.95,
+     "margin_after": 1.52,
+     "margin_delta": 0.5700000000000001,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202marf54f428e",
+       "pollster": "Marist College",
+       "date": "2026-09-18",
+       "start_date": "2026-09-17",
+       "end_date": "2026-09-20",
+       "sample_size": 1050,
+       "population": "rv",
+       "dem_pct": 50.0,
+       "rep_pct": 42.0,
+       "margin": 8.7,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://maristpoll.marist.edu/polls/2026-midterm-elections-in-iowa-september-2026/",
+       "dem_candidate": "Josh Turek",
+       "rep_candidate": "Ashley Hinson"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-FL",
+     "name": "Florida",
+     "prob_before": 0.1941,
+     "prob_after": 0.1645,
+     "prob_delta": -0.029599999999999987,
+     "margin_before": -4.99,
+     "margin_after": -5.56,
+     "margin_delta": -0.5699999999999994,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202insad41796a",
+       "pollster": "InsiderAdvantage",
+       "date": "2026-09-20",
+       "start_date": "2026-09-20",
+       "end_date": "2026-09-21",
+       "sample_size": 600,
+       "population": "lv",
+       "dem_pct": 41.8,
+       "rep_pct": 49.3,
+       "margin": -8.2,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://insideradvantage.com/insideradvantage-florida-u-s-senate-survey-moody-leads-nixon-by-7/?utm_source=rss&utm_medium=rss&utm_campaign=insideradvantage-florida-u-s-senate-survey-moody-leads-nixon-by-7",
+       "dem_candidate": "Angie Nixon",
+       "rep_candidate": "Ashley Moody"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-MI",
+     "name": "Michigan",
+     "prob_before": 0.7124,
+     "prob_after": 0.7295,
+     "prob_delta": 0.017100000000000004,
+     "margin_before": 3.13,
+     "margin_after": 3.42,
+     "margin_delta": 0.29000000000000004,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202suf59500e62",
+       "pollster": "Suffolk University",
+       "date": "2026-09-18",
+       "start_date": "2026-09-16",
+       "end_date": "2026-09-20",
+       "sample_size": 500,
+       "population": "lv",
+       "dem_pct": 47.0,
+       "rep_pct": 40.0,
+       "margin": 8.0,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://www.suffolk.edu/academics/research-at-suffolk/political-research-center/polls/other-states#collapse-September-22-2026-Michigan-Governor-and-US-Senate-Statewide-and-Bellwether",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-TX",
+     "name": "Texas",
+     "prob_before": 0.7704,
+     "prob_after": 0.7569,
+     "prob_delta": -0.013499999999999956,
+     "margin_before": 4.07,
+     "margin_after": 3.84,
+     "margin_delta": -0.23000000000000043,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202tex6938a787",
+       "pollster": "Texas Southern University Barbara Jordan Public Policy Research and Survey Center",
+       "date": "2026-09-17",
+       "start_date": "2026-09-15",
+       "end_date": "2026-09-19",
+       "sample_size": 1800,
+       "population": "lv",
+       "dem_pct": 47.0,
+       "rep_pct": 46.0,
+       "margin": 1.1,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://www.jordanresearchcenter.org/publications/tsusept2026-txsenate-governor-statewideraces",
+       "dem_candidate": "James Talarico",
+       "rep_candidate": "Ken Paxton"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-OH",
+     "name": "Ohio",
+     "prob_before": 0.8293,
+     "prob_after": 0.8404,
+     "prob_delta": 0.011099999999999999,
+     "margin_before": 5.33,
+     "margin_after": 5.61,
+     "margin_delta": 0.28000000000000025,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-LA",
+     "name": "Louisiana",
+     "prob_before": 0.1225,
+     "prob_after": 0.1119,
+     "prob_delta": -0.010599999999999998,
+     "margin_before": -12.15,
+     "margin_after": -12.27,
+     "margin_delta": -0.11999999999999922,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-CO",
+     "name": "Colorado",
+     "prob_before": 0.9467,
+     "prob_after": 0.9362,
+     "prob_delta": -0.010499999999999954,
+     "margin_before": 16.73,
+     "margin_after": 16.66,
+     "margin_delta": -0.07000000000000028,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-09-22\n\nDemocratic chances of Senate control are up 0.4 pts to 68.9% on 4 new polls. Projected seats 52.0 \u2192 52.0 (+0.0).\n\n**Races that moved** (7 of 35):\n\n  - **Iowa** \u2014 Democratic win probability 56.5% \u2192 60.7% (+4.1 pts); projected margin D+0.9 \u2192 D+1.5 (+0.6). Driven by 1 new poll:\n    - Marist College (2026-09-18, n=1050, RV): D+8.7\n\n  - **Florida** \u2014 Democratic win probability 19.4% \u2192 16.4% (-3.0 pts); projected margin R+5.0 \u2192 R+5.6 (-0.6). Driven by 1 new poll:\n    - InsiderAdvantage (2026-09-20, n=600, LV): R+8.2\n\n  - **Michigan** \u2014 Democratic win probability 71.2% \u2192 73.0% (+1.7 pts); projected margin D+3.1 \u2192 D+3.4 (+0.3). Driven by 1 new poll:\n    - Suffolk University (2026-09-18, n=500, LV): D+8.0\n\n  - **Texas** \u2014 Democratic win probability 77.0% \u2192 75.7% (-1.3 pts); projected margin D+4.1 \u2192 D+3.8 (-0.2). Driven by 1 new poll:\n    - Texas Southern University Barbara Jordan Public Policy Research and Survey Center (2026-09-17, n=1800, LV): D+1.1\n\n  - **Ohio** \u2014 Democratic win probability 82.9% \u2192 84.0% (+1.1 pts); projected margin D+5.3 \u2192 D+5.6 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Louisiana** \u2014 Democratic win probability 12.2% \u2192 11.2% (-1.1 pts); projected margin R+12.2 \u2192 R+12.3 (-0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Colorado** \u2014 Democratic win probability 94.7% \u2192 93.6% (-1.0 pts); projected margin D+16.7 \u2192 D+16.7 (-0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-09-21",
    "previous_run_date": "2026-09-20",
    "headline": "No new polling since 2026-09-20. Democratic chances of Senate control hold at 68.5%.",

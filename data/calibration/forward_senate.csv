@@ -1,0 +1,5 @@
+scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logit,predicted_logit,predictive_sd,pit
+2026-09-22,2026-09-21,senate,senate-2026-FL,us-202insad41796a,InsiderAdvantage,2026-09-20,-0.16503,-0.11599,0.10663,0.28928
+2026-09-22,2026-09-21,senate,senate-2026-IA,us-202marf54f428e,Marist College,2026-09-18,0.17435,0.08576,0.08345,0.88559
+2026-09-22,2026-09-21,senate,senate-2026-MI,us-202suf59500e62,Suffolk University,2026-09-18,0.16127,0.03885,0.11523,0.88574
+2026-09-22,2026-09-21,senate,senate-2026-TX,us-202tex6938a787,Texas Southern University Barbara Jordan Public Policy Research and Survey Center,2026-09-17,0.02151,0.07354,0.06152,0.1623

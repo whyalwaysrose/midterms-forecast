@@ -2,6 +2,47 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-23",
+   "previous_run_date": "2026-09-22",
+   "headline": "No new polling since 2026-09-22. Democratic chances of Senate control hold at 68.9%.",
+   "body": [
+    "**Races that moved** (2 of 35):",
+    "",
+    "  - **Colorado** \u2014 Democratic win probability 93.6% \u2192 95.2% (+1.6 pts); projected margin D+16.7 \u2192 D+16.8 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **South Carolina** \u2014 Democratic win probability 25.6% \u2192 25.0% (-0.6 pts); projected margin R+6.5 \u2192 R+6.9 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-CO",
+     "name": "Colorado",
+     "prob_before": 0.9362,
+     "prob_after": 0.9519,
+     "prob_delta": 0.015699999999999936,
+     "margin_before": 16.66,
+     "margin_after": 16.83,
+     "margin_delta": 0.16999999999999815,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-SC",
+     "name": "South Carolina",
+     "prob_before": 0.2555,
+     "prob_after": 0.2499,
+     "prob_delta": -0.005599999999999994,
+     "margin_before": -6.49,
+     "margin_after": -6.93,
+     "margin_delta": -0.4399999999999995,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-09-23\n\nNo new polling since 2026-09-22. Democratic chances of Senate control hold at 68.9%.\n\n**Races that moved** (2 of 35):\n\n  - **Colorado** \u2014 Democratic win probability 93.6% \u2192 95.2% (+1.6 pts); projected margin D+16.7 \u2192 D+16.8 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **South Carolina** \u2014 Democratic win probability 25.6% \u2192 25.0% (-0.6 pts); projected margin R+6.5 \u2192 R+6.9 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-09-22",
    "previous_run_date": "2026-09-21",
    "headline": "Democratic chances of Senate control are up 0.4 pts to 68.9% on 4 new polls. Projected seats 52.0 \u2192 52.0 (+0.0).",

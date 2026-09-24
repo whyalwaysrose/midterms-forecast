@@ -3,3 +3,8 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-09-22,2026-09-21,senate,senate-2026-IA,us-202marf54f428e,Marist College,2026-09-18,0.17435,0.08576,0.08345,0.88559
 2026-09-22,2026-09-21,senate,senate-2026-MI,us-202suf59500e62,Suffolk University,2026-09-18,0.16127,0.03885,0.11523,0.88574
 2026-09-22,2026-09-21,senate,senate-2026-TX,us-202tex6938a787,Texas Southern University Barbara Jordan Public Policy Research and Survey Center,2026-09-17,0.02151,0.07354,0.06152,0.1623
+2026-09-24,2026-09-23,senate,senate-2026-ME,us-202the9a68a494,The New York Times/Siena College,2026-09-18,-0.06318,0.04234,0.09999,0.1156
+2026-09-24,2026-09-23,senate,senate-2026-MI,us-202thecf4746de,The New York Times/Siena College,2026-09-18,0.10763,0.05044,0.09853,0.75632
+2026-09-24,2026-09-23,senate,senate-2026-MI,us-202co/b838141c,co/efficient,2026-09-22,0.0,0.01666,0.08672,0.40701
+2026-09-24,2026-09-23,senate,senate-2026-NC,us-202higae3d1182,High Point University Survey Research Center,2026-09-12,0.17435,0.22803,0.09878,0.25714
+2026-09-24,2026-09-23,senate,senate-2026-NH,us-202the55816505,The New York Times/Siena College,2026-09-18,0.10536,0.15196,0.10245,0.29129

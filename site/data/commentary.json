@@ -2,6 +2,161 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-24",
+   "previous_run_date": "2026-09-23",
+   "headline": "Democratic chances of Senate control are down 0.9 pts to 68.0% on 5 new polls. Projected seats 52.0 \u2192 51.9 (-0.1).",
+   "body": [
+    "**Races that moved** (6 of 35):",
+    "",
+    "  - **Maine** \u2014 Democratic win probability 69.6% \u2192 64.3% (-5.3 pts); projected margin D+2.9 \u2192 D+2.1 (-0.8). Driven by 1 new poll:\n    - The New York Times/Siena College (2026-09-18, n=619, LV): R+3.2",
+    "",
+    "  - **New Jersey** \u2014 Democratic win probability 91.7% \u2192 90.0% (-1.6 pts); projected margin D+13.8 \u2192 D+13.3 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **New Hampshire** \u2014 Democratic win probability 92.7% \u2192 91.4% (-1.3 pts); projected margin D+8.4 \u2192 D+7.9 (-0.5). Driven by 1 new poll:\n    - The New York Times/Siena College (2026-09-18, n=613, LV): D+5.3",
+    "",
+    "  - **Colorado** \u2014 Democratic win probability 95.2% \u2192 94.0% (-1.2 pts); projected margin D+16.8 \u2192 D+16.5 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Georgia** \u2014 Democratic win probability 92.5% \u2192 91.9% (-0.6 pts); projected margin D+8.5 \u2192 D+8.2 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **North Carolina** \u2014 Democratic win probability 96.3% \u2192 95.9% (-0.4 pts); projected margin D+10.1 \u2192 D+9.7 (-0.4). Driven by 1 new poll:\n    - High Point University Survey Research Center (2026-09-12, n=706, LV): D+8.7",
+    "",
+    "**New polling that did not move the needle.** Michigan (2). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 5,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-ME",
+     "name": "Maine",
+     "prob_before": 0.6959,
+     "prob_after": 0.6432,
+     "prob_delta": -0.05269999999999997,
+     "margin_before": 2.93,
+     "margin_after": 2.1,
+     "margin_delta": -0.8300000000000001,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202the9a68a494",
+       "pollster": "The New York Times/Siena College",
+       "date": "2026-09-18",
+       "start_date": "2026-09-15",
+       "end_date": "2026-09-22",
+       "sample_size": 619,
+       "population": "lv",
+       "dem_pct": 46.0,
+       "rep_pct": 49.0,
+       "margin": -3.2,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Portland Press Herald"
+       ],
+       "url": "https://www.nytimes.com/2026/09/24/us/politics/democrats-show-strength-in-michigan-senate-race-but-trail-in-maine-polls-find.html",
+       "dem_candidate": "Troy Jackson",
+       "rep_candidate": "Susan Collins"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-NJ",
+     "name": "New Jersey",
+     "prob_before": 0.9167,
+     "prob_after": 0.9002,
+     "prob_delta": -0.01649999999999996,
+     "margin_before": 13.83,
+     "margin_after": 13.31,
+     "margin_delta": -0.5199999999999996,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-NH",
+     "name": "New Hampshire",
+     "prob_before": 0.9274,
+     "prob_after": 0.9144,
+     "prob_delta": -0.013000000000000012,
+     "margin_before": 8.4,
+     "margin_after": 7.87,
+     "margin_delta": -0.5300000000000002,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202the55816505",
+       "pollster": "The New York Times/Siena College",
+       "date": "2026-09-18",
+       "start_date": "2026-09-15",
+       "end_date": "2026-09-22",
+       "sample_size": 613,
+       "population": "lv",
+       "dem_pct": 50.0,
+       "rep_pct": 45.0,
+       "margin": 5.3,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://www.nytimes.com/2026/09/24/us/politics/democrats-show-strength-in-michigan-senate-race-but-trail-in-maine-polls-find.html",
+       "dem_candidate": "Chris Pappas",
+       "rep_candidate": "John Sununu"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-CO",
+     "name": "Colorado",
+     "prob_before": 0.9519,
+     "prob_after": 0.9395,
+     "prob_delta": -0.012399999999999967,
+     "margin_before": 16.83,
+     "margin_after": 16.5,
+     "margin_delta": -0.3299999999999983,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-GA",
+     "name": "Georgia",
+     "prob_before": 0.9248,
+     "prob_after": 0.919,
+     "prob_delta": -0.005799999999999916,
+     "margin_before": 8.51,
+     "margin_after": 8.19,
+     "margin_delta": -0.3200000000000003,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-NC",
+     "name": "North Carolina",
+     "prob_before": 0.963,
+     "prob_after": 0.959,
+     "prob_delta": -0.0040000000000000036,
+     "margin_before": 10.11,
+     "margin_after": 9.71,
+     "margin_delta": -0.3999999999999986,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202higae3d1182",
+       "pollster": "High Point University Survey Research Center",
+       "date": "2026-09-12",
+       "start_date": "2026-09-09",
+       "end_date": "2026-09-16",
+       "sample_size": 706,
+       "population": "lv",
+       "dem_pct": 50.0,
+       "rep_pct": 42.0,
+       "margin": 8.7,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://www.highpoint.edu/src/files/2023/08/HPUPoll127MemoA-1.pdf",
+       "dem_candidate": "Roy Cooper",
+       "rep_candidate": "Michael Whatley"
+      }
+     ]
+    }
+   ],
+   "markdown": "## 2026-09-24\n\nDemocratic chances of Senate control are down 0.9 pts to 68.0% on 5 new polls. Projected seats 52.0 \u2192 51.9 (-0.1).\n\n**Races that moved** (6 of 35):\n\n  - **Maine** \u2014 Democratic win probability 69.6% \u2192 64.3% (-5.3 pts); projected margin D+2.9 \u2192 D+2.1 (-0.8). Driven by 1 new poll:\n    - The New York Times/Siena College (2026-09-18, n=619, LV): R+3.2\n\n  - **New Jersey** \u2014 Democratic win probability 91.7% \u2192 90.0% (-1.6 pts); projected margin D+13.8 \u2192 D+13.3 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **New Hampshire** \u2014 Democratic win probability 92.7% \u2192 91.4% (-1.3 pts); projected margin D+8.4 \u2192 D+7.9 (-0.5). Driven by 1 new poll:\n    - The New York Times/Siena College (2026-09-18, n=613, LV): D+5.3\n\n  - **Colorado** \u2014 Democratic win probability 95.2% \u2192 94.0% (-1.2 pts); projected margin D+16.8 \u2192 D+16.5 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Georgia** \u2014 Democratic win probability 92.5% \u2192 91.9% (-0.6 pts); projected margin D+8.5 \u2192 D+8.2 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **North Carolina** \u2014 Democratic win probability 96.3% \u2192 95.9% (-0.4 pts); projected margin D+10.1 \u2192 D+9.7 (-0.4). Driven by 1 new poll:\n    - High Point University Survey Research Center (2026-09-12, n=706, LV): D+8.7\n\n**New polling that did not move the needle.** Michigan (2). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
    "run_date": "2026-09-23",
    "previous_run_date": "2026-09-22",
    "headline": "No new polling since 2026-09-22. Democratic chances of Senate control hold at 68.9%.",

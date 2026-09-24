@@ -1,2 +1,2 @@
-15:44:22 INFO    midterms.data.results: senate: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_Senate_elections
+16:09:40 INFO    midterms.data.results: senate: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_Senate_elections
 No senate result published yet. Nothing to score.

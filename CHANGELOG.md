@@ -2,6 +2,31 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-24
+
+Democratic chances of Senate control are down 0.9 pts to 68.0% on 5 new polls. Projected seats 52.0 → 51.9 (-0.1).
+
+**Races that moved** (6 of 35):
+
+  - **Maine** — Democratic win probability 69.6% → 64.3% (-5.3 pts); projected margin D+2.9 → D+2.1 (-0.8). Driven by 1 new poll:
+    - The New York Times/Siena College (2026-09-18, n=619, LV): R+3.2
+
+  - **New Jersey** — Democratic win probability 91.7% → 90.0% (-1.6 pts); projected margin D+13.8 → D+13.3 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **New Hampshire** — Democratic win probability 92.7% → 91.4% (-1.3 pts); projected margin D+8.4 → D+7.9 (-0.5). Driven by 1 new poll:
+    - The New York Times/Siena College (2026-09-18, n=613, LV): D+5.3
+
+  - **Colorado** — Democratic win probability 95.2% → 94.0% (-1.2 pts); projected margin D+16.8 → D+16.5 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Georgia** — Democratic win probability 92.5% → 91.9% (-0.6 pts); projected margin D+8.5 → D+8.2 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **North Carolina** — Democratic win probability 96.3% → 95.9% (-0.4 pts); projected margin D+10.1 → D+9.7 (-0.4). Driven by 1 new poll:
+    - High Point University Survey Research Center (2026-09-12, n=706, LV): D+8.7
+
+**New polling that did not move the needle.** Michigan (2). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-09-23
 
 No new polling since 2026-09-22. Democratic chances of Senate control hold at 68.9%.

@@ -8,3 +8,4 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-09-24,2026-09-23,senate,senate-2026-MI,us-202co/b838141c,co/efficient,2026-09-22,0.0,0.01666,0.08672,0.40701
 2026-09-24,2026-09-23,senate,senate-2026-NC,us-202higae3d1182,High Point University Survey Research Center,2026-09-12,0.17435,0.22803,0.09878,0.25714
 2026-09-24,2026-09-23,senate,senate-2026-NH,us-202the55816505,The New York Times/Siena College,2026-09-18,0.10536,0.15196,0.10245,0.29129
+2026-09-25,2026-09-24,senate,senate-2026-ME,us-202uni866e047f,University of Massachusetts Lowell Center for Public Opinion/YouGov,2026-09-05,0.11,0.03365,0.09632,0.82348

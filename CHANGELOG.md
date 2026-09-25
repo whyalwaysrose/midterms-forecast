@@ -2,6 +2,17 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-25
+
+Democratic chances of Senate control are up 0.2 pts to 68.2% on 1 new poll. Projected seats 51.9 → 51.9 (+0.0).
+
+**Races that moved** (1 of 35):
+
+  - **Maine** — Democratic win probability 64.3% → 67.9% (+3.6 pts); projected margin D+2.1 → D+2.6 (+0.5). Driven by 1 new poll:
+    - University of Massachusetts Lowell Center for Public Opinion/YouGov (2026-09-05, n=650, LV): D+5.5
+
+---
+
 ## 2026-09-24
 
 Democratic chances of Senate control are down 0.9 pts to 68.0% on 5 new polls. Projected seats 52.0 → 51.9 (-0.1).

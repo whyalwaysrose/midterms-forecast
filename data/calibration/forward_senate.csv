@@ -9,3 +9,11 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-09-24,2026-09-23,senate,senate-2026-NC,us-202higae3d1182,High Point University Survey Research Center,2026-09-12,0.17435,0.22803,0.09878,0.25714
 2026-09-24,2026-09-23,senate,senate-2026-NH,us-202the55816505,The New York Times/Siena College,2026-09-18,0.10536,0.15196,0.10245,0.29129
 2026-09-25,2026-09-24,senate,senate-2026-ME,us-202uni866e047f,University of Massachusetts Lowell Center for Public Opinion/YouGov,2026-09-05,0.11,0.03365,0.09632,0.82348
+2026-09-26,2026-09-25,senate,senate-2026-FL,us-202ste67ef4e2d,Stetson University Center for Public Opinion Research,2026-09-17,-0.24295,-0.122,0.08937,0.07052
+2026-09-26,2026-09-25,senate,senate-2026-GA,us-202insbbb32dd3,InsiderAdvantage,2026-09-22,0.17435,0.14732,0.08484,0.65107
+2026-09-26,2026-09-25,senate,senate-2026-KS,us-202wedd2e2b8b0,Wedgewood Polls,2026-09-23,0.04082,-0.01997,0.11833,0.73173
+2026-09-26,2026-09-25,senate,senate-2026-ME,us-202uni51f1c418,University of New Hampshire,2026-09-19,0.08168,0.04797,0.07472,0.70724
+2026-09-26,2026-09-25,senate,senate-2026-NE,us-202gba71e992b6,GBAO,2026-09-05,0.02151,-0.19376,0.20043,0.88789
+2026-09-26,2026-09-25,senate,senate-2026-NH,us-202uni02a0a46f,University of New Hampshire,2026-09-19,0.17435,0.15303,0.07599,0.63405
+2026-09-26,2026-09-25,senate,senate-2026-OH,us-202qua2790f813,Quantus Insights,2026-09-22,0.01052,0.09196,0.09321,0.15523
+2026-09-26,2026-09-25,senate,senate-2026-TX,us-202sli284b821d,Slingshot Strategies,2026-09-20,0.08516,0.10239,0.08232,0.39891

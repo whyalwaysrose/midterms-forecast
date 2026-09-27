@@ -2,6 +2,18 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-27
+
+No new polling since 2026-09-26. Democratic chances of Senate control hold at 69.7%.
+
+**Races that moved** (2 of 35):
+
+  - **South Carolina** — Democratic win probability 25.6% → 24.2% (-1.4 pts); projected margin R+6.6 → R+6.9 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Montana** — Democratic win probability 15.1% → 15.9% (+0.8 pts); projected margin R+10.6 → R+10.1 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-09-26
 
 Democratic chances of Senate control are up 1.8 pts to 69.9% on 8 new polls. Projected seats 51.9 → 52.2 (+0.3).

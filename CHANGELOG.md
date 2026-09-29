@@ -2,6 +2,22 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-09-29
+
+No new polling since 2026-09-28. Democratic chances of Senate control hold at 69.6%.
+
+**Races that moved** (4 of 35):
+
+  - **Illinois** — Democratic win probability 91.6% → 92.4% (+0.8 pts); projected margin D+14.4 → D+14.8 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Colorado** — Democratic win probability 94.7% → 95.3% (+0.6 pts); projected margin D+16.9 → D+17.4 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Delaware** — Democratic win probability 97.6% → 98.0% (+0.4 pts); projected margin D+20.8 → D+20.4 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Kentucky** — Democratic win probability 2.3% → 2.4% (+0.1 pts); projected margin R+19.7 → R+20.0 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-09-28
 
 No new polling since 2026-09-27. Democratic chances of Senate control hold at 69.7%.

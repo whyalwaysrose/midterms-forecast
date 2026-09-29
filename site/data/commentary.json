@@ -2,6 +2,75 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-09-29",
+   "previous_run_date": "2026-09-28",
+   "headline": "No new polling since 2026-09-28. Democratic chances of Senate control hold at 69.6%.",
+   "body": [
+    "**Races that moved** (4 of 35):",
+    "",
+    "  - **Illinois** \u2014 Democratic win probability 91.6% \u2192 92.4% (+0.8 pts); projected margin D+14.4 \u2192 D+14.8 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Colorado** \u2014 Democratic win probability 94.7% \u2192 95.3% (+0.6 pts); projected margin D+16.9 \u2192 D+17.4 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Delaware** \u2014 Democratic win probability 97.6% \u2192 98.0% (+0.4 pts); projected margin D+20.8 \u2192 D+20.4 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Kentucky** \u2014 Democratic win probability 2.3% \u2192 2.4% (+0.1 pts); projected margin R+19.7 \u2192 R+20.0 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-IL",
+     "name": "Illinois",
+     "prob_before": 0.916,
+     "prob_after": 0.9236,
+     "prob_delta": 0.00759999999999994,
+     "margin_before": 14.38,
+     "margin_after": 14.78,
+     "margin_delta": 0.3999999999999986,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-CO",
+     "name": "Colorado",
+     "prob_before": 0.9466,
+     "prob_after": 0.9528,
+     "prob_delta": 0.006199999999999983,
+     "margin_before": 16.91,
+     "margin_after": 17.44,
+     "margin_delta": 0.5300000000000011,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-DE",
+     "name": "Delaware",
+     "prob_before": 0.9757,
+     "prob_after": 0.9797,
+     "prob_delta": 0.0040000000000000036,
+     "margin_before": 20.76,
+     "margin_after": 20.35,
+     "margin_delta": -0.41000000000000014,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-KY",
+     "name": "Kentucky",
+     "prob_before": 0.0228,
+     "prob_after": 0.0235,
+     "prob_delta": 0.0006999999999999992,
+     "margin_before": -19.7,
+     "margin_after": -20.0,
+     "margin_delta": -0.3000000000000007,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-09-29\n\nNo new polling since 2026-09-28. Democratic chances of Senate control hold at 69.6%.\n\n**Races that moved** (4 of 35):\n\n  - **Illinois** \u2014 Democratic win probability 91.6% \u2192 92.4% (+0.8 pts); projected margin D+14.4 \u2192 D+14.8 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Colorado** \u2014 Democratic win probability 94.7% \u2192 95.3% (+0.6 pts); projected margin D+16.9 \u2192 D+17.4 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Delaware** \u2014 Democratic win probability 97.6% \u2192 98.0% (+0.4 pts); projected margin D+20.8 \u2192 D+20.4 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Kentucky** \u2014 Democratic win probability 2.3% \u2192 2.4% (+0.1 pts); projected margin R+19.7 \u2192 R+20.0 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-09-28",
    "previous_run_date": "2026-09-27",
    "headline": "No new polling since 2026-09-27. Democratic chances of Senate control hold at 69.7%.",

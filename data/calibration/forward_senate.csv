@@ -17,3 +17,7 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-09-26,2026-09-25,senate,senate-2026-NH,us-202uni02a0a46f,University of New Hampshire,2026-09-19,0.17435,0.15303,0.07599,0.63405
 2026-09-26,2026-09-25,senate,senate-2026-OH,us-202qua2790f813,Quantus Insights,2026-09-22,0.01052,0.09196,0.09321,0.15523
 2026-09-26,2026-09-25,senate,senate-2026-TX,us-202sli284b821d,Slingshot Strategies,2026-09-20,0.08516,0.10239,0.08232,0.39891
+2026-09-30,2026-09-29,senate,senate-2026-FL,us-202chad8109bd5,Change Research,2026-09-26,-0.02105,-0.15055,0.08112,0.95284
+2026-09-30,2026-09-29,senate,senate-2026-MA,us-202mas5785b9ea,MassINC Polling Group,2026-09-18,0.69315,0.57568,0.11184,0.88342
+2026-09-30,2026-09-29,senate,senate-2026-MI,us-202cyg13fa7f0a,Cygnal/Beacon Research,2026-09-19,0.11778,0.06178,0.10061,0.74774
+2026-09-30,2026-09-29,senate,senate-2026-OH,us-202mara7f1d430,Marist College,2026-09-25,0.17063,0.17707,0.077,0.45911

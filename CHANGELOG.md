@@ -2,6 +2,28 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-01
+
+Democratic chances of Senate control are down 1.9 pts to 69.5% on 3 new polls. Projected seats 52.4 → 52.2 (-0.2).
+
+**National environment.** The generic ballot moved D+7.6 → D+7.5 (-0.1). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
+
+**Races that moved** (4 of 35):
+
+  - **Michigan** — Democratic win probability 76.4% → 72.3% (-4.1 pts); projected margin D+3.9 → D+3.2 (-0.7). Driven by 1 new poll:
+    - Beacon Research/Shaw & Co. Research (2026-09-26, n=1028, LV): D+1.0
+
+  - **Maine** — Democratic win probability 74.2% → 70.4% (-3.8 pts); projected margin D+3.6 → D+3.0 (-0.7). Driven by 1 new poll:
+    - co/efficient (2026-09-29, n=1240, LV): R+2.1
+
+  - **Minnesota** — Democratic win probability 83.6% → 81.9% (-1.7 pts); projected margin D+5.7 → D+5.3 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **New Hampshire** — Democratic win probability 90.2% → 89.0% (-1.1 pts); projected margin D+7.3 → D+6.9 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+**New polling that did not move the needle.** Alabama (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-09-30
 
 Democratic chances of Senate control are up 1.8 pts to 71.4% on 4 new polls. Projected seats 52.2 → 52.4 (+0.2).

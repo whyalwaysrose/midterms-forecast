@@ -2,6 +2,81 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-02",
+   "previous_run_date": "2026-10-01",
+   "headline": "Democratic chances of Senate control are down 0.8 pts to 68.7% on 2 new polls. Projected seats 52.2 \u2192 52.2 (-0.0).",
+   "body": [
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **Ohio** \u2014 Democratic win probability 80.9% \u2192 78.3% (-2.6 pts); projected margin D+4.8 \u2192 D+4.3 (-0.5). Driven by 1 new poll:\n    - InsiderAdvantage (2026-09-28, n=1200, LV): D+1.1",
+    "",
+    "  - **Iowa** \u2014 Democratic win probability 60.0% \u2192 58.2% (-1.8 pts); projected margin D+1.4 \u2192 D+1.1 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Montana** \u2014 Democratic win probability 14.7% \u2192 15.2% (+0.5 pts); projected margin R+10.2 \u2192 R+10.5 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "**New polling that did not move the needle.** Maine (1). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 2,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-OH",
+     "name": "Ohio",
+     "prob_before": 0.809,
+     "prob_after": 0.7829,
+     "prob_delta": -0.026100000000000012,
+     "margin_before": 4.8,
+     "margin_after": 4.27,
+     "margin_delta": -0.5300000000000002,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202insea9816ae",
+       "pollster": "InsiderAdvantage",
+       "date": "2026-09-28",
+       "start_date": "2026-09-28",
+       "end_date": "2026-09-29",
+       "sample_size": 1200,
+       "population": "lv",
+       "dem_pct": 44.0,
+       "rep_pct": 43.0,
+       "margin": 1.1,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://insideradvantage.com/insideradvantage-ohio-senate-race-narrows-to-brown-up-by-one",
+       "dem_candidate": "Sherrod Brown",
+       "rep_candidate": "Jon Husted"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-IA",
+     "name": "Iowa",
+     "prob_before": 0.5997,
+     "prob_after": 0.5819,
+     "prob_delta": -0.017800000000000038,
+     "margin_before": 1.4,
+     "margin_after": 1.12,
+     "margin_delta": -0.2799999999999998,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-MT",
+     "name": "Montana",
+     "prob_before": 0.1467,
+     "prob_after": 0.1517,
+     "prob_delta": 0.0050000000000000044,
+     "margin_before": -10.16,
+     "margin_after": -10.49,
+     "margin_delta": -0.33000000000000007,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-10-02\n\nDemocratic chances of Senate control are down 0.8 pts to 68.7% on 2 new polls. Projected seats 52.2 \u2192 52.2 (-0.0).\n\n**Races that moved** (3 of 35):\n\n  - **Ohio** \u2014 Democratic win probability 80.9% \u2192 78.3% (-2.6 pts); projected margin D+4.8 \u2192 D+4.3 (-0.5). Driven by 1 new poll:\n    - InsiderAdvantage (2026-09-28, n=1200, LV): D+1.1\n\n  - **Iowa** \u2014 Democratic win probability 60.0% \u2192 58.2% (-1.8 pts); projected margin D+1.4 \u2192 D+1.1 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Montana** \u2014 Democratic win probability 14.7% \u2192 15.2% (+0.5 pts); projected margin R+10.2 \u2192 R+10.5 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n**New polling that did not move the needle.** Maine (1). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
    "run_date": "2026-10-01",
    "previous_run_date": "2026-09-30",
    "headline": "Democratic chances of Senate control are down 1.9 pts to 69.5% on 3 new polls. Projected seats 52.4 \u2192 52.2 (-0.2).",

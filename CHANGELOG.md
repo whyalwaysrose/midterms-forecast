@@ -2,6 +2,23 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-02
+
+Democratic chances of Senate control are down 0.8 pts to 68.7% on 2 new polls. Projected seats 52.2 → 52.2 (-0.0).
+
+**Races that moved** (3 of 35):
+
+  - **Ohio** — Democratic win probability 80.9% → 78.3% (-2.6 pts); projected margin D+4.8 → D+4.3 (-0.5). Driven by 1 new poll:
+    - InsiderAdvantage (2026-09-28, n=1200, LV): D+1.1
+
+  - **Iowa** — Democratic win probability 60.0% → 58.2% (-1.8 pts); projected margin D+1.4 → D+1.1 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Montana** — Democratic win probability 14.7% → 15.2% (+0.5 pts); projected margin R+10.2 → R+10.5 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+**New polling that did not move the needle.** Maine (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-01
 
 Democratic chances of Senate control are down 1.9 pts to 69.5% on 3 new polls. Projected seats 52.4 → 52.2 (-0.2).

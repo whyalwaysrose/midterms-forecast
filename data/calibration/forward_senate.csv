@@ -26,3 +26,5 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-01,2026-09-30,senate,senate-2026-AL,us-202rmg809825be,RMG Research,2026-09-23,-0.49248,-0.47646,0.1269,0.43849
 2026-10-01,2026-09-30,senate,senate-2026-ME,us-202co/7102b7eb,co/efficient,2026-09-29,-0.04256,0.01626,0.07738,0.18573
 2026-10-01,2026-09-30,senate,senate-2026-MI,us-202beac0286b40,Beacon Research/Shaw & Co. Research,2026-09-26,0.0202,0.10663,0.07706,0.10366
+2026-10-02,2026-10-01,senate,senate-2026-ME,us-202fabe2bcab70,"Fabrizio, Lee & Associates/Impact Research",2026-09-21,0.06188,0.07795,0.08271,0.40596
+2026-10-02,2026-10-01,senate,senate-2026-OH,us-202insea9816ae,InsiderAdvantage,2026-09-28,0.02299,0.08492,0.07827,0.17697

@@ -2,6 +2,18 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-04",
+   "previous_run_date": "2026-10-03",
+   "headline": "No new polling since 2026-10-03. Democratic chances of House control hold at 78.5%.",
+   "body": [
+    "No individual race moved enough to be worth reporting.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [],
+   "markdown": "## 2026-10-04\n\nNo new polling since 2026-10-03. Democratic chances of House control hold at 78.5%.\n\nNo individual race moved enough to be worth reporting.\n"
+  },
+  {
    "run_date": "2026-10-03",
    "previous_run_date": "2026-10-02",
    "headline": "Democratic chances of House control are down 0.2 pts to 78.5% on 1 new poll. Projected seats 245.9 \u2192 245.6 (-0.3).",

@@ -2,6 +2,28 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-05
+
+Democratic chances of Senate control are up 1.1 pts to 68.5% on 1 new poll. Projected seats 52.0 → 52.1 (+0.1).
+
+**National environment.** The generic ballot moved D+7.4 → D+7.6 (+0.2). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
+
+**Races that moved** (5 of 35):
+
+  - **New Jersey** — Democratic win probability 90.4% → 91.9% (+1.6 pts); projected margin D+13.5 → D+13.9 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **New Mexico** — Democratic win probability 90.8% → 91.7% (+0.9 pts); projected margin D+13.8 → D+14.1 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Louisiana** — Democratic win probability 11.1% → 11.9% (+0.8 pts); projected margin R+12.1 → R+11.8 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Montana** — Democratic win probability 14.3% → 15.0% (+0.7 pts); projected margin R+10.8 → R+10.4 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Idaho** — Democratic win probability 1.8% → 2.0% (+0.2 pts); projected margin R+15.9 → R+15.5 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+**New polling that did not move the needle.** Georgia (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-04
 
 No new polling since 2026-10-03. Democratic chances of Senate control hold at 67.4%.

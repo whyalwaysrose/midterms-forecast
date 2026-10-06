@@ -2,6 +2,153 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-06",
+   "previous_run_date": "2026-10-05",
+   "headline": "Democratic chances of Senate control are down 0.2 pts to 68.3% on 2 new polls. Projected seats 52.1 \u2192 52.1 (+0.0).",
+   "body": [
+    "**Races that moved** (7 of 35):",
+    "",
+    "  - **Maine** \u2014 Democratic win probability 70.1% \u2192 67.1% (-3.1 pts); projected margin D+2.9 \u2192 D+2.4 (-0.5). Driven by 1 new poll:\n    - Marist College (2026-10-02, n=1505, RV): D+4.1",
+    "",
+    "  - **Michigan** \u2014 Democratic win probability 71.9% \u2192 73.2% (+1.4 pts); projected margin D+3.1 \u2192 D+3.3 (+0.2). Driven by 1 new poll:\n    - Mitchell Research & Communications (2026-10-01, n=682, LV): D+5.7",
+    "",
+    "  - **South Carolina** \u2014 Democratic win probability 24.4% \u2192 25.6% (+1.2 pts); projected margin R+6.9 \u2192 R+6.7 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Ohio** \u2014 Democratic win probability 78.2% \u2192 79.3% (+1.2 pts); projected margin D+4.3 \u2192 D+4.5 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **New Mexico** \u2014 Democratic win probability 91.7% \u2192 91.9% (+0.2 pts); projected margin D+14.1 \u2192 D+14.5 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Oregon** \u2014 Democratic win probability 97.0% \u2192 96.8% (-0.2 pts); projected margin D+19.0 \u2192 D+19.4 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Colorado** \u2014 Democratic win probability 95.7% \u2192 95.6% (-0.1 pts); projected margin D+17.3 \u2192 D+17.6 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 2,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-ME",
+     "name": "Maine",
+     "prob_before": 0.7014,
+     "prob_after": 0.6706,
+     "prob_delta": -0.03080000000000005,
+     "margin_before": 2.93,
+     "margin_after": 2.4,
+     "margin_delta": -0.5300000000000002,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202mare89f317d",
+       "pollster": "Marist College",
+       "date": "2026-10-02",
+       "start_date": "2026-10-01",
+       "end_date": "2026-10-04",
+       "sample_size": 1505,
+       "population": "rv",
+       "dem_pct": 51.0,
+       "rep_pct": 47.0,
+       "margin": 4.1,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://maristpoll.marist.edu/polls/midterm-elections-in-maine-october-2026/",
+       "dem_candidate": "Troy Jackson",
+       "rep_candidate": "Susan Collins"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-MI",
+     "name": "Michigan",
+     "prob_before": 0.7187,
+     "prob_after": 0.7324,
+     "prob_delta": 0.013700000000000045,
+     "margin_before": 3.14,
+     "margin_after": 3.32,
+     "margin_delta": 0.17999999999999972,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202mit7960c973",
+       "pollster": "Mitchell Research & Communications",
+       "date": "2026-10-01",
+       "start_date": "2026-10-01",
+       "end_date": "2026-10-01",
+       "sample_size": 682,
+       "population": "lv",
+       "dem_pct": 46.0,
+       "rep_pct": 41.0,
+       "margin": 5.7,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://wwmt.com/news/michigan-politics/mitchell-poll-michigan-us-senate-election-abdul-el-sayed-mike-rogers-politics-government-vote-polls-state",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-SC",
+     "name": "South Carolina",
+     "prob_before": 0.2438,
+     "prob_after": 0.2557,
+     "prob_delta": 0.011899999999999994,
+     "margin_before": -6.91,
+     "margin_after": -6.66,
+     "margin_delta": 0.25,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-OH",
+     "name": "Ohio",
+     "prob_before": 0.7817,
+     "prob_after": 0.7933,
+     "prob_delta": 0.011600000000000055,
+     "margin_before": 4.26,
+     "margin_after": 4.49,
+     "margin_delta": 0.23000000000000043,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-NM",
+     "name": "New Mexico",
+     "prob_before": 0.9169,
+     "prob_after": 0.9188,
+     "prob_delta": 0.0018999999999999018,
+     "margin_before": 14.13,
+     "margin_after": 14.46,
+     "margin_delta": 0.33000000000000007,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-OR",
+     "name": "Oregon",
+     "prob_before": 0.9698,
+     "prob_after": 0.9681,
+     "prob_delta": -0.0017000000000000348,
+     "margin_before": 19.04,
+     "margin_after": 19.36,
+     "margin_delta": 0.3200000000000003,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-CO",
+     "name": "Colorado",
+     "prob_before": 0.9569,
+     "prob_after": 0.956,
+     "prob_delta": -0.0009000000000000119,
+     "margin_before": 17.3,
+     "margin_after": 17.65,
+     "margin_delta": 0.34999999999999787,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-10-06\n\nDemocratic chances of Senate control are down 0.2 pts to 68.3% on 2 new polls. Projected seats 52.1 \u2192 52.1 (+0.0).\n\n**Races that moved** (7 of 35):\n\n  - **Maine** \u2014 Democratic win probability 70.1% \u2192 67.1% (-3.1 pts); projected margin D+2.9 \u2192 D+2.4 (-0.5). Driven by 1 new poll:\n    - Marist College (2026-10-02, n=1505, RV): D+4.1\n\n  - **Michigan** \u2014 Democratic win probability 71.9% \u2192 73.2% (+1.4 pts); projected margin D+3.1 \u2192 D+3.3 (+0.2). Driven by 1 new poll:\n    - Mitchell Research & Communications (2026-10-01, n=682, LV): D+5.7\n\n  - **South Carolina** \u2014 Democratic win probability 24.4% \u2192 25.6% (+1.2 pts); projected margin R+6.9 \u2192 R+6.7 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Ohio** \u2014 Democratic win probability 78.2% \u2192 79.3% (+1.2 pts); projected margin D+4.3 \u2192 D+4.5 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **New Mexico** \u2014 Democratic win probability 91.7% \u2192 91.9% (+0.2 pts); projected margin D+14.1 \u2192 D+14.5 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Oregon** \u2014 Democratic win probability 97.0% \u2192 96.8% (-0.2 pts); projected margin D+19.0 \u2192 D+19.4 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Colorado** \u2014 Democratic win probability 95.7% \u2192 95.6% (-0.1 pts); projected margin D+17.3 \u2192 D+17.6 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-10-05",
    "previous_run_date": "2026-10-04",
    "headline": "Democratic chances of Senate control are up 1.1 pts to 68.5% on 1 new poll. Projected seats 52.0 \u2192 52.1 (+0.1).",

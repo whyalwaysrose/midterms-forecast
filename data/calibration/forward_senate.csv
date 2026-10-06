@@ -35,3 +35,5 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-03,2026-10-02,senate,senate-2026-TX,us-202beab9600d9b,Beacon Research/Shaw & Co. Research,2026-09-26,0.04001,0.09433,0.08174,0.21504
 2026-10-05,2026-10-04,senate,__national__,gen202you9adbf42a,YouGov - CBS News,2026-10-01,0.18232,0.14128,0.05984,0.79177
 2026-10-05,2026-10-04,senate,senate-2026-GA,us-202wed7f897488,Wedgewood Polls,2026-10-02,0.20067,0.18187,0.10236,0.58899
+2026-10-06,2026-10-05,senate,senate-2026-ME,us-202mare89f317d,Marist College,2026-10-02,0.08168,0.14075,0.06929,0.16062
+2026-10-06,2026-10-05,senate,senate-2026-MI,us-202mit7960c973,Mitchell Research & Communications,2026-10-01,0.11507,0.04733,0.10007,0.78893

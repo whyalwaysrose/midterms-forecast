@@ -2,6 +2,194 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-08",
+   "previous_run_date": "2026-10-07",
+   "headline": "Democratic chances of Senate control are down 0.8 pts to 67.5% on 7 new polls. Projected seats 52.1 \u2192 52.1 (-0.1).",
+   "body": [
+    "**Races that moved** (7 of 35):",
+    "",
+    "  - **Iowa** \u2014 Democratic win probability 59.2% \u2192 56.0% (-3.2 pts); projected margin D+1.3 \u2192 D+0.8 (-0.4). Driven by 1 new poll:\n    - CNN/SSRS (2026-10-02, n=801, LV): R+2.3",
+    "",
+    "  - **South Carolina** \u2014 Democratic win probability 25.6% \u2192 24.0% (-1.6 pts); projected margin R+6.7 \u2192 R+7.2 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Texas** \u2014 Democratic win probability 72.5% \u2192 71.1% (-1.4 pts); projected margin D+3.3 \u2192 D+3.0 (-0.3). Driven by 2 new polls:\n    - Guidant Polling and Strategy (2026-09-24, n=800, LV): D+2.6\n    - University of Massachusetts Lowell Center for Public Opinion/YouGov (2026-09-23, n=850, LV): D+0.0",
+    "",
+    "  - **Michigan** \u2014 Democratic win probability 73.2% \u2192 74.3% (+1.1 pts); projected margin D+3.3 \u2192 D+3.5 (+0.2). Driven by 1 new poll:\n    - Guidant Polling and Strategy (2026-09-23, n=800, LV): D+5.5",
+    "",
+    "  - **New Mexico** \u2014 Democratic win probability 91.9% \u2192 91.4% (-0.5 pts); projected margin D+14.5 \u2192 D+14.1 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Colorado** \u2014 Democratic win probability 95.6% \u2192 95.3% (-0.3 pts); projected margin D+17.6 \u2192 D+17.3 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Oregon** \u2014 Democratic win probability 96.8% \u2192 96.7% (-0.1 pts); projected margin D+19.4 \u2192 D+19.0 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "**New polling that did not move the needle.** Ohio (1), Massachusetts (1), Rhode Island (1). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 7,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-IA",
+     "name": "Iowa",
+     "prob_before": 0.5916,
+     "prob_after": 0.5597,
+     "prob_delta": -0.03190000000000004,
+     "margin_before": 1.27,
+     "margin_after": 0.83,
+     "margin_delta": -0.44000000000000006,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202cnnc393624c",
+       "pollster": "CNN/SSRS",
+       "date": "2026-10-02",
+       "start_date": "2026-09-29",
+       "end_date": "2026-10-05",
+       "sample_size": 801,
+       "population": "lv",
+       "dem_pct": 43.0,
+       "rep_pct": 45.0,
+       "margin": -2.3,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://www.cnn.com/2026/10/08/politics/cnn-polls-ohio-iowa-senate-governor-midterms",
+       "dem_candidate": "Josh Turek",
+       "rep_candidate": "Ashley Hinson"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-SC",
+     "name": "South Carolina",
+     "prob_before": 0.2557,
+     "prob_after": 0.2396,
+     "prob_delta": -0.016099999999999975,
+     "margin_before": -6.66,
+     "margin_after": -7.16,
+     "margin_delta": -0.5,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-TX",
+     "name": "Texas",
+     "prob_before": 0.7248,
+     "prob_after": 0.7106,
+     "prob_delta": -0.01419999999999999,
+     "margin_before": 3.26,
+     "margin_after": 2.97,
+     "margin_delta": -0.2899999999999996,
+     "new_poll_count": 2,
+     "new_polls": [
+      {
+       "id": "us-202gui7fa4251f",
+       "pollster": "Guidant Polling and Strategy",
+       "date": "2026-09-24",
+       "start_date": "2026-09-20",
+       "end_date": "2026-09-28",
+       "sample_size": 800,
+       "population": "lv",
+       "dem_pct": 46.6,
+       "rep_pct": 44.2,
+       "margin": 2.6,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Public First Action"
+       ],
+       "url": "https://x.com/burgessev/status/2107923538392776875?s=20",
+       "dem_candidate": "James Talarico",
+       "rep_candidate": "Ken Paxton"
+      },
+      {
+       "id": "us-202unic8d0412d",
+       "pollster": "University of Massachusetts Lowell Center for Public Opinion/YouGov",
+       "date": "2026-09-23",
+       "start_date": "2026-09-18",
+       "end_date": "2026-09-28",
+       "sample_size": 850,
+       "population": "lv",
+       "dem_pct": 45.0,
+       "rep_pct": 45.0,
+       "margin": 0.0,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://www.uml.edu/news/press-releases/2026/10092026-texas-poll.aspx",
+       "dem_candidate": "James Talarico",
+       "rep_candidate": "Ken Paxton"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-MI",
+     "name": "Michigan",
+     "prob_before": 0.7324,
+     "prob_after": 0.7432,
+     "prob_delta": 0.01079999999999992,
+     "margin_before": 3.32,
+     "margin_after": 3.5,
+     "margin_delta": 0.18000000000000016,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202guic8eacfa2",
+       "pollster": "Guidant Polling and Strategy",
+       "date": "2026-09-23",
+       "start_date": "2026-09-20",
+       "end_date": "2026-09-27",
+       "sample_size": 800,
+       "population": "lv",
+       "dem_pct": 48.0,
+       "rep_pct": 43.0,
+       "margin": 5.5,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Public First Action"
+       ],
+       "url": "https://x.com/burgessev/status/2107923538392776875?s=20",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-NM",
+     "name": "New Mexico",
+     "prob_before": 0.9188,
+     "prob_after": 0.9139,
+     "prob_delta": -0.004899999999999904,
+     "margin_before": 14.46,
+     "margin_after": 14.09,
+     "margin_delta": -0.370000000000001,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-CO",
+     "name": "Colorado",
+     "prob_before": 0.956,
+     "prob_after": 0.9532,
+     "prob_delta": -0.0027999999999999137,
+     "margin_before": 17.65,
+     "margin_after": 17.34,
+     "margin_delta": -0.3099999999999987,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-OR",
+     "name": "Oregon",
+     "prob_before": 0.9681,
+     "prob_after": 0.9667,
+     "prob_delta": -0.0013999999999999568,
+     "margin_before": 19.36,
+     "margin_after": 19.01,
+     "margin_delta": -0.34999999999999787,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-10-08\n\nDemocratic chances of Senate control are down 0.8 pts to 67.5% on 7 new polls. Projected seats 52.1 \u2192 52.1 (-0.1).\n\n**Races that moved** (7 of 35):\n\n  - **Iowa** \u2014 Democratic win probability 59.2% \u2192 56.0% (-3.2 pts); projected margin D+1.3 \u2192 D+0.8 (-0.4). Driven by 1 new poll:\n    - CNN/SSRS (2026-10-02, n=801, LV): R+2.3\n\n  - **South Carolina** \u2014 Democratic win probability 25.6% \u2192 24.0% (-1.6 pts); projected margin R+6.7 \u2192 R+7.2 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Texas** \u2014 Democratic win probability 72.5% \u2192 71.1% (-1.4 pts); projected margin D+3.3 \u2192 D+3.0 (-0.3). Driven by 2 new polls:\n    - Guidant Polling and Strategy (2026-09-24, n=800, LV): D+2.6\n    - University of Massachusetts Lowell Center for Public Opinion/YouGov (2026-09-23, n=850, LV): D+0.0\n\n  - **Michigan** \u2014 Democratic win probability 73.2% \u2192 74.3% (+1.1 pts); projected margin D+3.3 \u2192 D+3.5 (+0.2). Driven by 1 new poll:\n    - Guidant Polling and Strategy (2026-09-23, n=800, LV): D+5.5\n\n  - **New Mexico** \u2014 Democratic win probability 91.9% \u2192 91.4% (-0.5 pts); projected margin D+14.5 \u2192 D+14.1 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Colorado** \u2014 Democratic win probability 95.6% \u2192 95.3% (-0.3 pts); projected margin D+17.6 \u2192 D+17.3 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Oregon** \u2014 Democratic win probability 96.8% \u2192 96.7% (-0.1 pts); projected margin D+19.4 \u2192 D+19.0 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n**New polling that did not move the needle.** Ohio (1), Massachusetts (1), Rhode Island (1). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
    "run_date": "2026-10-07",
    "previous_run_date": "2026-10-06",
    "headline": "No new polling since 2026-10-06. Democratic chances of Senate control hold at 68.3%.",

@@ -37,3 +37,10 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-05,2026-10-04,senate,senate-2026-GA,us-202wed7f897488,Wedgewood Polls,2026-10-02,0.20067,0.18187,0.10236,0.58899
 2026-10-06,2026-10-05,senate,senate-2026-ME,us-202mare89f317d,Marist College,2026-10-02,0.08168,0.14075,0.06929,0.16062
 2026-10-06,2026-10-05,senate,senate-2026-MI,us-202mit7960c973,Mitchell Research & Communications,2026-10-01,0.11507,0.04733,0.10007,0.78893
+2026-10-08,2026-10-07,senate,senate-2026-IA,us-202cnnc393624c,CNN/SSRS,2026-10-02,-0.04546,0.02833,0.09152,0.1728
+2026-10-08,2026-10-07,senate,senate-2026-MA,us-202unifcec5d26,University of New Hampshire,2026-09-19,0.56909,0.62577,0.1193,0.28323
+2026-10-08,2026-10-07,senate,senate-2026-MI,us-202guic8eacfa2,Guidant Polling and Strategy,2026-09-23,0.11,0.06381,0.08507,0.74272
+2026-10-08,2026-10-07,senate,senate-2026-OH,us-202cnna1713372,CNN/SSRS,2026-10-02,0.13062,0.09287,0.09197,0.69056
+2026-10-08,2026-10-07,senate,senate-2026-RI,us-202uni2e797321,University of New Hampshire,2026-09-19,0.47378,0.46756,0.1204,0.5253
+2026-10-08,2026-10-07,senate,senate-2026-TX,us-202unic8d0412d,University of Massachusetts Lowell Center for Public Opinion/YouGov,2026-09-23,0.0,0.05955,0.08356,0.19988
+2026-10-08,2026-10-07,senate,senate-2026-TX,us-202gui7fa4251f,Guidant Polling and Strategy,2026-09-24,0.05288,0.05949,0.08559,0.46221

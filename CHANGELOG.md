@@ -2,6 +2,34 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-08
+
+Democratic chances of Senate control are down 0.8 pts to 67.5% on 7 new polls. Projected seats 52.1 → 52.1 (-0.1).
+
+**Races that moved** (7 of 35):
+
+  - **Iowa** — Democratic win probability 59.2% → 56.0% (-3.2 pts); projected margin D+1.3 → D+0.8 (-0.4). Driven by 1 new poll:
+    - CNN/SSRS (2026-10-02, n=801, LV): R+2.3
+
+  - **South Carolina** — Democratic win probability 25.6% → 24.0% (-1.6 pts); projected margin R+6.7 → R+7.2 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Texas** — Democratic win probability 72.5% → 71.1% (-1.4 pts); projected margin D+3.3 → D+3.0 (-0.3). Driven by 2 new polls:
+    - Guidant Polling and Strategy (2026-09-24, n=800, LV): D+2.6
+    - University of Massachusetts Lowell Center for Public Opinion/YouGov (2026-09-23, n=850, LV): D+0.0
+
+  - **Michigan** — Democratic win probability 73.2% → 74.3% (+1.1 pts); projected margin D+3.3 → D+3.5 (+0.2). Driven by 1 new poll:
+    - Guidant Polling and Strategy (2026-09-23, n=800, LV): D+5.5
+
+  - **New Mexico** — Democratic win probability 91.9% → 91.4% (-0.5 pts); projected margin D+14.5 → D+14.1 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Colorado** — Democratic win probability 95.6% → 95.3% (-0.3 pts); projected margin D+17.6 → D+17.3 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Oregon** — Democratic win probability 96.8% → 96.7% (-0.1 pts); projected margin D+19.4 → D+19.0 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+**New polling that did not move the needle.** Ohio (1), Massachusetts (1), Rhode Island (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-07
 
 No new polling since 2026-10-06. Democratic chances of Senate control hold at 68.3%.

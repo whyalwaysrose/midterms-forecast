@@ -406,6 +406,28 @@ against the last archived run that had not seen them. METHODOLOGY 8a.
 - The archive carries only `LATENT_TAIL` trajectory points (see `slim_payload`); the full
   payload is 380 KB and archiving it daily would add tens of megabytes a cycle.
 
+## The results parser is scraping a wiki — validate it against a real cycle, every time
+
+`src/midterms/data/results.py` reads per-race results for both chambers (METHODOLOGY 8c).
+Every bug found while writing it dropped races **silently**; none raised. If you touch it,
+re-run it against 2022 and 2024 and check the totals, which is the only thing that catches
+these:
+
+- **Template case varies by cycle.** 2022 writes `{{Party stripe}}`/`{{Aye}}`, 2024 writes
+  them lowercase. A case-sensitive match validated 2022 perfectly and lost 27 districts in
+  2024 — the worst possible shape for a bug.
+- **A district cell can carry attributes**: `! rowspan=2 | {{ushr|WV|2|X}}`. Matching only
+  `! {{ushr` lost eleven states.
+- **`{{ushr}}` appears inside cells too**, for redistricting notes. Row markers end `|X}}`,
+  cross-references `|C}}` — that is what separates 435 rows from 783 template uses.
+- **An unopposed candidate has no bullet** and sometimes no percentage at all; the latter
+  is the normal state of a called race on election night.
+- **Concurrent special elections** duplicate a district. Only rows under a state heading
+  are the general election.
+- **Senate rows must come from the race-summary subsections only.** The state link also
+  appears in every candidate and primary table: matching it everywhere gives 118 rows for
+  35 races and would score a primary as the election.
+
 ## Known rough edges
 
 Listed in the README under "Known data-quality items" and `docs/METHODOLOGY.md` §9. The

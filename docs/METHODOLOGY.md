@@ -588,6 +588,37 @@ The seat percentile is the most informative thing a single election yields. One 
 cannot show an interval was too wide; a result at the 3rd percentile is still a fact
 about the shape of the forecast.
 
+**Per-race results, which is where the evidence is.** The pre-registration above
+calls the race-by-race scoring the evidence and the chamber outcome an anecdote. Until
+2026-10-09 only the anecdote could actually be computed: the ingester read chamber seat
+totals and nothing else. It now reads every called race.
+
+Both chambers come from the per-state tables of Wikipedia's election articles, where a
+row opens with the `{{ushr}}` template and the winner is marked `{{Aye}}`. Validated by
+reparsing past cycles and comparing with the known result:
+
+| Cycle | Districts | D | R | Truth |
+|---|---|---|---|---|
+| 2024 | 435 | 215 | 220 | 215 / 220 ✓ |
+| 2022 | 435 | 213 | 222 | 213 / 222 ✓ |
+| 2018 | 420 | 230 | 190 | 235 / 199 — older article layout, partially supported |
+
+The two cycles whose layout 2026 follows come back exact. Against the live 2026 article
+the parser already locates **all 435 district rows and all 35 Senate rows**, with none
+called, which is the correct state of the world.
+
+A margin is recorded only where one Democrat faced one Republican. Uncontested seats and
+the same-party run-offs California, Washington and Louisiana produce have a winner but no
+two-party margin, and the model forecasts a two-party margin — so the win probability is
+scored and the interval coverage is not asked to place a race the model never tried to.
+A race called before its vote shares are published is treated the same way, which is the
+ordinary state of things on the night.
+
+Counts of rows and of parsed outcomes are both reported, because the dangerous failure is
+not an exception. Finding 435 rows and parsing 400 means the markup moved; finding 435
+and parsing none means the election has not happened. The outcome count alone cannot tell
+those apart, so a high row count with a low parse rate raises an error annotation.
+
 **The result arrives on its own.** `src/midterms/data/results.py` reads the chamber
 totals from the infobox of Wikipedia's 2026 election articles — the one part of those
 pages with a stable schema, and already present with empty seat fields. Every parse is

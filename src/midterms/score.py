@@ -335,24 +335,51 @@ def run_score(chamber: str = "senate", dry_run: int | None = None) -> int:
         )
     else:
         seats = results_source.fetch_chamber_seats(chamber)
-        if seats is None:
+        # Per-race results arrive independently of the chamber total, and
+        # usually earlier: races are called one at a time through the night,
+        # while the infobox total is only filled in once somebody adds the
+        # chamber up. Either can be missing, so neither gates the other.
+        outcomes = results_source.fetch_race_results(chamber)
+        race_results = [
+            RaceResult(o.race_id, o.dem_won, o.dem_margin) for o in outcomes.values()
+        ]
+
+        if seats is None and not race_results:
             print(f"No {chamber} result published yet. Nothing to score.")
             return 0
-        # Independents are reported separately and never folded in; see
-        # data/results.py. Scoring uses the party count, and the caucus
-        # alternative is printed beside it.
-        race_results = []
-        chamber_result = ChamberResult(chamber, seats.dem)
-        provenance = (
-            f"  Result: D {seats.dem}, R {seats.rep}, I {seats.ind} "
-            f"(via infobox `{seats.field}`)\n  Source: {seats.source}"
-        )
+
+        if seats is None:
+            # Races are being called but the chamber has not been totalled.
+            # Counting winners here would be wrong for the Senate, where most
+            # seats were never up, so the chamber simply goes unscored for now.
+            chamber_result = None
+            provenance = (
+                f"  {len(race_results)} races called so far; no chamber total "
+                f"published yet, so only the races are scored."
+            )
+        else:
+            # Independents are reported separately and never folded in; see
+            # data/results.py. Scoring uses the party count, and the caucus
+            # alternative is printed beside it.
+            chamber_result = ChamberResult(chamber, seats.dem)
+            provenance = (
+                f"  Result: D {seats.dem}, R {seats.rep}, I {seats.ind} "
+                f"(via infobox `{seats.field}`); {len(race_results)} races called"
+                f"\n  Source: {seats.source}"
+            )
 
     print("=" * 74)
     print(f"  SCORING THE {chamber.upper()} FORECAST OF {forecast['run_date']}")
     print("=" * 74)
     print(provenance)
     print()
+
+    if chamber_result is None:
+        print("  Chamber: no published total yet, so not scored.")
+        race_score = score_races(forecast, race_results)
+        _print_race_scores(race_score)
+        print("=" * 74)
+        return 0
 
     chamber_score = score_chamber(forecast, chamber_result)
     print("  Chamber")
@@ -379,6 +406,19 @@ def run_score(chamber: str = "senate", dry_run: int | None = None) -> int:
         print("    forecast wins whenever it is right, which is what confident means.")
 
     race_score = score_races(forecast, race_results)
+    _print_race_scores(race_score)
+
+    print("=" * 74)
+    return 0
+
+
+def _print_race_scores(race_score: dict) -> None:
+    """The per-race half of the report.
+
+    Shared by both paths through run_score, because races get called long
+    before anyone totals the chamber, and a night where only the races are
+    scored should print exactly the same numbers as one where both are.
+    """
     if race_score["n"]:
         print()
         print(f"  Races ({race_score['n']} scored, "
@@ -404,6 +444,3 @@ def run_score(chamber: str = "senate", dry_run: int | None = None) -> int:
         print()
         print("  No per-race results available, so only the chamber is scored.")
         print("  Per-race scoring is where the evidence is; see score.py.")
-
-    print("=" * 74)
-    return 0

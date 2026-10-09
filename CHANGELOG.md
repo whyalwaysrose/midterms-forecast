@@ -2,6 +2,27 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-09
+
+Democratic chances of Senate control are up 1.5 pts to 69.0% on 1 new poll. Projected seats 52.1 → 52.2 (+0.2).
+
+**Races that moved** (6 of 35):
+
+  - **Florida** — Democratic win probability 14.8% → 19.3% (+4.4 pts); projected margin R+5.8 → R+4.8 (+1.0). Driven by 1 new poll:
+    - St. Pete Polls (2026-10-06, n=836, LV): R+2.2
+
+  - **South Carolina** — Democratic win probability 24.0% → 26.7% (+2.8 pts); projected margin R+7.2 → R+6.5 (+0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Texas** — Democratic win probability 71.1% → 72.7% (+1.6 pts); projected margin D+3.0 → D+3.2 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Kansas** — Democratic win probability 49.4% → 50.6% (+1.2 pts); projected margin R+0.1 → D+0.1 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Montana** — Democratic win probability 14.6% → 15.5% (+0.9 pts); projected margin R+10.6 → R+10.3 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Tennessee** — Democratic win probability 1.8% → 2.0% (+0.2 pts); projected margin R+21.0 → R+20.6 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-10-08
 
 Democratic chances of Senate control are down 0.8 pts to 67.5% on 7 new polls. Projected seats 52.1 → 52.1 (-0.1).

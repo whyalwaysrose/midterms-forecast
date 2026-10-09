@@ -44,3 +44,4 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-08,2026-10-07,senate,senate-2026-RI,us-202uni2e797321,University of New Hampshire,2026-09-19,0.47378,0.46756,0.1204,0.5253
 2026-10-08,2026-10-07,senate,senate-2026-TX,us-202unic8d0412d,University of Massachusetts Lowell Center for Public Opinion/YouGov,2026-09-23,0.0,0.05955,0.08356,0.19988
 2026-10-08,2026-10-07,senate,senate-2026-TX,us-202gui7fa4251f,Guidant Polling and Strategy,2026-09-24,0.05288,0.05949,0.08559,0.46221
+2026-10-09,2026-10-08,senate,senate-2026-FL,us-202st.fc2e22ed,St. Pete Polls,2026-10-06,-0.04349,-0.12079,0.08819,0.84545

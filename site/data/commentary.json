@@ -2,6 +2,123 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-09",
+   "previous_run_date": "2026-10-08",
+   "headline": "Democratic chances of Senate control are up 1.5 pts to 69.0% on 1 new poll. Projected seats 52.1 \u2192 52.2 (+0.2).",
+   "body": [
+    "**Races that moved** (6 of 35):",
+    "",
+    "  - **Florida** \u2014 Democratic win probability 14.8% \u2192 19.3% (+4.4 pts); projected margin R+5.8 \u2192 R+4.8 (+1.0). Driven by 1 new poll:\n    - St. Pete Polls (2026-10-06, n=836, LV): R+2.2",
+    "",
+    "  - **South Carolina** \u2014 Democratic win probability 24.0% \u2192 26.7% (+2.8 pts); projected margin R+7.2 \u2192 R+6.5 (+0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Texas** \u2014 Democratic win probability 71.1% \u2192 72.7% (+1.6 pts); projected margin D+3.0 \u2192 D+3.2 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Kansas** \u2014 Democratic win probability 49.4% \u2192 50.6% (+1.2 pts); projected margin R+0.1 \u2192 D+0.1 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Montana** \u2014 Democratic win probability 14.6% \u2192 15.5% (+0.9 pts); projected margin R+10.6 \u2192 R+10.3 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Tennessee** \u2014 Democratic win probability 1.8% \u2192 2.0% (+0.2 pts); projected margin R+21.0 \u2192 R+20.6 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 1,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-FL",
+     "name": "Florida",
+     "prob_before": 0.1484,
+     "prob_after": 0.1928,
+     "prob_delta": 0.044399999999999995,
+     "margin_before": -5.79,
+     "margin_after": -4.8,
+     "margin_delta": 0.9900000000000002,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202st.fc2e22ed",
+       "pollster": "St. Pete Polls",
+       "date": "2026-10-06",
+       "start_date": "2026-10-05",
+       "end_date": "2026-10-07",
+       "sample_size": 836,
+       "population": "lv",
+       "dem_pct": 45.0,
+       "rep_pct": 47.0,
+       "margin": -2.2,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Florida Politics"
+       ],
+       "url": "https://floridapolitics.com/archives/823921-new-st-pete-polls-survey-has-ashley-moody-at-47-angie-nixon-at-45-and-the-senate-race-still-inside-the-margin-of-error/",
+       "dem_candidate": "Angie Nixon",
+       "rep_candidate": "Ashley Moody"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-SC",
+     "name": "South Carolina",
+     "prob_before": 0.2396,
+     "prob_after": 0.2674,
+     "prob_delta": 0.02780000000000002,
+     "margin_before": -7.16,
+     "margin_after": -6.55,
+     "margin_delta": 0.6100000000000003,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-TX",
+     "name": "Texas",
+     "prob_before": 0.7106,
+     "prob_after": 0.7267,
+     "prob_delta": 0.016100000000000003,
+     "margin_before": 2.97,
+     "margin_after": 3.25,
+     "margin_delta": 0.2799999999999998,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-KS",
+     "name": "Kansas",
+     "prob_before": 0.4943,
+     "prob_after": 0.506,
+     "prob_delta": 0.011699999999999988,
+     "margin_before": -0.08,
+     "margin_after": 0.09,
+     "margin_delta": 0.16999999999999998,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-MT",
+     "name": "Montana",
+     "prob_before": 0.1461,
+     "prob_after": 0.155,
+     "prob_delta": 0.008899999999999991,
+     "margin_before": -10.61,
+     "margin_after": -10.28,
+     "margin_delta": 0.33000000000000007,
+     "new_poll_count": 0,
+     "new_polls": []
+    },
+    {
+     "race_id": "senate-2026-TN",
+     "name": "Tennessee",
+     "prob_before": 0.0184,
+     "prob_after": 0.0201,
+     "prob_delta": 0.0017000000000000001,
+     "margin_before": -21.04,
+     "margin_after": -20.61,
+     "margin_delta": 0.4299999999999997,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-10-09\n\nDemocratic chances of Senate control are up 1.5 pts to 69.0% on 1 new poll. Projected seats 52.1 \u2192 52.2 (+0.2).\n\n**Races that moved** (6 of 35):\n\n  - **Florida** \u2014 Democratic win probability 14.8% \u2192 19.3% (+4.4 pts); projected margin R+5.8 \u2192 R+4.8 (+1.0). Driven by 1 new poll:\n    - St. Pete Polls (2026-10-06, n=836, LV): R+2.2\n\n  - **South Carolina** \u2014 Democratic win probability 24.0% \u2192 26.7% (+2.8 pts); projected margin R+7.2 \u2192 R+6.5 (+0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Texas** \u2014 Democratic win probability 71.1% \u2192 72.7% (+1.6 pts); projected margin D+3.0 \u2192 D+3.2 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Kansas** \u2014 Democratic win probability 49.4% \u2192 50.6% (+1.2 pts); projected margin R+0.1 \u2192 D+0.1 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Montana** \u2014 Democratic win probability 14.6% \u2192 15.5% (+0.9 pts); projected margin R+10.6 \u2192 R+10.3 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Tennessee** \u2014 Democratic win probability 1.8% \u2192 2.0% (+0.2 pts); projected margin R+21.0 \u2192 R+20.6 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-10-08",
    "previous_run_date": "2026-10-07",
    "headline": "Democratic chances of Senate control are down 0.8 pts to 67.5% on 7 new polls. Projected seats 52.1 \u2192 52.1 (-0.1).",

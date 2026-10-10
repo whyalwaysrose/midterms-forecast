@@ -45,3 +45,13 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-08,2026-10-07,senate,senate-2026-TX,us-202unic8d0412d,University of Massachusetts Lowell Center for Public Opinion/YouGov,2026-09-23,0.0,0.05955,0.08356,0.19988
 2026-10-08,2026-10-07,senate,senate-2026-TX,us-202gui7fa4251f,Guidant Polling and Strategy,2026-09-24,0.05288,0.05949,0.08559,0.46221
 2026-10-09,2026-10-08,senate,senate-2026-FL,us-202st.fc2e22ed,St. Pete Polls,2026-10-06,-0.04349,-0.12079,0.08819,0.84545
+2026-10-10,2026-10-09,senate,__national__,gen202pew7314f461,Pew Research Center,2026-10-02,0.20067,0.14149,0.0458,0.92194
+2026-10-10,2026-10-09,senate,senate-2026-AR,us-202gracbfdd9ed,Grayhouse,2026-10-02,-0.24295,-0.40716,0.12352,0.92662
+2026-10-10,2026-10-09,senate,senate-2026-FL,us-202tar0bbd9d56,Targoz Market Research,2026-10-01,-0.21357,-0.10025,0.08552,0.07392
+2026-10-10,2026-10-09,senate,senate-2026-FL,us-202tarc49d2a14,Targoz Market Research,2026-10-01,-0.27444,-0.10742,0.07751,0.01941
+2026-10-10,2026-10-09,senate,senate-2026-IA,us-202eme2172a9a0,Emerson College,2026-10-05,-0.03494,0.01357,0.09577,0.27104
+2026-10-10,2026-10-09,senate,senate-2026-ME,us-202the6b777566,The Washington Post/George Mason University School of Policy and Government,2026-10-02,0.10536,0.04549,0.08432,0.7993
+2026-10-10,2026-10-09,senate,senate-2026-MI,us-202z tb2a3f7be,Z to A Research,2026-09-29,0.15415,0.08106,0.10755,0.78977
+2026-10-10,2026-10-09,senate,senate-2026-MN,us-202gqr63b7a4d3,GQR,2026-10-02,0.17435,0.1161,0.09478,0.76825
+2026-10-10,2026-10-09,senate,senate-2026-NC,us-202eas168b53d4,East Carolina University,2026-10-01,0.14165,0.19732,0.08518,0.21865
+2026-10-10,2026-10-09,senate,senate-2026-OH,us-202co/ed81e3f8,co/efficient,2026-10-05,-0.02248,0.01917,0.08583,0.27925

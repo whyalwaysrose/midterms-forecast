@@ -102695,6 +102695,2191 @@
      "poll_count": 0
     }
    }
+  },
+  {
+   "run_date": "2026-10-12",
+   "dem_control_prob": 0.8158,
+   "dem_seats_mean": 250.14,
+   "dem_seats_median": 250,
+   "generic_ballot_dem_margin": 8.53,
+   "n_race_polls": 69,
+   "races": {
+    "house-2026-AK-01": {
+     "dem_win_prob": 0.061,
+     "margin_p50": -11.41,
+     "poll_count": 4
+    },
+    "house-2026-AL-01": {
+     "dem_win_prob": 0.006,
+     "margin_p50": -28.85,
+     "poll_count": 0
+    },
+    "house-2026-AL-02": {
+     "dem_win_prob": 0.6462,
+     "margin_p50": 3.97,
+     "poll_count": 0
+    },
+    "house-2026-AL-03": {
+     "dem_win_prob": 0.0,
+     "margin_p50": -41.95,
+     "poll_count": 0
+    },
+    "house-2026-AL-04": {
+     "dem_win_prob": 0.0,
+     "margin_p50": -63.43,
+     "poll_count": 0
+    },
+    "house-2026-AL-05": {
+     "dem_win_prob": 0.0409,
+     "margin_p50": -19.85,
+     "poll_count": 0
+    },
+    "house-2026-AL-06": {
+     "dem_win_prob": 0.0088,
+     "margin_p50": -27.18,
+     "poll_count": 0
+    },
+    "house-2026-AL-07": {
+     "dem_win_prob": 0.9738,
+     "margin_p50": 22.13,
+     "poll_count": 0
+    },
+    "house-2026-AR-01": {
+     "dem_win_prob": 0.0003,
+     "margin_p50": -41.08,
+     "poll_count": 0
+    },
+    "house-2026-AR-02": {
+     "dem_win_prob": 0.7631,
+     "margin_p50": 5.32,
+     "poll_count": 1
+    },
+    "house-2026-AR-03": {
+     "dem_win_prob": 0.1061,
+     "margin_p50": -14.08,
+     "poll_count": 0
+    },
+    "house-2026-AR-04": {
+     "dem_win_prob": 0.002,
+     "margin_p50": -34.5,
+     "poll_count": 0
+    },
+    "house-2026-AZ-01": {
+     "dem_win_prob": 0.5112,
+     "margin_p50": 0.33,
+     "poll_count": 0
+    },
+    "house-2026-AZ-02": {
+     "dem_win_prob": 0.189,
+     "margin_p50": -9.66,
+     "poll_count": 0
+    },
+    "house-2026-AZ-03": {
+     "dem_win_prob": 0.9992,
+     "margin_p50": 40.88,
+     "poll_count": 0
+    },
+    "house-2026-AZ-04": {
+     "dem_win_prob": 0.8756,
+     "margin_p50": 12.82,
+     "poll_count": 0
+    },
+    "house-2026-AZ-05": {
+     "dem_win_prob": 0.1199,
+     "margin_p50": -13.55,
+     "poll_count": 0
+    },
+    "house-2026-AZ-06": {
+     "dem_win_prob": 0.6507,
+     "margin_p50": 2.92,
+     "poll_count": 3
+    },
+    "house-2026-AZ-07": {
+     "dem_win_prob": 0.9816,
+     "margin_p50": 24.68,
+     "poll_count": 0
+    },
+    "house-2026-AZ-08": {
+     "dem_win_prob": 0.1637,
+     "margin_p50": -10.75,
+     "poll_count": 0
+    },
+    "house-2026-AZ-09": {
+     "dem_win_prob": 0.015,
+     "margin_p50": -24.94,
+     "poll_count": 0
+    },
+    "house-2026-CA-01": {
+     "dem_win_prob": 0.8319,
+     "margin_p50": 11.0,
+     "poll_count": 0
+    },
+    "house-2026-CA-02": {
+     "dem_win_prob": 0.9906,
+     "margin_p50": 27.42,
+     "poll_count": 0
+    },
+    "house-2026-CA-03": {
+     "dem_win_prob": 0.8617,
+     "margin_p50": 12.26,
+     "poll_count": 0
+    },
+    "house-2026-CA-04": {
+     "dem_win_prob": 0.9451,
+     "margin_p50": 18.78,
+     "poll_count": 0
+    },
+    "house-2026-CA-05": {
+     "dem_win_prob": 0.1067,
+     "margin_p50": -14.32,
+     "poll_count": 0
+    },
+    "house-2026-CA-06": {
+     "dem_win_prob": 0.8416,
+     "margin_p50": 11.12,
+     "poll_count": 0
+    },
+    "house-2026-CA-07": {
+     "dem_win_prob": 0.9344,
+     "margin_p50": 17.46,
+     "poll_count": 0
+    },
+    "house-2026-CA-08": {
+     "dem_win_prob": 0.9993,
+     "margin_p50": 35.98,
+     "poll_count": 0
+    },
+    "house-2026-CA-09": {
+     "dem_win_prob": 0.9211,
+     "margin_p50": 16.5,
+     "poll_count": 0
+    },
+    "house-2026-CA-10": {
+     "dem_win_prob": 0.9986,
+     "margin_p50": 35.61,
+     "poll_count": 0
+    },
+    "house-2026-CA-11": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 70.96,
+     "poll_count": 0
+    },
+    "house-2026-CA-12": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 77.76,
+     "poll_count": 0
+    },
+    "house-2026-CA-13": {
+     "dem_win_prob": 0.7864,
+     "margin_p50": 8.82,
+     "poll_count": 0
+    },
+    "house-2026-CA-14": {
+     "dem_win_prob": 0.9981,
+     "margin_p50": 34.48,
+     "poll_count": 0
+    },
+    "house-2026-CA-15": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 50.11,
+     "poll_count": 0
+    },
+    "house-2026-CA-16": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 50.13,
+     "poll_count": 0
+    },
+    "house-2026-CA-17": {
+     "dem_win_prob": 0.9997,
+     "margin_p50": 41.38,
+     "poll_count": 0
+    },
+    "house-2026-CA-18": {
+     "dem_win_prob": 0.9957,
+     "margin_p50": 30.95,
+     "poll_count": 0
+    },
+    "house-2026-CA-19": {
+     "dem_win_prob": 0.999,
+     "margin_p50": 36.71,
+     "poll_count": 0
+    },
+    "house-2026-CA-20": {
+     "dem_win_prob": 0.0115,
+     "margin_p50": -26.73,
+     "poll_count": 0
+    },
+    "house-2026-CA-21": {
+     "dem_win_prob": 0.8664,
+     "margin_p50": 12.45,
+     "poll_count": 0
+    },
+    "house-2026-CA-22": {
+     "dem_win_prob": 0.7161,
+     "margin_p50": 4.4,
+     "poll_count": 1
+    },
+    "house-2026-CA-23": {
+     "dem_win_prob": 0.1209,
+     "margin_p50": -13.41,
+     "poll_count": 0
+    },
+    "house-2026-CA-24": {
+     "dem_win_prob": 0.9888,
+     "margin_p50": 27.42,
+     "poll_count": 0
+    },
+    "house-2026-CA-25": {
+     "dem_win_prob": 0.8618,
+     "margin_p50": 12.17,
+     "poll_count": 0
+    },
+    "house-2026-CA-26": {
+     "dem_win_prob": 0.9508,
+     "margin_p50": 19.28,
+     "poll_count": 0
+    },
+    "house-2026-CA-27": {
+     "dem_win_prob": 0.9075,
+     "margin_p50": 14.98,
+     "poll_count": 0
+    },
+    "house-2026-CA-28": {
+     "dem_win_prob": 0.9898,
+     "margin_p50": 27.91,
+     "poll_count": 0
+    },
+    "house-2026-CA-29": {
+     "dem_win_prob": 0.9988,
+     "margin_p50": 35.62,
+     "poll_count": 0
+    },
+    "house-2026-CA-30": {
+     "dem_win_prob": 0.9994,
+     "margin_p50": 42.11,
+     "poll_count": 0
+    },
+    "house-2026-CA-31": {
+     "dem_win_prob": 0.9296,
+     "margin_p50": 16.85,
+     "poll_count": 0
+    },
+    "house-2026-CA-32": {
+     "dem_win_prob": 0.9902,
+     "margin_p50": 27.64,
+     "poll_count": 0
+    },
+    "house-2026-CA-33": {
+     "dem_win_prob": 0.9021,
+     "margin_p50": 15.05,
+     "poll_count": 0
+    },
+    "house-2026-CA-34": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 53.33,
+     "poll_count": 0
+    },
+    "house-2026-CA-35": {
+     "dem_win_prob": 0.8803,
+     "margin_p50": 13.55,
+     "poll_count": 0
+    },
+    "house-2026-CA-36": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 41.09,
+     "poll_count": 0
+    },
+    "house-2026-CA-37": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 62.59,
+     "poll_count": 0
+    },
+    "house-2026-CA-38": {
+     "dem_win_prob": 0.9343,
+     "margin_p50": 16.98,
+     "poll_count": 0
+    },
+    "house-2026-CA-39": {
+     "dem_win_prob": 0.9105,
+     "margin_p50": 14.85,
+     "poll_count": 0
+    },
+    "house-2026-CA-40": {
+     "dem_win_prob": 0.239,
+     "margin_p50": -7.67,
+     "poll_count": 0
+    },
+    "house-2026-CA-41": {
+     "dem_win_prob": 0.9124,
+     "margin_p50": 15.45,
+     "poll_count": 0
+    },
+    "house-2026-CA-42": {
+     "dem_win_prob": 0.9339,
+     "margin_p50": 17.75,
+     "poll_count": 0
+    },
+    "house-2026-CA-43": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 50.88,
+     "poll_count": 0
+    },
+    "house-2026-CA-44": {
+     "dem_win_prob": 0.9991,
+     "margin_p50": 37.3,
+     "poll_count": 0
+    },
+    "house-2026-CA-45": {
+     "dem_win_prob": 0.8423,
+     "margin_p50": 10.99,
+     "poll_count": 0
+    },
+    "house-2026-CA-46": {
+     "dem_win_prob": 0.9607,
+     "margin_p50": 20.06,
+     "poll_count": 0
+    },
+    "house-2026-CA-47": {
+     "dem_win_prob": 0.9141,
+     "margin_p50": 15.23,
+     "poll_count": 0
+    },
+    "house-2026-CA-48": {
+     "dem_win_prob": 0.665,
+     "margin_p50": 4.71,
+     "poll_count": 0
+    },
+    "house-2026-CA-49": {
+     "dem_win_prob": 0.9241,
+     "margin_p50": 16.87,
+     "poll_count": 0
+    },
+    "house-2026-CA-50": {
+     "dem_win_prob": 0.9705,
+     "margin_p50": 21.63,
+     "poll_count": 0
+    },
+    "house-2026-CA-51": {
+     "dem_win_prob": 0.9689,
+     "margin_p50": 21.69,
+     "poll_count": 0
+    },
+    "house-2026-CA-52": {
+     "dem_win_prob": 0.9626,
+     "margin_p50": 21.19,
+     "poll_count": 0
+    },
+    "house-2026-CO-01": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 57.93,
+     "poll_count": 0
+    },
+    "house-2026-CO-02": {
+     "dem_win_prob": 0.9998,
+     "margin_p50": 41.64,
+     "poll_count": 0
+    },
+    "house-2026-CO-03": {
+     "dem_win_prob": 0.1853,
+     "margin_p50": -7.67,
+     "poll_count": 1
+    },
+    "house-2026-CO-04": {
+     "dem_win_prob": 0.1352,
+     "margin_p50": -12.48,
+     "poll_count": 0
+    },
+    "house-2026-CO-05": {
+     "dem_win_prob": 0.3321,
+     "margin_p50": -4.7,
+     "poll_count": 0
+    },
+    "house-2026-CO-06": {
+     "dem_win_prob": 0.9759,
+     "margin_p50": 23.02,
+     "poll_count": 0
+    },
+    "house-2026-CO-07": {
+     "dem_win_prob": 0.9445,
+     "margin_p50": 19.33,
+     "poll_count": 0
+    },
+    "house-2026-CO-08": {
+     "dem_win_prob": 0.5482,
+     "margin_p50": 1.3,
+     "poll_count": 0
+    },
+    "house-2026-CT-01": {
+     "dem_win_prob": 0.989,
+     "margin_p50": 26.22,
+     "poll_count": 0
+    },
+    "house-2026-CT-02": {
+     "dem_win_prob": 0.9091,
+     "margin_p50": 14.84,
+     "poll_count": 0
+    },
+    "house-2026-CT-03": {
+     "dem_win_prob": 0.9516,
+     "margin_p50": 19.18,
+     "poll_count": 0
+    },
+    "house-2026-CT-04": {
+     "dem_win_prob": 0.9885,
+     "margin_p50": 26.64,
+     "poll_count": 0
+    },
+    "house-2026-CT-05": {
+     "dem_win_prob": 0.8852,
+     "margin_p50": 13.52,
+     "poll_count": 0
+    },
+    "house-2026-DE-01": {
+     "dem_win_prob": 0.9576,
+     "margin_p50": 19.6,
+     "poll_count": 0
+    },
+    "house-2026-FL-01": {
+     "dem_win_prob": 0.0043,
+     "margin_p50": -30.84,
+     "poll_count": 0
+    },
+    "house-2026-FL-02": {
+     "dem_win_prob": 0.3491,
+     "margin_p50": -4.32,
+     "poll_count": 0
+    },
+    "house-2026-FL-03": {
+     "dem_win_prob": 0.2168,
+     "margin_p50": -8.9,
+     "poll_count": 0
+    },
+    "house-2026-FL-04": {
+     "dem_win_prob": 0.4878,
+     "margin_p50": -0.34,
+     "poll_count": 0
+    },
+    "house-2026-FL-05": {
+     "dem_win_prob": 0.2007,
+     "margin_p50": -9.35,
+     "poll_count": 0
+    },
+    "house-2026-FL-06": {
+     "dem_win_prob": 0.034,
+     "margin_p50": -20.88,
+     "poll_count": 0
+    },
+    "house-2026-FL-07": {
+     "dem_win_prob": 0.4694,
+     "margin_p50": -0.85,
+     "poll_count": 0
+    },
+    "house-2026-FL-08": {
+     "dem_win_prob": 0.4021,
+     "margin_p50": -2.8,
+     "poll_count": 0
+    },
+    "house-2026-FL-09": {
+     "dem_win_prob": 0.574,
+     "margin_p50": 1.96,
+     "poll_count": 0
+    },
+    "house-2026-FL-10": {
+     "dem_win_prob": 0.9907,
+     "margin_p50": 27.26,
+     "poll_count": 0
+    },
+    "house-2026-FL-11": {
+     "dem_win_prob": 0.4157,
+     "margin_p50": -2.37,
+     "poll_count": 0
+    },
+    "house-2026-FL-12": {
+     "dem_win_prob": 0.4233,
+     "margin_p50": -2.03,
+     "poll_count": 0
+    },
+    "house-2026-FL-13": {
+     "dem_win_prob": 0.4119,
+     "margin_p50": -1.69,
+     "poll_count": 2
+    },
+    "house-2026-FL-14": {
+     "dem_win_prob": 0.7242,
+     "margin_p50": 6.52,
+     "poll_count": 0
+    },
+    "house-2026-FL-15": {
+     "dem_win_prob": 0.258,
+     "margin_p50": -7.03,
+     "poll_count": 0
+    },
+    "house-2026-FL-16": {
+     "dem_win_prob": 0.4443,
+     "margin_p50": -1.55,
+     "poll_count": 0
+    },
+    "house-2026-FL-17": {
+     "dem_win_prob": 0.1865,
+     "margin_p50": -9.94,
+     "poll_count": 0
+    },
+    "house-2026-FL-18": {
+     "dem_win_prob": 0.3776,
+     "margin_p50": -3.33,
+     "poll_count": 0
+    },
+    "house-2026-FL-19": {
+     "dem_win_prob": 0.0327,
+     "margin_p50": -20.94,
+     "poll_count": 0
+    },
+    "house-2026-FL-20": {
+     "dem_win_prob": 0.9984,
+     "margin_p50": 35.94,
+     "poll_count": 0
+    },
+    "house-2026-FL-21": {
+     "dem_win_prob": 0.3929,
+     "margin_p50": -2.97,
+     "poll_count": 0
+    },
+    "house-2026-FL-22": {
+     "dem_win_prob": 0.6402,
+     "margin_p50": 2.76,
+     "poll_count": 1
+    },
+    "house-2026-FL-23": {
+     "dem_win_prob": 0.9201,
+     "margin_p50": 16.53,
+     "poll_count": 0
+    },
+    "house-2026-FL-24": {
+     "dem_win_prob": 0.9998,
+     "margin_p50": 40.13,
+     "poll_count": 0
+    },
+    "house-2026-FL-25": {
+     "dem_win_prob": 0.6441,
+     "margin_p50": 4.04,
+     "poll_count": 0
+    },
+    "house-2026-FL-26": {
+     "dem_win_prob": 0.331,
+     "margin_p50": -4.81,
+     "poll_count": 0
+    },
+    "house-2026-FL-27": {
+     "dem_win_prob": 0.486,
+     "margin_p50": -0.3,
+     "poll_count": 1
+    },
+    "house-2026-FL-28": {
+     "dem_win_prob": 0.2976,
+     "margin_p50": -4.64,
+     "poll_count": 1
+    },
+    "house-2026-GA-01": {
+     "dem_win_prob": 0.4133,
+     "margin_p50": -2.34,
+     "poll_count": 0
+    },
+    "house-2026-GA-02": {
+     "dem_win_prob": 0.9053,
+     "margin_p50": 15.08,
+     "poll_count": 0
+    },
+    "house-2026-GA-03": {
+     "dem_win_prob": 0.0398,
+     "margin_p50": -20.24,
+     "poll_count": 0
+    },
+    "house-2026-GA-04": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 53.41,
+     "poll_count": 0
+    },
+    "house-2026-GA-05": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 72.6,
+     "poll_count": 0
+    },
+    "house-2026-GA-06": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 50.66,
+     "poll_count": 0
+    },
+    "house-2026-GA-07": {
+     "dem_win_prob": 0.1857,
+     "margin_p50": -10.04,
+     "poll_count": 0
+    },
+    "house-2026-GA-08": {
+     "dem_win_prob": 0.0309,
+     "margin_p50": -21.67,
+     "poll_count": 0
+    },
+    "house-2026-GA-09": {
+     "dem_win_prob": 0.0111,
+     "margin_p50": -26.53,
+     "poll_count": 0
+    },
+    "house-2026-GA-10": {
+     "dem_win_prob": 0.2282,
+     "margin_p50": -8.3,
+     "poll_count": 0
+    },
+    "house-2026-GA-11": {
+     "dem_win_prob": 0.1468,
+     "margin_p50": -11.58,
+     "poll_count": 0
+    },
+    "house-2026-GA-12": {
+     "dem_win_prob": 0.4267,
+     "margin_p50": -1.9,
+     "poll_count": 0
+    },
+    "house-2026-GA-13": {
+     "dem_win_prob": 0.9999,
+     "margin_p50": 41.05,
+     "poll_count": 0
+    },
+    "house-2026-GA-14": {
+     "dem_win_prob": 0.0046,
+     "margin_p50": -30.05,
+     "poll_count": 0
+    },
+    "house-2026-HI-01": {
+     "dem_win_prob": 0.9891,
+     "margin_p50": 27.09,
+     "poll_count": 0
+    },
+    "house-2026-HI-02": {
+     "dem_win_prob": 0.9802,
+     "margin_p50": 24.51,
+     "poll_count": 0
+    },
+    "house-2026-IA-01": {
+     "dem_win_prob": 0.7594,
+     "margin_p50": 5.57,
+     "poll_count": 1
+    },
+    "house-2026-IA-02": {
+     "dem_win_prob": 0.6494,
+     "margin_p50": 3.11,
+     "poll_count": 1
+    },
+    "house-2026-IA-03": {
+     "dem_win_prob": 0.5759,
+     "margin_p50": 2.05,
+     "poll_count": 0
+    },
+    "house-2026-IA-04": {
+     "dem_win_prob": 0.0204,
+     "margin_p50": -24.18,
+     "poll_count": 0
+    },
+    "house-2026-ID-01": {
+     "dem_win_prob": 0.0004,
+     "margin_p50": -41.45,
+     "poll_count": 0
+    },
+    "house-2026-ID-02": {
+     "dem_win_prob": 0.0333,
+     "margin_p50": -20.55,
+     "poll_count": 0
+    },
+    "house-2026-IL-01": {
+     "dem_win_prob": 0.9979,
+     "margin_p50": 33.98,
+     "poll_count": 0
+    },
+    "house-2026-IL-02": {
+     "dem_win_prob": 0.9983,
+     "margin_p50": 35.11,
+     "poll_count": 0
+    },
+    "house-2026-IL-03": {
+     "dem_win_prob": 0.9979,
+     "margin_p50": 33.42,
+     "poll_count": 0
+    },
+    "house-2026-IL-04": {
+     "dem_win_prob": 0.9942,
+     "margin_p50": 31.12,
+     "poll_count": 0
+    },
+    "house-2026-IL-05": {
+     "dem_win_prob": 0.9996,
+     "margin_p50": 38.58,
+     "poll_count": 0
+    },
+    "house-2026-IL-06": {
+     "dem_win_prob": 0.8753,
+     "margin_p50": 13.26,
+     "poll_count": 0
+    },
+    "house-2026-IL-07": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 66.51,
+     "poll_count": 0
+    },
+    "house-2026-IL-08": {
+     "dem_win_prob": 0.8907,
+     "margin_p50": 14.1,
+     "poll_count": 0
+    },
+    "house-2026-IL-09": {
+     "dem_win_prob": 0.9991,
+     "margin_p50": 38.3,
+     "poll_count": 0
+    },
+    "house-2026-IL-10": {
+     "dem_win_prob": 0.9836,
+     "margin_p50": 25.54,
+     "poll_count": 0
+    },
+    "house-2026-IL-11": {
+     "dem_win_prob": 0.928,
+     "margin_p50": 17.16,
+     "poll_count": 0
+    },
+    "house-2026-IL-12": {
+     "dem_win_prob": 0.0013,
+     "margin_p50": -38.84,
+     "poll_count": 0
+    },
+    "house-2026-IL-13": {
+     "dem_win_prob": 0.9252,
+     "margin_p50": 16.44,
+     "poll_count": 0
+    },
+    "house-2026-IL-14": {
+     "dem_win_prob": 0.8691,
+     "margin_p50": 13.04,
+     "poll_count": 0
+    },
+    "house-2026-IL-15": {
+     "dem_win_prob": 0.0021,
+     "margin_p50": -34.47,
+     "poll_count": 0
+    },
+    "house-2026-IL-16": {
+     "dem_win_prob": 0.1298,
+     "margin_p50": -13.26,
+     "poll_count": 0
+    },
+    "house-2026-IL-17": {
+     "dem_win_prob": 0.8692,
+     "margin_p50": 12.77,
+     "poll_count": 0
+    },
+    "house-2026-IN-01": {
+     "dem_win_prob": 0.8102,
+     "margin_p50": 9.8,
+     "poll_count": 0
+    },
+    "house-2026-IN-02": {
+     "dem_win_prob": 0.0659,
+     "margin_p50": -17.76,
+     "poll_count": 0
+    },
+    "house-2026-IN-03": {
+     "dem_win_prob": 0.0233,
+     "margin_p50": -23.99,
+     "poll_count": 0
+    },
+    "house-2026-IN-04": {
+     "dem_win_prob": 0.0316,
+     "margin_p50": -21.76,
+     "poll_count": 0
+    },
+    "house-2026-IN-05": {
+     "dem_win_prob": 0.2907,
+     "margin_p50": -6.05,
+     "poll_count": 0
+    },
+    "house-2026-IN-06": {
+     "dem_win_prob": 0.015,
+     "margin_p50": -25.61,
+     "poll_count": 0
+    },
+    "house-2026-IN-07": {
+     "dem_win_prob": 0.9999,
+     "margin_p50": 42.94,
+     "poll_count": 0
+    },
+    "house-2026-IN-08": {
+     "dem_win_prob": 0.0065,
+     "margin_p50": -29.81,
+     "poll_count": 0
+    },
+    "house-2026-IN-09": {
+     "dem_win_prob": 0.028,
+     "margin_p50": -22.41,
+     "poll_count": 0
+    },
+    "house-2026-KS-01": {
+     "dem_win_prob": 0.0201,
+     "margin_p50": -24.03,
+     "poll_count": 0
+    },
+    "house-2026-KS-02": {
+     "dem_win_prob": 0.1974,
+     "margin_p50": -9.72,
+     "poll_count": 0
+    },
+    "house-2026-KS-03": {
+     "dem_win_prob": 0.8603,
+     "margin_p50": 12.21,
+     "poll_count": 0
+    },
+    "house-2026-KS-04": {
+     "dem_win_prob": 0.1098,
+     "margin_p50": -14.22,
+     "poll_count": 0
+    },
+    "house-2026-KY-01": {
+     "dem_win_prob": 0.0001,
+     "margin_p50": -42.83,
+     "poll_count": 0
+    },
+    "house-2026-KY-02": {
+     "dem_win_prob": 0.001,
+     "margin_p50": -36.05,
+     "poll_count": 0
+    },
+    "house-2026-KY-03": {
+     "dem_win_prob": 0.9751,
+     "margin_p50": 23.31,
+     "poll_count": 0
+    },
+    "house-2026-KY-04": {
+     "dem_win_prob": 0.0067,
+     "margin_p50": -28.82,
+     "poll_count": 0
+    },
+    "house-2026-KY-05": {
+     "dem_win_prob": 0.0,
+     "margin_p50": -60.97,
+     "poll_count": 0
+    },
+    "house-2026-KY-06": {
+     "dem_win_prob": 0.4198,
+     "margin_p50": -2.24,
+     "poll_count": 0
+    },
+    "house-2026-LA-01": {
+     "dem_win_prob": 0.0029,
+     "margin_p50": -32.52,
+     "poll_count": 0
+    },
+    "house-2026-LA-02": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 48.75,
+     "poll_count": 0
+    },
+    "house-2026-LA-03": {
+     "dem_win_prob": 0.0067,
+     "margin_p50": -29.22,
+     "poll_count": 0
+    },
+    "house-2026-LA-04": {
+     "dem_win_prob": 0.0103,
+     "margin_p50": -26.79,
+     "poll_count": 0
+    },
+    "house-2026-LA-05": {
+     "dem_win_prob": 0.0115,
+     "margin_p50": -26.73,
+     "poll_count": 0
+    },
+    "house-2026-LA-06": {
+     "dem_win_prob": 0.0953,
+     "margin_p50": -15.19,
+     "poll_count": 0
+    },
+    "house-2026-MA-01": {
+     "dem_win_prob": 0.9491,
+     "margin_p50": 19.17,
+     "poll_count": 0
+    },
+    "house-2026-MA-02": {
+     "dem_win_prob": 0.9903,
+     "margin_p50": 27.13,
+     "poll_count": 0
+    },
+    "house-2026-MA-03": {
+     "dem_win_prob": 0.9754,
+     "margin_p50": 23.03,
+     "poll_count": 0
+    },
+    "house-2026-MA-04": {
+     "dem_win_prob": 0.9791,
+     "margin_p50": 23.58,
+     "poll_count": 0
+    },
+    "house-2026-MA-05": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 46.93,
+     "poll_count": 0
+    },
+    "house-2026-MA-06": {
+     "dem_win_prob": 0.983,
+     "margin_p50": 24.32,
+     "poll_count": 0
+    },
+    "house-2026-MA-07": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 65.48,
+     "poll_count": 0
+    },
+    "house-2026-MA-08": {
+     "dem_win_prob": 0.9947,
+     "margin_p50": 29.5,
+     "poll_count": 0
+    },
+    "house-2026-MA-09": {
+     "dem_win_prob": 0.9293,
+     "margin_p50": 16.98,
+     "poll_count": 0
+    },
+    "house-2026-MD-01": {
+     "dem_win_prob": 0.2605,
+     "margin_p50": -7.08,
+     "poll_count": 0
+    },
+    "house-2026-MD-02": {
+     "dem_win_prob": 0.9743,
+     "margin_p50": 22.53,
+     "poll_count": 0
+    },
+    "house-2026-MD-03": {
+     "dem_win_prob": 0.9911,
+     "margin_p50": 27.2,
+     "poll_count": 0
+    },
+    "house-2026-MD-04": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 75.94,
+     "poll_count": 0
+    },
+    "house-2026-MD-05": {
+     "dem_win_prob": 0.9997,
+     "margin_p50": 36.11,
+     "poll_count": 0
+    },
+    "house-2026-MD-06": {
+     "dem_win_prob": 0.8988,
+     "margin_p50": 13.67,
+     "poll_count": 0
+    },
+    "house-2026-MD-07": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 60.8,
+     "poll_count": 0
+    },
+    "house-2026-MD-08": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 58.33,
+     "poll_count": 0
+    },
+    "house-2026-ME-01": {
+     "dem_win_prob": 0.985,
+     "margin_p50": 25.44,
+     "poll_count": 0
+    },
+    "house-2026-ME-02": {
+     "dem_win_prob": 0.4304,
+     "margin_p50": -1.34,
+     "poll_count": 4
+    },
+    "house-2026-MI-01": {
+     "dem_win_prob": 0.164,
+     "margin_p50": -11.44,
+     "poll_count": 0
+    },
+    "house-2026-MI-02": {
+     "dem_win_prob": 0.0279,
+     "margin_p50": -22.49,
+     "poll_count": 0
+    },
+    "house-2026-MI-03": {
+     "dem_win_prob": 0.8996,
+     "margin_p50": 14.61,
+     "poll_count": 0
+    },
+    "house-2026-MI-04": {
+     "dem_win_prob": 0.5484,
+     "margin_p50": 1.04,
+     "poll_count": 1
+    },
+    "house-2026-MI-05": {
+     "dem_win_prob": 0.057,
+     "margin_p50": -18.55,
+     "poll_count": 0
+    },
+    "house-2026-MI-06": {
+     "dem_win_prob": 0.9883,
+     "margin_p50": 26.77,
+     "poll_count": 0
+    },
+    "house-2026-MI-07": {
+     "dem_win_prob": 0.6804,
+     "margin_p50": 3.7,
+     "poll_count": 2
+    },
+    "house-2026-MI-08": {
+     "dem_win_prob": 0.7012,
+     "margin_p50": 5.71,
+     "poll_count": 0
+    },
+    "house-2026-MI-09": {
+     "dem_win_prob": 0.0167,
+     "margin_p50": -25.2,
+     "poll_count": 0
+    },
+    "house-2026-MI-10": {
+     "dem_win_prob": 0.555,
+     "margin_p50": 1.48,
+     "poll_count": 0
+    },
+    "house-2026-MI-11": {
+     "dem_win_prob": 0.9631,
+     "margin_p50": 20.78,
+     "poll_count": 0
+    },
+    "house-2026-MI-12": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 40.73,
+     "poll_count": 0
+    },
+    "house-2026-MI-13": {
+     "dem_win_prob": 0.9998,
+     "margin_p50": 42.65,
+     "poll_count": 0
+    },
+    "house-2026-MN-01": {
+     "dem_win_prob": 0.4634,
+     "margin_p50": -1.03,
+     "poll_count": 0
+    },
+    "house-2026-MN-02": {
+     "dem_win_prob": 0.8808,
+     "margin_p50": 13.41,
+     "poll_count": 0
+    },
+    "house-2026-MN-03": {
+     "dem_win_prob": 0.9798,
+     "margin_p50": 25.18,
+     "poll_count": 0
+    },
+    "house-2026-MN-04": {
+     "dem_win_prob": 0.9988,
+     "margin_p50": 37.7,
+     "poll_count": 0
+    },
+    "house-2026-MN-05": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 63.8,
+     "poll_count": 0
+    },
+    "house-2026-MN-06": {
+     "dem_win_prob": 0.1987,
+     "margin_p50": -9.69,
+     "poll_count": 0
+    },
+    "house-2026-MN-07": {
+     "dem_win_prob": 0.0042,
+     "margin_p50": -30.83,
+     "poll_count": 0
+    },
+    "house-2026-MN-08": {
+     "dem_win_prob": 0.379,
+     "margin_p50": -3.38,
+     "poll_count": 0
+    },
+    "house-2026-MO-01": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 58.95,
+     "poll_count": 0
+    },
+    "house-2026-MO-02": {
+     "dem_win_prob": 0.4912,
+     "margin_p50": -0.25,
+     "poll_count": 0
+    },
+    "house-2026-MO-03": {
+     "dem_win_prob": 0.1862,
+     "margin_p50": -10.07,
+     "poll_count": 0
+    },
+    "house-2026-MO-04": {
+     "dem_win_prob": 0.1641,
+     "margin_p50": -11.35,
+     "poll_count": 0
+    },
+    "house-2026-MO-05": {
+     "dem_win_prob": 0.3337,
+     "margin_p50": -4.96,
+     "poll_count": 0
+    },
+    "house-2026-MO-06": {
+     "dem_win_prob": 0.0556,
+     "margin_p50": -18.3,
+     "poll_count": 0
+    },
+    "house-2026-MO-07": {
+     "dem_win_prob": 0.0005,
+     "margin_p50": -37.7,
+     "poll_count": 0
+    },
+    "house-2026-MO-08": {
+     "dem_win_prob": 0.0,
+     "margin_p50": -50.05,
+     "poll_count": 0
+    },
+    "house-2026-MS-01": {
+     "dem_win_prob": 0.0062,
+     "margin_p50": -30.54,
+     "poll_count": 0
+    },
+    "house-2026-MS-02": {
+     "dem_win_prob": 0.9826,
+     "margin_p50": 24.22,
+     "poll_count": 0
+    },
+    "house-2026-MS-03": {
+     "dem_win_prob": 0.0417,
+     "margin_p50": -19.68,
+     "poll_count": 0
+    },
+    "house-2026-MS-04": {
+     "dem_win_prob": 0.0008,
+     "margin_p50": -37.29,
+     "poll_count": 0
+    },
+    "house-2026-MT-01": {
+     "dem_win_prob": 0.389,
+     "margin_p50": -2.07,
+     "poll_count": 2
+    },
+    "house-2026-MT-02": {
+     "dem_win_prob": 0.0207,
+     "margin_p50": -23.57,
+     "poll_count": 0
+    },
+    "house-2026-NC-01": {
+     "dem_win_prob": 0.7045,
+     "margin_p50": 5.89,
+     "poll_count": 0
+    },
+    "house-2026-NC-02": {
+     "dem_win_prob": 0.9981,
+     "margin_p50": 35.87,
+     "poll_count": 0
+    },
+    "house-2026-NC-03": {
+     "dem_win_prob": 0.4473,
+     "margin_p50": -1.46,
+     "poll_count": 0
+    },
+    "house-2026-NC-04": {
+     "dem_win_prob": 0.9997,
+     "margin_p50": 46.53,
+     "poll_count": 0
+    },
+    "house-2026-NC-05": {
+     "dem_win_prob": 0.3541,
+     "margin_p50": -4.0,
+     "poll_count": 0
+    },
+    "house-2026-NC-06": {
+     "dem_win_prob": 0.3653,
+     "margin_p50": -3.68,
+     "poll_count": 0
+    },
+    "house-2026-NC-07": {
+     "dem_win_prob": 0.4419,
+     "margin_p50": -1.64,
+     "poll_count": 0
+    },
+    "house-2026-NC-08": {
+     "dem_win_prob": 0.2843,
+     "margin_p50": -6.22,
+     "poll_count": 0
+    },
+    "house-2026-NC-09": {
+     "dem_win_prob": 0.4045,
+     "margin_p50": -2.6,
+     "poll_count": 0
+    },
+    "house-2026-NC-10": {
+     "dem_win_prob": 0.3625,
+     "margin_p50": -3.81,
+     "poll_count": 0
+    },
+    "house-2026-NC-11": {
+     "dem_win_prob": 0.5393,
+     "margin_p50": 1.04,
+     "poll_count": 0
+    },
+    "house-2026-NC-12": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 47.49,
+     "poll_count": 0
+    },
+    "house-2026-NC-13": {
+     "dem_win_prob": 0.3914,
+     "margin_p50": -2.93,
+     "poll_count": 0
+    },
+    "house-2026-NC-14": {
+     "dem_win_prob": 0.4232,
+     "margin_p50": -2.09,
+     "poll_count": 0
+    },
+    "house-2026-ND-01": {
+     "dem_win_prob": 0.004,
+     "margin_p50": -30.94,
+     "poll_count": 0
+    },
+    "house-2026-NE-01": {
+     "dem_win_prob": 0.607,
+     "margin_p50": 1.93,
+     "poll_count": 3
+    },
+    "house-2026-NE-02": {
+     "dem_win_prob": 0.7139,
+     "margin_p50": 6.7,
+     "poll_count": 0
+    },
+    "house-2026-NE-03": {
+     "dem_win_prob": 0.0003,
+     "margin_p50": -49.99,
+     "poll_count": 0
+    },
+    "house-2026-NH-01": {
+     "dem_win_prob": 0.8512,
+     "margin_p50": 11.11,
+     "poll_count": 0
+    },
+    "house-2026-NH-02": {
+     "dem_win_prob": 0.9992,
+     "margin_p50": 21.55,
+     "poll_count": 3
+    },
+    "house-2026-NJ-01": {
+     "dem_win_prob": 0.9753,
+     "margin_p50": 22.62,
+     "poll_count": 0
+    },
+    "house-2026-NJ-02": {
+     "dem_win_prob": 0.4389,
+     "margin_p50": -1.74,
+     "poll_count": 0
+    },
+    "house-2026-NJ-03": {
+     "dem_win_prob": 0.9146,
+     "margin_p50": 15.41,
+     "poll_count": 0
+    },
+    "house-2026-NJ-04": {
+     "dem_win_prob": 0.0328,
+     "margin_p50": -21.87,
+     "poll_count": 0
+    },
+    "house-2026-NJ-05": {
+     "dem_win_prob": 0.8327,
+     "margin_p50": 10.48,
+     "poll_count": 0
+    },
+    "house-2026-NJ-06": {
+     "dem_win_prob": 0.8982,
+     "margin_p50": 14.0,
+     "poll_count": 0
+    },
+    "house-2026-NJ-07": {
+     "dem_win_prob": 0.7154,
+     "margin_p50": 4.53,
+     "poll_count": 1
+    },
+    "house-2026-NJ-08": {
+     "dem_win_prob": 0.9911,
+     "margin_p50": 27.51,
+     "poll_count": 0
+    },
+    "house-2026-NJ-09": {
+     "dem_win_prob": 0.8015,
+     "margin_p50": 9.17,
+     "poll_count": 0
+    },
+    "house-2026-NJ-10": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 52.22,
+     "poll_count": 0
+    },
+    "house-2026-NJ-11": {
+     "dem_win_prob": 0.9162,
+     "margin_p50": 15.77,
+     "poll_count": 0
+    },
+    "house-2026-NJ-12": {
+     "dem_win_prob": 0.9895,
+     "margin_p50": 27.37,
+     "poll_count": 0
+    },
+    "house-2026-NM-01": {
+     "dem_win_prob": 0.9287,
+     "margin_p50": 17.33,
+     "poll_count": 0
+    },
+    "house-2026-NM-02": {
+     "dem_win_prob": 0.7527,
+     "margin_p50": 7.26,
+     "poll_count": 0
+    },
+    "house-2026-NM-03": {
+     "dem_win_prob": 0.7926,
+     "margin_p50": 8.94,
+     "poll_count": 0
+    },
+    "house-2026-NV-01": {
+     "dem_win_prob": 0.822,
+     "margin_p50": 10.17,
+     "poll_count": 0
+    },
+    "house-2026-NV-02": {
+     "dem_win_prob": 0.2023,
+     "margin_p50": -9.15,
+     "poll_count": 0
+    },
+    "house-2026-NV-03": {
+     "dem_win_prob": 0.7741,
+     "margin_p50": 8.14,
+     "poll_count": 0
+    },
+    "house-2026-NV-04": {
+     "dem_win_prob": 0.8192,
+     "margin_p50": 10.14,
+     "poll_count": 0
+    },
+    "house-2026-NY-01": {
+     "dem_win_prob": 0.38,
+     "margin_p50": -2.59,
+     "poll_count": 1
+    },
+    "house-2026-NY-02": {
+     "dem_win_prob": 0.3172,
+     "margin_p50": -5.49,
+     "poll_count": 0
+    },
+    "house-2026-NY-03": {
+     "dem_win_prob": 0.7534,
+     "margin_p50": 7.39,
+     "poll_count": 0
+    },
+    "house-2026-NY-04": {
+     "dem_win_prob": 0.8415,
+     "margin_p50": 8.36,
+     "poll_count": 1
+    },
+    "house-2026-NY-05": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 43.68,
+     "poll_count": 0
+    },
+    "house-2026-NY-06": {
+     "dem_win_prob": 0.8993,
+     "margin_p50": 13.88,
+     "poll_count": 0
+    },
+    "house-2026-NY-07": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 47.67,
+     "poll_count": 0
+    },
+    "house-2026-NY-08": {
+     "dem_win_prob": 0.9999,
+     "margin_p50": 45.43,
+     "poll_count": 0
+    },
+    "house-2026-NY-09": {
+     "dem_win_prob": 0.9996,
+     "margin_p50": 42.51,
+     "poll_count": 0
+    },
+    "house-2026-NY-10": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 62.25,
+     "poll_count": 0
+    },
+    "house-2026-NY-11": {
+     "dem_win_prob": 0.1056,
+     "margin_p50": -14.44,
+     "poll_count": 0
+    },
+    "house-2026-NY-12": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 65.12,
+     "poll_count": 0
+    },
+    "house-2026-NY-13": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 60.65,
+     "poll_count": 0
+    },
+    "house-2026-NY-14": {
+     "dem_win_prob": 0.9988,
+     "margin_p50": 34.36,
+     "poll_count": 0
+    },
+    "house-2026-NY-15": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 49.27,
+     "poll_count": 0
+    },
+    "house-2026-NY-16": {
+     "dem_win_prob": 0.9995,
+     "margin_p50": 35.34,
+     "poll_count": 0
+    },
+    "house-2026-NY-17": {
+     "dem_win_prob": 0.4978,
+     "margin_p50": -0.04,
+     "poll_count": 3
+    },
+    "house-2026-NY-18": {
+     "dem_win_prob": 0.8903,
+     "margin_p50": 10.25,
+     "poll_count": 1
+    },
+    "house-2026-NY-19": {
+     "dem_win_prob": 0.8447,
+     "margin_p50": 10.81,
+     "poll_count": 0
+    },
+    "house-2026-NY-20": {
+     "dem_win_prob": 0.9515,
+     "margin_p50": 19.24,
+     "poll_count": 0
+    },
+    "house-2026-NY-21": {
+     "dem_win_prob": 0.5672,
+     "margin_p50": 1.27,
+     "poll_count": 3
+    },
+    "house-2026-NY-22": {
+     "dem_win_prob": 0.9036,
+     "margin_p50": 14.64,
+     "poll_count": 0
+    },
+    "house-2026-NY-23": {
+     "dem_win_prob": 0.1921,
+     "margin_p50": -10.04,
+     "poll_count": 0
+    },
+    "house-2026-NY-24": {
+     "dem_win_prob": 0.1376,
+     "margin_p50": -12.53,
+     "poll_count": 0
+    },
+    "house-2026-NY-25": {
+     "dem_win_prob": 0.9738,
+     "margin_p50": 22.46,
+     "poll_count": 0
+    },
+    "house-2026-NY-26": {
+     "dem_win_prob": 0.9759,
+     "margin_p50": 23.17,
+     "poll_count": 0
+    },
+    "house-2026-OH-01": {
+     "dem_win_prob": 0.7863,
+     "margin_p50": 8.65,
+     "poll_count": 0
+    },
+    "house-2026-OH-02": {
+     "dem_win_prob": 0.0014,
+     "margin_p50": -37.0,
+     "poll_count": 0
+    },
+    "house-2026-OH-03": {
+     "dem_win_prob": 0.9999,
+     "margin_p50": 41.59,
+     "poll_count": 0
+    },
+    "house-2026-OH-04": {
+     "dem_win_prob": 0.0012,
+     "margin_p50": -37.65,
+     "poll_count": 0
+    },
+    "house-2026-OH-05": {
+     "dem_win_prob": 0.1085,
+     "margin_p50": -14.22,
+     "poll_count": 0
+    },
+    "house-2026-OH-06": {
+     "dem_win_prob": 0.0095,
+     "margin_p50": -27.83,
+     "poll_count": 0
+    },
+    "house-2026-OH-07": {
+     "dem_win_prob": 0.9236,
+     "margin_p50": 9.93,
+     "poll_count": 3
+    },
+    "house-2026-OH-08": {
+     "dem_win_prob": 0.33,
+     "margin_p50": -4.94,
+     "poll_count": 0
+    },
+    "house-2026-OH-09": {
+     "dem_win_prob": 0.7101,
+     "margin_p50": 5.93,
+     "poll_count": 0
+    },
+    "house-2026-OH-10": {
+     "dem_win_prob": 0.5417,
+     "margin_p50": 1.13,
+     "poll_count": 0
+    },
+    "house-2026-OH-11": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 55.87,
+     "poll_count": 0
+    },
+    "house-2026-OH-12": {
+     "dem_win_prob": 0.0311,
+     "margin_p50": -22.3,
+     "poll_count": 0
+    },
+    "house-2026-OH-13": {
+     "dem_win_prob": 0.8509,
+     "margin_p50": 11.72,
+     "poll_count": 0
+    },
+    "house-2026-OH-14": {
+     "dem_win_prob": 0.185,
+     "margin_p50": -10.3,
+     "poll_count": 0
+    },
+    "house-2026-OH-15": {
+     "dem_win_prob": 0.3946,
+     "margin_p50": -2.02,
+     "poll_count": 2
+    },
+    "house-2026-OK-01": {
+     "dem_win_prob": 0.1963,
+     "margin_p50": -9.67,
+     "poll_count": 0
+    },
+    "house-2026-OK-02": {
+     "dem_win_prob": 0.0,
+     "margin_p50": -52.34,
+     "poll_count": 0
+    },
+    "house-2026-OK-03": {
+     "dem_win_prob": 0.0001,
+     "margin_p50": -41.34,
+     "poll_count": 0
+    },
+    "house-2026-OK-04": {
+     "dem_win_prob": 0.0127,
+     "margin_p50": -25.66,
+     "poll_count": 0
+    },
+    "house-2026-OK-05": {
+     "dem_win_prob": 0.3463,
+     "margin_p50": -4.26,
+     "poll_count": 0
+    },
+    "house-2026-OR-01": {
+     "dem_win_prob": 0.9991,
+     "margin_p50": 39.89,
+     "poll_count": 0
+    },
+    "house-2026-OR-02": {
+     "dem_win_prob": 0.0343,
+     "margin_p50": -20.97,
+     "poll_count": 0
+    },
+    "house-2026-OR-03": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 48.1,
+     "poll_count": 0
+    },
+    "house-2026-OR-04": {
+     "dem_win_prob": 0.9252,
+     "margin_p50": 16.89,
+     "poll_count": 0
+    },
+    "house-2026-OR-05": {
+     "dem_win_prob": 0.8934,
+     "margin_p50": 14.1,
+     "poll_count": 0
+    },
+    "house-2026-OR-06": {
+     "dem_win_prob": 0.9151,
+     "margin_p50": 16.08,
+     "poll_count": 0
+    },
+    "house-2026-PA-01": {
+     "dem_win_prob": 0.6356,
+     "margin_p50": 3.76,
+     "poll_count": 0
+    },
+    "house-2026-PA-02": {
+     "dem_win_prob": 0.9993,
+     "margin_p50": 37.8,
+     "poll_count": 0
+    },
+    "house-2026-PA-03": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 78.38,
+     "poll_count": 0
+    },
+    "house-2026-PA-04": {
+     "dem_win_prob": 0.963,
+     "margin_p50": 20.28,
+     "poll_count": 0
+    },
+    "house-2026-PA-05": {
+     "dem_win_prob": 0.9971,
+     "margin_p50": 31.15,
+     "poll_count": 0
+    },
+    "house-2026-PA-06": {
+     "dem_win_prob": 0.9386,
+     "margin_p50": 17.37,
+     "poll_count": 0
+    },
+    "house-2026-PA-07": {
+     "dem_win_prob": 0.7246,
+     "margin_p50": 4.34,
+     "poll_count": 2
+    },
+    "house-2026-PA-08": {
+     "dem_win_prob": 0.6123,
+     "margin_p50": 2.3,
+     "poll_count": 1
+    },
+    "house-2026-PA-09": {
+     "dem_win_prob": 0.0059,
+     "margin_p50": -31.66,
+     "poll_count": 0
+    },
+    "house-2026-PA-10": {
+     "dem_win_prob": 0.7236,
+     "margin_p50": 4.33,
+     "poll_count": 2
+    },
+    "house-2026-PA-11": {
+     "dem_win_prob": 0.1799,
+     "margin_p50": -10.54,
+     "poll_count": 0
+    },
+    "house-2026-PA-12": {
+     "dem_win_prob": 0.974,
+     "margin_p50": 23.04,
+     "poll_count": 0
+    },
+    "house-2026-PA-13": {
+     "dem_win_prob": 0.0005,
+     "margin_p50": -40.5,
+     "poll_count": 0
+    },
+    "house-2026-PA-14": {
+     "dem_win_prob": 0.0156,
+     "margin_p50": -25.79,
+     "poll_count": 0
+    },
+    "house-2026-PA-15": {
+     "dem_win_prob": 0.0059,
+     "margin_p50": -31.58,
+     "poll_count": 0
+    },
+    "house-2026-PA-16": {
+     "dem_win_prob": 0.1363,
+     "margin_p50": -12.39,
+     "poll_count": 0
+    },
+    "house-2026-PA-17": {
+     "dem_win_prob": 0.8904,
+     "margin_p50": 13.48,
+     "poll_count": 0
+    },
+    "house-2026-RI-01": {
+     "dem_win_prob": 0.9869,
+     "margin_p50": 25.74,
+     "poll_count": 0
+    },
+    "house-2026-RI-02": {
+     "dem_win_prob": 0.9,
+     "margin_p50": 14.22,
+     "poll_count": 0
+    },
+    "house-2026-SC-01": {
+     "dem_win_prob": 0.4941,
+     "margin_p50": -0.12,
+     "poll_count": 1
+    },
+    "house-2026-SC-02": {
+     "dem_win_prob": 0.438,
+     "margin_p50": -1.66,
+     "poll_count": 0
+    },
+    "house-2026-SC-03": {
+     "dem_win_prob": 0.0007,
+     "margin_p50": -38.04,
+     "poll_count": 0
+    },
+    "house-2026-SC-04": {
+     "dem_win_prob": 0.1455,
+     "margin_p50": -12.08,
+     "poll_count": 0
+    },
+    "house-2026-SC-05": {
+     "dem_win_prob": 0.1626,
+     "margin_p50": -11.01,
+     "poll_count": 0
+    },
+    "house-2026-SC-06": {
+     "dem_win_prob": 0.9856,
+     "margin_p50": 26.16,
+     "poll_count": 0
+    },
+    "house-2026-SC-07": {
+     "dem_win_prob": 0.0894,
+     "margin_p50": -15.69,
+     "poll_count": 0
+    },
+    "house-2026-SD-01": {
+     "dem_win_prob": 0.0298,
+     "margin_p50": -21.73,
+     "poll_count": 0
+    },
+    "house-2026-TN-01": {
+     "dem_win_prob": 0.0,
+     "margin_p50": -54.53,
+     "poll_count": 0
+    },
+    "house-2026-TN-02": {
+     "dem_win_prob": 0.0116,
+     "margin_p50": -26.34,
+     "poll_count": 0
+    },
+    "house-2026-TN-03": {
+     "dem_win_prob": 0.0066,
+     "margin_p50": -28.83,
+     "poll_count": 0
+    },
+    "house-2026-TN-04": {
+     "dem_win_prob": 0.1337,
+     "margin_p50": -12.62,
+     "poll_count": 0
+    },
+    "house-2026-TN-05": {
+     "dem_win_prob": 0.1504,
+     "margin_p50": -11.49,
+     "poll_count": 0
+    },
+    "house-2026-TN-06": {
+     "dem_win_prob": 0.0767,
+     "margin_p50": -16.08,
+     "poll_count": 0
+    },
+    "house-2026-TN-07": {
+     "dem_win_prob": 0.2498,
+     "margin_p50": -7.47,
+     "poll_count": 0
+    },
+    "house-2026-TN-08": {
+     "dem_win_prob": 0.2461,
+     "margin_p50": -7.6,
+     "poll_count": 0
+    },
+    "house-2026-TN-09": {
+     "dem_win_prob": 0.4015,
+     "margin_p50": -2.77,
+     "poll_count": 0
+    },
+    "house-2026-TX-01": {
+     "dem_win_prob": 0.0,
+     "margin_p50": -45.27,
+     "poll_count": 0
+    },
+    "house-2026-TX-02": {
+     "dem_win_prob": 0.1578,
+     "margin_p50": -11.06,
+     "poll_count": 0
+    },
+    "house-2026-TX-03": {
+     "dem_win_prob": 0.1449,
+     "margin_p50": -12.04,
+     "poll_count": 0
+    },
+    "house-2026-TX-04": {
+     "dem_win_prob": 0.1188,
+     "margin_p50": -13.63,
+     "poll_count": 0
+    },
+    "house-2026-TX-05": {
+     "dem_win_prob": 0.2023,
+     "margin_p50": -9.14,
+     "poll_count": 0
+    },
+    "house-2026-TX-06": {
+     "dem_win_prob": 0.1612,
+     "margin_p50": -11.25,
+     "poll_count": 0
+    },
+    "house-2026-TX-07": {
+     "dem_win_prob": 0.9867,
+     "margin_p50": 26.93,
+     "poll_count": 0
+    },
+    "house-2026-TX-08": {
+     "dem_win_prob": 0.0596,
+     "margin_p50": -17.71,
+     "poll_count": 0
+    },
+    "house-2026-TX-09": {
+     "dem_win_prob": 0.3586,
+     "margin_p50": -3.91,
+     "poll_count": 0
+    },
+    "house-2026-TX-10": {
+     "dem_win_prob": 0.1706,
+     "margin_p50": -10.85,
+     "poll_count": 0
+    },
+    "house-2026-TX-11": {
+     "dem_win_prob": 0.0107,
+     "margin_p50": -27.01,
+     "poll_count": 0
+    },
+    "house-2026-TX-12": {
+     "dem_win_prob": 0.1406,
+     "margin_p50": -12.46,
+     "poll_count": 0
+    },
+    "house-2026-TX-13": {
+     "dem_win_prob": 0.0002,
+     "margin_p50": -41.48,
+     "poll_count": 0
+    },
+    "house-2026-TX-14": {
+     "dem_win_prob": 0.1277,
+     "margin_p50": -12.85,
+     "poll_count": 0
+    },
+    "house-2026-TX-15": {
+     "dem_win_prob": 0.86,
+     "margin_p50": 7.59,
+     "poll_count": 4
+    },
+    "house-2026-TX-16": {
+     "dem_win_prob": 0.9684,
+     "margin_p50": 21.36,
+     "poll_count": 0
+    },
+    "house-2026-TX-17": {
+     "dem_win_prob": 0.1998,
+     "margin_p50": -9.48,
+     "poll_count": 0
+    },
+    "house-2026-TX-18": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 56.2,
+     "poll_count": 0
+    },
+    "house-2026-TX-19": {
+     "dem_win_prob": 0.0001,
+     "margin_p50": -47.55,
+     "poll_count": 0
+    },
+    "house-2026-TX-20": {
+     "dem_win_prob": 0.9953,
+     "margin_p50": 30.85,
+     "poll_count": 0
+    },
+    "house-2026-TX-21": {
+     "dem_win_prob": 0.1881,
+     "margin_p50": -9.77,
+     "poll_count": 0
+    },
+    "house-2026-TX-22": {
+     "dem_win_prob": 0.18,
+     "margin_p50": -10.43,
+     "poll_count": 0
+    },
+    "house-2026-TX-23": {
+     "dem_win_prob": 0.5018,
+     "margin_p50": 0.04,
+     "poll_count": 1
+    },
+    "house-2026-TX-24": {
+     "dem_win_prob": 0.5048,
+     "margin_p50": 0.13,
+     "poll_count": 0
+    },
+    "house-2026-TX-25": {
+     "dem_win_prob": 0.1383,
+     "margin_p50": -12.53,
+     "poll_count": 0
+    },
+    "house-2026-TX-26": {
+     "dem_win_prob": 0.1376,
+     "margin_p50": -12.3,
+     "poll_count": 0
+    },
+    "house-2026-TX-27": {
+     "dem_win_prob": 0.2185,
+     "margin_p50": -8.82,
+     "poll_count": 0
+    },
+    "house-2026-TX-28": {
+     "dem_win_prob": 0.9516,
+     "margin_p50": 13.62,
+     "poll_count": 1
+    },
+    "house-2026-TX-29": {
+     "dem_win_prob": 0.9968,
+     "margin_p50": 32.81,
+     "poll_count": 0
+    },
+    "house-2026-TX-30": {
+     "dem_win_prob": 0.9999,
+     "margin_p50": 48.12,
+     "poll_count": 0
+    },
+    "house-2026-TX-31": {
+     "dem_win_prob": 0.1875,
+     "margin_p50": -9.85,
+     "poll_count": 0
+    },
+    "house-2026-TX-32": {
+     "dem_win_prob": 0.4554,
+     "margin_p50": -1.25,
+     "poll_count": 0
+    },
+    "house-2026-TX-33": {
+     "dem_win_prob": 0.998,
+     "margin_p50": 34.98,
+     "poll_count": 0
+    },
+    "house-2026-TX-34": {
+     "dem_win_prob": 0.7601,
+     "margin_p50": 5.45,
+     "poll_count": 1
+    },
+    "house-2026-TX-35": {
+     "dem_win_prob": 0.6329,
+     "margin_p50": 3.56,
+     "poll_count": 0
+    },
+    "house-2026-TX-36": {
+     "dem_win_prob": 0.1154,
+     "margin_p50": -13.83,
+     "poll_count": 0
+    },
+    "house-2026-TX-37": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 57.91,
+     "poll_count": 0
+    },
+    "house-2026-TX-38": {
+     "dem_win_prob": 0.2191,
+     "margin_p50": -8.68,
+     "poll_count": 0
+    },
+    "house-2026-UT-01": {
+     "dem_win_prob": 0.9763,
+     "margin_p50": 23.52,
+     "poll_count": 0
+    },
+    "house-2026-UT-02": {
+     "dem_win_prob": 0.04,
+     "margin_p50": -20.46,
+     "poll_count": 0
+    },
+    "house-2026-UT-03": {
+     "dem_win_prob": 0.0019,
+     "margin_p50": -34.82,
+     "poll_count": 0
+    },
+    "house-2026-UT-04": {
+     "dem_win_prob": 0.0114,
+     "margin_p50": -27.11,
+     "poll_count": 0
+    },
+    "house-2026-VA-01": {
+     "dem_win_prob": 0.7169,
+     "margin_p50": 4.16,
+     "poll_count": 1
+    },
+    "house-2026-VA-02": {
+     "dem_win_prob": 0.5859,
+     "margin_p50": 1.68,
+     "poll_count": 1
+    },
+    "house-2026-VA-03": {
+     "dem_win_prob": 0.9987,
+     "margin_p50": 36.52,
+     "poll_count": 0
+    },
+    "house-2026-VA-04": {
+     "dem_win_prob": 0.9987,
+     "margin_p50": 34.76,
+     "poll_count": 0
+    },
+    "house-2026-VA-05": {
+     "dem_win_prob": 0.4747,
+     "margin_p50": -0.69,
+     "poll_count": 0
+    },
+    "house-2026-VA-06": {
+     "dem_win_prob": 0.1308,
+     "margin_p50": -12.36,
+     "poll_count": 0
+    },
+    "house-2026-VA-07": {
+     "dem_win_prob": 0.8563,
+     "margin_p50": 12.09,
+     "poll_count": 0
+    },
+    "house-2026-VA-08": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 51.39,
+     "poll_count": 0
+    },
+    "house-2026-VA-09": {
+     "dem_win_prob": 0.0011,
+     "margin_p50": -39.0,
+     "poll_count": 0
+    },
+    "house-2026-VA-10": {
+     "dem_win_prob": 0.916,
+     "margin_p50": 15.83,
+     "poll_count": 0
+    },
+    "house-2026-VA-11": {
+     "dem_win_prob": 0.999,
+     "margin_p50": 36.64,
+     "poll_count": 0
+    },
+    "house-2026-VT-01": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 37.81,
+     "poll_count": 3
+    },
+    "house-2026-WA-01": {
+     "dem_win_prob": 0.9966,
+     "margin_p50": 31.27,
+     "poll_count": 0
+    },
+    "house-2026-WA-02": {
+     "dem_win_prob": 0.9877,
+     "margin_p50": 26.38,
+     "poll_count": 0
+    },
+    "house-2026-WA-03": {
+     "dem_win_prob": 0.4491,
+     "margin_p50": -0.93,
+     "poll_count": 2
+    },
+    "house-2026-WA-04": {
+     "dem_win_prob": 0.107,
+     "margin_p50": -14.38,
+     "poll_count": 0
+    },
+    "house-2026-WA-05": {
+     "dem_win_prob": 0.283,
+     "margin_p50": -6.27,
+     "poll_count": 0
+    },
+    "house-2026-WA-06": {
+     "dem_win_prob": 0.9732,
+     "margin_p50": 22.67,
+     "poll_count": 0
+    },
+    "house-2026-WA-07": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 77.62,
+     "poll_count": 0
+    },
+    "house-2026-WA-08": {
+     "dem_win_prob": 0.8586,
+     "margin_p50": 12.16,
+     "poll_count": 0
+    },
+    "house-2026-WA-09": {
+     "dem_win_prob": 0.9998,
+     "margin_p50": 43.18,
+     "poll_count": 0
+    },
+    "house-2026-WA-10": {
+     "dem_win_prob": 0.9681,
+     "margin_p50": 21.61,
+     "poll_count": 0
+    },
+    "house-2026-WI-01": {
+     "dem_win_prob": 0.5766,
+     "margin_p50": 2.1,
+     "poll_count": 0
+    },
+    "house-2026-WI-02": {
+     "dem_win_prob": 0.9999,
+     "margin_p50": 41.56,
+     "poll_count": 0
+    },
+    "house-2026-WI-03": {
+     "dem_win_prob": 0.8083,
+     "margin_p50": 6.53,
+     "poll_count": 2
+    },
+    "house-2026-WI-04": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 52.81,
+     "poll_count": 0
+    },
+    "house-2026-WI-05": {
+     "dem_win_prob": 0.1426,
+     "margin_p50": -12.45,
+     "poll_count": 0
+    },
+    "house-2026-WI-06": {
+     "dem_win_prob": 0.3008,
+     "margin_p50": -5.77,
+     "poll_count": 0
+    },
+    "house-2026-WI-07": {
+     "dem_win_prob": 0.1322,
+     "margin_p50": -12.84,
+     "poll_count": 0
+    },
+    "house-2026-WI-08": {
+     "dem_win_prob": 0.3137,
+     "margin_p50": -5.55,
+     "poll_count": 0
+    },
+    "house-2026-WV-01": {
+     "dem_win_prob": 0.0007,
+     "margin_p50": -40.0,
+     "poll_count": 0
+    },
+    "house-2026-WV-02": {
+     "dem_win_prob": 0.002,
+     "margin_p50": -34.02,
+     "poll_count": 0
+    },
+    "house-2026-WY-01": {
+     "dem_win_prob": 0.0006,
+     "margin_p50": -42.34,
+     "poll_count": 0
+    }
+   }
   }
  ]
 }

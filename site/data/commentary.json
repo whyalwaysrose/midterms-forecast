@@ -2,6 +2,121 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-13",
+   "previous_run_date": "2026-10-12",
+   "headline": "Democratic chances of Senate control are up 0.1 pts to 68.7% on 4 new polls. Projected seats 52.2 \u2192 52.2 (-0.0).",
+   "body": [
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **Nebraska** \u2014 Democratic win probability 32.3% \u2192 30.3% (-2.1 pts); projected margin R+3.0 \u2192 R+3.0 (+0.0). Driven by 1 new poll:\n    - National Public Affairs (2026-10-03, n=800, LV): R+3.2",
+    "",
+    "  - **North Carolina** \u2014 Democratic win probability 95.4% \u2192 96.6% (+1.2 pts); projected margin D+9.3 \u2192 D+10.1 (+0.7). Driven by 2 new polls:\n    - SurveyUSA (2026-10-09, n=643, LV): D+14.9\n    - Change Research (2026-10-04, n=829, LV, D-aligned sponsor): D+11.1",
+    "",
+    "  - **Georgia** \u2014 Democratic win probability 94.2% \u2192 95.0% (+0.7 pts); projected margin D+8.7 \u2192 D+9.1 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "**New polling that did not move the needle.** Texas (1). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 4,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-NE",
+     "name": "Nebraska",
+     "prob_before": 0.3234,
+     "prob_after": 0.3027,
+     "prob_delta": -0.020699999999999996,
+     "margin_before": -3.01,
+     "margin_after": -2.98,
+     "margin_delta": 0.029999999999999805,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202nat61ba6088",
+       "pollster": "National Public Affairs",
+       "date": "2026-10-03",
+       "start_date": "2026-10-02",
+       "end_date": "2026-10-05",
+       "sample_size": 800,
+       "population": "lv",
+       "dem_pct": 46.0,
+       "rep_pct": 49.0,
+       "margin": -3.2,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://backend.natpublicaffairs.com/media/Nebraska_General_Election_Memo_100926.pdf",
+       "dem_candidate": "Dan Osborn",
+       "rep_candidate": "Pete Ricketts"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-NC",
+     "name": "North Carolina",
+     "prob_before": 0.9542,
+     "prob_after": 0.9662,
+     "prob_delta": 0.0119999999999999,
+     "margin_before": 9.32,
+     "margin_after": 10.06,
+     "margin_delta": 0.7400000000000002,
+     "new_poll_count": 2,
+     "new_polls": [
+      {
+       "id": "us-202surbcf9e1be",
+       "pollster": "SurveyUSA",
+       "date": "2026-10-09",
+       "start_date": "2026-10-07",
+       "end_date": "2026-10-11",
+       "sample_size": 643,
+       "population": "lv",
+       "dem_pct": 54.0,
+       "rep_pct": 40.0,
+       "margin": 14.9,
+       "partisan_sign": 0,
+       "sponsors": [
+        "WRAL-TV",
+        "WSOC-TV"
+       ],
+       "url": "https://results.surveyusa.com/client/PollReport.aspx?g=0a876c84-9a95-4995-9218-82b1015f5d77",
+       "dem_candidate": "Roy Cooper",
+       "rep_candidate": "Michael Whatley"
+      },
+      {
+       "id": "us-202chaa0d9b00c",
+       "pollster": "Change Research",
+       "date": "2026-10-04",
+       "start_date": "2026-10-01",
+       "end_date": "2026-10-07",
+       "sample_size": 829,
+       "population": "lv",
+       "dem_pct": 50.0,
+       "rep_pct": 40.0,
+       "margin": 11.1,
+       "partisan_sign": 1,
+       "sponsors": [
+        "Carolina Forward"
+       ],
+       "url": "https://carolinaforward.org/news/the-october-2026-carolina-forward-poll/?emci=e7b29264-2cc4-f111-bf5b-000d3a4fbe83&emdi=beb3dd17-f1c6-f111-bf5b-000d3a4fbe83&ceid=27194997",
+       "dem_candidate": "Roy Cooper",
+       "rep_candidate": "Michael Whatley"
+      }
+     ]
+    },
+    {
+     "race_id": "senate-2026-GA",
+     "name": "Georgia",
+     "prob_before": 0.9421,
+     "prob_after": 0.9496,
+     "prob_delta": 0.007499999999999951,
+     "margin_before": 8.73,
+     "margin_after": 9.13,
+     "margin_delta": 0.40000000000000036,
+     "new_poll_count": 0,
+     "new_polls": []
+    }
+   ],
+   "markdown": "## 2026-10-13\n\nDemocratic chances of Senate control are up 0.1 pts to 68.7% on 4 new polls. Projected seats 52.2 \u2192 52.2 (-0.0).\n\n**Races that moved** (3 of 35):\n\n  - **Nebraska** \u2014 Democratic win probability 32.3% \u2192 30.3% (-2.1 pts); projected margin R+3.0 \u2192 R+3.0 (+0.0). Driven by 1 new poll:\n    - National Public Affairs (2026-10-03, n=800, LV): R+3.2\n\n  - **North Carolina** \u2014 Democratic win probability 95.4% \u2192 96.6% (+1.2 pts); projected margin D+9.3 \u2192 D+10.1 (+0.7). Driven by 2 new polls:\n    - SurveyUSA (2026-10-09, n=643, LV): D+14.9\n    - Change Research (2026-10-04, n=829, LV, D-aligned sponsor): D+11.1\n\n  - **Georgia** \u2014 Democratic win probability 94.2% \u2192 95.0% (+0.7 pts); projected margin D+8.7 \u2192 D+9.1 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n**New polling that did not move the needle.** Texas (1). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
    "run_date": "2026-10-12",
    "previous_run_date": "2026-10-11",
    "headline": "No new polling since 2026-10-11. Democratic chances of Senate control hold at 68.6%.",

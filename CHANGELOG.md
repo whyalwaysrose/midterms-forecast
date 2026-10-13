@@ -2,6 +2,25 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-13
+
+Democratic chances of Senate control are up 0.1 pts to 68.7% on 4 new polls. Projected seats 52.2 → 52.2 (-0.0).
+
+**Races that moved** (3 of 35):
+
+  - **Nebraska** — Democratic win probability 32.3% → 30.3% (-2.1 pts); projected margin R+3.0 → R+3.0 (+0.0). Driven by 1 new poll:
+    - National Public Affairs (2026-10-03, n=800, LV): R+3.2
+
+  - **North Carolina** — Democratic win probability 95.4% → 96.6% (+1.2 pts); projected margin D+9.3 → D+10.1 (+0.7). Driven by 2 new polls:
+    - SurveyUSA (2026-10-09, n=643, LV): D+14.9
+    - Change Research (2026-10-04, n=829, LV, D-aligned sponsor): D+11.1
+
+  - **Georgia** — Democratic win probability 94.2% → 95.0% (+0.7 pts); projected margin D+8.7 → D+9.1 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+**New polling that did not move the needle.** Texas (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-12
 
 No new polling since 2026-10-11. Democratic chances of Senate control hold at 68.6%.

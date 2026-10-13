@@ -55,3 +55,7 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-10,2026-10-09,senate,senate-2026-MN,us-202gqr63b7a4d3,GQR,2026-10-02,0.17435,0.1161,0.09478,0.76825
 2026-10-10,2026-10-09,senate,senate-2026-NC,us-202eas168b53d4,East Carolina University,2026-10-01,0.14165,0.19732,0.08518,0.21865
 2026-10-10,2026-10-09,senate,senate-2026-OH,us-202co/ed81e3f8,co/efficient,2026-10-05,-0.02248,0.01917,0.08583,0.27925
+2026-10-13,2026-10-12,senate,senate-2026-NC,us-202chaa0d9b00c,Change Research,2026-10-04,0.22314,0.19747,0.08844,0.63837
+2026-10-13,2026-10-12,senate,senate-2026-NC,us-202surbcf9e1be,SurveyUSA,2026-10-09,0.3001,0.18488,0.0963,0.90847
+2026-10-13,2026-10-12,senate,senate-2026-NE,us-202nat61ba6088,National Public Affairs,2026-10-03,-0.06318,-0.0603,0.11171,0.48739
+2026-10-13,2026-10-12,senate,senate-2026-TX,us-202recc152b3f7,ReconMR/Siena University,2026-10-06,0.08701,0.08295,0.10099,0.51968

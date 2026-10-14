@@ -296,3 +296,33 @@ def test_independents_are_never_folded_into_either_party():
     seats = results_source.parse_seats(WITH_FOOTNOTE, "senate", "test")
     assert seats.ind == 2
     assert seats.dem == 49, "independents were folded into the Democratic count"
+
+
+def test_a_missing_fundamentals_prior_is_reported_rather_than_faked():
+    """The baseline that silently became a second coin.
+
+    score_races falls back to 0.5 when a race has no stored prior. If every
+    race is missing it the "fundamentals" baseline is exactly the coin
+    baseline, and the skill figure against it reads as a real result -- which
+    is what archives written before the field existed actually produced.
+    """
+    forecast = {
+        "chamber": "house", "run_date": "2026-10-13",
+        "chamber_forecast": _chamber_forecast()["chamber_forecast"],
+        "races": [
+            {"id": "r1", "dem_win_prob": 0.8, "margin": {"p50": 5.0}},
+            {"id": "r2", "dem_win_prob": 0.2, "margin": {"p50": -5.0}},
+        ],
+    }
+    results = [score.RaceResult("r1", True), score.RaceResult("r2", False)]
+
+    without = score.score_races(forecast, results)
+    assert without["has_fundamentals"] is False
+    assert without["skill_vs_fundamentals"] is None
+    assert without["brier_fundamentals"] == without["brier_coin"]
+
+    for race, prior in zip(forecast["races"], (4.0, -4.0), strict=True):
+        race["fundamentals_prior_margin"] = prior
+    with_prior = score.score_races(forecast, results)
+    assert with_prior["has_fundamentals"] is True
+    assert with_prior["skill_vs_fundamentals"] is not None

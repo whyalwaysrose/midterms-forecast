@@ -428,6 +428,19 @@ these:
   appears in every candidate and primary table: matching it everywhere gives 118 rows for
   35 races and would score a primary as the election.
 
+## The forecast of record is pinned by date — do not score the live payload
+
+`score.forecast_of_record()` returns the last archived run on or before `election_date`
+(METHODOLOGY 8c). The live `site/data/forecast.json` is rewritten by every run, and the
+daily job scores *after* refitting, so reading it would grade a forecast made after the
+result was known — and a different one each day.
+
+- The rule freezes itself. No ceremony is needed on election night.
+- `slim_payload` must keep `election_date` and `fundamentals_prior_margin`. Drop either and
+  scoring degrades silently: no election date means "newest run", which after the election
+  is the wrong one; no prior means the fundamentals baseline becomes a second coin.
+- A test asserts `run_score` never touches `SITE_DATA_DIR`.
+
 ## Known rough edges
 
 Listed in the README under "Known data-quality items" and `docs/METHODOLOGY.md` §9. The

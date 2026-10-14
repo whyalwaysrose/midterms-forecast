@@ -662,6 +662,9 @@ def slim_payload(payload: dict) -> dict:
         "model_fingerprint": payload.get("model_fingerprint"),
         "run_date": payload["run_date"],
         "generated_at": payload["generated_at"],
+        # Needed to work out which archived run is the forecast of record --
+        # the last one published before the polls closed. See score.py.
+        "election_date": payload.get("election_date"),
         "chamber_forecast": payload["chamber_forecast"],
         "national": {
             "generic_ballot": payload["national"]["generic_ballot"],
@@ -676,6 +679,12 @@ def slim_payload(payload: dict) -> dict:
                 "name": race["name"],
                 "dem_win_prob": race["dem_win_prob"],
                 "margin": race["margin"],
+                # One of the two baselines the scoring was pre-registered
+                # against (METHODOLOGY 8c): what the model believed before it
+                # read a single poll. Without it every race falls back to a
+                # coin flip and the "beat the fundamentals" comparison quietly
+                # becomes a comparison with nothing.
+                "fundamentals_prior_margin": race.get("fundamentals_prior_margin"),
                 "poll_count": race["poll_count"],
                 "all_poll_ids": race.get("all_poll_ids", []),
                 "latent": race.get("trajectory", [])[-LATENT_TAIL:],

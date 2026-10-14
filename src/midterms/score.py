@@ -51,9 +51,13 @@ like special pleading after the fact.
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
+from datetime import date
 
 import numpy as np
+
+log = logging.getLogger(__name__)
 
 #: Probabilities are clipped before taking a log, so a confident miss costs a
 #: large finite number rather than infinity. At 1e-4 the worst possible per-race
@@ -172,10 +176,19 @@ def score_races(forecast: dict, results) -> dict:
 
     # Fundamentals: what the model believed before any poll, at a tied national
     # environment. Beating this is the whole claim of reading polls.
-    prior = []
+    #
+    # Whether the archive actually carries it is tracked, because the fallback
+    # is a coin flip -- so an archive missing the field produces a baseline
+    # identical to the coin and a skill figure that reads as a real result. It
+    # did exactly that against runs archived before the field was added.
+    prior, have_prior = [], False
     for r in scored:
         margin = races[r.race_id].get("fundamentals_prior_margin")
-        prior.append(0.5 if margin is None else float(margin > 0))
+        if margin is None:
+            prior.append(0.5)
+        else:
+            have_prior = True
+            prior.append(float(margin > 0))
 
     coin = [0.5] * len(scored)
     out = {
@@ -188,8 +201,11 @@ def score_races(forecast: dict, results) -> dict:
         "coverage": interval_coverage(scored, races),
         "called_right": int(sum((p > 0.5) == bool(y) for p, y in zip(model, outcomes, strict=True))),
     }
+    out["has_fundamentals"] = have_prior
     out["skill_vs_coin"] = skill(out["brier"], out["brier_coin"])
-    out["skill_vs_fundamentals"] = skill(out["brier"], out["brier_fundamentals"])
+    out["skill_vs_fundamentals"] = (
+        skill(out["brier"], out["brier_fundamentals"]) if have_prior else None
+    )
 
     margins = [(races[r.race_id]["margin"]["p50"], r.dem_margin)
                for r in scored if r.dem_margin is not None]
@@ -305,6 +321,86 @@ def _load_rivals(chamber: str) -> list[dict]:
         return [r for r in csv.DictReader(fh) if r["chamber"] == chamber]
 
 
+ARCHIVE_NAME = {"senate": "forecast.json", "house": "forecast_house.json"}
+
+
+def forecast_of_record(chamber: str):
+    """The forecast this chamber will be graded on, and where it came from.
+
+    **The last run published on or before election day.** Not the live payload,
+    which is what this used to read and which is wrong in a way that only
+    surfaces once, on the night.
+
+    The daily workflow fits the model and *then* scores. So on the morning after
+    the election it would have refit, and then graded that brand-new forecast --
+    one made after the result was known -- against the result. Worse, it would
+    do it again the next day, and the next, grading a different forecast each
+    time and quietly drifting. METHODOLOGY 8c fixed *how* the forecast is
+    scored in September and never fixed *which* forecast, which is the hole
+    this closes.
+
+    Choosing by date rather than by a frozen copy means it needs no ceremony on
+    the day and freezes itself: before the election the answer is simply the
+    latest run, and from election day onward no new run can qualify, so the
+    forecast of record stops moving without anyone doing anything.
+
+    Returns (payload, path), or None when nothing is archived yet.
+    """
+    import json
+
+    from . import paths
+
+    runs = paths.OUTPUTS_DIR / "runs"
+    if not runs.exists():
+        return None
+
+    best = None
+    for directory in runs.glob("*/"):
+        path = directory / ARCHIVE_NAME[chamber]
+        if not path.exists():
+            continue
+        try:
+            when = date.fromisoformat(directory.name)
+        except ValueError:
+            continue
+        if best is None or when > best[0]:
+            best = (when, path)
+
+    if best is None:
+        return None
+
+    payload = json.loads(best[1].read_text(encoding="utf-8"))
+    election = payload.get("election_date")
+    if election is None:
+        # Archives written before election_date was carried cannot be placed
+        # relative to the election, so fall back to the newest and say so.
+        log.warning("%s: archived runs carry no election_date; using the newest",
+                    chamber)
+        return payload, best[1]
+
+    cutoff = date.fromisoformat(election)
+    if best[0] <= cutoff:
+        return payload, best[1]
+
+    # Past the election: pick the last run that was published before the polls
+    # closed, which is the forecast that actually had something to predict.
+    eligible = None
+    for directory in runs.glob("*/"):
+        path = directory / ARCHIVE_NAME[chamber]
+        if not path.exists():
+            continue
+        try:
+            when = date.fromisoformat(directory.name)
+        except ValueError:
+            continue
+        if when <= cutoff and (eligible is None or when > eligible[0]):
+            eligible = (when, path)
+
+    if eligible is None:
+        return None
+    return json.loads(eligible[1].read_text(encoding="utf-8")), eligible[1]
+
+
 def run_score(chamber: str = "senate", dry_run: int | None = None) -> int:
     """Score the published forecast against the result, if there is one yet.
 
@@ -313,17 +409,14 @@ def run_score(chamber: str = "senate", dry_run: int | None = None) -> int:
     scheduled job that fails every day until November is a job whose failures
     stop being read.
     """
-    import json
 
-    from . import paths
     from .data import results as results_source
 
-    name = "forecast.json" if chamber == "senate" else "forecast_house.json"
-    path = paths.SITE_DATA_DIR / name
-    if not path.exists():
-        print(f"No published {chamber} forecast at {path}.")
+    found = forecast_of_record(chamber)
+    if found is None:
+        print(f"No archived {chamber} forecast to score.")
         return 0
-    forecast = json.loads(path.read_text(encoding="utf-8"))
+    forecast, forecast_path = found
 
     if dry_run is not None:
         race_results, chamber_result = simulate_outcome(forecast, seed=dry_run)
@@ -423,11 +516,18 @@ def _print_race_scores(race_score: dict) -> None:
         print()
         print(f"  Races ({race_score['n']} scored, "
               f"{race_score['called_right']} called correctly)")
-        print(f"    Brier {race_score['brier']:.4f}   "
-              f"vs coin {race_score['brier_coin']:.4f} "
-              f"(skill {race_score['skill_vs_coin']:+.1%})   "
-              f"vs fundamentals {race_score['brier_fundamentals']:.4f} "
-              f"(skill {race_score['skill_vs_fundamentals']:+.1%})")
+        line = (f"    Brier {race_score['brier']:.4f}   "
+                f"vs coin {race_score['brier_coin']:.4f} "
+                f"(skill {race_score['skill_vs_coin']:+.1%})")
+        if race_score.get("has_fundamentals"):
+            line += (f"   vs fundamentals {race_score['brier_fundamentals']:.4f} "
+                     f"(skill {race_score['skill_vs_fundamentals']:+.1%})")
+        print(line)
+        if not race_score.get("has_fundamentals"):
+            print("    vs fundamentals: not available -- this archive predates "
+                  "the stored prior,")
+            print("                     and the fallback is a coin, which would "
+                  "print as a real result.")
         print(f"    log score {race_score['log_score']:.4f}")
         if "margin_mae" in race_score:
             print(f"    margin error {race_score['margin_mae']:.2f} pts mean absolute, "

@@ -588,6 +588,21 @@ The seat percentile is the most informative thing a single election yields. One 
 cannot show an interval was too wide; a result at the 3rd percentile is still a fact
 about the shape of the forecast.
 
+**Which forecast is graded: the last run published on or before election day.**
+Pre-registering how a forecast is scored is worth nothing if the thing being scored can
+still move, and until 2026-10-14 it could. The daily job fits the model and *then* scores,
+reading the payload it had just written — so on 4 November it would have refit, then graded
+that brand-new forecast against a result already public, and done it again on a different
+forecast the next day.
+
+Choosing by date needs no action on the night and freezes itself: before the election the
+answer is simply the latest run; from election day onward no new run can qualify, so the
+verdict reached on the night is the same one reached a month later. The archived run
+carries `election_date` and `fundamentals_prior_margin` for this reason — the latter is one
+of the two pre-registered baselines, and without it every race falls back to a coin flip,
+making the "beat the fundamentals" comparison identical to the coin while still printing a
+confident number. The scorer now says it is unavailable rather than printing one.
+
 **Per-race results, which is where the evidence is.** The pre-registration above
 calls the race-by-race scoring the evidence and the chamber outcome an anecdote. Until
 2026-10-09 only the anecdote could actually be computed: the ingester read chamber seat

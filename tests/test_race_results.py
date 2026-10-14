@@ -283,3 +283,62 @@ def test_senate_rows_are_read_only_from_the_race_summary():
     parsed = R.parse_senate_races(SENATE_SUMMARY)
     assert set(parsed) == {"senate-2026-GA"}
     assert parsed["senate-2026-GA"].dem_pct == 51.4      # not the 99.0 below
+
+
+# --- the night itself -------------------------------------------------------
+
+
+def test_an_unreachable_wikipedia_degrades_instead_of_crashing(monkeypatch, capsys):
+    """Found by rehearsing election night, where it was fatal.
+
+    A single dropped connection raised out of fetch_chamber_seats, took
+    run_score with it, and the House was never scored at all. The workflow step
+    is continue-on-error, so that would have been a silent no-score on the one
+    night it matters -- and Wikipedia under election-night load is exactly when
+    a dropped connection is likely.
+
+    A missing result and an unreachable source are different things. Neither
+    may crash, and the second has to say so.
+    """
+    import requests
+
+    def unreachable(*args, **kwargs):
+        raise requests.exceptions.ConnectionError("Remote end closed connection")
+
+    monkeypatch.setattr(R.requests, "get", unreachable)
+    monkeypatch.setattr(R, "BACKOFF_SECONDS", 0.0)
+
+    assert R.fetch_chamber_seats("house") is None
+    assert R.fetch_house_districts() == {}
+    assert R.fetch_senate_races() == {}
+    assert "::warning" in capsys.readouterr().out
+
+
+def test_a_transient_failure_is_retried_before_giving_up(monkeypatch):
+    """Election night is the worst possible time for a one-shot request."""
+    import requests
+
+    calls = {"n": 0}
+
+    class Response:
+        status_code = 200
+
+        @staticmethod
+        def raise_for_status():
+            return None
+
+        @staticmethod
+        def json():
+            return {"parse": {"wikitext": "==Alabama==\n"}}
+
+    def flaky(*args, **kwargs):
+        calls["n"] += 1
+        if calls["n"] < 3:
+            raise requests.exceptions.ConnectionError("transient")
+        return Response()
+
+    monkeypatch.setattr(R.requests, "get", flaky)
+    monkeypatch.setattr(R, "BACKOFF_SECONDS", 0.0)
+
+    assert R.fetch_house_districts() == {}      # parsed fine, simply no rows
+    assert calls["n"] == 3, "the request was not retried"

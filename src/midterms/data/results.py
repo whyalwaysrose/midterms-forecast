@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import logging
 import re
+import time
 import urllib.parse
 from dataclasses import dataclass
 
@@ -89,6 +90,44 @@ class ChamberSeats:
         return self.dem + self.rep + self.ind
 
 
+#: Wikipedia will be under heavy load on election night, which is the one
+#: night this code matters. A dropped connection then is likely rather than
+#: unlikely, so a single failed request must not be the end of it.
+RETRIES = 3
+BACKOFF_SECONDS = 2.0
+
+
+def _get(params: dict, timeout: float) -> dict:
+    """One API call, retried on transient failure.
+
+    Raises only after the last attempt. Callers above this turn that into a
+    missing result rather than a crash -- found by rehearsing the night, where
+    a single ConnectionError took down the whole scorer and the House was never
+    scored at all.
+    """
+    last: Exception | None = None
+    for attempt in range(1, RETRIES + 1):
+        try:
+            response = requests.get(
+                WIKI_API, params=params,
+                headers={"User-Agent": USER_AGENT}, timeout=timeout,
+            )
+            response.raise_for_status()
+            payload = response.json()
+            if "error" in payload:
+                raise RuntimeError(
+                    f"Wikipedia: {payload['error'].get('info', 'unknown error')}"
+                )
+            return payload
+        except Exception as exc:                      # noqa: BLE001
+            last = exc
+            if attempt < RETRIES:
+                log.warning("wikipedia request failed (%s of %s): %s",
+                            attempt, RETRIES, exc)
+                time.sleep(BACKOFF_SECONDS * attempt)
+    raise last                                        # type: ignore[misc]
+
+
 def _fetch_lead_wikitext(page: str, timeout: float = 30.0) -> str:
     """The lead section's wikitext, which is where the infobox lives.
 
@@ -96,36 +135,16 @@ def _fetch_lead_wikitext(page: str, timeout: float = 30.0) -> str:
     same certificate bundle -- the standard library's urllib trusts the system
     store, which on this machine is stale enough to reject Wikipedia outright.
     """
-    response = requests.get(
-        WIKI_API,
-        params={
-            "action": "parse", "page": page, "prop": "wikitext",
-            "section": "0", "format": "json", "formatversion": "2",
-        },
-        headers={"User-Agent": USER_AGENT},
-        timeout=timeout,
-    )
-    response.raise_for_status()
-    payload = response.json()
-    if "error" in payload:
-        raise RuntimeError(f"Wikipedia: {payload['error'].get('info', 'unknown error')}")
+    payload = _get({"action": "parse", "page": page, "prop": "wikitext",
+                    "section": "0", "format": "json", "formatversion": "2"}, timeout)
     return payload["parse"]["wikitext"]
 
 
 def _fetch_full_wikitext(page: str, timeout: float = 60.0) -> str:
     """The whole article. The per-state results tables are spread across fifty
     sections, so one request for everything beats fifty for the pieces."""
-    response = requests.get(
-        WIKI_API,
-        params={"action": "parse", "page": page, "prop": "wikitext",
-                "format": "json", "formatversion": "2"},
-        headers={"User-Agent": USER_AGENT},
-        timeout=timeout,
-    )
-    response.raise_for_status()
-    payload = response.json()
-    if "error" in payload:
-        raise RuntimeError(f"Wikipedia: {payload['error'].get('info', 'unknown error')}")
+    payload = _get({"action": "parse", "page": page, "prop": "wikitext",
+                    "format": "json", "formatversion": "2"}, timeout)
     return payload["parse"]["wikitext"]
 
 
@@ -228,7 +247,16 @@ def fetch_chamber_seats(chamber: str, page: str | None = None) -> ChamberSeats |
     """
     page = page or PAGES[chamber]
     url = f"https://en.wikipedia.org/wiki/{urllib.parse.quote(page.replace(' ', '_'))}"
-    wikitext = _fetch_lead_wikitext(page)
+    try:
+        wikitext = _fetch_lead_wikitext(page)
+    except Exception:                                 # noqa: BLE001
+        # A missing result and an unreachable Wikipedia are different things,
+        # and the second must not look like the first -- nor take the rest of
+        # the scoring down with it, which is what it did in rehearsal.
+        log.exception("%s: could not reach Wikipedia for the chamber total", chamber)
+        print(f"::warning title=Chamber total unavailable::could not fetch the "
+              f"{chamber} total from Wikipedia; will retry on the next run")
+        return None
     seats = parse_seats(wikitext, chamber, url)
     if seats is None:
         log.info("%s: no usable seat totals yet at %s", chamber, url)
@@ -532,7 +560,14 @@ def parse_senate_races(wikitext: str) -> dict[str, RaceOutcome]:
 def fetch_senate_races(page: str | None = None) -> dict[str, RaceOutcome]:
     """Per-race Senate results from Wikipedia, empty until they exist."""
     page = page or PAGES["senate"]
-    return parse_senate_races(_fetch_full_wikitext(page))
+    try:
+        wikitext = _fetch_full_wikitext(page)
+    except Exception:                                 # noqa: BLE001
+        log.exception("senate: could not reach Wikipedia for race results")
+        print("::warning title=Race results unavailable::could not fetch the "
+              "Senate results from Wikipedia; will retry on the next run")
+        return {}
+    return parse_senate_races(wikitext)
 
 
 def fetch_race_results(chamber: str, page: str | None = None) -> dict[str, RaceOutcome]:
@@ -545,7 +580,13 @@ def fetch_race_results(chamber: str, page: str | None = None) -> dict[str, RaceO
 def fetch_house_districts(page: str | None = None) -> dict[str, RaceOutcome]:
     """Per-district House results from Wikipedia, empty until they exist."""
     page = page or PAGES["house"]
-    wikitext = _fetch_full_wikitext(page)
+    try:
+        wikitext = _fetch_full_wikitext(page)
+    except Exception:                                 # noqa: BLE001
+        log.exception("house: could not reach Wikipedia for district results")
+        print("::warning title=District results unavailable::could not fetch the "
+              "House results from Wikipedia; will retry on the next run")
+        return {}
     results = parse_house_districts(wikitext)
     log.info("house: %d districts called at %s", len(results), page)
     return results

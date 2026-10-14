@@ -441,6 +441,25 @@ result was known — and a different one each day.
   is the wrong one; no prior means the fundamentals baseline becomes a second coin.
 - A test asserts `run_score` never touches `SITE_DATA_DIR`.
 
+## Rehearse election night before election night
+
+A full rehearsal — real `run_score`, real Wikipedia fetchers, real selection rule,
+with `outputs/runs` pointed at a November-shaped archive and the result pages at
+2024's articles — is the only way to exercise fetch → parse → select → score before
+the one night it has to work. It is worth redoing after any change to `score.py`
+or `data/results.py`.
+
+The first rehearsal crashed. `fetch_chamber_seats` raised `ConnectionError`, took
+`run_score` down with it, and the House was never scored — on a step that is
+`continue-on-error`, so it would have been a silent no-score. Wikipedia under
+election-night load is exactly when a dropped connection is likely.
+
+- **Fetches retry, then degrade.** Three attempts with backoff; after that a missing
+  result is returned and a GitHub warning is raised. An unreachable source and a
+  result that does not exist yet are different things and must not look alike.
+- **Nothing in the result path may raise into `run_score`.** One chamber failing
+  must never stop the other being scored.
+
 ## Known rough edges
 
 Listed in the README under "Known data-quality items" and `docs/METHODOLOGY.md` §9. The

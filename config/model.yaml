@@ -295,6 +295,51 @@ election_day_error:
     length_scale: 1.25
     region_weight: 0.6      # how much sharing a region pulls states together
     nugget: 0.02            # keeps the matrix comfortably positive-definite
+    # --- demographic covariates: implemented, off ---------------------------
+    #
+    # METHODOLOGY 5 said for months that these were the highest-value available
+    # improvement, on the reasoning that education and urbanicity are the axes
+    # along which recent polling errors correlated. Measured on 2026-10-14
+    # against the same 13 cycles and 135 state pairs that validated the
+    # political covariates, they are not:
+    #
+    #     political only                            +0.173
+    #     + education, raw                          +0.102
+    #     + education, residualised                 +0.079
+    #     + urban share, residualised               +0.178
+    #
+    # Education hurts because it is +0.79 collinear with the 2024 lean above.
+    # Residualised urban share is the only gain, +0.005, and it wins 62% of
+    # bootstrap resamples with a 90% interval of -0.108 to +0.115 -- noise by
+    # the standard that rejected the region_weight change.
+    #
+    # They are here because that measurement has no power where the claim
+    # lives: 14 usable state pairs from 2012 onward, none from 2016, and none
+    # at all at district level. To turn them on, set a weight and name the
+    # covariates, e.g.
+    #
+    #     demographic_weight: 1.5
+    #     demographic_covariates: [urban]
+    #
+    # Note what this buys the House: the data is state-level, so every district
+    # in a state shares a value and the covariate adds no within-state
+    # separation. The ACS publishes nothing for the 181 districts whose 2026
+    # lines have never held an election, so true district values would have to
+    # be apportioned from tracts.
+    #
+    # READ THIS BEFORE TURNING IT ON. Adding a column adds a dimension to the
+    # distance, so every pair moves further apart and the whole kernel shrinks
+    # toward independence. At weight 1.5 with `urban`, mean off-diagonal
+    # correlation falls from +0.314 to +0.181 on the House and +0.291 to +0.172
+    # on the Senate. Independent error averages out across 435 seats and
+    # correlated error does not (METHODOLOGY 11b), so this *narrows* the seat
+    # interval -- and a narrower interval is precisely the artefact
+    # fit_correlation.py finding 3 and METHODOLOGY 11 warn against reading as an
+    # improvement. If you enable this, re-fit `length_scale` alongside it rather
+    # than taking the narrowing as free accuracy.
+    demographic_weight: 0.0
+    demographic_covariates: []
+    demographic_residualise: true
   #
   # NOTE: there is deliberately no separate "drift to election day" term here.
   # The latent random walks are defined on a grid whose final point IS election

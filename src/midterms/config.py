@@ -285,6 +285,31 @@ class CorrelationConfig:
     region_weight: float
     nugget: float
 
+    # --- demographic covariates, off by default ---------------------------
+    #
+    # Off because of a measurement, not a preference:
+    # scripts/fit_demographic_covariates.py scores them on the 13 cycles and
+    # 135 state pairs that validated the political covariates, and education
+    # lowers agreement (+0.173 -> +0.102) while the best demographic
+    # specification gains +0.005 inside a bootstrap interval of +/-0.11. See
+    # METHODOLOGY 5 and known weakness 1.
+    #
+    # Implemented anyway because the measurement has no power where the claim
+    # lives -- 14 usable pairs from 2012, none from 2016, and none at all at
+    # district level. `demographic_weight` of 0.0 removes the columns entirely,
+    # so the default run is bit-identical to one with no such code.
+
+    #: Scale on each demographic column, as `region_weight` is for region.
+    #: 0.0 disables them.
+    demographic_weight: float = 0.0
+    #: Which columns, named as in data.demographics.COVARIATE_COLUMNS.
+    demographic_covariates: tuple[str, ...] = ()
+    #: Regress each against both leans and keep only the residual -- the part
+    #: the kernel does not already carry. Measured as the better-posed
+    #: specification even though it scored worse for education, because
+    #: appending the raw column mainly re-weights the lean axis.
+    demographic_residualise: bool = True
+
 
 @dataclass(frozen=True)
 class ElectionDayErrorConfig:
@@ -367,8 +392,9 @@ class ModelConfig:
             election_day_error=ElectionDayErrorConfig(
                 national_sd=float(_require(ede, "national_sd", "election_day_error")),
                 state_sd=float(_require(ede, "state_sd", "election_day_error")),
-                correlation=CorrelationConfig(
-                    **_require(ede, "correlation", "election_day_error")
+                correlation=_correlation_config(
+                    _require(ede, "correlation", "election_day_error"),
+                    "election_day_error.correlation",
                 ),
             ),
             sampler=SamplerConfig(**_require(raw, "sampler", ctx)),
@@ -402,7 +428,32 @@ def _race_state_config(raw: Mapping[str, Any]) -> RaceStateConfig:
     correlation = values.pop("movement_correlation", None)
     if correlation is None:
         raise ConfigError("race.movement_correlation is required")
-    return RaceStateConfig(movement_correlation=CorrelationConfig(**correlation), **values)
+    return RaceStateConfig(
+        movement_correlation=_correlation_config(
+            correlation, "race.movement_correlation"
+        ),
+        **values,
+    )
+
+
+def _correlation_config(raw: dict, ctx: str) -> CorrelationConfig:
+    """Build a CorrelationConfig, normalising the optional list field.
+
+    YAML gives `demographic_covariates` as a list; the dataclass is frozen and
+    declares a tuple, so it is converted here rather than in two call sites.
+    """
+    values = dict(raw)
+    covariates = values.get("demographic_covariates")
+    if covariates is not None:
+        if isinstance(covariates, str):
+            raise ConfigError(
+                f"{ctx}.demographic_covariates must be a list, not a string"
+            )
+        values["demographic_covariates"] = tuple(covariates)
+    try:
+        return CorrelationConfig(**values)
+    except TypeError as exc:
+        raise ConfigError(f"{ctx}: {exc}") from None
 
 
 def load_all(

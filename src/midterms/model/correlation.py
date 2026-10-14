@@ -15,6 +15,13 @@ We model that with two pieces:
 Distance is built from what we actually know about each state: its presidential
 lean in 2024 and 2020 (standardised), plus a region indicator. States that vote
 alike and sit in the same region are treated as likely to miss alike.
+
+Those covariates are political rather than demographic. Demographic ones are
+implemented, and off: measured against 13 cycles of state polling error they do
+not improve the kernel, and education actively worsens it because it is +0.79
+collinear with the 2024 lean already here. See
+:mod:`midterms.data.demographics`, METHODOLOGY 5, and
+``scripts/fit_demographic_covariates.py``.
 """
 
 from __future__ import annotations
@@ -33,12 +40,47 @@ def _standardise(values: np.ndarray) -> np.ndarray:
     return (values - float(np.mean(values))) / sd
 
 
+def _demographic_columns(
+    fundamentals: Fundamentals, cfg: CorrelationConfig
+) -> list[np.ndarray]:
+    """Optional demographic columns. Empty unless the config asks for them.
+
+    Off by default, and the default is a measurement rather than a preference --
+    see :mod:`midterms.data.demographics` and METHODOLOGY 5. When the weight is
+    zero this returns nothing at all, so a default run builds exactly the
+    covariate matrix it built before this code existed.
+    """
+    if cfg.demographic_weight <= 0.0 or not cfg.demographic_covariates:
+        return []
+
+    from ..data import demographics
+
+    if not fundamentals.units:
+        raise demographics.DemographicsError(
+            "demographic covariates need Fundamentals.units, which this "
+            "Fundamentals was built without"
+        )
+
+    columns = []
+    for name in cfg.demographic_covariates:
+        values = demographics.values_for(fundamentals.units, name)
+        if cfg.demographic_residualise:
+            values = demographics.residualise_against(
+                values, fundamentals.lean_2024, fundamentals.lean_2020
+            )
+        columns.append(_standardise(values) * cfg.demographic_weight)
+    return columns
+
+
 def covariate_matrix(fundamentals: Fundamentals, cfg: CorrelationConfig) -> np.ndarray:
     """Standardised covariates used to measure political distance between races.
 
     Columns are the 2024 lean, the 2020 lean, and one scaled indicator column
     per region. Two races in different regions are pushed
     ``sqrt(2) * region_weight`` further apart than they would otherwise be.
+
+    Demographic columns are appended only when ``demographic_weight`` is above
+    zero, which it is not by default.
     """
     lean_2024 = _standardise(fundamentals.lean_2024)
     lean_2020 = _standardise(fundamentals.lean_2020)
@@ -49,7 +91,9 @@ def covariate_matrix(fundamentals: Fundamentals, cfg: CorrelationConfig) -> np.n
         region_onehot[i, unique_regions.index(region)] = 1.0
     region_onehot *= cfg.region_weight
 
-    return np.column_stack([lean_2024, lean_2020, region_onehot])
+    return np.column_stack(
+        [lean_2024, lean_2020, region_onehot, *_demographic_columns(fundamentals, cfg)]
+    )
 
 
 def distance_matrix(covariates: np.ndarray) -> np.ndarray:

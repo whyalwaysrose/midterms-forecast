@@ -51,6 +51,10 @@ class Fundamentals:
     lean_2024: np.ndarray
     lean_2020: np.ndarray
     regions: tuple[str, ...]
+    #: Each race's unit -- a state for the Senate, a district for the House.
+    #: Carried so the correlation kernel can resolve a race to the state whose
+    #: demographics it looks up, without parsing race ids.
+    units: tuple[str, ...] = ()
 
     def as_dict(self) -> dict[str, float]:
         return dict(zip(self.race_ids, self.prior_mean.tolist(), strict=True))
@@ -76,6 +80,7 @@ def compute(races: RaceSet, cfg: ModelConfig) -> Fundamentals:
     leans_2024: list[float] = []
     leans_2020: list[float] = []
     regions: list[str] = []
+    units: list[str] = []
 
     for race in races.races:
         lean_2024, lean_2020 = race_lean(race, cfg)
@@ -95,6 +100,7 @@ def compute(races: RaceSet, cfg: ModelConfig) -> Fundamentals:
         leans_2024.append(lean_2024)
         leans_2020.append(lean_2020)
         regions.append(race.region)
+        units.append(race.unit)
 
     return Fundamentals(
         race_ids=tuple(ids),
@@ -102,4 +108,5 @@ def compute(races: RaceSet, cfg: ModelConfig) -> Fundamentals:
         lean_2024=np.asarray(leans_2024, dtype=float),
         lean_2020=np.asarray(leans_2020, dtype=float),
         regions=tuple(regions),
+        units=tuple(units),
     )

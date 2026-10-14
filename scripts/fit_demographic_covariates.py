@@ -175,19 +175,18 @@ def refresh() -> None:
     print(f"wrote {VENDORED} ({len(shared)} states)")
 
 
+# Reading and residualising live in midterms.data.demographics, because the
+# model reads the same file through the same code when the config flag is on.
+# Two copies of "what does this CSV mean" is how a measurement and the model it
+# informs drift apart.
 def load_demographics() -> dict[str, dict[str, float]]:
-    if not VENDORED.exists():
-        raise SystemExit(
-            f"{VENDORED} is missing; run with --refresh to derive it from Census."
-        )
-    out = {}
-    with VENDORED.open(encoding="utf-8") as fh:
-        for row in csv.DictReader(fh):
-            out[row["state"]] = {
-                "education": float(row["ba_plus_pct"]),
-                "urban": float(row["urban_pct"]),
-            }
-    return out
+    """``{postal: {covariate: value}}`` from the vendored CSV."""
+    from midterms.data.demographics import DemographicsError, load
+
+    try:
+        return load(VENDORED)
+    except DemographicsError as exc:
+        raise SystemExit(str(exc)) from None
 
 
 def residualise_against(target: np.ndarray, *controls: np.ndarray) -> np.ndarray:
@@ -198,9 +197,9 @@ def residualise_against(target: np.ndarray, *controls: np.ndarray) -> np.ndarray
     column 0.79 correlated with 2024 lean mostly re-weights the existing axis
     rather than adding a new one.
     """
-    design = np.column_stack([np.ones(len(target)), *controls])
-    beta, *_ = np.linalg.lstsq(design, target, rcond=None)
-    return target - design @ beta
+    from midterms.data.demographics import residualise_against as shared
+
+    return shared(target, *controls)
 
 
 def _demeaned(corr, residuals, pairs, index) -> np.ndarray:

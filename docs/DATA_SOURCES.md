@@ -237,9 +237,11 @@ of ±0.11.
 
 These numbers were fetched to test METHODOLOGY §5's long-standing claim that demographic
 covariates were the highest-value available improvement to the correlation kernel. They
-are not used by the model. They are kept, and committed, so that the negative result is
-reproducible rather than merely asserted — and so the test can be re-run cheaply when
-there are more cycles to run it on.
+are **not used by default**: the kernel reads them only when
+`election_day_error.correlation.demographic_weight` is set above its default of `0.0`.
+They are kept, and committed, so that the negative result is reproducible rather than
+merely asserted, so the flag has data to read if anyone turns it on, and so the test can
+be re-run cheaply when there are more cycles to run it on.
 
 ## Reproducibility
 

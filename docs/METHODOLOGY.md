@@ -415,6 +415,28 @@ over whole cycles with a 90% interval of −0.108 to +0.115. That is a weaker re
 the `region_weight` change rejected as noise in §8's companion fit, and it is rejected on
 the same standard.
 
+**They are implemented, and off.** `election_day_error.correlation.demographic_weight`
+defaults to `0.0`, which removes the columns entirely rather than scaling them to nothing,
+so a default run builds the same covariate matrix it built before the code existed — a
+test asserts exactly that. Set a weight and name the covariates to enable them:
+
+```yaml
+demographic_weight: 1.5
+demographic_covariates: [urban]
+```
+
+One consequence to know before doing so. Each added column is another dimension of
+distance, so every pair of races moves further apart and the kernel shrinks toward
+independence: at that setting mean off-diagonal correlation falls from +0.314 to +0.181 on
+the House. Independent error averages out over 435 seats and correlated error does not
+(§11b), so this *narrows* the seat interval — which is the artefact §11 and
+`fit_correlation.py`'s finding 3 both warn against mistaking for accuracy. A `length_scale`
+re-fit belongs with any such change rather than taking the narrowing as free precision.
+
+For the House there is a further limit: the data is state-level, so every district in a
+state shares a value and the covariate separates states without separating districts
+within one.
+
 Two limits on that conclusion, both stated rather than buried. The claim concerns *recent*
 cycles, and restricting the measurement to 2012-and-later leaves 14 usable pairs and to
 2016-and-later leaves none — so this dataset cannot see whether the realignment shows up
@@ -725,6 +747,11 @@ than debugged on the night.
    boundaries are redrawn every decade so eras cannot be pooled. The House kernel is
    **unconfirmable** at district level from this dataset, which is a stronger and more
    useful statement than weakness 11's "confirmed for neither".
+
+   The covariates themselves are implemented behind
+   `election_day_error.correlation.demographic_weight`, defaulting to `0.0`, for anyone
+   who prefers a theoretically motivated kernel to a noise-limited measurement. §5 records
+   what enabling them does to the kernel's width, which is not nothing.
 
    Closing that would need a different measurement, not a different covariate: district
    error correlation estimated by pooling error products against covariate distance

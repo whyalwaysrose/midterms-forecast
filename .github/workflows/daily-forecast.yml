@@ -11,6 +11,11 @@ name: Daily forecast
 # Both chambers are refit here, Senate first. The House is the expensive one and
 # is deliberately allowed to fail without taking the Senate down with it -- see
 # the comment on its step.
+#
+# The House candidate roster is rebuilt from FEC filings before either model
+# runs. It used to be a hand-run script, and went three months without being
+# re-run while the poll feed grew from 40 districts to 66; the `roster-freshness`
+# job at the bottom exists so that cannot happen quietly again.
 
 on:
   schedule:
@@ -60,6 +65,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -e . --no-deps
+
+      # The roster is the join between a poll's bare candidate names and a side
+      # of the ballot, and without it a district's polls are dropped. It was
+      # generated once, by hand, when 40 districts were polled; by October the
+      # feed had 66 and the roster had never been rebuilt. That cost the House
+      # 27 districts and 44 polls -- every one of them sitting in the feed,
+      # rejected as "no single D-vs-R matchup" because neither name was known.
+      # Nothing failed and nothing warned: the audit step below printed the
+      # names every day and nobody was reading the log.
+      #
+      # So it is rebuilt here, before anything reads it. Party comes from each
+      # candidate's own FEC filing, and a name that matches no filing stays
+      # unclassified rather than being guessed at.
+      #
+      # continue-on-error because an FEC outage must not cost a forecast: the
+      # script writes only after both fetches succeed, so a failure here leaves
+      # yesterday's committed roster in place and the run continues on it.
+      - name: Rebuild the House candidate roster from FEC filings
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python scripts/build_house_roster.py
 
       - name: Check the candidate roster still covers the feed
         # Non-fatal: a new nominee means some polls are skipped, which we want
@@ -167,6 +193,9 @@ jobs:
                   site/data/us-districts.json \
                   outputs/runs \
                   CHANGELOG.md
+          # Rebuilt from FEC filings above, so it changes whenever someone files
+          # or a pollster tests a district for the first time.
+          git add config/candidates_house_2026.yaml || true
           # The forward-calibration rows, which only grow.
           git add data/calibration || true
           # Empty until election night, then the scorecard -- committed so the
@@ -186,6 +215,44 @@ jobs:
             # Another run may have landed while we were sampling.
             git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+  # The rebuild step is continue-on-error, which closes one hole and opens a
+  # smaller one: if the FEC or the poll feed is unreachable for a week, the
+  # roster silently goes stale again and the run stays green -- exactly the
+  # state this change was made to get out of.
+  #
+  # So this job is allowed to fail, because failing is the entire point: a
+  # failed job is the only thing here that reaches a person. It is a job rather
+  # than a step for the same reason it is not `continue-on-error`: a step that
+  # fails takes the job with it, and `deploy` needs the job, so a stale roster
+  # would have taken the whole dashboard off the air. It is the wrong trade --
+  # a stale roster costs accuracy, not the site.
+  #
+  # It therefore runs beside `deploy`, not before it, and checks out the branch
+  # head so it reads the roster the forecast job just committed.
+  roster-freshness:
+    needs: forecast
+    if: ${{ always() && needs.forecast.result != 'cancelled' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Fail if the House roster has gone stale
+        run: |
+          built=$(sed -n 's/^# built: //p' config/candidates_house_2026.yaml | head -1)
+          if [ -z "$built" ]; then
+            echo "::error::config/candidates_house_2026.yaml has no build stamp."
+            exit 1
+          fi
+          age=$(( ( $(date -u +%s) - $(date -u -d "$built" +%s) ) / 86400 ))
+          echo "roster built $built ($age days ago)"
+          if [ "$age" -gt 7 ]; then
+            echo "::error::The House candidate roster was last rebuilt $built, $age days ago. The rebuild step has been failing silently, so any district polled for the first time since then has every poll rejected as having no D-vs-R matchup, and the House is forecast on less data than the feed holds."
+            exit 1
           fi
 
   # Publishing lives in deploy.yml, shared with CI, so the two paths cannot

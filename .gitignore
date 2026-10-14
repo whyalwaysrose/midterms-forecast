@@ -19,6 +19,9 @@ __pycache__.numba/
 # and licensed CC BY 4.0 from VoteHub; we commit only derived artefacts).
 data/raw/*.json
 data/raw/*.json.gz
+# The FEC bulk candidate file, cached by the roster builder. Regenerable
+# and refetched daily, so it is a cache like the poll snapshots above.
+data/raw/weball*.zip
 !data/raw/.gitkeep
 
 # Large posterior traces (regenerable; the derived JSON in site/data is what ships)

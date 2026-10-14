@@ -10,7 +10,13 @@ from midterms import commentary as C
 from midterms.outputs import slim_payload
 
 
-def make_poll(poll_id, margin=2.0, pollster="Test Pollster", date="2026-08-18", partisan=0):
+def make_poll(poll_id, margin=2.0, pollster="Test Pollster", date="2026-08-18",
+              partisan=0, created_at=None):
+    """A payload poll dict.
+
+    ``created_at`` defaults to None, which is what a payload written before the
+    field existed looks like, and is the case most of these tests want.
+    """
     return {
         "id": poll_id, "pollster": pollster, "date": date,
         "start_date": date, "end_date": date,
@@ -18,6 +24,7 @@ def make_poll(poll_id, margin=2.0, pollster="Test Pollster", date="2026-08-18", 
         "dem_pct": 50.0, "rep_pct": 48.0, "margin": margin,
         "partisan_sign": partisan, "sponsors": [], "url": "",
         "dem_candidate": "D", "rep_candidate": "R",
+        "created_at": created_at,
     }
 
 

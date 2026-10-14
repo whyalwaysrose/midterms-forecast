@@ -98,10 +98,17 @@ midterms audit-roster --chamber senate
 midterms audit-roster --chamber house
 ```
 
-Add any reported names to the chamber's roster in `config/` under the correct party (or
-under `other` for minor-party candidates) and commit. For the House an unresolved name is
-often benign — pollsters test candidates months before they file with the FEC, and a
-primary field of four Democrats is correctly rejected as not a general-election matchup.
+For the **Senate**, add any reported names to `config/candidates_senate_2026.yaml` under
+the correct party (or under `other` for minor-party candidates) and commit. Thirty-five
+races is a hand-editable number.
+
+For the **House** there is nothing to do: four hundred and thirty-five is not, so the
+roster is regenerated from FEC filings by the daily job and this audit is a report on
+what the FEC could not resolve, not a queue of work. An unresolved House name is usually
+benign — pollsters test candidates months before they file, and a primary field of four
+Democrats is correctly rejected as not a general-election matchup. Do not hand-edit that
+file: it is overwritten on the next run. A published misspelling, the one thing the FEC
+cannot tell us, goes in `ALIASES` in `scripts/build_house_roster.py` instead.
 
 **2. Pollsters filing under more than one name.** A firm that starts filing as both
 "Saint Anselm" and "Saint Anselm College Survey Center" gets two house effects, each
@@ -281,14 +288,23 @@ always had; the House is suffixed (`forecast_house.json`). The asymmetry is deli
 the published site, every archived run, and any saved link already point at the
 unsuffixed names.
 
-The **scripts that generate the House configs** are run by hand, not daily, because their
-inputs change once a cycle rather than once a day:
+The **scripts that generate the House configs**:
 
 ```
-scripts/build_house_lean.py     precinct returns → district presidential lean
-scripts/build_house_races.py    lean + current membership → the 435-race config
-scripts/build_house_roster.py   FEC filings → candidate roster for polled districts
+scripts/build_house_lean.py     precinct returns → district presidential lean   (by hand)
+scripts/build_house_races.py    lean + current membership → the 435-race config (by hand)
+scripts/build_house_roster.py   FEC filings → candidate roster                  (daily, in CI)
 ```
+
+The first two are run by hand because their inputs change once a cycle. The roster
+is not like them and was wrongly treated as though it were. It joins a poll's bare
+candidate names to a side of the ballot, so it changes whenever a pollster tests a
+district for the first time — and a district with no roster entry has all of its
+polls rejected as having no D-vs-R matchup. Built once in August at 40 polled
+districts, it was still at 40 in October when the feed had 66: the House was being
+forecast on 38 districts while usable data for 61 sat in the feed, with nothing
+failing and nothing warning. It is now rebuilt by the daily job before anything
+reads it, and will refuse to overwrite a good roster with a near-empty one.
 
 ---
 

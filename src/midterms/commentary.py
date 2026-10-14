@@ -74,6 +74,18 @@ class RaceChange:
     margin_before: float
     margin_after: float
     new_polls: list[dict] = field(default_factory=list)
+    #: Polls that are new to the *forecast* but were already published when the
+    #: previous run was made: they were in the feed and being rejected, and
+    #: something other than a pollster changed to let them in -- in practice a
+    #: candidate name the roster could not resolve until the roster was rebuilt.
+    #:
+    #: They have to be told apart from genuinely new polling or the commentary
+    #: reports a data-coverage fix as fresh movement in the race. When the House
+    #: roster was first rebuilt, 30 such polls landed at once -- taking district
+    #: coverage from 38 to 60 -- one of them fielded six weeks earlier. Every one
+    #: would have been called new, under a headline crediting fresh polling for
+    #: 229 of 435 races moving.
+    newly_usable: list[dict] = field(default_factory=list)
     #: Set when the run that produced this change used a different model, so a
     #: move cannot be attributed to polling.
     model_changed: bool = False
@@ -106,7 +118,7 @@ class RaceChange:
             f"{_fmt_margin(self.margin_before)} → {_fmt_margin(self.margin_after)} "
             f"({_fmt_signed(self.margin_delta)})."
         )
-        if not self.new_polls:
+        if not self.new_polls and not self.newly_usable:
             if self.model_changed:
                 return head + " No new polls in this race; this is the model revision."
             return (
@@ -115,18 +127,40 @@ class RaceChange:
                 " environment and from correlated movement in similar states."
             )
 
-        bullets = []
-        for poll in self.new_polls:
-            sponsor = ""
-            if poll.get("partisan_sign"):
-                side = "D" if poll["partisan_sign"] > 0 else "R"
-                sponsor = f", {side}-aligned sponsor"
-            bullets.append(
-                f"    - {poll['pollster']} ({poll['date']}, n={poll['sample_size']}, "
-                f"{poll['population'].upper()}{sponsor}): {_fmt_margin(poll['margin'])}"
+        def _bullets(polls: list[dict]) -> list[str]:
+            out = []
+            for poll in polls:
+                sponsor = ""
+                if poll.get("partisan_sign"):
+                    side = "D" if poll["partisan_sign"] > 0 else "R"
+                    sponsor = f", {side}-aligned sponsor"
+                out.append(
+                    f"    - {poll['pollster']} ({poll['date']}, "
+                    f"n={poll['sample_size']}, {poll['population'].upper()}"
+                    f"{sponsor}): {_fmt_margin(poll['margin'])}"
+                )
+            return out
+
+        parts = []
+        if self.new_polls:
+            label = "new poll" if len(self.new_polls) == 1 else "new polls"
+            parts.append(
+                f" Driven by {len(self.new_polls)} {label}:\n"
+                + "\n".join(_bullets(self.new_polls))
             )
-        label = "new poll" if len(self.new_polls) == 1 else "new polls"
-        return head + f" Driven by {len(self.new_polls)} {label}:\n" + "\n".join(bullets)
+        if self.newly_usable:
+            n = len(self.newly_usable)
+            # Said plainly, because the alternative is a reader seeing a poll
+            # fielded weeks ago offered as the reason a race moved today.
+            was = "This poll was" if n == 1 else f"These {n} polls were"
+            parts.append(
+                f"\n{'  ' if self.new_polls else ''}  {was} already published at "
+                "the last run and counted for the first time in this one, so this "
+                "part of the move is a correction to our coverage rather than a "
+                "change in the race:\n"
+                + "\n".join(_bullets(self.newly_usable))
+            )
+        return head + "".join(parts)
 
 
 @dataclass
@@ -162,6 +196,8 @@ class Commentary:
                     "margin_delta": c.margin_delta,
                     "new_poll_count": len(c.new_polls),
                     "new_polls": c.new_polls,
+                    "newly_usable_count": len(c.newly_usable),
+                    "newly_usable": c.newly_usable,
                 }
                 for c in self.race_changes
             ],
@@ -257,14 +293,41 @@ def generate(current: dict, previous: dict | None) -> Commentary:
 
     changes: list[RaceChange] = []
     total_new_polls = 0
+    total_newly_usable = 0
 
     for race in current.get("races", []):
         before = prev_races.get(race["id"])
         if before is None:
             continue
 
-        new_polls = [p for p in race.get("polls", []) if p["id"] not in previous_ids]
-        total_new_polls += len(new_polls)
+        # A poll absent from the previous run is not necessarily new. It may
+        # have been in the feed and rejected -- most often because the roster
+        # could not resolve a candidate name -- and become usable without any
+        # pollster doing anything. Conflating the two reports our own coverage
+        # catching up as movement in the race.
+        #
+        # `created_at` is when the feed first carried the poll, and is the only
+        # field that separates them. The field date cannot: a poll fielded on
+        # the 10th and published on the 14th is genuinely new to us on the 14th,
+        # and most new polling arrives with a lag of days, so a field-date rule
+        # would mislabel the ordinary case rather than the rare one.
+        unseen = [p for p in race.get("polls", []) if p["id"] not in previous_ids]
+        fresh, recovered = [], []
+        for poll in unseen:
+            created = poll.get("created_at")
+            # Both uncertain cases resolve to "new", because "we had this poll
+            # and were not counting it" is the claim that needs evidence:
+            #
+            #  - no `created_at` at all: a payload written before the field
+            #    existed, or a feed that does not supply it. Falling back to
+            #    "new" is also exactly what every run before this change did.
+            #  - created on the day of the previous run: the date has no time in
+            #    it, so that run may well have read the feed before the poll
+            #    landed. Hence strictly before, not on or before.
+            was_available = bool(created) and created < previous["run_date"]
+            (recovered if was_available else fresh).append(poll)
+        total_new_polls += len(fresh)
+        total_newly_usable += len(recovered)
 
         changes.append(
             RaceChange(
@@ -274,7 +337,10 @@ def generate(current: dict, previous: dict | None) -> Commentary:
                 prob_after=race["dem_win_prob"],
                 margin_before=before["margin"]["p50"],
                 margin_after=race["margin"]["p50"],
-                new_polls=sorted(new_polls, key=lambda p: p["date"], reverse=True),
+                new_polls=sorted(fresh, key=lambda p: p["date"], reverse=True),
+                newly_usable=sorted(
+                    recovered, key=lambda p: p["date"], reverse=True
+                ),
                 model_changed=model_changed,
             )
         )
@@ -288,7 +354,7 @@ def generate(current: dict, previous: dict | None) -> Commentary:
     control_delta = cur_chamber["dem_control_prob"] - prev_chamber["dem_control_prob"]
     seats_delta = cur_chamber["dem_seats"]["mean"] - prev_chamber["dem_seats"]["mean"]
 
-    if abs(control_delta) < 0.005 and total_new_polls == 0:
+    if abs(control_delta) < 0.005 and total_new_polls == 0 and not total_newly_usable:
         headline = (
             f"No new polling since {previous['run_date']}. Democratic chances of "
             f"{which} control hold at {_fmt_pct(cur_chamber['dem_control_prob'])}."
@@ -299,6 +365,22 @@ def generate(current: dict, previous: dict | None) -> Commentary:
             if total_new_polls
             else "no new polls"
         )
+        if total_newly_usable:
+            # Named in the headline, not just per race: on the day the roster is
+            # rebuilt this is the largest single cause of movement in the run,
+            # and a reader who sees only "N new polls" is being told the wrong
+            # thing about why the forecast changed.
+            recovered_phrase = (
+                f"{total_newly_usable} poll"
+                f"{'s' if total_newly_usable != 1 else ''} that "
+                f"{'were' if total_newly_usable != 1 else 'was'} already "
+                "published but had not been counted until now"
+            )
+            poll_phrase = (
+                recovered_phrase
+                if not total_new_polls
+                else f"{poll_phrase}, plus {recovered_phrase}"
+            )
         if abs(control_delta) < 0.0005:
             movement = f"are unchanged at {_fmt_pct(cur_chamber['dem_control_prob'])}"
         else:
@@ -337,7 +419,8 @@ def generate(current: dict, previous: dict | None) -> Commentary:
             f"**National environment.** The generic ballot moved "
             f"{_fmt_margin(prev_gb)} → {_fmt_margin(cur_gb)} "
             f"({_fmt_signed(cur_gb - prev_gb)}). Because every race is geared to the "
-            f"national environment by its own elasticity, this shifts all 35 contests "
+            f"national environment by its own elasticity, this shifts all "
+            f"{len(current.get('races', [])) or 35} contests "
             f"together, not just the ones with new polls."
         )
         body.append("")

@@ -73,6 +73,14 @@ class NormalisedPoll:
     url: str
     dem_candidate: str
     rep_candidate: str
+    #: When the feed first carried this poll, which is not its field date: a
+    #: poll fielded on the 10th and published on the 14th is new to us on the
+    #: 14th. The commentary needs the difference to tell new polling apart from
+    #: a poll that was in the feed all along and only became usable once the
+    #: roster could resolve its candidates. ``None`` for a feed that does not
+    #: say, and the commentary then assumes the poll is genuinely new, which is
+    #: the claim that needs no evidence.
+    created_at: date | None = None
 
     @property
     def margin(self) -> float:
@@ -250,6 +258,7 @@ def _normalise_one(
         url=str(record.get("url") or ""),
         dem_candidate=dem_candidate,
         rep_candidate=rep_candidate,
+        created_at=_parse_date(record.get("created_at")),
     )
 
 

@@ -217,6 +217,9 @@ def _polls_for_display(table: PollTable, race_id: str, limit: int = 25) -> list[
             "url": p.url,
             "dem_candidate": p.dem_candidate,
             "rep_candidate": p.rep_candidate,
+            # When the feed first carried it, so the next run's commentary can
+            # tell a new poll from one it had been rejecting all along.
+            "created_at": p.created_at.isoformat() if p.created_at else None,
         }
         for p in polls[:limit]
     ]

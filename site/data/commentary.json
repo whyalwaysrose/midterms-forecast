@@ -2,6 +2,86 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-14",
+   "previous_run_date": "2026-10-13",
+   "headline": "Democratic chances of Senate control are down 0.5 pts to 68.2% on 1 new poll. Projected seats 52.2 \u2192 52.2 (-0.0).",
+   "body": [
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **Texas** \u2014 Democratic win probability 70.4% \u2192 68.1% (-2.3 pts); projected margin D+2.9 \u2192 D+2.5 (-0.3). Driven by 1 new poll:\n    - Quantus Insights (2026-10-10, n=854, LV): R+0.5",
+    "",
+    "  - **Louisiana** \u2014 Democratic win probability 12.7% \u2192 11.6% (-1.0 pts); projected margin R+11.2 \u2192 R+11.4 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **South Carolina** \u2014 Democratic win probability 25.0% \u2192 24.7% (-0.3 pts); projected margin R+6.6 \u2192 R+6.9 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 1,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-TX",
+     "name": "Texas",
+     "prob_before": 0.7039,
+     "prob_after": 0.6812,
+     "prob_delta": -0.022699999999999942,
+     "margin_before": 2.87,
+     "margin_after": 2.53,
+     "margin_delta": -0.3400000000000003,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202quaee83ce98",
+       "pollster": "Quantus Insights",
+       "date": "2026-10-10",
+       "start_date": "2026-10-09",
+       "end_date": "2026-10-11",
+       "sample_size": 854,
+       "population": "lv",
+       "dem_pct": 46.7,
+       "rep_pct": 47.2,
+       "margin": -0.5,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://quantusinsights.org/polling/f/texas-senate-paxton-and-talarico-in-a-near-tie",
+       "dem_candidate": "James Talarico",
+       "rep_candidate": "Ken Paxton",
+       "created_at": "2026-10-13"
+      }
+     ],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-LA",
+     "name": "Louisiana",
+     "prob_before": 0.1266,
+     "prob_after": 0.1164,
+     "prob_delta": -0.010199999999999987,
+     "margin_before": -11.25,
+     "margin_after": -11.42,
+     "margin_delta": -0.16999999999999993,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-SC",
+     "name": "South Carolina",
+     "prob_before": 0.2504,
+     "prob_after": 0.2473,
+     "prob_delta": -0.0031000000000000194,
+     "margin_before": -6.62,
+     "margin_after": -6.93,
+     "margin_delta": -0.3099999999999996,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-10-14\n\nDemocratic chances of Senate control are down 0.5 pts to 68.2% on 1 new poll. Projected seats 52.2 \u2192 52.2 (-0.0).\n\n**Races that moved** (3 of 35):\n\n  - **Texas** \u2014 Democratic win probability 70.4% \u2192 68.1% (-2.3 pts); projected margin D+2.9 \u2192 D+2.5 (-0.3). Driven by 1 new poll:\n    - Quantus Insights (2026-10-10, n=854, LV): R+0.5\n\n  - **Louisiana** \u2014 Democratic win probability 12.7% \u2192 11.6% (-1.0 pts); projected margin R+11.2 \u2192 R+11.4 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **South Carolina** \u2014 Democratic win probability 25.0% \u2192 24.7% (-0.3 pts); projected margin R+6.6 \u2192 R+6.9 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-10-13",
    "previous_run_date": "2026-10-12",
    "headline": "Democratic chances of Senate control are up 0.1 pts to 68.7% on 4 new polls. Projected seats 52.2 \u2192 52.2 (-0.0).",

@@ -2,6 +2,56 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-14
+
+Democratic chances of House control are down 0.2 pts to 81.7% on 2 new polls, plus 28 polls that were already published but had not been counted until now. Projected seats 250.6 → 251.5 (+1.0).
+
+**National environment.** The generic ballot moved D+8.6 → D+9.1 (+0.5). Because every race is geared to the national environment by its own elasticity, this shifts all 435 contests together, not just the ones with new polls.
+
+**Races that moved** (225 of 435):
+
+  - **KY-06** — Democratic win probability 41.7% → 81.0% (+39.3 pts); projected margin R+2.3 → D+6.3 (+8.6).
+  These 2 polls were already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - Change Research (2026-10-02, n=524, LV, D-aligned sponsor): D+10.6
+    - Lake Research Partners (2026-10-02, n=400, LV, D-aligned sponsor): D+5.1
+
+  - **AK-01** — Democratic win probability 6.2% → 32.7% (+26.5 pts); projected margin R+11.2 → R+4.9 (+6.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **FL-16** — Democratic win probability 45.4% → 22.9% (-22.5 pts); projected margin R+1.3 → R+5.6 (-4.3).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - Public Policy Polling (2026-10-01, n=530, RV, D-aligned sponsor): R+4.9
+
+  - **VA-05** — Democratic win probability 47.9% → 29.4% (-18.5 pts); projected margin R+0.6 → R+3.8 (-3.2).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - The Washington Post/George Mason University Schar School of Policy and Government (2026-09-25, n=600, LV): R+5.2
+
+  - **NC-01** — Democratic win probability 70.7% → 88.9% (+18.3 pts); projected margin D+5.9 → D+9.5 (+3.6).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - Neighborhood Research and Media (2026-10-03, n=303, LV): D+10.9
+
+  - **NE-02** — Democratic win probability 72.4% → 90.3% (+17.9 pts); projected margin D+6.8 → D+9.8 (+2.9). Driven by 1 new poll:
+    - National Public Affairs (2026-10-03, n=377, LV): D+13.6
+    This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - SurveyUSA (2026-09-10, n=182, LV): D+4.5
+
+  - **OH-09** — Democratic win probability 71.1% → 54.7% (-16.4 pts); projected margin D+6.1 → D+0.9 (-5.2).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - DCCC Targeting and Analytics Department (2026-09-22, n=481, LV, D-aligned sponsor): D+0.0
+
+  - **AZ-01** — Democratic win probability 51.7% → 65.8% (+14.1 pts); projected margin D+0.5 → D+3.1 (+2.6).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - FirstStrategic (2026-10-01, n=400, LV): D+3.3
+
+  - **TX-35** — Democratic win probability 63.3% → 49.5% (-13.9 pts); projected margin D+3.7 → R+0.1 (-3.8).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - Normington, Petts & Associates (2026-08-29, n=500, LV, D-aligned sponsor): R+1.1
+
+  - **PA-01** — Democratic win probability 64.1% → 50.6% (-13.5 pts); projected margin D+3.9 → D+0.1 (-3.8).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - GQR (2026-08-21, n=400, LV, D-aligned sponsor): R+1.0
+
+---
+
 ## 2026-10-13
 
 No new polling since 2026-10-12. Democratic chances of House control hold at 81.9%.

@@ -2,6 +2,21 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-14
+
+Democratic chances of Senate control are down 0.5 pts to 68.2% on 1 new poll. Projected seats 52.2 → 52.2 (-0.0).
+
+**Races that moved** (3 of 35):
+
+  - **Texas** — Democratic win probability 70.4% → 68.1% (-2.3 pts); projected margin D+2.9 → D+2.5 (-0.3). Driven by 1 new poll:
+    - Quantus Insights (2026-10-10, n=854, LV): R+0.5
+
+  - **Louisiana** — Democratic win probability 12.7% → 11.6% (-1.0 pts); projected margin R+11.2 → R+11.4 (-0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **South Carolina** — Democratic win probability 25.0% → 24.7% (-0.3 pts); projected margin R+6.6 → R+6.9 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-10-13
 
 Democratic chances of Senate control are up 0.1 pts to 68.7% on 4 new polls. Projected seats 52.2 → 52.2 (-0.0).

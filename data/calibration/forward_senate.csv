@@ -59,3 +59,4 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-13,2026-10-12,senate,senate-2026-NC,us-202surbcf9e1be,SurveyUSA,2026-10-09,0.3001,0.18488,0.0963,0.90847
 2026-10-13,2026-10-12,senate,senate-2026-NE,us-202nat61ba6088,National Public Affairs,2026-10-03,-0.06318,-0.0603,0.11171,0.48739
 2026-10-13,2026-10-12,senate,senate-2026-TX,us-202recc152b3f7,ReconMR/Siena University,2026-10-06,0.08701,0.08295,0.10099,0.51968
+2026-10-14,2026-10-13,senate,senate-2026-TX,us-202quaee83ce98,Quantus Insights,2026-10-10,-0.01065,0.03548,0.08319,0.25307

@@ -31,10 +31,9 @@ log = logging.getLogger("midterms")
 #: Candidate roster per chamber. The Senate's is hand-written and reviewed; the
 #: House's is generated, and covers only the districts that have been polled --
 #: names matter for reading a poll, and an unpolled district has none to read.
-ROSTER_FILE = {
-    "senate": "candidates_senate_2026.yaml",
-    "house": "candidates_house_2026.yaml",
-}
+# One copy, in data.roster, next to the loader whose default is the trap this
+# mapping exists to avoid.
+from .data.roster import ROSTER_FILE  # noqa: E402
 
 
 def _use_utf8_output() -> None:
@@ -512,8 +511,13 @@ def cmd_bundle(args: argparse.Namespace) -> int:
 
 
 def cmd_calibrate_forward(args: argparse.Namespace) -> int:
-    from .forward import run_forward
+    from .forward import backfill, run_forward
 
+    if args.backfill_since:
+        return 0 if backfill(
+            chamber=args.chamber,
+            since=date.fromisoformat(args.backfill_since),
+        ) >= 0 else 1
     return run_forward(chamber=args.chamber)
 
 
@@ -639,6 +643,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="score today's new polls against the last run that had not seen them",
     )
     forward.add_argument("--chamber", choices=["senate", "house"], default="senate")
+    forward.add_argument(
+        "--backfill-since", metavar="YYYY-MM-DD",
+        help="replay the daily scoring from this date, for days it never ran",
+    )
     forward.set_defaults(func=cmd_calibrate_forward)
 
     return parser

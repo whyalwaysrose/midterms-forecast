@@ -216,6 +216,47 @@ and the comparison is refused outright when no run falls within the tolerance. T
 the four rows currently decline to compare for exactly that reason, one of them because
 its figure predates the mid-decade redistricting that moved 181 seats.
 
+## A second poll source for the House: surveyed 2026-10-15, not built
+
+The House forward calibration looked starved — four scored polls in three weeks against
+the Senate's sixty — so the obvious question was where to find more district polling. The
+answer turned out to be that it was not a data problem (see below), but the survey is
+recorded because it will be asked again.
+
+| Source | District polls? | Licence | Verdict |
+|---|---|---|---|
+| **Wikipedia** per-state House pages | Yes, and including districts VoteHub lacks | **CC BY-SA** | **The only viable addition.** Not built — see the cost below |
+| PollResults.org | Advertises a 2026 House endpoint, keyless | Claims CC BY 4.0 **and** "non-commercial" | **No.** Upstream is the New York Times, which has not released its tracker under CC BY; a re-publisher cannot grant a licence it does not hold. Also returned no data when tested |
+| 50+1 (fiftyplusone.news) | Yes | Paid API, no commercial re-use | **No.** Already excluded |
+| 270toWin | Yes, HTML only | Proprietary, no stated reuse terms | **No.** Useful as a *check* on our coverage, which is how it was used |
+| PollingSource.com | Averages, unclear raw access | CC BY 4.0 in page metadata, unverified | Unresolved; the site did not respond when fetched |
+| Cook Political Report | Ratings, not polls | Licensing on request | Not applicable |
+| FiveThirtyEight archive | Yes, but 2016–2021 | CC BY 4.0 | Wrong cycle. Already vendored for the historical fits |
+
+**What Wikipedia would add.** Across the twenty states with competitive districts: 211
+polling tables, of which **24 are general-election D-vs-R** matchups — the rest are
+primaries, which the model correctly rejects anyway. It does cover real gaps: Maine
+carries four general-election rows and Montana six, and ME-01, MT-02 and CA-34 are exactly
+the three districts the VoteHub feed does not have at all.
+
+**Why it was not built.** The yield is perhaps ten to twenty-five district polls beyond
+what VoteHub already carries, and the cost is a second brittle wikitext parser: candidate
+columns identified by `{{party shading/…}}` templates per cell, date ranges spanning month
+boundaries, sample sizes with population screens, partisan-sponsor suffixes, district
+attribution from section nesting, and deduplication against VoteHub by pollster and field
+dates. The results parser in `src/midterms/data/results.py` needed six separate fixes for
+silent markup variations, each of which dropped races without failing, and that was for a
+format far more regular than this one. Three weeks from an election, a component with that
+failure mode is a worse risk than the polls are worth.
+
+**And the premise was wrong.** The calibration was not starved of data: VoteHub was
+receiving about eight House district polls a week and accelerating. It was starved by a
+bug — `forward.py` built its poll table with the Senate roster and the Senate poll type,
+both of which are the defaults, so every district poll was rejected and only
+generic-ballot polls were ever scored. Fixing that one line and replaying the archives
+took the House record from 4 polls across 1 race to 45 across 36. If more data is wanted
+later, this table is where to start; the point is that it was not the binding constraint.
+
 ## Census demographics: fetched to answer a question, kept because the answer was no
 
 `data/history/state_demographics.csv` — BA+ share of the 25-and-over population, and

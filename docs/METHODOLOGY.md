@@ -762,6 +762,24 @@ than debugged on the night.
    that error would land precisely on the seats the forecast is least sure about.
 2. **The fundamentals prior has no candidate-quality term.** No fundraising, no scandal, no
    prior-office measure.
+3b. ~~**The House forward calibration is starved** — four polls in three weeks against the
+    Senate's sixty, and it will not reach a usable sample before November.~~ **It was not
+    starved, it was broken.** `forward.py` built its poll table with `Roster.load()` and
+    `build_poll_table(...)` without a chamber, and both default to the Senate: the House
+    run read Senate polls against Senate candidates, matched none of them to a House
+    subject, and scored only the generic-ballot polls, which need no roster. All four
+    accumulated rows were `__national__`. The archives were present every day and the
+    polls were arriving at about eight a week; nothing failed and every workflow reported
+    success. One line, plus a replay of the archives respecting the daily cadence, took
+    the record from **4 polls across 1 race to 45 across 36 races and 29 pollsters**.
+
+    What it now says, on 45 polls: the 50% interval contains 60%, the 80% contains 84%,
+    the 90% contains 96%, and PIT mean is 0.614. Intervals a little too wide, which is the
+    same direction the Senate shows — but the off-centre PIT is new and is the House's own:
+    district polls are landing **more Democratic than the model expects**. On 45 rows that
+    is a trend and not a p-value, and polls from one pollster share a house effect, so
+    treat it as something to watch accumulate rather than a correction to make.
+
 3. **Fourteen races have no qualifying polls.** They rest entirely on fundamentals and the
    national environment; their intervals are wide but their centres are only as good as the
    prior.

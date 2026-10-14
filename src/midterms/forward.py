@@ -60,14 +60,14 @@ import csv
 import logging
 import math
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import numpy as np
 
 from . import paths
 from .config import load_all
-from .data.polls import NATIONAL_RACE_ID, build_poll_table
+from .data.polls import NATIONAL_RACE_ID, RACE_POLL_TYPE, build_poll_table
 from .data.roster import Roster
 from .data.votehub import latest_snapshot, load_snapshot
 from .model.design import POOLED_POLLSTER, _sampling_variance
@@ -327,6 +327,66 @@ def accumulated(chamber: str) -> dict:
     }
 
 
+def backfill(chamber: str, since: date, until: date | None = None) -> int:
+    """Replay the daily scoring over past days, for days it never ran.
+
+    The House forward calibration recorded nothing but generic-ballot polls for
+    three weeks because `run_forward` built its poll table with the Senate
+    roster and the Senate poll type (both the defaults). The archives are all
+    there, and so are the polls, so the evidence is recoverable rather than lost.
+
+    It replays the *daily cadence* rather than scoring everything against the
+    oldest archive. That distinction is the whole correctness of this function:
+    scoring a poll against the earliest run that had not seen it would give it a
+    much longer horizon than the daily job gives, and the accumulated table --
+    whose Senate rows are all "scored against yesterday" -- would silently mix
+    two different tests. So for each day, only polls that had *arrived* by then
+    are offered, using the feed's own `created_at`.
+
+    Polls are deduplicated by id across the whole file by `append`, so a poll
+    counted on one day is not counted again on the next, and re-running this is
+    harmless.
+    """
+    until = until or date.today()
+    races, cfg = load_all(chamber=chamber)
+    snapshot = latest_snapshot()
+    if snapshot is None:
+        print("No poll snapshot available; cannot backfill.")
+        return 0
+    raw = load_snapshot(snapshot)
+    roster = Roster.for_chamber(chamber)
+
+    total = 0
+    day = since
+    while day <= until:
+        payload = previous_run(chamber, before=day)
+        if payload is None:
+            day += timedelta(days=1)
+            continue
+
+        table = build_poll_table(
+            raw, races, cfg, roster,
+            as_of=day, race_poll_type=RACE_POLL_TYPE[chamber],
+        )
+        # Only what the feed had published by `day`. A poll with no `created_at`
+        # is excluded rather than assumed available: this is a reconstruction,
+        # and crediting the run with predicting a poll that may not have existed
+        # yet would make the calibration look better than it was earned.
+        available = [
+            poll for poll in table.polls
+            if poll.created_at is not None and poll.created_at <= day
+        ]
+        scored = score_against(payload, available)
+        written = append(chamber, scored, payload["run_date"], day)
+        if written:
+            print(f"  {day}: +{written} rows (vs run {payload['run_date']})")
+        total += written
+        day += timedelta(days=1)
+
+    print(f"Backfilled {total} rows for {chamber}.")
+    return total
+
+
 def run_forward(chamber: str = "senate", today: date | None = None) -> int:
     """Score today's new polls against the last archived run, and accumulate.
 
@@ -346,7 +406,17 @@ def run_forward(chamber: str = "senate", today: date | None = None) -> int:
         print("No poll snapshot available.")
         return 0
     raw = load_snapshot(snapshot)
-    table = build_poll_table(raw, races, cfg, Roster.load(), as_of=today)
+    # Both chamber arguments are required, and leaving them off was a silent
+    # three-week outage rather than an error. `Roster.load()` defaults to the
+    # Senate roster and `build_poll_table` to `us-senator`, so for the House
+    # this read Senate polls against Senate candidates, mapped none of them to
+    # a House subject, and scored only the generic-ballot polls -- which need no
+    # roster. Every run reported success and the accumulated House table held
+    # four rows, all of them `__national__`.
+    table = build_poll_table(
+        raw, races, cfg, Roster.for_chamber(chamber),
+        as_of=today, race_poll_type=RACE_POLL_TYPE[chamber],
+    )
 
     scored = score_against(payload, table.polls)
     written = append(chamber, scored, payload["run_date"], today)

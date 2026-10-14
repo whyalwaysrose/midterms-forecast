@@ -27,6 +27,20 @@ SIDE_D = "D"
 SIDE_R = "R"
 SIDE_OTHER = "other"
 
+#: Each chamber's roster file.
+#:
+#: ``load()`` defaults to the Senate's, which read as harmless until a
+#: chamber-aware caller forgot to pass a path: the House forward calibration
+#: built its poll table with the Senate roster, so every district poll's
+#: candidates were unknown, every one was rejected as "no single D-vs-R
+#: matchup", and three weeks of House calibration recorded only
+#: generic-ballot polls while reporting success. Prefer
+#: :meth:`Roster.for_chamber`, which cannot be wrong by omission.
+ROSTER_FILE = {
+    "senate": "candidates_senate_2026.yaml",
+    "house": "candidates_house_2026.yaml",
+}
+
 
 @dataclass
 class Roster:
@@ -48,6 +62,22 @@ class Roster:
     def _norm(name: str) -> str:
         """Case- and whitespace-insensitive key for a candidate name."""
         return " ".join(str(name).split()).casefold()
+
+    @classmethod
+    def for_chamber(cls, chamber: str) -> Roster:
+        """The roster for one chamber, named rather than defaulted.
+
+        Use this wherever the chamber is known. ``load()``'s Senate default is
+        kept for the Senate-only backtest and scripts, and is a trap for
+        anything else -- see :data:`ROSTER_FILE`.
+        """
+        try:
+            name = ROSTER_FILE[chamber]
+        except KeyError:
+            raise ValueError(
+                f"unknown chamber {chamber!r}; known: {sorted(ROSTER_FILE)}"
+            ) from None
+        return cls.load(paths.CONFIG_DIR / name)
 
     @classmethod
     def load(cls, path: Path | None = None) -> Roster:

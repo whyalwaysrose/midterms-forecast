@@ -216,6 +216,31 @@ and the comparison is refused outright when no run falls within the tolerance. T
 the four rows currently decline to compare for exactly that reason, one of them because
 its figure predates the mid-decade redistricting that moved 181 seats.
 
+## Census demographics: fetched to answer a question, kept because the answer was no
+
+`data/history/state_demographics.csv` — BA+ share of the 25-and-over population, and
+share of population in urban areas, by state.
+
+| | |
+|---|---|
+| **Source** | US Census Bureau: ACS 2023 5-year table B15003 (education); 2010 Census `PctUrbanRural_State` (urban share) |
+| **Licence** | **Public domain** — a work of the US federal government |
+| **Why these files** | The Census *data API* now requires a key, and signing up for one is a per-person account action. These two are keyless bulk files, so anyone cloning the repo can regenerate the CSV with `python scripts/fit_demographic_covariates.py --refresh` |
+| **Why so small a fetch** | The national B15003 file is 92 MB and 52 rows of it are wanted. Rows are ordered by summary level and the state block sits in the first 400 KB, so the script range-requests it and fails loudly if fewer than 51 states resolve |
+
+The urban share is **2010-vintage**, which is the most recent the Census publishes as plain
+text at state level; the 2020 equivalent is only released as a spreadsheet, and adding a
+spreadsheet dependency was not worth it for a covariate that turned out not to be used.
+The vintage cannot change the conclusion either, because the measurement is noise-limited
+rather than covariate-limited: the gain in question is +0.005 against a bootstrap interval
+of ±0.11.
+
+These numbers were fetched to test METHODOLOGY §5's long-standing claim that demographic
+covariates were the highest-value available improvement to the correlation kernel. They
+are not used by the model. They are kept, and committed, so that the negative result is
+reproducible rather than merely asserted — and so the test can be re-run cheaply when
+there are more cycles to run it on.
+
 ## Reproducibility
 
 Every fetch writes a gzipped, dated snapshot to `data/raw/votehub-<date>.json.gz` **before

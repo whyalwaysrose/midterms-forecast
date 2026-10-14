@@ -387,11 +387,42 @@ and a scaled region indicator — with `ℓ = 1.25`. The exponential kernel is p
 definite for Euclidean distance (it is the Matérn-½ kernel), and the nugget keeps it
 comfortably so, which matters because it gets Cholesky-factored on every run.
 
-**Limitation:** the covariates are political (past presidential results plus region) rather
-than demographic. Education and urbanicity have been the axes along which recent polling
-errors actually correlated. Adding demographic covariates is the single highest-value
-improvement available, and was deferred here rather than fabricated from unverified
+**The covariates are political** (past presidential results plus region) rather than
+demographic, and that was long recorded here as the single highest-value improvement
+available, on the reasoning that education and urbanicity are the axes along which recent
+polling errors actually correlated. It was deferred rather than fabricated from unverified
 numbers.
+
+**Measured, 2026-10-14, with verified numbers: it does not improve the kernel.**
+`scripts/fit_demographic_covariates.py` adds ACS educational attainment and Census urban
+share to the covariate matrix and scores them on the same 13 cycles and 135 state pairs
+that validated the political covariates in the first place.
+
+| Added to the committed covariates | Agreement with measured ranking |
+|---|---|
+| nothing (political only) | **+0.173** |
+| education, raw | +0.102 |
+| education, residualised against both leans | +0.079 |
+| urban share, raw | +0.145 |
+| urban share, residualised | +0.178 |
+
+Education *hurts*, and the reason is collinearity: across the 35 states racing in 2026 the
+BA+ share correlates +0.79 with the 2024 lean. The kernel already carries that axis, and
+residualising to isolate what is genuinely new leaves 38% of its variance — which turns
+out not to predict which states miss together. Urban share residualised is the only
+specification that helps at all, by +0.005, and it wins only 62% of bootstrap resamples
+over whole cycles with a 90% interval of −0.108 to +0.115. That is a weaker result than
+the `region_weight` change rejected as noise in §8's companion fit, and it is rejected on
+the same standard.
+
+Two limits on that conclusion, both stated rather than buried. The claim concerns *recent*
+cycles, and restricting the measurement to 2012-and-later leaves 14 usable pairs and to
+2016-and-later leaves none — so this dataset cannot see whether the realignment shows up
+in error correlation, in either direction. And at **district** level, where the kernel
+matters more (51 House seats within five points against ten in the Senate), the
+measurement does not exist at all: no pair of districts recurs across four cycles within
+any stable-boundary era, because House polling follows whichever seats are competitive
+that year. See known weakness 1.
 
 ---
 
@@ -673,7 +704,35 @@ than debugged on the night.
    rate implied. That was live in a published forecast and invisible until two independent
    sources were compared.
 
-1. **Correlation covariates are political, not demographic** (§5). Highest-value fix.
+1. ~~**Correlation covariates are political, not demographic** (§5). Highest-value fix.~~
+   **Measured, and the fix is not one.** `scripts/fit_demographic_covariates.py` scores
+   ACS education and Census urban share on the same 13 cycles and 135 state pairs that
+   validated the political covariates. Education *lowers* agreement with the measured
+   error ranking, from +0.173 to +0.102, because it is +0.79 collinear with the 2024 lean
+   the kernel already carries; residualising to keep only the new information leaves 38%
+   of its variance and lowers agreement further, to +0.079. Residualised urban share is
+   the only gain, +0.005, winning 62% of bootstrap resamples with a 90% interval of
+   −0.108 to +0.115 — noise on the same standard that rejected the `region_weight` change.
+
+   What remains open is narrower and worth stating precisely, because it is not "add
+   demographics". **The measurement has no power where the claim actually lives.**
+   Restricting to 2012-and-later leaves 14 usable pairs and to 2016-and-later leaves zero,
+   so the realignment cycles cannot be examined in either direction. And at district
+   level — where the kernel matters more, 51 seats sitting within five points against ten
+   in the Senate — no pair of districts recurs across four cycles in any stable-boundary
+   era (70, 45 and 4 district-cycles respectively; zero recurring pairs in each). House
+   polling follows whichever seats are competitive that year and those change, and
+   boundaries are redrawn every decade so eras cannot be pooled. The House kernel is
+   **unconfirmable** at district level from this dataset, which is a stronger and more
+   useful statement than weakness 11's "confirmed for neither".
+
+   Closing that would need a different measurement, not a different covariate: district
+   error correlation estimated by pooling error products against covariate distance
+   across all within-cycle pairs, rather than per-pair correlations that require
+   recurrence. On 45 district-cycles that would still be noise-dominated. A covariate for
+   the 181 redrawn 2026 districts (§9.0) would also have to be apportioned from tracts,
+   since the ACS publishes nothing on boundaries that have never held an election, and
+   that error would land precisely on the seats the forecast is least sure about.
 2. **The fundamentals prior has no candidate-quality term.** No fundraising, no scandal, no
    prior-office measure.
 3. **Fourteen races have no qualifying polls.** They rest entirely on fundamentals and the

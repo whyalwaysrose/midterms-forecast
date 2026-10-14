@@ -586,9 +586,12 @@
           <strong id="m-skill">&mdash;</strong> on simply calling every race for whoever
           leads the polls. How often the true result landed inside each interval:</p>
           <div id="m-coverage" class="coverage-rows"></div>
-          <p><strong>Against polls it has not seen.</strong> The model is also refit on older
-          polls and asked to predict recent ones it was never shown. That catches a different
-          failure: a model that has learned this cycle&rsquo;s noise rather than its signal.</p>
+          <p><strong>Against polls it has not seen.</strong> Every day brings polls the
+          previous day&rsquo;s model was never shown, so each one is scored against the
+          forecast that could not have known about it. That catches a different failure
+          from the test above: a model that has learned this cycle&rsquo;s noise rather
+          than its signal.</p>
+          <div id="m-forward"></div>
           <p class="subtle">Neither test can prove the 2026 forecast is right. They establish
           that this method has been honest about its own uncertainty in the past, which is
           the most anyone can claim before an election happens.</p>
@@ -623,10 +626,11 @@
       <p>A forecast can also be compared with the others published alongside it. Where they
       agree that is no proof either is right, but a large disagreement is a prompt to find
       out which side is making the odd assumption.</p>
-      <p>In <strong>mid-September 2026</strong> this model put the House at 72%, Decision
-      Desk HQ at 68%, and 50+1 at 97% &mdash; all three on essentially the same central
-      outcome of about 236 Democratic seats. Same centre, very different confidence, so the
-      whole disagreement was about how wide the range should be.</p>
+      <p>In <strong>mid-October 2026</strong> this model put the House at 79%, against
+      Decision Desk HQ at 76%, Silver Bulletin at 94% and 50+1 at 99%. The two camps are
+      not disagreeing about who is ahead &mdash; 50+1&rsquo;s central outcome is 243
+      Democratic seats against this model&rsquo;s 246 &mdash; but about how wide the range
+      around that centre should be.</p>
       <p>Chasing that down produced the clearest result of the cycle so far. To be as
       confident as the most bullish of those forecasts, this model would have to shrink the
       nationwide polling error it carries to roughly a quarter of what thirteen past cycles

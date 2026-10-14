@@ -342,6 +342,56 @@ function closeDrawer() {
 
 /* ------------------------------------------------------------------- main */
 
+/** Out-of-sample poll scoring, accumulated daily.
+ *
+ * The page described this test for weeks without ever showing its result,
+ * because the only figures available came from one manual run in August. They
+ * accumulate on their own now, so they can be shown -- with the sample size
+ * next to them, because that is what decides whether they mean anything.
+ *
+ * Below a usable sample the numbers are deliberately not drawn. A 50% interval
+ * measured on four polls will read 75% or 100% and look like a finding.
+ */
+function renderForward(fwd) {
+  const host = $('m-forward');
+  if (!host) return;
+  if (!fwd) { host.innerHTML = ''; return; }
+
+  const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+  const scope = `${plural(fwd.n, 'poll')} across ${plural(fwd.races, 'race')} `
+    + `and ${plural(fwd.pollsters, 'pollster')}, over ${plural(fwd.days, 'day')}`;
+
+  if (!fwd.enough_to_read) {
+    host.innerHTML = `<p class="subtle">Accumulating: ${esc(scope)} so far. `
+      + `Too few to report a coverage figure that would mean anything &mdash; `
+      + `the numbers are kept, and shown once there are enough of them.</p>`;
+    return;
+  }
+
+  const rows = Object.entries(fwd.coverage)
+    .sort((a, b) => +a[0] - +b[0])
+    .map(([level, hit]) => {
+      const target = +level;
+      return `<div class="coverage-row">
+        <span>${pct(target)} interval</span>
+        <span class="coverage-track">
+          <span class="coverage-fill" style="width:${(100 * hit).toFixed(1)}%"></span>
+          <span class="coverage-target" style="left:${(100 * target).toFixed(1)}%"></span>
+        </span>
+        <span class="coverage-value">${pct(hit)}</span>
+      </div>`;
+    }).join('');
+
+  host.innerHTML = `<div class="coverage-rows">${rows}</div>`
+    + `<p class="subtle method-note">${esc(scope)}, `
+    + `${esc(fwd.first)} to ${esc(fwd.last)}. A poll landing above its interval `
+    + `is as much a miss as one landing below; the marker is the target. `
+    + `Polls from one pollster share a house effect and consecutive days share `
+    + `most of a race's state, so the effective sample is smaller than the count `
+    + `&mdash; read it as a trend, not a p-value.</p>`;
+}
+
+
 function renderMethodology(forecast) {
   const m = forecast.methodology ?? {};
   const summary = forecast.poll_summary ?? {};
@@ -428,6 +478,8 @@ function renderMethodology(forecast) {
       ).join('') + '</tbody>';
 
     // Coverage: a bar for what happened, a notch for what was promised.
+    renderForward(m.forward_calibration);
+
     $('m-coverage').innerHTML = Object.entries(bt.coverage)
       .sort((a, b) => +a[0] - +b[0])
       .map(([level, hit]) => {

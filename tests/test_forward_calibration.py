@@ -297,3 +297,66 @@ def test_the_fake_poll_has_only_attributes_the_real_one_has():
         f"the fake poll carries {sorted(fake - real)}, which NormalisedPoll does "
         "not -- code reading those would pass here and fail in production"
     )
+
+
+# --- what the dashboard is given --------------------------------------------
+
+
+def test_the_dashboard_block_is_absent_until_there_is_something_to_show(monkeypatch):
+    from midterms import outputs
+
+    monkeypatch.setattr(outputs, "_forward_calibration_block",
+                        outputs._forward_calibration_block)
+    monkeypatch.setattr(forward, "accumulated", lambda chamber: {"n": 0})
+    assert outputs._forward_calibration_block("senate") is None
+
+
+def test_a_thin_sample_is_flagged_rather_than_drawn(monkeypatch):
+    """A 50% interval measured on four polls reads 75% or 100%.
+
+    Drawn as a bar beside the historical figures it would look like a finding,
+    which is why the page says it is still accumulating instead. The House sat
+    at four polls for weeks, so this is the live case, not a hypothetical.
+    """
+    from midterms import outputs
+
+    monkeypatch.setattr(forward, "accumulated", lambda chamber: {
+        "n": 4, "races": 1, "pollsters": 4, "days": 3,
+        "first": "2026-10-01", "last": "2026-10-10", "pit_mean": 0.7,
+        "coverage": [{"level": 0.5, "covered": 0.75}],
+    })
+    block = outputs._forward_calibration_block("house")
+    assert block["n"] == 4
+    assert block["enough_to_read"] is False
+
+
+def test_a_usable_sample_is_marked_readable(monkeypatch):
+    from midterms import outputs
+
+    monkeypatch.setattr(forward, "accumulated", lambda chamber: {
+        "n": outputs.MIN_FORWARD_POLLS, "races": 9, "pollsters": 12, "days": 8,
+        "first": "2026-09-22", "last": "2026-10-13", "pit_mean": 0.5,
+        "coverage": [{"level": 0.9, "covered": 0.91}],
+    })
+    assert outputs._forward_calibration_block("senate")["enough_to_read"] is True
+
+
+def test_a_broken_calibration_file_costs_the_panel_and_not_the_forecast(monkeypatch):
+    """One panel of one tab must never stop a forecast publishing."""
+    from midterms import outputs
+
+    def boom(chamber):
+        raise ValueError("corrupt")
+
+    monkeypatch.setattr(forward, "accumulated", boom)
+    assert outputs._forward_calibration_block("senate") is None
+
+
+def test_the_page_has_somewhere_to_put_it_and_asks_for_it():
+    """Guards the wiring: a payload nobody renders is worse than no payload."""
+    from midterms import paths
+
+    html = (paths.SITE_DIR / "index.html").read_text(encoding="utf-8")
+    js = (paths.SITE_DIR / "js" / "app.js").read_text(encoding="utf-8")
+    assert 'id="m-forward"' in html
+    assert "renderForward(m.forward_calibration)" in js

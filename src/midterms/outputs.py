@@ -538,6 +538,47 @@ def _markets_block() -> dict | None:
     }
 
 
+#: Below this many scored polls the coverage figures bounce around far too
+#: much to put in front of a reader. At 20 the standard error on a coverage
+#: percentage is still about 11 points, which is why the page says so.
+MIN_FORWARD_POLLS = 20
+
+
+def _forward_calibration_block(chamber: str) -> dict | None:
+    """Out-of-sample poll scoring, accumulated daily (METHODOLOGY 8a).
+
+    The dashboard has always described this test and never shown its result,
+    because the only numbers available were from a single manual run in August.
+    They now accumulate on their own, so the page can report them.
+
+    Returns None rather than raising: this is one panel of one tab, and a
+    missing calibration file must never cost a forecast.
+    """
+    try:
+        from .forward import accumulated
+
+        stats = accumulated(chamber)
+        if not stats.get("n"):
+            return None
+        return {
+            "n": stats["n"],
+            "races": stats["races"],
+            "pollsters": stats["pollsters"],
+            "days": stats["days"],
+            "first": stats["first"],
+            "last": stats["last"],
+            "pit_mean": _round(stats["pit_mean"], 3),
+            "coverage": {
+                str(row["level"]): _round(row["covered"], 3)
+                for row in stats["coverage"]
+            },
+            "enough_to_read": stats["n"] >= MIN_FORWARD_POLLS,
+        }
+    except Exception:                                 # noqa: BLE001
+        log.exception("forward calibration unavailable for the dashboard")
+        return None
+
+
 def _methodology_block(cfg: ModelConfig, chamber: str = "senate") -> dict:
     """Calibration and validation figures, computed rather than written down.
 
@@ -569,6 +610,7 @@ def _methodology_block(cfg: ModelConfig, chamber: str = "senate") -> dict:
             ),
         },
         "design_effect": _round(cfg.polls.design_effect, 2),
+        "forward_calibration": _forward_calibration_block(chamber),
         "student_t_nu": cfg.polls.student_t_nu,
     }
 

@@ -51,6 +51,21 @@ RACE_POLL_TYPE = {
     "house": "us-representative",
 }
 
+#: The shared feeds, read whichever chamber is being forecast.
+NATIONAL_POLL_TYPES = ("generic-ballot", "approval")
+
+#: Every poll type the project reads, for the commands whose job is the whole
+#: feed rather than one chamber's.
+#:
+#: Derived from RACE_POLL_TYPE rather than written out, because it was written
+#: out: `midterms fetch` listed three types by hand and omitted
+#: `us-representative`, so the one command whose entire purpose is to populate
+#: the local snapshot was the one command that could not populate it for the
+#: House. It reported success, naming the three types it had fetched, and a
+#: subsequent `run --offline --chamber house` then failed with "no usable race
+#: polls" -- which reads as a data problem rather than a fetch that never asked.
+ALL_POLL_TYPES = (*RACE_POLL_TYPE.values(), *NATIONAL_POLL_TYPES)
+
 
 @dataclass(frozen=True)
 class NormalisedPoll:

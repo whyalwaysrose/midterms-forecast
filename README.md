@@ -205,7 +205,7 @@ URL will fail because browsers block `fetch` from the filesystem.
 | `midterms run --chamber house` | The same, for all 435 districts (~12 min) |
 | `midterms run --offline` | Same, reusing the last raw snapshot (no network) |
 | `midterms run --date 2026-08-01` | Reproduce a run as of a past date (ignores later polls) |
-| `midterms fetch` | Fetch and snapshot polls only |
+| `midterms fetch` | Snapshot every poll type, both chambers' and the national feeds |
 | `midterms audit-roster [--chamber house]` | Report candidate names the roster cannot classify |
 | `midterms backtest --holdout-days 30` | Calibration check against held-out polls |
 | `midterms bundle` | Build a single self-contained `outputs/dashboard.html` |

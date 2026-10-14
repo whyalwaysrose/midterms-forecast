@@ -2,7 +2,7 @@
 
     midterms run              fetch polls, fit, simulate, write outputs
     midterms run --offline    same, but reuse the latest raw snapshot
-    midterms fetch            fetch and snapshot polls only
+    midterms fetch            snapshot every poll type (both chambers)
     midterms audit-roster     report candidate names the roster cannot classify
     midterms audit-pollsters  report pollster names that look like duplicates
     midterms check-keys       report which optional API keys are configured
@@ -76,12 +76,28 @@ def _configure_logging(verbose: bool) -> None:
 
 
 def cmd_fetch(args: argparse.Namespace) -> int:
+    """Populate the local snapshot with every poll type the project reads.
+
+    Every type, not a chamber's: this command takes no `--chamber`, so fetching
+    a subset leaves the snapshot unable to answer for the rest and nothing says
+    so. It used to fetch three types and omit `us-representative`, which made
+    `run --offline --chamber house` impossible while `fetch` reported success.
+    """
+    from .data.polls import ALL_POLL_TYPES
     from .data.votehub import VoteHubClient
 
     client = VoteHubClient()
-    raw = client.fetch_and_snapshot(["us-senator", "generic-ballot", "approval"])
-    for poll_type, records in raw.items():
-        log.info("%s: %d polls", poll_type, len(records))
+    raw = client.fetch_and_snapshot(list(ALL_POLL_TYPES))
+    for poll_type in ALL_POLL_TYPES:
+        log.info("%s: %d polls", poll_type, len(raw.get(poll_type, ())))
+
+    # Named rather than merely absent from the counts above. A poll type the
+    # feed did not return is the one failure that otherwise looks like a quiet
+    # success, and it is what this command existed to make visible.
+    missing = [t for t in ALL_POLL_TYPES if not raw.get(t)]
+    if missing:
+        log.error("no polls returned for: %s", ", ".join(missing))
+        return 1
     return 0
 
 
@@ -138,17 +154,28 @@ def cmd_audit_roster(args: argparse.Namespace) -> int:
     for race_id in sorted(unknown):
         for name in sorted(unknown[race_id]):
             print(f"  {race_id}: {name}")
-    print(
-        f"\nAdd each to config/{ROSTER_FILE[chamber]} under the correct party, "
-        "or under `other` for minor-party candidates."
-    )
     if chamber == "house":
+        # Deliberately not "add each to the roster". That file is regenerated
+        # from FEC filings by the daily job, so a name typed into it survives
+        # until tomorrow and no further -- and this command is a report on what
+        # the FEC could not resolve, not a queue of work.
         print(
-            "\nFor the House, an unclassified name is often benign. Pollsters "
-            "test candidates months before they file with the FEC, and a "
-            "primary field of four Democrats is not a general-election matchup: "
-            "the `no single D-vs-R matchup` guard rejects those on its own, "
-            "which is the correct outcome rather than a gap to be filled."
+            f"\nconfig/{ROSTER_FILE[chamber]} is generated from FEC filings by "
+            "scripts/build_house_roster.py, which the daily job runs. Do not "
+            "add these by hand: the next run overwrites them. A name here means "
+            "the FEC has no filing under that surname in that district, which "
+            "is usually benign -- pollsters test candidates months before they "
+            "file, and a primary field of four Democrats is not a "
+            "general-election matchup, so the `no single D-vs-R matchup` guard "
+            "rejects it on its own.\n\n"
+            "If a name is a pollster's misspelling of someone who did file, add "
+            "it to ALIASES in that script, which is the one thing about this "
+            "file the FEC cannot tell us."
+        )
+    else:
+        print(
+            f"\nAdd each to config/{ROSTER_FILE[chamber]} under the correct "
+            "party, or under `other` for minor-party candidates."
         )
     return 1
 
@@ -162,6 +189,7 @@ def cmd_audit_pollsters(args: argparse.Namespace) -> int:
     share a word. So this proposes and a person decides, exactly as
     ``audit-roster`` does for candidates.
     """
+    from .data.polls import ALL_POLL_TYPES
     from .data.pollsters import ALIASES, find_probable_duplicates, unify
     from .data.votehub import VoteHubClient, latest_snapshot, load_snapshot
 
@@ -173,9 +201,7 @@ def cmd_audit_pollsters(args: argparse.Namespace) -> int:
     # roster, so it can audit poll types this chamber does not model.
     snapshot = latest_snapshot()
     if snapshot is None or not args.offline:
-        raw = VoteHubClient().fetch_and_snapshot(
-            ["us-senator", "us-representative", "generic-ballot", "approval"]
-        )
+        raw = VoteHubClient().fetch_and_snapshot(list(ALL_POLL_TYPES))
     else:
         raw = load_snapshot(snapshot)
 
@@ -320,8 +346,10 @@ def cmd_run(args: argparse.Namespace) -> int:
         if not raw.get(poll_type):
             log.error(
                 "%s holds no %s polls (it has: %s). It was written before both "
-                "chambers shared a snapshot, or by a run of the other chamber. "
-                "Re-run without --offline to fetch them.",
+                "chambers shared a snapshot, or by a run of the other chamber, "
+                "or by a `fetch` from before that command asked for every poll "
+                "type. Run `midterms fetch` to complete it, or re-run without "
+                "--offline.",
                 snapshot.name, poll_type, ", ".join(sorted(raw)) or "nothing",
             )
             return 2

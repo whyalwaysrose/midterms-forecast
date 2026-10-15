@@ -2,6 +2,20 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-15",
+   "previous_run_date": "2026-10-14",
+   "headline": "**The model changed in this run.** Democratic chances of Senate control are 68.2%, against 68.2% on 2026-10-14 \u2014 but the two runs were produced by different models, so the difference is not a change in the race.",
+   "body": [
+    "Movement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.",
+    "",
+    "No individual race moved enough to be worth reporting.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [],
+   "markdown": "## 2026-10-15\n\n**The model changed in this run.** Democratic chances of Senate control are 68.2%, against 68.2% on 2026-10-14 \u2014 but the two runs were produced by different models, so the difference is not a change in the race.\n\nMovement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.\n\nNo individual race moved enough to be worth reporting.\n"
+  },
+  {
    "run_date": "2026-10-14",
    "previous_run_date": "2026-10-13",
    "headline": "Democratic chances of Senate control are down 0.5 pts to 68.2% on 1 new poll. Projected seats 52.2 \u2192 52.2 (-0.0).",

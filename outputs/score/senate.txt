@@ -1,3 +1,3 @@
-16:08:35 INFO    midterms.data.results: senate: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_Senate_elections
-16:08:35 INFO    midterms.data.results: senate: 35 race rows, 0 with a called winner
+15:56:04 INFO    midterms.data.results: senate: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_Senate_elections
+15:56:04 INFO    midterms.data.results: senate: 35 race rows, 0 with a called winner
 No senate result published yet. Nothing to score.

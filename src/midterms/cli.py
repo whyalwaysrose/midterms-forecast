@@ -367,6 +367,29 @@ def cmd_run(args: argparse.Namespace) -> int:
             "`midterms audit-roster --chamber %s`",
             len(table.unknown_candidates), chamber,
         )
+
+    # Check the data the model is about to be given, against the invariants a
+    # real past failure violated. Written here rather than in its own command
+    # so that what is checked is what the forecast consumed -- a health check
+    # that fetches its own copy is checking a different pipeline.
+    #
+    # Never fatal. The report is committed and a separate CI job fails on it,
+    # so a pipeline fault reaches a person by email without taking the
+    # dashboard off the air. Same trade as the roster-freshness job.
+    try:
+        from . import health
+
+        report = health.build(chamber, raw, table, races, today=run_date)
+        health.write(report)
+        print(health.render(report))
+        for check in report.checks:
+            if not check.ok:
+                print(f"::error title=Pipeline health ({chamber})::"
+                      f"{check.name}: {check.detail}")
+    except Exception:
+        # A broken health check must not stop a forecast; that would invert
+        # the thing it exists to protect.
+        log.exception("pipeline health check failed to run")
     if not table.race_polls and chamber == "senate":
         log.error("no usable race polls; aborting")
         return 3

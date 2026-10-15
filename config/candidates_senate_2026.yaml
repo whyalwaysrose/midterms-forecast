@@ -160,15 +160,41 @@ races:
   # Listed so the audit command has somewhere to put new names as polls appear.
   senate-2026-CO: {D: [John Hickenlooper], R: []}
   senate-2026-DE: {D: [Chris Coons], R: []}
-  senate-2026-IL: {D: [], R: []}
+  senate-2026-IL:
+    # Nominees added 2026-10-15, from each candidate's own FEC filing in
+    # weball26 (STRATTON, JULIANA — DEM; TRACY, DON — REP). The stub had
+    # survived the primary, so the 2026-10-01 PPP general-election poll
+    # (Stratton 49, Tracy 36) was being discarded and Illinois was running on
+    # its fundamentals prior. Found by the pipeline health check, not by anyone
+    # reading the audit log.
+    D: [Juliana Stratton]
+    R: [Don Tracy]
   senate-2026-KY: {D: [], R: []}
   senate-2026-LA: {D: [], R: []}
   senate-2026-NJ: {D: [Cory Booker], R: []}
-  senate-2026-NM: {D: [Ben Ray Luján], R: []}
+  senate-2026-NM:
+    # R side added 2026-10-15 from FEC (MARKER, LARRY E — REP); two general
+    # -election polls were being discarded.
+    D: [Ben Ray Luján]
+    R: [Larry Marker]
   senate-2026-OK: {D: [], R: []}
   senate-2026-OR: {D: [Jeff Merkley], R: []}
-  senate-2026-SC: {D: [], R: []}
+  senate-2026-SC:
+    # Added 2026-10-15 from FEC (ANDREWS, ANNIE — DEM; GRAHAM, DARLINE — REP;
+    # WHITENER, KASIE DR. — LIB). Note South Carolina has two Republican
+    # Grahams filed, Darline and the incumbent Lindsey; both are REP, so the
+    # side is unambiguous even where the person is not.
+    #
+    # Mark Hackett appears in the 2026-09-29 poll and has no FEC filing in
+    # South Carolina, so he stays unclassified — fail-closed, and harmless
+    # here: one D and one R are still identifiable in that poll.
+    D: [Annie Andrews]
+    R: [Darline Graham]
+    other: [Kasie Whitener]          # Libertarian
   senate-2026-SD: {D: [], R: [Mike Rounds]}
-  senate-2026-TN: {D: [], R: [Bill Hagerty]}
+  senate-2026-TN:
+    # D side added 2026-10-15 from FEC (BRADSHAW, MARQUITA — DEM).
+    D: [Marquita Bradshaw]
+    R: [Bill Hagerty]
   senate-2026-WV: {D: [], R: [Shelley Moore Capito]}
   senate-2026-WY: {D: [], R: []}

@@ -196,6 +196,10 @@ jobs:
           # Rebuilt from FEC filings above, so it changes whenever someone files
           # or a pollster tests a district for the first time.
           git add config/candidates_house_2026.yaml || true
+          # The pipeline health report each run writes. Committed because the
+          # next run diffs its coverage against it, and because a fault should
+          # land in a diff rather than only in a log.
+          git add outputs/health || true
           # The forward-calibration rows, which only grow.
           git add data/calibration || true
           # Empty until election night, then the scorecard -- committed so the
@@ -254,6 +258,51 @@ jobs:
             echo "::error::The House candidate roster was last rebuilt $built, $age days ago. The rebuild step has been failing silently, so any district polled for the first time since then has every poll rejected as having no D-vs-R matchup, and the House is forecast on less data than the feed holds."
             exit 1
           fi
+
+  # Whether the data reaching the model looked like data, as opposed to
+  # whether the model ran. Every other check in this repository tests the
+  # second; the defects have all been in the first, and they all looked like
+  # success -- see the docstring on src/midterms/health.py for the list.
+  #
+  # A job rather than a step, for the reason the roster-freshness job is one:
+  # a failing step takes the forecast job with it and `deploy` needs that job,
+  # so a data fault would take the dashboard off the air. It should not. A
+  # stale or thin forecast is worth publishing; it is just also worth an email.
+  pipeline-health:
+    needs: forecast
+    if: ${{ always() && needs.forecast.result != 'cancelled' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Fail if a pipeline health check did not pass
+        run: |
+          status=0
+          for chamber in senate house; do
+            report="outputs/health/$chamber.json"
+            if [ ! -f "$report" ]; then
+              echo "::warning::no health report for $chamber; its forecast may not have run"
+              continue
+            fi
+            python - "$report" "$chamber" <<'PY' || status=1
+          import json, sys
+          report, chamber = json.load(open(sys.argv[1], encoding="utf-8")), sys.argv[2]
+          bad = [c for c in report["checks"] if not c["ok"]]
+          for c in bad:
+              print(f"::error title=Pipeline health ({chamber})::"
+                    f"{c['name']}: {c['detail']} -- guards against {c['guards']}")
+          m = report["metrics"]
+          print(f"{chamber}: {m['races_with_polls']}/{m['races_total']} races polled, "
+                f"{m['race_polls']} race polls, "
+                f"{m['races_blocked_by_roster']} blocked by the roster")
+          sys.exit(1 if bad else 0)
+          PY
+          done
+          exit $status
 
   # Publishing lives in deploy.yml, shared with CI, so the two paths cannot
   # drift apart. It checks out the branch head rather than this run's SHA,

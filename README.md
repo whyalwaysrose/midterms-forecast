@@ -83,6 +83,20 @@ repository secrets to add. If you later swap in a paid data source, add its key 
 **Settings → Secrets and variables → Actions** and read it via `env:` in
 `.github/workflows/daily-forecast.yml`.
 
+### The daily job checks its own inputs
+
+`src/midterms/health.py` runs inside every forecast and asserts that the data reaching
+the model looks like data: every poll type present in the snapshot, this chamber's own
+polls actually used, the roster still able to resolve the feed, coverage not collapsed
+against yesterday, every race carrying a lean. Each check is an invariant that a real
+past defect violated — see METHODOLOGY §8d for the list, which is not short.
+
+It writes `outputs/health/<chamber>.json`, and the `pipeline-health` job fails the run
+if a check did not pass. That failure is deliberately in its own job: a thin forecast is
+still worth publishing, so it must not block the deploy, but it is worth an email.
+
+The audits below are the older, softer version of the same idea.
+
 ### Ongoing maintenance — two recurring tasks
 
 Both run in the daily workflow and report into its log without ever failing the run.

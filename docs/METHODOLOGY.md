@@ -701,6 +701,51 @@ means that by the time it matters it will have been exercised every day for week
 than debugged on the night.
 
 
+## 8d. Checking the inputs, not just the model
+
+Every check above tests the model *given its inputs*: the backtest, the forward
+calibration, the convergence report, the unit tests. None of them tested whether the
+inputs arrived. That asymmetry is where this project's real defects have lived, and they
+share one signature — **the pipeline produced a plausible artefact that was quietly
+wrong, and "fewer records" is indistinguishable from "legitimately fewer records"**:
+
+| Defect | Lived for | Cost |
+|---|---|---|
+| House roster generated once at 40 polled districts, never rebuilt | ~7 weeks | Forecast used 38 of 61 available districts |
+| `midterms fetch` omitted `us-representative` and exited 0 | ~7 weeks | No offline House work possible; a coverage analysis run on a stale snapshot |
+| `forward.py` defaulted to the Senate roster and poll type | 3 weeks | House calibration scored only generic-ballot polls |
+| `{{party stripe}}` capitalisation | one cycle | 27 districts dropped from the 2024 result parse, while 2022 validated perfectly |
+| OR-03 presidential lean 30 points wrong | weeks, published | Found only by comparing two independent sources |
+
+`src/midterms/health.py` runs inside every forecast, against the table the model is
+actually about to consume, and writes `outputs/health/<chamber>.json`. Each check is an
+invariant that one of those failures violated, and each records in a `guards` field which
+one — so a future reader loosening a threshold can see what they are giving up. A check
+nobody can name a real bug for is a check that gets tuned away.
+
+The load-bearing one is **`roster_reads_the_feed`**. It counts races that have poll data
+and no usable poll *because no candidate name resolves*, against races that have poll
+data at all. That denominator matters: against all 435 House districts the stale roster
+reads as 6% and the check never fires, because nine districts in ten are never polled.
+Against races with data it reads 41%, which is what it was. Races rejected with their
+names resolved — California's top-two D-vs-D generals, member-vs-member after
+redistricting — are correct refusals and are invisible to it.
+
+It found a live defect on its first run. Four **Senate** races — Illinois, New Mexico,
+South Carolina, Tennessee — were stubs in the hand-maintained roster that had survived
+their primaries, so every general-election poll in them was being discarded and all four
+were running on fundamentals alone. That included a 2026-10-01 Illinois poll (Stratton 49,
+Tracy 36) and a South Carolina race polling within two points. Filled from each
+candidate's own FEC filing, the same public-domain source and fail-closed rule the House
+roster uses: Senate coverage went from 20 polled races to 24, and 243 race polls to 249.
+
+Reports are committed, so the next run can compare its coverage against the last one, and
+a `pipeline-health` job fails on a breach. Like `roster-freshness` it is a separate job,
+not a step: a failing step would take `deploy` down with it, and a thin forecast is still
+worth publishing — it is just also worth an email.
+
+---
+
 ## 9. Known weaknesses
 
 0. ~~**The House model is built on the wrong district map.**~~ **Fixed.** Ten states

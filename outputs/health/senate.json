@@ -1,37 +1,37 @@
 {
  "chamber": "senate",
- "run_date": "2026-10-15",
- "ok": true,
+ "run_date": "2026-10-16",
+ "ok": false,
  "metrics": {
   "races_total": 35,
   "races_with_polls": 24,
   "races_blocked_by_roster": 0,
-  "race_polls": 249,
+  "race_polls": 262,
   "national_polls": 422,
   "feed_records": {
-   "us-senator": 465,
-   "us-representative": 132,
+   "us-senator": 479,
+   "us-representative": 0,
    "generic-ballot": 548,
    "approval": 2949
   },
   "rejections": {
    "primary subject": 60,
-   "older than max_age_days": 138,
+   "older than max_age_days": 140,
    "no single D-vs-R matchup": 30,
    "pollster banned by 538: Big Data Poll": 32,
-   "repeat readings of a survey already counted": 97
+   "repeat readings of a survey already counted": 96
   },
   "unresolved_name_races": 9
  },
  "checks": [
   {
    "name": "snapshot_complete",
-   "ok": true,
-   "detail": "every poll type present",
+   "ok": false,
+   "detail": "snapshot has no us-representative",
    "guards": "`midterms fetch` omitting us-representative and exiting 0",
    "value": {
-    "us-senator": 465,
-    "us-representative": 132,
+    "us-senator": 479,
+    "us-representative": 0,
     "generic-ballot": 548,
     "approval": 2949
    }
@@ -39,9 +39,9 @@
   {
    "name": "race_polls_used",
    "ok": true,
-   "detail": "249 race polls from us-senator",
+   "detail": "262 race polls from us-senator",
    "guards": "a chamber-blind default feeding the Senate's polls to the House",
-   "value": 249
+   "value": 262
   },
   {
    "name": "roster_reads_the_feed",

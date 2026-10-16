@@ -2,6 +2,53 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-16
+
+Democratic chances of Senate control are down 0.6 pts to 67.6% on 14 new polls, plus 6 polls that were already published but had not been counted until now. Projected seats 52.2 → 52.3 (+0.2).
+
+**Races that moved** (16 of 35):
+
+  - **South Carolina** — Democratic win probability 24.7% → 42.3% (+17.5 pts); projected margin R+6.9 → R+1.1 (+5.8).
+  These 2 polls were already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - InsiderAdvantage (2026-09-28, n=1200, LV): R+1.1
+    - InsiderAdvantage (2026-09-08, n=1200, LV): R+2.2
+
+  - **New Mexico** — Democratic win probability 92.7% → 99.8% (+7.1 pts); projected margin D+14.7 → D+17.9 (+3.3).
+  These 2 polls were already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - SurveyUSA (2026-09-27, n=576, LV): D+20.0
+    - Research & Polling Inc. (2026-08-24, n=516, LV): D+16.5
+
+  - **Michigan** — Democratic win probability 76.1% → 71.3% (-4.8 pts); projected margin D+3.9 → D+3.0 (-0.8). Driven by 2 new polls:
+    - The Tyson Group (2026-10-07, n=600, LV, R-aligned sponsor): R+2.2
+    - The Tyson Group (2026-09-25, n=600, LV, R-aligned sponsor): D+1.1
+
+  - **Illinois** — Democratic win probability 93.5% → 98.4% (+4.8 pts); projected margin D+15.4 → D+14.4 (-1.1).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - Public Policy Polling (2026-09-30, n=569, LV, D-aligned sponsor): D+15.3
+
+  - **Minnesota** — Democratic win probability 87.1% → 82.9% (-4.2 pts); projected margin D+6.4 → D+5.3 (-1.1). Driven by 1 new poll:
+    - SurveyUSA (2026-10-10, n=718, LV): D+3.4
+
+  - **Louisiana** — Democratic win probability 11.6% → 14.3% (+2.7 pts); projected margin R+11.4 → R+10.5 (+0.9). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Alaska** — Democratic win probability 63.0% → 60.5% (-2.6 pts); projected margin D+1.9 → D+1.5 (-0.4). Driven by 1 new poll:
+    - Public Policy Polling (2026-10-14, n=578, RV, D-aligned sponsor): D+1.1
+
+  - **Texas** — Democratic win probability 68.1% → 65.7% (-2.5 pts); projected margin D+2.5 → D+2.2 (-0.4). Driven by 2 new polls:
+    - InsiderAdvantage (2026-10-13, n=1200, LV): R+1.0
+    - ActiVote (2026-10-07, n=400, LV): D+3.8
+
+  - **Tennessee** — Democratic win probability 2.2% → 0.1% (-2.1 pts); projected margin R+19.7 → R+19.7 (+0.0).
+  This poll was already published at the last run and counted for the first time in this one, so this part of the move is a correction to our coverage rather than a change in the race:
+    - Targoz Market Research (2026-08-20, n=1157, RV): R+24.4
+
+  - **Mississippi** — Democratic win probability 14.1% → 15.8% (+1.7 pts); projected margin R+6.8 → R+5.8 (+1.1). Driven by 1 new poll:
+    - Wedgewood Polls (2026-10-13, n=511, LV): R+4.0
+
+**New polling that did not move the needle.** Kansas (1), Iowa (2), Maine (1), Ohio (1), Arkansas (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-15
 
 **The model changed in this run.** Democratic chances of Senate control are 68.2%, against 68.2% on 2026-10-14 — but the two runs were produced by different models, so the difference is not a change in the race.

@@ -44,3 +44,5 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-09,2026-10-08,house,house-2026-NY-21,us-202sie2af2e738,Siena University,2026-10-03,0.09097,-0.1341,0.15844,0.93693
 2026-10-13,2026-10-12,house,house-2026-MN-01,us-202sur83d49b6b,SurveyUSA,2026-10-06,0.04445,-0.02358,0.1998,0.66071
 2026-10-13,2026-10-12,house,house-2026-NE-02,us-202natda50e477,National Public Affairs,2026-10-03,0.27444,0.13214,0.22518,0.77415
+2026-10-16,2026-10-15,house,house-2026-NM-01,us-202res39c7cfc1,Research & Polling Inc.,2026-10-05,0.41494,0.37765,0.21863,0.5828
+2026-10-16,2026-10-15,house,house-2026-NM-03,us-202resc0457a03,Research & Polling Inc.,2026-10-05,0.30673,0.19409,0.20962,0.74062

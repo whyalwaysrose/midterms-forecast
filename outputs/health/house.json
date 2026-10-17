@@ -1,6 +1,6 @@
 {
  "chamber": "house",
- "run_date": "2026-10-16",
+ "run_date": "2026-10-17",
  "ok": false,
  "metrics": {
   "races_total": 435,
@@ -60,20 +60,20 @@
   {
    "name": "coverage_did_not_collapse",
    "ok": true,
-   "detail": "races with polls 60 -> 62 (+3%; limit -25%)",
+   "detail": "races with polls 62 -> 62 (-0%; limit -25%)",
    "guards": "any new fault that silently drops races, the shared signature of every defect in this file's docstring",
    "value": {
-    "before": 60,
+    "before": 62,
     "after": 62
    }
   },
   {
    "name": "roster_is_fresh",
    "ok": true,
-   "detail": "roster built 2026-10-16 (0 days ago; limit 7)",
+   "detail": "roster built 2026-10-17 (0 days ago; limit 7)",
    "guards": "the rebuild step failing quietly and the roster re-staling",
    "value": {
-    "built": "2026-10-16",
+    "built": "2026-10-17",
     "age_days": 0
    }
   },

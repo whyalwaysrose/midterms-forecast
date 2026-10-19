@@ -11285,6 +11285,191 @@
      "poll_count": 2
     }
    }
+  },
+  {
+   "run_date": "2026-10-19",
+   "dem_control_prob": 0.6754,
+   "dem_seats_mean": 52.33,
+   "dem_seats_median": 53,
+   "generic_ballot_dem_margin": 8.03,
+   "n_race_polls": 261,
+   "races": {
+    "senate-2026-AL": {
+     "dem_win_prob": 0.0015,
+     "margin_p50": -18.04,
+     "poll_count": 2
+    },
+    "senate-2026-AK": {
+     "dem_win_prob": 0.61,
+     "margin_p50": 1.55,
+     "poll_count": 15
+    },
+    "senate-2026-AR": {
+     "dem_win_prob": 0.007,
+     "margin_p50": -14.45,
+     "poll_count": 4
+    },
+    "senate-2026-FL": {
+     "dem_win_prob": 0.1127,
+     "margin_p50": -6.65,
+     "poll_count": 14
+    },
+    "senate-2026-ID": {
+     "dem_win_prob": 0.028,
+     "margin_p50": -14.67,
+     "poll_count": 1
+    },
+    "senate-2026-IA": {
+     "dem_win_prob": 0.5379,
+     "margin_p50": 0.51,
+     "poll_count": 19
+    },
+    "senate-2026-KS": {
+     "dem_win_prob": 0.4937,
+     "margin_p50": -0.09,
+     "poll_count": 4
+    },
+    "senate-2026-KY": {
+     "dem_win_prob": 0.031,
+     "margin_p50": -18.08,
+     "poll_count": 0
+    },
+    "senate-2026-LA": {
+     "dem_win_prob": 0.1436,
+     "margin_p50": -10.56,
+     "poll_count": 0
+    },
+    "senate-2026-ME": {
+     "dem_win_prob": 0.6952,
+     "margin_p50": 2.78,
+     "poll_count": 14
+    },
+    "senate-2026-MS": {
+     "dem_win_prob": 0.1621,
+     "margin_p50": -5.83,
+     "poll_count": 3
+    },
+    "senate-2026-MT": {
+     "dem_win_prob": 0.1611,
+     "margin_p50": -10.27,
+     "poll_count": 0
+    },
+    "senate-2026-NE": {
+     "dem_win_prob": 0.2946,
+     "margin_p50": -3.11,
+     "poll_count": 2
+    },
+    "senate-2026-NC": {
+     "dem_win_prob": 0.9626,
+     "margin_p50": 9.74,
+     "poll_count": 33
+    },
+    "senate-2026-OH": {
+     "dem_win_prob": 0.7896,
+     "margin_p50": 4.32,
+     "poll_count": 20
+    },
+    "senate-2026-OK": {
+     "dem_win_prob": 0.011,
+     "margin_p50": -22.64,
+     "poll_count": 0
+    },
+    "senate-2026-SC": {
+     "dem_win_prob": 0.426,
+     "margin_p50": -1.09,
+     "poll_count": 2
+    },
+    "senate-2026-SD": {
+     "dem_win_prob": 0.0204,
+     "margin_p50": -20.39,
+     "poll_count": 0
+    },
+    "senate-2026-TN": {
+     "dem_win_prob": 0.0018,
+     "margin_p50": -19.77,
+     "poll_count": 1
+    },
+    "senate-2026-TX": {
+     "dem_win_prob": 0.6597,
+     "margin_p50": 2.21,
+     "poll_count": 41
+    },
+    "senate-2026-WV": {
+     "dem_win_prob": 0.0003,
+     "margin_p50": -34.37,
+     "poll_count": 0
+    },
+    "senate-2026-WY": {
+     "dem_win_prob": 0.0004,
+     "margin_p50": -36.97,
+     "poll_count": 0
+    },
+    "senate-2026-CO": {
+     "dem_win_prob": 0.959,
+     "margin_p50": 17.85,
+     "poll_count": 0
+    },
+    "senate-2026-DE": {
+     "dem_win_prob": 0.9835,
+     "margin_p50": 21.1,
+     "poll_count": 0
+    },
+    "senate-2026-GA": {
+     "dem_win_prob": 0.9483,
+     "margin_p50": 8.99,
+     "poll_count": 8
+    },
+    "senate-2026-IL": {
+     "dem_win_prob": 0.9841,
+     "margin_p50": 14.33,
+     "poll_count": 1
+    },
+    "senate-2026-MA": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 29.57,
+     "poll_count": 11
+    },
+    "senate-2026-MI": {
+     "dem_win_prob": 0.7115,
+     "margin_p50": 3.03,
+     "poll_count": 37
+    },
+    "senate-2026-MN": {
+     "dem_win_prob": 0.8256,
+     "margin_p50": 5.3,
+     "poll_count": 6
+    },
+    "senate-2026-NH": {
+     "dem_win_prob": 0.8932,
+     "margin_p50": 6.98,
+     "poll_count": 16
+    },
+    "senate-2026-NJ": {
+     "dem_win_prob": 0.909,
+     "margin_p50": 13.62,
+     "poll_count": 0
+    },
+    "senate-2026-NM": {
+     "dem_win_prob": 0.9981,
+     "margin_p50": 17.88,
+     "poll_count": 2
+    },
+    "senate-2026-OR": {
+     "dem_win_prob": 0.9672,
+     "margin_p50": 19.29,
+     "poll_count": 0
+    },
+    "senate-2026-RI": {
+     "dem_win_prob": 1.0,
+     "margin_p50": 23.36,
+     "poll_count": 3
+    },
+    "senate-2026-VA": {
+     "dem_win_prob": 0.998,
+     "margin_p50": 18.02,
+     "poll_count": 2
+    }
+   }
   }
  ]
 }

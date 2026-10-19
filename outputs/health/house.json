@@ -1,13 +1,13 @@
 {
  "chamber": "house",
- "run_date": "2026-10-18",
- "ok": false,
+ "run_date": "2026-10-19",
+ "ok": true,
  "metrics": {
   "races_total": 435,
   "races_with_polls": 62,
   "races_blocked_by_roster": 2,
   "race_polls": 96,
-  "national_polls": 422,
+  "national_polls": 419,
   "feed_records": {
    "us-senator": 0,
    "us-representative": 134,
@@ -16,7 +16,7 @@
   },
   "rejections": {
    "no single D-vs-R matchup": 1046,
-   "older than max_age_days": 121,
+   "older than max_age_days": 124,
    "pollster banned by 538: Big Data Poll": 14,
    "repeat readings of a survey already counted": 12
   },
@@ -24,10 +24,10 @@
  },
  "checks": [
   {
-   "name": "snapshot_complete",
-   "ok": false,
-   "detail": "snapshot has no us-senator",
-   "guards": "`midterms fetch` omitting us-representative and exiting 0",
+   "name": "required_feeds_present",
+   "ok": true,
+   "detail": "all of us-representative, generic-ballot, approval present",
+   "guards": "a run proceeding on a feed that returned nothing, which reads downstream as a quiet day rather than a failed fetch",
    "value": {
     "us-senator": 0,
     "us-representative": 134,
@@ -70,10 +70,10 @@
   {
    "name": "roster_is_fresh",
    "ok": true,
-   "detail": "roster built 2026-10-18 (0 days ago; limit 7)",
+   "detail": "roster built 2026-10-19 (0 days ago; limit 7)",
    "guards": "the rebuild step failing quietly and the roster re-staling",
    "value": {
-    "built": "2026-10-18",
+    "built": "2026-10-19",
     "age_days": 0
    }
   },

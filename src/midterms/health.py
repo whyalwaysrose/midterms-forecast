@@ -140,20 +140,36 @@ def build(chamber: str, raw: dict, table, races, today: date | None = None) -> R
     checked is what the forecast consumed. A health check that fetches its own
     copy of the data is checking a different pipeline from the one that ran.
     """
-    from .data.polls import ALL_POLL_TYPES, RACE_POLL_TYPE
+    from .data.polls import ALL_POLL_TYPES, NATIONAL_POLL_TYPES, RACE_POLL_TYPE
 
     today = today or date.today()
     poll_type = RACE_POLL_TYPE[chamber]
     report = Report(chamber=chamber, run_date=today.isoformat())
 
-    # --- the snapshot holds every poll type -------------------------------
-    missing = [t for t in ALL_POLL_TYPES if not raw.get(t)]
+    # --- the feeds this run needed arrived --------------------------------
+    #
+    # This chamber's race poll type plus the shared national ones -- which is
+    # exactly what `cmd_run` requests. NOT every poll type: `fetch_and_snapshot`
+    # merges into the snapshot on disk but *returns only what was asked for*, so
+    # a Senate run's `raw` legitimately has no `us-representative`.
+    #
+    # The first version of this check asserted all four and failed three nights
+    # running, each chamber reporting the other's feed missing while its own
+    # coverage was perfect. It was written against `load_snapshot(...)`, which
+    # holds everything, instead of against the dict `cmd_run` actually passes --
+    # a check for "the inputs are not what you think" that was itself wrong
+    # about its input. Whole-snapshot completeness is `cmd_fetch`'s job and it
+    # already fails there; it cannot be this one's, because the Senate runs
+    # before the House and the snapshot is genuinely half-built in between.
+    required = (poll_type, *NATIONAL_POLL_TYPES)
+    missing = [t for t in required if not raw.get(t)]
     report.checks.append(Check(
-        name="snapshot_complete",
+        name="required_feeds_present",
         ok=not missing,
-        detail=("every poll type present" if not missing
-                else f"snapshot has no {', '.join(missing)}"),
-        guards="`midterms fetch` omitting us-representative and exiting 0",
+        detail=(f"all of {', '.join(required)} present" if not missing
+                else f"this run received no {', '.join(missing)}"),
+        guards="a run proceeding on a feed that returned nothing, which reads "
+               "downstream as a quiet day rather than a failed fetch",
         value={t: len(raw.get(t, ())) for t in ALL_POLL_TYPES},
     ))
 

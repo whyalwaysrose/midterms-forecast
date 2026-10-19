@@ -83,7 +83,28 @@ def test_the_fakes_match_the_real_objects():
 
 
 def _raw(**overrides):
+    """A full snapshot, as `run --offline` loads it."""
     out = {t: [{"id": f"{t}-1"}] for t in ALL_POLL_TYPES}
+    out.update(overrides)
+    return out
+
+
+def _raw_as_cmd_run_passes_it(chamber, **overrides):
+    """What a live run actually hands the health check.
+
+    `cmd_run` calls `fetch_and_snapshot([poll_type, "generic-ballot",
+    "approval"])`, which merges into the snapshot file but returns **only the
+    types it asked for**. So a Senate run's dict has no `us-representative`.
+
+    Testing against `_raw()` instead of this is what shipped a check that failed
+    three nights running, each chamber reporting the other's feed missing while
+    its own coverage was perfect. Every test that exercises the feed check uses
+    this shape.
+    """
+    from midterms.data.polls import NATIONAL_POLL_TYPES, RACE_POLL_TYPE
+
+    out = {t: [{"id": f"{t}-1"}]
+           for t in (RACE_POLL_TYPE[chamber], *NATIONAL_POLL_TYPES)}
     out.update(overrides)
     return out
 
@@ -103,17 +124,49 @@ def _check(report, name):
 
 # --- the reconstructions ----------------------------------------------------
 
-def test_a_snapshot_missing_a_poll_type_fails(tmp_path, monkeypatch):
-    """`midterms fetch` omitted us-representative and exited 0."""
+def test_a_run_whose_own_feed_returned_nothing_fails(tmp_path, monkeypatch):
+    """The feed this chamber needs came back empty."""
     monkeypatch.setattr(health, "report_path", lambda c: tmp_path / f"{c}.json")
     table, races = _healthy()
-    raw = _raw(**{"us-representative": []})
+    raw = _raw_as_cmd_run_passes_it("house", **{"us-representative": []})
 
     report = health.build("house", raw, table, races, today=date(2026, 10, 15))
 
     assert not report.ok
-    assert not _check(report, "snapshot_complete").ok
-    assert "us-representative" in _check(report, "snapshot_complete").detail
+    assert not _check(report, "required_feeds_present").ok
+    assert "us-representative" in _check(report, "required_feeds_present").detail
+
+
+def test_a_missing_national_feed_fails(tmp_path, monkeypatch):
+    monkeypatch.setattr(health, "report_path", lambda c: tmp_path / f"{c}.json")
+    table, races = _healthy()
+    raw = _raw_as_cmd_run_passes_it("house", **{"generic-ballot": []})
+
+    report = health.build("house", raw, table, races, today=date(2026, 10, 15))
+
+    assert not _check(report, "required_feeds_present").ok
+
+
+@pytest.mark.parametrize("chamber", ["senate", "house"])
+def test_one_chamber_does_not_demand_the_others_feed(chamber, tmp_path, monkeypatch):
+    """The regression, in the shape production actually has.
+
+    A live Senate run never receives `us-representative` and a live House run
+    never receives `us-senator`, because each asks only for its own. Requiring
+    both failed the job three nights running on perfectly healthy data, and
+    cost three failure emails for a defect that was entirely in the check.
+    """
+    monkeypatch.setattr(health, "report_path", lambda c: tmp_path / f"{c}.json")
+    monkeypatch.setattr(health, "_roster_built", lambda c: date(2026, 10, 15))
+    table, races = _healthy(chamber=chamber)
+    raw = _raw_as_cmd_run_passes_it(chamber)
+
+    report = health.build(chamber, raw, table, races, today=date(2026, 10, 15))
+
+    assert _check(report, "required_feeds_present").ok, (
+        _check(report, "required_feeds_present").detail
+    )
+    assert report.ok, [c.detail for c in report.checks if not c.ok]
 
 
 def test_a_chamber_reading_the_other_chambers_polls_fails(tmp_path, monkeypatch):

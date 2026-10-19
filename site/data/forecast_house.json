@@ -2,7 +2,7 @@
  "schema_version": 5,
  "model_fingerprint": "89f29bd3f6ef",
  "run_date": "2026-10-19",
- "generated_at": "2026-10-19T12:18:39+00:00",
+ "generated_at": "2026-10-19T17:42:03+00:00",
  "cycle": 2026,
  "chamber": "house",
  "election_date": "2026-11-03",
@@ -71960,13 +71960,13 @@
  "markets": {
   "source": "Polymarket",
   "source_url": "https://polymarket.com",
-  "fetched_at": "2026-10-19T11:56:48+00:00",
+  "fetched_at": "2026-10-19T17:20:19+00:00",
   "note": "Shown for contrast only. Market prices are never an input to this model: traders read forecasts, so using them would be circular.",
   "events": [
    {
     "slug": "balance-of-power-2026-midterms",
     "title": "Balance of Power: 2026 Midterms",
-    "volume": 25064503.0,
+    "volume": 25133670.0,
     "outcomes": [
      {
       "label": "Democrats Sweep",
@@ -73922,7 +73922,7 @@
    {
     "slug": "which-party-will-win-the-senate-in-2026",
     "title": "Which party will win the Senate in 2026?",
-    "volume": 7141683.0,
+    "volume": 7152533.0,
     "outcomes": [
      {
       "label": "Democratic Party",
@@ -74901,7 +74901,7 @@
    {
     "slug": "republican-senate-seats-after-the-2026-midterm-elections-927",
     "title": "Republican Senate seats after the 2026 midterm elections?",
-    "volume": 3207788.0,
+    "volume": 3210027.0,
     "outcomes": [
      {
       "label": "\u226447",
@@ -74925,22 +74925,22 @@
      },
      {
       "label": "51",
-      "probability": 0.08,
+      "probability": 0.075,
       "history": []
      },
      {
       "label": "52",
-      "probability": 0.0625,
+      "probability": 0.06,
       "history": []
      },
      {
       "label": "53",
-      "probability": 0.0455,
+      "probability": 0.0465,
       "history": []
      },
      {
       "label": "54",
-      "probability": 0.025,
+      "probability": 0.0255,
       "history": []
      },
      {

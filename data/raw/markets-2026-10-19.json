@@ -1,12 +1,12 @@
 {
- "fetched_at": "2026-10-19T11:56:48+00:00",
+ "fetched_at": "2026-10-19T17:20:19+00:00",
  "source": "Polymarket",
  "source_url": "https://polymarket.com",
  "events": {
   "balance-of-power-2026-midterms": {
    "slug": "balance-of-power-2026-midterms",
    "title": "Balance of Power: 2026 Midterms",
-   "volume": 25064502.701737,
+   "volume": 25133670.323853,
    "outcomes": [
     {
      "label": "Democrats Sweep",
@@ -1967,7 +1967,7 @@
   "which-party-will-win-the-senate-in-2026": {
    "slug": "which-party-will-win-the-senate-in-2026",
    "title": "Which party will win the Senate in 2026?",
-   "volume": 7141682.871494,
+   "volume": 7152532.921031001,
    "outcomes": [
     {
      "label": "Democratic Party",
@@ -2948,7 +2948,7 @@
   "republican-senate-seats-after-the-2026-midterm-elections-927": {
    "slug": "republican-senate-seats-after-the-2026-midterm-elections-927",
    "title": "Republican Senate seats after the 2026 midterm elections?",
-   "volume": 3207788.2412839998,
+   "volume": 3210026.93207,
    "outcomes": [
     {
      "label": "\u226447",
@@ -2976,25 +2976,25 @@
     },
     {
      "label": "51",
-     "probability": 0.08,
+     "probability": 0.075,
      "token_id": "105627504566569706748610029122703529394729331390957077331824112641486910010161",
      "history": []
     },
     {
      "label": "52",
-     "probability": 0.0625,
+     "probability": 0.06,
      "token_id": "71547572456937213989007089427188853117815317606685045433579261770964952182308",
      "history": []
     },
     {
      "label": "53",
-     "probability": 0.0455,
+     "probability": 0.0465,
      "token_id": "15394416147421266264002744586901575755411758481406494583013250092373628427765",
      "history": []
     },
     {
      "label": "54",
-     "probability": 0.025,
+     "probability": 0.0255,
      "token_id": "13278443981418985302116823794751942747516190107446009911143426402863687470127",
      "history": []
     },

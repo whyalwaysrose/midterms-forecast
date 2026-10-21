@@ -46,3 +46,19 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-13,2026-10-12,house,house-2026-NE-02,us-202natda50e477,National Public Affairs,2026-10-03,0.27444,0.13214,0.22518,0.77415
 2026-10-16,2026-10-15,house,house-2026-NM-01,us-202res39c7cfc1,Research & Polling Inc.,2026-10-05,0.41494,0.37765,0.21863,0.5828
 2026-10-16,2026-10-15,house,house-2026-NM-03,us-202resc0457a03,Research & Polling Inc.,2026-10-05,0.30673,0.19409,0.20962,0.74062
+2026-10-21,2026-10-20,house,house-2026-FL-07,us-202dccdf4a1055,DCCC Targeting and Analytics Department,2026-10-18,0.0,-0.02099,0.20329,0.55043
+2026-10-21,2026-10-20,house,house-2026-FL-13,us-202pub0883c101,Public Policy Polling,2026-10-14,0.02151,0.01218,0.12064,0.53781
+2026-10-21,2026-10-20,house,house-2026-IN-05,us-202exp61baa04f,Expedition Strategies,2026-10-02,-0.02105,-0.11981,0.19671,0.72726
+2026-10-21,2026-10-20,house,house-2026-KY-06,us-202pubb12b26d8,Public Policy Polling,2026-10-19,0.13658,0.17131,0.11874,0.3606
+2026-10-21,2026-10-20,house,house-2026-MN-01,us-202pube424dda1,Public Policy Polling,2026-10-13,0.0,0.04447,0.11378,0.31765
+2026-10-21,2026-10-20,house,house-2026-MO-02,us-202pub64d2c386,Public Policy Polling,2026-10-19,0.02198,0.03748,0.12313,0.43863
+2026-10-21,2026-10-20,house,house-2026-MT-01,us-202pubba1dafd6,Public Policy Polling,2026-10-13,0.06454,0.02527,0.12316,0.65117
+2026-10-21,2026-10-20,house,house-2026-NC-09,us-202pub0782eb1a,Public Policy Polling,2026-10-19,-0.09097,-0.01525,0.19992,0.32277
+2026-10-21,2026-10-20,house,house-2026-NE-01,us-202pubb040dd5f,Public Policy Polling,2026-10-19,-0.02198,0.08572,0.12177,0.15263
+2026-10-21,2026-10-20,house,house-2026-NV-02,us-202pubd24128e3,Public Policy Polling,2026-10-12,-0.04445,-0.06148,0.20022,0.54158
+2026-10-21,2026-10-20,house,house-2026-NY-21,us-202pube3646207,Public Policy Polling,2026-10-12,-0.04445,0.06443,0.12375,0.15374
+2026-10-21,2026-10-20,house,house-2026-OH-10,us-202dccf9796e58,DCCC Targeting and Analytics Department,2026-10-12,0.06596,0.02406,0.19449,0.60397
+2026-10-21,2026-10-20,house,house-2026-OH-15,us-202har6cfd60c5,Hart Research Associates,2026-10-10,0.06454,-0.00623,0.13094,0.74176
+2026-10-21,2026-10-20,house,house-2026-RI-01,us-202emb6d7ed09a,Embold Research,2026-10-06,0.45474,0.53449,0.22436,0.33279
+2026-10-21,2026-10-20,house,house-2026-RI-02,us-202embaff582ba,Embold Research,2026-10-06,0.28768,0.26508,0.204,0.55408
+2026-10-21,2026-10-20,house,house-2026-TX-28,us-202dccab8a9d73,DCCC Targeting and Analytics Department,2026-10-10,0.46262,0.29024,0.13932,0.91446

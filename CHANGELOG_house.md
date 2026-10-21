@@ -2,6 +2,47 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-21
+
+Democratic chances of House control are down 0.3 pts to 80.8% on 16 new polls. Projected seats 250.0 → 250.1 (+0.1).
+
+**National environment.** The generic ballot moved D+9.0 → D+8.8 (-0.1). Because every race is geared to the national environment by its own elasticity, this shifts all 435 contests together, not just the ones with new polls.
+
+**Races that moved** (81 of 435):
+
+  - **NC-09** — Democratic win probability 37.6% → 21.7% (-16.0 pts); projected margin R+3.3 → R+5.8 (-2.5). Driven by 1 new poll:
+    - Public Policy Polling (2026-10-19, n=526, LV, D-aligned sponsor): R+4.5
+
+  - **NY-21** — Democratic win probability 52.5% → 39.6% (-12.9 pts); projected margin D+0.5 → R+1.8 (-2.3). Driven by 1 new poll:
+    - Public Policy Polling (2026-10-12, n=613, LV, D-aligned sponsor): R+2.2
+
+  - **NE-01** — Democratic win probability 59.2% → 49.6% (-9.6 pts); projected margin D+1.7 → R+0.1 (-1.8). Driven by 1 new poll:
+    - Public Policy Polling (2026-10-19, n=536, LV, D-aligned sponsor): R+1.1
+
+  - **RI-02** — Democratic win probability 89.2% → 96.8% (+7.5 pts); projected margin D+13.3 → D+14.0 (+0.7). Driven by 1 new poll:
+    - Embold Research (2026-10-06, n=417, LV): D+14.3
+
+  - **IN-05** — Democratic win probability 25.8% → 33.1% (+7.3 pts); projected margin R+7.0 → R+3.1 (+3.8). Driven by 1 new poll:
+    - Expedition Strategies (2026-10-02, n=600, LV, D-aligned sponsor): R+1.1
+
+  - **MT-01** — Democratic win probability 43.1% → 49.6% (+6.4 pts); projected margin R+1.3 → R+0.1 (+1.2). Driven by 1 new poll:
+    - Public Policy Polling (2026-10-13, n=541, LV, D-aligned sponsor): D+3.2
+
+  - **OH-10** — Democratic win probability 50.9% → 56.8% (+5.9 pts); projected margin D+0.2 → D+1.2 (+1.0). Driven by 1 new poll:
+    - DCCC Targeting and Analytics Department (2026-10-12, n=535, LV, D-aligned sponsor): D+3.3
+
+  - **TX-34** — Democratic win probability 74.9% → 80.4% (+5.5 pts); projected margin D+5.1 → D+6.3 (+1.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **OH-15** — Democratic win probability 39.5% → 44.8% (+5.3 pts); projected margin R+1.9 → R+0.9 (+1.0). Driven by 1 new poll:
+    - Hart Research Associates (2026-10-10, n=503, LV, D-aligned sponsor): D+3.2
+
+  - **MN-01** — Democratic win probability 48.2% → 43.4% (-4.9 pts); projected margin R+0.3 → R+1.1 (-0.8). Driven by 1 new poll:
+    - Public Policy Polling (2026-10-13, n=588, LV, D-aligned sponsor): D+0.0
+
+**New polling that did not move the needle.** MO-02 (1), RI-01 (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-20
 
 Democratic chances of House control are down 1.3 pts to 81.0% on no new polls. Projected seats 251.7 → 250.0 (-1.7).

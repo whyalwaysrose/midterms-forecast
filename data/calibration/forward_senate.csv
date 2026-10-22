@@ -93,3 +93,7 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-21,2026-10-20,senate,senate-2026-NC,us-202act3e915bba,ActiVote,2026-10-14,0.27777,0.20393,0.1147,0.77809
 2026-10-21,2026-10-20,senate,senate-2026-OH,us-202mar3b19e64d,Marist College,2026-10-16,0.08701,0.15985,0.07618,0.13597
 2026-10-21,2026-10-20,senate,senate-2026-RI,us-202embbacff0bd,Embold Research,2026-10-06,0.5416,0.48351,0.10354,0.7493
+2026-10-22,2026-10-21,senate,senate-2026-FL,us-202unif780f058,University of North Florida,2026-10-15,-0.08516,-0.13228,0.06908,0.7906
+2026-10-22,2026-10-21,senate,senate-2026-GA,us-202uni278821c4,University of Georgia School of Public and International Affairs,2026-10-11,0.18232,0.18334,0.08095,0.49386
+2026-10-22,2026-10-21,senate,senate-2026-MI,us-202marad729239,Marist College,2026-10-16,0.04082,0.1239,0.0968,0.15915
+2026-10-22,2026-10-21,senate,senate-2026-OH,us-202vot936927b5,VoteHub/Verasight,2026-10-10,0.08567,0.08216,0.10276,0.51676

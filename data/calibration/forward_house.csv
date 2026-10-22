@@ -62,3 +62,7 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-21,2026-10-20,house,house-2026-RI-01,us-202emb6d7ed09a,Embold Research,2026-10-06,0.45474,0.53449,0.22436,0.33279
 2026-10-21,2026-10-20,house,house-2026-RI-02,us-202embaff582ba,Embold Research,2026-10-06,0.28768,0.26508,0.204,0.55408
 2026-10-21,2026-10-20,house,house-2026-TX-28,us-202dccab8a9d73,DCCC Targeting and Analytics Department,2026-10-10,0.46262,0.29024,0.13932,0.91446
+2026-10-22,2026-10-21,house,house-2026-SD-01,us-202mas4a1e1960,Mason-Dixon,2026-10-13,-0.62861,-0.4319,0.21072,0.14103
+2026-10-22,2026-10-21,house,house-2026-TX-15,us-202tex58503fef,Texas Southern University Barbara Jordan Public Policy Research and Survey Center,2026-10-14,0.14764,0.15301,0.11386,0.47687
+2026-10-22,2026-10-21,house,house-2026-TX-23,us-202norac2aeeac,"Normington, Petts & Associates",2026-10-06,0.0,0.05372,0.15082,0.33248
+2026-10-22,2026-10-21,house,house-2026-TX-35,us-202nord8a4b596,"Normington, Petts & Associates",2026-10-13,0.04349,0.02418,0.14532,0.56471

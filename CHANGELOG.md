@@ -2,6 +2,22 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-22
+
+Democratic chances of Senate control are down 0.3 pts to 65.5% on 4 new polls. Projected seats 52.1 → 52.1 (+0.0).
+
+**Races that moved** (2 of 35):
+
+  - **Michigan** — Democratic win probability 69.6% → 67.4% (-2.2 pts); projected margin D+2.8 → D+2.4 (-0.4). Driven by 1 new poll:
+    - Marist College (2026-10-16, n=600, LV): D+2.0
+
+  - **Florida** — Democratic win probability 9.9% → 11.2% (+1.3 pts); projected margin R+7.0 → R+6.5 (+0.5). Driven by 1 new poll:
+    - University of North Florida (2026-10-15, n=1414, LV): R+4.3
+
+**New polling that did not move the needle.** Ohio (1), Georgia (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-21
 
 Democratic chances of Senate control are down 0.6 pts to 65.8% on 13 new polls. Projected seats 52.2 → 52.1 (-0.1).

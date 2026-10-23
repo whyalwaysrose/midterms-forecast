@@ -2,6 +2,201 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-23",
+   "previous_run_date": "2026-10-22",
+   "headline": "Democratic chances of Senate control are up 0.8 pts to 66.3% on 13 new polls. Projected seats 52.1 \u2192 52.2 (+0.1).",
+   "body": [
+    "**Races that moved** (5 of 35):",
+    "",
+    "  - **Nebraska** \u2014 Democratic win probability 27.3% \u2192 32.7% (+5.4 pts); projected margin R+3.4 \u2192 R+2.5 (+0.9). Driven by 1 new poll:\n    - National Public Affairs (2026-10-16, n=598, LV): R+3.1",
+    "",
+    "  - **Ohio** \u2014 Democratic win probability 75.4% \u2192 76.9% (+1.5 pts); projected margin D+3.7 \u2192 D+3.9 (+0.2). Driven by 2 new polls:\n    - Beacon Research/Shaw & Co. Research (2026-10-17, n=1592, LV): D+5.1\n    - New River Strategies/GS Strategy Group (2026-10-11, n=959, LV): D+6.5",
+    "",
+    "  - **Iowa** \u2014 Democratic win probability 50.0% \u2192 51.1% (+1.2 pts); projected margin D+-0.0 \u2192 D+0.1 (+0.1). Driven by 1 new poll:\n    - New River Strategies/GS Strategy Group (2026-10-11, n=602, LV): D+2.2",
+    "",
+    "  - **New Hampshire** \u2014 Democratic win probability 90.1% \u2192 91.1% (+1.1 pts); projected margin D+7.1 \u2192 D+7.3 (+0.2). Driven by 1 new poll:\n    - Saint Anselm (2026-10-19, n=1672, LV): D+7.5",
+    "",
+    "  - **Montana** \u2014 Democratic win probability 14.6% \u2192 14.0% (-0.6 pts); projected margin R+10.5 \u2192 R+10.8 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "**New polling that did not move the needle.** Texas (5), Florida (1), North Carolina (1), Alabama (1). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 13,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-NE",
+     "name": "Nebraska",
+     "prob_before": 0.2728,
+     "prob_after": 0.3271,
+     "prob_delta": 0.054300000000000015,
+     "margin_before": -3.41,
+     "margin_after": -2.5,
+     "margin_delta": 0.9100000000000001,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202natd1a93c5a",
+       "pollster": "National Public Affairs",
+       "date": "2026-10-16",
+       "start_date": "2026-10-15",
+       "end_date": "2026-10-18",
+       "sample_size": 598,
+       "population": "lv",
+       "dem_pct": 47.0,
+       "rep_pct": 50.0,
+       "margin": -3.1,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://backend.natpublicaffairs.com/media/NE_Tracker_R2_Trend_Memo_102226.7.pdf",
+       "dem_candidate": "Dan Osborn",
+       "rep_candidate": "Pete Ricketts",
+       "created_at": "2026-10-23"
+      }
+     ],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-OH",
+     "name": "Ohio",
+     "prob_before": 0.7539,
+     "prob_after": 0.7688,
+     "prob_delta": 0.014900000000000024,
+     "margin_before": 3.66,
+     "margin_after": 3.9,
+     "margin_delta": 0.23999999999999977,
+     "new_poll_count": 2,
+     "new_polls": [
+      {
+       "id": "us-202bea80ab32e9",
+       "pollster": "Beacon Research/Shaw & Co. Research",
+       "date": "2026-10-17",
+       "start_date": "2026-10-15",
+       "end_date": "2026-10-19",
+       "sample_size": 1592,
+       "population": "lv",
+       "dem_pct": 52.0,
+       "rep_pct": 47.0,
+       "margin": 5.1,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Fox News"
+       ],
+       "url": "https://www.foxnews.com/politics/fox-news-poll-gender-gap-pocketbook-pain-shape-ohio-senate-race",
+       "dem_candidate": "Sherrod Brown",
+       "rep_candidate": "Jon Husted",
+       "created_at": "2026-10-22"
+      },
+      {
+       "id": "us-202new8d3274bf",
+       "pollster": "New River Strategies/GS Strategy Group",
+       "date": "2026-10-11",
+       "start_date": "2026-10-09",
+       "end_date": "2026-10-13",
+       "sample_size": 959,
+       "population": "lv",
+       "dem_pct": 49.0,
+       "rep_pct": 43.0,
+       "margin": 6.5,
+       "partisan_sign": 0,
+       "sponsors": [
+        "The Cook Political Report"
+       ],
+       "url": "https://www.cookpolitical.com/analysis/survey-research/battleground-district-project/senate-battleground-district-project-october?utm_medium=email_action&utm_source=customer.io",
+       "dem_candidate": "Sherrod Brown",
+       "rep_candidate": "Jon Husted",
+       "created_at": "2026-10-22"
+      }
+     ],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-IA",
+     "name": "Iowa",
+     "prob_before": 0.4998,
+     "prob_after": 0.5114,
+     "prob_delta": 0.011599999999999944,
+     "margin_before": -0.0,
+     "margin_after": 0.15,
+     "margin_delta": 0.15,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202newc8f58efe",
+       "pollster": "New River Strategies/GS Strategy Group",
+       "date": "2026-10-11",
+       "start_date": "2026-10-09",
+       "end_date": "2026-10-13",
+       "sample_size": 602,
+       "population": "lv",
+       "dem_pct": 46.0,
+       "rep_pct": 44.0,
+       "margin": 2.2,
+       "partisan_sign": 0,
+       "sponsors": [
+        "The Cook Political Report"
+       ],
+       "url": "https://www.cookpolitical.com/analysis/survey-research/battleground-district-project/senate-battleground-district-project-october?utm_medium=email_action&utm_source=customer.io",
+       "dem_candidate": "Josh Turek",
+       "rep_candidate": "Ashley Hinson",
+       "created_at": "2026-10-22"
+      }
+     ],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-NH",
+     "name": "New Hampshire",
+     "prob_before": 0.9006,
+     "prob_after": 0.9113,
+     "prob_delta": 0.010700000000000043,
+     "margin_before": 7.12,
+     "margin_after": 7.3,
+     "margin_delta": 0.17999999999999972,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202sai55f1c7c2",
+       "pollster": "Saint Anselm",
+       "date": "2026-10-19",
+       "start_date": "2026-10-19",
+       "end_date": "2026-10-20",
+       "sample_size": 1672,
+       "population": "lv",
+       "dem_pct": 50.0,
+       "rep_pct": 43.0,
+       "margin": 7.5,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://www.anselm.edu/about/anselmian-hub/news/new-saint-anselm-college-poll-finds-democrats-leading-congressional-races-affordability-concerns-shape-election-landscape",
+       "dem_candidate": "Chris Pappas",
+       "rep_candidate": "John Sununu",
+       "created_at": "2026-10-23"
+      }
+     ],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-MT",
+     "name": "Montana",
+     "prob_before": 0.146,
+     "prob_after": 0.1399,
+     "prob_delta": -0.006099999999999994,
+     "margin_before": -10.48,
+     "margin_after": -10.82,
+     "margin_delta": -0.33999999999999986,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-10-23\n\nDemocratic chances of Senate control are up 0.8 pts to 66.3% on 13 new polls. Projected seats 52.1 \u2192 52.2 (+0.1).\n\n**Races that moved** (5 of 35):\n\n  - **Nebraska** \u2014 Democratic win probability 27.3% \u2192 32.7% (+5.4 pts); projected margin R+3.4 \u2192 R+2.5 (+0.9). Driven by 1 new poll:\n    - National Public Affairs (2026-10-16, n=598, LV): R+3.1\n\n  - **Ohio** \u2014 Democratic win probability 75.4% \u2192 76.9% (+1.5 pts); projected margin D+3.7 \u2192 D+3.9 (+0.2). Driven by 2 new polls:\n    - Beacon Research/Shaw & Co. Research (2026-10-17, n=1592, LV): D+5.1\n    - New River Strategies/GS Strategy Group (2026-10-11, n=959, LV): D+6.5\n\n  - **Iowa** \u2014 Democratic win probability 50.0% \u2192 51.1% (+1.2 pts); projected margin D+-0.0 \u2192 D+0.1 (+0.1). Driven by 1 new poll:\n    - New River Strategies/GS Strategy Group (2026-10-11, n=602, LV): D+2.2\n\n  - **New Hampshire** \u2014 Democratic win probability 90.1% \u2192 91.1% (+1.1 pts); projected margin D+7.1 \u2192 D+7.3 (+0.2). Driven by 1 new poll:\n    - Saint Anselm (2026-10-19, n=1672, LV): D+7.5\n\n  - **Montana** \u2014 Democratic win probability 14.6% \u2192 14.0% (-0.6 pts); projected margin R+10.5 \u2192 R+10.8 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n**New polling that did not move the needle.** Texas (5), Florida (1), North Carolina (1), Alabama (1). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
    "run_date": "2026-10-22",
    "previous_run_date": "2026-10-21",
    "headline": "Democratic chances of Senate control are down 0.3 pts to 65.5% on 4 new polls. Projected seats 52.1 \u2192 52.1 (+0.0).",

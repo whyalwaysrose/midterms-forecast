@@ -1,21 +1,21 @@
 {
  "chamber": "house",
- "run_date": "2026-10-22",
+ "run_date": "2026-10-23",
  "ok": true,
  "metrics": {
   "races_total": 435,
-  "races_with_polls": 70,
+  "races_with_polls": 75,
   "races_blocked_by_roster": 2,
-  "race_polls": 116,
-  "national_polls": 417,
+  "race_polls": 131,
+  "national_polls": 416,
   "feed_records": {
    "us-senator": 0,
-   "us-representative": 155,
-   "generic-ballot": 548,
-   "approval": 2949
+   "us-representative": 171,
+   "generic-ballot": 547,
+   "approval": 2947
   },
   "rejections": {
-   "no single D-vs-R matchup": 1047,
+   "no single D-vs-R matchup": 1046,
    "older than max_age_days": 126,
    "pollster banned by 538: Big Data Poll": 14,
    "repeat readings of a survey already counted": 12
@@ -30,27 +30,27 @@
    "guards": "a run proceeding on a feed that returned nothing, which reads downstream as a quiet day rather than a failed fetch",
    "value": {
     "us-senator": 0,
-    "us-representative": 155,
-    "generic-ballot": 548,
-    "approval": 2949
+    "us-representative": 171,
+    "generic-ballot": 547,
+    "approval": 2947
    }
   },
   {
    "name": "race_polls_used",
    "ok": true,
-   "detail": "116 race polls from us-representative",
+   "detail": "131 race polls from us-representative",
    "guards": "a chamber-blind default feeding the Senate's polls to the House",
-   "value": 116
+   "value": 131
   },
   {
    "name": "roster_reads_the_feed",
    "ok": true,
-   "detail": "2 of 72 races with poll data are unusable because no candidate name resolves (3%; limit 20%)",
+   "detail": "2 of 77 races with poll data are unusable because no candidate name resolves (3%; limit 20%)",
    "guards": "the House roster going stale for seven weeks at 41% blocked",
    "value": {
     "blocked": 2,
-    "with_data": 72,
-    "fraction": 0.0278,
+    "with_data": 77,
+    "fraction": 0.026,
     "races": [
      "house-2026-AK-01",
      "house-2026-IL-04"
@@ -60,20 +60,20 @@
   {
    "name": "coverage_did_not_collapse",
    "ok": true,
-   "detail": "races with polls 69 -> 70 (+1%; limit -25%)",
+   "detail": "races with polls 70 -> 75 (+7%; limit -25%)",
    "guards": "any new fault that silently drops races, the shared signature of every defect in this file's docstring",
    "value": {
-    "before": 69,
-    "after": 70
+    "before": 70,
+    "after": 75
    }
   },
   {
    "name": "roster_is_fresh",
    "ok": true,
-   "detail": "roster built 2026-10-22 (0 days ago; limit 7)",
+   "detail": "roster built 2026-10-23 (0 days ago; limit 7)",
    "guards": "the rebuild step failing quietly and the roster re-staling",
    "value": {
-    "built": "2026-10-22",
+    "built": "2026-10-23",
     "age_days": 0
    }
   },

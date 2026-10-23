@@ -97,3 +97,16 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-22,2026-10-21,senate,senate-2026-GA,us-202uni278821c4,University of Georgia School of Public and International Affairs,2026-10-11,0.18232,0.18334,0.08095,0.49386
 2026-10-22,2026-10-21,senate,senate-2026-MI,us-202marad729239,Marist College,2026-10-16,0.04082,0.1239,0.0968,0.15915
 2026-10-22,2026-10-21,senate,senate-2026-OH,us-202vot936927b5,VoteHub/Verasight,2026-10-10,0.08567,0.08216,0.10276,0.51676
+2026-10-23,2026-10-22,senate,senate-2026-AL,us-202cyg0d88fe11,Cygnal,2026-10-16,-0.35667,-0.41647,0.12036,0.72525
+2026-10-23,2026-10-22,senate,senate-2026-FL,us-202co/bf7a2617,co/efficient,2026-10-19,-0.18232,-0.20758,0.08317,0.64442
+2026-10-23,2026-10-22,senate,senate-2026-IA,us-202newc8f58efe,New River Strategies/GS Strategy Group,2026-10-11,0.04445,0.01006,0.09702,0.66678
+2026-10-23,2026-10-22,senate,senate-2026-NC,us-202har90f566f4,Harper Polling,2026-10-19,0.22826,0.23925,0.10484,0.44881
+2026-10-23,2026-10-22,senate,senate-2026-NE,us-202natd1a93c5a,National Public Affairs,2026-10-16,-0.06188,-0.05917,0.10428,0.48727
+2026-10-23,2026-10-22,senate,senate-2026-NH,us-202sai55f1c7c2,Saint Anselm,2026-10-19,0.15082,0.14062,0.07381,0.56734
+2026-10-23,2026-10-22,senate,senate-2026-OH,us-202new8d3274bf,New River Strategies/GS Strategy Group,2026-10-11,0.13062,0.08355,0.07836,0.76342
+2026-10-23,2026-10-22,senate,senate-2026-OH,us-202bea80ab32e9,Beacon Research/Shaw & Co. Research,2026-10-17,0.1011,0.09651,0.06413,0.53501
+2026-10-23,2026-10-22,senate,senate-2026-TX,us-202new4178c636,New River Strategies/GS Strategy Group,2026-10-11,0.10763,0.05173,0.0784,0.80024
+2026-10-23,2026-10-22,senate,senate-2026-TX,us-202pol8bd7b267,Pollfinity,2026-10-16,0.11,0.05061,0.13958,0.69679
+2026-10-23,2026-10-22,senate,senate-2026-TX,us-202bea368d4e46,Beacon Research/Shaw & Co. Research,2026-10-17,0.0,0.06485,0.06694,0.1332
+2026-10-23,2026-10-22,senate,senate-2026-TX,us-202eme43ceed84,Emerson College,2026-10-18,0.04256,0.0405,0.07735,0.51303
+2026-10-23,2026-10-22,senate,senate-2026-TX,us-202actbd0ac41f,ActiVote,2026-10-19,0.04001,0.05683,0.11655,0.42972

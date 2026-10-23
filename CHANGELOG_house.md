@@ -2,6 +2,46 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-23
+
+Democratic chances of House control are down 0.8 pts to 79.7% on 15 new polls. Projected seats 248.8 → 248.1 (-0.8).
+
+**National environment.** The generic ballot moved D+8.8 → D+8.6 (-0.2). Because every race is geared to the national environment by its own elasticity, this shifts all 435 contests together, not just the ones with new polls.
+
+**Races that moved** (126 of 435):
+
+  - **NC-11** — Democratic win probability 52.7% → 86.7% (+34.0 pts); projected margin D+0.7 → D+8.6 (+7.9). Driven by 1 new poll:
+    - Emerson College (2026-10-13, n=388, LV): D+13.1
+
+  - **NJ-02** — Democratic win probability 40.7% → 9.2% (-31.5 pts); projected margin R+2.6 → R+10.1 (-7.5). Driven by 1 new poll:
+    - Impact Research (2026-10-08, n=600, LV, D-aligned sponsor): R+11.1
+
+  - **AR-02** — Democratic win probability 76.0% → 56.3% (-19.7 pts); projected margin D+5.0 → D+1.1 (-3.9). Driven by 1 new poll:
+    - Emerson College (2026-10-13, n=383, LV): R+4.0
+
+  - **AZ-02** — Democratic win probability 29.1% → 42.9% (+13.9 pts); projected margin R+5.9 → R+1.4 (+4.6). Driven by 1 new poll:
+    - Emerson College (2026-10-13, n=345, LV): D+2.0
+
+  - **FL-25** — Democratic win probability 63.8% → 70.7% (+6.9 pts); projected margin D+3.8 → D+3.9 (+0.1). Driven by 1 new poll:
+    - Public Policy Polling (2026-10-21, n=592, LV, D-aligned sponsor): D+5.6
+
+  - **MO-02** — Democratic win probability 43.9% → 50.6% (+6.7 pts); projected margin R+1.0 → D+0.1 (+1.1). Driven by 1 new poll:
+    - Emerson College (2026-10-13, n=401, LV): D+5.2
+
+  - **MI-07** — Democratic win probability 70.1% → 76.0% (+5.8 pts); projected margin D+3.9 → D+4.8 (+1.0). Driven by 1 new poll:
+    - Emerson College (2026-10-13, n=314, LV): D+8.2
+
+  - **ME-02** — Democratic win probability 41.2% → 35.8% (-5.4 pts); projected margin R+1.7 → R+2.7 (-1.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **NY-01** — Democratic win probability 39.9% → 34.8% (-5.1 pts); projected margin R+2.1 → R+3.2 (-1.0). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **MT-01** — Democratic win probability 49.0% → 53.5% (+4.5 pts); projected margin R+0.2 → D+0.6 (+0.7). Driven by 1 new poll:
+    - Emerson College (2026-10-13, n=329, LV): D+4.2
+
+**New polling that did not move the needle.** TX-35 (1), PA-08 (1), IA-02 (1), NH-02 (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-22
 
 Democratic chances of House control are down 0.2 pts to 80.5% on 4 new polls. Projected seats 250.1 → 248.8 (-1.2).

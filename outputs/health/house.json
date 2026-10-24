@@ -1,16 +1,16 @@
 {
  "chamber": "house",
- "run_date": "2026-10-23",
+ "run_date": "2026-10-24",
  "ok": true,
  "metrics": {
   "races_total": 435,
   "races_with_polls": 75,
   "races_blocked_by_roster": 2,
-  "race_polls": 131,
+  "race_polls": 135,
   "national_polls": 416,
   "feed_records": {
    "us-senator": 0,
-   "us-representative": 171,
+   "us-representative": 175,
    "generic-ballot": 547,
    "approval": 2947
   },
@@ -30,7 +30,7 @@
    "guards": "a run proceeding on a feed that returned nothing, which reads downstream as a quiet day rather than a failed fetch",
    "value": {
     "us-senator": 0,
-    "us-representative": 171,
+    "us-representative": 175,
     "generic-ballot": 547,
     "approval": 2947
    }
@@ -38,9 +38,9 @@
   {
    "name": "race_polls_used",
    "ok": true,
-   "detail": "131 race polls from us-representative",
+   "detail": "135 race polls from us-representative",
    "guards": "a chamber-blind default feeding the Senate's polls to the House",
-   "value": 131
+   "value": 135
   },
   {
    "name": "roster_reads_the_feed",
@@ -60,20 +60,20 @@
   {
    "name": "coverage_did_not_collapse",
    "ok": true,
-   "detail": "races with polls 70 -> 75 (+7%; limit -25%)",
+   "detail": "races with polls 75 -> 75 (-0%; limit -25%)",
    "guards": "any new fault that silently drops races, the shared signature of every defect in this file's docstring",
    "value": {
-    "before": 70,
+    "before": 75,
     "after": 75
    }
   },
   {
    "name": "roster_is_fresh",
    "ok": true,
-   "detail": "roster built 2026-10-23 (0 days ago; limit 7)",
+   "detail": "roster built 2026-10-24 (0 days ago; limit 7)",
    "guards": "the rebuild step failing quietly and the roster re-staling",
    "value": {
-    "built": "2026-10-23",
+    "built": "2026-10-24",
     "age_days": 0
    }
   },

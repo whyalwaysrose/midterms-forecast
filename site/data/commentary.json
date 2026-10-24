@@ -2,6 +2,127 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-24",
+   "previous_run_date": "2026-10-23",
+   "headline": "Democratic chances of Senate control are down 0.8 pts to 65.5% on 6 new polls. Projected seats 52.2 \u2192 52.2 (-0.1).",
+   "body": [
+    "**National environment.** The generic ballot moved D+7.9 \u2192 D+7.8 (-0.1). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.",
+    "",
+    "**Races that moved** (4 of 35):",
+    "",
+    "  - **Maine** \u2014 Democratic win probability 70.4% \u2192 65.9% (-4.5 pts); projected margin D+2.9 \u2192 D+2.2 (-0.7). Driven by 1 new poll:\n    - Beacon Research/Shaw & Co. Research (2026-10-18, n=1514, LV): D+0.0",
+    "",
+    "  - **Michigan** \u2014 Democratic win probability 67.8% \u2192 66.6% (-1.2 pts); projected margin D+2.4 \u2192 D+2.2 (-0.2). Driven by 1 new poll:\n    - InsiderAdvantage (2026-10-21, n=1200, LV): D+1.1",
+    "",
+    "  - **South Carolina** \u2014 Democratic win probability 40.4% \u2192 41.6% (+1.2 pts); projected margin R+1.4 \u2192 R+1.2 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **New Jersey** \u2014 Democratic win probability 92.3% \u2192 92.1% (-0.2 pts); projected margin D+14.5 \u2192 D+14.0 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "**New polling that did not move the needle.** Iowa (1), Texas (2), Ohio (1). New polls close to the existing estimate confirm it rather than change it.",
+    ""
+   ],
+   "new_poll_count": 6,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-ME",
+     "name": "Maine",
+     "prob_before": 0.7036,
+     "prob_after": 0.6587,
+     "prob_delta": -0.04490000000000005,
+     "margin_before": 2.86,
+     "margin_after": 2.18,
+     "margin_delta": -0.6799999999999997,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202bea00f453c2",
+       "pollster": "Beacon Research/Shaw & Co. Research",
+       "date": "2026-10-18",
+       "start_date": "2026-10-16",
+       "end_date": "2026-10-20",
+       "sample_size": 1514,
+       "population": "lv",
+       "dem_pct": 49.0,
+       "rep_pct": 49.0,
+       "margin": 0.0,
+       "partisan_sign": 0,
+       "sponsors": [
+        "Fox News"
+       ],
+       "url": "https://www.foxnews.com/politics/fox-news-poll-nail-biter-maine-senate-race",
+       "dem_candidate": "Troy Jackson",
+       "rep_candidate": "Susan Collins",
+       "created_at": "2026-10-23"
+      }
+     ],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-MI",
+     "name": "Michigan",
+     "prob_before": 0.678,
+     "prob_after": 0.6657,
+     "prob_delta": -0.012300000000000089,
+     "margin_before": 2.42,
+     "margin_after": 2.25,
+     "margin_delta": -0.16999999999999993,
+     "new_poll_count": 1,
+     "new_polls": [
+      {
+       "id": "us-202ins51d307b7",
+       "pollster": "InsiderAdvantage",
+       "date": "2026-10-21",
+       "start_date": "2026-10-21",
+       "end_date": "2026-10-22",
+       "sample_size": 1200,
+       "population": "lv",
+       "dem_pct": 47.0,
+       "rep_pct": 46.0,
+       "margin": 1.1,
+       "partisan_sign": 0,
+       "sponsors": [],
+       "url": "https://insideradvantage.com/insideradvantage-senate-surveys-mi-el-sayed-47-rogers-46-ia-hinson-47-turek-45-oh-brown-47-husted-44/",
+       "dem_candidate": "Abdul El-Sayed",
+       "rep_candidate": "Mike Rogers",
+       "created_at": "2026-10-23"
+      }
+     ],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-SC",
+     "name": "South Carolina",
+     "prob_before": 0.4043,
+     "prob_after": 0.4162,
+     "prob_delta": 0.011900000000000022,
+     "margin_before": -1.35,
+     "margin_after": -1.2,
+     "margin_delta": 0.15000000000000013,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-NJ",
+     "name": "New Jersey",
+     "prob_before": 0.9234,
+     "prob_after": 0.9213,
+     "prob_delta": -0.0020999999999999908,
+     "margin_before": 14.5,
+     "margin_after": 13.97,
+     "margin_delta": -0.5299999999999994,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-10-24\n\nDemocratic chances of Senate control are down 0.8 pts to 65.5% on 6 new polls. Projected seats 52.2 \u2192 52.2 (-0.1).\n\n**National environment.** The generic ballot moved D+7.9 \u2192 D+7.8 (-0.1). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.\n\n**Races that moved** (4 of 35):\n\n  - **Maine** \u2014 Democratic win probability 70.4% \u2192 65.9% (-4.5 pts); projected margin D+2.9 \u2192 D+2.2 (-0.7). Driven by 1 new poll:\n    - Beacon Research/Shaw & Co. Research (2026-10-18, n=1514, LV): D+0.0\n\n  - **Michigan** \u2014 Democratic win probability 67.8% \u2192 66.6% (-1.2 pts); projected margin D+2.4 \u2192 D+2.2 (-0.2). Driven by 1 new poll:\n    - InsiderAdvantage (2026-10-21, n=1200, LV): D+1.1\n\n  - **South Carolina** \u2014 Democratic win probability 40.4% \u2192 41.6% (+1.2 pts); projected margin R+1.4 \u2192 R+1.2 (+0.2). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **New Jersey** \u2014 Democratic win probability 92.3% \u2192 92.1% (-0.2 pts); projected margin D+14.5 \u2192 D+14.0 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n**New polling that did not move the needle.** Iowa (1), Texas (2), Ohio (1). New polls close to the existing estimate confirm it rather than change it.\n"
+  },
+  {
    "run_date": "2026-10-23",
    "previous_run_date": "2026-10-22",
    "headline": "Democratic chances of Senate control are up 0.8 pts to 66.3% on 13 new polls. Projected seats 52.1 \u2192 52.2 (+0.1).",

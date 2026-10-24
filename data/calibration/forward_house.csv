@@ -81,3 +81,7 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-23,2026-10-22,house,house-2026-PA-08,us-202emea36e3a37,Emerson College,2026-10-13,0.08004,0.07397,0.14567,0.52041
 2026-10-23,2026-10-22,house,house-2026-TX-35,us-202emec9ad5ca5,Emerson College,2026-10-13,0.04001,0.02823,0.12362,0.54653
 2026-10-23,2026-10-22,house,house-2026-WA-03,us-202cha630f1158,Change Research,2026-10-20,0.02247,-0.00381,0.1163,0.6089
+2026-10-24,2026-10-23,house,house-2026-CO-03,us-202dcc52565cb3,DCCC Targeting and Analytics Department,2026-10-20,0.02151,-0.06274,0.15961,0.73705
+2026-10-24,2026-10-23,house,house-2026-SC-01,us-202pubd9e6a1c9,Public Policy Polling,2026-10-21,0.04349,0.02346,0.12155,0.58003
+2026-10-24,2026-10-23,house,house-2026-TX-34,us-202theaa4f5a76,The Washington Post/George Mason University Schar School of Policy and Government,2026-10-16,0.15082,0.12281,0.12025,0.61216
+2026-10-24,2026-10-23,house,house-2026-VA-01,us-202pubf344107a,Public Policy Polling,2026-10-21,0.02151,0.12121,0.12024,0.16668

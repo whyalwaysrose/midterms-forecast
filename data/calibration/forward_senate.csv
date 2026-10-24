@@ -110,3 +110,9 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-23,2026-10-22,senate,senate-2026-TX,us-202bea368d4e46,Beacon Research/Shaw & Co. Research,2026-10-17,0.0,0.06485,0.06694,0.1332
 2026-10-23,2026-10-22,senate,senate-2026-TX,us-202eme43ceed84,Emerson College,2026-10-18,0.04256,0.0405,0.07735,0.51303
 2026-10-23,2026-10-22,senate,senate-2026-TX,us-202actbd0ac41f,ActiVote,2026-10-19,0.04001,0.05683,0.11655,0.42972
+2026-10-24,2026-10-23,senate,senate-2026-IA,us-202ins750c2821,InsiderAdvantage,2026-10-21,-0.04349,-0.01415,0.07282,0.31262
+2026-10-24,2026-10-23,senate,senate-2026-ME,us-202bea00f453c2,Beacon Research/Shaw & Co. Research,2026-10-18,0.0,0.07524,0.06547,0.099
+2026-10-24,2026-10-23,senate,senate-2026-MI,us-202ins51d307b7,InsiderAdvantage,2026-10-21,0.02151,0.0324,0.07369,0.42807
+2026-10-24,2026-10-23,senate,senate-2026-OH,us-202ins6e5f29f2,InsiderAdvantage,2026-10-21,0.06596,0.06046,0.07298,0.53686
+2026-10-24,2026-10-23,senate,senate-2026-TX,us-202vot954dd8b2,VoteHub/Verasight,2026-10-10,0.05174,0.05438,0.09514,0.48637
+2026-10-24,2026-10-23,senate,senate-2026-TX,us-202slidcb5236a,Slingshot Strategies,2026-10-16,0.08168,0.07731,0.07846,0.52725

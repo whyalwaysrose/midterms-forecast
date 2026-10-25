@@ -366,14 +366,40 @@ def build_poll_table(
     # fabricated number cannot be weighted into usefulness: it looks precise,
     # not noisy, so a variance adjustment would make the model MORE confident.
     if cfg.polls.pollster_ratings.exclude_banned:
+        from .pollsters import normalise as normalise_pollster
         from .ratings import PollsterRatings
 
-        banned = PollsterRatings.load().banned_names({p.pollster for p in table.polls})
+        observed = {p.pollster for p in table.polls}
+        banned = PollsterRatings.load().banned_names(observed)
+
+        # 538's list is a vendored CSV and 538 closed in March 2025, so it can
+        # never grow a firm exposed afterwards. Wedgewood Polls admitted
+        # fabricating its data on 2026-10-20 with six polls already in this
+        # model, which is precisely the case the list above was meant to cover
+        # and structurally could not.
+        keys = {
+            normalise_pollster(n)
+            for n in cfg.polls.pollster_ratings.banned_locally
+        }
+        local_names = {
+            name for name in observed if normalise_pollster(name) in keys
+        }
+
+        # Attributed separately, because "banned by 538" about a firm 538 never
+        # rated is a false statement in a log a person reads -- and the
+        # distinction is the point: one list is frozen history, the other is a
+        # judgement this project made and has to defend.
+        for name, source in (
+            *((n, "538") for n in banned - local_names),
+            *((n, "this project") for n in local_names),
+        ):
+            n_dropped = sum(1 for p in table.polls if p.pollster == name)
+            if n_dropped:
+                table.rejections[f"pollster banned by {source}: {name}"] += n_dropped
+
+        banned = banned | local_names
         if banned:
-            dropped = Counter(p.pollster for p in table.polls if p.pollster in banned)
             table.polls[:] = [p for p in table.polls if p.pollster not in banned]
-            for name, n in dropped.most_common():
-                table.rejections[f"pollster banned by 538: {name}"] += n
 
     # One survey, one observation. A pollster testing several hypothetical
     # matchups files several rows; they share one sample, so counting them

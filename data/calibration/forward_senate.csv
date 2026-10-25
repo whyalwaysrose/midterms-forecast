@@ -11,7 +11,6 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-09-25,2026-09-24,senate,senate-2026-ME,us-202uni866e047f,University of Massachusetts Lowell Center for Public Opinion/YouGov,2026-09-05,0.11,0.03365,0.09632,0.82348
 2026-09-26,2026-09-25,senate,senate-2026-FL,us-202ste67ef4e2d,Stetson University Center for Public Opinion Research,2026-09-17,-0.24295,-0.122,0.08937,0.07052
 2026-09-26,2026-09-25,senate,senate-2026-GA,us-202insbbb32dd3,InsiderAdvantage,2026-09-22,0.17435,0.14732,0.08484,0.65107
-2026-09-26,2026-09-25,senate,senate-2026-KS,us-202wedd2e2b8b0,Wedgewood Polls,2026-09-23,0.04082,-0.01997,0.11833,0.73173
 2026-09-26,2026-09-25,senate,senate-2026-ME,us-202uni51f1c418,University of New Hampshire,2026-09-19,0.08168,0.04797,0.07472,0.70724
 2026-09-26,2026-09-25,senate,senate-2026-NE,us-202gba71e992b6,GBAO,2026-09-05,0.02151,-0.19376,0.20043,0.88789
 2026-09-26,2026-09-25,senate,senate-2026-NH,us-202uni02a0a46f,University of New Hampshire,2026-09-19,0.17435,0.15303,0.07599,0.63405
@@ -30,11 +29,9 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-02,2026-10-01,senate,senate-2026-OH,us-202insea9816ae,InsiderAdvantage,2026-09-28,0.02299,0.08492,0.07827,0.17697
 2026-10-03,2026-10-02,senate,senate-2026-AK,us-202qua198b0338,Quantus Insights,2026-09-29,-0.01263,0.02374,0.09331,0.3181
 2026-10-03,2026-10-02,senate,senate-2026-IA,us-202beaadb6c4f9,Beacon Research/Shaw & Co. Research,2026-09-26,0.04167,0.04562,0.0797,0.47577
-2026-10-03,2026-10-02,senate,senate-2026-ME,us-202wedfe4427b1,Wedgewood Polls,2026-09-29,0.08004,0.06151,0.11719,0.57688
 2026-10-03,2026-10-02,senate,senate-2026-MI,us-202tra046dabbf,Trafalgar Group,2026-09-29,0.04349,0.04319,0.07485,0.50193
 2026-10-03,2026-10-02,senate,senate-2026-TX,us-202beab9600d9b,Beacon Research/Shaw & Co. Research,2026-09-26,0.04001,0.09433,0.08174,0.21504
 2026-10-05,2026-10-04,senate,__national__,gen202you9adbf42a,YouGov - CBS News,2026-10-01,0.18232,0.14128,0.05984,0.79177
-2026-10-05,2026-10-04,senate,senate-2026-GA,us-202wed7f897488,Wedgewood Polls,2026-10-02,0.20067,0.18187,0.10236,0.58899
 2026-10-06,2026-10-05,senate,senate-2026-ME,us-202mare89f317d,Marist College,2026-10-02,0.08168,0.14075,0.06929,0.16062
 2026-10-06,2026-10-05,senate,senate-2026-MI,us-202mit7960c973,Mitchell Research & Communications,2026-10-01,0.11507,0.04733,0.10007,0.78893
 2026-10-08,2026-10-07,senate,senate-2026-IA,us-202cnnc393624c,CNN/SSRS,2026-10-02,-0.04546,0.02833,0.09152,0.1728
@@ -71,7 +68,6 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-16,2026-10-15,senate,senate-2026-MI,us-202thee5a838a4,The Tyson Group,2026-09-25,0.02299,0.06204,0.09869,0.31562
 2026-10-16,2026-10-15,senate,senate-2026-MI,us-202thed1db38e3,The Tyson Group,2026-10-07,-0.04445,0.06121,0.09819,0.11174
 2026-10-16,2026-10-15,senate,senate-2026-MN,us-202sur63027f3e,SurveyUSA,2026-10-10,0.06899,0.12728,0.10548,0.25377
-2026-10-16,2026-10-15,senate,senate-2026-MS,us-202weda6e4ad64,Wedgewood Polls,2026-10-13,-0.08004,-0.12625,0.12268,0.67633
 2026-10-16,2026-10-15,senate,senate-2026-NM,us-202resf47cceea,Research & Polling Inc.,2026-08-24,0.33271,0.29554,0.20133,0.58945
 2026-10-16,2026-10-15,senate,senate-2026-NM,us-202surae0ec3b2,SurveyUSA,2026-09-27,0.40547,0.29471,0.20382,0.74286
 2026-10-16,2026-10-15,senate,senate-2026-OH,us-202bow14c3613e,Bowling Green State University/YouGov,2026-10-04,0.13353,0.09922,0.08485,0.68804

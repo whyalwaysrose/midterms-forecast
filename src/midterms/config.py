@@ -260,6 +260,18 @@ class PollsterRatingsConfig:
 
     enabled: bool
     exclude_banned: bool
+    #: Pollsters banned here rather than by 538.
+    #:
+    #: `exclude_banned` reads the "Banned by 538" column of a vendored CSV, and
+    #: 538 was shut down in March 2025. The list is therefore frozen: it cannot
+    #: ever contain a firm exposed after that date, and fabrication is still
+    #: being exposed -- Wedgewood Polls admitted it on 2026-10-20, with six of
+    #: its polls already in this model.
+    #:
+    #: Matched on the same normalised form the ratings table uses, so a change
+    #: of filing name ("Wedgewood Polls" to "Wedgewood Polling") does not
+    #: silently un-ban anyone.
+    banned_locally: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -410,9 +422,21 @@ def _polls_config(raw: Mapping[str, Any]) -> PollsConfig:
     ratings = values.pop("pollster_ratings", None)
     if ratings is None:
         raise ConfigError("polls.pollster_ratings is missing from config/model.yaml")
-    return PollsConfig(
-        pollster_ratings=PollsterRatingsConfig(**ratings), **values
-    )
+    ratings = dict(ratings)
+    # YAML gives a list; the dataclass is frozen and declares a tuple.
+    locally = ratings.get("banned_locally")
+    if locally is not None:
+        if isinstance(locally, str):
+            raise ConfigError(
+                "polls.pollster_ratings.banned_locally must be a list, not a string"
+            )
+        ratings["banned_locally"] = tuple(locally)
+    try:
+        return PollsConfig(
+            pollster_ratings=PollsterRatingsConfig(**ratings), **values
+        )
+    except TypeError as exc:
+        raise ConfigError(f"polls.pollster_ratings: {exc}") from None
 
 
 def _national_env_config(raw: Mapping[str, Any]) -> NationalEnvConfig:

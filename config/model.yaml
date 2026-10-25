@@ -235,6 +235,22 @@ polls:
     # Currently excludes Big Data Poll (generic-ballot and approval only; no
     # Senate race polls). Set false to keep them, weighted by their rating.
     exclude_banned: true
+    # Firms banned here rather than by 538, because 538 shut down in March 2025
+    # and its list is a vendored CSV that cannot grow. Fabrication did not stop
+    # when the list froze. Same treatment: dropped, not down-weighted.
+    #
+    # Each entry needs a date and a primary source. This is a public accusation
+    # against a named business, and the bar for making one is that the firm
+    # admitted it or a credible investigation established it.
+    banned_locally:
+      # Admitted fabricating its data on 2026-10-20, after FiftyPlusOne compared
+      # respondent identifiers in its raw Mississippi Senate file against the
+      # Pollfish platform it claimed to have used and found patterns
+      # incompatible with real interviews. The New York Times removed all of its
+      # polls; Decision Desk HQ removed 17; Silver Bulletin banned it on
+      # 2026-10-24. The firm says one genuine survey was ever run, in Nebraska.
+      # Six of its polls were in this model -- GA, KS, ME, MS, OH, TX.
+      - Wedgewood Polls
   # Population/screen adjustments, relative to likely voters (the reference).
   # Registered-voter and adult samples historically lean slightly more
   # Democratic than likely-voter samples.

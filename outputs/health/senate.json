@@ -5,23 +5,24 @@
  "metrics": {
   "races_total": 35,
   "races_with_polls": 24,
-  "races_blocked_by_roster": 1,
-  "race_polls": 292,
+  "races_blocked_by_roster": 0,
+  "race_polls": 254,
   "national_polls": 415,
   "feed_records": {
-   "us-senator": 516,
-   "us-representative": 0,
-   "generic-ballot": 547,
-   "approval": 2947
+   "us-senator": 479,
+   "us-representative": 134,
+   "generic-ballot": 548,
+   "approval": 2949
   },
   "rejections": {
    "primary subject": 60,
-   "older than max_age_days": 150,
-   "no single D-vs-R matchup": 34,
+   "older than max_age_days": 151,
+   "no single D-vs-R matchup": 30,
    "pollster banned by 538: Big Data Poll": 32,
-   "repeat readings of a survey already counted": 95
+   "pollster banned by this project: Wedgewood Polls": 6,
+   "repeat readings of a survey already counted": 94
   },
-  "unresolved_name_races": 10
+  "unresolved_name_races": 9
  },
  "checks": [
   {
@@ -30,31 +31,29 @@
    "detail": "all of us-senator, generic-ballot, approval present",
    "guards": "a run proceeding on a feed that returned nothing, which reads downstream as a quiet day rather than a failed fetch",
    "value": {
-    "us-senator": 516,
-    "us-representative": 0,
-    "generic-ballot": 547,
-    "approval": 2947
+    "us-senator": 479,
+    "us-representative": 134,
+    "generic-ballot": 548,
+    "approval": 2949
    }
   },
   {
    "name": "race_polls_used",
    "ok": true,
-   "detail": "292 race polls from us-senator",
+   "detail": "254 race polls from us-senator",
    "guards": "a chamber-blind default feeding the Senate's polls to the House",
-   "value": 292
+   "value": 254
   },
   {
    "name": "roster_reads_the_feed",
    "ok": true,
-   "detail": "1 of 25 races with poll data are unusable because no candidate name resolves (4%; limit 20%)",
+   "detail": "0 of 24 races with poll data are unusable because no candidate name resolves (0%; limit 20%)",
    "guards": "the House roster going stale for seven weeks at 41% blocked",
    "value": {
-    "blocked": 1,
-    "with_data": 25,
-    "fraction": 0.04,
-    "races": [
-     "senate-2026-SD"
-    ]
+    "blocked": 0,
+    "with_data": 24,
+    "fraction": 0.0,
+    "races": []
    }
   },
   {

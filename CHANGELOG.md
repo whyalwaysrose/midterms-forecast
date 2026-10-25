@@ -2,6 +2,14 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-25
+
+No new polling since 2026-10-24. Democratic chances of Senate control hold at 65.6%.
+
+No individual race moved enough to be worth reporting.
+
+---
+
 ## 2026-10-24
 
 Democratic chances of Senate control are down 0.8 pts to 65.5% on 6 new polls. Projected seats 52.2 → 52.2 (-0.1).

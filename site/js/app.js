@@ -166,6 +166,68 @@ function commentaryHtml(entry) {
   return parts.join('');
 }
 
+/** Other forecasters' published numbers, shown under our own headline.
+ *
+ * Ours is drawn in the same list rather than above it, because the comparison
+ * only means something if this model has to sit in the ordering it produced.
+ * On the House that currently puts it last.
+ */
+function renderRivals(forecast) {
+  const block = forecast.rivals;
+  const wrap = $('rivals');
+  const rows = block?.forecasters ?? [];
+  if (rows.length < 2) {
+    wrap.hidden = true;
+    return;
+  }
+  wrap.hidden = false;
+
+  const ours = {
+    name: 'This model',
+    dem_control_prob: forecast.chamber_forecast.dem_control_prob,
+    dem_seats_median: forecast.chamber_forecast.dem_seats?.median ?? null,
+    as_of: forecast.run_date,
+    mine: true,
+  };
+  const all = [...rows, ours].sort(
+    (a, b) => b.dem_control_prob - a.dem_control_prob,
+  );
+
+  const chamber = forecast.chamber === 'house' ? 'House' : 'Senate';
+  const probs = all.map((r) => r.dem_control_prob);
+  const lo = pct1(Math.min(...probs));
+  const hi = pct1(Math.max(...probs));
+  const rank = all.findIndex((r) => r.mine) + 1;
+  $('rivals-title').textContent =
+    `${all.length} forecasts of the ${chamber}, from ${lo} to ${hi}`;
+
+  $('rival-list').innerHTML = all
+    .map((r) => {
+      const width = (100 * r.dem_control_prob).toFixed(1);
+      const seats = r.dem_seats_median ? `${r.dem_seats_median} seats` : '';
+      const stale = !r.mine && r.age_days > 2
+        ? `<span class="rival-stale">${esc(fmtDateShort(r.as_of))}</span>` : '';
+      const paywalled = r.access === 'paywalled-preview'
+        ? '<span class="rival-flag" title="Topline taken from a free preview of a paid page">preview</span>'
+        : '';
+      const name = r.source_url && !r.mine
+        ? `<a href="${esc(r.source_url)}" rel="noopener nofollow" target="_blank">${esc(r.name)}</a>`
+        : esc(r.name);
+      return `<li class="rival-row${r.mine ? ' mine' : ''}">
+        <span class="rival-name">${name}${paywalled}${stale}</span>
+        <span class="rival-bar"><span class="rival-fill" style="width:${width}%"></span></span>
+        <span class="rival-value">${pct1(r.dem_control_prob)}</span>
+        <span class="rival-seats">${esc(seats)}</span>
+      </li>`;
+    })
+    .join('');
+
+  const ordinal = ['', 'most', '2nd most', '3rd most'][rank] || `${rank}th most`;
+  $('rivals-foot').textContent =
+    `Democratic chance of control. This model is the ${ordinal} confident of `
+    + `the ${all.length}. Readings older than ${block.max_age_days} days are not shown.`;
+}
+
 function renderCommentary(commentary) {
   const entries = commentary?.entries ?? [];
   if (!entries.length) {
@@ -776,6 +838,7 @@ function render(forecast, history, commentary, geo, layout) {
   renderHistoryChart(history);
   renderTrajectory($('national-chart'), forecast.national.trajectory, { width: 520, height: 190 });
   renderMarkets(forecast);
+  renderRivals(forecast);
   renderCommentary(commentary);
 
   ALL_RACES = forecast.races ?? [];

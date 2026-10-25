@@ -364,6 +364,7 @@ class ForecastRun:
             "races": race_records,
             "predictive": self._predictive_block(),
             "markets": _markets_block(),
+            "rivals": _rivals_block(races.chamber, self.run_date),
             "methodology": _methodology_block(self.cfg, races.chamber),
             "diagnostics": {k: _round(v, 4) for k, v in self.diagnostics.items()},
             "poll_summary": {
@@ -480,6 +481,55 @@ class ForecastRun:
                 for i, race in enumerate(self.races.races)
             },
         }
+
+
+def _rivals_block(chamber: str, run_date: date) -> dict | None:
+    """What other forecasters currently say, for the strip under the headline.
+
+    Published alongside our own number rather than tucked away, because a
+    reader's first question about a probability is what everyone else thinks,
+    and the honest answer on the House is that this model is the most cautious
+    of the group. A comparison that only appears when it flatters is not one.
+
+    Read from the committed registry, never fetched: every rival publishes a
+    rendered page and none publishes a feed, so the numbers are hand-entered
+    with a date, a source and the exact wording. Returns None rather than
+    raising, like the markets block -- a missing comparison is an ordinary
+    state, and nothing here may delay a forecast.
+    """
+    try:
+        from .data import rivals
+
+        rows = rivals.latest_for_chamber(chamber, today=run_date)
+    except Exception as exc:  # noqa: BLE001 - never let this break a forecast
+        log.warning("rival registry unreadable, publishing without it: %s", exc)
+        return None
+
+    if len(rows) < 2:
+        # One other forecaster is an anecdote, not a comparison.
+        return None
+
+    return {
+        "note": (
+            "Other published forecasts of the same question, each read on the "
+            "date shown. Hand-entered from the source page, because none of "
+            "them publishes a feed. They are never an input to this model."
+        ),
+        "max_age_days": rivals.MAX_AGE_DAYS,
+        "forecasters": [
+            {
+                "name": r.forecaster,
+                "dem_control_prob": round(r.dem_control_prob, 4),
+                "dem_seats_median": r.dem_seats_median,
+                "as_of": r.as_of.isoformat(),
+                "age_days": r.age_days(run_date),
+                "access": r.access,
+                "source_url": r.source_url,
+                "note": r.note,
+            }
+            for r in rows
+        ],
+    }
 
 
 def _markets_block() -> dict | None:

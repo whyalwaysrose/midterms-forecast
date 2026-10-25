@@ -1130,3 +1130,109 @@ table.polls td.num { font-family: var(--mono); text-align: right; font-variant-n
   .market-card { flex-basis: 90%; max-width: none; padding: 13px 12px; }
   .carousel-nav { display: none; }   /* swipe is the obvious gesture on touch */
 }
+
+/* ---- What other forecasters say -------------------------------------- */
+/* Sits under the headline inside the hero card. Our own number is one row
+   among the others, sorted with them, so the comparison cannot be arranged
+   to flatter. */
+.rivals {
+  margin: var(--s-6) 0 var(--s-2);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--border);
+}
+
+.rivals-title {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+.rivals-sub { margin-bottom: var(--s-4); }
+
+.rival-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.rival-row {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 13rem) 1fr 3.6rem 5rem;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--fs-sm);
+}
+
+/* The one row that is ours. Marked, not promoted: it keeps its place in the
+   sort. */
+.rival-row.mine .rival-name,
+.rival-row.mine .rival-value { font-weight: 700; color: var(--text); }
+.rival-row.mine .rival-fill { background: var(--dem); }
+
+.rival-name {
+  color: var(--text-dim);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.rival-name a { color: inherit; text-decoration-color: var(--border-strong); }
+.rival-name a:hover { color: var(--text); }
+
+.rival-flag,
+.rival-stale {
+  margin-left: var(--s-2);
+  font-size: var(--fs-micro);
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+.rival-flag {
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.rival-bar {
+  display: block;
+  height: 8px;
+  min-width: 0;
+  background: var(--bg-elev-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rival-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  /* Rivals sit in a muted blue so ours reads as the one being compared. */
+  background: color-mix(in srgb, var(--dem) 55%, var(--bg-elev-2));
+}
+
+.rival-value {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--text);
+}
+
+.rival-seats {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+}
+
+@media (max-width: 640px) {
+  .rival-row {
+    grid-template-columns: 1fr 3.4rem;
+    grid-template-areas: "name value" "bar bar";
+    row-gap: var(--s-1);
+  }
+  .rival-name  { grid-area: name; }
+  .rival-value { grid-area: value; }
+  .rival-bar   { grid-area: bar; }
+  /* Seats are the first thing to go: the probability is the comparison. */
+  .rival-seats { display: none; }
+}

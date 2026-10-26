@@ -2,6 +2,36 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-26
+
+**The model changed in this run.** Democratic chances of House control are 79.8%, against 79.8% on 2026-10-25 — but the two runs were produced by different models, so the difference is not a change in the race.
+
+Movement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.
+
+**Races that moved** (26 of 435):
+
+  - **KS-02** — Democratic win probability 16.5% → 14.7% (-1.8 pts); projected margin R+10.7 → R+11.2 (-0.5). No new polls in this race; this is the model revision.
+
+  - **OH-14** — Democratic win probability 15.0% → 13.4% (-1.6 pts); projected margin R+11.2 → R+11.5 (-0.3). No new polls in this race; this is the model revision.
+
+  - **ME-02** — Democratic win probability 34.9% → 36.5% (+1.5 pts); projected margin R+2.8 → R+2.5 (+0.3). No new polls in this race; this is the model revision.
+
+  - **AZ-05** — Democratic win probability 19.7% → 18.4% (-1.3 pts); projected margin R+9.4 → R+9.4 (-0.1). No new polls in this race; this is the model revision.
+
+  - **FL-12** — Democratic win probability 37.1% → 35.9% (-1.3 pts); projected margin R+3.4 → R+3.8 (-0.3). No new polls in this race; this is the model revision.
+
+  - **FL-07** — Democratic win probability 41.2% → 40.0% (-1.2 pts); projected margin R+1.7 → R+1.9 (-0.2). No new polls in this race; this is the model revision.
+
+  - **FL-26** — Democratic win probability 26.6% → 25.4% (-1.2 pts); projected margin R+6.6 → R+6.9 (-0.3). No new polls in this race; this is the model revision.
+
+  - **TX-21** — Democratic win probability 14.5% → 13.3% (-1.2 pts); projected margin R+11.3 → R+11.7 (-0.4). No new polls in this race; this is the model revision.
+
+  - **NV-04** — Democratic win probability 86.6% → 87.7% (+1.1 pts); projected margin D+11.8 → D+11.9 (+0.1). No new polls in this race; this is the model revision.
+
+  - **SC-05** — Democratic win probability 11.7% → 10.6% (-1.1 pts); projected margin R+12.8 → R+13.2 (-0.4). No new polls in this race; this is the model revision.
+
+---
+
 ## 2026-10-25
 
 No new polling since 2026-10-24. Democratic chances of House control hold at 79.8%.

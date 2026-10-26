@@ -2,6 +2,85 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-26",
+   "previous_run_date": "2026-10-25",
+   "headline": "**The model changed in this run.** Democratic chances of Senate control are 65.2%, against 65.6% on 2026-10-25 \u2014 but the two runs were produced by different models, so the difference is not a change in the race.",
+   "body": [
+    "Movement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.",
+    "",
+    "**Races that moved** (4 of 35):",
+    "",
+    "  - **Kansas** \u2014 Democratic win probability 46.9% \u2192 44.0% (-2.9 pts); projected margin R+0.4 \u2192 R+0.8 (-0.4). No new polls in this race; this is the model revision.",
+    "",
+    "  - **Mississippi** \u2014 Democratic win probability 15.2% \u2192 13.5% (-1.7 pts); projected margin R+6.0 \u2192 R+6.8 (-0.8). No new polls in this race; this is the model revision.",
+    "",
+    "  - **Montana** \u2014 Democratic win probability 13.8% \u2192 14.9% (+1.1 pts); projected margin R+10.6 \u2192 R+10.8 (-0.2). No new polls in this race; this is the model revision.",
+    "",
+    "  - **Louisiana** \u2014 Democratic win probability 13.6% \u2192 13.2% (-0.4 pts); projected margin R+11.2 \u2192 R+11.5 (-0.4). No new polls in this race; this is the model revision.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-KS",
+     "name": "Kansas",
+     "prob_before": 0.4686,
+     "prob_after": 0.44,
+     "prob_delta": -0.028600000000000014,
+     "margin_before": -0.42,
+     "margin_after": -0.84,
+     "margin_delta": -0.42,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-MS",
+     "name": "Mississippi",
+     "prob_before": 0.1523,
+     "prob_after": 0.1349,
+     "prob_delta": -0.0174,
+     "margin_before": -5.98,
+     "margin_after": -6.79,
+     "margin_delta": -0.8099999999999996,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-MT",
+     "name": "Montana",
+     "prob_before": 0.1382,
+     "prob_after": 0.1488,
+     "prob_delta": 0.010599999999999998,
+     "margin_before": -10.6,
+     "margin_after": -10.78,
+     "margin_delta": -0.17999999999999972,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-LA",
+     "name": "Louisiana",
+     "prob_before": 0.1363,
+     "prob_after": 0.1325,
+     "prob_delta": -0.003799999999999998,
+     "margin_before": -11.15,
+     "margin_after": -11.54,
+     "margin_delta": -0.3899999999999988,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-10-26\n\n**The model changed in this run.** Democratic chances of Senate control are 65.2%, against 65.6% on 2026-10-25 \u2014 but the two runs were produced by different models, so the difference is not a change in the race.\n\nMovement below reflects the model revision as well as any new polling, and the two cannot be separated from a single comparison. Day-over-day attribution resumes with the next run.\n\n**Races that moved** (4 of 35):\n\n  - **Kansas** \u2014 Democratic win probability 46.9% \u2192 44.0% (-2.9 pts); projected margin R+0.4 \u2192 R+0.8 (-0.4). No new polls in this race; this is the model revision.\n\n  - **Mississippi** \u2014 Democratic win probability 15.2% \u2192 13.5% (-1.7 pts); projected margin R+6.0 \u2192 R+6.8 (-0.8). No new polls in this race; this is the model revision.\n\n  - **Montana** \u2014 Democratic win probability 13.8% \u2192 14.9% (+1.1 pts); projected margin R+10.6 \u2192 R+10.8 (-0.2). No new polls in this race; this is the model revision.\n\n  - **Louisiana** \u2014 Democratic win probability 13.6% \u2192 13.2% (-0.4 pts); projected margin R+11.2 \u2192 R+11.5 (-0.4). No new polls in this race; this is the model revision.\n"
+  },
+  {
    "run_date": "2026-10-25",
    "previous_run_date": "2026-10-24",
    "headline": "No new polling since 2026-10-24. Democratic chances of Senate control hold at 65.6%.",

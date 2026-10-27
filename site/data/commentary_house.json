@@ -2,6 +2,18 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-10-27",
+   "previous_run_date": "2026-10-26",
+   "headline": "No new polling since 2026-10-26. Democratic chances of House control hold at 79.8%.",
+   "body": [
+    "No individual race moved enough to be worth reporting.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [],
+   "markdown": "## 2026-10-27\n\nNo new polling since 2026-10-26. Democratic chances of House control hold at 79.8%.\n\nNo individual race moved enough to be worth reporting.\n"
+  },
+  {
    "run_date": "2026-10-26",
    "previous_run_date": "2026-10-25",
    "headline": "**The model changed in this run.** Democratic chances of House control are 79.8%, against 79.8% on 2026-10-25 \u2014 but the two runs were produced by different models, so the difference is not a change in the race.",

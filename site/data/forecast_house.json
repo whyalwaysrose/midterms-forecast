@@ -1,12 +1,12 @@
 {
  "schema_version": 5,
  "model_fingerprint": "74c3d6e6f870",
- "run_date": "2026-10-26",
- "generated_at": "2026-10-26T17:30:56+00:00",
+ "run_date": "2026-10-27",
+ "generated_at": "2026-10-27T16:34:43+00:00",
  "cycle": 2026,
  "chamber": "house",
  "election_date": "2026-11-03",
- "days_to_election": 8,
+ "days_to_election": 7,
  "data_source": {
   "name": "VoteHub Polling API",
   "url": "https://votehub.com/polls/api/",
@@ -72748,17 +72748,17 @@
  "markets": {
   "source": "Polymarket",
   "source_url": "https://polymarket.com",
-  "fetched_at": "2026-10-26T17:07:57+00:00",
+  "fetched_at": "2026-10-27T16:11:58+00:00",
   "note": "Shown for contrast only. Market prices are never an input to this model: traders read forecasts, so using them would be circular.",
   "events": [
    {
     "slug": "balance-of-power-2026-midterms",
     "title": "Balance of Power: 2026 Midterms",
-    "volume": 37977634.0,
+    "volume": 39350238.0,
     "outcomes": [
      {
       "label": "Democrats Sweep",
-      "probability": 0.655,
+      "probability": 0.645,
       "history": [
        {
         "date": "2025-07-19",
@@ -73237,14 +73237,14 @@
         "p": 0.625
        },
        {
-        "date": "2026-10-26",
-        "p": 0.655
+        "date": "2026-10-27",
+        "p": 0.645
        }
       ]
      },
      {
       "label": "R Senate, D House",
-      "probability": 0.265,
+      "probability": 0.275,
       "history": [
        {
         "date": "2025-07-19",
@@ -73723,8 +73723,8 @@
         "p": 0.275
        },
        {
-        "date": "2026-10-26",
-        "p": 0.265
+        "date": "2026-10-27",
+        "p": 0.275
        }
       ]
      },
@@ -73773,7 +73773,7 @@
         "p": 0.225
        },
        {
-        "date": "2025-08-26",
+        "date": "2025-08-27",
         "p": 0.23
        },
        {
@@ -73801,7 +73801,7 @@
         "p": 0.27
        },
        {
-        "date": "2025-09-22",
+        "date": "2025-09-23",
         "p": 0.28
        },
        {
@@ -73829,8 +73829,8 @@
         "p": 0.34
        },
        {
-        "date": "2025-10-19",
-        "p": 0.335
+        "date": "2025-10-20",
+        "p": 0.345
        },
        {
         "date": "2025-10-23",
@@ -73853,12 +73853,12 @@
         "p": 0.255
        },
        {
-        "date": "2025-11-11",
-        "p": 0.27
+        "date": "2025-11-12",
+        "p": 0.265
        },
        {
-        "date": "2025-11-15",
-        "p": 0.235
+        "date": "2025-11-16",
+        "p": 0.23
        },
        {
         "date": "2025-11-19",
@@ -73881,12 +73881,12 @@
         "p": 0.15
        },
        {
-        "date": "2025-12-08",
+        "date": "2025-12-09",
         "p": 0.19
        },
        {
-        "date": "2025-12-12",
-        "p": 0.22
+        "date": "2025-12-13",
+        "p": 0.215
        },
        {
         "date": "2025-12-16",
@@ -73905,16 +73905,16 @@
         "p": 0.175
        },
        {
-        "date": "2025-12-31",
+        "date": "2026-01-01",
         "p": 0.19
        },
        {
-        "date": "2026-01-04",
-        "p": 0.16
+        "date": "2026-01-05",
+        "p": 0.165
        },
        {
-        "date": "2026-01-08",
-        "p": 0.17
+        "date": "2026-01-09",
+        "p": 0.16
        },
        {
         "date": "2026-01-12",
@@ -73933,16 +73933,16 @@
         "p": 0.215
        },
        {
-        "date": "2026-01-27",
+        "date": "2026-01-28",
         "p": 0.195
        },
        {
-        "date": "2026-01-31",
-        "p": 0.195
+        "date": "2026-02-01",
+        "p": 0.19
        },
        {
-        "date": "2026-02-04",
-        "p": 0.175
+        "date": "2026-02-05",
+        "p": 0.16
        },
        {
         "date": "2026-02-08",
@@ -73961,16 +73961,16 @@
         "p": 0.155
        },
        {
-        "date": "2026-02-23",
-        "p": 0.135
+        "date": "2026-02-24",
+        "p": 0.145
        },
        {
-        "date": "2026-02-27",
+        "date": "2026-02-28",
         "p": 0.15
        },
        {
-        "date": "2026-03-03",
-        "p": 0.16
+        "date": "2026-03-04",
+        "p": 0.175
        },
        {
         "date": "2026-03-07",
@@ -73985,19 +73985,19 @@
         "p": 0.165
        },
        {
-        "date": "2026-03-18",
+        "date": "2026-03-19",
         "p": 0.155
        },
        {
-        "date": "2026-03-22",
+        "date": "2026-03-23",
         "p": 0.145
        },
        {
-        "date": "2026-03-26",
-        "p": 0.155
+        "date": "2026-03-27",
+        "p": 0.145
        },
        {
-        "date": "2026-03-30",
+        "date": "2026-03-31",
         "p": 0.145
        },
        {
@@ -74013,20 +74013,20 @@
         "p": 0.125
        },
        {
-        "date": "2026-04-17",
+        "date": "2026-04-19",
         "p": 0.125
        },
        {
-        "date": "2026-04-22",
-        "p": 0.135
-       },
-       {
-        "date": "2026-04-26",
+        "date": "2026-04-23",
         "p": 0.125
        },
        {
-        "date": "2026-04-30",
-        "p": 0.135
+        "date": "2026-04-27",
+        "p": 0.125
+       },
+       {
+        "date": "2026-05-01",
+        "p": 0.145
        },
        {
         "date": "2026-05-04",
@@ -74041,19 +74041,19 @@
         "p": 0.225
        },
        {
-        "date": "2026-05-15",
-        "p": 0.215
+        "date": "2026-05-16",
+        "p": 0.225
        },
        {
-        "date": "2026-05-19",
-        "p": 0.205
-       },
-       {
-        "date": "2026-05-23",
+        "date": "2026-05-20",
         "p": 0.185
        },
        {
-        "date": "2026-05-27",
+        "date": "2026-05-24",
+        "p": 0.185
+       },
+       {
+        "date": "2026-05-28",
         "p": 0.195
        },
        {
@@ -74065,23 +74065,23 @@
         "p": 0.175
        },
        {
-        "date": "2026-06-07",
+        "date": "2026-06-08",
         "p": 0.175
        },
        {
-        "date": "2026-06-11",
+        "date": "2026-06-12",
         "p": 0.175
        },
        {
-        "date": "2026-06-15",
-        "p": 0.165
+        "date": "2026-06-16",
+        "p": 0.195
        },
        {
-        "date": "2026-06-19",
-        "p": 0.175
+        "date": "2026-06-20",
+        "p": 0.185
        },
        {
-        "date": "2026-06-23",
+        "date": "2026-06-24",
         "p": 0.175
        },
        {
@@ -74093,23 +74093,23 @@
         "p": 0.165
        },
        {
-        "date": "2026-07-04",
+        "date": "2026-07-05",
         "p": 0.155
        },
        {
-        "date": "2026-07-08",
+        "date": "2026-07-09",
         "p": 0.145
        },
        {
-        "date": "2026-07-12",
-        "p": 0.14
-       },
-       {
-        "date": "2026-07-16",
+        "date": "2026-07-13",
         "p": 0.145
        },
        {
-        "date": "2026-07-20",
+        "date": "2026-07-17",
+        "p": 0.155
+       },
+       {
+        "date": "2026-07-21",
         "p": 0.155
        },
        {
@@ -74117,55 +74117,55 @@
         "p": 0.145
        },
        {
-        "date": "2026-07-27",
+        "date": "2026-07-28",
         "p": 0.135
        },
        {
-        "date": "2026-07-31",
+        "date": "2026-08-01",
         "p": 0.135
        },
        {
-        "date": "2026-08-04",
+        "date": "2026-08-05",
         "p": 0.125
        },
        {
-        "date": "2026-08-08",
+        "date": "2026-08-09",
         "p": 0.125
        },
        {
-        "date": "2026-08-12",
+        "date": "2026-08-13",
         "p": 0.115
        },
        {
-        "date": "2026-08-16",
-        "p": 0.135
+        "date": "2026-08-17",
+        "p": 0.125
        },
        {
         "date": "2026-08-20",
         "p": 0.125
        },
        {
-        "date": "2026-08-23",
-        "p": 0.125
-       },
-       {
-        "date": "2026-08-27",
+        "date": "2026-08-24",
         "p": 0.115
        },
        {
-        "date": "2026-08-31",
+        "date": "2026-08-28",
         "p": 0.115
        },
        {
-        "date": "2026-09-04",
+        "date": "2026-09-01",
+        "p": 0.135
+       },
+       {
+        "date": "2026-09-05",
         "p": 0.115
        },
        {
-        "date": "2026-09-08",
+        "date": "2026-09-09",
         "p": 0.115
        },
        {
-        "date": "2026-09-12",
+        "date": "2026-09-13",
         "p": 0.125
        },
        {
@@ -74173,43 +74173,43 @@
         "p": 0.105
        },
        {
-        "date": "2026-09-19",
+        "date": "2026-09-20",
         "p": 0.085
        },
        {
-        "date": "2026-09-23",
+        "date": "2026-09-24",
         "p": 0.075
        },
        {
-        "date": "2026-09-27",
+        "date": "2026-09-28",
         "p": 0.075
        },
        {
-        "date": "2026-10-01",
+        "date": "2026-10-02",
         "p": 0.075
        },
        {
-        "date": "2026-10-05",
+        "date": "2026-10-06",
         "p": 0.075
        },
        {
-        "date": "2026-10-09",
+        "date": "2026-10-10",
         "p": 0.085
        },
        {
-        "date": "2026-10-12",
+        "date": "2026-10-13",
+        "p": 0.095
+       },
+       {
+        "date": "2026-10-17",
+        "p": 0.095
+       },
+       {
+        "date": "2026-10-21",
         "p": 0.085
        },
        {
-        "date": "2026-10-16",
-        "p": 0.085
-       },
-       {
-        "date": "2026-10-20",
-        "p": 0.085
-       },
-       {
-        "date": "2026-10-26",
+        "date": "2026-10-27",
         "p": 0.075
        }
       ]
@@ -74695,7 +74695,7 @@
         "p": 0.0095
        },
        {
-        "date": "2026-10-26",
+        "date": "2026-10-27",
         "p": 0.0085
        }
       ]
@@ -74705,11 +74705,11 @@
    {
     "slug": "which-party-will-win-the-senate-in-2026",
     "title": "Which party will win the Senate in 2026?",
-    "volume": 9291167.0,
+    "volume": 9461258.0,
     "outcomes": [
      {
       "label": "Democratic Party",
-      "probability": 0.645,
+      "probability": 0.655,
       "history": [
        {
         "date": "2025-07-19",
@@ -75188,14 +75188,14 @@
         "p": 0.635
        },
        {
-        "date": "2026-10-26",
-        "p": 0.645
+        "date": "2026-10-27",
+        "p": 0.655
        }
       ]
      },
      {
       "label": "Republican Party",
-      "probability": 0.355,
+      "probability": 0.345,
       "history": [
        {
         "date": "2025-07-19",
@@ -75674,8 +75674,8 @@
         "p": 0.365
        },
        {
-        "date": "2026-10-26",
-        "p": 0.355
+        "date": "2026-10-27",
+        "p": 0.345
        }
       ]
      }
@@ -75684,11 +75684,11 @@
    {
     "slug": "republican-senate-seats-after-the-2026-midterm-elections-927",
     "title": "Republican Senate seats after the 2026 midterm elections?",
-    "volume": 3721871.0,
+    "volume": 3756732.0,
     "outcomes": [
      {
       "label": "\u226447",
-      "probability": 0.42,
+      "probability": 0.415,
       "history": []
      },
      {
@@ -75713,27 +75713,27 @@
      },
      {
       "label": "52",
-      "probability": 0.062,
+      "probability": 0.065,
       "history": []
      },
      {
       "label": "53",
-      "probability": 0.0595,
+      "probability": 0.061,
       "history": []
      },
      {
       "label": "54",
-      "probability": 0.009,
-      "history": []
-     },
-     {
-      "label": "55",
-      "probability": 0.003,
+      "probability": 0.014,
       "history": []
      },
      {
       "label": "57+",
-      "probability": 0.003,
+      "probability": 0.005,
+      "history": []
+     },
+     {
+      "label": "55",
+      "probability": 0.0035,
       "history": []
      },
      {
@@ -75754,7 +75754,7 @@
     "dem_control_prob": 0.99,
     "dem_seats_median": 243,
     "as_of": "2026-10-25",
-    "age_days": 1,
+    "age_days": 2,
     "access": "free",
     "source_url": "https://fiftyplusone.news/forecast/house",
     "note": "'99 out of 100'; median outcome D+51, 243 seats. Page states 'LAST UPDATED: OCT 25 AT 3:10PM'. Unchanged from 2026-10-10."
@@ -75764,7 +75764,7 @@
     "dem_control_prob": 0.94,
     "dem_seats_median": null,
     "as_of": "2026-10-09",
-    "age_days": 17,
+    "age_days": 18,
     "access": "paywalled-preview",
     "source_url": "https://www.natesilver.net/p/nate-silver-2026-midterm-election-polls-model",
     "note": "Free preview states Democrats' House chances are 'up to nearly 94 percent' in the FLIPR Deluxe model. Prose, not a published figure, so 0.94 is approximate. No Senate number was public this week -- the reverse of 2026-09-14, when the Senate was free and the House paid."
@@ -75774,7 +75774,7 @@
     "dem_control_prob": 0.93,
     "dem_seats_median": 240,
     "as_of": "2026-10-25",
-    "age_days": 1,
+    "age_days": 2,
     "access": "free",
     "source_url": "https://gking.harvard.edu/electit/",
     "note": "Harvard/Caltech LogisTiCC model (Ebanks, Katz, King). 'Model + All Polls' variant, the only one using district and state polls and so the only one comparable to this model. 240 seats, 95% range [211,283]; national House vote D 54.0%. Polls last updated 2026-10-25 02:01 ET."
@@ -75784,7 +75784,7 @@
     "dem_control_prob": 0.88,
     "dem_seats_median": 230,
     "as_of": "2026-10-25",
-    "age_days": 1,
+    "age_days": 2,
     "access": "free",
     "source_url": "https://www.poliwave.com/us/fed/projection",
     "note": "'Updated Oct 25, 2026', 100,000 simulations. 230 seats, 217-248 in 80% of runs -- an 80% range, so it is not recorded in the p05/p95 columns, which are 90%. The site states its probabilities 'have not been calibrated against past elections'."
@@ -75794,7 +75794,7 @@
     "dem_control_prob": 0.8,
     "dem_seats_median": 237,
     "as_of": "2026-10-24",
-    "age_days": 2,
+    "age_days": 3,
     "access": "free",
     "source_url": "https://votes.decisiondeskhq.com/forecast/2026/house",
     "note": "Page states 'Last updated Oct 24, 8:24 PM'; 80% and a 237-198 seat split, flagged as up over one week. Topline is rendered graphically, read from the page."

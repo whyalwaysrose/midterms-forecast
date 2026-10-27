@@ -112,3 +112,8 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-24,2026-10-23,senate,senate-2026-OH,us-202ins6e5f29f2,InsiderAdvantage,2026-10-21,0.06596,0.06046,0.07298,0.53686
 2026-10-24,2026-10-23,senate,senate-2026-TX,us-202vot954dd8b2,VoteHub/Verasight,2026-10-10,0.05174,0.05438,0.09514,0.48637
 2026-10-24,2026-10-23,senate,senate-2026-TX,us-202slidcb5236a,Slingshot Strategies,2026-10-16,0.08168,0.07731,0.07846,0.52725
+2026-10-27,2026-10-26,senate,senate-2026-ME,us-202mar84640418,Marist College,2026-10-23,0.04167,0.1052,0.06788,0.14049
+2026-10-27,2026-10-26,senate,senate-2026-MI,us-202mic57c88db3,Michigan State University Institute for Public Policy and Social Research/YouGov,2026-10-10,0.05349,0.06062,0.08216,0.45758
+2026-10-27,2026-10-26,senate,senate-2026-NC,us-202qua525d8d11,Quantus Insights,2026-10-24,0.1831,0.18043,0.09016,0.51449
+2026-10-27,2026-10-26,senate,senate-2026-SC,us-202tarbd5d9c4c,Targoz Market Research,2026-10-20,-0.02151,-0.08223,0.09613,0.77407
+2026-10-27,2026-10-26,senate,senate-2026-TX,us-202youe49ed5b8,YouGov,2026-10-17,0.10536,0.03708,0.07497,0.85369

@@ -1,21 +1,21 @@
 {
  "chamber": "house",
- "run_date": "2026-10-27",
+ "run_date": "2026-10-28",
  "ok": true,
  "metrics": {
   "races_total": 435,
   "races_with_polls": 75,
   "races_blocked_by_roster": 2,
-  "race_polls": 135,
+  "race_polls": 136,
   "national_polls": 412,
   "feed_records": {
    "us-senator": 0,
-   "us-representative": 175,
+   "us-representative": 177,
    "generic-ballot": 547,
    "approval": 2947
   },
   "rejections": {
-   "no single D-vs-R matchup": 1046,
+   "no single D-vs-R matchup": 1047,
    "older than max_age_days": 130,
    "pollster banned by 538: Big Data Poll": 14,
    "repeat readings of a survey already counted": 12
@@ -30,7 +30,7 @@
    "guards": "a run proceeding on a feed that returned nothing, which reads downstream as a quiet day rather than a failed fetch",
    "value": {
     "us-senator": 0,
-    "us-representative": 175,
+    "us-representative": 177,
     "generic-ballot": 547,
     "approval": 2947
    }
@@ -38,9 +38,9 @@
   {
    "name": "race_polls_used",
    "ok": true,
-   "detail": "135 race polls from us-representative",
+   "detail": "136 race polls from us-representative",
    "guards": "a chamber-blind default feeding the Senate's polls to the House",
-   "value": 135
+   "value": 136
   },
   {
    "name": "roster_reads_the_feed",
@@ -70,10 +70,10 @@
   {
    "name": "roster_is_fresh",
    "ok": true,
-   "detail": "roster built 2026-10-27 (0 days ago; limit 7)",
+   "detail": "roster built 2026-10-28 (0 days ago; limit 7)",
    "guards": "the rebuild step failing quietly and the roster re-staling",
    "value": {
-    "built": "2026-10-27",
+    "built": "2026-10-28",
     "age_days": 0
    }
   },

@@ -125,3 +125,8 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-28,2026-10-27,senate,senate-2026-MI,us-202gle5c572e3a,"Glengariff Group, Inc.",2026-10-20,0.13076,-0.02088,0.10128,0.94447
 2026-10-28,2026-10-27,senate,senate-2026-NE,us-202ech8ce34abf,Echelon Insights,2026-10-19,-0.02151,-0.05959,0.12264,0.64747
 2026-10-28,2026-10-27,senate,senate-2026-OH,us-202ech01f06c61,Echelon Insights,2026-10-19,0.0,0.07095,0.10352,0.20838
+2026-10-29,2026-10-28,senate,senate-2026-AL,us-202blu72ec478b,Blueprint Polling,2026-10-23,-0.18232,-0.38681,0.10094,0.97632
+2026-10-29,2026-10-28,senate,senate-2026-ME,us-202cnn450b1a6b,CNN/SSRS,2026-10-23,0.08516,0.04581,0.08758,0.70648
+2026-10-29,2026-10-28,senate,senate-2026-MI,us-202mit52e22a51,Mitchell Research & Communications,2026-10-26,0.14764,0.05455,0.09704,0.86473
+2026-10-29,2026-10-28,senate,senate-2026-NC,us-202hig5d2fb253,High Point University Survey Research Center,2026-10-10,0.3001,0.2176,0.09974,0.83279
+2026-10-29,2026-10-28,senate,senate-2026-OH,us-202cona69a5893,Concord Public Opinion Partners,2026-09-14,0.22314,0.11563,0.10591,0.87652

@@ -86,3 +86,8 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-24,2026-10-23,house,house-2026-TX-34,us-202theaa4f5a76,The Washington Post/George Mason University Schar School of Policy and Government,2026-10-16,0.15082,0.12281,0.12025,0.61216
 2026-10-24,2026-10-23,house,house-2026-VA-01,us-202pubf344107a,Public Policy Polling,2026-10-21,0.02151,0.12121,0.12024,0.16668
 2026-10-28,2026-10-27,house,house-2026-IN-05,us-202qua75e251d2,Quantus Insights,2026-10-21,-0.06089,-0.07352,0.11722,0.5526
+2026-10-30,2026-10-29,house,house-2026-AL-02,us-202remdfdb864e,Remington Research Group,2026-10-24,-0.04256,0.064,0.1859,0.24628
+2026-10-30,2026-10-29,house,house-2026-AZ-01,us-202keacab04b63,Keating Research,2026-10-27,0.08516,0.06208,0.12889,0.58682
+2026-10-30,2026-10-29,house,house-2026-MT-01,us-202mon8f4b97ae,Montana State University Billings,2026-10-13,0.42608,0.03941,0.1462,0.99052
+2026-10-30,2026-10-29,house,house-2026-MT-02,us-202mon85d47fca,Montana State University Billings,2026-10-13,-0.47692,-0.37534,0.24931,0.31067
+2026-10-30,2026-10-29,house,house-2026-PA-07,us-202muhc58c523b,Muhlenberg College Institute of Public Opinion,2026-10-10,0.13062,0.08258,0.11695,0.69069

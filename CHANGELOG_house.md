@@ -2,6 +2,39 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-30
+
+Democratic chances of House control are down 0.2 pts to 79.8% on 5 new polls. Projected seats 248.8 → 248.4 (-0.3).
+
+**Races that moved** (70 of 435):
+
+  - **AL-02** — Democratic win probability 62.0% → 42.5% (-19.5 pts); projected margin D+3.2 → R+1.3 (-4.5). Driven by 1 new poll:
+    - Remington Research Group (2026-10-24, n=642, LV): R+2.1
+
+  - **PA-07** — Democratic win probability 70.8% → 77.0% (+6.2 pts); projected margin D+3.9 → D+5.0 (+1.1). Driven by 1 new poll:
+    - Muhlenberg College Institute of Public Opinion (2026-10-10, n=529, LV): D+6.5
+
+  - **MT-01** — Democratic win probability 55.1% → 61.2% (+6.1 pts); projected margin D+0.9 → D+1.9 (+1.0). Driven by 1 new poll:
+    - Montana State University Billings (2026-10-13, n=287, A): D+21.0
+
+  - **AZ-01** — Democratic win probability 66.5% → 70.8% (+4.3 pts); projected margin D+3.2 → D+3.7 (+0.5). Driven by 1 new poll:
+    - Keating Research (2026-10-27, n=500, LV): D+4.3
+
+  - **MT-02** — Democratic win probability 3.7% → 0.4% (-3.4 pts); projected margin R+19.6 → R+23.1 (-3.5). Driven by 1 new poll:
+    - Montana State University Billings (2026-10-13, n=350, A): R+23.4
+
+  - **GA-12** — Democratic win probability 39.9% → 37.4% (-2.5 pts); projected margin R+2.6 → R+3.2 (-0.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **NC-07** — Democratic win probability 40.4% → 38.3% (-2.1 pts); projected margin R+2.6 → R+3.1 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **FL-08** — Democratic win probability 33.2% → 31.2% (-2.0 pts); projected margin R+4.5 → R+5.0 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **TX-24** — Democratic win probability 44.2% → 42.4% (-1.9 pts); projected margin R+1.6 → R+1.9 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **NY-19** — Democratic win probability 79.3% → 81.1% (+1.8 pts); projected margin D+8.7 → D+9.2 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-10-29
 
 No new polling since 2026-10-28. Democratic chances of House control hold at 80.0%.

@@ -130,3 +130,18 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-29,2026-10-28,senate,senate-2026-MI,us-202mit52e22a51,Mitchell Research & Communications,2026-10-26,0.14764,0.05455,0.09704,0.86473
 2026-10-29,2026-10-28,senate,senate-2026-NC,us-202hig5d2fb253,High Point University Survey Research Center,2026-10-10,0.3001,0.2176,0.09974,0.83279
 2026-10-29,2026-10-28,senate,senate-2026-OH,us-202cona69a5893,Concord Public Opinion Partners,2026-09-14,0.22314,0.11563,0.10591,0.87652
+2026-10-30,2026-10-29,senate,senate-2026-AR,us-202gra4551bd46,Grayhouse,2026-10-27,-0.34377,-0.30643,0.11747,0.34925
+2026-10-30,2026-10-29,senate,senate-2026-IA,us-202co/138b0472,co/efficient,2026-10-28,-0.04256,-0.06577,0.07814,0.64144
+2026-10-30,2026-10-29,senate,senate-2026-KS,us-202cnn473d5c5d,CNN/SSRS,2026-10-23,0.08516,-0.00246,0.09302,0.86088
+2026-10-30,2026-10-29,senate,senate-2026-KS,us-202thee58243fb,The Washington Post/George Mason University Schar School of Policy and Government,2026-10-24,0.19004,0.00027,0.09263,0.97714
+2026-10-30,2026-10-29,senate,senate-2026-MA,us-202unidf4870a3,University of Massachusetts Lowell Center for Public Opinion/YouGov,2026-10-12,0.74924,0.59387,0.10261,0.94599
+2026-10-30,2026-10-29,senate,senate-2026-MI,us-202micf2fa67e0,Michigan State University Department of Political Science/Verasight,2026-10-15,0.15845,0.07006,0.06592,0.928
+2026-10-30,2026-10-29,senate,senate-2026-MI,us-202cnn2b6bf541,CNN/SSRS,2026-10-23,0.15415,0.06958,0.08899,0.86275
+2026-10-30,2026-10-29,senate,senate-2026-MI,us-202upscf2886a6,Upswing Research,2026-10-26,0.10536,0.08829,0.10344,0.58015
+2026-10-30,2026-10-29,senate,senate-2026-NH,us-202uni57f2dfa4,University of Massachusetts Lowell Center for Public Opinion/YouGov,2026-10-10,0.15763,0.1322,0.10443,0.61703
+2026-10-30,2026-10-29,senate,senate-2026-SC,us-202eas9f073b45,East Carolina University,2026-10-21,-0.08168,0.00685,0.08249,0.11226
+2026-10-30,2026-10-29,senate,senate-2026-TX,us-202cnn4329221b,CNN/SSRS,2026-10-23,0.13062,0.05657,0.08118,0.85402
+2026-10-30,2026-10-29,senate,senate-2026-TX,us-202tex39cdaf4f,Texas Southern University Barbara Jordan Public Policy Research and Survey Center,2026-10-23,0.04167,0.0344,0.06057,0.55852
+2026-10-30,2026-10-29,senate,senate-2026-TX,us-202a2 c2344bd1,A2 Insights,2026-10-25,0.06162,0.05923,0.09158,0.51281
+2026-10-30,2026-10-29,senate,senate-2026-TX,us-202acta7d9392c,ActiVote,2026-10-25,0.08405,0.05786,0.11495,0.60978
+2026-10-30,2026-10-29,senate,senate-2026-TX,us-202qua5e695b57,Quantus Insights,2026-10-27,-0.02045,0.02984,0.06915,0.19544

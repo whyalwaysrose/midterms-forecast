@@ -2,6 +2,21 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-10-31
+
+Democratic chances of Senate control are down 0.1 pts to 71.8% on 2 new polls. Projected seats 52.8 → 52.8 (+0.0).
+
+**Races that moved** (2 of 35):
+
+  - **Kansas** — Democratic win probability 64.6% → 65.9% (+1.3 pts); projected margin D+2.1 → D+2.2 (+0.1). Driven by 1 new poll:
+    - Emerson College (2026-10-27, n=800, LV): D+2.5
+
+  - **Maine** — Democratic win probability 67.3% → 66.3% (-1.0 pts); projected margin D+2.4 → D+2.3 (-0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+**New polling that did not move the needle.** Illinois (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-10-30
 
 Democratic chances of Senate control are up 2.7 pts to 71.9% on 15 new polls. Projected seats 52.5 → 52.8 (+0.3).

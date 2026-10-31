@@ -145,3 +145,5 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-30,2026-10-29,senate,senate-2026-TX,us-202a2 c2344bd1,A2 Insights,2026-10-25,0.06162,0.05923,0.09158,0.51281
 2026-10-30,2026-10-29,senate,senate-2026-TX,us-202acta7d9392c,ActiVote,2026-10-25,0.08405,0.05786,0.11495,0.60978
 2026-10-30,2026-10-29,senate,senate-2026-TX,us-202qua5e695b57,Quantus Insights,2026-10-27,-0.02045,0.02984,0.06915,0.19544
+2026-10-31,2026-10-30,senate,senate-2026-IL,us-202act4459517f,ActiVote,2026-10-25,0.22494,0.31891,0.13008,0.19692
+2026-10-31,2026-10-30,senate,senate-2026-KS,us-202emeb5d23beb,Emerson College,2026-10-27,0.0497,0.03793,0.08918,0.56433

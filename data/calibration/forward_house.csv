@@ -91,3 +91,6 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-30,2026-10-29,house,house-2026-MT-01,us-202mon8f4b97ae,Montana State University Billings,2026-10-13,0.42608,0.03941,0.1462,0.99052
 2026-10-30,2026-10-29,house,house-2026-MT-02,us-202mon85d47fca,Montana State University Billings,2026-10-13,-0.47692,-0.37534,0.24931,0.31067
 2026-10-30,2026-10-29,house,house-2026-PA-07,us-202muhc58c523b,Muhlenberg College Institute of Public Opinion,2026-10-10,0.13062,0.08258,0.11695,0.69069
+2026-10-31,2026-10-30,house,house-2026-CA-01,us-ca-uni0e552a49,University of Southern California Democracy and Fair Elections Lab/University of Southern California Dornsife Center for Economic and Social Research,2026-10-25,0.3001,0.27408,0.2032,0.56242
+2026-10-31,2026-10-30,house,house-2026-CA-22,us-202unia6d17909,University of Southern California Democracy and Fair Elections Lab/University of Southern California Dornsife Center for Economic and Social Research,2026-10-25,0.20479,0.11874,0.14172,0.76571
+2026-10-31,2026-10-30,house,house-2026-CA-48,us-202unide272ca0,University of Southern California Democracy and Fair Elections Lab,2026-10-25,0.16705,0.12582,0.12268,0.65878

@@ -1,0 +1,3495 @@
+{
+ "schema_version": 5,
+ "model_fingerprint": "d054cd323ebb",
+ "run_date": "2026-10-31",
+ "generated_at": "2026-10-31T15:59:08+00:00",
+ "election_date": "2026-11-03",
+ "chamber_forecast": {
+  "dem_control_prob": 0.7177,
+  "rep_control_prob": 0.2823,
+  "exact_tie_prob": 0.0639,
+  "dem_seats": {
+   "mean": 52.79,
+   "median": 53,
+   "p05": 46,
+   "p25": 50,
+   "p75": 56,
+   "p95": 58
+  },
+  "seat_distribution": {
+   "37": 0.0001,
+   "39": 0.0001,
+   "40": 0.0004,
+   "41": 0.0016,
+   "42": 0.0038,
+   "43": 0.0066,
+   "44": 0.0126,
+   "45": 0.022,
+   "46": 0.0302,
+   "47": 0.0369,
+   "48": 0.0478,
+   "49": 0.0562,
+   "50": 0.0639,
+   "51": 0.0696,
+   "52": 0.0782,
+   "53": 0.0876,
+   "54": 0.0935,
+   "55": 0.1023,
+   "56": 0.1038,
+   "57": 0.08,
+   "58": 0.0539,
+   "59": 0.0307,
+   "60": 0.0126,
+   "61": 0.0038,
+   "62": 0.0011,
+   "63": 0.0006,
+   "64": 0.0001,
+   "65": 0.0,
+   "66": 0.0
+  },
+  "total_seats": 100,
+  "seats_not_up": {
+   "D": 34,
+   "R": 31
+  },
+  "dem_seats_for_majority": 51,
+  "tiebreaker_party": "R",
+  "n_simulations": 40000
+ },
+ "national": {
+  "generic_ballot": {
+   "dem_margin_median": 8.2,
+   "dem_margin_p05": 6.88,
+   "dem_margin_p95": 9.71,
+   "dem_two_party_share_median": 0.54
+  },
+  "latent": [
+   {
+    "date": "2026-09-15",
+    "p05": 6.92,
+    "p50": 7.99,
+    "p95": 9.2
+   },
+   {
+    "date": "2026-09-22",
+    "p05": 6.97,
+    "p50": 8.04,
+    "p95": 9.19
+   },
+   {
+    "date": "2026-09-29",
+    "p05": 6.99,
+    "p50": 8.09,
+    "p95": 9.25
+   },
+   {
+    "date": "2026-10-06",
+    "p05": 7.01,
+    "p50": 8.14,
+    "p95": 9.36
+   },
+   {
+    "date": "2026-10-13",
+    "p05": 6.99,
+    "p50": 8.15,
+    "p95": 9.38
+   },
+   {
+    "date": "2026-10-20",
+    "p05": 7.01,
+    "p50": 8.2,
+    "p95": 9.5
+   },
+   {
+    "date": "2026-10-27",
+    "p05": 6.96,
+    "p50": 8.22,
+    "p95": 9.63
+   },
+   {
+    "date": "2026-11-03",
+    "p05": 6.88,
+    "p50": 8.2,
+    "p95": 9.71
+   }
+  ]
+ },
+ "predictive": {
+  "house_effect": {
+   "(infrequent pollsters)": {
+    "mean": 0.01431,
+    "sd": 0.0082
+   },
+   "ActiVote": {
+    "mean": 0.00631,
+    "sd": 0.02576
+   },
+   "Alaska Survey Research": {
+    "mean": 0.03195,
+    "sd": 0.0276
+   },
+   "Beacon Research/Shaw & Co. Research": {
+    "mean": 0.0077,
+    "sd": 0.01583
+   },
+   "Bowling Green State University/YouGov": {
+    "mean": 0.02056,
+    "sd": 0.02709
+   },
+   "CNN/SSRS": {
+    "mean": 0.02278,
+    "sd": 0.01864
+   },
+   "Change Research": {
+    "mean": -0.00416,
+    "sd": 0.01651
+   },
+   "Clarity Campaign Labs": {
+    "mean": -0.01072,
+    "sd": 0.02184
+   },
+   "Cygnal": {
+    "mean": -0.00607,
+    "sd": 0.01415
+   },
+   "Data for Progress": {
+    "mean": 0.01412,
+    "sd": 0.02737
+   },
+   "East Carolina University": {
+    "mean": -0.0373,
+    "sd": 0.02934
+   },
+   "Echelon Insights": {
+    "mean": -0.0059,
+    "sd": 0.01393
+   },
+   "Elon University/YouGov": {
+    "mean": 0.0414,
+    "sd": 0.03199
+   },
+   "Emerson College": {
+    "mean": -0.00277,
+    "sd": 0.01425
+   },
+   "Fabrizio, Lee & Associates/Impact Research": {
+    "mean": 0.01352,
+    "sd": 0.02568
+   },
+   "Focaldata": {
+    "mean": 0.00468,
+    "sd": 0.01505
+   },
+   "GBAO": {
+    "mean": 0.03214,
+    "sd": 0.02236
+   },
+   "Glengariff Group, Inc.": {
+    "mean": -0.0417,
+    "sd": 0.03394
+   },
+   "Grayhouse": {
+    "mean": 0.00176,
+    "sd": 0.0256
+   },
+   "Harper Polling": {
+    "mean": 0.02949,
+    "sd": 0.02679
+   },
+   "HarrisX": {
+    "mean": -0.09303,
+    "sd": 0.01786
+   },
+   "HarrisX/Harris": {
+    "mean": -0.08373,
+    "sd": 0.01699
+   },
+   "Hart Research Associates/Public Opinion Strategies": {
+    "mean": -0.00726,
+    "sd": 0.02023
+   },
+   "High Point University Survey Research Center": {
+    "mean": 0.0184,
+    "sd": 0.02869
+   },
+   "InsiderAdvantage": {
+    "mean": -0.02829,
+    "sd": 0.01564
+   },
+   "Ipsos": {
+    "mean": -0.03513,
+    "sd": 0.00955
+   },
+   "J.L. Partners": {
+    "mean": 0.00562,
+    "sd": 0.02956
+   },
+   "John Zogby Strategies": {
+    "mean": -0.01966,
+    "sd": 0.02521
+   },
+   "Marist College": {
+    "mean": 0.04947,
+    "sd": 0.01885
+   },
+   "Marquette University Law School": {
+    "mean": -0.00801,
+    "sd": 0.01798
+   },
+   "McLaughlin & Associates": {
+    "mean": -0.0439,
+    "sd": 0.01891
+   },
+   "Michigan State University Institute for Public Policy and Social Research/YouGov": {
+    "mean": 0.01363,
+    "sd": 0.02874
+   },
+   "Mitchell Research & Communications": {
+    "mean": 0.00847,
+    "sd": 0.02753
+   },
+   "Morning Consult": {
+    "mean": -0.04324,
+    "sd": 0.00612
+   },
+   "National Public Affairs": {
+    "mean": -0.02071,
+    "sd": 0.03214
+   },
+   "New River Strategies/GS Strategy Group": {
+    "mean": 0.0268,
+    "sd": 0.02737
+   },
+   "Noble Predictive Insights": {
+    "mean": -0.02512,
+    "sd": 0.01943
+   },
+   "Public Policy Polling": {
+    "mean": 0.00476,
+    "sd": 0.02316
+   },
+   "Quantus Insights": {
+    "mean": -0.02181,
+    "sd": 0.01282
+   },
+   "Quinnipiac University": {
+    "mean": 0.06349,
+    "sd": 0.02775
+   },
+   "RMG Research": {
+    "mean": -0.07117,
+    "sd": 0.0191
+   },
+   "ReconMR/Siena University": {
+    "mean": 0.0275,
+    "sd": 0.02707
+   },
+   "Saint Anselm": {
+    "mean": -0.00109,
+    "sd": 0.02508
+   },
+   "Slingshot Strategies": {
+    "mean": 0.03349,
+    "sd": 0.02272
+   },
+   "Suffolk University": {
+    "mean": -0.00295,
+    "sd": 0.03061
+   },
+   "Survey 160": {
+    "mean": 0.07094,
+    "sd": 0.02663
+   },
+   "SurveyUSA": {
+    "mean": -0.002,
+    "sd": 0.0307
+   },
+   "TIPP Insights": {
+    "mean": -0.00178,
+    "sd": 0.02158
+   },
+   "Targoz Market Research": {
+    "mean": -0.0431,
+    "sd": 0.03121
+   },
+   "Texas Southern University Barbara Jordan Public Policy Research and Survey Center": {
+    "mean": -0.01332,
+    "sd": 0.02162
+   },
+   "The Argument/Verasight": {
+    "mean": 0.00538,
+    "sd": 0.01357
+   },
+   "The Bullfinch Group": {
+    "mean": 0.067,
+    "sd": 0.02459
+   },
+   "The New York Times/Siena College": {
+    "mean": -0.01346,
+    "sd": 0.02141
+   },
+   "The Public Sentiment Institute": {
+    "mean": 0.05181,
+    "sd": 0.02761
+   },
+   "The Winston Group": {
+    "mean": 0.02756,
+    "sd": 0.02405
+   },
+   "Trafalgar Group": {
+    "mean": -0.01,
+    "sd": 0.02633
+   },
+   "University of Massachusetts Department of Political Science/YouGov": {
+    "mean": -0.00883,
+    "sd": 0.0308
+   },
+   "University of Massachusetts Lowell Center for Public Opinion/YouGov": {
+    "mean": 0.00179,
+    "sd": 0.02702
+   },
+   "University of New Hampshire": {
+    "mean": -0.01432,
+    "sd": 0.02101
+   },
+   "University of North Florida": {
+    "mean": 0.01341,
+    "sd": 0.02844
+   },
+   "Verasight": {
+    "mean": 0.04386,
+    "sd": 0.01515
+   },
+   "YouGov": {
+    "mean": 0.00368,
+    "sd": 0.00763
+   },
+   "co/efficient": {
+    "mean": -0.05727,
+    "sd": 0.01972
+   }
+  },
+  "population_effect": {
+   "lv": {
+    "mean": 0.0,
+    "sd": 0.0
+   },
+   "rv": {
+    "mean": -0.00501,
+    "sd": 0.00748
+   },
+   "a": {
+    "mean": 0.0251,
+    "sd": 0.00927
+   }
+  },
+  "partisan_effect": {
+   "mean": 0.0152,
+   "sd": 0.00929
+  },
+  "sigma_excess": {
+   "mean": 0.01442,
+   "sd": 0.00239
+  },
+  "reference_population": "lv",
+  "design_effect": 1.18,
+  "student_t_nu": 5.0,
+  "match_student_t_variance": true,
+  "national_poll_ids": [
+   "gen202atlfaff628e",
+   "gen202atli98ny44e",
+   "gen202bea1zjzpg64",
+   "gen202beab54fecf9",
+   "gen202bed25e3a0e3",
+   "gen202bow961d6eac",
+   "gen202cha2262f999",
+   "gen202cha3a50e664",
+   "gen202chaa87e051f",
+   "gen202chaac421070",
+   "gen202cla167fdc50",
+   "gen202cla35wej9ad",
+   "gen202cla48neovgl",
+   "gen202cla8ed0b7c5",
+   "gen202claf159f7a2",
+   "gen202clatqyzbr5d",
+   "gen202cnn284290e8",
+   "gen202cnn5odn7vb2",
+   "gen202cnn96858d5d",
+   "gen202cnnv1jpahum",
+   "gen202cyg042f1e59",
+   "gen202cyg0f4e4de6",
+   "gen202cyg5dc20dbb",
+   "gen202cyg62d7b594",
+   "gen202cyg7krp08wo",
+   "gen202cyg91511465",
+   "gen202cygaqish8b5",
+   "gen202cygbfde610f",
+   "gen202cyge6frdfy5",
+   "gen202cygf628d98b",
+   "gen202cyggq1ns3i7",
+   "gen202cygl643olc7",
+   "gen202datf7176eb4",
+   "gen202ech0gads5m7",
+   "gen202ech2aa40d74",
+   "gen202ech657fa13f",
+   "gen202ech6dc8bbee",
+   "gen202ech6ea2c23e",
+   "gen202ech75567eb0",
+   "gen202ech92b1793f",
+   "gen202ech9vgw0ths",
+   "gen202echa62b259e",
+   "gen202echcrpejs8g",
+   "gen202echg6wqrhp3",
+   "gen202eme09e7vdrr",
+   "gen202eme0v5i59it",
+   "gen202eme29000092",
+   "gen202eme52b01f0e",
+   "gen202eme59d14015",
+   "gen202emed204ed40",
+   "gen202emefa66ea0d",
+   "gen202emer1qfrr9e",
+   "gen202fabdmpzj8zo",
+   "gen202foc15ef8992",
+   "gen202foc290a9926",
+   "gen202foc331c995c",
+   "gen202foc42312cd7",
+   "gen202foc4dadf601",
+   "gen202foc64195cbb",
+   "gen202foc8381e6bc",
+   "gen202foc9688c25e",
+   "gen202foccaecc3f9",
+   "gen202focde986d92",
+   "gen202focec036b61",
+   "gen202gba5ap9ebsy",
+   "gen202gbaefbb746a",
+   "gen202gra16882fe7",
+   "gen202gra2275cae0",
+   "gen202har3111816f",
+   "gen202har3b4dc744",
+   "gen202har3fuscn8p",
+   "gen202har524f07a0",
+   "gen202har52d21b8c",
+   "gen202har55021d5f",
+   "gen202har68e5c022",
+   "gen202har6b357806",
+   "gen202har6cb5564e",
+   "gen202har76cd5463",
+   "gen202har8f24bc9e",
+   "gen202har96803jy9",
+   "gen202hara9a84ddc",
+   "gen202harb82e0a2b",
+   "gen202harc4ffc78c",
+   "gen202hard90e1273",
+   "gen202harde8dec3f",
+   "gen202hare0f9b514",
+   "gen202harf7u1dop3",
+   "gen202harfa03dff7",
+   "gen202hary979p4hg",
+   "gen202higl0n40cys",
+   "gen202higz24262eu",
+   "gen202impb4bb4fec",
+   "gen202impbbhnd85v",
+   "gen202impde2e7fda",
+   "gen202ips094ac646",
+   "gen202ips0bc2dcd0",
+   "gen202ips1b69c5aa",
+   "gen202ips32a4331e",
+   "gen202ips4tl5wi4t",
+   "gen202ips4ul5u7dr",
+   "gen202ips5480e8db",
+   "gen202ips56dfccb2",
+   "gen202ips5a0ed2e7",
+   "gen202ips5f46bb4b",
+   "gen202ips67b7ec50",
+   "gen202ips6e1b4a09",
+   "gen202ips723b2f06",
+   "gen202ips7guhl7ea",
+   "gen202ips899bee43",
+   "gen202ips8e4643b0",
+   "gen202ips8f20b085",
+   "gen202ips98484562",
+   "gen202ipsb162ebc2",
+   "gen202ipsb55f0d9f",
+   "gen202ipsc03e0960",
+   "gen202ipsc06cf7d6",
+   "gen202ipsc3892df0",
+   "gen202ipse0d79dcd",
+   "gen202ipse467faa1",
+   "gen202ipse8884e79",
+   "gen202ipsefd2e293",
+   "gen202ipsf49cf96d",
+   "gen202ipsgz4jzn1r",
+   "gen202ipshoed831k",
+   "gen202ipsoltvkyn1",
+   "gen202ipst0vqxwzr",
+   "gen202ipsw38dqmfx",
+   "gen202j.llqmqhhn7",
+   "gen202j.lmx2bwz2t",
+   "gen202joh0a1e6aef",
+   "gen202joh3aca1eba",
+   "gen202joh415e61a2",
+   "gen202joh690fd4a0",
+   "gen202kff582c6691",
+   "gen202kffnllpfo8t",
+   "gen202leg6734532b",
+   "gen202manknsqluca",
+   "gen202mar1mmhk54j",
+   "gen202mar4b14738d",
+   "gen202mar4e24ed15",
+   "gen202mar66597189",
+   "gen202mar6d2d2b89",
+   "gen202mar7ecb1694",
+   "gen202marb1e8baaf",
+   "gen202mardb2854b7",
+   "gen202marea9f7806",
+   "gen202marfa6kqh0m",
+   "gen202marmf1y26jw",
+   "gen202maro1vul0lx",
+   "gen202maroindbw0q",
+   "gen202marsb7pbzop",
+   "gen202mart725c1lc",
+   "gen202mcl0f670da2",
+   "gen202mcl73db4894",
+   "gen202mcl812e2f8e",
+   "gen202mclac6f0649",
+   "gen202mclalveuwur",
+   "gen202mclb94b7c24",
+   "gen202mclnofw0ify",
+   "gen202mclzpy7tp0x",
+   "gen202mor077806f2",
+   "gen202mor0b96b326",
+   "gen202mor0eb6c381",
+   "gen202mor18c3ca3c",
+   "gen202mor1928580e",
+   "gen202mor1a15291a",
+   "gen202mor1bc36679",
+   "gen202mor21cd6c2a",
+   "gen202mor25e7b4e1",
+   "gen202mor2b525ceb",
+   "gen202mor2e2d0029",
+   "gen202mor32544209",
+   "gen202mor40wu93uh",
+   "gen202mor4108c1ef",
+   "gen202mor441d3c0c",
+   "gen202mor486fec38",
+   "gen202mor4n710c21",
+   "gen202mor52a53368",
+   "gen202mor572d6544",
+   "gen202mor5e30dp4k",
+   "gen202mor74921d58",
+   "gen202mor77813195",
+   "gen202mor7d2ev6j8",
+   "gen202mor8d572fd0",
+   "gen202mor93xcfxwn",
+   "gen202mor950d8ecd",
+   "gen202mora1cc2932",
+   "gen202moraf812e1e",
+   "gen202moraq07xnwv",
+   "gen202morasuqyoxk",
+   "gen202morav9t1tpv",
+   "gen202morb2eb12dc",
+   "gen202morb582e7f4",
+   "gen202morb92de0d5",
+   "gen202morbad84d57",
+   "gen202morc2d053f1",
+   "gen202morccd4ont3",
+   "gen202morcz732988",
+   "gen202mord7yx3hp4",
+   "gen202moredea7e96",
+   "gen202moreswt9ang",
+   "gen202morf4eb5111",
+   "gen202morf843d467",
+   "gen202morfece680f",
+   "gen202morfersg7h4",
+   "gen202morhqrpcr9z",
+   "gen202morhrb08nk6",
+   "gen202moriofdcbee",
+   "gen202morjcfai245",
+   "gen202morjcls6rqx",
+   "gen202morjndncmme",
+   "gen202morneejnver",
+   "gen202morp33r88gn",
+   "gen202morq71dlrjx",
+   "gen202morqcn8uhs5",
+   "gen202morr2avsbar",
+   "gen202morybmkp88m",
+   "gen202moryc6bhc0x",
+   "gen202morzjhstweo",
+   "gen202new6qw03vmk",
+   "gen202newox3d7bq2",
+   "gen202nob0c120q72",
+   "gen202nob5477cc24",
+   "gen202nob71129946",
+   "gen202nob842fb127",
+   "gen202pen388f5658",
+   "gen202pen573f413b",
+   "gen202pew7314f461",
+   "gen202pub024ad9fb",
+   "gen202pub1eunsp9r",
+   "gen202pub1uzfis8x",
+   "gen202qua250cbc5a",
+   "gen202qua2uog9zfw",
+   "gen202qua30319a4e",
+   "gen202qua445d984b",
+   "gen202qua5fec4b64",
+   "gen202qua8d4f16f1",
+   "gen202qua946fac3d",
+   "gen202qua9n11067c",
+   "gen202quaf01fa8df",
+   "gen202quamqcd3h07",
+   "gen202quau8o1h7sf",
+   "gen202quayrux711g",
+   "gen202qui189d3bff",
+   "gen202qui1a373f46",
+   "gen202quisv6i8kb4",
+   "gen202quiuhrq4f2e",
+   "gen202ras4513ks5s",
+   "gen202ras58d26adb",
+   "gen202res9438765a",
+   "gen202reszwfu9xpw",
+   "gen202rmg246nd3tm",
+   "gen202rmg6e270e3b",
+   "gen202rmg8840c11c",
+   "gen202rmg8b19cf0c",
+   "gen202rmga44f828f",
+   "gen202rmgedb864a5",
+   "gen202rmgsgiakj74",
+   "gen202rmgzscdfzcq",
+   "gen202sur62e6d9ea",
+   "gen202sur6qvftmu9",
+   "gen202surc38b2f8a",
+   "gen202tald5d533fb",
+   "gen202tav4385f790",
+   "gen202the035c13b4",
+   "gen202the055f2404",
+   "gen202the0qhxbf0f",
+   "gen202the175e2ddd",
+   "gen202the289bae57",
+   "gen202the46f080ee",
+   "gen202the4b712378",
+   "gen202the5055eb68",
+   "gen202the52f17495",
+   "gen202the6afca19c",
+   "gen202the940ca850",
+   "gen202thea1a0afb2",
+   "gen202thea1c3940a",
+   "gen202theaccdd393",
+   "gen202theb66b8abe",
+   "gen202thebetxq9n0",
+   "gen202thecaa1c332",
+   "gen202thed828b959",
+   "gen202thee6468149",
+   "gen202theea14xh0m",
+   "gen202theeb8b068f",
+   "gen202theebe8cac7",
+   "gen202thef222ecc9",
+   "gen202thef6d37a30",
+   "gen202theh0ygpmcw",
+   "gen202theit3vqxax",
+   "gen202thelkg0oyr4",
+   "gen202theoqmu5rw8",
+   "gen202thet8h94b7k",
+   "gen202theup5bfb8s",
+   "gen202thew0pr38sc",
+   "gen202tip00f8b387",
+   "gen202tip4415de70",
+   "gen202tipce47db1a",
+   "gen202uniab038bd7",
+   "gen202unibdng1eek",
+   "gen202ver06de9dc4",
+   "gen202ver5jr9xwy7",
+   "gen202ver9645121a",
+   "gen202vera1bb9c79",
+   "gen202vera78dda95",
+   "gen202verb7bf02d2",
+   "gen202verb8fa684b",
+   "gen202verd43ch8uz",
+   "gen202verfe20faa5",
+   "gen202verl2j6ull5",
+   "gen202verrjoxe39u",
+   "gen202wasynrir54c",
+   "gen202yal0858bkxy",
+   "gen202yalf028b2ff",
+   "gen202you0acd1884",
+   "gen202you0dee45a4",
+   "gen202you0di212ea",
+   "gen202you0k6m7yg7",
+   "gen202you0nji2mdw",
+   "gen202you0v0ouios",
+   "gen202you10817016",
+   "gen202you13c9e3ae",
+   "gen202you1706e723",
+   "gen202you200a062e",
+   "gen202you2142fbd8",
+   "gen202you2ae6f378",
+   "gen202you2ea3a450",
+   "gen202you3180bc85",
+   "gen202you38c2a9ca",
+   "gen202you396f2cec",
+   "gen202you3b7f3c42",
+   "gen202you3de5efa3",
+   "gen202you3f6356b0",
+   "gen202you3n4bs4qe",
+   "gen202you47b39b9a",
+   "gen202you4cb58744",
+   "gen202you5072b560",
+   "gen202you519cb5b0",
+   "gen202you5a7g4s2i",
+   "gen202you5ba4707a",
+   "gen202you5d81f482",
+   "gen202you5eb0a81f",
+   "gen202you6j0eib4q",
+   "gen202you6o1nsb1w",
+   "gen202you70d22b71",
+   "gen202you7b6454f4",
+   "gen202you7e155176",
+   "gen202you85czczs0",
+   "gen202you883b1d2b",
+   "gen202you8d2cimjg",
+   "gen202you91f64a9d",
+   "gen202you92365a96",
+   "gen202you9a9g9olg",
+   "gen202you9adbf42a",
+   "gen202youa317f770",
+   "gen202youa37aee72",
+   "gen202youa693623d",
+   "gen202youa845f411",
+   "gen202youaopgshld",
+   "gen202youb0c541de",
+   "gen202youb7220175",
+   "gen202youbujtr0mn",
+   "gen202youc1d6d31f",
+   "gen202youc2d75ff6",
+   "gen202youc4doajhn",
+   "gen202youc4u7dikt",
+   "gen202youc7574fda",
+   "gen202youcq6fiamj",
+   "gen202youd8d72505",
+   "gen202youda6c5c1c",
+   "gen202youdb34af58",
+   "gen202youedd3df25",
+   "gen202youf1935f54",
+   "gen202youfa0e23zn",
+   "gen202youfc649q73",
+   "gen202youfww7v041",
+   "gen202yougccmqau9",
+   "gen202youkht853yu",
+   "gen202youljd2lcjf",
+   "gen202youmsx7p0ic",
+   "gen202youmu5vzabb",
+   "gen202youmxyis93n",
+   "gen202youn7fgtk5t",
+   "gen202younb0uckie",
+   "gen202youo39xn1pc",
+   "gen202youo7qshven",
+   "gen202youopwcmq60",
+   "gen202youpmtm80jk",
+   "gen202youpwe26mar",
+   "gen202youq3dfmb50",
+   "gen202yourt1gmu86",
+   "gen202youslkef7gy",
+   "gen202yout11p2aja",
+   "gen202youted6dkve",
+   "gen202youtqbpl5wi",
+   "gen202youu3ai7u27",
+   "gen202youurkrv24g",
+   "gen202youvl63j6v6",
+   "gen202youwb0wcges",
+   "gen202youxems43ny",
+   "gen202youxfka7cyz",
+   "gen202youxi2k24mg",
+   "genconechc98db130",
+   "genconips46ba18f1",
+   "genconmar0fdfbf72",
+   "genconmor4f257b9c",
+   "genconmor6c6e87b1",
+   "genconver13f348b3",
+   "genconyou0df1e8df",
+   "genconyouc499c5b3"
+  ]
+ },
+ "poll_summary": {
+  "n_race_polls": 318,
+  "n_national_polls": 410,
+  "n_pollsters": 144,
+  "rejections": {
+   "primary subject": 60,
+   "older than max_age_days": 160,
+   "no single D-vs-R matchup": 37,
+   "pollster banned by 538: Big Data Poll": 32,
+   "pollster banned by this project: Wedgewood Polls": 6,
+   "repeat readings of a survey already counted": 93
+  },
+  "unknown_candidates": {
+   "senate-2026-OH": [
+    "Bill Redpath",
+    "Greg Levy",
+    "Gregory Levy"
+   ],
+   "senate-2026-RI": [
+    "Michael Bahry"
+   ],
+   "senate-2026-MA": [
+    "Joe Tache",
+    "Shriya Ayyadurai"
+   ],
+   "senate-2026-MI": [
+    "Douglas P. Marsh",
+    "Lydia Christensen",
+    "Tim Long",
+    "Walter P. Kristy"
+   ],
+   "senate-2026-IA": [
+    "Thomas Laehn"
+   ],
+   "senate-2026-KS": [
+    "David Graham"
+   ],
+   "senate-2026-FL": [
+    "Neil Gillespie"
+   ],
+   "senate-2026-NH": [
+    "Edmond Laplante"
+   ],
+   "senate-2026-SC": [
+    "Mark Hackett"
+   ],
+   "senate-2026-SD": [
+    "Brian Bengs"
+   ],
+   "senate-2026-GA": [
+    "Allen Buckley"
+   ],
+   "senate-2026-NE": [
+    "Chuck Conboy",
+    "Robin Richards"
+   ]
+  }
+ },
+ "diagnostics": {
+  "max_r_hat": 1.01,
+  "min_ess_bulk": 528.0,
+  "min_ess_tail": 429.0,
+  "divergences": 0,
+  "n_draws": 4000
+ },
+ "races": [
+  {
+   "id": "senate-2026-SC",
+   "name": "South Carolina",
+   "dem_win_prob": 0.4602,
+   "margin": {
+    "p05": -9.49,
+    "p25": -4.26,
+    "p50": -0.55,
+    "p75": 3.11,
+    "p95": 8.43
+   },
+   "fundamentals_prior_margin": -16.08,
+   "poll_count": 4,
+   "all_poll_ids": [
+    "us-202ins635442db",
+    "us-202ins4236730d",
+    "us-202tarbd5d9c4c",
+    "us-202eas9f073b45"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -3.52,
+     "p50": -0.66,
+     "p95": 2.04
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -3.59,
+     "p50": -0.74,
+     "p95": 1.99
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -3.51,
+     "p50": -0.7,
+     "p95": 1.95
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -3.45,
+     "p50": -0.65,
+     "p95": 2.06
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -3.5,
+     "p50": -0.67,
+     "p95": 2.09
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -3.42,
+     "p50": -0.58,
+     "p95": 2.24
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -3.49,
+     "p50": -0.56,
+     "p95": 2.4
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -3.7,
+     "p50": -0.55,
+     "p95": 2.6
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-IA",
+   "name": "Iowa",
+   "dem_win_prob": 0.5543,
+   "margin": {
+    "p05": -7.95,
+    "p25": -2.84,
+    "p50": 0.73,
+    "p75": 4.33,
+    "p95": 9.38
+   },
+   "fundamentals_prior_margin": -12.03,
+   "poll_count": 25,
+   "all_poll_ids": [
+    "us-202cha781abe34",
+    "us-202gbab93d5de3",
+    "us-202echf4929c57",
+    "us-202pub957d3bcc",
+    "us-202cyg40c776c5",
+    "us-202the52e3337f",
+    "us-202bea93a2c09c",
+    "us-202eme4923d9f5",
+    "us-202sufc2449e1f",
+    "us-202emec4141ca7",
+    "us-202youa33846f3",
+    "us-202youe257a121",
+    "us-202co/dc2b4681",
+    "us-202marf54f428e",
+    "us-202beaadb6c4f9",
+    "us-202cnnc393624c",
+    "us-202eme2172a9a0",
+    "us-202you1e856ad2",
+    "us-202mar9ee393ca",
+    "us-202nat70f2036c",
+    "us-202newc8f58efe",
+    "us-202co/2755fd48",
+    "us-202echbc68f468",
+    "us-202ins750c2821",
+    "us-202co/138b0472"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -0.63,
+     "p50": 0.91,
+     "p95": 2.5
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -0.84,
+     "p50": 0.73,
+     "p95": 2.29
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -0.92,
+     "p50": 0.56,
+     "p95": 2.06
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -0.93,
+     "p50": 0.49,
+     "p95": 1.91
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -1.04,
+     "p50": 0.42,
+     "p95": 1.9
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -0.94,
+     "p50": 0.59,
+     "p95": 2.13
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -1.05,
+     "p50": 0.7,
+     "p95": 2.49
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -1.39,
+     "p50": 0.73,
+     "p95": 2.75
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-NE",
+   "name": "Nebraska",
+   "dem_win_prob": 0.3842,
+   "margin": {
+    "p05": -10.82,
+    "p25": -5.37,
+    "p50": -1.61,
+    "p75": 2.13,
+    "p95": 7.5
+   },
+   "fundamentals_prior_margin": -22.0,
+   "poll_count": 4,
+   "all_poll_ids": [
+    "us-202gba71e992b6",
+    "us-202nat61ba6088",
+    "us-202natd1a93c5a",
+    "us-202ech8ce34abf"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -5.48,
+     "p50": -2.05,
+     "p95": 1.36
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -5.48,
+     "p50": -2.09,
+     "p95": 1.28
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -5.34,
+     "p50": -2.06,
+     "p95": 1.24
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -5.26,
+     "p50": -1.98,
+     "p95": 1.27
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -5.29,
+     "p50": -1.95,
+     "p95": 1.27
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -5.11,
+     "p50": -1.77,
+     "p95": 1.62
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -5.22,
+     "p50": -1.63,
+     "p95": 1.97
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -5.39,
+     "p50": -1.61,
+     "p95": 2.04
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-AK",
+   "name": "Alaska",
+   "dem_win_prob": 0.6289,
+   "margin": {
+    "p05": -7.22,
+    "p25": -1.91,
+    "p50": 1.77,
+    "p75": 5.42,
+    "p95": 10.68
+   },
+   "fundamentals_prior_margin": -17.95,
+   "poll_count": 16,
+   "all_poll_ids": [
+    "us-202datff65423b",
+    "us-202ala3b65f6ef",
+    "us-202pub023ecafb",
+    "us-202ala6fd3746f",
+    "us-202alabcabdd28",
+    "us-202alabbd6655e",
+    "us-202alab987738a",
+    "us-202ala3352af00",
+    "us-202the011805d2",
+    "us-202alaaa70f06a",
+    "us-202ala6eea5978",
+    "us-202fabecd2ecd9",
+    "us-202co/0acc5699",
+    "us-202qua198b0338",
+    "us-202data959fae6",
+    "us-202pub53b72052"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -0.53,
+     "p50": 1.77,
+     "p95": 4.07
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -0.68,
+     "p50": 1.67,
+     "p95": 3.94
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -0.81,
+     "p50": 1.59,
+     "p95": 3.95
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -0.83,
+     "p50": 1.56,
+     "p95": 4.07
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -0.89,
+     "p50": 1.57,
+     "p95": 4.05
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -0.93,
+     "p50": 1.69,
+     "p95": 4.31
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -1.08,
+     "p50": 1.75,
+     "p95": 4.6
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -1.26,
+     "p50": 1.75,
+     "p95": 4.74
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-KS",
+   "name": "Kansas",
+   "dem_win_prob": 0.6589,
+   "margin": {
+    "p05": -6.64,
+    "p25": -1.4,
+    "p50": 2.21,
+    "p75": 5.84,
+    "p95": 11.03
+   },
+   "fundamentals_prior_margin": -18.51,
+   "poll_count": 6,
+   "all_poll_ids": [
+    "us-202tav22537272",
+    "us-202emeb0bb9def",
+    "us-202ins9dcc36f4",
+    "us-202cnn473d5c5d",
+    "us-202thee58243fb",
+    "us-202emeb5d23beb"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -0.98,
+     "p50": 1.74,
+     "p95": 4.49
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -1.07,
+     "p50": 1.71,
+     "p95": 4.43
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -0.95,
+     "p50": 1.65,
+     "p95": 4.34
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -0.86,
+     "p50": 1.7,
+     "p95": 4.3
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -0.67,
+     "p50": 1.76,
+     "p95": 4.3
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -0.48,
+     "p50": 1.98,
+     "p95": 4.57
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -0.47,
+     "p50": 2.18,
+     "p95": 4.83
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -0.6,
+     "p50": 2.17,
+     "p95": 5.09
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-ME",
+   "name": "Maine",
+   "dem_win_prob": 0.6627,
+   "margin": {
+    "p05": -6.47,
+    "p25": -1.35,
+    "p50": 2.26,
+    "p75": 5.88,
+    "p95": 11.01
+   },
+   "fundamentals_prior_margin": 4.37,
+   "poll_count": 17,
+   "all_poll_ids": [
+    "us-202unia65b1e02",
+    "us-202harfe4afc0e",
+    "us-202bea347c91b0",
+    "us-202you8b2f9799",
+    "us-202uni866e047f",
+    "us-202qua5c07dc65",
+    "us-202the9a68a494",
+    "us-202uni51f1c418",
+    "us-202fabe2bcab70",
+    "us-202co/7102b7eb",
+    "us-202mare89f317d",
+    "us-202the6b777566",
+    "us-202inscfc77987",
+    "us-202bea00f453c2",
+    "us-202ech31fe342b",
+    "us-202mar84640418",
+    "us-202cnn450b1a6b"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 1.08,
+     "p50": 2.65,
+     "p95": 4.26
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 1.21,
+     "p50": 2.69,
+     "p95": 4.27
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 1.12,
+     "p50": 2.59,
+     "p95": 4.14
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 1.0,
+     "p50": 2.55,
+     "p95": 4.2
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 0.81,
+     "p50": 2.46,
+     "p95": 4.14
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 0.55,
+     "p50": 2.29,
+     "p95": 4.09
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 0.27,
+     "p50": 2.29,
+     "p95": 4.34
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -0.04,
+     "p50": 2.31,
+     "p95": 4.54
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-TX",
+   "name": "Texas",
+   "dem_win_prob": 0.6821,
+   "margin": {
+    "p05": -6.12,
+    "p25": -1.05,
+    "p50": 2.49,
+    "p75": 6.01,
+    "p95": 11.15
+   },
+   "fundamentals_prior_margin": -11.61,
+   "poll_count": 50,
+   "all_poll_ids": [
+    "us-202rag0c28bfd3",
+    "us-202emeef7cbc1d",
+    "us-202uni0dc518c7",
+    "us-202pub7e233927",
+    "us-202imp50137db2",
+    "us-202you9dee520f",
+    "us-202texe500a6d5",
+    "us-202texc28cf835",
+    "us-202pub121c904c",
+    "us-202sli9f75fb57",
+    "us-202rec22b1c62b",
+    "us-202qua6b878295",
+    "us-202texc8fd4814",
+    "us-202thee89c7bce",
+    "us-202a2 1a5590cb",
+    "us-202sli6204659f",
+    "us-202you3c4a4a9f",
+    "us-202bea54820d8d",
+    "us-202texee0a6ae6",
+    "us-202rec773da2d7",
+    "us-202eme5bcac049",
+    "us-202the54ba4671",
+    "us-202sli394bd9a0",
+    "us-202youc39ac53a",
+    "us-202fab22efb6bc",
+    "us-202ins8df69531",
+    "us-202rec85c5cf76",
+    "us-202emee56d4394",
+    "us-202tex6938a787",
+    "us-202sli284b821d",
+    "us-202unic8d0412d",
+    "us-202gui7fa4251f",
+    "us-202beab9600d9b",
+    "us-202recc152b3f7",
+    "us-202act4e413645",
+    "us-202quaee83ce98",
+    "us-202vot954dd8b2",
+    "us-202new4178c636",
+    "us-202ins62d5470c",
+    "us-202pol8bd7b267",
+    "us-202slidcb5236a",
+    "us-202bea368d4e46",
+    "us-202youe49ed5b8",
+    "us-202eme43ceed84",
+    "us-202actbd0ac41f",
+    "us-202cnn4329221b",
+    "us-202tex39cdaf4f",
+    "us-202a2 c2344bd1",
+    "us-202acta7d9392c",
+    "us-202qua5e695b57"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 1.41,
+     "p50": 2.72,
+     "p95": 4.06
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 1.22,
+     "p50": 2.56,
+     "p95": 3.91
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 1.11,
+     "p50": 2.48,
+     "p95": 3.86
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 1.21,
+     "p50": 2.53,
+     "p95": 3.88
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 1.19,
+     "p50": 2.46,
+     "p95": 3.72
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 1.23,
+     "p50": 2.53,
+     "p95": 3.78
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 1.0,
+     "p50": 2.5,
+     "p95": 3.99
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 0.7,
+     "p50": 2.5,
+     "p95": 4.3
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-MI",
+   "name": "Michigan",
+   "dem_win_prob": 0.7685,
+   "margin": {
+    "p05": -4.8,
+    "p25": 0.33,
+    "p50": 3.91,
+    "p75": 7.46,
+    "p95": 12.58
+   },
+   "fundamentals_prior_margin": -0.67,
+   "poll_count": 44,
+   "all_poll_ids": [
+    "us-202ros410812c7",
+    "us-202mit590c99af",
+    "us-202glef7ac134b",
+    "us-202eme5bdd236b",
+    "us-202gle0133b0b3",
+    "us-202mit9a5c32a0",
+    "us-202tip59dfdfa0",
+    "us-202tip6d4d41d9",
+    "us-202tul3efe64f6",
+    "us-202zen354a92cf",
+    "us-202qua3b4e634a",
+    "us-202gle7fc79cd5",
+    "us-202epife4108d8",
+    "us-202mit1e6a5692",
+    "us-202bea6ed87549",
+    "us-202gba7596c230",
+    "us-202tip8915c085",
+    "us-202fab12ee3caf",
+    "us-202susb1d73b8b",
+    "us-202micb55519f5",
+    "us-202miccc27552a",
+    "us-202epi5f481027",
+    "us-202traa454dc67",
+    "us-202the9066d3a5",
+    "us-202eme99d02ce6",
+    "us-202suf59500e62",
+    "us-202thecf4746de",
+    "us-202cyg13fa7f0a",
+    "us-202co/b838141c",
+    "us-202guic8eacfa2",
+    "us-202thee5a838a4",
+    "us-202beac0286b40",
+    "us-202tra046dabbf",
+    "us-202z tb2a3f7be",
+    "us-202mit7960c973",
+    "us-202thed1db38e3",
+    "us-202mic57c88db3",
+    "us-202micf2fa67e0",
+    "us-202marad729239",
+    "us-202gle5c572e3a",
+    "us-202ins51d307b7",
+    "us-202cnn2b6bf541",
+    "us-202mit52e22a51",
+    "us-202upscf2886a6"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 2.14,
+     "p50": 3.54,
+     "p95": 4.93
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 2.21,
+     "p50": 3.55,
+     "p95": 4.94
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 2.15,
+     "p50": 3.54,
+     "p95": 4.96
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 2.08,
+     "p50": 3.6,
+     "p95": 5.12
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 2.13,
+     "p50": 3.66,
+     "p95": 5.25
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 2.2,
+     "p50": 3.81,
+     "p95": 5.46
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 2.1,
+     "p50": 3.9,
+     "p95": 5.73
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 1.85,
+     "p50": 3.91,
+     "p95": 6.08
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-OH",
+   "name": "Ohio",
+   "dem_win_prob": 0.8045,
+   "margin": {
+    "p05": -4.09,
+    "p25": 0.95,
+    "p50": 4.52,
+    "p75": 8.08,
+    "p95": 13.1
+   },
+   "fundamentals_prior_margin": -11.16,
+   "poll_count": 26,
+   "all_poll_ids": [
+    "us-202bow288ac89a",
+    "us-202emeea9b3350",
+    "us-202emc72b76be3",
+    "us-202onm04028dcb",
+    "us-202quad6aba264",
+    "us-202echefadd030",
+    "us-202bow8a765810",
+    "us-202bea6ef5bd7d",
+    "us-202fabc4750dc3",
+    "us-202the85ab5fb4",
+    "us-202bea58e907c0",
+    "us-202ins890b679a",
+    "us-202cona69a5893",
+    "us-202tra4f3f6f82",
+    "us-202qua2790f813",
+    "us-202mara7f1d430",
+    "us-202insea9816ae",
+    "us-202cnna1713372",
+    "us-202bow14c3613e",
+    "us-202co/ed81e3f8",
+    "us-202vot936927b5",
+    "us-202new8d3274bf",
+    "us-202mar3b19e64d",
+    "us-202bea80ab32e9",
+    "us-202ech01f06c61",
+    "us-202ins6e5f29f2"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 3.25,
+     "p50": 4.82,
+     "p95": 6.54
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 3.11,
+     "p50": 4.59,
+     "p95": 6.18
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 2.89,
+     "p50": 4.39,
+     "p95": 5.95
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 2.88,
+     "p50": 4.31,
+     "p95": 5.86
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 2.75,
+     "p50": 4.25,
+     "p95": 5.79
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 2.82,
+     "p50": 4.39,
+     "p95": 6.02
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 2.65,
+     "p50": 4.51,
+     "p95": 6.35
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 2.45,
+     "p50": 4.49,
+     "p95": 6.6
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-MT",
+   "name": "Montana",
+   "dem_win_prob": 0.155,
+   "margin": {
+    "p05": -26.68,
+    "p25": -17.25,
+    "p50": -10.36,
+    "p75": -3.36,
+    "p95": 6.23
+   },
+   "fundamentals_prior_margin": -19.18,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -24.4,
+     "p50": -10.4,
+     "p95": 3.37
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -24.55,
+     "p50": -10.47,
+     "p95": 3.38
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -24.43,
+     "p50": -10.54,
+     "p95": 3.35
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -24.39,
+     "p50": -10.53,
+     "p95": 3.23
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -24.47,
+     "p50": -10.52,
+     "p95": 3.39
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -24.28,
+     "p50": -10.39,
+     "p95": 3.65
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -24.32,
+     "p50": -10.31,
+     "p95": 3.65
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -24.41,
+     "p50": -10.29,
+     "p95": 3.67
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-MN",
+   "name": "Minnesota",
+   "dem_win_prob": 0.8456,
+   "margin": {
+    "p05": -3.53,
+    "p25": 1.88,
+    "p50": 5.64,
+    "p75": 9.33,
+    "p95": 14.59
+   },
+   "fundamentals_prior_margin": 4.08,
+   "poll_count": 6,
+   "all_poll_ids": [
+    "us-202eme46470152",
+    "us-202sur47670306",
+    "us-202qua8837472c",
+    "us-202sura38c6933",
+    "us-202gqr63b7a4d3",
+    "us-202sur63027f3e"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 2.67,
+     "p50": 5.58,
+     "p95": 8.38
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 2.76,
+     "p50": 5.63,
+     "p95": 8.45
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 2.69,
+     "p50": 5.63,
+     "p95": 8.46
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 2.68,
+     "p50": 5.61,
+     "p95": 8.55
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 2.58,
+     "p50": 5.57,
+     "p95": 8.66
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 2.49,
+     "p50": 5.61,
+     "p95": 8.8
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 2.32,
+     "p50": 5.64,
+     "p95": 8.92
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 2.15,
+     "p50": 5.64,
+     "p95": 9.1
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-MS",
+   "name": "Mississippi",
+   "dem_win_prob": 0.1441,
+   "margin": {
+    "p05": -16.47,
+    "p25": -10.67,
+    "p50": -6.53,
+    "p75": -2.42,
+    "p95": 3.61
+   },
+   "fundamentals_prior_margin": -24.76,
+   "poll_count": 2,
+   "all_poll_ids": [
+    "us-202imp28c38a71",
+    "us-202dat084dfba9"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -11.89,
+     "p50": -6.77,
+     "p95": -1.75
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -12.03,
+     "p50": -6.78,
+     "p95": -1.64
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -12.02,
+     "p50": -6.77,
+     "p95": -1.5
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -12.02,
+     "p50": -6.72,
+     "p95": -1.41
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -12.05,
+     "p50": -6.67,
+     "p95": -1.4
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -12.04,
+     "p50": -6.59,
+     "p95": -1.23
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -11.92,
+     "p50": -6.54,
+     "p95": -1.11
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -12.17,
+     "p50": -6.54,
+     "p95": -1.05
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-LA",
+   "name": "Louisiana",
+   "dem_win_prob": 0.1236,
+   "margin": {
+    "p05": -26.29,
+    "p25": -17.51,
+    "p50": -11.16,
+    "p75": -4.68,
+    "p95": 4.73
+   },
+   "fundamentals_prior_margin": -21.09,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -24.13,
+     "p50": -11.52,
+     "p95": 1.7
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -24.14,
+     "p50": -11.49,
+     "p95": 1.77
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -24.15,
+     "p50": -11.42,
+     "p95": 1.8
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -24.2,
+     "p50": -11.37,
+     "p95": 1.77
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -24.21,
+     "p50": -11.29,
+     "p95": 2.01
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -24.01,
+     "p50": -11.17,
+     "p95": 2.27
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -24.1,
+     "p50": -11.13,
+     "p95": 2.34
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -24.32,
+     "p50": -11.12,
+     "p95": 2.41
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-FL",
+   "name": "Florida",
+   "dem_win_prob": 0.1163,
+   "margin": {
+    "p05": -14.97,
+    "p25": -9.94,
+    "p50": -6.38,
+    "p75": -2.83,
+    "p95": 2.44
+   },
+   "fundamentals_prior_margin": -11.32,
+   "poll_count": 18,
+   "all_poll_ids": [
+    "us-202uni979cabda",
+    "us-202emed67d42c8",
+    "us-202ste198f7a4a",
+    "us-202unic788577e",
+    "us-202cha69e5536b",
+    "us-202qua2b8ed3cb",
+    "us-202st.73c64f89",
+    "us-202ste67ef4e2d",
+    "us-202insad41796a",
+    "us-202chad8109bd5",
+    "us-202tar0bbd9d56",
+    "us-202tarc49d2a14",
+    "us-202st.fc2e22ed",
+    "us-202mdwe9967dcc",
+    "us-202unif780f058",
+    "us-202co/bf7a2617",
+    "us-202ech9cca8dca",
+    "us-202actc8c031ff"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -8.4,
+     "p50": -6.44,
+     "p95": -4.4
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -8.47,
+     "p50": -6.52,
+     "p95": -4.56
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -8.45,
+     "p50": -6.53,
+     "p95": -4.58
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -8.33,
+     "p50": -6.42,
+     "p95": -4.52
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -8.34,
+     "p50": -6.45,
+     "p95": -4.55
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -8.33,
+     "p50": -6.37,
+     "p95": -4.4
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -8.52,
+     "p50": -6.4,
+     "p95": -4.25
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -8.72,
+     "p50": -6.38,
+     "p95": -4.09
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-NH",
+   "name": "New Hampshire",
+   "dem_win_prob": 0.9139,
+   "margin": {
+    "p05": -1.56,
+    "p25": 3.73,
+    "p50": 7.4,
+    "p75": 11.06,
+    "p95": 16.25
+   },
+   "fundamentals_prior_margin": 3.65,
+   "poll_count": 17,
+   "all_poll_ids": [
+    "us-202co/0b672f7f",
+    "us-202saia99778cd",
+    "us-202prad23da08c",
+    "us-202uni1250e038",
+    "us-202yese8051e85",
+    "us-202saica770502",
+    "us-202eme9a6a68f5",
+    "us-202uni64743a1f",
+    "us-202unib186ef52",
+    "us-202sai3a119d63",
+    "us-202sai47715591",
+    "us-202unie006e257",
+    "us-202insfe93ffed",
+    "us-202the55816505",
+    "us-202uni02a0a46f",
+    "us-202uni57f2dfa4",
+    "us-202sai55f1c7c2"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 5.16,
+     "p50": 7.44,
+     "p95": 9.62
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 5.25,
+     "p50": 7.57,
+     "p95": 9.77
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 5.12,
+     "p50": 7.49,
+     "p95": 9.81
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 5.11,
+     "p50": 7.54,
+     "p95": 9.84
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 5.06,
+     "p50": 7.46,
+     "p95": 9.82
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 4.9,
+     "p50": 7.41,
+     "p95": 9.82
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 4.71,
+     "p50": 7.41,
+     "p95": 10.11
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 4.57,
+     "p50": 7.36,
+     "p95": 10.27
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-NJ",
+   "name": "New Jersey",
+   "dem_win_prob": 0.9219,
+   "margin": {
+    "p05": -2.27,
+    "p25": 7.55,
+    "p50": 14.21,
+    "p75": 20.86,
+    "p95": 30.07
+   },
+   "fundamentals_prior_margin": 10.31,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 0.27,
+     "p50": 14.28,
+     "p95": 27.92
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 0.32,
+     "p50": 14.32,
+     "p95": 28.05
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 0.27,
+     "p50": 14.38,
+     "p95": 28.06
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 0.24,
+     "p50": 14.43,
+     "p95": 28.18
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 0.18,
+     "p50": 14.37,
+     "p95": 28.19
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 0.04,
+     "p50": 14.32,
+     "p95": 28.05
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 0.13,
+     "p50": 14.24,
+     "p95": 27.96
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 0.1,
+     "p50": 14.3,
+     "p95": 28.13
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-GA",
+   "name": "Georgia",
+   "dem_win_prob": 0.9627,
+   "margin": {
+    "p05": 0.74,
+    "p25": 6.0,
+    "p50": 9.6,
+    "p75": 13.22,
+    "p95": 18.37
+   },
+   "fundamentals_prior_margin": 1.57,
+   "poll_count": 11,
+   "all_poll_ids": [
+    "us-202eme1bcacacc",
+    "us-202ech1a9afcfb",
+    "us-202bea8e2b79ff",
+    "us-202wic6dd1649c",
+    "us-202fab389395b2",
+    "us-202ins63791cfb",
+    "us-202insbbb32dd3",
+    "us-202uni278821c4",
+    "us-202act204154cb",
+    "us-202quae590b629",
+    "us-202echc0a48602"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 7.09,
+     "p50": 9.36,
+     "p95": 11.57
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 7.19,
+     "p50": 9.42,
+     "p95": 11.66
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 7.19,
+     "p50": 9.43,
+     "p95": 11.63
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 7.36,
+     "p50": 9.57,
+     "p95": 11.8
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 7.33,
+     "p50": 9.54,
+     "p95": 11.75
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 7.3,
+     "p50": 9.61,
+     "p95": 12.03
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 7.08,
+     "p50": 9.63,
+     "p95": 12.17
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 6.88,
+     "p50": 9.63,
+     "p95": 12.35
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-CO",
+   "name": "Colorado",
+   "dem_win_prob": 0.9656,
+   "margin": {
+    "p05": 1.68,
+    "p25": 11.44,
+    "p50": 18.19,
+    "p75": 24.7,
+    "p95": 33.76
+   },
+   "fundamentals_prior_margin": 14.12,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 4.33,
+     "p50": 18.11,
+     "p95": 31.6
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 4.52,
+     "p50": 18.23,
+     "p95": 31.78
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 4.51,
+     "p50": 18.33,
+     "p95": 31.72
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 4.43,
+     "p50": 18.23,
+     "p95": 31.96
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 4.44,
+     "p50": 18.22,
+     "p95": 31.91
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 4.14,
+     "p50": 18.14,
+     "p95": 31.9
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 3.97,
+     "p50": 18.18,
+     "p95": 31.91
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 4.12,
+     "p50": 18.17,
+     "p95": 32.01
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-KY",
+   "name": "Kentucky",
+   "dem_win_prob": 0.0335,
+   "margin": {
+    "p05": -33.79,
+    "p25": -24.94,
+    "p50": -18.42,
+    "p75": -11.82,
+    "p95": -2.07
+   },
+   "fundamentals_prior_margin": -28.56,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -32.19,
+     "p50": -19.02,
+     "p95": -4.87
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -32.13,
+     "p50": -18.94,
+     "p95": -4.98
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -31.97,
+     "p50": -18.76,
+     "p95": -4.78
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -31.93,
+     "p50": -18.68,
+     "p95": -4.67
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -31.85,
+     "p50": -18.59,
+     "p95": -4.49
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -31.63,
+     "p50": -18.42,
+     "p95": -4.16
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -31.69,
+     "p50": -18.45,
+     "p95": -4.38
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -31.72,
+     "p50": -18.49,
+     "p95": -4.34
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-ID",
+   "name": "Idaho",
+   "dem_win_prob": 0.0254,
+   "margin": {
+    "p05": -29.49,
+    "p25": -20.43,
+    "p50": -14.9,
+    "p75": -9.65,
+    "p95": -2.28
+   },
+   "fundamentals_prior_margin": -37.66,
+   "poll_count": 1,
+   "all_poll_ids": [
+    "us-202the39a65ca5"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -27.32,
+     "p50": -14.96,
+     "p95": -6.74
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -27.44,
+     "p50": -14.93,
+     "p95": -6.63
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -27.32,
+     "p50": -14.84,
+     "p95": -6.37
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -27.29,
+     "p50": -14.74,
+     "p95": -6.26
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -27.21,
+     "p50": -14.7,
+     "p95": -6.09
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -27.05,
+     "p50": -14.51,
+     "p95": -5.92
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -27.1,
+     "p50": -14.54,
+     "p95": -5.86
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -27.27,
+     "p50": -14.65,
+     "p95": -5.76
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-OR",
+   "name": "Oregon",
+   "dem_win_prob": 0.9765,
+   "margin": {
+    "p05": 3.52,
+    "p25": 13.39,
+    "p50": 19.91,
+    "p75": 26.33,
+    "p95": 35.19
+   },
+   "fundamentals_prior_margin": 15.95,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 5.7,
+     "p50": 19.93,
+     "p95": 33.01
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 5.73,
+     "p50": 20.04,
+     "p95": 33.18
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 5.84,
+     "p50": 20.11,
+     "p95": 33.13
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 5.83,
+     "p50": 20.14,
+     "p95": 33.22
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 5.89,
+     "p50": 20.04,
+     "p95": 33.09
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 5.89,
+     "p50": 20.01,
+     "p95": 33.07
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 5.72,
+     "p50": 20.0,
+     "p95": 33.08
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 5.61,
+     "p50": 19.98,
+     "p95": 33.03
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-SD",
+   "name": "South Dakota",
+   "dem_win_prob": 0.0228,
+   "margin": {
+    "p05": -36.74,
+    "p25": -27.58,
+    "p50": -20.92,
+    "p75": -14.0,
+    "p95": -3.79
+   },
+   "fundamentals_prior_margin": -30.95,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -34.73,
+     "p50": -21.36,
+     "p95": -7.04
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -34.9,
+     "p50": -21.34,
+     "p95": -6.93
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -34.77,
+     "p50": -21.24,
+     "p95": -6.85
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -34.86,
+     "p50": -21.23,
+     "p95": -6.71
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -34.71,
+     "p50": -21.09,
+     "p95": -6.52
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -34.58,
+     "p50": -20.98,
+     "p95": -6.24
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -34.75,
+     "p50": -20.85,
+     "p95": -6.19
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -34.8,
+     "p50": -20.87,
+     "p95": -6.11
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-NC",
+   "name": "North Carolina",
+   "dem_win_prob": 0.9803,
+   "margin": {
+    "p05": 2.24,
+    "p25": 7.4,
+    "p50": 10.97,
+    "p75": 14.51,
+    "p95": 19.58
+   },
+   "fundamentals_prior_margin": -2.52,
+   "poll_count": 37,
+   "all_poll_ids": [
+    "us-202har1bdb30c5",
+    "us-202cha2976f667",
+    "us-202tipab84b110",
+    "us-202cha2111afda",
+    "us-202nex3971aa3a",
+    "us-202pub85665d25",
+    "us-202you2133db87",
+    "us-202harca09238f",
+    "us-202higf04011a1",
+    "us-202hig7de64e7d",
+    "us-202opi5a64ca39",
+    "us-202chab31a8a6e",
+    "us-202harb00382e0",
+    "us-202youca5f07f2",
+    "us-202thef5594fea",
+    "us-202pub96a42a3f",
+    "us-202elodaa5cffa",
+    "us-202elo069243f3",
+    "us-202beacaddacc4",
+    "us-202chad53b9fb6",
+    "us-202chaf0ea6e94",
+    "us-202hig0453aa0e",
+    "us-202hig8ec8c4e5",
+    "us-202har1cef6d8a",
+    "us-202elo857d928d",
+    "us-202easa9c1ac17",
+    "us-202higae3d1182",
+    "us-202harfc1499b8",
+    "us-202insf80352ad",
+    "us-202eas168b53d4",
+    "us-202elo000dcdfc",
+    "us-202chaa0d9b00c",
+    "us-202surbcf9e1be",
+    "us-202hig5d2fb253",
+    "us-202act3e915bba",
+    "us-202har90f566f4",
+    "us-202qua525d8d11"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 8.86,
+     "p50": 10.67,
+     "p95": 12.45
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 8.94,
+     "p50": 10.73,
+     "p95": 12.56
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 8.91,
+     "p50": 10.78,
+     "p95": 12.64
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 9.13,
+     "p50": 10.93,
+     "p95": 12.8
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 9.05,
+     "p50": 10.96,
+     "p95": 12.79
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 8.99,
+     "p50": 11.01,
+     "p95": 13.0
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 8.89,
+     "p50": 10.99,
+     "p95": 13.09
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 8.64,
+     "p50": 10.97,
+     "p95": 13.37
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-OK",
+   "name": "Oklahoma",
+   "dem_win_prob": 0.0131,
+   "margin": {
+    "p05": -38.44,
+    "p25": -29.47,
+    "p50": -23.03,
+    "p75": -16.44,
+    "p95": -6.55
+   },
+   "fundamentals_prior_margin": -32.82,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -36.64,
+     "p50": -23.6,
+     "p95": -9.51
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -36.7,
+     "p50": -23.48,
+     "p95": -9.33
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -36.46,
+     "p50": -23.31,
+     "p95": -9.07
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -36.32,
+     "p50": -23.33,
+     "p95": -8.85
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -36.34,
+     "p50": -23.24,
+     "p95": -8.63
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -36.28,
+     "p50": -23.09,
+     "p95": -8.5
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -36.32,
+     "p50": -23.08,
+     "p95": -8.62
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -36.47,
+     "p50": -23.07,
+     "p95": -8.55
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-DE",
+   "name": "Delaware",
+   "dem_win_prob": 0.9878,
+   "margin": {
+    "p05": 6.0,
+    "p25": 15.55,
+    "p50": 21.91,
+    "p75": 28.19,
+    "p95": 36.86
+   },
+   "fundamentals_prior_margin": 18.08,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 8.37,
+     "p50": 21.85,
+     "p95": 34.55
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 8.61,
+     "p50": 21.97,
+     "p95": 34.65
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 8.69,
+     "p50": 22.02,
+     "p95": 34.73
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 8.68,
+     "p50": 22.12,
+     "p95": 34.89
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 8.74,
+     "p50": 22.13,
+     "p95": 34.77
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 8.63,
+     "p50": 22.03,
+     "p95": 34.78
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 8.45,
+     "p50": 21.99,
+     "p95": 34.8
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 8.36,
+     "p50": 21.97,
+     "p95": 34.84
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-IL",
+   "name": "Illinois",
+   "dem_win_prob": 0.9918,
+   "margin": {
+    "p05": 4.41,
+    "p25": 10.1,
+    "p50": 14.01,
+    "p75": 17.89,
+    "p95": 23.28
+   },
+   "fundamentals_prior_margin": 11.36,
+   "poll_count": 3,
+   "all_poll_ids": [
+    "us-202pub12c802d5",
+    "us-202act5e47e608",
+    "us-202act4459517f"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 9.56,
+     "p50": 13.98,
+     "p95": 18.35
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 9.68,
+     "p50": 14.04,
+     "p95": 18.45
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 9.82,
+     "p50": 14.1,
+     "p95": 18.41
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 9.85,
+     "p50": 14.16,
+     "p95": 18.47
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 9.8,
+     "p50": 14.08,
+     "p95": 18.53
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 9.66,
+     "p50": 13.99,
+     "p95": 18.47
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 9.72,
+     "p50": 13.98,
+     "p95": 18.51
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 9.46,
+     "p50": 14.0,
+     "p95": 18.65
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-AR",
+   "name": "Arkansas",
+   "dem_win_prob": 0.0042,
+   "margin": {
+    "p05": -23.94,
+    "p25": -18.71,
+    "p50": -15.03,
+    "p75": -11.21,
+    "p95": -5.72
+   },
+   "fundamentals_prior_margin": -32.27,
+   "poll_count": 5,
+   "all_poll_ids": [
+    "us-202grae15a8aed",
+    "us-202j.le2159a92",
+    "us-202gracbfdd9ed",
+    "us-202hen5c2d9c7e",
+    "us-202gra4551bd46"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -19.34,
+     "p50": -15.68,
+     "p95": -12.2
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -19.22,
+     "p50": -15.51,
+     "p95": -12.05
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -19.02,
+     "p50": -15.31,
+     "p95": -11.87
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -19.01,
+     "p50": -15.18,
+     "p95": -11.74
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -18.87,
+     "p50": -15.06,
+     "p95": -11.65
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -18.85,
+     "p50": -14.94,
+     "p95": -11.41
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -18.78,
+     "p50": -14.97,
+     "p95": -11.27
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -18.95,
+     "p50": -15.0,
+     "p95": -11.09
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-NM",
+   "name": "New Mexico",
+   "dem_win_prob": 0.9986,
+   "margin": {
+    "p05": 8.0,
+    "p25": 13.75,
+    "p50": 17.8,
+    "p75": 21.78,
+    "p95": 27.37
+   },
+   "fundamentals_prior_margin": 10.05,
+   "poll_count": 2,
+   "all_poll_ids": [
+    "us-202resf47cceea",
+    "us-202surae0ec3b2"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 12.88,
+     "p50": 17.71,
+     "p95": 22.52
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 13.03,
+     "p50": 17.83,
+     "p95": 22.7
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 13.06,
+     "p50": 17.86,
+     "p95": 22.73
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 12.97,
+     "p50": 17.91,
+     "p95": 22.83
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 12.96,
+     "p50": 17.88,
+     "p95": 22.84
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 12.82,
+     "p50": 17.83,
+     "p95": 22.86
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 12.66,
+     "p50": 17.82,
+     "p95": 23.01
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 12.55,
+     "p50": 17.81,
+     "p95": 23.04
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-VA",
+   "name": "Virginia",
+   "dem_win_prob": 0.9986,
+   "margin": {
+    "p05": 8.37,
+    "p25": 14.51,
+    "p50": 18.68,
+    "p75": 22.76,
+    "p95": 28.54
+   },
+   "fundamentals_prior_margin": 9.25,
+   "poll_count": 2,
+   "all_poll_ids": [
+    "us-202the5a104154",
+    "us-202the592aeef5"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 13.09,
+     "p50": 18.53,
+     "p95": 24.0
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 13.12,
+     "p50": 18.64,
+     "p95": 24.14
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 13.03,
+     "p50": 18.67,
+     "p95": 24.16
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 13.07,
+     "p50": 18.76,
+     "p95": 24.23
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 12.89,
+     "p50": 18.73,
+     "p95": 24.33
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 12.84,
+     "p50": 18.68,
+     "p95": 24.23
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 12.78,
+     "p50": 18.69,
+     "p95": 24.3
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 12.67,
+     "p50": 18.74,
+     "p95": 24.4
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-AL",
+   "name": "Alabama",
+   "dem_win_prob": 0.0009,
+   "margin": {
+    "p05": -26.74,
+    "p25": -21.53,
+    "p50": -17.88,
+    "p75": -14.15,
+    "p95": -8.66
+   },
+   "fundamentals_prior_margin": -28.66,
+   "poll_count": 5,
+   "all_poll_ids": [
+    "us-202yes4308b337",
+    "us-202rmg809825be",
+    "us-202thef799bd14",
+    "us-202cyg0d88fe11",
+    "us-202blu72ec478b"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -21.83,
+     "p50": -18.53,
+     "p95": -15.02
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -21.74,
+     "p50": -18.4,
+     "p95": -15.01
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -21.6,
+     "p50": -18.24,
+     "p95": -14.77
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -21.56,
+     "p50": -18.16,
+     "p95": -14.68
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -21.41,
+     "p50": -18.06,
+     "p95": -14.61
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -21.44,
+     "p50": -17.91,
+     "p95": -14.22
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -21.51,
+     "p50": -17.89,
+     "p95": -14.14
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -21.57,
+     "p50": -17.95,
+     "p95": -14.01
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-TN",
+   "name": "Tennessee",
+   "dem_win_prob": 0.0008,
+   "margin": {
+    "p05": -30.66,
+    "p25": -24.85,
+    "p50": -20.74,
+    "p75": -16.47,
+    "p95": -10.23
+   },
+   "fundamentals_prior_margin": -29.5,
+   "poll_count": 1,
+   "all_poll_ids": [
+    "us-202tara610e9e2"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -26.85,
+     "p50": -21.23,
+     "p95": -15.39
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -26.9,
+     "p50": -21.17,
+     "p95": -15.24
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -26.9,
+     "p50": -21.05,
+     "p95": -15.11
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -26.85,
+     "p50": -20.96,
+     "p95": -14.92
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -26.77,
+     "p50": -20.85,
+     "p95": -14.78
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -26.71,
+     "p50": -20.74,
+     "p95": -14.64
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -26.7,
+     "p50": -20.75,
+     "p95": -14.55
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -26.7,
+     "p50": -20.76,
+     "p95": -14.51
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-WV",
+   "name": "West Virginia",
+   "dem_win_prob": 0.0003,
+   "margin": {
+    "p05": -49.47,
+    "p25": -41.13,
+    "p50": -34.8,
+    "p75": -28.12,
+    "p95": -18.24
+   },
+   "fundamentals_prior_margin": -42.68,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -47.77,
+     "p50": -35.22,
+     "p95": -20.93
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -47.78,
+     "p50": -35.17,
+     "p95": -20.88
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -47.74,
+     "p50": -35.07,
+     "p95": -20.63
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -47.77,
+     "p50": -34.93,
+     "p95": -20.6
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -47.7,
+     "p50": -34.8,
+     "p95": -20.54
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -47.7,
+     "p50": -34.72,
+     "p95": -20.31
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -47.74,
+     "p50": -34.73,
+     "p95": -20.18
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -47.76,
+     "p50": -34.79,
+     "p95": -20.26
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-WY",
+   "name": "Wyoming",
+   "dem_win_prob": 0.0002,
+   "margin": {
+    "p05": -51.5,
+    "p25": -43.3,
+    "p50": -37.14,
+    "p75": -30.75,
+    "p95": -20.87
+   },
+   "fundamentals_prior_margin": -44.56,
+   "poll_count": 0,
+   "all_poll_ids": [],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": -49.88,
+     "p50": -37.46,
+     "p95": -23.75
+    },
+    {
+     "date": "2026-09-22",
+     "p05": -49.84,
+     "p50": -37.42,
+     "p95": -23.54
+    },
+    {
+     "date": "2026-09-29",
+     "p05": -49.82,
+     "p50": -37.2,
+     "p95": -23.41
+    },
+    {
+     "date": "2026-10-06",
+     "p05": -49.98,
+     "p50": -37.12,
+     "p95": -23.49
+    },
+    {
+     "date": "2026-10-13",
+     "p05": -49.91,
+     "p50": -37.08,
+     "p95": -23.34
+    },
+    {
+     "date": "2026-10-20",
+     "p05": -49.97,
+     "p50": -37.05,
+     "p95": -23.17
+    },
+    {
+     "date": "2026-10-27",
+     "p05": -50.03,
+     "p50": -37.06,
+     "p95": -23.11
+    },
+    {
+     "date": "2026-11-03",
+     "p05": -50.0,
+     "p50": -37.02,
+     "p95": -23.08
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-MA",
+   "name": "Massachusetts",
+   "dem_win_prob": 1.0,
+   "margin": {
+    "p05": 22.1,
+    "p25": 27.22,
+    "p50": 30.67,
+    "p75": 34.04,
+    "p95": 38.78
+   },
+   "fundamentals_prior_margin": 28.14,
+   "poll_count": 12,
+   "all_poll_ids": [
+    "us-202suf91850a3d",
+    "us-202uni06038789",
+    "us-202unide9784b7",
+    "us-202suf43021e00",
+    "us-202uni7ffc2e9d",
+    "us-202uni86a7074d",
+    "us-202unic67dc15d",
+    "us-202mas5785b9ea",
+    "us-202unifcec5d26",
+    "us-202uni13705323",
+    "us-202unidf4870a3",
+    "us-202suf710febda"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 27.31,
+     "p50": 29.92,
+     "p95": 32.56
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 27.61,
+     "p50": 30.16,
+     "p95": 32.79
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 27.72,
+     "p50": 30.42,
+     "p95": 33.01
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 27.93,
+     "p50": 30.64,
+     "p95": 33.28
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 27.96,
+     "p50": 30.79,
+     "p95": 33.39
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 27.79,
+     "p50": 30.65,
+     "p95": 33.57
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 27.54,
+     "p50": 30.66,
+     "p95": 33.76
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 27.3,
+     "p50": 30.69,
+     "p95": 33.9
+    }
+   ]
+  },
+  {
+   "id": "senate-2026-RI",
+   "name": "Rhode Island",
+   "dem_win_prob": 1.0,
+   "margin": {
+    "p05": 15.68,
+    "p25": 20.89,
+    "p50": 24.54,
+    "p75": 28.17,
+    "p95": 33.18
+   },
+   "fundamentals_prior_margin": 17.89,
+   "poll_count": 4,
+   "all_poll_ids": [
+    "us-202uni56d3ce46",
+    "us-202uni2c6a92aa",
+    "us-202uni2e797321",
+    "us-202embbacff0bd"
+   ],
+   "latent": [
+    {
+     "date": "2026-09-15",
+     "p05": 20.99,
+     "p50": 24.43,
+     "p95": 27.63
+    },
+    {
+     "date": "2026-09-22",
+     "p05": 21.19,
+     "p50": 24.57,
+     "p95": 27.78
+    },
+    {
+     "date": "2026-09-29",
+     "p05": 21.21,
+     "p50": 24.67,
+     "p95": 27.8
+    },
+    {
+     "date": "2026-10-06",
+     "p05": 21.31,
+     "p50": 24.75,
+     "p95": 27.88
+    },
+    {
+     "date": "2026-10-13",
+     "p05": 21.17,
+     "p50": 24.71,
+     "p95": 28.04
+    },
+    {
+     "date": "2026-10-20",
+     "p05": 20.96,
+     "p50": 24.65,
+     "p95": 28.05
+    },
+    {
+     "date": "2026-10-27",
+     "p05": 20.81,
+     "p50": 24.61,
+     "p95": 28.22
+    },
+    {
+     "date": "2026-11-03",
+     "p05": 20.56,
+     "p50": 24.6,
+     "p95": 28.23
+    }
+   ]
+  }
+ ]
+}

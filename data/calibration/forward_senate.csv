@@ -147,3 +147,21 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-30,2026-10-29,senate,senate-2026-TX,us-202qua5e695b57,Quantus Insights,2026-10-27,-0.02045,0.02984,0.06915,0.19544
 2026-10-31,2026-10-30,senate,senate-2026-IL,us-202act4459517f,ActiVote,2026-10-25,0.22494,0.31891,0.13008,0.19692
 2026-10-31,2026-10-30,senate,senate-2026-KS,us-202emeb5d23beb,Emerson College,2026-10-27,0.0497,0.03793,0.08918,0.56433
+2026-11-02,2026-11-01,senate,senate-2026-AK,us-202thef222f527,The New York Times/Siena College,2026-10-26,0.04256,0.02053,0.10033,0.60591
+2026-11-02,2026-11-01,senate,senate-2026-FL,us-202red57ac6384,RedBox Research,2026-10-30,-0.04349,-0.09862,0.05283,0.88214
+2026-11-02,2026-11-01,senate,senate-2026-IA,us-202the44d55dc8,The New York Times/Siena College,2026-10-29,0.02105,-0.00082,0.09057,0.61609
+2026-11-02,2026-11-01,senate,senate-2026-IA,us-202grada8105a7,Grayhouse,2026-10-29,-0.04256,0.01455,0.0985,0.24391
+2026-11-02,2026-11-01,senate,senate-2026-KS,us-202the0ed14b63,The New York Times/Siena College,2026-10-29,0.10763,0.02931,0.09328,0.83608
+2026-11-02,2026-11-01,senate,senate-2026-MA,us-202uni89b3e322,University of New Hampshire,2026-10-29,0.50456,0.61798,0.09579,0.09345
+2026-11-02,2026-11-01,senate,senate-2026-ME,us-202the7cccde56,The New York Times/Siena College,2026-10-29,0.12516,0.03305,0.09072,0.87656
+2026-11-02,2026-11-01,senate,senate-2026-ME,us-202unidbfe449d,University of New Hampshire,2026-10-29,0.18232,0.03179,0.06508,0.9847
+2026-11-02,2026-11-01,senate,senate-2026-MI,us-202you9af4ba59,YouGov,2026-10-27,0.08168,0.08046,0.05556,0.51076
+2026-11-02,2026-11-01,senate,senate-2026-MI,us-202thef985be3e,The New York Times/Siena College,2026-10-27,0.23262,0.06291,0.07851,0.98079
+2026-11-02,2026-11-01,senate,senate-2026-MN,us-202ins632539b6,InsiderAdvantage,2026-10-29,0.06318,0.08479,0.07902,0.36919
+2026-11-02,2026-11-01,senate,senate-2026-NC,us-202easda6f3684,East Carolina University,2026-10-27,0.18232,0.18329,0.07965,0.49402
+2026-11-02,2026-11-01,senate,senate-2026-NH,us-202nat3ed474bd,National Public Affairs,2026-10-27,0.12516,0.11357,0.0918,0.56155
+2026-11-02,2026-11-01,senate,senate-2026-NH,us-202uni43b7e03e,University of New Hampshire,2026-10-29,0.25131,0.13351,0.06491,0.96694
+2026-11-02,2026-11-01,senate,senate-2026-OH,us-202con020b20e8,Concord Public Opinion Partners,2026-10-23,0.09097,0.11893,0.11029,0.37835
+2026-11-02,2026-11-01,senate,senate-2026-OH,us-202the28c318b6,The New York Times/Siena College,2026-10-29,0.10763,0.07667,0.09115,0.66032
+2026-11-02,2026-11-01,senate,senate-2026-RI,us-202unif94885f7,University of New Hampshire,2026-10-29,0.6774,0.4869,0.10155,0.97001
+2026-11-02,2026-11-01,senate,senate-2026-TX,us-202thed5a5e7e5,The New York Times/Siena College,2026-10-29,0.15082,0.03528,0.07229,0.95298

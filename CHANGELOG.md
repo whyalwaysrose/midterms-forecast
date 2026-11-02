@@ -2,6 +2,50 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-11-02
+
+Democratic chances of Senate control are up 4.0 pts to 76.0% on 18 new polls. Projected seats 52.8 → 53.3 (+0.5).
+
+**National environment.** The generic ballot moved D+8.2 → D+8.7 (+0.5). Because every race is geared to the national environment by its own elasticity, this shifts all 35 contests together, not just the ones with new polls.
+
+**Races that moved** (13 of 35):
+
+  - **Maine** — Democratic win probability 66.8% → 76.9% (+10.1 pts); projected margin D+2.3 → D+3.9 (+1.6). Driven by 2 new polls:
+    - The New York Times/Siena College (2026-10-29, n=714, LV): D+6.2
+    - University of New Hampshire (2026-10-29, n=1654, LV): D+9.1
+
+  - **Kansas** — Democratic win probability 65.8% → 70.7% (+4.8 pts); projected margin D+2.2 → D+2.9 (+0.7). Driven by 1 new poll:
+    - The New York Times/Siena College (2026-10-29, n=736, LV): D+5.4
+
+  - **Texas** — Democratic win probability 68.1% → 72.5% (+4.4 pts); projected margin D+2.5 → D+3.2 (+0.7). Driven by 1 new poll:
+    - The New York Times/Siena College (2026-10-29, n=1215, LV): D+7.5
+
+  - **Florida** — Democratic win probability 11.5% → 15.8% (+4.3 pts); projected margin R+6.4 → R+5.3 (+1.1). Driven by 1 new poll:
+    - RedBox Research (2026-10-30, n=2898, LV, D-aligned sponsor): R+2.2
+
+  - **Michigan** — Democratic win probability 77.0% → 80.9% (+4.0 pts); projected margin D+3.9 → D+4.6 (+0.8). Driven by 2 new polls:
+    - YouGov (2026-10-27, n=2093, LV): D+4.1
+    - The New York Times/Siena College (2026-10-27, n=1011, LV): D+11.6
+
+  - **New Hampshire** — Democratic win probability 91.5% → 95.1% (+3.7 pts); projected margin D+7.4 → D+8.9 (+1.4). Driven by 2 new polls:
+    - University of New Hampshire (2026-10-29, n=2040, LV): D+12.5
+    - National Public Affairs (2026-10-27, n=800, LV, R-aligned sponsor): D+6.2
+
+  - **South Carolina** — Democratic win probability 46.4% → 49.5% (+3.1 pts); projected margin R+0.5 → R+0.1 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **New Jersey** — Democratic win probability 91.5% → 93.9% (+2.4 pts); projected margin D+14.0 → D+15.6 (+1.6). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Minnesota** — Democratic win probability 84.4% → 85.9% (+1.5 pts); projected margin D+5.6 → D+5.8 (+0.2). Driven by 1 new poll:
+    - InsiderAdvantage (2026-10-29, n=1200, LV): D+3.2
+
+  - **Ohio** — Democratic win probability 80.5% → 81.8% (+1.3 pts); projected margin D+4.5 → D+4.8 (+0.2). Driven by 2 new polls:
+    - The New York Times/Siena College (2026-10-29, n=717, LV): D+5.4
+    - Concord Public Opinion Partners (2026-10-23, n=469, LV, D-aligned sponsor): D+4.5
+
+**New polling that did not move the needle.** Iowa (2), Alaska (1), North Carolina (1), Massachusetts (1), Rhode Island (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-11-01
 
 No new polling since 2026-10-31. Democratic chances of Senate control hold at 72.0%.

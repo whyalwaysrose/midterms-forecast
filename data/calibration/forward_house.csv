@@ -94,3 +94,7 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-10-31,2026-10-30,house,house-2026-CA-01,us-ca-uni0e552a49,University of Southern California Democracy and Fair Elections Lab/University of Southern California Dornsife Center for Economic and Social Research,2026-10-25,0.3001,0.27408,0.2032,0.56242
 2026-10-31,2026-10-30,house,house-2026-CA-22,us-202unia6d17909,University of Southern California Democracy and Fair Elections Lab/University of Southern California Dornsife Center for Economic and Social Research,2026-10-25,0.20479,0.11874,0.14172,0.76571
 2026-10-31,2026-10-30,house,house-2026-CA-48,us-202unide272ca0,University of Southern California Democracy and Fair Elections Lab,2026-10-25,0.16705,0.12582,0.12268,0.65878
+2026-11-02,2026-11-01,house,house-2026-ME-01,us-202unif176090d,University of New Hampshire,2026-10-29,0.70865,0.54551,0.19476,0.83556
+2026-11-02,2026-11-01,house,house-2026-ME-02,us-202unia06f3a9e,University of New Hampshire,2026-10-29,-0.1011,-0.01303,0.11532,0.18472
+2026-11-02,2026-11-01,house,house-2026-NH-01,us-202uni93211609,University of New Hampshire,2026-10-29,0.26415,0.1166,0.09626,0.94763
+2026-11-02,2026-11-01,house,house-2026-NH-02,us-202uni750d2ff8,University of New Hampshire,2026-10-29,0.31178,0.43596,0.09602,0.07793

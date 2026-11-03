@@ -2,6 +2,42 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-11-03
+
+Democratic chances of Senate control are down 1.0 pts to 75.0% on 7 new polls. Projected seats 53.3 → 53.2 (-0.1).
+
+**Races that moved** (11 of 35):
+
+  - **Minnesota** — Democratic win probability 85.9% → 77.8% (-8.2 pts); projected margin D+5.8 → D+4.1 (-1.7). Driven by 1 new poll:
+    - AtlasIntel (2026-10-30, n=2133, LV): D+2.1
+
+  - **Kansas** — Democratic win probability 70.7% → 73.7% (+3.1 pts); projected margin D+2.9 → D+3.4 (+0.5). Driven by 1 new poll:
+    - Survey 160 (2026-10-29, n=1365, LV): D+7.5
+
+  - **Maine** — Democratic win probability 76.9% → 73.9% (-3.0 pts); projected margin D+3.9 → D+3.4 (-0.5). Driven by 1 new poll:
+    - Survey 160 (2026-10-29, n=1322, LV): D+4.2
+
+  - **South Carolina** — Democratic win probability 49.5% → 51.6% (+2.1 pts); projected margin R+0.1 → D+0.2 (+0.3). Driven by 1 new poll:
+    - Resonance Media Services (2026-10-30, n=600, LV): D+1.8
+
+  - **Ohio** — Democratic win probability 81.8% → 80.1% (-1.7 pts); projected margin D+4.8 → D+4.5 (-0.3). Driven by 1 new poll:
+    - Survey 160 (2026-10-29, n=1122, LV): D+4.3
+
+  - **Louisiana** — Democratic win probability 14.4% → 15.6% (+1.3 pts); projected margin R+10.9 → R+10.4 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **South Dakota** — Democratic win probability 2.0% → 2.5% (+0.5 pts); projected margin R+20.4 → R+20.0 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Georgia** — Democratic win probability 97.1% → 96.5% (-0.5 pts); projected margin D+10.3 → D+9.6 (-0.7). Driven by 1 new poll:
+    - InsiderAdvantage (2026-11-01, n=2500, LV): D+7.1
+
+  - **Colorado** — Democratic win probability 97.0% → 97.3% (+0.3 pts); projected margin D+19.0 → D+18.7 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Idaho** — Democratic win probability 2.8% → 3.0% (+0.2 pts); projected margin R+14.7 → R+14.2 (+0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+**New polling that did not move the needle.** North Carolina (1). New polls close to the existing estimate confirm it rather than change it.
+
+---
+
 ## 2026-11-02
 
 Democratic chances of Senate control are up 4.0 pts to 76.0% on 18 new polls. Projected seats 52.8 → 53.3 (+0.5).

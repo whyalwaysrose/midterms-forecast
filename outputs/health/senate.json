@@ -1,17 +1,17 @@
 {
  "chamber": "senate",
- "run_date": "2026-11-02",
+ "run_date": "2026-11-03",
  "ok": true,
  "metrics": {
   "races_total": 35,
   "races_with_polls": 24,
   "races_blocked_by_roster": 2,
-  "race_polls": 336,
-  "national_polls": 407,
+  "race_polls": 343,
+  "national_polls": 408,
   "feed_records": {
-   "us-senator": 573,
+   "us-senator": 580,
    "us-representative": 0,
-   "generic-ballot": 547,
+   "generic-ballot": 548,
    "approval": 2947
   },
   "rejections": {
@@ -31,18 +31,18 @@
    "detail": "all of us-senator, generic-ballot, approval present",
    "guards": "a run proceeding on a feed that returned nothing, which reads downstream as a quiet day rather than a failed fetch",
    "value": {
-    "us-senator": 573,
+    "us-senator": 580,
     "us-representative": 0,
-    "generic-ballot": 547,
+    "generic-ballot": 548,
     "approval": 2947
    }
   },
   {
    "name": "race_polls_used",
    "ok": true,
-   "detail": "336 race polls from us-senator",
+   "detail": "343 race polls from us-senator",
    "guards": "a chamber-blind default feeding the Senate's polls to the House",
-   "value": 336
+   "value": 343
   },
   {
    "name": "roster_reads_the_feed",

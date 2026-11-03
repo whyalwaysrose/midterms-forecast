@@ -98,3 +98,4 @@ scored_on,forecast_run,chamber,race_id,poll_id,pollster,field_date,observed_logi
 2026-11-02,2026-11-01,house,house-2026-ME-02,us-202unia06f3a9e,University of New Hampshire,2026-10-29,-0.1011,-0.01303,0.11532,0.18472
 2026-11-02,2026-11-01,house,house-2026-NH-01,us-202uni93211609,University of New Hampshire,2026-10-29,0.26415,0.1166,0.09626,0.94763
 2026-11-02,2026-11-01,house,house-2026-NH-02,us-202uni750d2ff8,University of New Hampshire,2026-10-29,0.31178,0.43596,0.09602,0.07793
+2026-11-03,2026-11-02,house,__national__,gen202ips86625ab0,Ipsos,2026-10-31,0.16705,0.13129,0.06566,0.74334

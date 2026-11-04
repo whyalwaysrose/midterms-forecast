@@ -1,3 +1,25 @@
-18:25:55 INFO    midterms.data.results: senate: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_Senate_elections
-18:25:55 INFO    midterms.data.results: senate: 35 race rows, 0 with a called winner
-No senate result published yet. Nothing to score.
+18:38:46 WARNING midterms.data.results: senate: seats_after fields sum to 98, not 100 -- rejected
+18:38:46 INFO    midterms.data.results: senate: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_Senate_elections
+18:38:46 INFO    midterms.data.results: senate: 35 race rows, 33 with a called winner
+==========================================================================
+  SCORING THE SENATE FORECAST OF 2026-11-03
+==========================================================================
+  33 races called so far; no chamber total published yet, so only the races are scored.
+
+  Chamber: no published total yet, so not scored.
+
+  Races (33 scored, 33 called correctly)
+    Brier 0.0308   vs coin 0.2500 (skill +87.7%)   vs fundamentals 0.2121 (skill +85.5%)
+    log score 0.1284
+
+    Reliability (predicted vs actual, by bucket):
+      0%-5%  n=9    predicted 1.2%  actual 0.0%
+      15%-25%  n=3    predicted 15.8%  actual 0.0%
+      35%-45%  n=1    predicted 39.9%  actual 0.0%
+      45%-55%  n=1    predicted 51.6%  actual 100.0%
+      55%-65%  n=1    predicted 55.6%  actual 100.0%
+      65%-75%  n=3    predicted 73.5%  actual 100.0%
+      75%-85%  n=3    predicted 79.4%  actual 100.0%
+      85%-95%  n=1    predicted 93.5%  actual 100.0%
+      95%-100%  n=11   predicted 98.5%  actual 100.0%
+==========================================================================

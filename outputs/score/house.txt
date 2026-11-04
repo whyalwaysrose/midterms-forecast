@@ -1,4 +1,28 @@
-18:25:56 INFO    midterms.data.results: house: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections
-18:25:56 INFO    midterms.data.results: house: 435 district rows, 0 with a called winner
-18:25:56 INFO    midterms.data.results: house: 0 districts called at 2026 United States House of Representatives elections
-No house result published yet. Nothing to score.
+18:38:47 WARNING midterms.data.results: house: seats fields sum to 384, not 435 -- rejected
+18:38:47 INFO    midterms.data.results: house: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections
+18:38:48 INFO    midterms.data.results: house: 435 district rows, 367 with a called winner
+18:38:48 INFO    midterms.data.results: house: 367 districts called at 2026 United States House of Representatives elections
+==========================================================================
+  SCORING THE HOUSE FORECAST OF 2026-11-03
+==========================================================================
+  367 races called so far; no chamber total published yet, so only the races are scored.
+
+  Chamber: no published total yet, so not scored.
+
+  Races (367 scored, 354 called correctly)
+    Brier 0.0277   vs coin 0.2500 (skill +88.9%)   vs fundamentals 0.0981 (skill +71.8%)
+    log score 0.1080
+
+    Reliability (predicted vs actual, by bucket):
+      0%-5%  n=75   predicted 0.7%  actual 0.0%
+      5%-15%  n=39   predicted 9.8%  actual 2.6%
+      15%-25%  n=12   predicted 18.2%  actual 8.3%
+      25%-35%  n=13   predicted 30.4%  actual 23.1%
+      35%-45%  n=4    predicted 40.0%  actual 25.0%
+      45%-55%  n=9    predicted 48.2%  actual 88.9%
+      55%-65%  n=6    predicted 60.6%  actual 100.0%
+      65%-75%  n=6    predicted 70.3%  actual 100.0%
+      75%-85%  n=13   predicted 80.1%  actual 100.0%
+      85%-95%  n=41   predicted 90.8%  actual 100.0%
+      95%-100%  n=149  predicted 99.3%  actual 100.0%
+==========================================================================

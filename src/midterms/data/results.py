@@ -442,6 +442,49 @@ def _parse_district_block(block: str) -> tuple[str, float | None, float | None] 
     return winner, best.get("D"), best.get("R")
 
 
+#: The template Wikipedia marks a winning candidate with. Counting these in
+#: the raw wikitext is the only honest way to tell a stale parser from an
+#: article that simply has not been filled in yet.
+_WINNER_MARKER = "{{aye}}"
+
+
+def _winner_markers(wikitext: str) -> int:
+    """How many winners the article claims to have marked."""
+    return wikitext.lower().count(_WINNER_MARKER)
+
+
+def _warn_if_parser_is_stale(
+    chamber: str, wikitext: str, parsed: int, rows_seen: int, min_rows: int
+) -> None:
+    """Fire only when the article marks winners this parser is not reading.
+
+    The first version of this compared `parsed` against `rows_seen` and fired
+    whenever fewer than 90% of rows had a winner. That is not a parser fault,
+    it is the ordinary state of the morning after an election: at 09:00 the day
+    after 2026-11-03 the article had 435 district rows and about a hundred
+    called races, so the guard cried stale on data that was completely correct
+    and did so every run until the article filled in.
+
+    The discriminating quantity is not how many races are called -- which is
+    the world's business, not ours -- but whether we read the ones that are.
+    So compare what we parsed against the winner markers actually present. A
+    few more markers than races is normal, because Alaska's ranked-choice
+    rounds mark more than once, hence the tolerance.
+    """
+    marked = _winner_markers(wikitext)
+    if rows_seen < min_rows or marked == 0:
+        return
+    if parsed >= marked * 0.9:
+        return
+    message = (
+        f"{chamber} results: the article marks {marked} winners but only "
+        f"{parsed} parsed -- the candidate markup has probably changed. "
+        "Scoring on this would quietly grade a fraction of the chamber."
+    )
+    log.error(message)
+    print(f"::error title={chamber.title()} results parser may be stale::{message}")
+
+
 def parse_house_districts(wikitext: str) -> dict[str, RaceOutcome]:
     """Every called House district in the article, keyed by race id.
 
@@ -481,16 +524,7 @@ def parse_house_districts(wikitext: str) -> dict[str, RaceOutcome]:
             out.setdefault(race_id, RaceOutcome(race_id, winner, dem, rep))
 
     log.info("house: %d district rows, %d with a called winner", rows_seen, len(out))
-    if rows_seen >= HOUSE_SEATS and 0 < len(out) < rows_seen * 0.9:
-        # Some called, most not parsed. Election night produces few-or-none;
-        # a layout change produces most-but-not-all, which is this.
-        message = (
-            f"house results: {rows_seen} district rows but only {len(out)} parsed "
-            "-- the article's candidate markup has probably changed. Scoring on "
-            "this would quietly grade a fraction of the chamber."
-        )
-        log.error(message)
-        print(f"::error title=House results parser may be stale::{message}")
+    _warn_if_parser_is_stale("house", wikitext, len(out), rows_seen, HOUSE_SEATS)
     return out
 
 
@@ -547,13 +581,7 @@ def parse_senate_races(wikitext: str) -> dict[str, RaceOutcome]:
             out.setdefault(race_id, RaceOutcome(race_id, winner, dem, rep))
 
     log.info("senate: %d race rows, %d with a called winner", rows_seen, len(out))
-    if rows_seen >= 30 and 0 < len(out) < rows_seen * 0.9:
-        message = (
-            f"senate results: {rows_seen} race rows but only {len(out)} parsed "
-            "-- the article's candidate markup has probably changed."
-        )
-        log.error(message)
-        print(f"::error title=Senate results parser may be stale::{message}")
+    _warn_if_parser_is_stale("senate", wikitext, len(out), rows_seen, 30)
     return out
 
 

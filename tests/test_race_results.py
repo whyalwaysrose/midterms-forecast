@@ -229,12 +229,20 @@ def test_a_concurrent_special_election_does_not_displace_the_general():
 # --- the guard --------------------------------------------------------------
 
 
-def test_a_full_set_of_rows_that_mostly_fail_to_parse_is_reported(capsys):
+def test_rows_whose_marked_winners_cannot_be_read_are_reported(capsys):
     """The failure that would otherwise be silent.
 
-    Finding 435 rows and parsing 400 means the markup moved. Finding 435 and
-    parsing none means election night. Only the first is a fault, and it has to
-    announce itself rather than return a plausible number.
+    The article marks 400 winners and the parser reads one: the markup moved
+    under us. That has to announce itself rather than return a plausible
+    number, because scoring a fraction of the chamber looks exactly like
+    scoring the whole of it.
+
+    Note what this fixture deliberately no longer tests. Rows carrying no
+    winner marker at all are not a fault, they are the morning after an
+    election -- on 2026-11-04 the article had 435 rows and about a hundred
+    called races. The old version of this test used unmarked rows and so
+    pinned a guard that cried stale on correct data every run until the
+    article filled in. See test_results_stale_guard.py.
     """
     good = """
 ==Alabama==
@@ -242,12 +250,20 @@ def test_a_full_set_of_rows_that_mostly_fail_to_parse_is_reported(capsys):
 ! {{ushr|AL|1|X}}
 | nowrap | {{Party stripe|Republican Party (US)}}{{Aye}} '''A''' (Republican) 60.0%
 """
+    # Winners ARE marked here. The party template is one the parser cannot read,
+    # which is the shape of the 2024 capitalisation bug.
+    # A full chamber's worth of rows: the guard has a minimum, so that it stays
+    # quiet on a half-written article rather than on a half-counted election.
     broken = "\n".join(
-        f"|-\n! {{{{ushr|AL|{n}|X}}}}\n| nowrap | nothing parseable here"
-        for n in range(2, 440)
+        f"|-\n! {{{{ushr|AL|{n}|X}}}}\n"
+        f"| nowrap | {{{{PartyStripeNG|Republican Party (US)}}}}{{{{Aye}}}} "
+        f"'''A''' (Republican) 60.0%"
+        for n in range(2, 436)
     )
     R.parse_house_districts(good + broken)
-    assert "::error" in capsys.readouterr().out
+    captured = capsys.readouterr().out
+    assert "::error" in captured
+    assert "435 winners" in captured, captured
 
 
 def test_no_rows_at_all_is_quiet():

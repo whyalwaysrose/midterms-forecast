@@ -701,6 +701,87 @@ means that by the time it matters it will have been exercised every day for week
 than debugged on the night.
 
 
+## 8c-i. The 2026 result, and where it fell — post-mortem, 2026-11-04
+
+Democrats won both chambers. The forecast of record, the run of **2026-11-03**, gave the
+Senate to the Democrats at **75.0%** with a median of **54 seats**, and the House at
+**81.2%** with a median of **249**. Both calls were right and the Senate seat median
+landed exactly. On the races called by the morning after:
+
+| | called | correct | Brier | skill vs coin |
+|---|---|---|---|---|
+| Senate | 33 | **33** | 0.0308 | +87.7% |
+| House | 140 | 133 | 0.0403 | +83.9% |
+
+Against the fundamentals baseline — what the model believed before reading a single poll —
+the skill is +85.5% for the Senate and +68.7% for the House.
+
+**The headline comparison was lost, and §8c said in advance that this would mean little.**
+Against the only rival that froze a final number, 50+1 at 98% House and 79% Senate, this
+model scores worse on both: Brier 0.0353 against 0.0004 on the House, 0.0625 against
+0.0441 on the Senate. That is the width this project chose, meeting the one outcome that
+punishes it. §8c, written seven weeks earlier and before anyone knew: *"a confident
+forecast wins whenever it is right"*. One election, two outcomes, no draw. It is a data
+point against the width, not a verdict on it.
+
+### The misses clustered, and clustering has two opposite explanations
+
+Seven of the first 140 House calls went the wrong way, and **four of them were in North
+Carolina** — NC-06, NC-09, NC-13 and NC-14. The others (AL, IN, PA) are isolated. A
+cluster like that is either a bad baseline, as Oregon's was when OR-03 came out 30 points
+wrong and sat live in a published forecast for weeks, or a correlated environment shift,
+which is the event §5's election-day error exists to price. The two call for opposite
+responses, and `scripts/postmortem_2026.py` separates them.
+
+**It was not the baseline.** North Carolina's fourteen districts average **48.50%**
+Democratic two-party for 2024 against an actual statewide **48.35%**. Congressional
+districts are equal-population by construction, so their unweighted mean must land on the
+statewide figure; it does, to 0.15 points. This is also the independent check §9.0 said
+was missing for the 181 redrawn seats — arriving, for one state, from the election itself.
+
+**The map is built to fail all at once.** Three districts are packed at D+18 to D+24 and
+the remaining eleven are drawn inside a five-point band, R+4.0 to R+9.0. A map like that
+takes eleven of fourteen under the conditions it was drawn for and loses the lot together
+when the environment moves, because those eleven are politically almost the same district.
+
+**The kernel saw that, and the four misses are one event.**
+
+| | |
+|---|---|
+| mean election-day correlation among the four | **0.940** |
+| mean across all 435 districts | 0.314 |
+| probability each was given | 29%, 21%, 31%, 35% |
+| P(all four) at that correlation | **19.1%** |
+| P(all four) if independent | 0.7% |
+
+A one-in-five outcome occurred. Counting it as four independent failures overstates the
+damage about **28-fold**, and it is a direct vindication of the structure that lost the
+headline comparison: the correlated error making this model look timid against 98% is the
+same correlated error that makes North Carolina unremarkable rather than a 1-in-140 shock.
+
+### What was actually wrong was the centre, not the spread
+
+Those eleven marginals needed roughly a seven-point Democratic shift from 2024 to fall,
+and they got it. The Senate reliability curve says the same thing from the other side:
+every competitive race broke Democratic — 45-55% went 100% Democratic, as did 55-65%,
+65-75%, 75-85% and 85-95%. The national term pointed the right way and not far enough.
+
+That is a statement about the **central estimate**, and it is the opposite of the
+correction the rival comparison appears to invite. Being beaten by forecasters at 98%
+tempts a narrower interval; the race-level evidence says the interval was doing its job
+and the centre was slightly too Republican. §13's generic-ballot correction is the term
+that governs this, fitted at +1.29 points post-2008 with a thin t = 1.76 — and one cycle
+does not re-fit it either.
+
+**Still open at the time of writing.** 295 House races and 2 Senate races uncalled, no
+published chamber totals, so neither the chamber-level scoring nor the pre-registered
+rival Brier of §8c can run yet; the daily job computes both as the counts arrive. Six of
+North Carolina's fourteen are among the uncalled, including NC-01, which this model has
+at 88% Democratic — if that one goes the other way it is a miss in the opposite direction
+and the state's story changes.
+
+---
+
 ## 8d. Checking the inputs, not just the model
 
 Every check above tests the model *given its inputs*: the backtest, the forward

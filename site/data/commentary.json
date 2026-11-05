@@ -2,6 +2,51 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-11-05",
+   "previous_run_date": "2026-11-04",
+   "headline": "No new polling since 2026-11-04. Democratic chances of Senate control hold at 74.8%.",
+   "body": [
+    "**Races that moved** (2 of 35):",
+    "",
+    "  - **Louisiana** \u2014 Democratic win probability 15.6% \u2192 14.0% (-1.6 pts); projected margin R+10.4 \u2192 R+10.3 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Montana** \u2014 Democratic win probability 16.0% \u2192 16.7% (+0.7 pts); projected margin R+10.1 \u2192 R+9.7 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-LA",
+     "name": "Louisiana",
+     "prob_before": 0.1562,
+     "prob_after": 0.1402,
+     "prob_delta": -0.016000000000000014,
+     "margin_before": -10.38,
+     "margin_after": -10.31,
+     "margin_delta": 0.07000000000000028,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-MT",
+     "name": "Montana",
+     "prob_before": 0.1599,
+     "prob_after": 0.1666,
+     "prob_delta": 0.0067000000000000115,
+     "margin_before": -10.06,
+     "margin_after": -9.71,
+     "margin_delta": 0.34999999999999964,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-11-05\n\nNo new polling since 2026-11-04. Democratic chances of Senate control hold at 74.8%.\n\n**Races that moved** (2 of 35):\n\n  - **Louisiana** \u2014 Democratic win probability 15.6% \u2192 14.0% (-1.6 pts); projected margin R+10.4 \u2192 R+10.3 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Montana** \u2014 Democratic win probability 16.0% \u2192 16.7% (+0.7 pts); projected margin R+10.1 \u2192 R+9.7 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-11-04",
    "previous_run_date": "2026-11-03",
    "headline": "No new polling since 2026-11-03. Democratic chances of Senate control hold at 75.0%.",

@@ -1,12 +1,12 @@
 {
  "schema_version": 5,
  "model_fingerprint": "d054cd323ebb",
- "run_date": "2026-11-05",
- "generated_at": "2026-11-05T18:32:41+00:00",
+ "run_date": "2026-11-06",
+ "generated_at": "2026-11-06T17:51:13+00:00",
  "cycle": 2026,
  "chamber": "senate",
  "election_date": "2026-11-03",
- "days_to_election": -2,
+ "days_to_election": -3,
  "data_source": {
   "name": "VoteHub Polling API",
   "url": "https://votehub.com/polls/api/",
@@ -19946,7 +19946,7 @@
  "markets": {
   "source": "Polymarket",
   "source_url": "https://polymarket.com",
-  "fetched_at": "2026-11-05T18:30:48+00:00",
+  "fetched_at": "2026-11-06T17:49:24+00:00",
   "note": "Shown for contrast only. Market prices are never an input to this model: traders read forecasts, so using them would be circular.",
   "events": [
    {
@@ -20958,7 +20958,7 @@
     "dem_control_prob": 0.73,
     "dem_seats_median": 52,
     "as_of": "2026-10-25",
-    "age_days": 11,
+    "age_days": 12,
     "access": "free",
     "source_url": "https://fiftyplusone.news/forecast/senate",
     "note": "'73 out of 100'; median outcome D+4, 52 seats. Same page timestamp. Unchanged from 2026-10-10."
@@ -20968,7 +20968,7 @@
     "dem_control_prob": 0.68,
     "dem_seats_median": 52,
     "as_of": "2026-10-25",
-    "age_days": 11,
+    "age_days": 12,
     "access": "free",
     "source_url": "https://gking.harvard.edu/electit/",
     "note": "Same model and variant. 52 seats, 95% range [46,57]; 9 of 35 races competitive. Note their Post-Nomination variant gives a much lower Senate figure; this row is Model + All Polls."
@@ -20978,7 +20978,7 @@
     "dem_control_prob": 0.57,
     "dem_seats_median": 51,
     "as_of": "2026-10-25",
-    "age_days": 11,
+    "age_days": 12,
     "access": "free",
     "source_url": "https://www.poliwave.com/us/fed/projection",
     "note": "51 seats, 48-54 in 80% of runs. D 57% / R 34% / 10% 'chance independents decide control' -- Osborn is a third outcome rather than assigned to a party, so this is the one rival whose Nebraska treatment is known and differs from ours."
@@ -20988,7 +20988,7 @@
     "dem_control_prob": 0.56,
     "dem_seats_median": 51,
     "as_of": "2026-10-24",
-    "age_days": 12,
+    "age_days": 13,
     "access": "free",
     "source_url": "https://votes.decisiondeskhq.com/forecast/2026/senate",
     "note": "Page states 'Last updated Oct 24, 8:24 PM'; 56% and a 51-49 seat split."

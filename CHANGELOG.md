@@ -2,6 +2,18 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-11-07
+
+No new polling since 2026-11-06. Democratic chances of Senate control hold at 75.1%.
+
+**Races that moved** (2 of 35):
+
+  - **Colorado** — Democratic win probability 96.9% → 97.2% (+0.3 pts); projected margin D+18.7 → D+19.1 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Louisiana** — Democratic win probability 14.0% → 14.0% (+0.0 pts); projected margin R+10.3 → R+10.7 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-11-06
 
 No new polling since 2026-11-05. Democratic chances of Senate control hold at 74.8%.

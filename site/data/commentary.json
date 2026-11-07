@@ -2,6 +2,51 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-11-07",
+   "previous_run_date": "2026-11-06",
+   "headline": "No new polling since 2026-11-06. Democratic chances of Senate control hold at 75.1%.",
+   "body": [
+    "**Races that moved** (2 of 35):",
+    "",
+    "  - **Colorado** \u2014 Democratic win probability 96.9% \u2192 97.2% (+0.3 pts); projected margin D+18.7 \u2192 D+19.1 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Louisiana** \u2014 Democratic win probability 14.0% \u2192 14.0% (+0.0 pts); projected margin R+10.3 \u2192 R+10.7 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-CO",
+     "name": "Colorado",
+     "prob_before": 0.9686,
+     "prob_after": 0.9717,
+     "prob_delta": 0.0030999999999999917,
+     "margin_before": 18.74,
+     "margin_after": 19.07,
+     "margin_delta": 0.33000000000000185,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-LA",
+     "name": "Louisiana",
+     "prob_before": 0.1402,
+     "prob_after": 0.1404,
+     "prob_delta": 0.00020000000000000573,
+     "margin_before": -10.31,
+     "margin_after": -10.66,
+     "margin_delta": -0.34999999999999964,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-11-07\n\nNo new polling since 2026-11-06. Democratic chances of Senate control hold at 75.1%.\n\n**Races that moved** (2 of 35):\n\n  - **Colorado** \u2014 Democratic win probability 96.9% \u2192 97.2% (+0.3 pts); projected margin D+18.7 \u2192 D+19.1 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Louisiana** \u2014 Democratic win probability 14.0% \u2192 14.0% (+0.0 pts); projected margin R+10.3 \u2192 R+10.7 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-11-06",
    "previous_run_date": "2026-11-05",
    "headline": "No new polling since 2026-11-05. Democratic chances of Senate control hold at 74.8%.",

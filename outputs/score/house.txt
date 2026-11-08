@@ -1,7 +1,7 @@
-17:02:41 WARNING midterms.data.results: house: seats fields sum to 416, not 435 -- rejected
-17:02:41 INFO    midterms.data.results: house: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections
-17:02:41 INFO    midterms.data.results: house: 435 district rows, 416 with a called winner
-17:02:41 INFO    midterms.data.results: house: 416 districts called at 2026 United States House of Representatives elections
+17:21:25 WARNING midterms.data.results: house: seats fields sum to 416, not 435 -- rejected
+17:21:25 INFO    midterms.data.results: house: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections
+17:21:26 INFO    midterms.data.results: house: 435 district rows, 416 with a called winner
+17:21:26 INFO    midterms.data.results: house: 416 districts called at 2026 United States House of Representatives elections
 ==========================================================================
   SCORING THE HOUSE FORECAST OF 2026-11-03
 ==========================================================================
@@ -12,6 +12,9 @@
   Races (416 scored, 394 called correctly)
     Brier 0.0405   vs coin 0.2500 (skill +83.8%)   vs fundamentals 0.1298 (skill +68.8%)
     log score 0.1458
+    margin error 7.77 pts mean absolute, bias +7.77
+    50% interval covered 40.0% of 10 races
+    90% interval covered 100.0% of 10 races
 
     Reliability (predicted vs actual, by bucket):
       0%-5%  n=76   predicted 0.7%  actual 0.0%

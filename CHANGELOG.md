@@ -2,6 +2,16 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-11-10
+
+No new polling since 2026-11-09. Democratic chances of Senate control hold at 75.0%.
+
+**Races that moved** (1 of 35):
+
+  - **South Dakota** — Democratic win probability 2.6% → 2.3% (-0.3 pts); projected margin R+20.2 → R+19.8 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-11-09
 
 No new polling since 2026-11-08. Democratic chances of Senate control hold at 74.9%.

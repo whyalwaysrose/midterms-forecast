@@ -2,6 +2,16 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-11-12
+
+No new polling since 2026-11-11. Democratic chances of Senate control hold at 75.1%.
+
+**Races that moved** (1 of 35):
+
+  - **Louisiana** — Democratic win probability 14.6% → 15.4% (+0.7 pts); projected margin R+10.7 → R+10.3 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-11-11
 
 No new polling since 2026-11-10. Democratic chances of Senate control hold at 75.3%.

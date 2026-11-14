@@ -2,6 +2,18 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-11-14
+
+No new polling since 2026-11-13. Democratic chances of Senate control hold at 75.0%.
+
+**Races that moved** (2 of 35):
+
+  - **Montana** — Democratic win probability 15.4% → 16.5% (+1.1 pts); projected margin R+10.0 → R+9.9 (+0.1). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Kentucky** — Democratic win probability 3.2% → 3.4% (+0.2 pts); projected margin R+17.9 → R+18.2 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-11-13
 
 No new polling since 2026-11-12. Democratic chances of Senate control hold at 74.9%.

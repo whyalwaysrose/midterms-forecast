@@ -1,6 +1,6 @@
 {
  "chamber": "senate",
- "run_date": "2026-11-16",
+ "run_date": "2026-11-17",
  "ok": true,
  "metrics": {
   "races_total": 35,
@@ -16,11 +16,11 @@
   },
   "rejections": {
    "primary subject": 60,
-   "older than max_age_days": 178,
+   "older than max_age_days": 179,
    "no single D-vs-R matchup": 38,
    "pollster banned by 538: Big Data Poll": 32,
    "pollster banned by this project: Wedgewood Polls": 6,
-   "repeat readings of a survey already counted": 91
+   "repeat readings of a survey already counted": 90
   },
   "unresolved_name_races": 13
  },

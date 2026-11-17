@@ -1,6 +1,6 @@
-21:06:44 WARNING midterms.data.results: senate: seats_after fields sum to 99, not 100 -- rejected
-21:06:44 INFO    midterms.data.results: senate: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_Senate_elections
-21:06:44 INFO    midterms.data.results: senate: 35 race rows, 34 with a called winner
+20:04:09 WARNING midterms.data.results: senate: seats_after fields sum to 99, not 100 -- rejected
+20:04:09 INFO    midterms.data.results: senate: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_Senate_elections
+20:04:10 INFO    midterms.data.results: senate: 35 race rows, 34 with a called winner
 ==========================================================================
   SCORING THE SENATE FORECAST OF 2026-11-03
 ==========================================================================

@@ -1,27 +1,27 @@
-21:06:45 WARNING midterms.data.results: house: seats fields sum to 427, not 435 -- rejected
-21:06:45 INFO    midterms.data.results: house: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections
-21:06:46 INFO    midterms.data.results: house: 435 district rows, 427 with a called winner
-21:06:46 INFO    midterms.data.results: house: 427 districts called at 2026 United States House of Representatives elections
+20:04:11 WARNING midterms.data.results: house: seats fields sum to 429, not 435 -- rejected
+20:04:11 INFO    midterms.data.results: house: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections
+20:04:11 INFO    midterms.data.results: house: 435 district rows, 430 with a called winner
+20:04:11 INFO    midterms.data.results: house: 430 districts called at 2026 United States House of Representatives elections
 ==========================================================================
   SCORING THE HOUSE FORECAST OF 2026-11-03
 ==========================================================================
-  427 races called so far; no chamber total published yet, so only the races are scored.
+  430 races called so far; no chamber total published yet, so only the races are scored.
 
   Chamber: no published total yet, so not scored.
 
-  Races (427 scored, 404 called correctly)
-    Brier 0.0427   vs coin 0.2500 (skill +82.9%)   vs fundamentals 0.1288 (skill +66.9%)
-    log score 0.1515
-    margin error 8.07 pts mean absolute, bias +7.88
-    50% interval covered 31.8% of 22 races
-    90% interval covered 95.5% of 22 races
+  Races (430 scored, 406 called correctly)
+    Brier 0.0447   vs coin 0.2500 (skill +82.1%)   vs fundamentals 0.1302 (skill +65.6%)
+    log score 0.1577
+    margin error 5.68 pts mean absolute, bias +4.55
+    50% interval covered 63.3% of 49 races
+    90% interval covered 93.9% of 49 races
 
     Reliability (predicted vs actual, by bucket):
       0%-5%  n=76   predicted 0.7%  actual 0.0%
-      5%-15%  n=45   predicted 10.1%  actual 2.2%
-      15%-25%  n=19   predicted 18.9%  actual 10.5%
+      5%-15%  n=46   predicted 10.1%  actual 4.3%
+      15%-25%  n=20   predicted 19.0%  actual 10.0%
       25%-35%  n=23   predicted 29.5%  actual 26.1%
-      35%-45%  n=14   predicted 39.8%  actual 21.4%
+      35%-45%  n=15   predicted 39.7%  actual 20.0%
       45%-55%  n=17   predicted 48.8%  actual 76.5%
       55%-65%  n=10   predicted 59.9%  actual 90.0%
       65%-75%  n=8    predicted 70.5%  actual 100.0%

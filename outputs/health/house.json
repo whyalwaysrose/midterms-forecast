@@ -1,22 +1,22 @@
 {
  "chamber": "house",
- "run_date": "2026-11-17",
+ "run_date": "2026-11-18",
  "ok": true,
  "metrics": {
   "races_total": 435,
   "races_with_polls": 79,
   "races_blocked_by_roster": 2,
   "race_polls": 147,
-  "national_polls": 397,
+  "national_polls": 395,
   "feed_records": {
    "us-senator": 0,
    "us-representative": 192,
    "generic-ballot": 548,
-   "approval": 2947
+   "approval": 2958
   },
   "rejections": {
-   "no single D-vs-R matchup": 1050,
-   "older than max_age_days": 146,
+   "no single D-vs-R matchup": 1061,
+   "older than max_age_days": 148,
    "pollster banned by 538: Big Data Poll": 14,
    "repeat readings of a survey already counted": 13
   },
@@ -32,7 +32,7 @@
     "us-senator": 0,
     "us-representative": 192,
     "generic-ballot": 548,
-    "approval": 2947
+    "approval": 2958
    }
   },
   {
@@ -70,10 +70,10 @@
   {
    "name": "roster_is_fresh",
    "ok": true,
-   "detail": "roster built 2026-11-17 (0 days ago; limit 7)",
+   "detail": "roster built 2026-11-18 (0 days ago; limit 7)",
    "guards": "the rebuild step failing quietly and the roster re-staling",
    "value": {
-    "built": "2026-11-17",
+    "built": "2026-11-18",
     "age_days": 0
    }
   },

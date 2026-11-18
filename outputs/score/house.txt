@@ -1,7 +1,7 @@
-20:04:11 WARNING midterms.data.results: house: seats fields sum to 429, not 435 -- rejected
-20:04:11 INFO    midterms.data.results: house: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections
-20:04:11 INFO    midterms.data.results: house: 435 district rows, 430 with a called winner
-20:04:11 INFO    midterms.data.results: house: 430 districts called at 2026 United States House of Representatives elections
+19:39:35 WARNING midterms.data.results: house: seats fields sum to 429, not 435 -- rejected
+19:39:35 INFO    midterms.data.results: house: no usable seat totals yet at https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections
+19:39:35 INFO    midterms.data.results: house: 435 district rows, 430 with a called winner
+19:39:35 INFO    midterms.data.results: house: 430 districts called at 2026 United States House of Representatives elections
 ==========================================================================
   SCORING THE HOUSE FORECAST OF 2026-11-03
 ==========================================================================

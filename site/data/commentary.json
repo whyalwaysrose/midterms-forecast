@@ -2,6 +2,51 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-11-21",
+   "previous_run_date": "2026-11-20",
+   "headline": "No new polling since 2026-11-20. Democratic chances of Senate control hold at 75.2%.",
+   "body": [
+    "**Races that moved** (2 of 35):",
+    "",
+    "  - **South Dakota** \u2014 Democratic win probability 2.3% \u2192 2.4% (+0.1 pts); projected margin R+20.2 \u2192 R+19.9 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **New Jersey** \u2014 Democratic win probability 94.0% \u2192 94.0% (+0.1 pts); projected margin D+15.6 \u2192 D+16.0 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-SD",
+     "name": "South Dakota",
+     "prob_before": 0.0227,
+     "prob_after": 0.0237,
+     "prob_delta": 0.0009999999999999974,
+     "margin_before": -20.21,
+     "margin_after": -19.91,
+     "margin_delta": 0.3000000000000007,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-NJ",
+     "name": "New Jersey",
+     "prob_before": 0.9398,
+     "prob_after": 0.9403,
+     "prob_delta": 0.000500000000000056,
+     "margin_before": 15.58,
+     "margin_after": 16.02,
+     "margin_delta": 0.4399999999999995,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-11-21\n\nNo new polling since 2026-11-20. Democratic chances of Senate control hold at 75.2%.\n\n**Races that moved** (2 of 35):\n\n  - **South Dakota** \u2014 Democratic win probability 2.3% \u2192 2.4% (+0.1 pts); projected margin R+20.2 \u2192 R+19.9 (+0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **New Jersey** \u2014 Democratic win probability 94.0% \u2192 94.0% (+0.1 pts); projected margin D+15.6 \u2192 D+16.0 (+0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-11-20",
    "previous_run_date": "2026-11-19",
    "headline": "No new polling since 2026-11-19. Democratic chances of Senate control hold at 75.1%.",

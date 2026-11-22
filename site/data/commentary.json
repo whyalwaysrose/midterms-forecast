@@ -2,6 +2,35 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-11-22",
+   "previous_run_date": "2026-11-21",
+   "headline": "No new polling since 2026-11-21. Democratic chances of Senate control hold at 74.8%.",
+   "body": [
+    "**Races that moved** (1 of 35):",
+    "",
+    "  - **South Dakota** \u2014 Democratic win probability 2.4% \u2192 2.9% (+0.5 pts); projected margin R+19.9 \u2192 R+20.3 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-SD",
+     "name": "South Dakota",
+     "prob_before": 0.0237,
+     "prob_after": 0.0288,
+     "prob_delta": 0.0051,
+     "margin_before": -19.91,
+     "margin_after": -20.33,
+     "margin_delta": -0.41999999999999815,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-11-22\n\nNo new polling since 2026-11-21. Democratic chances of Senate control hold at 74.8%.\n\n**Races that moved** (1 of 35):\n\n  - **South Dakota** \u2014 Democratic win probability 2.4% \u2192 2.9% (+0.5 pts); projected margin R+19.9 \u2192 R+20.3 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-11-21",
    "previous_run_date": "2026-11-20",
    "headline": "No new polling since 2026-11-20. Democratic chances of Senate control hold at 75.2%.",

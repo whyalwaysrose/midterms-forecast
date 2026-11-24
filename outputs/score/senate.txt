@@ -1,4 +1,4 @@
-22:55:26 INFO    midterms.data.results: senate: 35 race rows, 35 with a called winner
+21:17:49 INFO    midterms.data.results: senate: 35 race rows, 35 with a called winner
 ==========================================================================
   SCORING THE SENATE FORECAST OF 2026-11-03
 ==========================================================================

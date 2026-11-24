@@ -2,6 +2,67 @@
  "schema_version": 2,
  "entries": [
   {
+   "run_date": "2026-11-24",
+   "previous_run_date": "2026-11-23",
+   "headline": "No new polling since 2026-11-23. Democratic chances of Senate control hold at 75.0%.",
+   "body": [
+    "**Races that moved** (3 of 35):",
+    "",
+    "  - **New Jersey** \u2014 Democratic win probability 94.6% \u2192 93.7% (-1.0 pts); projected margin D+15.9 \u2192 D+15.6 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Colorado** \u2014 Democratic win probability 97.1% \u2192 96.9% (-0.2 pts); projected margin D+19.2 \u2192 D+18.8 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    "",
+    "  - **Kentucky** \u2014 Democratic win probability 3.6% \u2192 3.5% (-0.2 pts); projected margin R+17.8 \u2192 R+18.3 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.",
+    ""
+   ],
+   "new_poll_count": 0,
+   "race_changes": [
+    {
+     "race_id": "senate-2026-NJ",
+     "name": "New Jersey",
+     "prob_before": 0.9464,
+     "prob_after": 0.9368,
+     "prob_delta": -0.009600000000000053,
+     "margin_before": 15.95,
+     "margin_after": 15.56,
+     "margin_delta": -0.3899999999999988,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-CO",
+     "name": "Colorado",
+     "prob_before": 0.971,
+     "prob_after": 0.9688,
+     "prob_delta": -0.0021999999999999797,
+     "margin_before": 19.17,
+     "margin_after": 18.75,
+     "margin_delta": -0.4200000000000017,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    },
+    {
+     "race_id": "senate-2026-KY",
+     "name": "Kentucky",
+     "prob_before": 0.0361,
+     "prob_after": 0.0345,
+     "prob_delta": -0.0015999999999999973,
+     "margin_before": -17.8,
+     "margin_after": -18.27,
+     "margin_delta": -0.46999999999999886,
+     "new_poll_count": 0,
+     "new_polls": [],
+     "newly_usable_count": 0,
+     "newly_usable": []
+    }
+   ],
+   "markdown": "## 2026-11-24\n\nNo new polling since 2026-11-23. Democratic chances of Senate control hold at 75.0%.\n\n**Races that moved** (3 of 35):\n\n  - **New Jersey** \u2014 Democratic win probability 94.6% \u2192 93.7% (-1.0 pts); projected margin D+15.9 \u2192 D+15.6 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Colorado** \u2014 Democratic win probability 97.1% \u2192 96.9% (-0.2 pts); projected margin D+19.2 \u2192 D+18.8 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n\n  - **Kentucky** \u2014 Democratic win probability 3.6% \u2192 3.5% (-0.2 pts); projected margin R+17.8 \u2192 R+18.3 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.\n"
+  },
+  {
    "run_date": "2026-11-23",
    "previous_run_date": "2026-11-22",
    "headline": "No new polling since 2026-11-22. Democratic chances of Senate control hold at 75.1%.",

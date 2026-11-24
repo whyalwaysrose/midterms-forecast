@@ -2,6 +2,20 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-11-24
+
+No new polling since 2026-11-23. Democratic chances of Senate control hold at 75.0%.
+
+**Races that moved** (3 of 35):
+
+  - **New Jersey** — Democratic win probability 94.6% → 93.7% (-1.0 pts); projected margin D+15.9 → D+15.6 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Colorado** — Democratic win probability 97.1% → 96.9% (-0.2 pts); projected margin D+19.2 → D+18.8 (-0.4). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+  - **Kentucky** — Democratic win probability 3.6% → 3.5% (-0.2 pts); projected margin R+17.8 → R+18.3 (-0.5). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-11-23
 
 No new polling since 2026-11-22. Democratic chances of Senate control hold at 75.1%.

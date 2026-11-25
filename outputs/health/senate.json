@@ -1,22 +1,22 @@
 {
  "chamber": "senate",
- "run_date": "2026-11-24",
+ "run_date": "2026-11-25",
  "ok": true,
  "metrics": {
   "races_total": 35,
   "races_with_polls": 24,
   "races_blocked_by_roster": 2,
-  "race_polls": 341,
-  "national_polls": 384,
+  "race_polls": 340,
+  "national_polls": 383,
   "feed_records": {
    "us-senator": 580,
    "us-representative": 0,
    "generic-ballot": 548,
-   "approval": 2962
+   "approval": 2969
   },
   "rejections": {
    "primary subject": 60,
-   "older than max_age_days": 192,
+   "older than max_age_days": 194,
    "no single D-vs-R matchup": 38,
    "pollster banned by 538: Big Data Poll": 32,
    "pollster banned by this project: Wedgewood Polls": 6,
@@ -34,15 +34,15 @@
     "us-senator": 580,
     "us-representative": 0,
     "generic-ballot": 548,
-    "approval": 2962
+    "approval": 2969
    }
   },
   {
    "name": "race_polls_used",
    "ok": true,
-   "detail": "341 race polls from us-senator",
+   "detail": "340 race polls from us-senator",
    "guards": "a chamber-blind default feeding the Senate's polls to the House",
-   "value": 341
+   "value": 340
   },
   {
    "name": "roster_reads_the_feed",

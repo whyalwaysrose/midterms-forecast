@@ -1,12 +1,12 @@
 {
  "schema_version": 5,
  "model_fingerprint": "74c3d6e6f870",
- "run_date": "2026-11-25",
- "generated_at": "2026-11-25T20:45:34+00:00",
+ "run_date": "2026-11-26",
+ "generated_at": "2026-11-26T20:13:03+00:00",
  "cycle": 2026,
  "chamber": "house",
  "election_date": "2026-11-03",
- "days_to_election": -22,
+ "days_to_election": -23,
  "data_source": {
   "name": "VoteHub Polling API",
   "url": "https://votehub.com/polls/api/",
@@ -67652,7 +67652,7 @@
  "markets": {
   "source": "Polymarket",
   "source_url": "https://polymarket.com",
-  "fetched_at": "2026-11-25T20:22:36+00:00",
+  "fetched_at": "2026-11-26T19:59:15+00:00",
   "note": "Shown for contrast only. Market prices are never an input to this model: traders read forecasts, so using them would be circular.",
   "events": [
    {

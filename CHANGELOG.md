@@ -2,6 +2,16 @@
 
 Automatically generated after each model run. Newest entries first.
 
+## 2026-11-27
+
+No new polling since 2026-11-26. Democratic chances of Senate control hold at 74.9%.
+
+**Races that moved** (1 of 35):
+
+  - **Kentucky** — Democratic win probability 3.1% → 3.1% (+0.0 pts); projected margin R+17.9 → R+18.2 (-0.3). No new polls in this race; the move comes from the national environment and from correlated movement in similar states.
+
+---
+
 ## 2026-11-26
 
 No new polling since 2026-11-25. Democratic chances of Senate control hold at 75.0%.

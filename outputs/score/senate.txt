@@ -1,4 +1,4 @@
-20:12:32 INFO    midterms.data.results: senate: 35 race rows, 35 with a called winner
+19:07:44 INFO    midterms.data.results: senate: 35 race rows, 35 with a called winner
 ==========================================================================
   SCORING THE SENATE FORECAST OF 2026-11-03
 ==========================================================================
@@ -23,8 +23,8 @@
   Races (35 scored, 34 called correctly)
     Brier 0.0532   vs coin 0.2500 (skill +78.7%)   vs fundamentals 0.2571 (skill +79.3%)
     log score 0.1871
-    margin error 7.38 pts mean absolute, bias +4.26
-    50% interval covered 43.8% of 32 races
+    margin error 7.44 pts mean absolute, bias +4.35
+    50% interval covered 37.5% of 32 races
     90% interval covered 84.4% of 32 races
 
     Reliability (predicted vs actual, by bucket):
